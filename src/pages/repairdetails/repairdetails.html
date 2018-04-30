@@ -1,0 +1,61 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>工单详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-icon class="repair-ion" name="build"></ion-icon><p>报修类型-时间</p>
+<!--<p class="repair-state">派工状态</p>-->
+<p class="detail"><span>说明：</span>这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些
+  说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明</p>
+<p class="detail">处理进度如下：</p>
+
+<ul class="step-container">  
+        <li class="step-past">工单已提交  
+            <span class="arrow arrow-past">  
+                <span class="arrow-pre"></span>  
+                <span class="arrow-next"></span>  
+            </span>  
+        </li>  
+        <li class="step-current">工单已受理  
+            <span class="arrow arrow-current">  
+                <span class="arrow-pre"></span>  
+                <span class="arrow-next"></span>  
+            </span>  
+        </li>  
+        <li class="step-next">工单完成</li>  
+    </ul>
+
+<button ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+
+  
+    <!-- 弹窗内容开始 -->  
+    <div id="background" class="back">  
+        <div id="div1" class="content1">  
+            <div id="close" class="closs1">  
+                <span id="close-button" class="closs1-button">×</span>  
+                <h2>终止工单</h2>  
+            </div>  
+            <div id="div2" class="div2">   
+            <ion-item>
+              <ion-label>请选择取消原因</ion-label>
+              <ion-select cancelText="取消" okText="确认">
+                <ion-option value="">我已自己解决</ion-option>
+                <ion-option value="">太慢了，等不及</ion-option>
+                <ion-option value="">一直没有人联系我</ion-option>
+                <ion-option value="">其他原因（填写说明）</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-textarea class="add-some" placeholder="有没有什么补充说明的？"></ion-textarea>
+              </ion-item>
+            </div>  
+            <h3 id="foot" class="foot">确认终止工单</h3>  
+        </div>  
+    </div>  
+    
+</ion-content>

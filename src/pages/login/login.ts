@@ -4,12 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -26,13 +21,12 @@ public history='';
     password:''
   }
 
+  public loginNum : boolean;
+
   constructor(public navCtrl: NavController, public navParams:NavParams ,public httpService:HttpServicesProvider,public storage:StorageProvider) {
 
       this.history=this.navParams.get('history');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+      this.loginNum = true;
   }
 
   doLogin(){
@@ -69,9 +63,11 @@ public history='';
 
         })
      }
+  }
 
-
-
+  getLoginNum(){
+    this.loginNum = !this.loginNum;
+    console.log(this.loginNum)
   }
 
 }

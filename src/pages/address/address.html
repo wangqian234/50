@@ -21,8 +21,9 @@
         <ion-icon name="md-checkmark" color="danger"></ion-icon>
     </button>
    <div (tap)="changeAddress(item._id)" (press)="deleteAddress(key,item._id)">
-      <h2>{{item.name}}   {{item.phone}}</h2>
-      <p>{{item.address}}</p>
+      <h2>收货人姓名：{{item.name}}</h2>
+      <h2 class="middle_h2">收货电话号码：{{item.phone}}</h2>
+     <h2>收货地址：{{item.address}}</h2>
    </div>
 
     <button ion-button clear item-end icon-only (tap)="editAddress(item)">
@@ -41,7 +42,7 @@
     <ion-toolbar>
       
       <div class="add_address" [navPush]='AddaddressPage'>
-        +新建地址
+        新增收货地址<i class="icon ion-plus-circled"></i>
       </div>
     </ion-toolbar>
   </ion-footer>

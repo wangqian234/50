@@ -5,16 +5,16 @@ import { LoginPage } from '../login/login';
 import { RegisterPage } from '../register/register';
 
 //引入账户设置页面
-
 import { PersonalPage } from '../personal/personal';
+//引入收货地址界面
+import { AddressPage } from '../address/address';
+//引入工单界面
+import { RepairlistPage } from '../repairlist/repairlist';
+//引入购物清单界面
+import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
 import { StorageProvider } from '../../providers/storage/storage';
-/**
- * Generated class for the UserPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -29,6 +29,11 @@ export class UserPage {
 
   public PersonalPage=PersonalPage;
 
+  public AddressPage = AddressPage;
+
+  public  RepairlistPage = RepairlistPage;
+
+  public ShoppinglistPage = ShoppinglistPage;
 
     public userinfo='';
 

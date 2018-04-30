@@ -1,21 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the AddaddressPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
  //工具的服务
-
-
 import { ToolsProvider } from '../../providers/tools/tools';
 
-
 //请求数据
-
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 
@@ -36,13 +25,19 @@ export class AddaddressPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public tools:ToolsProvider,public httpService:HttpServicesProvider) {
 
   }
+
+  ionViewWillEnter(){
+    if(this.navParams.get('item')){
+      this.addressList=this.navParams.get('item');
+      console.log("wang456"+this.addressList);
+    } 
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddaddressPage');
   }
-
+  
   addAddress(){
-
-
 
     if(this.addressList.name!=''||this.addressList.phone!=''||this.addressList.address!=''){
         //获取表单的内容

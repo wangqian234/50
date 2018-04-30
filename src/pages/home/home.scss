@@ -10,53 +10,37 @@
 }
 .focus{
     width:100%;
-    height: 150px;
+    height: 22rem;
 
     img{
         width:100%;
-        height: 150px;
+        height: 20rem;
     }
-}
-
-.home_title {
-    padding: 5px 8px;
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0px 0px 0px;
-}
-
-.home_title:before {
-    font-size: 8px;
-    border-left: 3px solid red;
-    margin-right: 4px;
-    position: relative;
-    top:-1px;
-    content: "";
 }
 
 .plist{
     list-style: none;
-    padding:.4rem;
+    padding:4rem;
     
     li{
         width: 6.6rem;
         height: 14.8rem;
         float: left;
-        margin-right: .6rem;
+        margin-right: 6rem;
         .rec_shop_detial{
-            padding:.4rem 0rem;
+            padding:4rem 0rem;
             margin:0px;
-            height: 3.2rem;
+            height: 302rem;
             overflow: hidden;
         }
         img{
-            width:6rem;
-            height: 6rem;
+            width:60rem;
+            height: 60rem;
             display: block;
             margin:0 auto;
         }
         p{
-            padding:.2rem 0px;
+            padding:2rem 0px;
             text-align: center;
         }
         
@@ -66,41 +50,85 @@
 .rec_shop {
     ion-scroll{
         width: 100%;
-        height: 148px;
+        height: 14.8rem;
         overflow-x: auto;
     }
     .plist{
         width:auto;
     }
     .rec_shop_detial{
-        font-size: 1.2rem;
+        font-size: 12rem;
     }
 }
 
 
-/*热门商品*/
-.hot_shop ion-col{
-    border-top:1px solid #eee; 
-    border-bottom:1px solid #eee; 
-    margin-bottom:-1px;
+
+.bangding{
+    display: flex;
+    height: 3.8rem;
+}
+.p_bangding{
+    display: inline;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border-left: 0.3rem solid #488aff;
+    font-size: 2.5rem;
+}
+.bangding>button{
+    font-size: 2.5rem; 
+    height: 4rem;
+    margin-top: -0.1rem;
+}
+.smallnav{
+     font-size:2rem;
+}
+.smallnav img{
+    max-width:6rem;
+}
+.am-u-sm-3{
+     display: table-cell;
+     text-align:center;
 }
 
-.hot_shop ion-col:nth-child(2n+1){
-    border-right:1px solid #eee; 
-   
-}
-.hot_shop .hot_shop_detail{
-    height: 3.2rem;
-    overflow: hidden;
-}
-
-.hot_shop img{
-    height:15rem;
+div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,textarea,table,td{ margin:0; padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+area{outline:none;}
+.clearfix:after {
+    content: ".";
     display: block;
-    margin: 0 auto;
-    max-width: 100%;
-  
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
 }
-.hot_shop p{
-    padding:.5rem 0px;
+
+#main-container{
+    width: 50rem;
+}
+
+#main-container .main-nav{
+    width: 50rem;
+    margin: 1.6rem auto;
+    font-size: 1.6rem;
+}
+
+#main-container .main-nav .nav-item{
+    float: left;
+    width: 9rem;
+    height: 12rem;
+    margin: 0 1rem 1rem 1rem;
+}
+
+#main-container .main-nav a{
+    width: 9rem;
+    height: 10rem;
+    display: inline-block;
+    border-radius: 0.4rem;
+    border: 1px solid red;
+}
+
+#main-container .main-nav p{
+    text-align: center;
 }

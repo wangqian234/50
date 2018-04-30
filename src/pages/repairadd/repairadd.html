@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>提交工单</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+ <ion-list>
+
+    <ion-item>
+      <ion-label>请选择工单类型</ion-label>
+      <ion-select cancelText="取消" okText="确认">
+        <ion-option value="">公共报修</ion-option>
+        <ion-option value="">业户报修</ion-option>
+        <ion-option value="">投诉</ion-option>
+        <ion-option value="">建议</ion-option>
+        <ion-option value="">其他</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>请选择工单类别</ion-label>
+      <ion-select cancelText="取消" okText="确认">
+        <ion-option value="">空调维修</ion-option>
+        <ion-option value="">水管漏水</ion-option>
+        <ion-option value="">室内灯不亮</ion-option>
+        <ion-option value="">其他</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>请先绑定房屋</ion-label>
+    </ion-item>
+
+   <ion-item>
+      <ion-textarea class="add-some" placeholder="有没有什么补充说明的？（500字以内）"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="item-text-wrap" >
+      <ion-label>描述不清？拍照上传：</ion-label><br/>
+      <ion-label class="imgUpload"></ion-label>
+    </ion-item>
+    
+ </ion-list>
+      <div class="add_address" [navPush]='AddaddressPage'>
+       确认提交
+      </div>
+
+</ion-content>
