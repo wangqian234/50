@@ -19,7 +19,6 @@ import { RegistersignPage } from '../pages/registersign/registersign';
 import { RegisterpasswordPage } from '../pages/registerpassword/registerpassword';
 //搜索页面
 import { SearchPage } from '../pages/search/search';
-import { TestPage } from '../pages/test/test';
 
 //商品列表
 import { ProductlistPage } from '../pages/productlist/productlist';
@@ -38,15 +37,35 @@ import { OrderPage } from '../pages/order/order';
 //收货地址列表
 import { AddressPage } from '../pages/address/address';
 
-
-//增加收货地址
+//增加、修改收货地址
 import { AddaddressPage } from '../pages/addaddress/addaddress';
 
-//修改收货地址
-import { EditaddressPage } from '../pages/editaddress/editaddress';
+//增加报修
+import { RepairaddPage } from '../pages/repairadd/repairadd';
 
+//我的工单
+import { RepairlistPage } from '../pages/repairlist/repairlist';
 
+//工单详情页
+import { RepairdetailsPage } from '../pages/repairdetails/repairdetails';
 
+//商城首页
+import { ShoppingPage } from '../pages/shopping/shopping';
+
+//商品分类页
+import { ShopsortPage } from '../pages/shopsort/shopsort';
+
+//绑定房屋
+import { BindroomPage } from '../pages/bindroom/bindroom';
+
+//商品购物列表
+import { ShoppinglistPage } from '../pages/shoppinglist/shoppinglist';
+
+//重置密码页
+import { RebuildpassPage } from '../pages/rebuildpass/rebuildpass';
+
+//商品详情页
+import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -76,8 +95,15 @@ import { ToolsProvider } from '../providers/tools/tools';
     OrderPage,
     AddressPage,
     AddaddressPage,
-    EditaddressPage,
-    TestPage,
+    RepairaddPage,
+    RepairlistPage,
+    RepairdetailsPage,
+    ShoppingPage,
+    ShopsortPage,
+    BindroomPage,
+    ShoppinglistPage,
+    RebuildpassPage,
+    ShoppingdetailPage,
   ],
   imports: [
     BrowserModule,
@@ -108,8 +134,15 @@ import { ToolsProvider } from '../providers/tools/tools';
     OrderPage,
     AddressPage,
     AddaddressPage,
-    EditaddressPage,
-    TestPage
+    RepairaddPage,
+    RepairlistPage,
+    RepairdetailsPage,
+    ShoppingPage,
+    ShopsortPage,
+    BindroomPage,
+    ShoppinglistPage,
+    RebuildpassPage,
+    ShoppingdetailPage,
   ],
   providers: [  /*引入了自定义的服务*/
     StatusBar,

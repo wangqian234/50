@@ -1,0 +1,118 @@
+<ion-searchbar></ion-searchbar>
+
+<ion-content>
+    <div id="search_box"> 
+  <form id="search_form"> 
+    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
+    <button><ion-icon name="search"></ion-icon>搜索</button> 
+  </form> 
+</div> 
+    <div id="mallhome-content">
+        <ul class="goods-type clearfix">
+            <li class="variaty goods-type-item" [navPush]="ShopsortPage">
+                <a></a>
+                <p>旅游服务</p>
+            </li>
+            <li class="favourable goods-type-item">
+                <a href="javascript:;"></a>
+                <p>酒水饮料</p>
+            </li>
+            <li class="variaty goods-type-item">
+                <a href="javascript:;"></a>
+                <p>儿童教育</p>
+            </li>
+            <li class="investment goods-type-item">
+                <a href="javascript:;"></a>
+                <p>个护美妆</p>
+            </li>
+            <li class="variaty goods-type-item">
+                <a href="javascript:;"></a>
+                <p>汇超市</p>
+            </li>
+            <li class="favourable goods-type-item">
+                <a href="javascript:;"></a>
+                <p>鲜花绿植</p>
+            </li>
+            <li class="variaty goods-type-item">
+                <a href="javascript:;"></a>
+                <p>日用工艺</p>
+            </li>
+            <li class="investment goods-type-item">
+                <a href="javascript:;"></a>
+                <p>汽车服务</p>
+            </li>
+            <li class="variaty goods-type-item">
+                <a href="javascript:;"></a>
+                <p>粮油副食</p>
+            </li>
+            <li class="investment goods-type-item">
+                <a href="javascript:;"></a>
+                <p>更多</p>
+            </li>
+        </ul>
+
+        <ul class="goods-list" padding>
+            <li class="goods-item clearfix" [navPush]="ShoppingdetailPage">
+                <img src="assets/imgs/yibao.jpg" alt="" srcset="">
+                <div class="information">
+                    <p class="name">怡宝矿泉水</p>
+                    <p class="tip">好喝的矿泉水</p>
+                    <p class="price">￥<span>2</span></p>
+                    <p class="sales-count"><span>235</span>人已付款</p>
+                </div>
+            </li>
+            <li class="goods-item clearfix">
+                <img src="assets/imgs/mac.jpg" alt="" srcset="">
+                <div class="information">
+                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
+                    <p class="tip">好用的电脑</p>
+                    <p class="price">￥<span>12888</span></p>
+                    <p class="sales-count"><span>1555</span>人已付款</p>
+                </div>
+            </li>
+            <li class="goods-item clearfix">
+                <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
+                <div class="information">
+                    <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
+                    <p class="tip">笔记本平板工作站三合一</p>
+                    <p class="price">￥<span>12888</span></p>
+                    <p class="sales-count"><span>1555</span>人已付款</p>
+                </div>
+            </li>
+            <li class="goods-item clearfix">
+                    <img src="assets/imgs/yibao.jpg" alt="" srcset="">
+                    <div class="information">
+                        <p class="name">怡宝矿泉水</p>
+                        <p class="tip">好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水</p>
+                        <p class="price">￥<span>2</span></p>
+                        <p class="sales-count"><span>235</span>人已付款</p>
+                    </div>
+                </li>
+                <li class="goods-item clearfix">
+                    <img src="assets/imgs/mac.jpg" alt="" srcset="">
+                    <div class="information">
+                        <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
+                        <p class="tip">好用的电脑</p>
+                        <p class="price">￥<span>12888</span></p>
+                        <p class="sales-count"><span>1555</span>人已付款</p>
+                    </div>
+                </li>
+                <li class="goods-item clearfix">
+                    <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
+                    <div class="information">
+                        <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
+                        <p class="tip">笔记本平板工作站三合一</p>
+                        <p class="price">￥<span>12888</span></p>
+                        <p class="sales-count"><span>1555</span>人已付款</p>
+                    </div>
+                </li>
+        </ul>
+
+        <!-- 右下角导航 -->
+        <ul class="main-nav">
+           
+            <li class="cart"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
+            <li class="order" [navPush]="ShoppinglistPage"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
+        </ul>
+    </div>
+</ion-content>

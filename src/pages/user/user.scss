@@ -1,30 +1,68 @@
+.user_list>ion-item{
+    font-size: 1.8rem
+}
+.user_list span{
+    position: absolute;
+    left: 5rem;
+}
+.user_bg{
+  position:absolute;
+  top: -4rem;
+  left: 0;
+  width:100%;
+  height:100%;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
 .login{
-    padding:1rem;
-
+    
+    padding:3rem;
     .userimg{
         text-align: center;
         
     }
     .userimg img{
-        width:5rem;
-        height: 5rem;
-
+        width:10rem;
+        height: 10rem;
         border-radius: 50%;
     }
     .login_reg{
+        margin-top: 1rem; 
         text-align: center;
+        font-size: 2.5rem;
     }
 }
 
 .list-ios[inset]{
-
     margin:0px!important;
-
-
 }        
 ion-item-divider{
+    min-height: .6rem;
+}
+.icon-left{
+    position: absolute;
+    right: 1.1rem;
+}
+.topdiv{
+    padding: 0.7rem;
+    font-size: 1.9rem;
+    color: royalblue;
+}
+.edit_per{
+    margin-top: 0.5rem;
+    font-size: 1.9rem;
+    color: royalblue;
+}
+.out_login{
+    
+    float: right;
 
-    min-height: .3rem;
 }
 
 

@@ -7,26 +7,13 @@ import { AddaddressPage } from '../addaddress/addaddress';
 
 
 //工具的服务
-
-
 import { ToolsProvider } from '../../providers/tools/tools';
 
 
 //请求数据
-
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 
-//修改收货地址
-import { EditaddressPage } from '../editaddress/editaddress';
-
-
-/**
- * Generated class for the AddressPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -35,7 +22,10 @@ import { EditaddressPage } from '../editaddress/editaddress';
 })
 export class AddressPage {
 
-  public list=[];
+  public list=[{name:"wang123",phone:"18",address:"西安市"},
+  {name:"wang123",phone:"18",address:"西安市zheSIUEHGJbwrilguhawiuerIUajhs;gii;iruh阿瑞斯过会儿aohurgar奥如何"},
+  {name:"wang123",phone:"18",address:"西安市"}
+  ];
 
   public AddaddressPage=AddaddressPage;
 
@@ -54,8 +44,6 @@ export class AddressPage {
   //获取当前用户的收货地址
   getAddressList(){
 
-    //签名
-
     let userinfo:any=this.userinfo;
 
     let json={
@@ -71,7 +59,7 @@ export class AddressPage {
 
       if(data.success){
         this.list=data.result;
-
+        console.log(this.list)
       }else{
 
         alert(data.message);
@@ -181,15 +169,10 @@ export class AddressPage {
   }
 
   //编辑页面
-
   editAddress(item){
-
-
-    this.navCtrl.push(EditaddressPage,{
+    this.navCtrl.push(AddaddressPage,{
       item:item
     })
-
-
   }
 
 

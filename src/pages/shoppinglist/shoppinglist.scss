@@ -1,0 +1,85 @@
+page-shoppinglist {
+
+}
+
+#order-content .order-nav{
+    font-size: 1.6666666666666667rem;
+    background-color: #fff;
+    border-bottom: 1px solid rgb(239, 237, 237);
+}
+
+#order-content .order-nav .type{
+    width: 20%;
+    text-align: center;
+    float: left;
+}
+
+#order-content .order-nav .type a{
+    padding: 0.6666666666666666rem 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: #000;
+    border-bottom: 1px solid #fff;
+}
+
+#order-content .order-nav .type.current a{
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+#order-content .order-item{
+    margin-bottom: 0.8888888888888888rem;
+    background-color: #fff;
+}
+
+#order-content .order-item .seller{
+    border-bottom: 1px solid rgb(239, 237, 237);
+    padding: 0.8888888888888888rem;
+}
+
+#order-content .order-item .seller .name{
+    float: left;
+    font-size: 1.5555555555555556rem;
+}
+
+#order-content .order-item .seller .state{
+    float: right;
+    font-size: 1.5555555555555556rem;
+    color: red;
+}
+
+
+#order-content .order-item .goods{
+    border-bottom: 1px solid rgb(239, 237, 237);
+    padding: 1.3333333333333333rem 0.8888888888888888rem;
+}
+
+#order-content .order-item .goods img{
+    width: 6.666666666666667rem;
+    height: 6.666666666666667rem;
+    float: left;
+}
+
+#order-content .order-item .goods .name{
+    width: 70%;
+    height: 6.666666666666667rem;
+    margin-left: 1.3333333333333333rem; 
+    float: right;
+    font-size: 1.3333333333333333rem;
+    vertical-align: middle;
+}
+
+#order-content .order-item .sub-inf{
+    border-bottom: 1px solid rgb(239, 237, 237);
+    padding: 0.8888888888888888rem;
+}
+
+#order-content .order-item .sub-inf .time{
+    float: left;
+    font-size: 1.5555555555555556rem;
+}
+
+#order-content .order-item .sub-inf .buy-count{
+    float: right;
+    font-size: 1.5555555555555556rem;
+}

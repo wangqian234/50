@@ -1,17 +1,113 @@
-.login_btn{
-
-    width: 80%;
-    margin: 0px auto;
+#web_bg{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+}
+#web_bg_white{
+    z-index: 2;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    zoom: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}
+#web_bg_logo{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    zoom: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}
+ion-item{
+    z-index: 5;
+    width: 8rem;
+    font-size: 5rem;
+    background-color:rgba(255,255,255,0.2) !important;
+}
+.input_box{
+    z-index: 4;
+    position: absolute;
+    margin-top: 37rem;
+    width: 40rem;
+    margin-left:auto;
+    margin-right:auto;
+    left: 0; right: 0;
+}
+.ensure_button{
+   z-index: 5 !important;
+   font-size: 3rem !important;
+   height: 6rem;
+   margin-top: 2.5rem;
+}
+.div_a{
+    text-align:center;
+    margin-top: 2rem;
+}
+a{
+    font-size: 2rem !important;
 }
 
-.list_end span{
-    font-size: 1.4rem;
-    color: #666;
+.login_box { 
+    width: 98%;
+    margin:auto;
+    margin-top: 0.3rem;
+    height: 5.5rem; 
+    border-bottom:1px solid gainsboro;
+} 
+.login_box #s { 
+    float: left; 
+    padding: 0; 
+    margin: 6px 0 0 6px; 
+    border: 0; 
+    background: none; 
+    font-size: 2rem;
+    height:3rem;
+    width: 50%
+} 
+.login-box #go { 
+    float: right; 
+    margin: 3px 4px 0 0; 
+}
+.search_form button{
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    float: right;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
 }
 
-ion-label[fixed]{
-    flex: 0 0 60px;
-    width: 60px;
-    min-width: 60px;
-    max-width: 200px;
-}
+.timer{
+        width: 8rem;
+        height: 3.6rem;
+        line-height: 3.6rem;
+        margin-left: 1rem;
+
+        text-align: center;
+        background: #eee;
+        color:#666;
+        
+    }
+

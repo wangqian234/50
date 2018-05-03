@@ -10,53 +10,37 @@
 }
 .focus{
     width:100%;
-    height: 150px;
+    height: 20.5rem;
 
     img{
         width:100%;
-        height: 150px;
+        height: 20rem;
     }
-}
-
-.home_title {
-    padding: 5px 8px;
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0px 0px 0px;
-}
-
-.home_title:before {
-    font-size: 8px;
-    border-left: 3px solid red;
-    margin-right: 4px;
-    position: relative;
-    top:-1px;
-    content: "";
 }
 
 .plist{
     list-style: none;
-    padding:.4rem;
+    padding:4rem;
     
     li{
         width: 6.6rem;
         height: 14.8rem;
         float: left;
-        margin-right: .6rem;
+        margin-right: 6rem;
         .rec_shop_detial{
-            padding:.4rem 0rem;
+            padding:4rem 0rem;
             margin:0px;
-            height: 3.2rem;
+            height: 302rem;
             overflow: hidden;
         }
         img{
-            width:6rem;
-            height: 6rem;
+            width:60rem;
+            height: 60rem;
             display: block;
             margin:0 auto;
         }
         p{
-            padding:.2rem 0px;
+            padding:2rem 0px;
             text-align: center;
         }
         
@@ -66,41 +50,163 @@
 .rec_shop {
     ion-scroll{
         width: 100%;
-        height: 148px;
+        height: 14.8rem;
         overflow-x: auto;
     }
     .plist{
         width:auto;
     }
     .rec_shop_detial{
-        font-size: 1.2rem;
+        font-size: 12rem;
     }
 }
 
 
-/*热门商品*/
-.hot_shop ion-col{
-    border-top:1px solid #eee; 
-    border-bottom:1px solid #eee; 
-    margin-bottom:-1px;
+
+.bangding{
+    text-align: center;
+    background-color: white;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #efeded;
+}
+.p_bangding{
+    margin-top: 0.5rem;
+    color: grey;
+    text-align: center;
+    font-size: 1.7rem;
+}
+.p_more{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: grey;
+    text-align: center;
+    font-size: 1.7rem;
+}
+.smallnav{
+     font-size:2rem;
+}
+.smallnav img{
+    max-width:6rem;
+}
+.am-u-sm-3{
+     display: table-cell;
+     text-align:center;
 }
 
-.hot_shop ion-col:nth-child(2n+1){
-    border-right:1px solid #eee; 
-   
-}
-.hot_shop .hot_shop_detail{
-    height: 3.2rem;
-    overflow: hidden;
-}
-
-.hot_shop img{
-    height:15rem;
+div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,textarea,table,td{ margin:0; padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+area{outline:none;}
+.clearfix:after {
+    content: ".";
     display: block;
-    margin: 0 auto;
-    max-width: 100%;
-  
+    width: 0;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
 }
-.hot_shop p{
-    padding:.5rem 0px;
+
+#main-container{
+    width: 42rem;
+    padding: 0.5rem 0 1.2rem 0;
+    background-color: white;
+    margin-top: 0.5rem;
+}
+
+#main-container .main-nav{
+    font-size: 1.5rem;
+}
+
+#main-container .main-nav:first-child{
+    margin: 0 auto 1.8rem auto;
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
+}
+
+#main-container .main-nav .nav-item{
+    float: left;
+    width: 7rem;
+    height: 8rem;
+    margin: 0 1rem 0rem 0.35rem;
+}
+
+#main-container .main-nav img{
+    margin-left: 0.5rem;
+    width: 6rem;
+    height: 6rem;
+}
+
+#main-container .main-nav p{
+    text-align: center;
+}
+
+.zixun img{
+    width: 5rem !important;
+    height: 4rem !important;
+}
+
+.zixun p{
+    width: 80% !important;
+    font-size: 1.5rem;
+    color: #0082ca;
+    float: right;
+}
+.new_zixun{
+    margin-top: 1rem;
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.fee{
+    height: 10rem;
+    margin-top:0.5rem;
+    margin-bottom:1rem;
+    background-color: white;
+    text-align: center;
+}
+.fee1{
+    height: 8rem;
+    width: 50%;
+    float:left;
+    margin-top: 1rem;
+}
+.fee2{
+    margin-top: 1rem;
+    width: 50%;
+    float:left;
+    height: 8rem;
+    border-left:1px ridge gainsboro;
+}
+.fee1 p:nth-of-type(1){
+    color :red;
+    font-size: 3.5rem;
+    margin-top: 1rem;
+}
+.fee2 p:nth-of-type(1){
+    color :blue;
+    font-size: 3.5rem;
+    margin-top: 1rem;
+}
+.fee2 p:nth-of-type(2),.fee1 p:nth-of-type(2){
+    margin-top: 0.3rem;
+    bottom: 1rem;
+    color :grey;
+    font-size: 1.4rem;
+}
+.bangding_title{
+    font-size: 2rem;
+    background-color: white;
+    padding-left: 1rem;
+}
+.bangding_title p{
+    display: inline;
+}
+.bangding_title button{
+    font-size: 2rem; 
+    height: 2.5rem;
+    margin-top: -0.5rem;
+}
+#order-content{
+        padding: 0 1rem;
 }

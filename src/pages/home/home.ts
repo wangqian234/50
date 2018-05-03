@@ -4,16 +4,12 @@ import { NavController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
-
 import {Jsonp} from "@angular/http";
+//房屋报修
+import { RepairaddPage } from '../repairadd/repairadd';
+//绑定房屋
+import { BindroomPage } from '../bindroom/bindroom';
 
-
-//搜索页面
-import { SearchPage } from '../search/search';
-
-//商品详情
-import { PcontentPage } from '../pcontent/pcontent';
 
 @Component({
   selector: 'page-home',
@@ -21,74 +17,38 @@ import { PcontentPage } from '../pcontent/pcontent';
 })
 export class HomePage {
 
-  public PcontentPage=PcontentPage;
+  //跳转页面
+  public RepairaddPage=RepairaddPage;
+
+  public BindroomPage=BindroomPage
+
   public focusList=[];  /*数组 轮播图*/
-  public bestList=[];   /*精品推荐*/
-  public bestListWidth=''; /*精品推荐数据长度*/
-  public hotList=[];  /*热门商品 精品推荐*/
-
-
-
-
-  
+  public roomname = 1;
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public jsonp:Jsonp,public httpService:HttpServicesProvider) {
-
-
-    // console.log(this.config.apiUrl);
-
-    // this.config.run();
 
     //调用轮播图
 
     this.getFocus();
+    this.setFontSize();
 
-    //调用精品推荐
-    this.getBestProduct();
-
-    //调用猜你喜欢
-
-    this.getHotProduct();
-
-
-   
   }
-  //定义一个跳转到搜索页面的方法
-  goSearch(){
 
-    this.navCtrl.push(SearchPage);
-  }
   //轮播图
   getFocus(){ 
-    var that=this;
-    
-    this.httpService.requestData('api/focus',function(data){
-       console.log(data);
-        that.focusList=data.result;
-    })
+    var that=this;  
+
+      that.focusList=[
+        '../assets/imgs/slide01.png',
+        '../assets/imgs/slide02.png',
+        '../assets/imgs/slide03.jpg',
+        '../assets/imgs/rent1.png'
+      ];
+
   }
 
- //精品推荐
-
- getBestProduct(){
-
-
-    this.httpService.requestData('api/plist?is_best=1',(data)=>{
-      console.log(data);
-        this.bestList=data.result;
-        this.bestListWidth=this.bestList.length*92+'px'; 
-    })
- }
- //猜你喜欢
-
- getHotProduct(){
-  
-      this.httpService.requestData('api/plist?is_hot=1',(data)=>{
-          this.hotList=data.result;            
-        
-      })
-  
-   }
-
-
+  setFontSize(){
+      var w = document.documentElement.clientWidth || document.body.clientWidth;
+      document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
+  }
 }

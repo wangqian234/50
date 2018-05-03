@@ -93,12 +93,12 @@ $colors: (
 
 .mytabs .tab-button[aria-selected=true] .tab-button-icon{
 
-  color: #f53d3d !important;  /*优先级高*/
+  color: #0082ca !important;  /*优先级高*/
 }
 
 .mytabs .tab-button:hover:not(.disable-hover), .mytabs .tab-button[aria-selected=true]{
 
-  color: #f53d3d !important;  /*优先级高*/
+  color: #0082ca !important;  /*优先级高*/
 
 }
 
@@ -108,4 +108,12 @@ $colors: (
   display: block;
   height:0px;
   clear: both;
+}
+
+
+
+.tabs-md[tabsLayout=icon-top] .has-icon .tab-button-text {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-size: 0.5rem !important;
 }
