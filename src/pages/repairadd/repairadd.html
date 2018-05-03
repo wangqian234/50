@@ -7,28 +7,28 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
  <ion-list>
 
     <ion-item>
-      <ion-label>请选择工单类型</ion-label>
-      <ion-select cancelText="取消" okText="确认">
-        <ion-option value="">公共报修</ion-option>
-        <ion-option value="">业户报修</ion-option>
-        <ion-option value="">投诉</ion-option>
-        <ion-option value="">建议</ion-option>
-        <ion-option value="">其他</ion-option>
+      <ion-label  >请选择工单类型</ion-label>
+      <ion-select [(ngModel)]='repairLimit.sort1' cancelText="取消" okText="确认">
+        <ion-option value="1">公共报修</ion-option>
+        <ion-option value="2">业户报修</ion-option>
+        <ion-option value="3">投诉</ion-option>
+        <ion-option value="4">建议</ion-option>
+        <ion-option value="5">其他</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>请选择工单类别</ion-label>
-      <ion-select cancelText="取消" okText="确认">
-        <ion-option value="">空调维修</ion-option>
-        <ion-option value="">水管漏水</ion-option>
-        <ion-option value="">室内灯不亮</ion-option>
-        <ion-option value="">其他</ion-option>
+      <ion-select [(ngModel)]='repairLimit.sort2' cancelText="取消" okText="确认">
+        <ion-option value="1">空调维修</ion-option>
+        <ion-option value="2">水管漏水</ion-option>
+        <ion-option value="3">室内灯不亮</ion-option>
+        <ion-option value="4">其他</ion-option>
       </ion-select>
     </ion-item>
 
@@ -37,7 +37,7 @@
     </ion-item>
 
    <ion-item>
-      <ion-textarea class="add-some" placeholder="有没有什么补充说明的？（500字以内）"></ion-textarea>
+      <ion-textarea [(ngModel)]='repairLimit.add' class="add-some" placeholder="有没有什么补充说明的？（500字以内）"></ion-textarea>
     </ion-item>
 
     <ion-item class="item-text-wrap" >
@@ -46,7 +46,7 @@
     </ion-item>
     
  </ion-list>
-      <div class="add_address" [navPush]='AddaddressPage'>
+      <div class="add_address" (click)="httptest()">
        确认提交
       </div>
 

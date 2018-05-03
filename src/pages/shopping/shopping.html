@@ -1,6 +1,12 @@
 <ion-searchbar></ion-searchbar>
 
-<ion-content padding>
+<ion-content>
+    <div id="search_box"> 
+  <form id="search_form"> 
+    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
+    <button><ion-icon name="search"></ion-icon>搜索</button> 
+  </form> 
+</div> 
     <div id="mallhome-content">
         <ul class="goods-type clearfix">
             <li class="variaty goods-type-item" [navPush]="ShopsortPage">
@@ -45,8 +51,8 @@
             </li>
         </ul>
 
-        <ul class="goods-list">
-            <li class="goods-item clearfix">
+        <ul class="goods-list" padding>
+            <li class="goods-item clearfix" [navPush]="ShoppingdetailPage">
                 <img src="assets/imgs/yibao.jpg" alt="" srcset="">
                 <div class="information">
                     <p class="name">怡宝矿泉水</p>
@@ -104,9 +110,9 @@
 
         <!-- 右下角导航 -->
         <ul class="main-nav">
-            <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
+           
             <li class="cart"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
-            <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
+            <li class="order" [navPush]="ShoppinglistPage"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
         </ul>
     </div>
 </ion-content>

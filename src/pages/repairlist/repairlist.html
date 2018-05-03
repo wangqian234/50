@@ -3,12 +3,16 @@
   <ion-navbar>
     <ion-title style="text-align: center;">我的工单</ion-title>
   </ion-navbar>
-  <ion-searchbar [showCancelButton]=true cancelButtonText="搜索" (ionCancel)="onCancel(this)"></ion-searchbar>
+  <!--<ion-searchbar></ion-searchbar>-->
 </ion-header>
 
-
-<ion-content padding>
-    
+<ion-content>
+<div id="search_box"> 
+  <form id="search_form"> 
+    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
+    <button><ion-icon name="search"></ion-icon>搜索</button> 
+  </form> 
+</div> 
           <ion-list inset>
             <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">
                

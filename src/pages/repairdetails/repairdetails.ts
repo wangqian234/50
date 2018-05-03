@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
 
+import { HttpServicesProvider } from '../../providers/http-services/http-services';
+
 @Component({
   selector: 'page-repairdetails',
   templateUrl: 'repairdetails.html',
@@ -14,7 +16,7 @@ export class RepairdetailsPage {
   public div :any;  
   public close :any;  
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider) {
   }
 
   ionViewWillLoad() {
@@ -35,12 +37,34 @@ export class RepairdetailsPage {
   }
 
  showPopup(){
-     this.div.style.display = "block";  
+   this.div.style.display = "block";  
  }
-  
 
-  
-
+ closePopup(){
+   this.div.style.display = "none";
+ }
  
+  enSureStop(){
+
+    // let json={
+    //   uid:userinfo._id,   /*注意用户id   _id*/
+    //   salt:userinfo.salt
+    // }
+    // let sign=this.tools.sign(json);
+    // var api='api/addressList?uid='+userinfo._id+'&sign='+sign;
+
+    //请求数据
+      var api='api/pcate'
+      this.httpService.requestData(api,(data)=>{
+      // if(data.success){
+      //   this.list=data.result;
+      //   console.log(this.list)
+      // }else{
+      //   alert(data.message);
+      // }
+   
+      })
+  }
+  
 
 }

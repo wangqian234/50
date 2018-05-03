@@ -17,18 +17,38 @@
 <ul class="step-container">  
         <li class="step-past">工单已提交  
             <span class="arrow arrow-past">  
-                <span class="arrow-pre"></span>  
-                <span class="arrow-next"></span>  
+                <span class="arrow-pre"></span>   
             </span>  
         </li>  
         <li class="step-current">工单已受理  
             <span class="arrow arrow-current">  
                 <span class="arrow-pre"></span>  
-                <span class="arrow-next"></span>  
             </span>  
         </li>  
         <li class="step-next">工单完成</li>  
     </ul>
+<!--
+            <ion-list inset>
+            <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">  
+              <h4> {{item.time}}</h4>
+              <h4> {{item.details}}</h4>        
+            </ion-item>
+          </ion-list>-->
+
+          <ion-list>
+            <ion-item>  
+              <h4> 2018-06-05 20:10:20</h4>
+              <h4>您的工单已经提交</h4>        
+            </ion-item>
+            <ion-item>  
+              <h4> 2018-06-05 20:10:20</h4>
+              <h4>您的工单已经受理</h4>        
+            </ion-item>
+            <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">  
+              <h4> 2018-06-05 20:10:20</h4>
+              <h4>您的工单已经完成</h4>        
+            </ion-item>
+          </ion-list>
 
 <button ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
 
@@ -37,7 +57,7 @@
     <div id="background" class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
-                <span id="close-button" class="closs1-button">×</span>  
+                <span id="close-button" class="closs1-button" (click)="closePopup()">×</span>  
                 <h2>终止工单</h2>  
             </div>  
             <div id="div2" class="div2">   
@@ -54,7 +74,7 @@
               <ion-textarea class="add-some" placeholder="有没有什么补充说明的？"></ion-textarea>
               </ion-item>
             </div>  
-            <h3 id="foot" class="foot">确认终止工单</h3>  
+            <h3 id="foot" class="foot" (click)="enSureStop()">确认终止工单</h3>  
         </div>  
     </div>  
     

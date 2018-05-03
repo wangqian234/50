@@ -10,7 +10,7 @@
 }
 .focus{
     width:100%;
-    height: 22rem;
+    height: 20.5rem;
 
     img{
         width:100%;
@@ -64,20 +64,23 @@
 
 
 .bangding{
-    display: flex;
-    height: 3.8rem;
+    text-align: center;
+    background-color: white;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #efeded;
 }
 .p_bangding{
-    display: inline;
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-    border-left: 0.3rem solid #488aff;
-    font-size: 2.5rem;
+    margin-top: 0.5rem;
+    color: grey;
+    text-align: center;
+    font-size: 1.7rem;
 }
-.bangding>button{
-    font-size: 2.5rem; 
-    height: 4rem;
-    margin-top: -0.1rem;
+.p_more{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: grey;
+    text-align: center;
+    font-size: 1.7rem;
 }
 .smallnav{
      font-size:2rem;
@@ -105,30 +108,105 @@ area{outline:none;}
 }
 
 #main-container{
-    width: 50rem;
+    width: 42rem;
+    padding: 0.5rem 0 1.2rem 0;
+    background-color: white;
+    margin-top: 0.5rem;
 }
 
 #main-container .main-nav{
-    width: 50rem;
-    margin: 1.6rem auto;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+}
+
+#main-container .main-nav:first-child{
+    margin: 0 auto 1.8rem auto;
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
 }
 
 #main-container .main-nav .nav-item{
     float: left;
-    width: 9rem;
-    height: 12rem;
-    margin: 0 1rem 1rem 1rem;
+    width: 7rem;
+    height: 8rem;
+    margin: 0 1rem 0rem 0.35rem;
 }
 
-#main-container .main-nav a{
-    width: 9rem;
-    height: 10rem;
-    display: inline-block;
-    border-radius: 0.4rem;
-    border: 1px solid red;
+#main-container .main-nav img{
+    margin-left: 0.5rem;
+    width: 6rem;
+    height: 6rem;
 }
 
 #main-container .main-nav p{
     text-align: center;
+}
+
+.zixun img{
+    width: 5rem !important;
+    height: 4rem !important;
+}
+
+.zixun p{
+    width: 80% !important;
+    font-size: 1.5rem;
+    color: #0082ca;
+    float: right;
+}
+.new_zixun{
+    margin-top: 1rem;
+    background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.fee{
+    height: 10rem;
+    margin-top:0.5rem;
+    margin-bottom:1rem;
+    background-color: white;
+    text-align: center;
+}
+.fee1{
+    height: 8rem;
+    width: 50%;
+    float:left;
+    margin-top: 1rem;
+}
+.fee2{
+    margin-top: 1rem;
+    width: 50%;
+    float:left;
+    height: 8rem;
+    border-left:1px ridge gainsboro;
+}
+.fee1 p:nth-of-type(1){
+    color :red;
+    font-size: 3.5rem;
+    margin-top: 1rem;
+}
+.fee2 p:nth-of-type(1){
+    color :blue;
+    font-size: 3.5rem;
+    margin-top: 1rem;
+}
+.fee2 p:nth-of-type(2),.fee1 p:nth-of-type(2){
+    margin-top: 0.3rem;
+    bottom: 1rem;
+    color :grey;
+    font-size: 1.4rem;
+}
+.bangding_title{
+    font-size: 2rem;
+    background-color: white;
+    padding-left: 1rem;
+}
+.bangding_title p{
+    display: inline;
+}
+.bangding_title button{
+    font-size: 2rem; 
+    height: 2.5rem;
+    margin-top: -0.5rem;
+}
+#order-content{
+        padding: 0 1rem;
 }

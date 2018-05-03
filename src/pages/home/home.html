@@ -1,4 +1,20 @@
-<ion-content>
+<ion-content style="background-color:#f0f0f0">
+
+
+    <!--<div class="bangding_title" ng-if=false>
+      <p>您还没有绑定房屋&nbsp;</p>
+      <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
+    </div>-->
+<div style="background-color:white">
+    <ion-item>
+        <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width: 74%;" [(ngModel)]='roomname' cancelText="取消" okText="确认">
+        <ion-option value="1">凤城世家-1号楼(1-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="2">苏州澳韵花园-32号楼(32-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="4">--添加房屋--</ion-option>
+        </ion-select>
+    </ion-item>
+</div>
 
    <ion-slides *ngIf="focusList.length>0" class="focus" pager  loop="true" autoplay="3000">    
       <ion-slide *ngFor="let item of focusList">
@@ -6,41 +22,172 @@
       </ion-slide>         
    </ion-slides>
 
-    <div class="bangding" ng-if=false>
-      <p class="p_bangding">您还没有绑定房屋&nbsp;</p>
-      <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
+    <div class="fee">
+        <div class="fee1"><p>￥0.002</p><p>欠费总计</p></div>
+        <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
     </div>
-
-    <div id="main-container">
+    
+    <!--<div id="main-container">
         <ul class="main-nav clearfix">
             <li class="variaty nav-item">
-                <a [navPush]="RepairaddPage"></a>
-                <p>房屋报修</p>
+                <img src="assets/imgs/pay_fee.png">
+                <p>物业缴费</p>
             </li>
             <li class="favourable nav-item">
-                <a href="javascript:;"></a>
+                <img src="assets/imgs/prestore1.png">
+                <p>费用预存</p>
+            </li>
+            <li class="variaty nav-item">
+                <img src="assets/imgs/repair.png">
+                <p>在线报修</p>
+            </li>
+            <li class="investment nav-item">
+                <img src="assets/imgs/note.png">
                 <p>投诉建议</p>
             </li>
             <li class="variaty nav-item">
-                <a href="javascript:;"></a>
-                <p>房屋租售</p>
+                <img src="assets/imgs/rent1.png">
+                <p>房源发布</p>
+            </li>
+        </ul>
+
+        <ul class="main-nav clearfix">
+            <li class="investment nav-item">
+                <img src="assets/imgs/my_order.png">
+                <p>我的订单</p>
+            </li>
+            <li class="favourable nav-item">
+               <img src="assets/imgs/house4.png">
+                <p>房屋管理</p>
             </li>
             <li class="investment nav-item">
-                <a href="javascript:;"></a>
+                <img src="assets/imgs/megaphone.png">
+                <p>社区资讯</p>
+            </li>
+            <li class="variaty nav-item">
+                <img src="assets/imgs/complain.png">
+                <p>公示公告</p>
+            </li>
+            <li class="investment nav-item">
+                <img src="assets/imgs/open_door.png">
+                <p>一键开门</p>
+            </li>
+        </ul>
+    </div>-->
+
+        <div id="main-container">
+        <ul class="main-nav clearfix">
+            <li class="variaty nav-item">
+                <img src="assets/imgs/fee.png">
                 <p>物业缴费</p>
+            </li>
+            <li class="favourable nav-item">
+                <img src="assets/imgs/prefee.png">
+                <p>费用预存</p>
+            </li>
+            <li class="variaty nav-item">
+                <img src="assets/imgs/repair2.png">
+                <p>在线报修</p>
+            </li>
+            <li class="investment nav-item">
+                <img src="assets/imgs/suggest.png">
+                <p>投诉建议</p>
+            </li>
+            <li class="variaty nav-item">
+                <img src="assets/imgs/pushroom.png">
+                <p>房源发布</p>
+            </li>
+        </ul>
+
+        <ul class="main-nav clearfix">
+            <li class="investment nav-item">
+                <img src="assets/imgs/myorder.png">
+                <p>我的订单</p>
+            </li>
+            <li class="favourable nav-item">
+               <img src="assets/imgs/roommanger.png">
+                <p>房屋管理</p>
+            </li>
+            <li class="investment nav-item">
+                <img src="assets/imgs/massage.png">
+                <p>社区资讯</p>
+            </li>
+            <li class="variaty nav-item">
+                <img src="assets/imgs/public.png">
+                <p>公示公告</p>
+            </li>
+            <li class="investment nav-item">
+                <img src="assets/imgs/opendoor.png">
+                <p>一键开门</p>
             </li>
         </ul>
     </div>
 
-    <div class="bangding">
-      <p class="p_bangding">最新资讯</p>
-    </div>
 
+    <div class="new_zixun">
+        <div class="bangding">
+            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span>
+        </div>
+        <div id="order-content">
+            <div class="order-list">
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个最新资讯</p>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个最新资讯</p>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个最新资讯</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="bangding">
+            <span class="p_more">查看更多</span>
+        </div>
+    </div>
       <ion-list inset class="user_list">
       </ion-list>
 
-    <div class="bangding">
-      <p class="p_bangding">公告公示</p>
+    <div class="new_zixun">
+        <div class="bangding">
+            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;公示公告&nbsp;&nbsp;&nbsp;—————</span>
+        </div>
+        <div id="order-content">
+            <div class="order-list">
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个公示公告</p>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个公示公告</p>
+                        </div>
+                    </div>
+                    <div class="order-item">
+                        <div class="goods clearfix zixun">
+                            <img src="assets/imgs/gongyuan_logo.png" alt="">
+                            <p>这是一个公示公告</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="bangding">
+            <span class="p_more">查看更多</span>
+        </div>
     </div>
       <ion-list inset class="user_list">
       </ion-list>

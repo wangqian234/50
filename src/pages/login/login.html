@@ -1,21 +1,47 @@
-  <ion-navbar>
 
-  </ion-navbar>
 <div class="wrapper">
     <!--背景图片-->
     <div id="web_bg" style="background-image: url(assets/imgs/Login.png);"></div>
     <div id="web_bg_white" style="background-image: url(assets/imgs/Login_white.png);"></div>
     <div id="web_bg_logo" style="background-image: url(assets/imgs/Login_logo.png);"></div>
 </div>
+
 <div class="input_box">
-  <ion-item>
+
+  <div class="login_box">
+  <form class="search_form">
+    <input type="text" id="s" placeholder="请输入手机号码" class="swap_value" />
+
+  </form>
+</div>
+
+<div *ngIf="!loginNum" class="login_box">
+  <form class="search_form">
+    <input type="text" id="s" placeholder="请输入验证码" class="swap_value" />
+    <button *ngIf="isShowSend" (click)="ownRegist()">点击获取验证码</button>
+    <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
+  </form>
+</div>
+<div *ngIf="loginNum" class="login_box">
+  <form class="search_form">
+    <input type="password" id="s" placeholder="请输入密码" class="swap_value" />
+  </form>
+</div>
+<!--<div class="timer" > 
+               倒计时({{num}})
+        </div>
+        <div class="timer"  (tap)="sendCode()"> 
+               重新发送
+         </div>-->
+
+  <!--<ion-item>
     <ion-input type="number" placeholder="请输入手机号码" clearInput></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-input *ngIf="loginNum" type="password" placeholder="请输入登录密码" clearInput></ion-input>
     <ion-input *ngIf="!loginNum" type="password" placeholder="请输入动态验证码" clearInput></ion-input>
-  </ion-item>
+  </ion-item>-->
 
   <button class="ensure_button" ion-button block>登录</button>
   <div class="div_a">
@@ -23,6 +49,6 @@
       <a *ngIf="loginNum" (click)="getLoginNum()">验证码登录</a>
       <a *ngIf="!loginNum" (click)="getLoginNum()">密码登录</a> 
     </div>
-    <div><a>找回登录密码</a></div>
+    <div [navPush]="RebuildpassPage"><a>找回登录密码</a></div>
   </div>
 </div>

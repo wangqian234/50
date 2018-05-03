@@ -23,6 +23,7 @@ export class HomePage {
   public BindroomPage=BindroomPage
 
   public focusList=[];  /*数组 轮播图*/
+  public roomname = 1;
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public jsonp:Jsonp,public httpService:HttpServicesProvider) {
 
@@ -38,10 +39,10 @@ export class HomePage {
     var that=this;  
 
       that.focusList=[
-        '../assets/imgs/00.jpg',
-        '../assets/imgs/01.jpg',
-        '../assets/imgs/02.jpg',
-        '../assets/imgs/03.jpg'
+        '../assets/imgs/slide01.png',
+        '../assets/imgs/slide02.png',
+        '../assets/imgs/slide03.jpg',
+        '../assets/imgs/rent1.png'
       ];
 
   }

@@ -5,7 +5,8 @@ page-repairdetails {
 .step-container {  
             margin: 0;  
             padding: 0;  
-            width: 100%;  
+            width: 100%; 
+            margin-bottom: 5rem; 
         }  
         .step-container li {  
             display: inline-block;  
@@ -26,7 +27,7 @@ page-repairdetails {
             width: 34%;  
         }  
         .step-container li.step-current {  
-            //background-color: #00a2ca;  //第二个
+            background-color: #00a2ca;  //第二个
         }  
   
         .arrow {  
@@ -34,7 +35,7 @@ page-repairdetails {
             right: -7.5px;  
             height: 30px;  
             background-color: #ffffff;  
-            z-index: 2;  
+            z-index: 1;  
         }  
         .arrow span {  
             display: inline-block;
@@ -49,11 +50,12 @@ page-repairdetails {
             border-left: 15px solid #9cddf5;
         }  
         .arrow-past .arrow-next {  
-            //border-top: 15px solid #00a2ca;  //第二个
-            //border-bottom: 15px solid #00a2ca;  //第二个
+            border-top: 15px solid #00a2ca;  //第二个
+            border-bottom: 15px solid #00a2ca;  //第二个
         }  
         .arrow-current .arrow-pre {  
             border-left: 15px solid #cccccc;  //第二个
+            background-color: #00a2ca;
         }  
         .arrow-current .arrow-next {  
             border-top: 15px solid #cccccc;  
@@ -88,7 +90,8 @@ page-repairdetails {
     top: 0;  
     width: 100%;  
     height: 100%;  
-    background-color: rgba(0,0,0,0.5);  
+    background-color: rgba(0,0,0,0.5);
+    z-index: 5;
 }
 .content1 {  
     background:#eeeeee;  

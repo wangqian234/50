@@ -3,20 +3,25 @@
 
 <ion-content>
   <div class="user_bg" style="background-image: url(assets/imgs/user_title.png);"></div>
+  <div class="topdiv">
+      <span class="edit_per">编辑个人信息</span>
+    <span class="out_login">退出登录</span>
+    </div>
   <div class="login">
     <div class="userimg">
-      <img src="assets/imgs/user.png"  />
+      <img src="assets/imgs/user.png"/>
     </div>
+
 
     <div class="login_reg">
         <span>您好，XXX！</span>
     </div>
   </div>
 
-      <div class="login_reg">
+    <!--<div class="login_reg">
         <button ion-button [navPush]='LoginPage'>登录</button>
-        <button ion-button [navPush]='RegisterPage'>注册</button>
-    </div>
+        <button ion-button [navPush]='RegistersignPage'>注册</button>
+    </div>-->
 
 
   <!--<ion-list inset >
@@ -35,32 +40,42 @@
   <ion-list inset class="user_list">
 
         <ion-item [navPush]="ShoppinglistPage">
-            <ion-icon name="ios-paper-outline"></ion-icon>
+            <ion-icon style="color:#CC3333;font-size:2rem" name="ios-paper-outline"></ion-icon>
             <span>商城订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item [navPush]="AddressPage">
-            <ion-icon name="clipboard"></ion-icon>
-            <span>收货地址管理</span>
+        <ion-item [navPush]="ShoppinglistPage">
+             <ion-icon style="color:#CC8F33;font-size:2rem" name="star-half"></ion-icon>
+            <span>团购订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item [navPush]="RepairlistPage">
-            <ion-icon name="build"></ion-icon>
+            <ion-icon style="color:#8DC43C;font-size:2rem" name="logo-yen"></ion-icon>
+            <span>费用明细</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+        <ion-item [navPush]="RepairlistPage">
+            <ion-icon style="color:#44BB8C;font-size:2rem" name="build"></ion-icon>
             <span>我的工单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item>
-            <ion-icon name="chatboxes"></ion-icon>
+            <ion-icon style="color:#4474BB;font-size:2rem" name="chatboxes"></ion-icon>
             <span>我的发布信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item>
-            <ion-icon name="attach"></ion-icon>
+            <ion-icon style="color:#8C44BB;font-size:2rem" name="attach"></ion-icon>
             <span>积分收支明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
+        <ion-item [navPush]="AddressPage">
+            <ion-icon  style="color:#B34B8A;font-size:2rem" name="clipboard"></ion-icon>
+            <span>收货地址管理</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
         <ion-item>
-            <ion-icon name="ios-people-outline"></ion-icon>
+            <ion-icon style="color:#BB445C;font-size:2rem" name="ios-people-outline"></ion-icon>
             <span>重置登录密码</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>

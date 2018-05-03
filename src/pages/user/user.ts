@@ -13,7 +13,12 @@ import { RepairlistPage } from '../repairlist/repairlist';
 //引入购物清单界面
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
+import { RegistersignPage } from '../registersign/registersign';
+
+
 import { StorageProvider } from '../../providers/storage/storage';
+
+
 
 
 @IonicPage()
@@ -34,6 +39,8 @@ export class UserPage {
   public  RepairlistPage = RepairlistPage;
 
   public ShoppinglistPage = ShoppinglistPage;
+
+  public RegistersignPage = RegistersignPage;
 
     public userinfo='';
 
