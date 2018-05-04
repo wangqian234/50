@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import $ from 'jquery';
 //商品分类页
 import { ShopsortPage } from '../shopsort/shopsort';
-//订单页
-import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
-//商品详情页
-import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
+ShopsortPage
 
 @Component({
   selector: 'page-shopping',
@@ -14,14 +12,30 @@ import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
 export class ShoppingPage {
 
   public ShopsortPage = ShopsortPage;
-  public ShoppinglistPage =ShoppinglistPage;
-  public ShoppingdetailPage =ShoppingdetailPage;
+  public lunboList=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.getLunbo();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingPage');
   }
+/**轮播图 */
+getLunbo(){
+   var that=this;  
+      that.lunboList=[
+        '../assets/imgs/hua.jpg',
+        '../assets/imgs/jiaju.jpg',
+        '../assets/imgs/hongjiu.jpg',       
+      ];   
+}
 
+  clickEvent(){
+    var index = $(event.target).attr("index");
+    console.log(index);
+    var rem = index * 7 + 'rem';
+    console.log(rem)
+    $('.jiantou_button').css("left",rem)
+  }
 }

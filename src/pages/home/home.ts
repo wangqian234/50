@@ -51,4 +51,5 @@ export class HomePage {
       var w = document.documentElement.clientWidth || document.body.clientWidth;
       document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
   }
+
 }
