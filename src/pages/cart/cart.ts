@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
-import { OrderPage } from '../order/order';
+//import { OrderPage } from '../order/order';
 
 
 @Component({
@@ -190,7 +190,7 @@ export class CartPage {
 
       if(tempArr.length>0){
         this.storage.set('order_data',tempArr);
-        this.navCtrl.push(OrderPage);
+        //this.navCtrl.push(OrderPage);
       }else{
 
         alert('您还没有选中数据');

@@ -8,17 +8,12 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { CategoryPage } from '../pages/category/category';
 import { CartPage } from '../pages/cart/cart';
 import { UserPage } from '../pages/user/user';
 //登录
 import { LoginPage } from '../pages/login/login';
 //注册
-import { RegisterPage } from '../pages/register/register';
-import { RegistersignPage } from '../pages/registersign/registersign';
 import { RegisterpasswordPage } from '../pages/registerpassword/registerpassword';
-//搜索页面
-import { SearchPage } from '../pages/search/search';
 
 //商品列表
 import { ProductlistPage } from '../pages/productlist/productlist';
@@ -29,10 +24,6 @@ import { PcontentPage } from '../pages/pcontent/pcontent';
 //账户管理
 
 import { PersonalPage } from '../pages/personal/personal';
-
-
-//订单页面
-import { OrderPage } from '../pages/order/order';
 
 //收货地址列表
 import { AddressPage } from '../pages/address/address';
@@ -79,20 +70,15 @@ import { ToolsProvider } from '../providers/tools/tools';
 @NgModule({
   declarations: [
     MyApp,
-    CategoryPage,
     CartPage,
     UserPage,
     HomePage,
     TabsPage,
     LoginPage,
-    RegisterPage,
-    RegistersignPage,
     RegisterpasswordPage,
-    SearchPage,
     ProductlistPage,
     PcontentPage,
     PersonalPage,
-    OrderPage,
     AddressPage,
     AddaddressPage,
     RepairaddPage,
@@ -118,20 +104,15 @@ import { ToolsProvider } from '../providers/tools/tools';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    CategoryPage,
     CartPage,
     UserPage,
     HomePage,
     TabsPage,
     LoginPage,
-    RegisterPage,
-    RegistersignPage,
     RegisterpasswordPage,
-    SearchPage,
     ProductlistPage,
     PcontentPage,
     PersonalPage,
-    OrderPage,
     AddressPage,
     AddaddressPage,
     RepairaddPage,
