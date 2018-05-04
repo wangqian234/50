@@ -30,10 +30,13 @@ export class HomePage {
     //调用轮播图
 
     this.getFocus();
-    this.setFontSize();
 
   }
 
+ionViewWillEnter(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+}
   //轮播图
   getFocus(){ 
     var that=this;  
@@ -47,9 +50,5 @@ export class HomePage {
 
   }
 
-  setFontSize(){
-      var w = document.documentElement.clientWidth || document.body.clientWidth;
-      document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
-  }
 
 }

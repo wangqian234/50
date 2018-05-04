@@ -34,7 +34,7 @@ getLunbo(){
   clickEvent(){
     var index = $(event.target).attr("index");
     console.log(index);
-    var rem = index * 7 + 'rem';
+    var rem = index * 7.5 + 'rem';
     console.log(rem)
     $('.jiantou_button').css("left",rem)
   }
