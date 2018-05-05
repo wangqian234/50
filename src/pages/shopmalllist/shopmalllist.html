@@ -1,0 +1,94 @@
+<!--
+  Generated template for the ShopmalllistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+</ion-header>
+
+
+<ion-content>
+<div id="yemnr">
+<!--头部--> 
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k">
+		<div class="logo_k"><a href="index.html"><img src="images/web/logo.jpg"></a></div>
+		<div class="shous_k"><span></span><input id="sos_tanc"  type="search" input_key="" placeholder="限时疯抢，好物低至1元" placeholder_str=""></div>
+		<div class="dengl">
+			<div class="caid_img" id="zhu_caid"><img src="images/web/cd_1.png"></div>
+			<ul class="zhu_daoh" id="daoh_lb">
+				<em></em>
+				<li><a href="index.html">首页</a></li>
+				<li><a href="wangid_ShangP_FenL.html">商品分类</a></li>
+				<li><a href="#">扫一扫</a></li>
+				<li><a href="wanagid_GouWuChe.html">购物车</a></li>
+				<li class="wu"><a href="#">我的通城</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--商品列表--> 
+<div class="shangp_lieb_beij">
+	<div class="sp_daoh">
+		<ul>
+			<li class="gaodi_paix">
+				<a class="a_paix a_paix_dq">综合<em><img src="assets/imgs/a1.png"></em></a>
+				<div class="xiala">
+					<a href="#">综合</a>
+					<a href="#">高到低</a>
+					<a href="#">低到高</a>
+				</div> 
+			</li>
+			<li><a class="a_paix" href="#">销量</a></li>
+			<li><a class="a_paix" href="#">价格</a></li>
+			<li class="gaodi_paix">
+				<a class="a_paix a_paix_dq a_paix_fh"><p class="syil_zk"><img src="images/web/syil_zk.png"></p><em><img src="images/web/a2.png"></em></a>
+				<div class="xiala xiala1">
+					<a href="wangid_ShangP_LieB.html"><p class="syil_zk"><img src="images/web/syil_zk.png"></p>缩略</a>
+					<a href="wangid_ShangP_LieB_1.html"><p class="syil_zk syil_zk_1"><img src="images/web/lieb_tub.png"></p>详情</a> 
+				</div> 
+			</li>
+		</ul>
+	</div>
+	<ul class="shangp_lieb_k_er">
+		<li *ngFor="let item of list">
+			<a href="XiangQ_Y.html">
+				<div class="lieb_img"><img src={{item.img}}></div>
+				<div class="lieb_txt">
+					<p class="biao">{{item.title}}</p>
+					<p class="px26">¥{{item.price}}</p>
+          <p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>
+</div>
+
+<!--搜索页面-->
+<div id="shous_yem">
+	<div class="toub_beij">
+		<div class="zhongj_k zhongj_k_tanc">
+			<div class="logo_k logo_k_fanh"><a id="sous_fanh_sy"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="shous_k shous_k_ganc">
+				<a href="#" class="sous_ann_k"><span class="sous_ann"></span></a>
+				<input  type="search" placeholder="限时疯抢，好物低至1元">
+			</div> 
+		</div>
+		<div class="remen_sos">
+			<p>热门搜索：</p>
+			<ul>
+				<li><a href="#">笔记本</a></li>
+				<li><a href="#">游戏本</a></li>
+				<li><a href="#">工作站笔记本</a></li>
+				<li><a href="#">平板电脑</a></li>
+				<li><a href="#">台式机</a></li>
+				<li><a href="#">一体机服务器</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</ion-content>

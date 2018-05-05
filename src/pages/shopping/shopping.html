@@ -1,20 +1,6 @@
 
 <ion-content  style="background-color:#f0f0f0">
 
-        <!--<div class="jd_header">
-			 <ion-icon ios="ios-list" md="md-list" class="classlist"></ion-icon>
-			<div id="search_box" style="width:75%;margin-left:4rem;height:3.5rem;background-color:antiquewhite"> 
-                <form id="search_form"> 
-                    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
-                </form> 
-            </div>
-            <div class="location">
-                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
-                <span class="dw_font" id="curcity">西安</span>
-                <ion-icon name="arrow-dropdown"></ion-icon>
-            </div>
-		</div>-->
-
         <div style="background-color:white;padding:0.3rem 0;">
             <div class="classify"><img src="assets/imgs/point_list.png"/><span>分类</span></div>
 			<div class="search_box" style="float:left;width:58%;margin-top:0.25rem;height:3.5rem;"> 
@@ -26,11 +12,11 @@
                 <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
                 <span class="dw_font" id="curcity">西安</span>
             </div>
-</div>
+        </div>
 
-   <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000">    
-      <ion-slide *ngFor="let item of lunboList">
-          <img class="img1" [src]="item" />
+   <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
+      <ion-slide *ngFor="let item of lunboList"  style="height:20rem;">
+          <img class="img1" [src]="item"  style="height:20rem;"/>
       </ion-slide>         
    </ion-slides>
    <!-- 团购图标-->
@@ -117,9 +103,16 @@
             <p index="14"> 汽车服务</p>
         </div>
    </div>
+
+
 <div id="mallhome-content" style="margin-top:-1rem">
+     <ul class="main-nav">
+            <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
+            <li class="cart" [navPush]="ShopcarPage"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
+            <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
+        </ul>
    <ul class="goods-list">
-            <li class="goods-item clearfix">
+            <li class="goods-item clearfix" [navPush]="ShoppingdetailPage">
                 <img src="assets/imgs/yibao.jpg" alt="" srcset="">
                 <div class="information">
                     <p class="name">怡宝矿泉水</p>
@@ -185,9 +178,9 @@
     </div>
     <div><img src="assets/imgs/yibao.jpg" ></div>
     <div><img src="assets/imgs/yibao.jpg" ></div>
-            <div style="padding-top:1rem" class="bangding">
-            <span class="p_more">查看更多</span>
-        </div>
+    <div style="padding-top:1rem" class="bangding">
+        <span class="p_more">查看更多</span>
+    </div>
    <br />
    <br />
    <br />
