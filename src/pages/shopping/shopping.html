@@ -1,313 +1,540 @@
 
-<ion-content  style="background-color:#f0f0f0">
+<ion-content  class="shouye">
+<button (click)="geto()"> 请求数据</button>
+<!--大小限制--> 
+<div class="da_xiao_xianz">
+<!--页面内容-->
+<div id="yemnr">
+	<!--头部--> 
+	<div class="toub_beij toub_beij_shouye">
+		<div class="zhongj_k">
+			<div class="logo_k"><a href="index.html"><img src="images/web/logo.jpg"></a></div>
+			<div class="shous_k"><span></span><input id="sos_tanc"  type="search" input_key="" placeholder="限时疯抢，好物低至1元" placeholder_str=""></div>
+			<div class="dengl">
+				<a href="#"><!--跳转到登录--><div class="caid_img" ><img src="images/web/cd.png"></div></a>
+			</div>
+		</div>
+	</div>
+	<!--banner-->
+	<div class="swiper_container_1 ">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide"><a href="#"><img src="images/web/banner1.jpg"></a></div>
+	        <div class="swiper-slide"><a href="#"><img src="images/web/banner.jpg"></a></div>
+	        <div class="swiper-slide"><a href="#"><img src="images/web/banner1.jpg"></a></div> 
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper_pagination_1"></div>
+	</div> 
 
-        <!--<div class="jd_header">
-			 <ion-icon ios="ios-list" md="md-list" class="classlist"></ion-icon>
-			<div id="search_box" style="width:75%;margin-left:4rem;height:3.5rem;background-color:antiquewhite"> 
-                <form id="search_form"> 
-                    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
-                </form> 
-            </div>
-            <div class="location">
-                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
-                <span class="dw_font" id="curcity">西安</span>
-                <ion-icon name="arrow-dropdown"></ion-icon>
-            </div>
-		</div>-->
+	<!--导航-->
+	<div class="neir_beij"> 
+		<ul>
+			<li><a href="BenDiShengHuo.html"><div class="daohangk"><img src="images/1.png"></div><p>本地生活</p></a></li>
+			<li><a href="#"><div class="daohangk"><img src="images/2.png"></div><p>团购专区</p></a></li>
+			<li><a href="GeRenZhongXin_JiFenShnagC.html"><div class="daohangk"><img src="images/3.png"></div><p>积分商城</p></a></li>
+			<li><a href="#"><div class="daohangk"><img src="images/4.png"></div><p>分销系统</p></a></li>
+			<li><a href="#"><div class="daohangk"><img src="images/5.png"></div><p>办公耗材</p></a></li>
+			<li><a href="#"><div class="daohangk"><img src="images/6.png"></div><p>饰品礼品</p></a></li>
+			<li><a href="#"><div class="daohangk"><img src="images/7.png"></div><p>饰品礼品</p></a></li>
+			<li><a href="GeRenZhongXin.html"><div class="daohangk"><img src="images/8.png"></div><p>个人中心</p></a></li>
+		</ul>
+	</div>
 
-        <div style="background-color:white;padding:0.3rem 0;">
-            <div class="classify"><img src="assets/imgs/point_list.png"/><span>分类</span></div>
-			<div class="search_box" style="float:left;width:58%;margin-top:0.25rem;height:3.5rem;"> 
-                <form id="search_form"> 
-                    <input type="text" id="s" placeholder="商城商品搜索" class="swap_value" /> 
-                </form> 
-            </div>
-            <div class="location">&nbsp;
-                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
-                <span class="dw_font" id="curcity">西安</span>
-            </div>
+
+	<!--切换城市-->
+	<div class="qieh_chengs">
+		<div class="qieh_zhonj_kuang">
+			<p>贵阳市 <span><a href="XuanZeChengShi.html">[切换城市]</a></span><em>丨</em><span class="fenh">打造特色本地购物商城</span></p>
+		</div>
+	</div>
+	<!--本地生活-->
+	<div class="bendi_sh">
+		<div class="zuob">
+			<div class="tup"><img src="images/jiank_meis.jpg"></div>
+			<div class="wenz"><a href="#"><p>健康美食</p><span>让生活   更健康<br>更美味   更舒心</span></a></div>
+		</div>
+		<div class="bend_youb">
+			<div class="shang">
+				<p>全部区域</p>
+				<ul>
+					<li><a href="#">云岩区</a></li>
+					<li><a href="#">南明区</a></li>
+					<li><a href="#">白云区</a></li>
+					<li><a href="#">乌当区</a></li>
+					<li><a href="#">花溪区</a></li>
+					<li><a href="#">清镇市</a></li>
+					<li><a href="#">开阳县</a></li>
+				</ul>
+			</div>
+			<div class="liange_anniu">
+				<div class="ds"><a href="#"><img src="images/web/b1.jpg"></a></div>
+				<div class="ds"><a href="#"><img src="images/web/b2.jpg"></a></div>
+			</div>
+		</div>
+	</div>
+	<div class="henx"></div>
+	<div class="swiper_container_2">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide">
+	        	<a href="#">
+	        		<div class="kuaij_td_img"><img src="images/web/kuy.jpg"></div>
+	        		<div class="kuaij_td_wenz"><p class="p2">鸡蛋还能这样吃</p><p class="p1">家用电器</p></div>
+	        	</a>
+	        </div>
+	        <div class="swiper-slide">
+	        	<a href="#">
+					<div class="kuaij_td_img"><img src="images/web/kuy1.jpg"></div>
+	        		<div class="kuaij_td_wenz"><p class="p2">冬季生宝宝</p><p class="p1">母婴</p></div>
+	        	</a>
+	        </div>
+	        <div class="swiper-slide">
+	        	<a href="#">
+					<div class="kuaij_td_img"><img src="images/web/kuy.jpg"></div>
+	            	<div class="kuaij_td_wenz"><p class="p2">鸡蛋还能这样吃</p><p class="p1">家用电器</p></div>
+	            </a>
+	        </div>
+	        <div class="swiper-slide">
+	        	<a href="#">
+					<div class="kuaij_td_img"><img src="images/web/kuy1.jpg"></div>
+	        		<div class="kuaij_td_wenz"><p class="p2">鸡蛋还能这样吃</p><p class="p1">家用电器</p></div>
+	        	</a>
+	        </div> 
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper_pagination_2"></div>
+	</div> 
+
+	<!--第一层-->
+	<div class="louc_m louc_beij1">
+		<div class="mingc">
+			<em class="hua1"></em>
+			<p>办公家具</p>
+			<span>Office furniture</span>
+			<a href="#">更多+</a>
+		</div>
+	</div>
+	<div class="yic_beij">
+		<div class="yic_sahng_b">
+			<div class="zuo">
+				<a href="#">
+					<p>卧室家具</p>
+					<span>爆款低至五折</span>
+					<div class="zuo_tu_k"><img src="images/web/yic_c.jpg"></div>
+				</a>
+			</div>
+			<div class="you">
+				<div class="you_shang">
+					<a href="#">
+						<div class="wez">
+							<p class="px24">灯饰照明</p>
+							<span class="px22 color_h">发现品质生活</span>
+						</div>
+						<div class="uou_tu1_k"><img src="images/web/yic_d.jpg"></div>
+					</a>
+				</div>
+				<div class="youx">
+					<div class="youx_bq">
+						<a href="#">
+							<div class="wez">
+								<p class="px24">办公文化</p>
+								<span class="px22 color_h">办公设计精选</span>
+							</div>
+							<div class="youx_tu1_k"><img src="images/web/yic_bih.jpg"></div>
+						</a>
+					</div>
+					<div class="youx_bq youx_wubk">
+						<a href="#">
+							<div class="wez">
+								<p class="px24 wuj_color">五金工具</p>
+								<span class="px22 color_h">必买尖货儿</span>
+							</div>
+							<div class="youx_tu1_k"><img src="images/web/yic_wuj.jpg"></div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="yic_xia_b">
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">烘烤 电脑版镜面外观</p>
+						<span class="px26">￥349.00</span>
+					</div>
+					<div class="youc_xia_tu_k"><img src="images/web/yic_weibl.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo you_wux">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">烘烤 电脑版镜面外观</p>
+						<span class="px26">￥349.00</span>
+					</div>
+					<div class="youc_xia_tu_k"><img src="images/web/yic_s.jpg"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!--第二层-->
+	<div class="louc_m louc_beij2">
+		<div class="mingc">
+			<em class="hua2"></em>
+			<p>手机数码</p>
+			<span>Mobile phone digital</span>
+			<a href="#">更多+</a>
+		</div>
+	</div>
+	<div class="lianc_beij">
+		<div class="lianc_shang">
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">热门手机</p>
+						<span class="px22 color_h">1元购手机</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_shouj.jpg"></div>
+				</a>
+			</div>
+			<div class="you">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">智能数码</p>
+						<span class="px22 color_h">大品牌</span>
+						<div class="lvsz px22">品质推荐  ></div>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_diann.jpg"></div>
+				</a>
+			</div>
+		</div>
+		<div class="lianc_shang">
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_1">游戏组装</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_dian2.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_2">硬件存储</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_nc.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo zuo_wu">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_3">摄影产品</p>
+						<span class="px22 color_h">看的见的岁月</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_xiangj.jpg"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+
+	<!--第三层-->
+	<div class="louc_m louc_beij3">
+		<div class="mingc">
+			<em class="hua3"></em>
+			<p>服饰鞋帽</p>
+			<span>Shoes and hats</span>
+			<a href="#">更多+</a>
+		</div>
+	</div>
+
+	<div class="lianc_beij">
+		<div class="lianc_shang lianc_shang_sanc">
+			<div class="sanc_xiangd">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">女装</p>
+						<span class="px22 color_h">大品牌</span>
+					</div>
+					<div class="tu_k"><img src="images/web/sanc_nvz.jpg"></div>
+				</a>
+			</div>
+			<div class="sanc_xiangd sanc_xiangd_wuxian">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">童装</p>
+						<span class="px22 color_h">大品牌</span>
+					</div>
+					<div class="tu_k"><img src="images/web/sanc_tongz.jpg"></div>
+				</a>
+			</div> 
+		</div>
+		<div class="lianc_shang">
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_1">连衣裙</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/sanc_lyq.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_2">内衣</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/canc_neiy.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo zuo_wu">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_3">潮流精品</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/sanc_xz.jpg"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!--第四层-->
+	<div class="louc_m louc_beij4">
+		<div class="mingc">
+			<em class="hua4"></em>
+			<p>汽车用品</p>
+			<span>Automobile</span>
+			<a href="#">更多+</a>
+		</div>
+	</div>
+	<div class="lianc_beij">
+		<div class="lianc_shang">
+			<div class="zuo sic_">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">汽车服务</p>
+						<span class="px22 color_h">1元服务</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_shouj.jpg"></div>
+				</a>
+			</div>
+			<div class="you you_huanb">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color">汽车保养 </p>
+						<span class="px22 color_h">大品牌</span>
+						<div class="lvsz px22">品质推荐  ></div>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_diann.jpg"></div>
+				</a>
+			</div>
+		</div>
+		<div class="lianc_shang">
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_1">汽车装饰</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_dian2.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_2">汽车电器</p>
+						<span class="px22 color_h">精品推荐</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_nc.jpg"></div>
+				</a>
+			</div>
+			<div class="zuo zuo_wu">
+				<a href="#">
+					<div class="wez">
+						<p class="px24 wuj_color color_3">汽车品牌</p>
+						<span class="px22 color_h">看的见的岁月</span>
+					</div>
+					<div class="tu_k"><img src="images/web/erc_xiangj.jpg"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!--广告-->
+	<div class="swiper_container_3 ">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide"><a href="#"><img src="images/web/xia_banner1.jpg"></a></div>
+	        <div class="swiper-slide"><a href="#"><img src="images/web/xia_banner2.jpg"></a></div>
+	        <div class="swiper-slide"><a href="#"><img src="images/web/xia_banner1.jpg"></a></div> 
+	    </div>
+	    <!-- Add Pagination -->
+	    <div class="swiper_pagination_3"></div>
+	</div> 
+
+	<!--热门商品-->
+	<div class="rem_shangp_bt_b">
+		<div class="waik">
+			<em></em>
+			<div class="mingz"><i></i><p class="px26">热门商品</p></div>
+			<em></em>
+		</div>
+	</div>
+	<div class="rem_sp_b">
+		<div class="tonyi_k">
+			<div class="zuo_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r1.jpg"></div>
+					<div class="wez">
+						<p class="px22">御泥坊 清洁净肤黑面膜套装 21片装</p>
+						<span class="px24">¥ 69.90</span>
+					</div>
+				</a>
+			</div>
+			<div class="zuo_sp you_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r2.jpg"></div>
+					<div class="wez">
+						<p class="px22">盈菲妮秋季软妹子粉嫩少女风兔耳朵长袖</p>
+						<span class="px24">¥119.00</span>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="tonyi_k">
+			<div class="zuo_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r3.jpg"></div>
+					<div class="wez">
+						<p class="px22">安娅萱2016软妹子宽松女学生短袖t恤女</p>
+						<span class="px24">¥ 69.90</span>
+					</div>
+				</a>
+			</div>
+			<div class="zuo_sp you_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r4.jpg"></div>
+					<div class="wez">
+						<p class="px22">小米(MI)Air 13.3英寸全金属轻薄笔记本(i5-7200U</p>
+						<span class="px24">¥2519.00</span>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="tonyi_k">
+			<div class="zuo_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r1.jpg"></div>
+					<div class="wez">
+						<p class="px22">御泥坊 清洁净肤黑面膜套装 21片装</p>
+						<span class="px24">¥ 69.90</span>
+					</div>
+				</a>
+			</div>
+			<div class="zuo_sp you_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r2.jpg"></div>
+					<div class="wez">
+						<p class="px22">盈菲妮秋季软妹子粉嫩少女风兔耳朵长袖</p>
+						<span class="px24">¥119.00</span>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="tonyi_k">
+			<div class="zuo_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r3.jpg"></div>
+					<div class="wez">
+						<p class="px22">安娅萱2016软妹子宽松女学生短袖t恤女</p>
+						<span class="px24">¥ 69.90</span>
+					</div>
+				</a>
+			</div>
+			<div class="zuo_sp you_sp">
+				<a href="#"> 
+					<div class="tu_k"><img src="images/web/r4.jpg"></div>
+					<div class="wez">
+						<p class="px22">小米(MI)Air 13.3英寸全金属轻薄笔记本(i5-7200U</p>
+						<span class="px24">¥2519.00</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="jiazz">
+		<p class="px22">拼命加载中...</p>
+	</div>
+
+	<!--底部-->
+	<div class="dib_bj">
+		<div class="diyi">
+			<ul>
+				<li><a href="#">登录</a></li>
+				<p>丨</p>
+				<li><a href="#">注册</a></li>
+				<p>丨</p>
+				<li><a href="#">反馈</a></li>
+				<p>丨</p>
+				<li><a href="#">返回顶部</a></li>
+			</ul>
+		</div>
+		<div class="liange_bb">
+			<div class="bb">
+				<a href="#">
+					<div class="bb_img"><img src="images/web/chupb.png"></div>
+					<p>触屏版</p>
+				</a>
+			</div>
+			<div class="bb">
+				<a href="#">
+					<div class="bb_img"><img src="images/web/diannb.png"></div>
+					<p class="diann_color">电脑版</p>
+				</a>
+			</div>
+		</div> 
+		<div class="gs_beian">
+			<p>京公网安备：11010602030054号</p>
+			<p>京ICP备：14012449号 黔ICP证：B2-20140009号</p>
+		</div>
+	</div>
+
+	<!--底部导航-->
+	<div class="dib_daoh_b">
+		<ul>
+			<li><a href="index.html"><div class="fup"><img src="images/web/d2-2.png"></div><p class="dh_dq">首 页</p></a></li>
+			<li><a href="wangid_ShangP_FenL.html"><div class="fup"><img src="images/web/d1.png"></div><p>分 类</p></a></li>
+			<li><a href="wanagid_GouWuChe.html"><div class="fup"><img src="images/web/d3.png"></div><p>购物车</p></a></li>
+			<li><a href="GeRenZhongXin.html"><div class="fup"><img src="images/web/d4.png"></div><p>我</p></a></li>
+		</ul>
+	</div>
+</div>
+<!--大小限制--> 
+</div>
+<!--搜索页面-->
+<div id="shous_yem">
+	<div class="toub_beij">
+		<div class="zhongj_k zhongj_k_tanc">
+			<div class="logo_k logo_k_fanh"><a id="sous_fanh_sy"><img class="fanh_ann" src="images/web/fanh.png"></a></div>
+			<div class="shous_k shous_k_ganc">
+				<a href="#" class="sous_ann_k"><span class="sous_ann"></span></a>
+				<input  type="search" placeholder="限时疯抢，好物低至1元" placeholder_str="">
+			</div> 
+		</div>
+	</div>
+	<div class="remen_sos">
+		<p>热门搜索：</p>
+		<ul>
+			<li><a href="#">笔记本</a></li>
+			<li><a href="#">游戏本</a></li>
+			<li><a href="#">工作站笔记本</a></li>
+			<li><a href="#">平板电脑</a></li>
+			<li><a href="#">台式机</a></li>
+			<li><a href="#">一体机服务器</a></li>
+		</ul>
+	</div>
 </div>
 
-   <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000">    
-      <ion-slide *ngFor="let item of lunboList">
-          <img class="img1" [src]="item" />
-      </ion-slide>         
-   </ion-slides>
-   <!-- 团购图标-->
-  <div class="tupian-div">
-        <img src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
-        <div class="tupian-div2">
-            <img src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
-            <img src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
-        </div> 
-  </div>
-  <div style="clear:both"></div>
-    
-    <div class="titleshop">
-        <span class="p_shop">&nbsp;推荐分类</span>
-        <span class="p_shop2">更多></span>
-    </div>
-
-           
-       <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
-		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
-
-   <div class="facediv" (click)="clickEvent()">
-
-
-        <div>
-            <a href="#"><img index="0" src="assets/imgs/lvyou.png"/></a>
-            <p index="0">旅游服务</p>
-            <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/>
-        </div>
-       <div>
-            <a href="#"><img index="1" src="assets/imgs/shuiguo.png"/></a>
-            <p index="1">新鲜水果</p>
-        </div>
-      <div>
-            <a href="#"><img index="2" src="assets/imgs/yinliao.png"/></a>
-            <p index="2">酒水饮料</p>
-        </div>
-       <div>
-            <a href="#"><img index="3" src="assets/imgs/educate.png"/>  </a>
-            <p index="3">儿童教育</p>
-       </div>
-      <div>
-            <a href="#"><img index="4" src="assets/imgs/meizhuang.png"/>  </a>
-            <p index="4">个护美妆</p>
-        </div>
-      <div>
-            <a href="#"><img index="5" src="assets/imgs/chaoshi.png"/>  </a>
-            <p index="5">汇超市</p>
-        </div>
-      <div>
-            <a href="#"><img index="6" src="assets/imgs/gongyi.png"/>  </a>
-            <p index="6">日用工艺</p>
-        </div>
-         <div>
-            <a href="#"><img index="7" src="assets/imgs/liangshi.png"/>  </a>
-            <p index="7">粮食副食</p>
-        </div>
-        <div id="living">
-            <a href="#"><img index="8" src="assets/imgs/jujiafuwu.png"/>  </a>
-            <p index="8">居家服务</p>
-        </div>
-        <div id="family">
-            <a href="#"><img index="9" src="assets/imgs/dianqi.png"/>  </a>
-            <p index="9">家用电器</p>
-        </div>
-        <div id="tee">
-            <a href="#"><img index="10" src="assets/imgs/yangshengcha-.png"/>  </a>
-            <p index="10">养生茗茶</p>
-        </div>
-         <div>
-            <a href="#"><img index="11" src="assets/imgs/jujiajiancai.png"/>  </a>
-            <p index="11">居家建材</p>
-        </div>
-                <div>
-            <a href="#"><img index="12" src="assets/imgs/yinyongshui.png"/>  </a>
-            <p index="12">饮用水</p>
-        </div>
-         <div>
-            <a href="#"><img index="13" src="assets/imgs/xianhua.png"/>  </a>
-            <p index="13">鲜花绿植</p>
-        </div>
-        <div>
-            <a href="#"><img index="14" src="assets/imgs/car.png"/>  </a>
-            <p index="14"> 汽车服务</p>
-        </div>
-   </div>
-<div id="mallhome-content" style="margin-top:-1rem">
-   <ul class="goods-list">
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">怡宝矿泉水</p>
-                    <p class="price">￥<span>2</span></p>
-                    <p class="sales-count"><span>235</span>人已付款</p>
-                    <p class="special"><span>热销产品</span><span>人气推荐</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>155</span>人已付款</p>
-                    <p class="special"><span>热销产品</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>155</span>人已付款</p>
-                    <p class="special"><span>热销产品</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                    <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">怡宝矿泉水</p>
-                        <p class="price">￥<span>2</span></p>
-                        <p class="sales-count"><span>235</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                        <p class="tip">好用的电脑</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>155</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                        <p class="tip">笔记本平板工作站三合一</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>155</span>人已付款</p>
-                    </div>
-                </li>
-        </ul>
-        <div style="padding-top:1rem" class="bangding">
-            <span class="p_more">查看更多</span>
-        </div>
-</div>
-   <div style="clear:both"></div>
-
-    <div class="titleshop">
-        <span class="p_shop">&nbsp;精品推荐</span>
-        <span class="p_shop2">更多></span>
-    </div>
-    <div><img src="assets/imgs/yibao.jpg" ></div>
-    <div><img src="assets/imgs/yibao.jpg" ></div>
-            <div style="padding-top:1rem" class="bangding">
-            <span class="p_more">查看更多</span>
-        </div>
-   <br />
-   <br />
-   <br />
-   <br />
-  <!--  <div id="mallhome-content">
-        <ul class="goods-type clearfix">
-            <li class="variaty goods-type-item" [navPush]="ShopsortPage">
-                <a></a>
-                <p>旅游服务</p>
-            </li>
-            <li class="favourable goods-type-item">
-                <a href="javascript:;"></a>
-                <p>酒水饮料</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>儿童教育</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>个护美妆</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>汇超市</p>
-            </li>
-            <li class="favourable goods-type-item">
-                <a href="javascript:;"></a>
-                <p>鲜花绿植</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>日用工艺</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>汽车服务</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>粮油副食</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>更多</p>
-            </li>
-        </ul>
-
-        <ul class="goods-list">
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">怡宝矿泉水</p>
-                    <p class="tip">好喝的矿泉水</p>
-                    <p class="price">￥<span>2</span></p>
-                    <p class="sales-count"><span>235</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                    <p class="tip">好用的电脑</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>1555</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                    <p class="tip">笔记本平板工作站三合一</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>1555</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                    <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">怡宝矿泉水</p>
-                        <p class="tip">好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水</p>
-                        <p class="price">￥<span>2</span></p>
-                        <p class="sales-count"><span>235</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                        <p class="tip">好用的电脑</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>1555</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                        <p class="tip">笔记本平板工作站三合一</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>1555</span>人已付款</p>
-                    </div>
-                </li>
-        </ul>
-    
-         右下角导航 
-        <ul class="main-nav">
-            <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
-            <li class="cart"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
-            <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
-        </ul>
-    </div> -->
-    <!--<div>
-     <div style="margin-top: 1rem">
-        <span  class="span1">精品推荐</span> <a href="#" class="span"> 更多>> </a>
-     </div>
-   </div>
-   <div style="margin-top: 0.5rem">
-       <img src="assets/imgs/08.jpg" alt="sss" class= "tj-img" />
-        <img src="assets/imgs/hongjiu.jpg" alt="sss" class="tj-img" />
-   </div>-->
 
 </ion-content>
