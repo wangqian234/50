@@ -212,7 +212,7 @@ line-height: 0.73rem;
 	width: 3.70rem; 
 }
 .shangp_lieb_k_er li .lieb_txt p{color:#555; font-size: 0.22rem; line-height: 0.35rem; text-align: justify;}
-.shangp_lieb_k_er li .lieb_txt p.biao{height: 0.7rem; overflow: hidden;} 
+.shangp_lieb_k_er li .lieb_txt p.biao{overflow: hidden;} 
 .shangp_lieb_k_er li .lieb_txt p.px26{
 	font-size: 0.26rem;
 	color: #e10601

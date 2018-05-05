@@ -58,6 +58,13 @@ import { RebuildpassPage } from '../pages/rebuildpass/rebuildpass';
 //商品详情页
 import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 
+//购物车
+import { ShopcarPage } from '../pages/shopcar/shopcar';
+
+//全部商品页
+import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
+
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -90,6 +97,8 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
+    ShopcarPage,
+    ShopmalllistPage,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +133,8 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
+    ShopcarPage,
+    ShopmalllistPage,
   ],
   providers: [  /*引入了自定义的服务*/
     StatusBar,
