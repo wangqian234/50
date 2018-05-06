@@ -9,6 +9,12 @@ import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
 //商品详情页
 import { ShopcarPage } from '../shopcar/shopcar';
 
+//热卖界面
+import { BigsalePage } from '../bigsale/bigsale';
+//限时促销
+import { SalePage } from '../sale/sale';
+//团购界面
+import { GroupbuyPage } from '../groupbuy/groupbuy';
 
 @Component({
   selector: 'page-shopping',
@@ -19,6 +25,11 @@ export class ShoppingPage {
   public ShopsortPage = ShopsortPage;
   public ShoppingdetailPage = ShoppingdetailPage;
   public ShopcarPage = ShopcarPage;
+
+  public BigsalePage = BigsalePage;
+ public SalePage = SalePage;
+ public GroupbuyPage = GroupbuyPage;
+
   public lunboList=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider) {

@@ -1,15 +1,21 @@
 <!--
-  Generated template for the ShopmalllistPage page.
+  Generated template for the TestPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
+  <ion-navbar>
+    <ion-title>t</ion-title>
+  </ion-navbar>
+
 </ion-header>
 
 
-<ion-content>
+
+
+<ion-content >
 <div id="yemnr">
 <!--头部--> 
 <div class="toub_beij toub_beij_zy">
@@ -45,9 +51,7 @@
 			<li><a class="a_paix" href="#">销量</a></li>
 			<li><a class="a_paix" href="#">价格</a></li>
 			<li class="gaodi_paix">
-
 				<a class="a_paix a_paix_dq a_paix_fh"><p class="syil_zk"><img src="images/web/syil_zk.png"></p><em><img src="images/web/a2.png"></em></a>
-
 				<div class="xiala xiala1">
 					<a href="wangid_ShangP_LieB.html"><p class="syil_zk"><img src="images/web/syil_zk.png"></p>缩略</a>
 					<a href="wangid_ShangP_LieB_1.html"><p class="syil_zk syil_zk_1"><img src="images/web/lieb_tub.png"></p>详情</a> 
@@ -58,16 +62,12 @@
 	<ul class="shangp_lieb_k_er">
 		<li *ngFor="let item of list">
 			<a href="XiangQ_Y.html">
-
-				<div class="lieb_img"><img src="{{URL}}{{item.img}}"></div>
-
+				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
 					<p class="px26">¥{{item.price}}</p>
           <p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
-
 		  <p class="px26">{{item.recommend | pipeMultiple}}</p>
-
 				</div>
 			</a>
 		</li>

@@ -10,7 +10,13 @@ import { RepairaddPage } from '../repairadd/repairadd';
 import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
-
+//测试页面跳转到shopmallist
+import {TestPage}from '../test/test';
+import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
+import {ShopsortPage}from '../shopsort/shopsort';
+import {SalePage}from '../sale/sale';
+import {BigsalePage}from '../bigsale/bigsale';
+import {GroupbuyPage}from '../groupbuy/groupbuy';
 
 @Component({
   selector: 'page-home',
@@ -68,6 +74,16 @@ export class HomePage {
         '../assets/imgs/rent1.png'
       ];
   }
+  //测试跳转至商品  
+goShop(){
+
+  this.navCtrl.push(TestPage);
+}
+//测试跳转至分类
+goShopSort(){
+
+  this.navCtrl.push(ShopsortPage);
+}
   
   getHouseDefault(){
     // var j = 3;  //确定递归次数，避免死循环
