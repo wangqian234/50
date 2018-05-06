@@ -65,14 +65,25 @@ import { ShopcarPage } from '../pages/shopcar/shopcar';
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
 
+//新建测试界面
+import{TestPage} from '../pages/test/test';
+//新建限时抢购
+import {SalePage}from '../pages/sale/sale';
+//新建热销
+import {BigsalePage}from '../pages/bigsale/bigsale';
+   
+//新建团购
+import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConfigProvider } from '../providers/config/config';
 import { HttpServicesProvider } from '../providers/http-services/http-services';
-
 import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
+import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
 
 @NgModule({
   declarations: [
@@ -99,6 +110,11 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    TestPage,
+    SalePage,
+    BigsalePage,
+    GroupbuyPage,
+    PipeMultiplePipe
   ],
   imports: [
     BrowserModule,
@@ -135,6 +151,10 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    SalePage,
+    BigsalePage,
+    GroupbuyPage,
+    TestPage,
   ],
   providers: [  /*引入了自定义的服务*/
     StatusBar,
