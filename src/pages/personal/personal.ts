@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
-/**
- * Generated class for the PersonalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Http } from '@angular/http';
+import { ConfigProvider } from '../../providers/config/config';
 
 @IonicPage()
 @Component({
@@ -15,22 +11,30 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class PersonalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
+  public token = "";
+  public personInfo = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+        public storage:StorageProvider,public config:ConfigProvider, public http: Http) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalPage');
+    this.getUserInfo();
+  }
+
+  getUserInfo(){
+    var api = this.config.apiUrl + '/user/user/info?token=' +  this.token;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      this.personInfo = data.model
+    });
   }
 
   loginOut(){
 
     //用户信息保存在localstorage
-
-
     this.storage.remove('userinfo');
 
     //跳转到用户中心
-
     this.navCtrl.popToRoot();
 
   }

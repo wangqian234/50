@@ -10,21 +10,21 @@
 
   <div class="login_box">
   <form class="search_form">
-    <input type="text" id="s" placeholder="请输入手机号码" class="swap_value" />
+    <input [(ngModel)]='userinfo.userName' name='userName' type="text"  placeholder="请输入手机号码" class="swap_value" />
 
   </form>
 </div>
 
 <div *ngIf="!loginNum" class="login_box">
   <form class="search_form">
-    <input type="text" id="s" placeholder="请输入验证码" class="swap_value" />
+    <input [(ngModel)]='regist' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" />
     <button *ngIf="isShowSend" (click)="ownRegist()">点击获取验证码</button>
     <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
   </form>
 </div>
 <div *ngIf="loginNum" class="login_box">
   <form class="search_form">
-    <input type="password" id="s" placeholder="请输入密码" class="swap_value" />
+    <input [(ngModel)]='userinfo.userPwd' name='userPwd' type="password" placeholder="请输入密码" class="swap_value" />
   </form>
 </div>
 <!--<div class="timer" > 
@@ -43,7 +43,7 @@
     <ion-input *ngIf="!loginNum" type="password" placeholder="请输入动态验证码" clearInput></ion-input>
   </ion-item>-->
 
-  <button class="ensure_button" ion-button block>登录</button>
+  <button (click)="doLogin()" class="ensure_button" ion-button block>登录</button>
   <div class="div_a">
     <div>
       <a *ngIf="loginNum" (click)="getLoginNum()">验证码登录</a>
