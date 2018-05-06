@@ -21,7 +21,8 @@
 	</div>
 </div>
 
-<button ion-button [navPush]='LoginPage'>登录</button>
+<button *ngIf="!enSureLogin" ion-button [navPush]='LoginPage'>登录</button>
+<button *ngIf="enSureLogin" ion-button (click)="outLogin()">退出登录</button>
 
 
 

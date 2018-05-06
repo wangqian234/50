@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { HttpModule, JsonpModule } from '@angular/http';
 
+import { Geolocation } from '@ionic-native/geolocation';//zqditu
 
 import { MyApp } from './app.component';
 
@@ -137,6 +138,7 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShopmalllistPage,
   ],
   providers: [  /*引入了自定义的服务*/
+    Geolocation,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
