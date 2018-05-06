@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class ConfigProvider {
 
   //api请求地址
-  public apiUrl="";
+  public apiUrl="http://test.api.gyhsh.cn";
 
   constructor() {
     console.log('Hello ConfigProvider Provider');
