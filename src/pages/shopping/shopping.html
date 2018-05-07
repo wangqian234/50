@@ -1,6 +1,22 @@
 
 <ion-content  style="background-color:#f0f0f0">
-
+    
+        <!-- 商城首页head 分类、搜索、定位界面
+            <div class="jd_header">
+			 <ion-icon ios="ios-list" md="md-list" class="classlist"></ion-icon>
+	    		<div id="search_box" style="width:75%;margin-left:4rem;height:3.5rem;background-color:antiquewhite"> 
+                <form id="search_form"> 
+                    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
+                </form> 
+            </div>
+            <div class="location">
+                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
+                <span class="dw_font" id="curcity">西安</span>
+                <ion-icon name="arrow-dropdown"></ion-icon>
+            </div>
+		</div>-->
+        <button [navPush]=ShoppingdetailPage>跳转商品详情页面</button>
+ <!-- 首页head 分类、搜索、定位-->
         <div style="background-color:white;padding:0.3rem 0;">
 
             <div class="classify"><img [navPush]="ShopsortPage" src="assets/imgs/point_list.png"/><span>分类</span></div>
@@ -15,6 +31,14 @@
                 <span class="dw_font" id="curcity">西安</span>
             </div>
         </div>
+<!-- 轮播图 -->
+
+
+        <ion-slides>    
+            <ion-slide *ngFor="let item of l">
+               <img class="img1" src="{{item}}" />
+           </ion-slide>         
+        </ion-slides>
 
    <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
       <ion-slide *ngFor="let item of lunboList"  style="height:20rem;">
@@ -42,39 +66,78 @@
        <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
 
-   <div class="facediv" (click)="clickEvent()">
 
+<!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
+<!--
+             <div class="tupian-div">
+                 <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1"> </a>
+             <div class="tupian-div2">
+                 <a href="#"><img src="{{tuangouList[1]}}" alt="aa" class="div2"></a>               
+                 <a href="#"><img src="{{tuangouList[2]}}" alt="aa" class="div3"></a>
+             </div> 
+           </div>-->
 
+        <div class="tupian-div">
+             <img src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
+             <div class="tupian-div2">
+                <img src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
+                <img src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
+            </div> 
+         </div>
+<!-- 推荐分类-->
+        <div style="clear:both"></div>
+            
+            <div class="titleshop">
+                <span class="p_shop">&nbsp;推荐分类</span>
+                <span class="p_shop2">更多></span>
+            </div>               
+        <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
+		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
+              <!--图标遍历-->             
+        <ul class="facediv" >
+            <li *ngFor= "let item of tubList">   
+                    <div>
+                    <a href="#"><img index="0" src="{{item.img}}"/></a>
+                    <p index="0">{{item.name}}</p>                   
+                    </div>
+            </li>
+        </ul>
+        <div (click)="clickEvent()"> <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/></div>
+        
+              
+
+        <!--<div class="facediv" (click)="clickEvent()">
+      
         <div>
             <a href="#"><img index="0" src="assets/imgs/lvyou.png"/></a>
             <p index="0">旅游服务</p>
-            <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/>
+            //<img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/>
         </div>
-       <div>
+        <div>
             <a href="#"><img index="1" src="assets/imgs/shuiguo.png"/></a>
             <p index="1">新鲜水果</p>
         </div>
-      <div>
+        <div>
             <a href="#"><img index="2" src="assets/imgs/yinliao.png"/></a>
             <p index="2">酒水饮料</p>
-        </div>
+       </div>
        <div>
             <a href="#"><img index="3" src="assets/imgs/educate.png"/>  </a>
             <p index="3">儿童教育</p>
-        </div>
-      <div>
+       </div>
+        <div>
             <a href="#"><img index="4" src="assets/imgs/meizhuang.png"/>  </a>
             <p index="4">个护美妆</p>
         </div>
-      <div>
+         <div>
             <a href="#"><img index="5" src="assets/imgs/chaoshi.png"/>  </a>
             <p index="5">汇超市</p>
-        </div>
-      <div>
+         </div>
+         <div>
             <a href="#"><img index="6" src="assets/imgs/gongyi.png"/>  </a>
             <p index="6">日用工艺</p>
         </div>
-         <div>
+        <div>
             <a href="#"><img index="7" src="assets/imgs/liangshi.png"/>  </a>
             <p index="7">粮食副食</p>
         </div>
@@ -88,7 +151,7 @@
         </div>
         <div id="tee">
             <a href="#"><img index="10" src="assets/imgs/yangshengcha-.png"/>  </a>
-            <p index="10">养生茗茶</p>
+            <p index="10">养生茗茶</p> 
         </div>
          <div>
             <a href="#"><img index="11" src="assets/imgs/jujiajiancai.png"/>  </a>
@@ -106,17 +169,10 @@
             <a href="#"><img index="14" src="assets/imgs/car.png"/>  </a>
             <p index="14"> 汽车服务</p>
         </div>
-   </div>
-
-
+   </div>-->
 <div id="mallhome-content" style="margin-top:-1rem">
-     <ul class="main-nav">
-            <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
-            <li class="cart" [navPush]="ShopcarPage"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
-            <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
-        </ul>
    <ul class="goods-list">
-            <li class="goods-item clearfix" [navPush]="ShoppingdetailPage">
+            <li class="goods-item clearfix">
                 <img src="assets/imgs/yibao.jpg" alt="" srcset="">
                 <div class="information">
                     <p class="name">怡宝矿泉水</p>
@@ -180,11 +236,16 @@
         <span class="p_shop">&nbsp;精品推荐</span>
         <span class="p_shop2">更多></span>
     </div>
-    <div><img src="assets/imgs/yibao.jpg" ></div>
-    <div><img src="assets/imgs/yibao.jpg" ></div>
-    <div style="padding-top:1rem" class="bangding">
-        <span class="p_more">查看更多</span>
-    </div>
+    <!--<ul>
+        <li *ngFor= "let item of tuijList">
+            <a href="#">
+               <div><img src= "{{item.url}}"> </div>
+            </a>
+        </li>
+    </ul>-->
+       <div style="padding-top:1rem" class="bangding">
+            <span class="p_more">查看更多</span>
+        </div>
    <br />
    <br />
    <br />

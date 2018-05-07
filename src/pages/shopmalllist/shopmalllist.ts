@@ -18,19 +18,21 @@ export class ShopmalllistPage {
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-    console.log(this.config.apiUrl);
+
+
     var api = 'http://test.api.gyhsh.cn/api/goods/group_list?pageSize=10&pageIndex=1&curCityCode=4403'
      //var api = '';
-    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
-    //    if(data.errmsg == 'OK'){
-    //      this.list = data.list;
-    //      console.log(data);
-    //  } else {
-    //     alert(data.errmsg);
-    //  }
-    //  })
-  }
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg == 'OK'){
+         this.list = data.list;
+         console.log(data);
+     } else {
+        alert(data.errmsg);
+     }
+     })
 
+  }
+ 
   ionViewCanEnter():boolean{
         return true;
   }
