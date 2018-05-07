@@ -30,15 +30,17 @@
             </div>
         </div>
 <!-- 轮播图 -->
+
         <ion-slides>    
-            <ion-slide *ngFor="let item of lunboList">
+            <ion-slide *ngFor="let item of l">
                <img class="img1" src="{{item}}" />
            </ion-slide>         
         </ion-slides>
+
 <!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
 <!--
              <div class="tupian-div">
-                 <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1">   </a>
+                 <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1"> </a>
              <div class="tupian-div2">
                  <a href="#"><img src="{{tuangouList[1]}}" alt="aa" class="div2"></a>               
                  <a href="#"><img src="{{tuangouList[2]}}" alt="aa" class="div3"></a>
@@ -61,18 +63,21 @@
             </div>               
         <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
-
-        <div class="facediv" (click)="clickEvent()">
-            <!--图标遍历-->
-        <!--<ul>
-            <li *ngFor= "let item of tubList">
-                <div style="float: left">
+              <!--图标遍历-->             
+        <ul class="facediv" >
+            <li *ngFor= "let item of tubList">   
+                    <div>
                     <a href="#"><img index="0" src="{{item.img}}"/></a>
-                    <p index="0">{{item.name}}</p>
-                    <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/>
-                </div>
+                    <p index="0">{{item.name}}</p>                   
+                    </div>
             </li>
-        </ul>-->
+        </ul>
+        <div (click)="clickEvent()"> <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/></div>
+        
+              
+
+        <!--<div class="facediv" (click)="clickEvent()">
+      
         <div>
             <a href="#"><img index="0" src="assets/imgs/lvyou.png"/></a>
             <p index="0">旅游服务</p>
@@ -134,7 +139,7 @@
             <a href="#"><img index="14" src="assets/imgs/car.png"/>  </a>
             <p index="14"> 汽车服务</p>
         </div>
-   </div>
+   </div>-->
 <div id="mallhome-content" style="margin-top:-1rem">
    <ul class="goods-list">
             <li class="goods-item clearfix">
