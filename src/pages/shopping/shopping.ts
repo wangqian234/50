@@ -37,7 +37,7 @@ export class ShoppingPage {
 //主页面加载函数
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
     // var that=this;
     // var api = this.aa+'/api/index/list?curCityCode=4403';
     //  //var api =  '';
