@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { ConfigProvider } from '../../providers/config/config';
 
 @Component({
   selector: 'page-shopmalllist',
@@ -9,13 +10,15 @@ import { Http } from '@angular/http';
 export class ShopmalllistPage {
 
   public list = [];
+  public URL = "http://test.api.gyhsh.cn";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config: ConfigProvider) {
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+
 
     var api = 'http://test.api.gyhsh.cn/api/goods/group_list?pageSize=10&pageIndex=1&curCityCode=4403'
      //var api = '';
@@ -27,8 +30,12 @@ export class ShopmalllistPage {
         alert(data.errmsg);
      }
      })
-  }
 
+  }
+ 
+  ionViewCanEnter():boolean{
+        return true;
+  }
   ionViewDidLoad(){
     this.onload2();
   }

@@ -1,35 +1,39 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { ConfigProvider } from '../../providers/config/config';
 
- //工具的服务
-import { ToolsProvider } from '../../providers/tools/tools';
+//收货地址列表
+import { AddressPage } from '../address/address';
 
-//请求数据
-import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
-
-
-@IonicPage()
 @Component({
   selector: 'page-addaddress',
   templateUrl: 'addaddress.html',
 })
 export class AddaddressPage {
 
-
+  public token = "";
   public addressList={
-    name:'',
-    phone:'',
-    address:''
+    provinceVal:'',
+    cityVal:'',
+    districtVal:'',
+    province:'',
+    city:'',
+    district:'',
+    address:'',
+    code:'',
+    mobile:'',
+    tel:'',
+    default:'',
+    token : ''
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams,public tools:ToolsProvider,public httpService:HttpServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider) {
 
   }
 
   ionViewWillEnter(){
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
-      console.log("wang456"+this.addressList);
     } 
   }
 
@@ -38,44 +42,43 @@ export class AddaddressPage {
   }
   
   addAddress(){
-
-    if(this.addressList.name!=''||this.addressList.phone!=''||this.addressList.address!=''){
-        //获取表单的内容
-        let unserinfo=this.tools.getUserInfo();
-
-        let json={
-          uid:unserinfo._id,
-          salt:unserinfo.salt,
-          name:this.addressList.name,
-          phone:this.addressList.phone,
-          address:this.addressList.address
-        }
-
-        let sign=this.tools.sign(json); /*生成签名*/
-
-        var  api='api/addAddress';
-        this.httpService.doPost(api,{
-          uid:unserinfo._id,
-          sign:sign,
-          name:this.addressList.name,
-          phone:this.addressList.phone,
-          address:this.addressList.address
-        },(data)=>{
-          // console.log(data); 
-          if(data.success){/*增加成功 返回到地址列表*/
-              this.navCtrl.pop();
-          }else{
-            alert(data.message)
-          }
-        })
-
-    }else{      
-         alert('收货地址不对');
+    // var data = {
+    //   'token' : this.token,
+    //   'provinceVal' : this.addressList.provinceVal,
+    //   'cityVal' : this.addressList.cityVal,
+    //   'districtVal' : this.addressList.districtVal,
+    //   'province' : this.addressList.province,
+    //   'city' : this.addressList.city,
+    //   'district' : this.addressList.district,
+    //   'address' : this.addressList.address,
+    //   'code' : this.addressList.code,
+    //   'mobile' : this.addressList.mobile,
+    //   'tel' : this.addressList.tel,
+    //   'default' : this.addressList.default,
+    // }
+    this.addressList.token = this.token;
+    var data = this.addressList;
+    if(!this.navParams.get('item')){  //新加还是修改判断
+      var api = this.config.apiUrl + '/user/address/add';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert("添加成功！");
+        this.navCtrl.push(AddressPage);
+      } else {
+        alert("添加失败！");
+      }
+    });
+    } else {
+      var api = this.config.apiUrl + '/user/address/edit';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert("添加成功！");
+        this.navCtrl.push(AddressPage);
+      } else {
+        alert("添加失败！");
+      }
+    });
     }
-      
-
   }
-
-
-  
+ 
 }

@@ -32,39 +32,39 @@ export class ShoppingPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-  //this.getLunbo();  
+  this.getLunbo();  
 }
 //主页面加载函数
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-    var that=this;
-    var api = this.aa+'/api/index/list?curCityCode=4403';
-     //var api =  '';
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      /* if(data.errmsg == 'OK'){
-         this.list = data.list;
-         console.log(data);
-     } else {
-        alert(data.data_Banner.errmsg);
-     }*/
-    console.log(data);
-     that.lunboList=data.json["data_Banner"].list;
-    // console.log(this.lunboList);
-     that.tuangouList=data.json['data_Modules'].list;
-    // console.log(this.tuangouList[1]);
-     that.tubList=data.json['data_Sort'].list;
-    console.log(that.tubList);
-    that.tuijList=data.json['data_Recommend'].list;
-    // console.log(this.tuijList);
-     })
+    // var that=this;
+    // var api = this.aa+'/api/index/list?curCityCode=4403';
+    //  //var api =  '';
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //   /* if(data.errmsg == 'OK'){
+    //      this.list = data.list;
+    //      console.log(data);
+    //  } else {
+    //     alert(data.data_Banner.errmsg);
+    //  }*/
+    // console.log(data);
+    //  that.lunboList=data.json["data_Banner"].list;
+    // // console.log(this.lunboList);
+    //  that.tuangouList=data.json['data_Modules'].list;
+    // // console.log(this.tuangouList[1]);
+    //  that.tubList=data.json['data_Sort'].list;
+    // console.log(that.tubList);
+    // that.tuijList=data.json['data_Recommend'].list;
+    // // console.log(this.tuijList);
+    //  })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingPage');
   }
 
-/**轮播图 
+/**轮播图 */
 getLunbo(){
    var that=this;  
       that.lunboList=[
@@ -72,7 +72,7 @@ getLunbo(){
         '../assets/imgs/jiaju.jpg',
         '../assets/imgs/hongjiu.jpg',       
       ];   
-}*/
+}
 
   clickEvent(){
     var index = $(event.target).attr("index");
@@ -81,4 +81,5 @@ getLunbo(){
     console.log(rem)
     $('.jiantou_button').css("left",rem)
   }
+
 }

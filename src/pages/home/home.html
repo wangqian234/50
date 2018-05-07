@@ -1,17 +1,16 @@
 <ion-content style="background-color:#f0f0f0">
 
 
-    <!--<div class="bangding_title" ng-if=false>
+    <div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
       <p>您还没有绑定房屋&nbsp;</p>
       <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
-    </div>-->
-<div style="background-color:white">
+    </div>
+<div *ngIf="enSureLogin" style="background-color:white">
     <ion-item>
-        <ion-label>请选择房屋</ion-label>
-        <ion-select style="max-width: 74%;" [(ngModel)]='roomname' cancelText="取消" okText="确认">
-        <ion-option value="1">凤城世家-1号楼(1-217)&nbsp;&nbsp;</ion-option>
-        <ion-option value="2">苏州澳韵花园-32号楼(32-217)&nbsp;&nbsp;</ion-option>
-        <ion-option value="4">--添加房屋--</ion-option>
+		 <ion-label>请选择房屋</ion-label>
+        <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+        <ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
+        <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
 </div>
@@ -99,28 +98,16 @@
         </div>
         <div id="order-content">
             <div class="order-list">
-                    <div class="order-item">
+                    <div class="order-item" *ngFor="let newList of newList">
                         <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个最新资讯</p>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个最新资讯</p>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个最新资讯</p>
+                            <img src="{{config.apiUrl}}" alt="">
+                            <p>{{newList.topic}}{{newList.addDate}}</p>
                         </div>
                     </div>
             </div>
         </div>
 
-        <div class="bangding">
+        <div class="bangding" (click)="getNews()">
             <span class="p_more">查看更多</span>
         </div>
     </div>
@@ -133,24 +120,13 @@
         </div>
         <div id="order-content">
             <div class="order-list">
-                    <div class="order-item">
+                    <div class="order-item" *ngFor="let newList of newList">
                         <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个公示公告</p>
+                            <img src="{{config.apiUrl}}" alt="">
+                            <p>{{newList.topic}}{{newList.addDate}}</p>
                         </div>
                     </div>
-                    <div class="order-item">
-                        <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个公示公告</p>
-                        </div>
-                    </div>
-                    <div class="order-item">
-                        <div class="goods clearfix zixun">
-                            <img src="assets/imgs/gongyuan_logo.png" alt="">
-                            <p>这是一个公示公告</p>
-                        </div>
-                    </div>
+
             </div>
         </div>
 
