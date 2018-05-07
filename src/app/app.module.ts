@@ -1,10 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
+//请求数据
 import { HttpModule, JsonpModule } from '@angular/http';
-
-
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
@@ -64,6 +62,9 @@ import { ShopcarPage } from '../pages/shopcar/shopcar';
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
+//商品评价列表界面
+import {ShoppingevaluatePage} from '../pages/Shoppingevaluate/Shoppingevaluate'
+//支付
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -99,6 +100,7 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    ShoppingevaluatePage,
   ],
   imports: [
     BrowserModule,
@@ -135,6 +137,7 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    ShoppingevaluatePage,
   ],
   providers: [  /*引入了自定义的服务*/
     StatusBar,
