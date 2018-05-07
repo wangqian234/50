@@ -18,7 +18,9 @@
         <button [navPush]=ShoppingdetailPage>跳转商品详情页面</button>
  <!-- 首页head 分类、搜索、定位-->
         <div style="background-color:white;padding:0.3rem 0;">
-            <div class="classify"><img src="assets/imgs/point_list.png"/><span>分类</span></div>
+
+            <div class="classify"><img [navPush]="ShopsortPage" src="assets/imgs/point_list.png"/><span>分类</span></div>
+
 			<div class="search_box" style="float:left;width:58%;margin-top:0.25rem;height:3.5rem;"> 
                 <form id="search_form"> 
                     <input type="text" id="s" placeholder="商城商品搜索" class="swap_value" /> 
@@ -31,11 +33,39 @@
         </div>
 <!-- 轮播图 -->
 
+
         <ion-slides>    
             <ion-slide *ngFor="let item of l">
                <img class="img1" src="{{item}}" />
            </ion-slide>         
         </ion-slides>
+
+   <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
+      <ion-slide *ngFor="let item of lunboList"  style="height:20rem;">
+          <img class="img1" [src]="item"  style="height:20rem;"/>
+      </ion-slide>         
+   </ion-slides>
+   <!-- 团购图标-->
+  <div class="tupian-div">
+
+        <img [navPush]="GroupbuyPage" src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
+        <div class="tupian-div2">
+            <img [navPush]="SalePage"  src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
+            <img [navPush]="BigsalePage"  src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
+
+        </div> 
+  </div>
+  <div style="clear:both"></div>
+    
+    <div class="titleshop">
+        <span class="p_shop">&nbsp;推荐分类</span>
+        <span class="p_shop2">更多></span>
+    </div>
+
+           
+       <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
+		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
+
 
 <!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
 <!--
