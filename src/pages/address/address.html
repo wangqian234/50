@@ -13,18 +13,18 @@
 </div>
 
 <!--内容-->
-<div class="shouhdz_hk">
+<div class="shouhdz_hk" *ngFor="let item of addresslist">
 	<div class="shouh_zk">
 		<div class="shouh_dange_beijin">
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p><em>{{addresslist.name}}</em>&nbsp;<em>{{addresslist.mobile}}</em></p>
-					<p>{{addresslist.address}}</p>
+					<p><em>{{item.name}}</em>&nbsp;<em>{{item.mobile}}</em></p>
+					<p>{{item.address}}</p>
 				</div>
 			</div>
 			<div class="boanjk">
         <div *ngIf="addresslist.default" class="def"><input type="radio" [checked]="addresslist.default" />默认地址</div>
-        <div *ngIf="addresslist.default" class="def"><input type="radio" [checked]="addresslist.default" (click)="clickToDef(addresslist.id)"/>设为默认</div>
+        <div *ngIf="addresslist.default" class="def"><input type="radio" [checked]="addresslist.default" (click)="clickToDef(item.id)"/>设为默认</div>
         <a style="display:inline;" href="#">删除</a>&nbsp;&nbsp;<a style="display:inline;" href="#">编辑</a>
       </div>
 		</div>

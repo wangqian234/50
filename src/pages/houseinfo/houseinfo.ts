@@ -74,9 +74,9 @@ export class HouseinfoPage {
   }
 
   //解除用户自己的绑定
-  delUserRoom(){
+  delUserRoom(houseId){
     var j = 3;
-    var api = this.config.apiUrl + 'api/UserRoom/del?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var api = this.config.apiUrl + 'api/UserRoom/del?token=' + this.storage.get('token') + '&roomId=' + houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert('解除绑定成功');
@@ -85,7 +85,7 @@ export class HouseinfoPage {
           j--;
           if(j>0){
             this.config.doDefLogin();
-            this.getUserRoom();
+            this.delUserRoom(houseId);
           }
       } else {
         alert("data.errmsg")

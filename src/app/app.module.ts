@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
+//请求数据
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { Geolocation } from '@ionic-native/geolocation';//zqditu
@@ -65,6 +65,9 @@ import { ShopcarPage } from '../pages/shopcar/shopcar';
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
+//商品评价列表界面
+import {ShoppingevaluatePage} from '../pages/Shoppingevaluate/Shoppingevaluate'
+//支付
 
 //新建测试界面
 import{TestPage} from '../pages/test/test';
@@ -113,6 +116,7 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    ShoppingevaluatePage,
     TestPage,
     SalePage,
     BigsalePage,
@@ -155,6 +159,7 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ShoppingdetailPage,
     ShopcarPage,
     ShopmalllistPage,
+    ShoppingevaluatePage,
     SalePage,
     BigsalePage,
     GroupbuyPage,

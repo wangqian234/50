@@ -3,12 +3,11 @@ import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
 import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppingPage } from '../shopping/shopping';
 import { UserPage } from '../user/user';
 
-import { CartPage } from '../cart/cart';
 import { ShopcarPage } from '../shopcar/shopcar';
 
 @Component({
