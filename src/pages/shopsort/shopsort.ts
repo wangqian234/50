@@ -62,7 +62,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 
 
   getRightCateData(pid){
-    alert(pid);
+    //alert(pid);
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403 ';
          this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){

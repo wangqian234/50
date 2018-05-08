@@ -13,6 +13,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import {ShoppingevaluatePage}from '../Shoppingevaluate/Shoppingevaluate';
 //ShopcarPage购物车
 import {ShopcarPage} from '../Shopcar/Shopcar';
+
 @Component({
   selector: 'page-shoppingdetail',
   templateUrl: 'shoppingdetail.html',
@@ -24,8 +25,10 @@ export class ShoppingdetailPage {
   //定义token
   public token=this.storage.get('token');
   //跳转页面
-  public ShoppingevaluatePage = ShoppingevaluatePage;
-  public ShopcarPage= ShopcarPage;
+
+  //public ShoppingevaluatePage = ShoppingevaluatePage;
+  //public ShopcarPage= ShopcarPage;
+
   //定义接收数据的list
   public dataGlist=[];
   public goodMlist=[];
@@ -54,7 +57,7 @@ export class ShoppingdetailPage {
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
        that.dataGlist = data.json['data_group'].list;//list为空
-      // console.log(that.dataGlist);
+      console.log(that.dataGlist);
       that.goodMlist=data.json['good_Model'].model;
       console.log(that.goodMlist);
       that.dataSlist=data.json['data_Sizes'].list;

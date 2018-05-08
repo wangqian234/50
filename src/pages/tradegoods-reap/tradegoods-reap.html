@@ -1,5 +1,5 @@
 <!--
-  Generated template for the GroupbuyPage page.
+  Generated template for the TradegoodsReapPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>TG</ion-title>
+    <ion-title>商品退款申请</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -39,11 +39,11 @@
 	<div class="sp_daoh">
 		<ul>
 			<li class="gaodi_paix">
-				<a class="a_paix a_paix_dq">全部<em><img src="assets/imgs/a1.png"></em></a>
+				<a class="a_paix a_paix_dq">综合<em><img src="assets/imgs/a1.png"></em></a>
 				<div class="xiala">
-					<a href="#">进行中</a>
-					<a href="#">即将开始</a>
-					<a href="#">已结束</a>
+					<a href="#">综合</a>
+					<a href="#">高到低</a>
+					<a href="#">低到高</a>
 				</div> 
 			</li>
 			<li><a class="a_paix" href="#">销量</a></li>
@@ -63,9 +63,8 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">团购价格¥{{item.price}}</p>
-          <p class="bend">{{item.num}}人团</p>
-		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
+					<p class="size_name">¥{{item.size_name}}</p>
+          <p class="num">¥{{item.num}}</p>
 				</div>
 			</a>
 		</li>

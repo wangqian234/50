@@ -15,10 +15,8 @@ import { LoginPage } from '../login/login';
 //测试页面跳转到shopmallist
 import {TestPage}from '../test/test';
 import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
-import {ShopsortPage}from '../shopsort/shopsort';
-import {SalePage}from '../sale/sale';
-import {BigsalePage}from '../bigsale/bigsale';
-import {GroupbuyPage}from '../groupbuy/groupbuy';
+
+
 
 declare var BMap;
 declare var BMAP_STATUS_SUCCESS;
@@ -176,11 +174,7 @@ goShop(){
 
   this.navCtrl.push(TestPage);
 }
-//测试跳转至分类
-goShopSort(){
 
-  this.navCtrl.push(ShopsortPage);
-}
   
   getHouseDefault(){
     // var j = 3;  //确定递归次数，避免死循环
