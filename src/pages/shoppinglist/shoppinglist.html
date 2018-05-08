@@ -5,80 +5,40 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>我的商城订单</ion-title>
+    <ion-title>商品订单</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
-    <div id="order-content">
+    <!--商品订单列表--> 
+  <div id="order-content">
         <ul class="order-nav clearfix">
             <li class="type current" data-nav="all"><a href="javascript:;">全部</a></li>
-            <li class="type" data-nav="payment"><a href="javascript:;">待付款</a></li>
-            <li class="type" data-nav="receive"><a href="javascript:;">待收货</a></li>
-            <li class="type" data-nav="done"><a href="javascript:;">已完成</a></li>
-            <li class="type" data-nav="cancel"><a href="javascript:;">已取消</a></li>
+            <li class="type" data-nav="payment"   (click)="paymentEvent(1)"><a href="javascript:;">待付款</a></li>
+            <li class="type" data-nav="receive"   (click)="paymentEvent(2)"><a href="javascript:;">待发货</a></li>
+            <li class="type" data-nav="done" (click)="paymentEvent(3)"><a href="javascript:;">待收货</a></li>
+            <li class="type" data-nav="cancel" (click)="paymentEvent(4)"><a href="javascript:;">待评价</a></li>
         </ul>
         <div class="order-list">
             <div class="order-item">
-                <div class="seller clearfix">
-                    <span class="name">京东自营苹果旗舰店</span>
-                    <span class="state">商品出库</span>
-                </div>
-                <div class="goods clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                </div>
-                <div class="sub-inf clearfix">
-                    <span class="time">2018-4-30 12:02:08</span>
-                    <span class="buy-count">共<span class="count">1</span>件商品 实付款：￥<span class="price">31.80</span></span>
-                </div>
-            </div>
-            <div class="order-item">
-                <div class="seller clearfix">
-                    <span class="name">京东自营苹果旗舰店</span>
-                    <span class="state">商品出库</span>
-                </div>
-                <div class="goods clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                </div>
-                <div class="sub-inf clearfix">
-                    <span class="time">2018-4-30 12:02:08</span>
-                    <span class="buy-count">共<span class="count">1</span>件商品 实付款：￥<span class="price">31.80</span></span>
-                </div>
-            </div>
-            <div class="order-item">
-                <div class="seller clearfix">
-                    <span class="name">京东自营苹果旗舰店</span>
-                    <span class="state">商品出库</span>
-                </div>
-                <div class="goods clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                </div>
-                <div class="sub-inf clearfix">
-                    <span class="time">2018-4-30 12:02:08</span>
-                    <span class="buy-count">共<span class="count">1</span>件商品 实付款：￥<span class="price">31.80</span></span>
-                </div>
-            </div>
-            <div class="order-item">
-                <div class="seller clearfix">
-                    <span class="name">京东自营苹果旗舰店</span>
-                    <span class="state">商品出库</span>
-                </div>
-                <div class="goods clearfix">
-                    <img src="assets/mac.jpg" alt="">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                </div>
-                <div class="sub-inf clearfix">
-                    <span class="time">2018-4-30 12:02:08</span>
-                    <span class="buy-count">共<span class="count">1</span>件商品 实付款：￥<span class="price">31.80</span></span>
-                </div>
+            <li *ngFor="let item of list" [navPush]='GoodsoderdetailPage' [navParams]="{id:item['trade_id']}">
+			    <a href="XiangQ_Y.html">
+			    	<div class="lieb_img"><img src={{item.img}}></div>
+			    	<div class="lieb_txt">
+		    		<p class="biao">{{item.trade_id}}</p>
+            <p class="biao">{{item.statename}}</p>
+            <p class="biao">{{item.goods_list[0].goods_title}}</p>
+            <p class="biao">{{item.goods_list[0].refundstate}}</p>
+            <p class="bend">购买数量<i>{{item.goods_list[0].goods_num}}</i></p>
+		    		</div>
+		    	</a>
+		    </li> 
             </div>
         </div>
+
     </div>
+
 </ion-content>
+ 
