@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams  } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
-import { Http } from '@angular/http';
+import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
 import { StorageProvider } from '../../providers/storage/storage';
+import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 
 //增加收货地址
@@ -18,6 +19,7 @@ import { LoginPage } from '../login/login';
 })
 export class AddressPage {
   //发送数据
+  public idd:string = "";
   public token = "";
   //获取数据
   public addresslist=[];
@@ -25,21 +27,27 @@ export class AddressPage {
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
 
+  public data = {
+      'addressId' : '',
+      'token' : ''
+    }
+
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
-    ,public storage:StorageProvider) {
+    ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
   }
 
   ionViewWillEnter(){
     this.getRem();
     this.getAddressList();
-    this.token = this.storage.get('token');
   }
   //获取当前用户的收货地址
   getAddressList(){
-    var api = this.config.apiUrl + 'api/Address/list?token=' + this.token;
+    console.log(this.storage.get('token'))
+    var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
+        console.log(this.addresslist);
       } else {
         alert(data.errmsg)
       }
@@ -48,9 +56,24 @@ export class AddressPage {
   }
 
   //设置默认收货地址
-  changeAddress(id){
-    var api = this.config.apiUrl + '/api/Address/edit_default?addressId=' + id + '&token=' + this.token;
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
+  clickToDef(id){
+    var headers = new Headers({ 'Content-Type': 'application/form-data;charset=UTF-8' });
+    var options = new RequestOptions({ headers: headers });
+    var data = {
+      addressId : '',
+      token:''
+    };
+    data.addressId = id;
+    data.token = this.storage.get('token');
+    var api = this.config.apiUrl + '/api/Address/edit_default';
+    // this.http.post(api,JSON.stringify(data),options).map(res => res.json()).subscribe(data =>{
+    //   if (data.errcode === 0 && data.errmsg === 'OK') {
+    //     alert("设置成功！");
+    //     this.cd.detectChanges(); //更新页面
+    //   }
+    // });
+     var api = '/api/Address/edit_default';
+     this.httpService.doPost(api,JSON.stringify(data),(data)=>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("设置成功！");
         this.cd.detectChanges(); //更新页面
@@ -58,13 +81,12 @@ export class AddressPage {
     });
   }
   //删除数据
-  deleteAddress(key,id){
-    var data = {
-      'addressId' : id,
-      'token' : this.token
-    }
+  deleteAddress(id){
+    alert("进来了")
+    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
+    var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+    this.http.post(api,this.data,options).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("删除成功！");
         this.cd.detectChanges(); //更新页面

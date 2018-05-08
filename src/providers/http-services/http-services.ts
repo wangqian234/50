@@ -7,13 +7,6 @@ import 'rxjs/add/operator/map';
 //配置文件
 import { ConfigProvider } from '../../providers/config/config';
 
-
-/*
-  Generated class for the HttpServicesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class HttpServicesProvider {
 
