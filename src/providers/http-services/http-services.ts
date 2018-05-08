@@ -28,7 +28,6 @@ export class HttpServicesProvider {
         var api=this.config.apiUrl+apiUrl+'?callback=JSONP_CALLBACK'
       }else{
         var api=this.config.apiUrl+apiUrl+'&callback=JSONP_CALLBACK'
-        //  http://39.108.159.135/api/plist?is_best=1&callback=JSONP_CALLBACK
       }
       this.jsonp.get(api).subscribe(function(data){
         // console.log(data);
