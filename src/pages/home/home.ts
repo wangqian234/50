@@ -12,8 +12,20 @@ import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
 
+//测试页面跳转到shopmallist
+import {TestPage}from '../test/test';
+import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
+import {ShopsortPage}from '../shopsort/shopsort';
+import {SalePage}from '../sale/sale';
+import {BigsalePage}from '../bigsale/bigsale';
+import {GroupbuyPage}from '../groupbuy/groupbuy';
+
 declare var BMap;
 declare var BMAP_STATUS_SUCCESS;
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -78,10 +90,10 @@ export class HomePage {
     // map.addControl(new BMap.MapTypeControl());//地图类型切换
     // map.setCurrentCity("广州"); //设置当前城市
 
-    let point = new BMap.Point(34.23615, 108.913014);//坐标可以通过百度地图坐标拾取器获取
+    /*let point = new BMap.Point(34.23615, 108.913014);//坐标可以通过百度地图坐标拾取器获取
     let marker = new BMap.Marker(point);
     this.map.addOverlay(marker);
-    map.centerAndZoom(point, 18);//设置中心和地图显示级别
+    map.centerAndZoom(point, 18);*///设置中心和地图显示级别
 
     // let sizeMap = new BMap.Size(10, 80);//显示位置
     // map.addControl(new BMap.NavigationControl());
@@ -90,7 +102,7 @@ export class HomePage {
     // let marker = this.marker = new BMap.Marker(point, { icon: myIcon });
     // map.addOverlay(marker);
 
-    this.getLocationByIp()
+    /*this.getLocationByIp()*/
   }
 
   getLocationByBrowser() {
@@ -159,6 +171,16 @@ export class HomePage {
         '../assets/imgs/rent1.png'
       ];
   }
+  //测试跳转至商品  
+goShop(){
+
+  this.navCtrl.push(TestPage);
+}
+//测试跳转至分类
+goShopSort(){
+
+  this.navCtrl.push(ShopsortPage);
+}
   
   getHouseDefault(){
     // var j = 3;  //确定递归次数，避免死循环
@@ -173,6 +195,7 @@ export class HomePage {
     //         this.getPreArrFee(data.list[i]);
     //         break;
     //       }
+    //       console.log(data)
     //     }
     //   } else if(data.errcode === 40002) {
     //       j--;
@@ -197,7 +220,7 @@ export class HomePage {
 
   getNews(){
     // var j = 3;
-    // var api = this.config.apiUrl + '/hsh/news/list?pageIndex=1&pageSize=3&type=1&token=' + this.storage.get('token');
+    // var api = this.config.apiUrl + '/api/Nwes/list?pageIndex=1&pageSize=3&keyWord=&type=1&token=' + this.storage.get('token');
     // this.http.get(api).map(res => res.json()).subscribe(data =>{
     //   if (data.errcode === 0 && data.errmsg === 'OK') {
     //     this.newsList = data.list;
@@ -210,7 +233,7 @@ export class HomePage {
     //   } else {
     //     alert("data.errmsg")
     //   }
-    //    console.log("获取最新资讯" + data)
+    //    console.log("获取最新资讯" , data)
     // });
   }
 

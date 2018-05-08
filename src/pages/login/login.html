@@ -8,10 +8,9 @@
 
 <div class="input_box">
 
-  <div class="login_box">
+<div class="login_box">
   <form class="search_form">
     <input [(ngModel)]='userinfo.userName' name='userName' type="text"  placeholder="请输入手机号码" class="swap_value" />
-
   </form>
 </div>
 
@@ -47,6 +46,7 @@
   <div class="div_a">
     <div>
       <a *ngIf="loginNum" (click)="getLoginNum()">验证码登录</a>
+      <a [navPush]="RegisterpasswordPage">注册</a>
       <a *ngIf="!loginNum" (click)="getLoginNum()">密码登录</a> 
     </div>
     <div [navPush]="RebuildpassPage"><a>找回登录密码</a></div>

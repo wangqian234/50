@@ -17,7 +17,7 @@
 <div class="gerenzhonhx">
 	<h1 class="grzx_toub_beij"><img src="assets/imgs/user_title.png"></h1>
 	<div class="grzx_toux_fus">
-		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p>山的那边是海</p></div>
+		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p *ngIf="enSureLogin">您好，{{userLoginName}}</p></div>
 	</div>
 </div>
 
@@ -58,7 +58,7 @@
             <span>积分收支明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item [navPush]="AddressPage">
+        <ion-item (click)="gotoAddressPage()">
             <ion-icon  style="color:#B34B8A;" name="clipboard"></ion-icon>
             <span>收货地址管理</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>

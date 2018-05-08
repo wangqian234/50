@@ -1,0 +1,29 @@
+<!--
+  Generated template for the OnlinepaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>物业缴费</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="background-color:white">
+    <ion-item>
+        <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width: 74%;" [(ngModel)]='roomname' cancelText="取消" okText="确认">
+        <ion-option value="1">凤城世家-1号楼(1-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="2">苏州澳韵花园-32号楼(32-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="4">--添加房屋--</ion-option>
+        </ion-select>
+    </ion-item>
+</div>
+
+</ion-content>

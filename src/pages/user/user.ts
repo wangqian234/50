@@ -13,16 +13,14 @@ import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { TabsPage } from '../tabs/tabs';
 
-
-
-
-
 @IonicPage()
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
 })
 export class UserPage {
+
+  public userLoginName = ''
 
   public enSureLogin:boolean = false;
 
@@ -39,24 +37,32 @@ export class UserPage {
     public userinfo='';
 
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
-      console.log('constructor');
+      
     }
     ionViewDidLoad(){
-         console.log("1.0 ionViewDidLoad 当页面加载的时候触发，仅在页面创建的  时候触发一次，如果被缓存了，那么下次再打开这个页面则不会触发");
+         
     }
     ionViewWillEnter(){
-      console.log(this.storage.get('token'))
       //确认登录状态
       if(this.storage.get('token')){
         this.enSureLogin = true;
+        this.userLoginName = this.storage.get('username1')
       }
       var w = document.documentElement.clientWidth || document.body.clientWidth;
       document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
       }
 
-      outLogin(){
+      outLogin(){//退出登录
         this.storage.remove("token");
         this.navCtrl.popToRoot(); /*回到根页面*/
         this.navCtrl.push(TabsPage);
+      }
+
+      gotoAddressPage(){
+        if(this.storage.get('token') == undefined){
+          this.navCtrl.push(LoginPage);
+        } else {
+          this.navCtrl.push(AddressPage);
+        }
       }
 }
