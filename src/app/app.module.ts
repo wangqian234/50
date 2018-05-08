@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 //请求数据
 import { HttpModule, JsonpModule } from '@angular/http';
+
+import { Geolocation } from '@ionic-native/geolocation';//zqditu
+
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
@@ -75,6 +78,8 @@ import {BigsalePage}from '../pages/bigsale/bigsale';
    
 //新建团购
 import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+//房屋基本信息
+import {HouseinfoPage}from '../pages/houseinfo/houseinfo';
 
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -116,7 +121,8 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     SalePage,
     BigsalePage,
     GroupbuyPage,
-    PipeMultiplePipe
+    PipeMultiplePipe,
+    HouseinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -158,8 +164,10 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     BigsalePage,
     GroupbuyPage,
     TestPage,
+    HouseinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
+    Geolocation,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -1,10 +1,86 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>地址变更</ion-title>
-  </ion-navbar>
+
 </ion-header>
 <ion-content>
-  <ion-list class="login_list">        
+
+
+  <!--头部--> 
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToAddress()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">新添收货地址</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+<script type="text/javascript">
+	//滑动头部透明（针对首页头部用）
+	window.onscroll=function(){
+
+	var autoheight=document.body.scrollTop||document.documentElement.scrollTop;
+	if(autoheight>10){
+		$(".toub_beij").css("position" ,"fixed")
+		}else{
+			$(".toub_beij").css("position" ,"relative")
+		}
+	}
+</script>
+<!--内容-->
+<div class="shouhdz_hk">
+	<div class="shouh_zk">
+		<div class="shouh_dange_beijin">
+			<div class="denglu_k denglu_k_k">
+				<div class="denglk denglk_l">
+					<div class="mz px24">收货人：</div>
+					<input type="text" placeholder="">
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">联系方式：</div>
+					<input type="text" placeholder="手机号码">
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">所在地区：</div>
+					<div class="browser">
+				        <!--选择地区-->
+				        <section class="express-area">
+				            <a id="expressArea" href="javascript:void(0)">
+				                <dl>
+				                    <dt></dt>
+				                    <dd>省 > 市 > 区/县</dd>
+				                </dl>
+				            </a>
+				        </section>
+				        <!--选择地区弹层-->
+				        <section id="areaLayer" class="express-area-box">
+				            <header>
+				                <h3>选择地区</h3>
+				                <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+				                <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+				            </header>
+				            <article id="areaBox">
+				                <ul id="areaList" class="area-list"></ul>
+				            </article>
+				        </section>
+				        <!--遮罩层-->
+				        <div id="areaMask" class="mask"></div>
+				    </div>
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">详细地址：</div> 
+				</div> 
+			</div>
+		</div>
+		<div class="shouh_dange_beijin dk"><a href="#">确 认</a></div>
+	</div>
+</div>  
+
+
+
+  <!--<ion-list class="login_list">        
     <ion-item>
       <ion-label fixed>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</ion-label>
       <ion-input type="text" placeholder="姓名" [(ngModel)]='addressList.name'></ion-input>
@@ -25,6 +101,6 @@
         <ion-label style="width:20rem;position:absolute;margin-top:0.2rem"><input type="checkbox">&nbsp;&nbsp;设为默认收货地址</ion-label>
     </ion-item>
   </ion-list>
-    <button ion-button block color="#488aff" (click)="addAddress()">提交收货地址</button>
+    <button ion-button block color="#488aff" (click)="addAddress()">提交收货地址</button>-->
   </ion-content>
   

@@ -1,1 +1,68 @@
-<ion-content>aa</ion-content>
+<ion-content>
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="zyyge">购物车</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <div class="cart_spinner" *ngIf="list.length==0 && hasData">
+      <ion-spinner></ion-spinner>
+    </div>  
+    <p style="text-align:center; padding-top:80px;" *ngIf="!hasData">您购物车没有数据!</p>
+
+ <div class="gouwuc_kk">
+	<ul>
+ 		<li *ngFor="let item of list">
+ 			<div class="diannao_shanp">
+ 				<i class="i1 i1-i" (tap)="changeCarts()">
+					<dt>
+					<ion-checkbox color="danger" [(ngModel)]="item.checked" (ionChange)="changeCarts()"></ion-checkbox>
+					<img [src]="" />
+					</dt> 
+				 </i>
+ 				<h1><img src="assets/imgs/001.jpg"></h1>
+ 				<div class="you">
+ 					<p class="px24 bt">{{item.product_title}}</p>
+ 					<p class="xh">{{item.product_title}}</p>
+ 					<div class="youjfy">
+						<div class="goum_sl">
+							<p class="px26 jiaq">￥{{item.product_price}}</p>
+							<div class="counter_box">
+								<i class="jian" (tap)="decCount(item)">-</i>
+								<input type="text" readonly="readonly" [(ngModel)]="item.product_count" name="num" id="num">
+								<i class="jia" (tap)="incCount(item)">+</i>
+							</div>
+						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+  </li>
+	</ul>
+		 </div>
+</ion-content>
+	
+<div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem">
+		<div class="zuo" >
+			 
+			<i class="i1" (tap)="checkAll()">
+				<ion-checkbox style="padding:0.25rem" disabled="true" color="danger" [(ngModel)]='isChencked'></ion-checkbox>
+			</i>
+			
+		</div>
+		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allPrice}}</em></p></div>
+		<div class="you">
+			<div class="goum">
+				<a href="wanagid_JieSuan.html">去结算</a>  
+			</div>
+		</div>
+	</div>
+</div>
+

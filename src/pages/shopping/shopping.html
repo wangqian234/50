@@ -15,7 +15,6 @@
                 <ion-icon name="arrow-dropdown"></ion-icon>
             </div>
 		</div>-->
-        <button [navPush]=ShoppingdetailPage>跳转商品详情页面</button>
  <!-- 首页head 分类、搜索、定位-->
         <div style="background-color:white;padding:0.3rem 0;">
 
@@ -40,11 +39,7 @@
            </ion-slide>         
         </ion-slides>
 
-   <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
-      <ion-slide *ngFor="let item of lunboList"  style="height:20rem;">
-          <img class="img1" [src]="item"  style="height:20rem;"/>
-      </ion-slide>         
-   </ion-slides>
+  
    <!-- 团购图标-->
   <div class="tupian-div">
 
@@ -55,18 +50,6 @@
 
         </div> 
   </div>
-  <div style="clear:both"></div>
-    
-    <div class="titleshop">
-        <span class="p_shop">&nbsp;推荐分类</span>
-        <span class="p_shop2">更多></span>
-    </div>
-
-           
-       <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
-		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
-
-
 <!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
 <!--
              <div class="tupian-div">
@@ -76,14 +59,6 @@
                  <a href="#"><img src="{{tuangouList[2]}}" alt="aa" class="div3"></a>
              </div> 
            </div>-->
-
-        <div class="tupian-div">
-             <img src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
-             <div class="tupian-div2">
-                <img src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
-                <img src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
-            </div> 
-         </div>
 <!-- 推荐分类-->
         <div style="clear:both"></div>
             

@@ -1,6 +1,4 @@
 <ion-content style="background-color:#f0f0f0">
-
-
     <div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
       <p>您还没有绑定房屋&nbsp;</p>
       <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
@@ -14,6 +12,8 @@
         </ion-select>
     </ion-item>
 </div>
+
+<div #map id="map_container"></div>
 
    <ion-slides *ngIf="focusList.length>0" class="focus" pager  loop="true" autoplay="3000">    
       <ion-slide *ngFor="let item of focusList">
@@ -98,9 +98,9 @@
         </div>
         <div id="order-content">
             <div class="order-list">
-                    <div class="order-item" *ngFor="let newList of newList">
+                    <div class="order-item" *ngFor="let newList of newsList">
                         <div class="goods clearfix zixun">
-                            <img src="{{config.apiUrl}}" alt="">
+                            <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
                             <p>{{newList.topic}}{{newList.addDate}}</p>
                         </div>
                     </div>

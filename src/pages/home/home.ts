@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
+import { Geolocation } from '@ionic-native/geolocation';
 
 //房屋报修
 import { RepairaddPage } from '../repairadd/repairadd';
@@ -10,6 +11,7 @@ import { RepairaddPage } from '../repairadd/repairadd';
 import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
+
 //测试页面跳转到shopmallist
 import {TestPage}from '../test/test';
 import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
@@ -18,11 +20,23 @@ import {SalePage}from '../sale/sale';
 import {BigsalePage}from '../bigsale/bigsale';
 import {GroupbuyPage}from '../groupbuy/groupbuy';
 
+declare var BMap;
+declare var BMAP_STATUS_SUCCESS;
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  @ViewChild('map') map_container: ElementRef;
+  map: any;//地图对象
+  marker: any;//标记
+  geolocation1: any;
+  myIcon: any;
 
   public roomid:any;
   public enSureLoginHome:boolean;
@@ -42,7 +56,8 @@ export class HomePage {
   public RepairaddPage=RepairaddPage;
   public BindroomPage=BindroomPage
 
-  constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,public storage:StorageProvider) {
+  constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
+  public storage:StorageProvider,private geolocation: Geolocation) {
   }
 
   ionViewWillEnter(){
@@ -62,8 +77,90 @@ export class HomePage {
       } else {
           this.enSureLoginHome = false;
       }
-
   }
+
+    ionViewDidEnter() {
+    let map =
+      this.map =
+      new BMap.Map(
+        this.map_container.nativeElement
+      );//创建地图实例
+
+    // map.centerAndZoom("广州",17); //设置城市设置中心和地图显示级别
+    // map.addControl(new BMap.MapTypeControl());//地图类型切换
+    // map.setCurrentCity("广州"); //设置当前城市
+
+    /*let point = new BMap.Point(34.23615, 108.913014);//坐标可以通过百度地图坐标拾取器获取
+    let marker = new BMap.Marker(point);
+    this.map.addOverlay(marker);
+    map.centerAndZoom(point, 18);*///设置中心和地图显示级别
+
+    // let sizeMap = new BMap.Size(10, 80);//显示位置
+    // map.addControl(new BMap.NavigationControl());
+
+    // let myIcon = new BMap.Icon("assets/icon/favicon.ico", new BMap.Size(300, 157));
+    // let marker = this.marker = new BMap.Marker(point, { icon: myIcon });
+    // map.addOverlay(marker);
+
+    /*this.getLocationByIp()*/
+  }
+
+  getLocationByBrowser() {
+    let geolocation1 = this.geolocation1 = new BMap.Geolocation();
+    geolocation1.getCurrentPosition((r) => {
+      let mk = this.marker = new BMap.Marker(r.point, { icon: this.myIcon });
+      if (geolocation1.getStatus() == BMAP_STATUS_SUCCESS) {
+        this.map.addOverlay(mk);
+        this.map.panTo(r.point, 16);
+        console.log('浏览器定位：您的位置是 ' + r.point.lng + ',' + r.point.lat);
+      }
+      else {
+        alert('failed' + this.geolocation1.getStatus());
+      }
+    }, { enableHighAccuracy: false })
+  }
+
+  getLocationByIp() {
+    let myCity = new BMap.LocalCity();
+    myCity.get(result => {
+       console.log("jieguo结果:" + JSON.stringify(result));
+      let cityName = result.name;
+      this.map.setCenter(cityName);
+      console.log("当前定位城市:" + cityName);
+      alert("当前定位城市:" + cityName);
+    });
+  }
+  getLocationByCity() {
+    let city = "广州";
+    if (city != "") {
+      this.map.centerAndZoom(city, 16);      // 用城市名设置地图中心点
+    }
+  }
+  getLocationByLatLon() {
+    let point = new BMap.Point(113.38028471135, 23.129702256122);
+    let marker = this.marker = new BMap.Marker(point, { icon: this.myIcon });
+    this.map.addOverlay(marker);
+    this.map.centerAndZoom(point, 16);
+  }
+  getLocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      alert(resp.coords.longitude+"sdsds"+resp.coords.latitude);
+      let locationPoint = new BMap.Point(resp.coords.longitude, resp.coords.latitude);
+      let convertor = new BMap.Convertor();
+      let pointArr = [];
+      pointArr.push(locationPoint);
+      convertor.translate(pointArr, 1, 5, (data) => {
+        if (data.status === 0) {
+          let marker = this.marker = new BMap.Marker(data.points[0], { icon: this.myIcon });
+          this.map.panTo(data.points[0]);
+          marker.setPosition(data.points[0]);
+          this.map.addOverlay(marker);
+        }
+      })
+      console.log('GPS定位：您的位置是 ' + resp.coords.longitude + ',' + resp.coords.latitude);
+    })
+  }
+
   //轮播图
   getFocus(){ 
     var that=this;  
@@ -98,6 +195,7 @@ goShopSort(){
     //         this.getPreArrFee(data.list[i]);
     //         break;
     //       }
+    //       console.log(data)
     //     }
     //   } else if(data.errcode === 40002) {
     //       j--;
@@ -122,7 +220,7 @@ goShopSort(){
 
   getNews(){
     // var j = 3;
-    // var api = this.config.apiUrl + '/hsh/news/list?pageIndex=1&pageSize=3&type=1&token=' + this.storage.get('token');
+    // var api = this.config.apiUrl + '/api/Nwes/list?pageIndex=1&pageSize=3&keyWord=&type=1&token=' + this.storage.get('token');
     // this.http.get(api).map(res => res.json()).subscribe(data =>{
     //   if (data.errcode === 0 && data.errmsg === 'OK') {
     //     this.newsList = data.list;
@@ -135,7 +233,7 @@ goShopSort(){
     //   } else {
     //     alert("data.errmsg")
     //   }
-    //    console.log("获取最新资讯" + data)
+    //    console.log("获取最新资讯" , data)
     // });
   }
 

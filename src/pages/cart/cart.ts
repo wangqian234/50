@@ -11,7 +11,22 @@ import { StorageProvider } from '../../providers/storage/storage';
   templateUrl: 'cart.html'
 })
 export class CartPage {
-  public list=[];
+  public list=[{
+    "checked":false,
+    "product_title":"这是一瓶矿泉水",
+    "product_price": 123,
+    "product_count":1
+  },{
+    "checked":false,
+    "product_title":"这是一瓶矿泉水",
+    "product_price": 123,
+    "product_count":1
+  },{
+    "checked":false,
+    "product_title":"这是一瓶矿泉水",
+    "product_price": 123,
+    "product_count":1
+  }];
 
   public allPrice=0;  /*总价*/
 
@@ -37,18 +52,18 @@ export class CartPage {
   }
 
   getCartsData(){
-    var cartsData=this.storage.get('carts_data');
-    console.log(cartsData);
-   if(cartsData && cartsData.length>0){
-      this.list=cartsData;
-      this.hasData=true;
+  //   var cartsData=this.storage.get('carts_data');
+  //   console.log(cartsData);
+  //  if(cartsData && cartsData.length>0){
+  //     this.list=cartsData;
+  //     this.hasData=true;
 
-    }else{
-      this.list=[];
-      this.hasData=false;
-    }
+  //   }else{
+  //     this.list=[];
+  //     this.hasData=false;
+  //   }
+    
     this.sumPrice(); 
-
   }
   changeCarts(){
     // console.log(this.list);
