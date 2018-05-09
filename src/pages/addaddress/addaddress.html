@@ -17,18 +17,6 @@
 		</div> 
 	</div>
 </div>
-<script type="text/javascript">
-	//滑动头部透明（针对首页头部用）
-	window.onscroll=function(){
-
-	var autoheight=document.body.scrollTop||document.documentElement.scrollTop;
-	if(autoheight>10){
-		$(".toub_beij").css("position" ,"fixed")
-		}else{
-			$(".toub_beij").css("position" ,"relative")
-		}
-	}
-</script>
 <!--内容-->
 <div class="shouhdz_hk">
 	<div class="shouh_zk">
@@ -36,11 +24,11 @@
 			<div class="denglu_k denglu_k_k">
 				<div class="denglk denglk_l">
 					<div class="mz px24">收货人：</div>
-					<input type="text" placeholder="">
+					<input type="text" placeholder="" [(ngModel)]='addressList.name'>
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">联系方式：</div>
-					<input type="text" placeholder="手机号码">
+					<input type="text" placeholder="请输入手机号码" [(ngModel)]='addressList.mobile'>
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">所在地区：</div>

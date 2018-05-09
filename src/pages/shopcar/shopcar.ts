@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage,NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
 
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
-
+@IonicPage()
 @Component({
   selector: 'page-shopcar',
   templateUrl: 'shopcar.html',
