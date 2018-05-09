@@ -13,7 +13,7 @@ import { ShopsortPage } from '../shopsort/shopsort';
 //商品详情页
 import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
 //商品详情页
-import { ShopcarPage } from '../shopcar/shopcar';
+import { CartPage } from '../cart/cart';
 
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
@@ -34,7 +34,7 @@ import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 export class ShoppingPage {
   public ShopsortPage = ShopsortPage;
   public ShoppingdetailPage = ShoppingdetailPage;
-  public ShopcarPage = ShopcarPage;
+  public CartPage = CartPage;
 
   //定义接收数据的list
   public l=[];

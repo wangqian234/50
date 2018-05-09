@@ -59,9 +59,6 @@ import { RebuildpassPage } from '../pages/rebuildpass/rebuildpass';
 //商品详情页
 import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 
-//购物车
-import { ShopcarPage } from '../pages/shopcar/shopcar';
-
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
@@ -128,7 +125,6 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
-    ShopcarPage,
     ShopmalllistPage,
     ShoppingevaluatePage,
     TestPage,
@@ -180,7 +176,6 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
-    ShopcarPage,
     ShopmalllistPage,
     ShoppingevaluatePage,
     SalePage,

@@ -18,7 +18,7 @@ export class AddaddressPage {
   public provice = [];
   public city = [];
   public district = [];
-  
+
   public addressList={
     provinceVal:'',
     cityVal:'',
@@ -42,8 +42,13 @@ export class AddaddressPage {
     this.getRem();
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
-      '天津市〡天津市〡和平区〢123123123'
-      this.addressList.province = this.addressList.address
+      var ss = this.addressList.address.split("〡");
+      this.addressList.province = ss[0];
+      this.addressList.city = ss[1];
+      var ss1 = ss[2].split("〢");
+      this.addressList.district = ss1[0];
+      this.addressList.address = ss1[1];
+      console.log(this.addressList);
     }
     this.areaList = $("#areaList")
     this.intProvince();
@@ -69,11 +74,13 @@ export class AddaddressPage {
 intProvince() {
 	var areaCont = "";
 	for (var i=0; i<this.config.province.length; i++) {
-		areaCont += '<li (click)="selectP(' + i + ');">' + this.config.province[i] + '</li>';
+		areaCont += '<li onclick="selectP(' + i + ');">' + this.config.province[i] + '</li>';
+      this.selectP(i)
 	}
+
 	this.areaList.html(areaCont);
 	$("#areaBox").scrollTop(0);
-	$("#backUp").removeAttr("click").hide();
+	$("#backUp").removeAttr("ng-click").hide();
 }
 
 /*选择省份*/
@@ -81,12 +88,12 @@ selectP(p) {
 	var areaCont = "";
 	this.areaList.html("");
 	for (var j=0; j<this.config.city[p].length; j++) {
-		areaCont += '<li (click)="selectC(' + p + ',' + j + ');">' + this.config.city[p][j] + '</li>';
+		areaCont += '<li (ng-click)="selectC(' + p + ',' + j + ');">' + this.config.city[p][j] + '</li>';
 	}
 	this.areaList.html(areaCont);
 	$("#areaBox").scrollTop(0);
 	var expressArea = this.config.province[p] + " > ";
-	$("#backUp").attr("(click)", "intProvince();").show();
+	$("#backUp").attr("ng-click", "intProvince();").show();
 }
 
 /*选择城市*/
