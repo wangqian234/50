@@ -2,7 +2,8 @@
 <div class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img class="fanh_ann" src="images/web/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a class="px24">收货地址</a></li>  
@@ -25,7 +26,8 @@
 			<div class="boanjk">
         <div *ngIf="item.default" class="def">默认地址</div>
         <div *ngIf="!item.default" class="def"><input type="radio" (change)="clickToDef(item.id)"/>设为默认</div>
-        <a style="display:inline;" (click)="deleteAddress(item.id)">删除</a>&nbsp;&nbsp;<a style="display:inline;" href="#">编辑</a>
+        <a style="display:inline;" (click)="deleteAddress(item.id)">删除</a>&nbsp;&nbsp;
+        <a style="display:inline;" (click)="editAddress(item)" href="#">编辑</a>
       </div>
 		</div>
 	</div>

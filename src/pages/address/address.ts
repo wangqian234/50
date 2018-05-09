@@ -57,7 +57,7 @@ export class AddressPage {
 
   //设置默认收货地址
   clickToDef(id){
-    var headers = new Headers({ 'Content-Type': 'application/form-data;charset=UTF-8' });
+    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' });
     var options = new RequestOptions({ headers: headers });
     var data = {
       addressId : '',
@@ -66,14 +66,7 @@ export class AddressPage {
     data.addressId = id;
     data.token = this.storage.get('token');
     var api = this.config.apiUrl + '/api/Address/edit_default';
-    // this.http.post(api,JSON.stringify(data),options).map(res => res.json()).subscribe(data =>{
-    //   if (data.errcode === 0 && data.errmsg === 'OK') {
-    //     alert("设置成功！");
-    //     this.cd.detectChanges(); //更新页面
-    //   }
-    // });
-     var api = '/api/Address/edit_default';
-     this.httpService.doPost(api,JSON.stringify(data),(data)=>{
+    this.http.post(api,JSON.stringify(data),options).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("设置成功！");
         this.cd.detectChanges(); //更新页面
@@ -99,6 +92,11 @@ export class AddressPage {
     this.navCtrl.push(AddaddressPage,{
       item:item
     })
+  }
+
+  //回退页面
+  backTo(){
+    this.navCtrl.pop();
   }
 
 

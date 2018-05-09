@@ -1,5 +1,5 @@
 <!--
-  Generated template for the SalePage page.
+  Generated template for the GroupbuyPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>抢购列表</ion-title>
+    <ion-title>团 </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
+<ion-content >
 <div id="yemnr">
 <!--头部--> 
 <div class="toub_beij toub_beij_zy">
@@ -58,13 +58,13 @@
 		</ul>
 	</div>
 	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of list">
-			<a href="XiangQ_Y.html">
+		<li *ngFor="let item of list" >
+			<a >
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">底价¥{{item.pricemin}}</p>
-          <p class="bend">抢购数量：{{item.whennum}}</p>
+					<p class="px26">团购价格¥{{item.price}}</p>
+          <p class="bend">{{item.num}}人团</p>
 		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
 			</a>

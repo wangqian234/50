@@ -77,9 +77,23 @@ import {SalePage}from '../pages/sale/sale';
 import {BigsalePage}from '../pages/bigsale/bigsale';
    
 //新建团购
-import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+
+import {GroupbuylistPage}from '../pages/groupbuylist/groupbuylist';
+import { GroupdetailPage } from '../pages/groupdetail/groupdetail';
+//商品购买页面
+import { ShopbuyPage } from '../pages/shopbuy/shopbuy';
+
+//王慧敏
+//添加、修改商品退款申请
+import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
+//商品退款详情
+import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund';
+//商品订单详情
+import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
+
+
 //房屋基本信息
-import {HouseinfoPage}from '../pages/houseinfo/houseinfo';
+import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -120,9 +134,18 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     TestPage,
     SalePage,
     BigsalePage,
-    GroupbuyPage,
+
+    GroupbuylistPage,
     PipeMultiplePipe,
+    GroupdetailPage,
+    ShopbuyPage,
+    //王慧敏
+    TradegoodsReapPage,
+    TradegoodsRefundPage,
+    GoodsoderdetailPage,
+
     HouseinfoPage,
+
   ],
   imports: [
     BrowserModule,
@@ -162,9 +185,18 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ShoppingevaluatePage,
     SalePage,
     BigsalePage,
-    GroupbuyPage,
+    GroupbuylistPage,
     TestPage,
+
+    GroupdetailPage,
+    ShopbuyPage,
+    //王慧敏
+    TradegoodsReapPage,
+    TradegoodsRefundPage,
+    GoodsoderdetailPage,   
+
     HouseinfoPage,
+
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

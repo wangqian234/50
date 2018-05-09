@@ -1,0 +1,35 @@
+<!--
+  Generated template for the GoodsoderdetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>商品订单详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+    <!--商品订单列表--> 
+  <div id="order-content">
+
+      <div class="order-list">
+            <div class="order-item">
+            <li *ngFor="let item of list" >
+			    <a href="XiangQ_Y.html">
+			    	<div class="lieb_img"><img src={{item.img}}></div>
+			    	<div class="lieb_txt">
+                    <p class="biao">{{item.model.tradeaddress}}</p>
+                    <p class="biao">{{item.model.pretotalprice}}</p>
+                    <p class="biao">{{item.list[0].goods_title}}</p>
+		    		</div>
+		    	</a>
+		        </li> 
+            </div>
+       </div>
+
+    </div>
+
+</ion-content>

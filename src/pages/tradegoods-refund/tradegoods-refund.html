@@ -1,19 +1,17 @@
 <!--
-  Generated template for the SalePage page.
+  Generated template for the TradegoodsRefundPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>抢购列表</ion-title>
+    <ion-title>SPTK</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content>
+<ion-content >
 <div id="yemnr">
 <!--头部--> 
 <div class="toub_beij toub_beij_zy">
@@ -39,11 +37,11 @@
 	<div class="sp_daoh">
 		<ul>
 			<li class="gaodi_paix">
-				<a class="a_paix a_paix_dq">全部<em><img src="assets/imgs/a1.png"></em></a>
+				<a class="a_paix a_paix_dq">综合<em><img src="assets/imgs/a1.png"></em></a>
 				<div class="xiala">
-					<a href="#">进行中</a>
-					<a href="#">即将开始</a>
-					<a href="#">已结束</a>
+					<a href="#">综合</a>
+					<a href="#">高到低</a>
+					<a href="#">低到高</a>
 				</div> 
 			</li>
 			<li><a class="a_paix" href="#">销量</a></li>
@@ -63,9 +61,8 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">底价¥{{item.pricemin}}</p>
-          <p class="bend">抢购数量：{{item.whennum}}</p>
-		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
+					<p class="size_name">¥{{item.size_name}}</p>
+          <p class="num">¥{{item.num}}</p>
 				</div>
 			</a>
 		</li>
