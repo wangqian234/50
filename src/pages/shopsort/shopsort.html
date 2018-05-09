@@ -1,4 +1,4 @@
-<ion-header>
+<<ion-header>
 
   <ion-navbar>
     <ion-title>更多商品分类</ion-title>
@@ -7,22 +7,26 @@
 </ion-header>
 
 
-<ion-content padding>
+
+<ion-content>
   <div class="cate_content">
       <div class="cate_left">
           <ion-list>
-            <ion-item *ngFor="let item of leftCate" (tap)="getRightCateData(item['_id'])">
-              {{item}}
+            <ion-item *ngFor="let item of list" (tap)="getRightCateData(item['id'])">
+              {{item.name}}
+
             </ion-item>
           </ion-list>
       </div>
 
       <div class="cate_right">
           <ion-row>
-              <ion-col col-4 *ngFor="let item of rightCate" [navPush]='ProductlistPage' [navParams]="{'cid':item['_id']}">              
-                
+
+              <!--<ion-col col-4 *ngFor="let iteme of fenllist" [navPush]='ProductlistPage' [navParams]="{'cid':item['_id']}">              -->
+                <ion-col col-4 *ngFor="let iteme of fenllist">
                     <!--<img [src]="config.apiUrl+item.pic" />-->
-                    <p>{{item}}</p>                           
+                    <p>{{iteme}}</p>                           
+
               </ion-col>
           </ion-row>
 

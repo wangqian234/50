@@ -36,7 +36,7 @@ public history='';
       this.history=this.navParams.get('history');
       this.loginNum = true;
   }
-
+//登录触发的函数
   doLogin(){
     console.log(this.userinfo.userName)
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
@@ -121,7 +121,7 @@ public history='';
     //     }
     // })
   }
-
+//转换大小的单位
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 18) + 'px';

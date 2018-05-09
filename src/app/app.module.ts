@@ -56,24 +56,34 @@ import { RebuildpassPage } from '../pages/rebuildpass/rebuildpass';
 //商品详情页
 import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 
-//购物车
-import { ShopcarPage } from '../pages/shopcar/shopcar';
-
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
 //商品评价列表界面
-import {ShoppingevaluatePage} from '../pages/Shoppingevaluate/Shoppingevaluate'
+import {ShoppingevaluatePage}from '../pages/shoppingevaluate/shoppingevaluate';
 //支付
+
+//新建测试界面
+import{TestPage} from '../pages/test/test';
+//新建限时抢购
+import {SalePage}from '../pages/sale/sale';
+//新建热销
+import {BigsalePage}from '../pages/bigsale/bigsale';
+   
+//新建团购
+import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+//商品详情页面
+import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
+
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConfigProvider } from '../providers/config/config';
 import { HttpServicesProvider } from '../providers/http-services/http-services';
-
 import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
+import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
 
 @NgModule({
   declarations: [
@@ -98,9 +108,14 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
-    ShopcarPage,
     ShopmalllistPage,
     ShoppingevaluatePage,
+    TestPage,
+    SalePage,
+    BigsalePage,
+    GroupbuyPage,
+    PipeMultiplePipe,
+    ShopgoodsinfoPage
   ],
   imports: [
     BrowserModule,
@@ -135,9 +150,13 @@ import { ToolsProvider } from '../providers/tools/tools';
     ShoppinglistPage,
     RebuildpassPage,
     ShoppingdetailPage,
-    ShopcarPage,
     ShopmalllistPage,
     ShoppingevaluatePage,
+    SalePage,
+    BigsalePage,
+    GroupbuyPage,
+    TestPage,
+    ShopgoodsinfoPage
   ],
   providers: [  /*引入了自定义的服务*/
     StatusBar,

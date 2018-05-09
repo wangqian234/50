@@ -1,21 +1,25 @@
 <!--
-  Generated template for the ShopmalllistPage page.
+  Generated template for the BigsalePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
+  <ion-navbar>
+    <ion-title>RM</ion-title>
+  </ion-navbar>
+
 </ion-header>
 
 
-<ion-content>
+<ion-content >
 <div id="yemnr">
 <!--头部--> 
 <div class="toub_beij toub_beij_zy">
 	<div class="zhongj_k">
 		<div class="logo_k"><a href="index.html"><img src="images/web/logo.jpg"></a></div>
-		<div class="shous_k"><span></span><input id="sos_tanc"  type="search" input_key="" placeholder="限时疯抢，好物低至1元" placeholder_str=""></div>
+		<div class="shous_k"><span></span><input id="sos_tanc" type="search" input_key="" placeholder="限时疯抢，好物低至1元" placeholder_str=""></div>
 		<div class="dengl">
 			<div class="caid_img" id="zhu_caid"><img src="images/web/cd_1.png"></div>
 			<ul class="zhu_daoh" id="daoh_lb">
@@ -35,19 +39,17 @@
 	<div class="sp_daoh">
 		<ul>
 			<li class="gaodi_paix">
-				<a class="a_paix a_paix_dq">综合<em><img src="assets/imgs/a1.png"></em></a>
+				<a class="a_paix a_paix_dq">全部<em><img src="assets/imgs/a1.png"></em></a>
 				<div class="xiala">
-					<a href="#">综合</a>
-					<a href="#">高到低</a>
-					<a href="#">低到高</a>
+					<a href="#">进行中</a>
+					<a href="#">即将开始</a>
+					<a href="#">已结束</a>
 				</div> 
 			</li>
 			<li><a class="a_paix" href="#">销量</a></li>
 			<li><a class="a_paix" href="#">价格</a></li>
 			<li class="gaodi_paix">
-
 				<a class="a_paix a_paix_dq a_paix_fh"><p class="syil_zk"><img src="images/web/syil_zk.png"></p><em><img src="images/web/a2.png"></em></a>
-
 				<div class="xiala xiala1">
 					<a href="wangid_ShangP_LieB.html"><p class="syil_zk"><img src="images/web/syil_zk.png"></p>缩略</a>
 					<a href="wangid_ShangP_LieB_1.html"><p class="syil_zk syil_zk_1"><img src="images/web/lieb_tub.png"></p>详情</a> 
@@ -56,16 +58,16 @@
 		</ul>
 	</div>
 	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of list"  (tap)="goGoodsInfo(item['id'])">
-				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
+		<li *ngFor="let item of list">
+			<a href="XiangQ_Y.html">
+				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">¥{{item.price}}</p>
-          <p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
-
-		  <p class="px26">{{item.recommend | pipeMultiple}}</p>
-
+					<p class="px26">活动价格¥{{item.preprice}}</p>
+          <p class="bend">已售数量：{{item.soldnum}}</p>
+		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
+			</a>
 		</li>
 	</ul>
 </div>

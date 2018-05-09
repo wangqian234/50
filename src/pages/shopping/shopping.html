@@ -15,14 +15,14 @@
                 <ion-icon name="arrow-dropdown"></ion-icon>
             </div>
 		</div>-->
-        <button [navPush]=ShoppingdetailPage>跳转商品详情页面</button>
  <!-- 首页head 分类、搜索、定位-->
         <div style="background-color:white;padding:0.3rem 0;">
-            <div class="classify"><img src="assets/imgs/point_list.png"/><span>分类</span></div>
+            <div class="classify"><img [navPush]="ShopsortPage" src="assets/imgs/point_list.png"/><span>分类</span></div>
 			<div class="search_box" style="float:left;width:58%;margin-top:0.25rem;height:3.5rem;"> 
                 <form id="search_form"> 
-                    <input type="text" id="s" placeholder="商城商品搜索" class="swap_value" /> 
+                    <input type="text" id="s" placeholder="商城商品搜索" [(ngModel)]='keywords' name='keywords'  class="swap_value" /> 
                 </form> 
+                <button (click)="doReserch()">搜索</button>
             </div>
             <div class="location">&nbsp;
                 <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
@@ -30,14 +30,20 @@
             </div>
         </div>
 <!-- 轮播图 -->
-
-        <ion-slides>    
-            <ion-slide *ngFor="let item of l">
-               <img class="img1" src="{{item}}" />
-           </ion-slide>         
-        </ion-slides>
-
-<!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
+   <ion-slides *ngIf="l.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
+      <ion-slide *ngFor="let item of l"  style="height:20rem;">
+          <img class="img1" [src]="item"  style="height:20rem;"/>
+      </ion-slide>         
+   </ion-slides>
+   <!-- 团购图标-->
+  <div class="tupian-div">
+    <img [navPush]="GroupbuyPage" src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
+    <div class="tupian-div2">
+        <img [navPush]="SalePage"  src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
+        <img [navPush]="BigsalePage"  src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
+    </div> 
+  </div>
+<!-- 团购、限时抢购图标--><!-- 图片布局怎么显示-->
 <!--
              <div class="tupian-div">
                  <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1"> </a>
@@ -46,17 +52,8 @@
                  <a href="#"><img src="{{tuangouList[2]}}" alt="aa" class="div3"></a>
              </div> 
            </div>-->
-
-        <div class="tupian-div">
-             <img src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
-             <div class="tupian-div2">
-                <img src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
-                <img src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
-            </div> 
-         </div>
 <!-- 推荐分类-->
-        <div style="clear:both"></div>
-            
+        <div style="clear:both"></div> 
             <div class="titleshop">
                 <span class="p_shop">&nbsp;推荐分类</span>
                 <span class="p_shop2">更多></span>
@@ -66,7 +63,7 @@
               <!--图标遍历-->             
         <ul class="facediv" >
             <li *ngFor= "let item of tubList">   
-                    <div>
+                    <div (tap)="getshoplist(item['id'])">
                     <a href="#"><img index="0" src="{{item.img}}"/></a>
                     <p index="0">{{item.name}}</p>                   
                     </div>
@@ -141,58 +138,15 @@
         </div>
    </div>-->
 <div id="mallhome-content" style="margin-top:-1rem">
-   <ul class="goods-list">
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">怡宝矿泉水</p>
-                    <p class="price">￥<span>2</span></p>
-                    <p class="sales-count"><span>235</span>人已付款</p>
-                    <p class="special"><span>热销产品</span><span>人气推荐</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>155</span>人已付款</p>
-                    <p class="special"><span>热销产品</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>155</span>人已付款</p>
-                    <p class="special"><span>热销产品</span></p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                    <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">怡宝矿泉水</p>
-                        <p class="price">￥<span>2</span></p>
-                        <p class="sales-count"><span>235</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                        <p class="tip">好用的电脑</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>155</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
+   <ul class="goods-list" >
+                <li class="goods-item clearfix" *ngFor="let item of shoplist" >
                     <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                        <p class="tip">笔记本平板工作站三合一</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>155</span>人已付款</p>
+                    <div class="information" (tap)="goGoodsInfo(item['id'])">
+                        <p class="name">{{item.title}}</p>
+                        <p class="tip">{{item.prename}}</p>
+                        <p class="price">￥<span>{{item.price}}</span></p>
+                        <p class="sales-count"><span>{{item.soldnum}}</span>人已付款</p>
+                        <button>推荐</button><button>促销</button>
                     </div>
                 </li>
         </ul>
@@ -206,13 +160,13 @@
         <span class="p_shop">&nbsp;精品推荐</span>
         <span class="p_shop2">更多></span>
     </div>
-    <!--<ul>
+    <ul>
         <li *ngFor= "let item of tuijList">
-            <a href="#">
-               <div><img src= "{{item.url}}"> </div>
+            <a href="{{item.url}}">
+               <div><img src= "{{item.img}}"> </div>
             </a>
         </li>
-    </ul>-->
+    </ul>
        <div style="padding-top:1rem" class="bangding">
             <span class="p_more">查看更多</span>
         </div>
@@ -220,122 +174,13 @@
    <br />
    <br />
    <br />
-  <!--  <div id="mallhome-content">
-        <ul class="goods-type clearfix">
-            <li class="variaty goods-type-item" [navPush]="ShopsortPage">
-                <a></a>
-                <p>旅游服务</p>
-            </li>
-            <li class="favourable goods-type-item">
-                <a href="javascript:;"></a>
-                <p>酒水饮料</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>儿童教育</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>个护美妆</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>汇超市</p>
-            </li>
-            <li class="favourable goods-type-item">
-                <a href="javascript:;"></a>
-                <p>鲜花绿植</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>日用工艺</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>汽车服务</p>
-            </li>
-            <li class="variaty goods-type-item">
-                <a href="javascript:;"></a>
-                <p>粮油副食</p>
-            </li>
-            <li class="investment goods-type-item">
-                <a href="javascript:;"></a>
-                <p>更多</p>
-            </li>
-        </ul>
-
-        <ul class="goods-list">
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">怡宝矿泉水</p>
-                    <p class="tip">好喝的矿泉水</p>
-                    <p class="price">￥<span>2</span></p>
-                    <p class="sales-count"><span>235</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                    <p class="tip">好用的电脑</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>1555</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                <div class="information">
-                    <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                    <p class="tip">笔记本平板工作站三合一</p>
-                    <p class="price">￥<span>12888</span></p>
-                    <p class="sales-count"><span>1555</span>人已付款</p>
-                </div>
-            </li>
-            <li class="goods-item clearfix">
-                    <img src="assets/imgs/yibao.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">怡宝矿泉水</p>
-                        <p class="tip">好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水好喝的矿泉水</p>
-                        <p class="price">￥<span>2</span></p>
-                        <p class="sales-count"><span>235</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/mac.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">Apple Macbook Pro 15.4英寸笔记本电脑 深空灰色（Core i5处理器）</p>
-                        <p class="tip">好用的电脑</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>1555</span>人已付款</p>
-                    </div>
-                </li>
-                <li class="goods-item clearfix">
-                    <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                    <div class="information">
-                        <p class="name">【灰钴蓝键盘套装】微软（Microsoft）新Surface Pro 二合一平板电脑</p>
-                        <p class="tip">笔记本平板工作站三合一</p>
-                        <p class="price">￥<span>12888</span></p>
-                        <p class="sales-count"><span>1555</span>人已付款</p>
-                    </div>
-                </li>
-        </ul>
+  
     
-         右下角导航 
+         <!--右下角导航 
         <ul class="main-nav">
             <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
             <li class="cart"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
             <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
-        </ul>
-    </div> -->
-    <!--<div>
-     <div style="margin-top: 1rem">
-        <span  class="span1">精品推荐</span> <a href="#" class="span"> 更多>> </a>
-     </div>
-   </div>
-   <div style="margin-top: 0.5rem">
-       <img src="assets/imgs/08.jpg" alt="sss" class= "tj-img" />
-        <img src="assets/imgs/hongjiu.jpg" alt="sss" class="tj-img" />
-   </div>-->
-
+        </ul>-->
+    
 </ion-content>

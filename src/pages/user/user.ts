@@ -11,11 +11,8 @@ import { RepairlistPage } from '../repairlist/repairlist';
 //引入购物清单界面
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
-
+//storag服务
 import { StorageProvider } from '../../providers/storage/storage';
-
-
-
 
 @IonicPage()
 @Component({
@@ -24,18 +21,14 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class UserPage {
 
+  //页面跳转
   public LoginPage=LoginPage;
-
   public PersonalPage=PersonalPage;
-
   public AddressPage = AddressPage;
-
   public  RepairlistPage = RepairlistPage;
-
   public ShoppinglistPage = ShoppinglistPage;
-
+   //自定义的变量
     public userinfo='';
-
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
       console.log('constructor');
     }
@@ -55,7 +48,6 @@ export class UserPage {
         }else{
           this.userinfo='';
         }
-
 
     }
 
