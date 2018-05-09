@@ -42,6 +42,8 @@ export class AddaddressPage {
     this.getRem();
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
+      '天津市〡天津市〡和平区〢123123123'
+      this.addressList.province = this.addressList.address
     }
     this.areaList = $("#areaList")
     this.intProvince();
