@@ -70,7 +70,7 @@ export class AddaddressPage {
       });
   }
 
-  /*初始化省份*/
+  /*初始化省份*/ 
 intProvince() {
 	var areaCont = "";
 	for (var i=0; i<this.config.province.length; i++) {
