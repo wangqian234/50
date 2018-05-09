@@ -11,8 +11,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 //ShoppingevaluatePage商品评价
 import {ShoppingevaluatePage}from '../Shoppingevaluate/Shoppingevaluate';
-//ShopcarPage购物车
-import {ShopcarPage} from '../Shopcar/Shopcar';
+//购物车
+import { CartPage } from '../cart/cart';
 
 @Component({
   selector: 'page-shoppingdetail',
