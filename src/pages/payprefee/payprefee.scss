@@ -1,0 +1,52 @@
+page-payprefee {
+    .otherUser_title{
+        margin-top: 10px;
+        background-color: white;
+        padding: 0.25rem;
+        font-size: 0.28rem;
+        box-shadow: 0 0 2px 2px #ece7e7;
+    }
+    .user_title{
+        display: inline;
+        font-size: 0.28rem;
+    }
+    .otherUser_content{
+        margin-top: 0.3rem;
+    }
+    .otherUser_content .item-ios{
+        padding-left: 0;
+    }
+    .fee_list{
+        float:left;
+        padding-left:16px;
+        width:30%;
+        min-width:125px;
+    }
+    .fee_list span{
+        font-size: 0.26rem;
+        float:right;
+        margin-top: 0.13rem;
+    }
+    .user_bigo{
+        color: gray;
+        font-size:0.22rem;
+        line-height: 0.32rem;
+    }
+    .fee_input{
+        margin-left: 7px;
+        width: 2.8rem;
+        height: 0.5rem;
+        border: 1px solid gainsboro;
+        border-radius: 0.05rem;
+        box-shadow: 1px 1px #ebedf2;
+    }
+    .fee_num{
+        margin-right: 4px;
+        float: right;
+        font-size: 0.26rem;
+        margin-top: 0.13rem;
+    }
+    .list-ios{
+        margin: -1px 0 0px;
+    }
+}

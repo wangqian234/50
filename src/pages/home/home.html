@@ -99,7 +99,7 @@
         <div id="order-content">
             <div class="order-list">
                     <div class="order-item" *ngFor="let newList of newsList">
-                        <div class="goods clearfix zixun">
+                        <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
                             <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
                             <p>{{newList.topic}}{{newList.addDate}}</p>
                         </div>

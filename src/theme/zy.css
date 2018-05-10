@@ -252,7 +252,7 @@ display: inline-block;
 
 .zhongjain_daoh ul li{
 	float: left;
-	margin: 0 0.2rem;
+	margin: -0.05rem 0.2rem;
 }
 .zhongjain_daoh ul li a{
 	line-height:  0.78rem;
@@ -692,7 +692,7 @@ a.denglxil{margin-top: 0.05rem;}
 .fuwu_yizs{margin: 0.9rem 0 1.5rem 0;}
 .fuwu_yizs h2{margin:0.4rem 0 0.3rem 0; color: #747474; font-size: 0.26rem;}
 .fuwu_yizs  p{color: #ababab;font-size: 0.24rem;line-height: 0.35rem;}
-.zhongjain_daoh ul li a.px24{font-size: 0.26rem;}
+.zhongjain_daoh ul li a.px24{font-size: 0.3rem;}
 
 .shouhdz_hk{
 	width: 100%;
