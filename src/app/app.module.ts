@@ -87,7 +87,8 @@ import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
 import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund';
 //商品订单详情
 import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
-
+//商品评价列表界面
+import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -139,6 +140,7 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,
+    GoodsoderevaluatePage,
 
     HouseinfoPage,
 
@@ -189,6 +191,7 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
+    GoodsoderevaluatePage,
 
     HouseinfoPage,
 

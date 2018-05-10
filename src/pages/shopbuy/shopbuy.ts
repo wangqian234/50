@@ -29,6 +29,9 @@ export class ShopbuyPage {
   public shoplist=[];
   public carriagelist=[];
   public creditslist=[];
+  public totalPrice=0;  /*总价*/
+  public test=123;
+  public te=123;
   //定义congfig中公共链接的变量aa
   public wdh = this.config.apiUrl;
   //定义token
@@ -48,16 +51,30 @@ ionViewWillLoad() {
     var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;//id目前写死
             this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
-       that.goodSlist = data.json.dt_GoodsSize.list[0];//list为空
+       that.goodSlist = data.json.dt_GoodsSize.list[0];
+       //商品内容（名称title、图片img、购买数量buynum）
       //alert(JSON.stringify(that.goodSlist));
-
-      that.dtlist=data.json['dt'].model;
+      // var testArr = [];
+      // for(var i=0;i<data.json.dt_GoodsSize.list.length;i++){
+      //   this.test=data.json.dt_GoodsSize.list[i].buynum;
+      //   testArr.cat
+      // }
+this.test=data.json.dt_GoodsSize.list[0].buynum;
+//this.test=that.goodSlist[0].buynum;
+      that.dtlist=data.json.dt.model;
+      //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
       //alert(JSON.stringify(that.dtlist));
+this.te= data.json.dt.model.totalprice;
+alert(this.test);
+this.totalPrice=this.test*this.te;
       console.log(that.dtlist);
 
-      that.addlist=data.json.address_List.list[0];
+      that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
       //alert(JSON.stringify(that.addlist));
       console.log(that.addlist);
+
+     
+           
     })
   
      //店铺信息
@@ -67,14 +84,14 @@ ionViewWillLoad() {
       that.shoplist = data2.model;
       console.log(data2);
       })
-     //运费
+     //运费postage
      var api3=this.wdh+'/api/trade/info?addressId=1&gId=1&gsId=1&goodsNum=1'+this.token;
             this.http.get(api3).map(res => res.json()).subscribe(data3 =>{
             console.log(data3);
       that.carriagelist = data3.model;
       console.log(data3);
        })
-     //积分抵扣
+     //积分抵扣pricemax
      var api4=this.wdh+'/api/userintegral/info?preDecimal=111'+this.token;
             this.http.get(api4).map(res => res.json()).subscribe(data4 =>{
             console.log(data4);
@@ -82,9 +99,25 @@ ionViewWillLoad() {
       console.log(data4);
        })
      //提交订单
-
-     
+   
+     //this.sumPrice();
+    
   }
+  
 //计算总价
+ sumPrice(){
+       var tempAllPrice=0;
+       //var test=0;
+       //alert(test);
+       //test=this.dtlist['totalprice'];
+
+//       for(let i=0;i<this.list.length;i++){
+//         if(this.list[i].checked==true){
+           tempAllPrice=parseInt(this.goodSlist['buynum'])*parseInt(this.dtlist['totalprice']);
+           //还需加运费
+//         }
+//       }
+      this.totalPrice=tempAllPrice;
+   }
 
 }

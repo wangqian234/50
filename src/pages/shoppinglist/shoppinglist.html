@@ -1,9 +1,4 @@
-<!--
-  Generated template for the ShoppinglistPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
+//王慧敏
 <ion-header>
   <ion-navbar>
     <ion-title>商品订单</ion-title>
@@ -14,31 +9,39 @@
 <ion-content>
     <!--商品订单列表--> 
   <div id="order-content">
-        <ul class="order-nav clearfix">
-            <li class="type current" data-nav="all"><a href="javascript:;">全部</a></li>
-            <li class="type" data-nav="payment"   (click)="paymentEvent(1)"><a href="javascript:;">待付款</a></li>
-            <li class="type" data-nav="receive"   (click)="paymentEvent(2)"><a href="javascript:;">待发货</a></li>
-            <li class="type" data-nav="done" (click)="paymentEvent(3)"><a href="javascript:;">待收货</a></li>
-            <li class="type" data-nav="cancel" (click)="paymentEvent(4)"><a href="javascript:;">待评价</a></li>
+        <ul class="order-nav clearfix" id="test">
+            <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:;">全部</a></li>
+            <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)"><a href="javascript:;">待付款</a></li>
+            <li class={{tabTest.li02}} data-nav="receive" (click)="paymentEvent(2)"><a href="javascript:;">待发货</a></li>
+            <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(3)"><a href="javascript:;">待收货</a></li>
+            <li class={{tabTest.li04}} data-nav="cancel" (click)="paymentEvent(4)"><a href="javascript:;">待评价</a></li>
         </ul>
         <div class="order-list">
             <div class="order-item">
-            <li *ngFor="let item of list" [navPush]='GoodsoderdetailPage' [navParams]="{id:item['trade_id']}">
-			    <a href="XiangQ_Y.html">
+            <li *ngFor="let item of list" >
+			    <a href="XiangQ_Y.html" [navPush]='GoodsoderdetailPage' [navParams]="{id:item['trade_id']}">
 			    	<div class="lieb_img"><img src={{item.img}}></div>
 			    	<div class="lieb_txt">
 		    		<p class="biao">{{item.trade_id}}</p>
-            <p class="biao">{{item.statename}}</p>
-            <p class="biao">{{item.goods_list[0].goods_title}}</p>
-            <p class="biao">{{item.goods_list[0].refundstate}}</p>
-            <p class="bend">购买数量<i>{{item.goods_list[0].goods_num}}</i></p>
+                    <p class="biao">{{item.statename}}</p>
+                       <p class="biao">检验订单状态{{item.trade_state}}</p>
+                    <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
+                    <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
+                    <p class="bend">购买数量<i>{{item.goods_list[0].goods_num}}</i></p>
 		    		</div>
 		    	</a>
+                <div class="evaluation" *ngIf="item.trade_state==6" (click)="evaluationEvent(item.trade_id)">
+                <p>商品评价：<span>这是一个待评价列表！</span></p>
+                </div>
+                <div class="refund" *ngIf="item.trade_state==3" (click)="refundEvent(item.trade_id)">
+                <p>商品退款：<span>退款列表！</span></p>
+                </div>
 		    </li> 
+                
             </div>
         </div>
 
     </div>
 
+
 </ion-content>
- 

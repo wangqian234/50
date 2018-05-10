@@ -15,7 +15,7 @@ import { CartPage } from '../cart/cart';
 })
 export class TabsPage {
 
-  tab1Root = CartPage;
+  tab1Root = ShoppingPage;
   tab2Root = RepairlistPage;
   tab3Root = ShoppingPage;
   tab4Root = UserPage;

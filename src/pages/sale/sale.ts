@@ -10,17 +10,77 @@ import { ConfigProvider } from '../../providers/config/config';
 })
 export class SalePage {
 public list = [];
+public mode = 0 ;
+ public tabTest={
+    li00:"type current",
+    li01:"type",
+    li02:"type",
+    li03:"type",
+   
+  };
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public http: Http,public config:ConfigProvider) {
   }
+//抢购时间判断
+ifontime(mode){
 
+    switch(mode){
+      case 0:
+      this.tabTest={
+        li00:"type current",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+      
+      };
+      break;
+      case 1:
+      this.tabTest={
+        li00:"type",
+        li01:"type current",
+        li02:"type",
+        li03:"type",
+      
+      };
+      break;
+      case 2:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type current",
+        li03:"type",
+       
+      };
+      break;
+      case 3:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type current",
+      
+      };
+      break;
+   
+    }
+    var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode='+mode+'&curCityCode=4403';
+     
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg == 'OK'){
+         this.list = data.list;
+         console.log(data);
+     } else {
+        alert(data.errmsg);
+     }
+     })
+}
  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
 
-    
-     var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode=3&curCityCode=4403';
+   
+     var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode=0&curCityCode=4403';
      
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
@@ -32,23 +92,8 @@ public wdh=this.config.apiUrl;
      })
   }
   ionViewDidLoad() {
-   this.onload2();
+   
   }
-onload2 = function(){
-    var Sos=document.getElementById('sos_tanc');
-		var ShouYe=document.getElementById('yemnr');
-		var SosYe=document.getElementById('shous_yem');
-		var SosFanHui=document.getElementById('sous_fanh_sy');
-		Sos.onclick=function()
-		{
-			ShouYe.style.display=('none');
-			SosYe.style.display=('block');
-		}
-		SosFanHui.onclick=function()
-		{
-			ShouYe.style.display=('block');
-			SosYe.style.display=('none');
-		}
-  }
+
 
 }
