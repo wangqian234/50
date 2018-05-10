@@ -8,6 +8,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+//添加、修改商品退款申请
+import {TradegoodsReapPage}from '../tradegoods-reap/tradegoods-reap';
 
 
 @IonicPage()
@@ -17,6 +19,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class TradegoodsRefundPage {
   public list = [];
+  public trade_id;
+  public TradegoodsReapPage=TradegoodsReapPage;
+
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -24,43 +29,53 @@ export class TradegoodsRefundPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-
+        this.trade_id=navParams.get('tradeId');
+        alert("退款页面");
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+    this.getRem();
+    this.getdetaillist();
+  }
+    getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-
-     //var api =this.aa+ '/api/tradegoods_refund/info?tgId=1'+this.token;
-     var api =this.aa+ '/api/tradegoods_refund/info?tgId=1&token=111';
-
+  }
+    getdetaillist(){
+     var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.trade_id+'&token='+this.token;
+     alert("看是否发送了请求");
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.list = data.model;
          console.log(data);
+         alert(JSON.stringify(data));
      } else {
         alert(data.errmsg);
      }
      })
   }
+  refundApplicationEvent(){
+        this.navCtrl.push(TradegoodsReapPage,{tradeId:this.trade_id});
+  }
+
   ionViewDidLoad() {
-   this.onload2();
+   //this.onload2();
   }
-onload2 = function(){
-    var Sos=document.getElementById('sos_tanc');
-		var ShouYe=document.getElementById('yemnr');
-		var SosYe=document.getElementById('shous_yem');
-		var SosFanHui=document.getElementById('sous_fanh_sy');
-		Sos.onclick=function()
-		{
-			ShouYe.style.display=('none');
-			SosYe.style.display=('block');
-		}
-		SosFanHui.onclick=function()
-		{
-			ShouYe.style.display=('block');
-			SosYe.style.display=('none');
-		}
-  }
+// onload2 = function(){
+//     var Sos=document.getElementById('sos_tanc');
+// 		var ShouYe=document.getElementById('yemnr');
+// 		var SosYe=document.getElementById('shous_yem');
+// 		var SosFanHui=document.getElementById('sous_fanh_sy');
+// 		Sos.onclick=function()
+// 		{
+// 			ShouYe.style.display=('none');
+// 			SosYe.style.display=('block');
+// 		}
+// 		SosFanHui.onclick=function()
+// 		{
+// 			ShouYe.style.display=('block');
+// 			SosYe.style.display=('none');
+// 		}
+//   }
 
 }

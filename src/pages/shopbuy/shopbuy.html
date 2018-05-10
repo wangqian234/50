@@ -43,11 +43,10 @@
     <!--第三部分-->
      <li >
 			<a>
-          <p class="px26">数量：{{dtlist.buynum}}</p>
-				<!--<div class="lieb_img"><img src={{item.img}}></div>-->
+          <p class="px26">数量：{{goodSlist.buynum}}</p>
           <p class="px26">运费：￥{{carriagelist.postage}}元</p>
           <p class="px26">积分抵扣:{{creditslist.pricemax}}元</p>
-
+					<p class="px26">ceshi:{{test}}元</p>
 		  
 			</a>
 		</li>
@@ -55,9 +54,11 @@
       <li >
 			<a>
                   
-		  <p>总计：元</p>
+		  <p>总计：{{totalPrice}}元</p>
+			
       <!--*dtlist.buynum+carriagelist.postage-->
-      <button>提交订单</button>
+     
+			 <button ion-button (click)="goBuy()">提交订单</button>
 			</a>
 		</li>
 	</ul>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { AddaddressPage } from './addaddress';
-import {MultiPickerModule} from 'ion-multi-picker';
+//import {MultiPickerModule} from 'ion-multi-picker';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import {MultiPickerModule} from 'ion-multi-picker';
     
   ],
   imports: [
-    MultiPickerModule,
+    //MultiPickerModule,
     IonicPageModule.forChild(AddaddressPage),
   ],
 })

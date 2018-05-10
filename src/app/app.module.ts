@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 //三级联动
-import {MultiPickerModule} from 'ion-multi-picker';
+//import {MultiPickerModule} from 'ion-multi-picker';
 //请求数据
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -87,7 +87,8 @@ import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
 import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund';
 //商品订单详情
 import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
-
+//商品评价列表界面
+import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -151,6 +152,8 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,
+    GoodsoderevaluatePage,
+
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
@@ -160,7 +163,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
   imports: [
     BrowserModule,
     HttpModule, JsonpModule,
-    MultiPickerModule,//三级联动
+    //MultiPickerModule,//三级联动
     // IonicModule.forRoot(MyApp)
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
@@ -205,6 +208,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
+    GoodsoderevaluatePage,
 
     HouseinfoPage,
     NewinfoPage,

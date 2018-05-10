@@ -16,11 +16,10 @@ export class ShopsortPage {
 
 
   public leftCate=[];  /*左侧分类数据*/
-public list=[];
-public fenllist=[];
-public wdh=this.config.apiUrl;
-  public rightCate=["第一个分类","第二个分类","第三个分类","第四个分类","第五个分类",
-  "第六个分类","第七个分类","第八个分类"];  /*右侧分类数据*/
+  public list=[];
+  public fenllist=[];
+  public wdh=this.config.apiUrl;
+  public rightCate=[];  /*右侧分类数据*/
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, 
   public httpService:HttpServicesProvider,public config:ConfigProvider) {
@@ -55,25 +54,27 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
       //     console.log(data);
       //     this.leftCate=data.result;
 
-      //     //调用右侧分类
-      //     this.getRightCateData(this.leftCate[0]['_id']);        
+      //  右侧内容的初始显示
+           this.getRightCateData(21);        
       // })
   }
 
 
   getRightCateData(pid){
+         
     //alert(pid);
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403 ';
          this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;
-         alert(JSON.stringify(this.fenllist));
+         //alert(JSON.stringify(this.fenllist));
          console.log(data);
      } else {
         alert(data.errmsg);
      }
      })
   }
+  
 
 }
 
