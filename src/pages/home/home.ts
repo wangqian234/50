@@ -12,6 +12,9 @@ import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
 
+//新闻详情页面
+import { NewinfoPage } from '../newinfo/newinfo';
+
 //测试页面跳转到shopmallist
 import {TestPage}from '../test/test';
 import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
@@ -213,26 +216,34 @@ goShop(){
   }
 
   getNews(){
-    // var j = 3;
-    // var api = this.config.apiUrl + '/api/Nwes/list?pageIndex=1&pageSize=3&keyWord=&type=1&token=' + this.storage.get('token');
-    // this.http.get(api).map(res => res.json()).subscribe(data =>{
-    //   if (data.errcode === 0 && data.errmsg === 'OK') {
-    //     this.newsList = data.list;
-    //   } else if(data.errcode === 40002){
-    //       j--;
-    //       if(j>0){
-    //         this.config.doDefLogin();
-    //         this.getNews();
-    //       }
-    //   } else {
-    //     alert("data.errmsg")
-    //   }
-    //    console.log("获取最新资讯" , data)
-    // });
+    var j = 3;
+    var api = this.config.apiUrl + '/api/Nwes/list?pageIndex=1&pageSize=3&keyWord=&type=1&token=' + this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.newsList = data.list;
+        console.log(this.newsList);
+      } else if(data.errcode === 40002){
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getNews();
+          }
+      } else {
+        alert("data.errmsg")
+      }
+       console.log("获取最新资讯" , data)
+    });
   }
 
   getPublic(){
 
+  }
+
+  getNewInfo(id){
+    alert(id)
+    this.navCtrl.push(NewinfoPage,{
+      id:id
+    });
   }
 
   changeRoom(){
@@ -244,7 +255,7 @@ goShop(){
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 50) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
 
 }

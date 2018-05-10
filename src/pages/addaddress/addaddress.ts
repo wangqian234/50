@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
+import {CityDataProvider} from "../../providers/city-data/city-data";
 
 //收货地址列表
 import { AddressPage } from '../address/address';
@@ -34,8 +35,11 @@ export class AddaddressPage {
     token : ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider) {
+  cityColumns: any[];
 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
+    public cityDataProvider: CityDataProvider) {
+    this.cityColumns = this.cityDataProvider.cities;
   }
 
   ionViewWillEnter(){
@@ -50,8 +54,6 @@ export class AddaddressPage {
       this.addressList.address = ss1[1];
       console.log(this.addressList);
     }
-    this.areaList = $("#areaList")
-    this.intProvince();
   }
 
   backToAddress(){
@@ -59,79 +61,9 @@ export class AddaddressPage {
   }
 
   ionViewDidEnter(){
-    /*打开省市区选项*/
-      $("#expressArea").click(function() {
-        $("#areaMask").fadeIn();
-        $("#areaLayer").animate({"bottom": 0});
-      });
-      /*关闭省市区选项*/
-      $("#areaMask, #closeArea").click(function() {
-        this.clockArea();
-      });
+    
   }
 
-  /*初始化省份*/ 
-intProvince() {
-	var areaCont = "";
-	for (var i=0; i<this.config.province.length; i++) {
-		areaCont += '<li onclick="selectP(' + i + ');">' + this.config.province[i] + '</li>';
-      this.selectP(i)
-	}
-
-	this.areaList.html(areaCont);
-	$("#areaBox").scrollTop(0);
-	$("#backUp").removeAttr("ng-click").hide();
-}
-
-/*选择省份*/
-selectP(p) {
-	var areaCont = "";
-	this.areaList.html("");
-	for (var j=0; j<this.config.city[p].length; j++) {
-		areaCont += '<li (ng-click)="selectC(' + p + ',' + j + ');">' + this.config.city[p][j] + '</li>';
-	}
-	this.areaList.html(areaCont);
-	$("#areaBox").scrollTop(0);
-	var expressArea = this.config.province[p] + " > ";
-	$("#backUp").attr("ng-click", "intProvince();").show();
-}
-
-/*选择城市*/
-selectC(p,c) {
-	var areaCont = "";
-	for (var k=0; k<this.config.district[p][c].length; k++) {
-		areaCont += '<li onClick="selectD(' + p + ',' + c + ',' + k + ');">' + this.config.district[p][c][k] + '</li>';
-	}
-	this.areaList.html(areaCont);
-	$("#areaBox").scrollTop(0);
-	var sCity = this.config.city[p][c];
-	if (sCity != "省直辖县级行政单位") {
-		if (sCity == "东莞市" || sCity == "中山市" || sCity == "儋州市" || sCity == "嘉峪关市") {
-			var expressArea = expressArea + sCity;
-			$("#expressArea dl dd").html(expressArea);
-			this.clockArea();
-		} else if (sCity == "市辖区" || sCity == "市辖县" || sCity == "香港岛" || sCity == "九龙半岛" || sCity == "新界" || sCity == "澳门半岛" || sCity == "离岛" || sCity == "无堂区划分区域") {
-			expressArea += "";
-		} else {
-			expressArea += sCity + " > ";
-		}
-	}
-	$("#backUp").attr("(click)", "selectP(" + p + ");");
-}
-
-/*选择区县*/
-selectD(p,c,d) {
-	this.clockArea();
-	var expressArea = expressArea + this.config.district[p][c][d];
-	$("#expressArea dl dd").html(expressArea);
-}
-
-/*关闭省市区选项*/
-clockArea() {
-	$("#areaMask").fadeOut();
-	$("#areaLayer").animate({"bottom": "-100%"});
-	this.intProvince();
-}
   
   addAddress(){
     // var data = {

@@ -72,7 +72,7 @@ export class CartPage {
 
   getCartsData(infiniteScroll){
     var j = 3;  //确定递归次数，避免死循环
-    var api = this.config.apiUrl + 'api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
+    var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.list=this.list.concat(data.result);  /*数据拼接*/
@@ -101,7 +101,7 @@ export class CartPage {
   //删除选中商品
   delCartsData(){
     var j = 3;  //确定递归次数，避免死循环
-    var api = this.config.apiUrl + 'api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
+    var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.list=this.list.concat(data.result);  /*数据拼接*/

@@ -1,3 +1,21 @@
 page-onlinepayment {
-
+.otherUser_content .item-ios{
+        padding-left: 0;
+    }
+    .fee_time{
+        float:left;
+        padding-left:16px;
+        width:10%;
+        font-size: 0.26rem;
+    }
+    .fee_content{
+        float:left;
+        width:30%;
+        font-size: 0.26rem;
+    }
+    .fee_num{
+        margin-right: 4px;
+        float: right;
+        font-size: 0.26rem;
+    }
 }

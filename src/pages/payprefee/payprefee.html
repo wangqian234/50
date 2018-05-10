@@ -1,0 +1,128 @@
+<ion-content style="background-color:#E3E3E3">
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24">费用预存</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="select" style="background-color:white;margin-top:10px">
+    <ion-item>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--为其他房屋缴费--</ion-option>
+        </ion-select>
+    </ion-item>
+</div>
+
+<div id="selectOther" style="margin-top:10px;display:none">
+      <ion-item>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-option selected>请选择小区</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--为其他房屋缴费--</ion-option>
+        </ion-select>
+    </ion-item>
+          <ion-item>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-option selected>请选择楼栋</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--为其他房屋缴费--</ion-option>
+        </ion-select>
+    </ion-item>
+          <ion-item>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-option selected>请选择房屋</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--为其他房屋缴费--</ion-option>
+        </ion-select>
+    </ion-item>
+</div>
+
+<div class="otherUser_title">
+    <div class="user_titlediv">
+      <div class="user_title">请填写预存款项金额</div>
+    </div>
+    <div class="otherUser_content">
+      <ion-list>
+        <ion-item>
+          <div class="fee_list"><span>管理费：</span></div>
+          <input class="fee_input" type="number" />
+          <div class="fee_num">元</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_list"><span>水费：</span></div>
+          <input class="fee_input" type="number" />
+          <div class="fee_num">元</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_list"><span>电费：</span></div>
+          <input class="fee_input" type="number" />
+          <div class="fee_num">元</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_list"><span>车位管理费：</span></div>
+          <input class="fee_input" type="number" />
+          <div class="fee_num">元</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_list"><span>生活垃圾处理费：</span></div>
+          <input class="fee_input" type="number" />
+          <div class="fee_num">元</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="otherUser_title">
+    <div class="user_titlediv">
+      <div class="user_bigo">提示：您可以根据往月费用，往不同账户中存入预存金额，系统每月会根据实际消费金额定向扣除（水电费抄表到户除外）</div>
+    </div>
+  </div>
+
+<div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem">
+		<div class="zhong"><p>总计：<em>{{allPrice}}</em></p></div>
+		<div class="you" style="position:absolute;right:0;">
+			<div class="goum">
+				<a style="background-color:#488aff">去结算</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+</ion-content>
