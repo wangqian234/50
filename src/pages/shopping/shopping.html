@@ -30,20 +30,24 @@
             </div>
         </div>
 <!-- 轮播图 -->
-   <ion-slides *ngIf="l.length>0" class="focus" pager  loop="true" autoplay="3000"  style="height:20rem;background-color:white">    
-      <ion-slide *ngFor="let item of l"  style="height:20rem;">
-          <img class="img1" [src]="item"  style="height:20rem;"/>
-      </ion-slide>         
-   </ion-slides>
+        <ion-slides>    
+            <ion-slide *ngFor="let item of l">
+               <img class="img1" src="{{item}}" />
+           </ion-slide>         
+        </ion-slides>
+
+  
    <!-- 团购图标-->
   <div class="tupian-div">
-    <img [navPush]="GroupbuyPage" src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
-    <div class="tupian-div2">
-        <img [navPush]="SalePage"  src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
-        <img [navPush]="BigsalePage"  src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
-    </div> 
+
+        <img [navPush]="GroupbuylistPage"  src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
+        <div class="tupian-div2">
+            <img [navPush]="SalePage"  src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
+            <img [navPush]="BigsalePage"  src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
+
+        </div> 
   </div>
-<!-- 团购、限时抢购图标--><!-- 图片布局怎么显示-->
+<!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
 <!--
              <div class="tupian-div">
                  <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1"> </a>

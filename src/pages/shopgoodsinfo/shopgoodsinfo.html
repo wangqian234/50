@@ -21,7 +21,18 @@
         <span> {{dataSlist.num}} </span>
         <span> 1</span>
       </div>
-      <button [navPush]="ShoppingevaluatePage">商品评价页面 </button>
-      <button (tap)="addcart(  )" >加入购物车 </button>
+      <button (tap)="getshopinfo(dataSlist['id'])">评价列表 </button><a [navPush]="ShoppingevaluatePage">  更多评价</a>
+      <button (tap)="addcart()" >加入购物车 </button>
+      <ion-icon name="alarm" [navPush]="CartPage"></ion-icon> 
+      <!--<ul>
+        <li *ngFor="let item of list">
+            <div>
+              <span>{{item.user_name}} </span>
+              <span>{{item.score}}</span>
+              <span></span>
+
+            </div>
+        </li>
+      </ul>-->
 
 </ion-content>

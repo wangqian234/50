@@ -23,7 +23,7 @@ export class ShoppingevaluatePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config: ConfigProvider,public http : Http) {
   }
-
+  
   ionViewWillLoad(){//钩子函数，将要进入页面的时候触发
     this.getRem();
     var that = this;

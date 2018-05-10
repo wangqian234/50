@@ -1,0 +1,65 @@
+<!--
+  Generated template for the ShopbuyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>确认订单</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+<div class="shangp_lieb_beij">
+	<div class="sp_daoh">
+	
+	</div>
+	
+	<ul class="shangp_lieb_k_er">
+    <!--第一部分-->
+		<li >
+			<a>
+        
+					<p class="biao">收货人:{{addlist.address_name}}</p>
+					<p class="px26">联系方式:{{addlist.address_mobile}}</p>
+          <p >地址：{{addlist.Address}}</p>
+
+			</a>
+		</li>
+    <!--第二部分-->
+    <li >
+			<a>
+          <p class="px26">店铺：{{shoplist.name}}</p>
+				<!--<div class="lieb_img"><img src={{item.img}}></div>-->
+          <p class="px26">项目：{{goodSlist.title}}</p>
+          <p class="px26">价格:{{dtlist.totalprice}}</p>
+		  
+			</a>
+		</li>
+    <!--第三部分-->
+     <li >
+			<a>
+          <p class="px26">数量：{{dtlist.buynum}}</p>
+				<!--<div class="lieb_img"><img src={{item.img}}></div>-->
+          <p class="px26">运费：￥{{carriagelist.postage}}元</p>
+          <p class="px26">积分抵扣:{{creditslist.pricemax}}元</p>
+
+		  
+			</a>
+		</li>
+<!--第四部分-->
+      <li >
+			<a>
+                  
+		  <p>总计：元</p>
+      <!--*dtlist.buynum+carriagelist.postage-->
+      <button>提交订单</button>
+			</a>
+		</li>
+	</ul>
+</div>
+</ion-content>

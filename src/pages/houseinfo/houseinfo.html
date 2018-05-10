@@ -1,0 +1,56 @@
+
+<ion-content style="background-color:#E3E3E3">
+  <!--头部--> 
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToAddress()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">房屋基本信息</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+<div class="content">
+  <div class="imgdiv"><img src="assets/imgs/house.jpg" /></div>
+  <div class="housename">这是房屋的名称</div>
+  <div class="content_info">
+  <div class="content_info_title">
+    <p class="title">业主：</p>        
+    <p class="title">绑定日期:</p>     
+    <p class="title">与业主关系：</p>  
+    <p class="title">绑定状态：</p>    
+  </div>
+  <div class="content_info_content">
+    <p class="title_content">{{houseInfo.name}}</p>
+     <p class="title_content">{{houseInfo.date}}</p>
+     <p class="title_content">{{houseInfo.relation}}</p>
+     <p class="title_content">{{houseInfo.state}}</p>
+  </div>
+  </div>
+  <div class="otherUser_title">
+    <div class="user_titlediv">
+      <div class="user_title">其他绑定此房屋用户</div>
+      <div class="appear" (click)="appearOtherUser()"><img src="assets/imgs/back.png"></div>
+    </div>
+    <div class="otherUser_content" style="display:none">
+      <div class="hrdiv"></div>
+      <div class="otherUser">
+        这是一段文字；<br />
+        这是一段文字；<br />
+        这是一段文字；<br />
+        这是一段文字；<br />
+      </div>
+    </div>
+  </div>
+
+    <div class="otherUser_title">
+    <div class="user_titlediv" (click)="delUserRoom()">
+      <div class="user_title">解除与此房屋的绑定</div>
+    </div>
+  </div>
+</div>
+</ion-content>
+

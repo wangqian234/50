@@ -9,9 +9,13 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 //商品分类页
 import { ShopsortPage } from '../shopsort/shopsort';
 //商品详情页
+
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //商品购物车
 
+import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
+//商品详情页
+import { CartPage } from '../cart/cart';
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
 //热卖界面
@@ -19,27 +23,36 @@ import { BigsalePage } from '../bigsale/bigsale';
 //限时促销
 import { SalePage } from '../sale/sale';
 //团购界面
+
 import { GroupbuyPage } from '../groupbuy/groupbuy';
 //搜索出的商品列表页
 import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+
+import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
+
 @Component({
   selector: 'page-shopping',
   templateUrl: 'shopping.html',
 })
 export class ShoppingPage {
 
+  public ShoppingdetailPage = ShoppingdetailPage;
+  public CartPage = CartPage;
+
   //页面跳转
   public ShopsortPage = ShopsortPage;
   public ShopgoodsinfoPage = ShopgoodsinfoPage;
-  
+
   public BigsalePage = BigsalePage;
-  public SalePage = SalePage;
   public GroupbuyPage = GroupbuyPage;
 
    //定义接收数据的list
   public l=[];
+ public SalePage = SalePage;
+ public GroupbuylistPage = GroupbuylistPage;
+
   public lunboList=[];
   public tuangouList=[];
   public tubList=[];
@@ -66,15 +79,15 @@ export class ShoppingPage {
      this.http.get(api).map(res => res.json()).subscribe(data =>{
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
-    // console.log(this.lunboList);
-     that.tuangouList=data.json['data_Modules'].list;
-    // console.log(this.tuangouList[1]);
+     // console.log(this.lunboList);
+     that.tuangouList=data.json['data_Modules'].list; 
+     // console.log(this.tuangouList[1]);
      that.tubList=data.json['data_Sort'].list;
-    console.log(that.tubList);
-    that.tuijList=data.json['data_Recommend'].list;
-    // console.log(this.tuijList);
+     console.log(that.tubList);
+     that.tuijList=data.json['data_Recommend'].list;
+     // console.log(this.tuijList);
      })
-    //初始显示旅游服务的商品列表
+      //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=1';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg ==="OK"){

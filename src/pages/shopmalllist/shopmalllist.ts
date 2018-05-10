@@ -38,7 +38,6 @@ export class ShopmalllistPage {
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list = data.list;
-         console.log(data);
      } else {
         alert(data.errmsg);
      }
@@ -47,20 +46,20 @@ export class ShopmalllistPage {
   //推荐商品搜索
     tuijGoods(){
       var api = this.aa +'/api/goods/list?curCityCode=4403';
+      alert('safasfas')
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;
-          console.log(data);
         }else{
           alert(data.errmsg);
         }
       })
     }
-
   //跳转到商品详情页面
   goGoodsInfo(id){
      this.navCtrl.push(ShopgoodsinfoPage,{id:id});
   }
+
   ionViewCanEnter():boolean{
         return true;
   }

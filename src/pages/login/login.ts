@@ -3,9 +3,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
+import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 //找回密码页
 import { RebuildpassPage } from '../rebuildpass/rebuildpass'
+//注册页
+import { RegisterpasswordPage } from '../registerpassword/registerpassword'
 
 @IonicPage()
 @Component({
@@ -15,7 +18,7 @@ import { RebuildpassPage } from '../rebuildpass/rebuildpass'
 export class LoginPage {
 
   public RebuildpassPage = RebuildpassPage;
-
+  public RegisterpasswordPage = RegisterpasswordPage;
   //定义数据
   public code='';  /*验证码*/
   public isShowSend=true;   /*是否显示发送验证码的按钮*/
@@ -31,7 +34,7 @@ public history='';
 
   public loginNum : boolean;
 
-  constructor(public navCtrl: NavController, public navParams:NavParams ,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
+  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
@@ -50,34 +53,21 @@ public history='';
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          this.storage.set('username',this.userinfo.userName);
+          this.storage.set('userName',this.userinfo.userName);
           this.storage.set('password',this.userinfo.userPwd);
           this.storage.set('token',data.model.token);
-          console.log("username" + this.userinfo.userName);
-          console.log("password" + this.userinfo.userPwd);
-          console.log(this.storage.get('token'));
-          this.navCtrl.popToRoot(); /*回到根页面*/
+          this.storage.set('username1',data.model.username);
+          console.log(data.model);
+          this.navCtrl.pop(); /*回到根页面*/
         } else {
           alert(data.errmsg);
         }
       });
-          //     if(this.history=='order'){
-          //       this.navCtrl.pop();  /*返回上一个页面*/
-          //     }else{
-          //       this.navCtrl.popToRoot(); /*回到根页面*/
-          //     }
-          // }
   }
 
   getLoginNum(){
     this.loginNum = !this.loginNum;
     console.log(this.loginNum)
-  }
-
-  ownRegist() {
-    this.num = 5;
-    this.isShowSend = false;
-    this.doTimer();  /*倒计时*/
   }
 
   goRegisterpasswordPage(){
@@ -108,18 +98,26 @@ public history='';
     },1000)
   }
   //发送验证码
-  sendCode(){
-    // var api='api/sendCode';
-    // this.httpService.doPost(api,{"tel":this.tel},(result)=>{
-    //     console.log(result);  /*发送到手机的验证码返回方便我们验证*/
-    //     if(result.success){
-    //       this.num=10;  /*设置倒计时*/
-    //       this.doTimer();  /*倒计时*/
-    //       this.isShowSend=false;  /*显示倒计时按钮*/  
-    //     }else{
-    //       alert('发送验证码失败');
-    //     }
-    // })
+  ownRegist(){
+    if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
+      alert('请输入正确的手机号码');
+      return;
+    }
+    var tel = this.userinfo.userName
+    var data= {
+      "mobile": tel
+    }
+    console.log(JSON.stringify(data))
+    var api = this.config.apiUrl + '/api/vcode/register';
+    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.num = 5;
+        this.isShowSend = false;
+        this.doTimer();  /*倒计时*/
+      } else {
+        alert(data.errmsg);
+      }
+    })
   }
 //转换大小的单位
   getRem(){

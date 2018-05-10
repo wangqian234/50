@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams } from 'ionic-angular';
+import $ from 'jquery';
 
+import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
-//import { OrderPage } from '../order/order';
-
 
 @Component({
   selector: 'page-cart',
-  templateUrl: 'cart.html'
+  templateUrl: 'cart.html',
 })
 export class CartPage {
+
+  pageSize = 10;
+  pageIndex = 1;
+  checked =false
   public list=[];
 
   public allPrice=0;  /*总价*/
@@ -20,186 +24,171 @@ export class CartPage {
   public isEdit=false;   /*是否编辑*/
 
   public hasData=true;   /*是否有数据*/
-
-  constructor(public navCtrl: NavController,public config:ConfigProvider,public storage:StorageProvider) {
-
+  //修改商品数量
+  public updateList = {
+    gsId:'',
+    goodsNum:'',
+    token:''
   }
-  ionViewDidEnter(){
-     this.getCartsData();
-
-     console.log(this.getChenckNum(),this.list.length);      
-      //进来的时候判断有没有全选
-      if(this.getChenckNum()==this.list.length && this.list.length>0){      
-        this.isChencked=true;
-      }else{
-        this.isChencked=false;
-      }      
+  //删除选中商品
+  public deleatcartList ={
+    gsId:'',
+    token:'',
   }
 
-  getCartsData(){
-    var cartsData=this.storage.get('carts_data');
-    console.log(cartsData);
-   if(cartsData && cartsData.length>0){
-      this.list=cartsData;
-      this.hasData=true;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  public config:ConfigProvider,public storage:StorageProvider, public http: Http) {
+  }
 
-    }else{
-      this.list=[];
-      this.hasData=false;
-    }
-    this.sumPrice(); 
+  ionViewWillEnter(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    this.getCartsData('');
 
   }
-  changeCarts(){
-    // console.log(this.list);
   
+  ionViewDidLoad() {
+    
+  }
 
+  getCartsData(infiniteScroll){
+    var j = 3;  //确定递归次数，避免死循环
+    var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.list=this.list.concat(data.list);  /*数据拼接*/
+        console.log(this.list);
+        this.hasData=true;
+        if(infiniteScroll){
+          //告诉ionic 请求数据完成
+          infiniteScroll.complete();
+
+          if(data.result.length<10){  /*没有数据停止上拉更新*/
+            infiniteScroll.enable(false);
+          }
+      };
+        this.pageIndex++
+      } else if(data.errcode === 40002) {
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getCartsData(infiniteScroll);
+          }
+      } else {
+        alert(data.errmsg);
+      }
+    });
+  }
+
+  //删除选中商品
+  delCartsData(item){
+    this.deleatcartList.gsId=item.size_id;
+    this.deleatcartList.token=this.storage.get('token');
+    var data = this.deleatcartList;
+    alert(JSON.stringify(data));
+    var j = 3;  //确定递归次数，避免死循环
+    var api = this.config.apiUrl + '/api/usercart/list?';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log("删除成功");
+      } else if(data.errcode === 40002) {
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.delCartsData(item);
+          }
+      } else {
+        alert(data.errmsg);
+      }
+    });
+    //刷新界面
+  }
+
+  changeCarts(){
     if(this.getChenckNum()==this.list.length){
-
       this.isChencked=true;
     }else{
       this.isChencked=false;
     }
-
-    this.sumPrice();  
-
-  }
-/*计算总价*/
-  sumPrice(){
-
-
-      var tempAllPrice=0;
-
-      for(let i=0;i<this.list.length;i++){
-
-        if(this.list[i].checked==true){
-
-          tempAllPrice+=this.list[i].product_count*this.list[i].product_price;
-        }
-
-      }
-
-      this.allPrice=tempAllPrice;
-
-  }
-
-  //数量变化  双向数据绑定
-
-  decCount(item){
-    // console.log(item);
-
-    if(item.product_count>1){
-
-      --item.product_count;
-    }
-    this.sumPrice();  
-
-  }
-
-  incCount(item){    
-    ++item.product_count;
     this.sumPrice();  
   }
 
-  //离开的时候保存购物车数据
-   ionViewWillLeave(){
-       this.storage.set('carts_data',this.list);
-   }
-
-   //全选反选
- //ionChange  事件只要checkbox改变就会触发
-   checkAll(){  /*按钮*/
-      console.log(this.isChencked);
-
-
-      if(this.isChencked){ /*选中*/
-
-         for(let i=0;i<this.list.length;i++){
-            this.list[i].checked=false;   
-         }
-
-         this.isChencked=false;
-
-
-      }else{
-         for(let i=0;i<this.list.length;i++){          
-            this.list[i].checked=true;              
-         }
-         this.isChencked=true; 
-      }
-
-   }
    //获取选中的数量
-
    getChenckNum(){
       let sum=0;
-
       for(let i=0;i<this.list.length;i++){          
           if(this.list[i].checked==true){
             sum+=1;
           }
       }
       return sum;
-
    }
 
-  //执行删除操作
-
-  doDelete(){
-
-        var noCheckedArr=[];      
-  
-        for(var i=0;i<this.list.length;i++){
-          if(!this.list[i].checked){
-  
-            noCheckedArr.push(this.list[i]);
-          }
-  
+   /*计算总价*/
+  sumPrice(){
+      var tempAllPrice=0;
+      for(let i=0;i<this.list.length;i++){
+        if(this.list[i].checked==true){
+          tempAllPrice+=this.list[i].num*this.list[i].price;
         }
-
-        //改变当前数据
-
-        this.list=noCheckedArr;
-
-        this.list.length>0?this.hasData=true:this.hasData=false;
-
-        //重新写入localstorage
-        this.storage.set('carts_data',noCheckedArr);
-
+      }
+      this.allPrice=tempAllPrice;
   }
 
 
-   //去结算  去订单页面
-
-   doPay(){
-
-    //获取购物车选中的数据
-
-      var tempArr=[];    
-
-      for(var i=0;i<this.list.length;i++){
-        if(this.list[i].checked){
-
-          tempArr.push(this.list[i]);
-        }
-
-      }
-      //选中的数据
-      // console.log(tempArr);
-      //保存订单数据
-
-      if(tempArr.length>0){
-        this.storage.set('order_data',tempArr);
-        //this.navCtrl.push(OrderPage);
+  //全选反选
+  //ionChange  事件只要checkbox改变就会触发
+  checkAll(){ 
+      if(this.isChencked){ /*选中*/
+         for(let i=0;i<this.list.length;i++){
+            this.list[i].checked=false;   
+         }
+         this.isChencked=false;
       }else{
-
-        alert('您还没有选中数据');
+         for(let i=0;i<this.list.length;i++){          
+            this.list[i].checked=true;              
+         }
+         this.isChencked=true; 
       }
+      this.sumPrice();
+   }
 
-      
+  incCount(item){    
+    ++item.num;
+    this.sumPrice();  
+    this.updatenum(item);
+  }
 
-          
+  //数量变化  双向数据绑定
+  decCount(item){
+    // console.log(item);
+    if(item.num>1){
+      --item.num;
+    }
+    this.sumPrice();  
+    this.updatenum(item);
+  }
+  //修改购物车数量
+  updatenum(item){
+    this.updateList.gsId=item.size_id;
+    this.updateList.goodsNum=item.num;
+    this.updateList.token=this.storage.get('token');
+    var data = this.updateList;
+    var that = this;
+    var api = this.config.apiUrl+'/api/usercart/update';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if(data.errcode ===0&&data.errmsg==='OK'){
+        console.log("修改成功")
+      }else{
+        alert(data.errmsg)
+      }
+    })
+  }
+
+  //加载更多
+  doLoadMore(infiniteScroll){
+    this.getCartsData(infiniteScroll);
+  }
    
 
-   }
 }

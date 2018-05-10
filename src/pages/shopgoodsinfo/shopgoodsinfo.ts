@@ -9,6 +9,7 @@ import { ConfigProvider } from '../../providers/config/config';
 //商品详情页
 import {ShoppingevaluatePage} from '../shoppingevaluate/shoppingevaluate'
 //购物车
+import { CartPage} from '../cart/cart'
 /**
  * Generated class for the ShopgoodsinfoPage page.
  *
@@ -24,7 +25,11 @@ import {ShoppingevaluatePage} from '../shoppingevaluate/shoppingevaluate'
 export class ShopgoodsinfoPage {
   //跳转页面
     public ShoppingevaluatePage=ShoppingevaluatePage;
+    public CartPage = CartPage;
+    //定义需要隐藏的标志变量
+    public showpingj =false;
     //接收数据的 list
+    public list =[];
     public goodMlist=[];
     public dataGlist=[];
     public dataSlist =[];
@@ -52,13 +57,16 @@ export class ShopgoodsinfoPage {
   goodsInfo(){
     var that =this;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
-    this.http.get(api).map(res =>res.json()).subscribe(data =>{
-      alert(JSON.stringify(data))     
+    console.log(this.token)
+    this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
+    
         that.goodMlist = data.json['good_Model'].model;
         that.dataGlist = data.json.data_group.list;
-        that.dataSlist = data.json.data_Sizes.list[0];     
+        that.dataSlist = data.json.data_Sizes.list[0];  
+      
     })
   }
+
   //加入购物车函数
    addcart(){ 
     this.addcarList.token=this.token;
@@ -72,6 +80,20 @@ export class ShopgoodsinfoPage {
         alert(data.errmsg);
       }
      })
+  }
+  //显示商品评价列表
+  getshopinfo(id){
+    this.showpingj=!this.showpingj;
+    var that = this;
+    var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+id;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+         this.list= data.list;
+         alert(JSON.stringify(this.list));
+      }else{
+        alert(data.errmsg);
+      }
+    })
   }
 
   ionViewDidLoad() {

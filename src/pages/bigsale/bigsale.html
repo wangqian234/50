@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>RM</ion-title>
+    <ion-title>热卖促销</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -57,11 +57,13 @@
 			</li>
 		</ul>
 	</div>
+	<!--[navParams]="{id:item['id']}"    [navPush]='groupdetailPage' -->
 	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of list">
-			<a href="XiangQ_Y.html">
+		<li *ngFor="let item of list" (tap)="getDetailData(item['id'])"  [navPush]='GroupdetailPage' [navParams]="{id:item['id']}">
+			<a>
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
+					
 					<p class="biao">{{item.title}}</p>
 					<p class="px26">活动价格¥{{item.preprice}}</p>
           <p class="bend">已售数量：{{item.soldnum}}</p>

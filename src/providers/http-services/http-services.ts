@@ -7,13 +7,6 @@ import 'rxjs/add/operator/map';
 //配置文件
 import { ConfigProvider } from '../../providers/config/config';
 
-
-/*
-  Generated class for the HttpServicesProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class HttpServicesProvider {
 
@@ -35,7 +28,6 @@ export class HttpServicesProvider {
         var api=this.config.apiUrl+apiUrl+'?callback=JSONP_CALLBACK'
       }else{
         var api=this.config.apiUrl+apiUrl+'&callback=JSONP_CALLBACK'
-        //  http://39.108.159.135/api/plist?is_best=1&callback=JSONP_CALLBACK
       }
       this.jsonp.get(api).subscribe(function(data){
         // console.log(data);

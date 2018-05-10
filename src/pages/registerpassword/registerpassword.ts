@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
+import { ConfigProvider } from '../../providers/config/config';
+import { Http } from '@angular/http';
 
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-/**
- * Generated class for the RegisterpasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,67 +13,102 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 })
 export class RegisterpasswordPage {
 
-  public tel='';
+  public num:number ;   /*倒计时的数量*/
+  public isShowSend=true;   /*是否显示发送验证码的按钮*/
+  public registerinfo = {
+    userTel:'',
+    userName:'',
+    regist:'',
+    rpassword:'',
+    password:'',
+    ckecked:false
+  }
 
-  public code='';
+  constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider,public storage:StorageProvider,
+      public config:ConfigProvider,public http: Http) {
 
-  public password='';
+  }
 
-  public rpassword='';
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider,public storage:StorageProvider) {
-
-    this.tel=storage.get('reg_tel');
-
-    this.code=storage.get('reg_code');
+  ionViewWillLoad() {
+    this.getRem();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterpasswordPage');
   }
 
+  agreeSheet(){
+    document.getElementById('background').style.display = "block";  
+  }
 
-  //执行注册
+  closePopup(){
+    document.getElementById('background').style.display = "none";
+  }
 
+  enSureStop(){
+    this.registerinfo.ckecked = true;
+  }
+
+  //注册信息发送
   doRegister(){
-      if(this.password!=this.rpassword){
-
+      if(this.registerinfo.password!=this.registerinfo.rpassword){
         alert('确认密码和密码不一样');
-      }else if(this.password.length<6){
+      }else if(this.registerinfo.password.length<6){
         alert('密码长度不能小于6位');
-
       }else{
-
-          //提交数据
-
-          var api='api/register';
-          this.httpService.doPost(api,{"tel":this.tel,"code":this.code,'password':this.password},(result)=>{
-             
-              console.log(result);
-
-              if(result.success){
-                  //保存用户信息
-                  this.storage.set('userinfo',result.userinfo[0]);
-
-                  //返回到用户中心 注册成功
-
-                  //http://ionicframework.com/docs/api/navigation/NavController/#popToRoot
-
-                  this.navCtrl.popToRoot();   /*回到根页面*/
-
-
-
-              }else{
-
-                alert('注册失败');
-              }
-
-
-          })
-
-
+        var api = this.config.apiUrl + '/api/user/register?userName=' + this.registerinfo.userName + "&userPwd=" + this.registerinfo.password +
+        "&mobile=" + this.registerinfo.userTel + "&code=" + this.registerinfo.regist;
+        this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if (data.errcode === 0 && data.errmsg === 'OK') {
+            this.storage.set('userName',data.model.loginname);
+            this.storage.set('password',this.registerinfo.password);
+            this.storage.set('token',data.model.token);
+            this.storage.set('username1',data.model.username);
+            this.navCtrl.popToRoot(); /*回到根页面*/
+          } else {
+            alert(data.errmsg);
+          }
+        })
       }
 
+  }
+
+  //发送验证码
+  ownRegist(){
+    if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.registerinfo.userName))){
+      alert('请输入正确的手机号码');
+      return;
+    }
+    var tel = this.registerinfo.userName
+    var data= {
+      "mobile": tel
+    }
+    console.log(JSON.stringify(data))
+    var api = this.config.apiUrl + '/api/vcode/register';
+    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.num = 60;
+        this.isShowSend = false;
+        this.doTimer();  /*倒计时*/
+      } else {
+        alert(data.errmsg);
+      }
+    })
+  }
+  //倒计时的方法
+  doTimer(){
+    var timer=setInterval(()=>{
+          --this.num; 
+          if(this.num==0){
+              clearInterval(timer);
+              this.isShowSend=true;
+          }
+    },1000)
+  }
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
   }
 }
 
