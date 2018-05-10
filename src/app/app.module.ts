@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+//三级联动
+//import {MultiPickerModule} from 'ion-multi-picker';
 //请求数据
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -62,8 +64,6 @@ import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
-//商品评价列表界面
-import {ShoppingevaluatePage} from '../pages/Shoppingevaluate/Shoppingevaluate'
 //支付
 
 //新建测试界面
@@ -93,6 +93,18 @@ import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 
+//新闻详情页面
+import { NewinfoPage }from '../pages/newinfo/newinfo';
+
+//新闻详情页面
+import { PayfeePage }from '../pages/payfee/payfee';
+
+//费用预存页面
+import { PayprefeePage }from '../pages/payprefee/payprefee';
+
+//在线缴费页面
+import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
+
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -102,6 +114,7 @@ import { HttpServicesProvider } from '../providers/http-services/http-services';
 import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
+import { CityDataProvider } from '../providers/city-data/city-data';
 
 @NgModule({
   declarations: [
@@ -127,7 +140,6 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     RebuildpassPage,
     ShoppingdetailPage,
     ShopmalllistPage,
-    ShoppingevaluatePage,
     TestPage,
     SalePage,
     BigsalePage,
@@ -143,16 +155,22 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     GoodsoderevaluatePage,
 
     HouseinfoPage,
-
+    NewinfoPage,
+    PayfeePage,
+    PayprefeePage,
+    OnlinepaymentPage,
   ],
   imports: [
     BrowserModule,
     HttpModule, JsonpModule,
+    //MultiPickerModule,//三级联动
     // IonicModule.forRoot(MyApp)
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
-      backButtonText: '' /*配置返回按钮*/
-    })        
+      backButtonText: '', /*配置返回按钮*/
+      iconMode: 'ios', 
+      mode: 'ios',
+    })       
     
   ],
   bootstrap: [IonicApp],
@@ -179,7 +197,6 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     RebuildpassPage,
     ShoppingdetailPage,
     ShopmalllistPage,
-    ShoppingevaluatePage,
     SalePage,
     BigsalePage,
     GroupbuylistPage,
@@ -194,7 +211,10 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     GoodsoderevaluatePage,
 
     HouseinfoPage,
-
+    NewinfoPage,
+    PayfeePage,
+    PayprefeePage,
+    OnlinepaymentPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
@@ -204,7 +224,8 @@ import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
     ConfigProvider,
     HttpServicesProvider,
     StorageProvider,
-    ToolsProvider
+    ToolsProvider,
+    CityDataProvider
   ]
 })
 export class AppModule {}

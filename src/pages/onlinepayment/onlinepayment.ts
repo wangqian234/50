@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the OnlinepaymentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-onlinepayment',
@@ -20,6 +13,11 @@ export class OnlinepaymentPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
+  }
+
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }

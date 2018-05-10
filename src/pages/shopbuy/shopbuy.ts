@@ -54,18 +54,14 @@ ionViewWillLoad() {
        that.goodSlist = data.json.dt_GoodsSize.list[0];
        //商品内容（名称title、图片img、购买数量buynum）
       //alert(JSON.stringify(that.goodSlist));
-      // var testArr = [];
-      // for(var i=0;i<data.json.dt_GoodsSize.list.length;i++){
-      //   this.test=data.json.dt_GoodsSize.list[i].buynum;
-      //   testArr.cat
-      // }
+     
 this.test=data.json.dt_GoodsSize.list[0].buynum;
 //this.test=that.goodSlist[0].buynum;
       that.dtlist=data.json.dt.model;
       //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
       //alert(JSON.stringify(that.dtlist));
 this.te= data.json.dt.model.totalprice;
-alert(this.test);
+//alert(this.test);
 this.totalPrice=this.test*this.te;
       console.log(that.dtlist);
 
@@ -105,19 +101,19 @@ this.totalPrice=this.test*this.te;
   }
   
 //计算总价
- sumPrice(){
-       var tempAllPrice=0;
+//  sumPrice(){
+//        var tempAllPrice=0;
        //var test=0;
        //alert(test);
        //test=this.dtlist['totalprice'];
 
 //       for(let i=0;i<this.list.length;i++){
 //         if(this.list[i].checked==true){
-           tempAllPrice=parseInt(this.goodSlist['buynum'])*parseInt(this.dtlist['totalprice']);
+//           tempAllPrice=parseInt(this.goodSlist['buynum'])*parseInt(this.dtlist['totalprice']);
            //还需加运费
 //         }
 //       }
-      this.totalPrice=tempAllPrice;
-   }
+  //     this.totalPrice=tempAllPrice;
+  //  }
 
 }
