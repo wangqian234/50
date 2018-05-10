@@ -5,7 +5,7 @@
     </div>
 <div *ngIf="enSureLogin" style="background-color:white">
     <ion-item>
-		 <ion-label>请选择房屋</ion-label>
+		<ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
         <ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
         <ion-option value="add">--添加房屋--</ion-option>

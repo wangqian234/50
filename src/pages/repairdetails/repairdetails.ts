@@ -20,6 +20,7 @@ export class RepairdetailsPage {
   }
 
   ionViewWillLoad() {
+    this.getRem();
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
      //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
@@ -64,6 +65,15 @@ export class RepairdetailsPage {
       // }
    
       })
+  }
+
+  backToRepair(){
+    this.navCtrl.pop();
+  }
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   
 

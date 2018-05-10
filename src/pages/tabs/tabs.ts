@@ -8,7 +8,9 @@ import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppingPage } from '../shopping/shopping';
 import { UserPage } from '../user/user';
 
-import { PayfeePage } from '../payfee/payfee';
+import{ PayfeePage } from '../payfee/payfee';
+
+
 
 @Component({
   templateUrl: 'tabs.html'
