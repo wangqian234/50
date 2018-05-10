@@ -12,6 +12,7 @@ export class RepairaddPage {
   public repairLimit:any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
   }
 
   httptest(){

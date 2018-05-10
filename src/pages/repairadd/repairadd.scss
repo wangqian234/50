@@ -1,16 +1,67 @@
 page-repairadd {
-.repair_button{
-    width: 28rem;
-}
-.add-some{
-    height: 8rem;
-}
-.imgUpload{
-    background-image: url(../assets/imgs/imgUpload.jpg);
-    background-repeat:no-repeat;
-    height: 10rem;
-    width: 10rem;
-    background-size: 10rem 10rem;
-}
+    .repair_button{
+        width: 28rem;
+    }
+    .add-some{
+        height: 8rem;
+    }
+    .repairType{
+        margin-top: 0.11rem;
+        float: left;
+        font-size: 0.28rem;
+        width:25%;
+    }
+    .repair{
+        font-size: 0.28rem;
+        width:25%;
+    }
+    .choose{
+        width:75%; 
+        display:inline-block;
+        position:relative;
+        line-height:0.5rem;
+        font-size:0.28px; 
+        border: 1px solid #bbbbbb;
+        border-radius: 4px;
+        background-color: white;
+    }
+    .choose select{
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        font-size: 0.23rem;
+        vertical-align: middle;
+        color:#bbbbbb;
+    }
+    img{
+        margin-top:0.2rem;
+    }
+    textarea{
+        width: 100%;
+        height: 100px;
+        border: 1px solid #bbbbbb;
+        margin-top: 10px;
+        border-radius: 1px;
+        font-size: 0.26rem;
+        padding: 10px;
+    }
+
+
+    .list-ios .item-block .item-inner{
+        border:none;
+    }
+    .list-ios > .item-block:first-child{
+        border:none;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border:none;
+    }
+    .button-ios{
+        height:0.8rem;
+        font-size: 0.32rem;
+        margin:0;
+        bottom:0;
+        position: absolute;
+    }
 }
 

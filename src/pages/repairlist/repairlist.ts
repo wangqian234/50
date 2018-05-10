@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import $ from 'jquery';
+import { ConfigProvider } from '../../providers/config/config';
 
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //工单详情页
 import { RepairdetailsPage } from '../repairdetails/repairdetails';
+//增加工单页
+import { RepairaddPage } from '../repairadd/repairadd';
 
 @Component({
   selector: 'page-repairlist',
   templateUrl: 'repairlist.html',
 })
 export class RepairlistPage {
+
+  public type="";
 
   public list=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
    {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
@@ -20,13 +26,19 @@ export class RepairlistPage {
   public page=1; /*分页*/
 
   public RepairdetailsPage=RepairdetailsPage;
+  public RepairaddPage = RepairaddPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
+  ,public config:ConfigProvider) {
 
     this.cid=this.navParams.get('cid');
 
     this.getProductList('');
 
+  }
+
+  ionViewWillLoad(){
+    this.getRem();
   }
 
   ionViewDidLoad() {
@@ -37,21 +49,24 @@ export class RepairlistPage {
 
   }
 
+  repairTypeSub(){
+    alert();
+  }
+
 getProductList(infiniteScroll){
-    var api='api/plist?cid='+this.cid+'&page='+this.page;
+    var api= this.config.apiUrl + '/api/plist?cid='+this.cid+'&page='+this.page;
     this.httpService.requestData(api,(data)=>{
       // console.log(data);
       this.list=this.list.concat(data.result);  /*数据拼接*/
       if(infiniteScroll){
         //告诉ionic 请求数据完成
         infiniteScroll.complete();
-
         if(data.result.length<10){  /*没有数据停止上拉更新*/
           infiniteScroll.enable(false);
+          $('.nomore').css('display','block');
         }
       };
       this.page++;
-
     })
 
   }
@@ -64,6 +79,11 @@ getProductList(infiniteScroll){
       this.navCtrl.push(RepairdetailsPage,{
       item:item
     })
+  }
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
 
 }
