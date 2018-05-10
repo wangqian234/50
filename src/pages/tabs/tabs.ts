@@ -15,7 +15,8 @@ import { PayfeePage } from '../payfee/payfee';
 })
 export class TabsPage {
 
-  tab1Root = PayfeePage;
+
+  tab1Root = ShoppingPage;
   tab2Root = RepairlistPage;
   tab3Root = ShoppingPage;
   tab4Root = UserPage;
