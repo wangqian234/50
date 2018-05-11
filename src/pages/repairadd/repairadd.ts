@@ -26,5 +26,8 @@ export class RepairaddPage {
     this.navCtrl.push(RepairlistPage);
 
   }
+  backToList(){
+    this.navCtrl.pop();
+  }
 
 }

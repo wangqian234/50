@@ -30,6 +30,7 @@ page-repairlist {
     }
 
     .choose select{
+        height: 30px;
         width:100%;
         background-color: #fff;
     }
@@ -101,6 +102,12 @@ page-repairlist {
     }
     .item-ios{
         padding:0
+    }
+    .button[icon-only]{
+        min-width:0;
+    }
+    .dengl .caid_img{
+        width: 80%;
     }
 }
 
