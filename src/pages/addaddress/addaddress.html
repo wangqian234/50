@@ -32,30 +32,10 @@
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">所在地区：</div>
-					<div class="browser">
-				        <!--选择地区-->
-				        <section class="express-area">
-				            <a id="expressArea" href="javascript:void(0)">
-				                <dl>
-				                    <dt></dt>
-				                    <dd>省 > 市 > 区/县</dd>
-				                </dl>
-				            </a>
-				        </section>
-				        <!--选择地区弹层-->
-				        <section id="areaLayer" class="express-area-box">
-				            <header>
-				                <h3>选择地区</h3>
-				                <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
-				                <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-				            </header>
-				            <article id="areaBox">
-				                <ul id="areaList" class="area-list"></ul>
-				            </article>
-				        </section>
-				        <!--遮罩层-->
-				        <div id="areaMask" class="mask"></div>
-				    </div>
+					<input type="text" placeholder="请输入所在地区">
+					<!--<ion-item>
+					<ion-multi-picker item-content [multiPickerColumns]="cityColumns" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
+					</ion-item>-->
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">详细地址：</div>

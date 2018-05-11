@@ -65,21 +65,21 @@ page-home{
 .bangding{
     text-align: center;
     background-color: white;
-    padding-bottom: 1rem;
+    padding-bottom: 0.02rem;
     border-bottom: 1px solid #efeded;
 }
 .p_bangding{
-    margin-top: 0.5rem;
+    margin-top: 0.05rem;
     color: grey;
     text-align: center;
-    font-size: 0.3rem;
+    font-size: 0.03rem;
 }
 .p_more{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.05rem;
+    margin-bottom: 0.05rem;
     color: grey;
     text-align: center;
-    font-size: 0.3rem;
+    font-size: 0.03rem;
 }
 .smallnav{
      font-size:2rem;
@@ -138,20 +138,20 @@ area{outline:none;}
 }
 
 .zixun img{
-    width: 5rem !important;
-    height: 4rem !important;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
 }
 
 .zixun p{
     width: 80% !important;
-    font-size: 1.5rem;
+    font-size: 0.3rem;
     color: #0082ca;
     float: right;
 }
 .new_zixun{
-    margin-top: 0.2rem;
+    margin-top: 0.02rem;
     background-color: white;
-    padding-top: 0.1rem;
+    padding-top: 0.02rem;
 }
 .fee{
     height: 1rem;
@@ -205,12 +205,22 @@ area{outline:none;}
 
 }
 #order-content{
-    padding: 0 1rem;
-}
-.item-block{
-    min-height: 0;
+    padding: 0 0.1rem;
 }
 
 }
 div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,textarea,table,td{ margin:0; padding:0;}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+.item-block{
+    min-height: 0;
+}
+.tabs-ios .tab-button-text{
+    font-size: 12px;
+    min-height: 15px;
+}
+.select .item-ios.item-block .item-inner{
+    border-bottom:none;
+}
+.select-ios .select-icon{
+    margin-right: 12px;
+}

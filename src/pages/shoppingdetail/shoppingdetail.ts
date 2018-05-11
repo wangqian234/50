@@ -9,9 +9,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
 //ShoppingevaluatePage商品评价
-import {ShoppingevaluatePage}from '../Shoppingevaluate/Shoppingevaluate';
+import {ShoppingevaluatePage}from '../shoppingevaluate/shoppingevaluate';
 //购物车
 import { CartPage } from '../cart/cart';
 
@@ -36,7 +35,8 @@ export class ShoppingdetailPage {
   public dataGlist=[];
   public goodMlist=[];
   public dataSlist=[];
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
+  public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
 
   }
       //主页面加载函数

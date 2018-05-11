@@ -29,7 +29,7 @@
 <div class="daohang_bd" style="background-color:white;margin:0;">
 	<ul>
 		<li>
-			<a [navPush]="PaymentPage" >
+			<a [navPush]="payfeePage" >
 				<h1><img src="assets/imgs/fee.png"></h1>
 				<p>物业缴费</p>
 			</a>
@@ -98,8 +98,8 @@
         </div>
         <div id="order-content">
             <div class="order-list">
-                    <div class="order-item" *ngFor="let newList of newsList" (tap)="gonewsInfo(newsList)">
-                        <div class="goods clearfix zixun">
+                    <div class="order-item" *ngFor="let newList of newsList">
+                        <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
                             <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
                             <p style="font-size: 0.5rem">{{newList.topic}}{{newList.addDate}}</p>
                         </div>

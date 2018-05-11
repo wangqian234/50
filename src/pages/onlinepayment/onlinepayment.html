@@ -1,29 +1,58 @@
-<!--
-  Generated template for the OnlinepaymentPage page.
+<ion-content style="background-color:#E3E3E3">
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24">物业缴费</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>物业缴费</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-  <div style="background-color:white">
+<div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
-        <ion-label>请选择房屋</ion-label>
-        <ion-select style="max-width: 74%;" [(ngModel)]='roomname' cancelText="取消" okText="确认">
-        <ion-option value="1">凤城世家-1号楼(1-217)&nbsp;&nbsp;</ion-option>
-        <ion-option value="2">苏州澳韵花园-32号楼(32-217)&nbsp;&nbsp;</ion-option>
-        <ion-option value="4">--添加房屋--</ion-option>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
    </div>
+
+  <div class="otherUser_content" style="margin-top:10px">
+    <ion-list>
+        <ion-item>
+            <div class="fee_time">
+                <input type="radio" />
+            </div>
+          <div class="fee_content">{{list.data}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              物业管理费</div>
+          <div class="fee_num">￥{{list.price}}</div>
+        </ion-item>
+      </ion-list>
+  </div>
+
+  <div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem">
+		<div class="zuo" >
+			<i class="i1" (tap)="checkAll()">
+				<ion-checkbox style="padding:0.25rem" disabled="true" color="danger" [(ngModel)]='isChencked'></ion-checkbox>
+			</i>
+		</div>
+		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allPrice}}</em></p></div>
+		<div class="you">
+			<div class="goum">
+				<a style="background-color:#488aff">去结算</a>  
+			</div>
+		</div>
+	</div>
+</div>
 
 </ion-content>

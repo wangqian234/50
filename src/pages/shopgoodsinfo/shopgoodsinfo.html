@@ -16,14 +16,20 @@
 </ion-header>
 <ion-content >
       <div>
-        <span>{{goodMlist.title}}</span>
-        <span>{{dataGlist}}</span>
-        <span> {{dataSlist.num}} </span>
-        <span> 1</span>
+        <span>{{goodMlist.title}}</span><br/>
+        <span>{{goodMlist.uaddName}}</span><br/>
+        <span>{{goodMlist.state}}</span><br/>
+        <span>{{goodMlist.detail}}</span><br/>
+        <span>{{goodMlist.preName}}</span><br/>
+        <span>{{dataGlist}}</span><br/>
+        <span> {{dataSlist.num}} </span><br/>
+         <span> {{dataSlist.price}} </span><br/>
+         <span> {{dataSlist.preprice}} </span><br/>
       </div>
-      <button (tap)="getshopinfo(dataSlist['id'])">评价列表 </button><a [navPush]="ShoppingevaluatePage">  更多评价</a>
-      <button (tap)="addcart()" >加入购物车 </button>
-      <ion-icon name="alarm" [navPush]="CartPage"></ion-icon> 
+      <button (tap)="getshopinfo(dataSlist['id'])">评价列表 </button>  <a [navPush]="ShoppingevaluatePage" >  更多评价</a><br/>
+      <button (tap)="addcart()" >加入购物车 </button><br/>
+      <ion-icon name="alarm" [navPush]="CartPage"></ion-icon> <br/>
+      <button (tap)="addcart()" >还有分享按钮 </button><br/>
       <!--<ul>
         <li *ngFor="let item of list">
             <div>

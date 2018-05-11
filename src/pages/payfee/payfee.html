@@ -1,0 +1,117 @@
+<ion-content style="background-color:#E3E3E3">
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24">物业缴费</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="select" style="background-color:white;margin-top:10px;">
+    <ion-item>
+      <ion-label>请选择房屋</ion-label>
+        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option>这是两栋楼</ion-option>
+        <ion-option>这是三栋楼</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
+        <ion-option value="add">--添加房屋--</ion-option>
+        </ion-select>
+    </ion-item>
+</div>
+
+    <div class="fee">
+        <div class="fee1"><p>￥0.002</p><p>欠费总计</p></div>
+        <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
+    </div>
+
+  <div class="otherUser_title">
+    <div class="user_titlediv" (click)="appearPayFee()">
+      <div class="user_title">选择要缴纳的费用</div>
+      <div class="appear"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
+    </div>
+    <div id="payFee" class="otherUser_content" style="display:none">
+     
+      <ion-list>
+        <ion-item>
+          <div class="fee_time">2018-02</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">￥283</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_time">2018-02</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">￥283</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_time">2018-02</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">￥283</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_time">2018-02</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">￥283</div>
+        </ion-item>
+        <ion-item>
+          <div class="fee_time">2018-02</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">￥283</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+    <div class="otherUser_title">
+    <div class="user_titlediv" (click)="appearPreDetail()">
+      <div class="user_title">预存款剩余明细</div>
+      <div class="appear"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
+    </div>
+    <div id="preDetail" class="otherUser_content" style="display:none">
+      <ion-list>
+        <ion-item>
+          <div class="fee_time">这是一段文字</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">这是一段文字</div>
+        </ion-item>
+         <ion-item>
+          <div class="fee_time">这是一段文字</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">这是一段文字</div>
+        </ion-item>
+         <ion-item>
+          <div class="fee_time">这是一段文字</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">这是一段文字</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="otherUser_title" (click)="appearFeeList()" style="margin-bottom:50px">
+    <div class="user_titlediv">
+      <div class="user_title">近半年缴费记录</div>
+      <div class="appear"><img id="feeListimg" src="assets/imgs/appear.png"></div>
+    </div>
+    <div id="feeList" class="otherUser_content" style="display:none">
+      <ion-list>
+        <ion-item>
+          <div class="fee_time">这是一段文字</div>
+          <div class="fee_content">这是一段文字</div>
+          <div class="fee_num">这是一段文字</div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <div class="bottom_button">
+    <button class="loginBtn" (click)="goOnlinePayfee()">在线缴费</button>
+    <button class="registerBtn" (click)="goPrefee()">费用预存</button>
+  </div>
+
+</ion-content>

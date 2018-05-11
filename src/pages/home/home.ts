@@ -12,11 +12,13 @@ import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
 
+//新闻详情页面
+import { NewinfoPage } from '../newinfo/newinfo';
+
 //测试页面跳转到shopmallist
 import {TestPage}from '../test/test';
 import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
-import {NewsinofPage} from '../newsinof/newsinof';
-import {PaymentPage} from '../payment/payment';
+import {PayfeePage} from '../payfee/payfee';
 
 declare var BMap;
 declare var BMAP_STATUS_SUCCESS;
@@ -53,8 +55,7 @@ export class HomePage {
   //跳转页面
   public RepairaddPage=RepairaddPage;
   public BindroomPage=BindroomPage;
-  public NewsinofPage=NewsinofPage;
-  public PaymentPage=PaymentPage;
+  public payfeePage=PayfeePage;
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,private geolocation: Geolocation) {
   }
@@ -219,6 +220,7 @@ goShop(){
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
+        console.log(this.newsList);
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -236,6 +238,13 @@ goShop(){
 
   }
 
+  getNewInfo(id){
+    alert(id)
+    this.navCtrl.push(NewinfoPage,{
+      id:id
+    });
+  }
+
   changeRoom(){
     alert(this.roomid);
     if(this.roomid === "add"){
@@ -245,11 +254,6 @@ goShop(){
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 50) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
-  //最新资讯详情
-  gonewsInfo(newsList){
-    this.navCtrl.push(NewsinofPage,{id:newsList.id})
-  }
-
 }

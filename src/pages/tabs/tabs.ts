@@ -13,12 +13,13 @@ import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
 
 import { UserPage } from '../user/user';
 
-import { CartPage } from '../cart/cart';
+import { PayfeePage } from '../payfee/payfee';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+
 
   tab1Root = HomePage;
   tab2Root = RepairlistPage;
@@ -26,5 +27,6 @@ export class TabsPage {
   tab4Root=UserPage;
 
   constructor(public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
+
   }
 }

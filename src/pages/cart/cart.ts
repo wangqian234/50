@@ -44,7 +44,6 @@ export class CartPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
     this.getCartsData('');
-
   }
   
   ionViewDidLoad() {
@@ -87,8 +86,9 @@ export class CartPage {
     var data = this.deleatcartList;
     alert(JSON.stringify(data));
     var j = 3;  //确定递归次数，避免死循环
-    var api = this.config.apiUrl + '/api/usercart/list?';
+    var api = this.config.apiUrl + '/api/usercart/delete?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      alert(1)
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("删除成功");
       } else if(data.errcode === 40002) {
