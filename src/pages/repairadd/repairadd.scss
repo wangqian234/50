@@ -56,12 +56,15 @@ page-repairadd {
     .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
         border:none;
     }
+    .label-ios {
+        margin: 7px 8px 7px 0;
+    }
     .button-ios{
         height:0.8rem;
         font-size: 0.32rem;
         margin:0;
         bottom:0;
-        position: absolute;
+        position: sticky;
     }
 }
 
