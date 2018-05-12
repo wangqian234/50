@@ -63,6 +63,7 @@ export class ShoppingPage {
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
+
     //定义token
   public token=this.storage.get('token');
   //构造函数
@@ -73,6 +74,7 @@ export class ShoppingPage {
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
+
     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
