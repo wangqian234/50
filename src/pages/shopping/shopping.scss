@@ -45,114 +45,72 @@ page-shopping {
     text-align: center;
 }
 
-#mallhome-content .goods-type li:nth-child(1) a{
-    background: -webkit-linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-    background: -moz-linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-    background: linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-}
-
-#mallhome-content .goods-type li:nth-child(2) a{
-    background: -webkit-linear-gradient(left, rgb(251, 90, 57), rgb(255, 42, 102));
-    background: -moz-linear-gradient(left, rgb(251, 90, 57), rgb(255, 42, 102));
-    background: linear-gradient(left, rgb(251, 90, 57), rgb(255, 42, 102));
-}
-
-#mallhome-content .goods-type li:nth-child(3) a{
-    background: -webkit-linear-gradient(left, rgb(151, 107, 91), rgb(97, 69, 66));
-    background: -moz-linear-gradient(left, rgb(151, 107, 91), rgb(97, 69, 66));
-    background: linear-gradient(left, rgb(151, 107, 91), rgb(97, 69, 66));
-}
-
-#mallhome-content .goods-type li:nth-child(4) a{
-    background: -webkit-linear-gradient(left, rgb(143, 71, 253), rgb(107, 70, 246));
-    background: -moz-linear-gradient(left, rgb(143, 71, 253), rgb(107, 70, 246));
-    background: linear-gradient(left, rgb(143, 71, 253), rgb(107, 70, 246));
-}
-
-#mallhome-content .goods-type li:nth-child(5) a{
-    background: -webkit-linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-    background: -moz-linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-    background: linear-gradient(left, rgb(244, 204, 36), rgb(255, 172, 54));
-}
-
-#mallhome-content .goods-type li:nth-child(6) a{
-    background: -webkit-linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-    background: -moz-linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-    background: linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-}
-
-#mallhome-content .goods-type li:nth-child(7) a{
-    background: -webkit-linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-    background: -moz-linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-    background: linear-gradient(left, rgb(246, 69, 150), rgb(249, 14, 97));
-}
-
-#mallhome-content .goods-type li:nth-child(8) a{
-    background: -webkit-linear-gradient(left, rgb(168, 229, 53), rgb(110, 209, 40));
-    background: -moz-linear-gradient(left, rgb(168, 229, 53), rgb(110, 209, 40));
-    background: linear-gradient(left, rgb(168, 229, 53), rgb(110, 209, 40));
-}
-
-#mallhome-content .goods-type li:nth-child(9) a,
-#mallhome-content .goods-type li:nth-child(10) a{
-    background: -webkit-linear-gradient(left, rgb(165, 86, 206), rgb(127, 77, 199));
-    background: -moz-linear-gradient(left, rgb(165, 86, 206), rgb(127, 77, 199));
-    background: linear-gradient(left, rgb(165, 86, 206), rgb(127, 77, 199));
-}
-
 #mallhome-content .goods-list{
-    margin-top: 0.8888888888888888rem;
     background: #fff;
 }
 
 #mallhome-content .goods-list .goods-item{
-    padding: 1.1111111111111112rem 1.3333333333333333rem;
+    padding: 3px 1.3px;
     border-bottom: 1px solid #EFEDED;
 }
 
 #mallhome-content .goods-list .goods-item img{
-    width: 13.333333333333334rem;
-    height: 10rem;
+    width: 30%;
+    height: 1.6rem;
     float: left;
     border-radius: 2px;
 }
 
 #mallhome-content .goods-list .goods-item .information{
-    float: left;
-    margin-left: 1.3333333333333333rem;
-    width: 10rem;
+    margin-left: 32%;
+    width: 68%;
     word-break:break-all; 
 }
 
 #mallhome-content .goods-list .goods-item .information .name{
-    width: 23.88888888888889rem;
-    font-size: 1.7777777777777777rem;
-    color: rgb(42, 42, 42);
+    font-size: 0.28rem;
+    color: #FF971C;
     white-space: nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
+    line-height: 0.5rem;
+    font-weight:600;
 }
 
 #mallhome-content .goods-list .goods-item .information .tip{
-    width: 23.88888888888889rem;
-    margin-top: 0.2222222222222222rem;
-    font-size: 1.5555555555555556rem;
+    width: 70%;
     color: rgb(107, 107, 107);
     white-space: nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
+    font-size:0.2rem;
+    color:rgba(158,158,158,1);
+    line-height:0.37rem;
+    font-family:MicrosoftYaHei;
+    span{
+        float:right;
+        color:white;
+        background: #FF971C;
+        border-radius: 0.05rem;
+        position: absolute;
+        margin-right: 5%;
+        margin-top: 0.15rem;
+        padding: 0.06rem;
+        right: 0;
+    }
 }
 
 #mallhome-content .goods-list .goods-item .information .price{
-    margin-top: 0.2222222222222222rem;
-    font-size: 1.5555555555555556rem;
-    color: rgb(246, 60, 60);
+    font-size: 0.23rem;
+    color: rgba(253,53,37,1);
+    line-height: 0.3rem
 }
 
 #mallhome-content .goods-list .goods-item .information .sales-count{
-    margin-top: 0.3333333333333333rem;
-    font-size: 1.5555555555555556rem;
-    color: rgb(107, 107, 107);
+   font-family:MicrosoftYaHei;
+    font-size: 0.2rem;
+    color: rgba(158,158,158,1);
+    line-height:0.37rem;
 }
 
 #mallhome-content .main-nav{
@@ -385,62 +343,86 @@ page-shopping {
 } 
 .tupian-div{
     position: relative;
-    margin-top: 0.5rem;
+    margin-top: 10px;
     float:left;
+    height:3.5rem;
+    background-color: white;
+    padding:7px;
 }
 .tupian-div img:nth-child(1){
-    width: 50%;
-    height: 25rem;
+    width: 45%;
     float:left;
-    background-color: white
+    height:100%;
+}
+.tupian-div2 {
+    height:100%;
 }
 .tupian-div2 img:nth-child(1){
-    width: 50%;
-    height: 12.5rem;
-    
+    width: 55%;
+    height: 50%;
 }
 .tupian-div2 img:nth-child(2){
-    width: 50%;
-    height: 12.5rem;
+    width: 55%;
+    height: 50%;
 }
 .facediv{
     background-color: white;
-    height: 10rem;
     display: -webkit-box;
     overflow-y: hidden;
     overflow-x: scroll;
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling:touch !important;
     border-bottom: 1px solid ghostwhite;
-    font-size: 1.5rem;
+    font-size: 0.23rem;
+    padding: 0 0.3rem;
+    flex-flow:row nowwrap; overflow:auto;
 }
-.facediv div{
-   width: 6.5rem;
-   height: 8.5rem;
-    margin:1rem 0.5rem 0 0.5rem;
+.facediv li{
+    float:none;
+   width: 1rem;
+   height: 1.4rem;
+    margin:0.2rem 0.09rem 0 0.09rem;
     text-align: center;
+    p{
+        font-family:MicrosoftYaHei;
+        color:#818181;
+    }
+}
+.active {
+border-bottom: 3px solid #FF971C;
 }
 .facediv img{
-    width:5.5rem;
-    height: 5.5rem;
+    width:0.8rem;
+    height: 0.8rem;
+    margin-bottom: 0.1rem;
+    margin-left: 0.07rem;
 }
 .arrow,.left-arrow{
     top:4.2rem;
 }
 .titleshop{
-    margin-top: 1rem;
+    margin-top: 10px;
     background-color: white;
-    padding-bottom: 1rem;
     border-bottom: 1px solid #efeded;
-    padding:1rem;
+    padding: 0.22rem 0.2rem 0 0.2rem;
+    height:0.76rem;
+    img{
+        float: left;
+        margin-top: -0.1rem;
+        width: 0.4rem;
+        height: 0.5rem;
+    }
 }
 .p_shop{
-    font-size: 2rem;
-     border-left: 3px solid orange;
+    font-size: 0.32rem;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: Bold;
+    color: #FF971C;
 }
 .p_shop2{
-    color: #0e90d2;
-    font-size: 2rem;
+    color: #FF971C;
+    font-size: 0.32rem;
     float: right;
+    font-weight:bold;;
 }
 .special{
     font-size: 1.5rem;
@@ -498,4 +480,63 @@ page-shopping {
     height: 2rem !important;
 
 }
+.shous_k{
+    background: #ffb661;
+    border-radius: 0.25rem;
+    width: 64%;
+}
+.logo_k{
+    width:18%;
+}
+.logo_k img{
+    height:0.48rem;
+    width:0.48rem;
+    float:left;
+    margin-right: 0.03rem;
+}
+.logo_k p{
+    color: #ffffff;
+    font-size: 0.23rem;
+    margin-top: 0.24rem;
+    margin-left: 0.1rem;
+}
+.dengl{
+    width:18%;
+}
+.dengl .caid_img img{
+    height:0.37rem;
+    width:0.37rem;
+    margin-top: 0.16rem;
+    float:left;
+}
+.dengl .caid_img{
+    width:100%;
+    float: left;
+}
+.caid_img p{
+    color: #ffffff;
+    font-size: 0.23rem;
+    margin-top: 0.24rem;
+    white-space:nowrap;
+}
+.shous_k img{
+    float: right;
+    height:0.4rem;
+    width:0.4rem;
+    margin-top:0.04rem;
+    margin-right:0.04rem;
+}
+.shous_k input{
+    width: 80%;
+    height:0.45rem;
+    margin-left: 3%;
+}
+ion-slides{
+     height: 4rem;;
+     margin-top: 10px;
+     background-color: white;
+}
+.slide-zoom{
+    height:100%;
+    }
 }
