@@ -58,26 +58,26 @@ onload2 = function(){
 
 
 
-gettext(){
-    var token = 'F1EFC0D90871A10EA4C4F54A3A452E8AB8930B0AA8D1209D41C60F268393129497703AD3FEECF810CC4F5065012555DD30DDDB91E79AA7988D1E59DCEAF71A036BD4AEF81AD6D3AD2DA6399252B5AC2C4A71E4BC1447F18B3E7EB225F8A1B0FD1C32999F3F5722C8F4DDED6617BD3076720643DC72218EFE689C58520E19E4DFE07F0990CD27CDCC0D8483CEBA825C6A780777DACA8BE4E26F30B2C9633DD1E7FAA890C620123E159964FA8EE3CA4D16'
+// gettext(){
+//     var token = 'F1EFC0D90871A10EA4C4F54A3A452E8AB8930B0AA8D1209D41C60F268393129497703AD3FEECF810CC4F5065012555DD30DDDB91E79AA7988D1E59DCEAF71A036BD4AEF81AD6D3AD2DA6399252B5AC2C4A71E4BC1447F18B3E7EB225F8A1B0FD1C32999F3F5722C8F4DDED6617BD3076720643DC72218EFE689C58520E19E4DFE07F0990CD27CDCC0D8483CEBA825C6A780777DACA8BE4E26F30B2C9633DD1E7FAA890C620123E159964FA8EE3CA4D16'
 
 
 
-    var api = this.aa +'/ api/user/address/list';
-    this.http.get(api,{"roomId":1,"token":token,"management":10,"water":10,"electricity":110,"parking":300,"rubbish":15}
-    ).map(res => res.json()).subscribe(data =>{
-      alert(1)
-      if(data.errcode === 0 && data.errmsg === 'OK'){
-        this.list= data.list;
-        alert("gaohaile")
-        console.log(data)
-      }else{
-        console.log(data)
-        alert(data.errmsg);
-      }
-    })
+//     var api = this.aa +'/ api/user/address/list';
+//     this.http.get(api,{"roomId":1,"token":token,"management":10,"water":10,"electricity":110,"parking":300,"rubbish":15}
+//     ).map(res => res.json()).subscribe(data =>{
+//       alert(1)
+//       if(data.errcode === 0 && data.errmsg === 'OK'){
+//         this.list= data.list;
+//         alert("gaohaile")
+//         console.log(data)
+//       }else{
+//         console.log(data)
+//         alert(data.errmsg);
+//       }
+//     })
 
-}
+// }
 
 
 
