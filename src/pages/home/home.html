@@ -29,7 +29,7 @@
 <div class="daohang_bd" style="background-color:white;margin:0;">
 	<ul>
 		<li>
-			<a href="#">
+			<a [navPush]="payfeePage" >
 				<h1><img src="assets/imgs/fee.png"></h1>
 				<p>物业缴费</p>
 			</a>
@@ -41,9 +41,9 @@
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a [navPush]="RepairaddPage">
 				<h1><img src="assets/imgs/repair2.png"></h1>
-				<p>在线报修</p>
+				<p >在线报修</p>
 			</a>
 		</li>
 		<li>
@@ -94,14 +94,14 @@
 
     <div class="new_zixun">
         <div class="bangding">
-            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span>
+            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span><a [navPush]="NewslistPage">更多</a>
         </div>
         <div id="order-content">
             <div class="order-list">
                     <div class="order-item" *ngFor="let newList of newsList">
                         <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
                             <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
-                            <p>{{newList.topic}}{{newList.addDate}}</p>
+                            <p style="font-size: 0.5rem">{{newList.topic}}{{newList.addDate}}</p>
                         </div>
                     </div>
             </div>

@@ -16,6 +16,8 @@
 
 
 <ion-content >
+	<button style="width: 50px; height: 50px"  (tap)="gettext()">ghl
+	</button>
 <div id="yemnr">
 <!--头部--> 
 <div class="toub_beij toub_beij_zy">
@@ -65,9 +67,8 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">¥{{item.price}}</p>
+					<p class="px26">¥{{item.pricemin}}</p>
           <p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
-		  <p class="px26">{{item.recommend | pipeMultiple}}</p>
 				</div>
 			</a>
 		</li>

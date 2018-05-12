@@ -14,18 +14,14 @@ export class StorageProvider {
   constructor(public http: Http) {
     console.log('Hello StorageProvider Provider');
   }
-  //localStorage
-
+  //localStorage存放、获取、移除
   set(key,value){
-
     localStorage.setItem(key,JSON.stringify(value));  /*对象转换成字符串*/
   }
-
   get(key){
     return JSON.parse(localStorage.getItem(key));   /*字符串转换成对象*/
   }
   remove(key){
-
     localStorage.removeItem(key);
   }
 

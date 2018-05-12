@@ -43,6 +43,8 @@ import { RepairlistPage } from '../pages/repairlist/repairlist';
 //工单详情页
 import { RepairdetailsPage } from '../pages/repairdetails/repairdetails';
 
+//工单评价页面
+import {RepairevaluatePage} from '../pages/repairevaluate/repairevaluate'
 //商城首页
 import { ShoppingPage } from '../pages/shopping/shopping';
 
@@ -64,6 +66,9 @@ import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
+//商品评价列表界面
+import {ShoppingevaluatePage}from '../pages/shoppingevaluate/shoppingevaluate';
+
 //支付
 
 //新建测试界面
@@ -75,11 +80,15 @@ import {BigsalePage}from '../pages/bigsale/bigsale';
    
 //新建团购
 
+import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+//商品详情页面
+import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
+//物业缴费
+import{PaymentPage} from '../pages/payment/payment'
 import {GroupbuylistPage}from '../pages/groupbuylist/groupbuylist';
 import { GroupdetailPage } from '../pages/groupdetail/groupdetail';
 //商品购买页面
 import { ShopbuyPage } from '../pages/shopbuy/shopbuy';
-
 //王慧敏
 //添加、修改商品退款申请
 import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
@@ -96,7 +105,10 @@ import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 //新闻详情页面
 import { NewinfoPage }from '../pages/newinfo/newinfo';
 
-//新闻详情页面
+//新闻列表
+import {NewslistPage} from '../pages/newslist/newslist';
+
+//物业缴费页面
 import { PayfeePage }from '../pages/payfee/payfee';
 
 //费用预存页面
@@ -104,6 +116,8 @@ import { PayprefeePage }from '../pages/payprefee/payprefee';
 
 //在线缴费页面
 import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
+
+
 
 
 import { TabsPage } from '../pages/tabs/tabs';
@@ -143,11 +157,14 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TestPage,
     SalePage,
     BigsalePage,
-
+    GroupbuyPage,
+    PipeMultiplePipe,
+    ShopgoodsinfoPage,
     GroupbuylistPage,
     PipeMultiplePipe,
     GroupdetailPage,
     ShopbuyPage,
+    PaymentPage,
     //王慧敏
     TradegoodsReapPage,
     TradegoodsRefundPage,
@@ -159,11 +176,15 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     PayfeePage,
     PayprefeePage,
     OnlinepaymentPage,
+    RepairevaluatePage,
+    NewslistPage,
+
+
   ],
   imports: [
     BrowserModule,
     HttpModule, JsonpModule,
-    //MultiPickerModule,//三级联动
+  //  MultiPickerModule,//三级联动
     // IonicModule.forRoot(MyApp)
     IonicModule.forRoot(MyApp,{
       tabsHideOnSubPages: 'true', //隐藏全部子页面 tabs
@@ -201,20 +222,23 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     BigsalePage,
     GroupbuylistPage,
     TestPage,
-
+    ShopgoodsinfoPage,
     GroupdetailPage,
     ShopbuyPage,
+    PaymentPage,
     //王慧敏
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
     GoodsoderevaluatePage,
-
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
     PayprefeePage,
     OnlinepaymentPage,
+    RepairevaluatePage,
+    NewslistPage,
+
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

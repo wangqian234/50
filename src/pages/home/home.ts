@@ -15,12 +15,13 @@ import { LoginPage } from '../login/login';
 //新闻详情页面
 import { NewinfoPage } from '../newinfo/newinfo';
 
+//新闻列表
+import {NewslistPage} from '../newslist/newslist';
+
 //测试页面跳转到shopmallist
 import {TestPage}from '../test/test';
 import {ShopmalllistPage}from '../shopmalllist/shopmalllist';
-
-
-
+import {PayfeePage} from '../payfee/payfee';
 declare var BMap;
 declare var BMAP_STATUS_SUCCESS;
 @Component({
@@ -55,7 +56,9 @@ export class HomePage {
 
   //跳转页面
   public RepairaddPage=RepairaddPage;
-  public BindroomPage=BindroomPage
+  public BindroomPage=BindroomPage;
+  public payfeePage=PayfeePage;
+  public NewslistPage=NewslistPage;
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,private geolocation: Geolocation) {
@@ -214,7 +217,7 @@ goShop(){
     // this.http.post(api,(data)).map(res => res.json()).subscribe(data =>{
     // });
   }
-
+//获取最新资讯在home页面显示
   getNews(){
     var j = 3;
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex=1&pageSize=3&keyWord=&type=1&token=' + this.storage.get('token');
@@ -229,7 +232,7 @@ goShop(){
             this.getNews();
           }
       } else {
-        alert("data.errmsg")
+        alert(data.errmsg)
       }
        console.log("获取最新资讯" , data)
     });
@@ -238,7 +241,7 @@ goShop(){
   getPublic(){
 
   }
-
+//跳转到最新资讯详情页面
   getNewInfo(id){
     alert(id)
     this.navCtrl.push(NewinfoPage,{
@@ -257,5 +260,4 @@ goShop(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
-
 }

@@ -8,13 +8,16 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { RepairdetailsPage } from '../repairdetails/repairdetails';
 //增加工单页
 import { RepairaddPage } from '../repairadd/repairadd';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
+import {Http,Jsonp}from '@angular/http';
 @Component({
   selector: 'page-repairlist',
   templateUrl: 'repairlist.html',
 })
 export class RepairlistPage {
 
+  public repairlist=[];
   public type="";
 
   public list=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
@@ -29,7 +32,7 @@ export class RepairlistPage {
   public RepairaddPage = RepairaddPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
 
     this.cid=this.navParams.get('cid');
 
@@ -53,22 +56,34 @@ export class RepairlistPage {
     alert();
   }
 
-getProductList(infiniteScroll){
-    var api= this.config.apiUrl + '/api/plist?cid='+this.cid+'&page='+this.page;
-    this.httpService.requestData(api,(data)=>{
-      // console.log(data);
-      this.list=this.list.concat(data.result);  /*数据拼接*/
-      if(infiniteScroll){
-        //告诉ionic 请求数据完成
-        infiniteScroll.complete();
-        if(data.result.length<10){  /*没有数据停止上拉更新*/
-          infiniteScroll.enable(false);
-          $('.nomore').css('display','block');
-        }
-      };
-      this.page++;
-    })
+// getProductList(infiniteScroll){
+//     var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
+//     this.httpService.requestData(api,(data)=>{
+//       // console.log(data);
+//       this.list=this.list.concat(data.result);  /*数据拼接*/
+//       if(infiniteScroll){
+//         //告诉ionic 请求数据完成
+//         infiniteScroll.complete();
+//         if(data.result.length<10){  /*没有数据停止上拉更新*/
+//           infiniteScroll.enable(false);
+//           $('.nomore').css('display','block');
+//         }
+//       };
+//       this.page++;
+//     })
 
+//   }
+  getProductList(infiniteScroll){
+     var that=this;
+    var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if(data.errcode===0&&data.errmsg==='OK'){
+            this.repairlist=data.list;//怎么知道那个是默认房屋
+            console.log(this.repairlist)
+          }else{
+            alert(data.errmsg)
+          }
+     })
   }
   //加载更多
   doLoadMore(infiniteScroll){
