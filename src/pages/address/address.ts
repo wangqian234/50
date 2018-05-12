@@ -76,7 +76,7 @@ export class AddressPage {
   //删除数据
   deleteAddress(id){
     alert("进来了")
-    var headers = new Headers({ 'Content-Type': 'application/json' });
+    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
     this.http.post(api,this.data,options).map(res => res.json()).subscribe(data =>{

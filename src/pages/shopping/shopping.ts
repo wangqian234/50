@@ -3,44 +3,53 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
-
 import {Http,Jsonp}from '@angular/http';
-
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 //商品分类页
 import { ShopsortPage } from '../shopsort/shopsort';
 //商品详情页
+
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//商品购物车
+
 import { ShoppingdetailPage } from '../shoppingdetail/shoppingdetail';
 //商品详情页
 import { CartPage } from '../cart/cart';
-
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
-
-
 //热卖界面
 import { BigsalePage } from '../bigsale/bigsale';
 //限时促销
 import { SalePage } from '../sale/sale';
 //团购界面
-import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 
+import { GroupbuyPage } from '../groupbuy/groupbuy';
+//搜索出的商品列表页
+import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
+
+import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 
 @Component({
   selector: 'page-shopping',
   templateUrl: 'shopping.html',
 })
 export class ShoppingPage {
-  public ShopsortPage = ShopsortPage;
+
   public ShoppingdetailPage = ShoppingdetailPage;
   public CartPage = CartPage;
 
-  //定义接收数据的list
-  public l=[];
-
+  //页面跳转
+  public ShopsortPage = ShopsortPage;
+  public ShopgoodsinfoPage = ShopgoodsinfoPage;
 
   public BigsalePage = BigsalePage;
+  public GroupbuyPage = GroupbuyPage;
+
+   //定义接收数据的list
+  public l=[];
  public SalePage = SalePage;
  public GroupbuylistPage = GroupbuylistPage;
 
@@ -48,58 +57,106 @@ export class ShoppingPage {
   public tuangouList=[];
   public tubList=[];
   public tuijList=[];
-  public list=[];
+  public shoplist=[];
+  public keywords="";
+
+
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-  this.getLunbo();  
-} 
-//主页面加载函数 
-  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+
+    //定义token
+  public token=this.storage.get('token');
+  //构造函数
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    this.getLunbo();  
+  } 
+  //主页面加载函数 
+   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+    this.getRem();
+
     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
-     //var api =  '';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-      /* if(data.errmsg == 'OK'){
-         this.list = data.list;
-         console.log(data);
-     } else {
-        alert(data.data_Banner.errmsg);
-     }*/
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
-    // console.log(this.lunboList);
-     that.tuangouList=data.json['data_Modules'].list;
-    // console.log(this.tuangouList[1]);
+     // console.log(this.lunboList);
+     that.tuangouList=data.json['data_Modules'].list; 
+     // console.log(this.tuangouList[1]);
      that.tubList=data.json['data_Sort'].list;
-    console.log(that.tubList);
-    that.tuijList=data.json['data_Recommend'].list;
-    // console.log(this.tuijList);
+     console.log(that.tubList);
+     that.tuijList=data.json['data_Recommend'].list;
+     // console.log(this.tuijList);
      })
-  }
 
+      //初始显示旅游服务的商品列表
+     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=1';
+        this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if(data.errcode === 0 && data.errmsg ==="OK"){
+          that.shoplist=data.list; 
+          console.log(data);
+        }else{
+          alert(data.errmsg);
+        }
+      })
+    }
+  //自带函数
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingPage');
+     $('.facediv li:nth-of-type(1)').attr("class","active");
   }
-
-/**轮播图 */
-getLunbo(){
+  shopFn(){
+    alert('123');
+  }
+  /**轮播图 */
+  getLunbo(){
    var that=this;  
       that.l=[
         '../assets/imgs/hua.jpg',
         '../assets/imgs/jiaju.jpg',
         '../assets/imgs/hongjiu.jpg',       
       ];   
-}
-
+  }
+//出发箭头
   clickEvent(){
     var index = $(event.target).attr("index");
     console.log(index);
     var rem = index * 7.5 + 'rem';
     console.log(rem)
     $('.jiantou_button').css("left",rem)
+  }
+  //商城首页查询商品列表
+  getshoplist(id,i){
+    $(".facediv li").removeAttr("class");
+    var span = ".facediv li:nth-of-type(" + ++i +")"
+    $(span).attr("class","active");
+
+    var that =this;
+     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if(data.errcode=== 0 && data.errmsg==="OK"){
+      that.shoplist=data.list;    
+      console.log(data);
+    }else{
+      alert(data.errmsg);
+    }
+    })
+  }
+  //输入框搜索，跳转到列表详情界面
+  doReserch(){
+    this.navCtrl.push(ShopmalllistPage ,{
+      keywords: this.keywords,
+    })  
+  }
+  //跳转到商品详情页面
+  goGoodsInfo(id){
+     this.navCtrl.push(ShopgoodsinfoPage,{id:id});
+  }
+
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
 }

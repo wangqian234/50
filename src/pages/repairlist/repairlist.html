@@ -1,31 +1,56 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title style="text-align: center;">我的工单</ion-title>
-  </ion-navbar>
-  <!--<ion-searchbar></ion-searchbar>-->
-</ion-header>
-
 <ion-content>
-<div id="search_box"> 
-  <form id="search_form"> 
-    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
-    <button><ion-icon name="search"></ion-icon>搜索</button> 
-  </form> 
-</div> 
-          <ion-list inset>
-            <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">
-               
-              <h4> {{item.title}}>>{{item.title}}</h4>
-              <p>价格:<span class="price">{{item.price}}</span>元</p> 
-              <button ion-button clear item-end icon-only>
-                <ion-icon name="arrow-dropright"></ion-icon>
-              </button>         
-            </ion-item>
-          </ion-list>
 
-          <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
-            <ion-infinite-scroll-content></ion-infinite-scroll-content>
-          </ion-infinite-scroll>
+<div class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToRepair()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">工单列表</a></li>  
+				</ul>
+			</div>
+		</div>
+    <div class="dengl" [navPush]="RepairaddPage">
+			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/add.png"></div>
+		</div>
+	</div>
+</div>
+
+  <div class="searchdiv">
+    <div class="searchTool">
+        <form class="choose">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <select name="cars" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;">
+          <option value="">全部类型</option>
+          <option value="">业主维修</option>
+          <option value="" selected="selected">投诉</option>
+          <option value="">建议</option>
+          <option value="">其他</option>
+          <option value="">公共报修</option>
+          </select>
+        </form>
+        <input type="text" placeholder="请输入关键词" class="searchTextInit">
+        <input type="button" value class="searchBtn">
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of list" (tap)="repairDetails(item)"> 
+      
+      <h4> {{item.title}}>>{{item.title}}</h4>
+      <h4> 这是一个房屋信息这是一个房屋信息</h4>
+      <p>价格:<span class="price">{{item.price}}</span>元</p> 
+      <button ion-button clear item-end icon-only>
+        <ion-icon style="font-size:0.3rem" name="arrow-dropright"></ion-icon>
+      </button> 
+             
+    </ion-item>
+  </ion-list>
+
+  <div class="nomore">没有更多数据了...</div>
+
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
  
 </ion-content>

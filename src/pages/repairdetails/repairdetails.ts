@@ -1,28 +1,48 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
+import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import { ConfigProvider } from '../../providers/config/config';
+import {RepairevaluatePage} from '../repairevaluate/repairevaluate'
 @Component({
   selector: 'page-repairdetails',
   templateUrl: 'repairdetails.html',
 })
 export class RepairdetailsPage {
 
-  public repairDetial = {};
+  public repairDetial = {List_Id:''};
+  public repairdetaillist =[];
+  
+  //工单处理post
+  public editcloselist={
+    listId:'',
+    token:'',
+    memo:'',
+    stopType:'',
+    act:'',
+  };
+ 
 
   public btn:any;  
   public div :any;  
   public close :any;  
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
+
   }
 
   ionViewWillLoad() {
+    this.getRem();
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
      //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
+
+
+
     }
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
@@ -35,11 +55,37 @@ export class RepairdetailsPage {
       this.div = document.getElementById('background');
       this.close = document.getElementById('close-button'); 
   }
-
+  //获取工单详情信息
+  getrepairdetails(){
+    var that = this;
+    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
+    this.http.get(api).map(res =>res.json()).subscribe(data =>{
+      if(data.errcode===0&&data.errmsg==='OK'){
+        this.repairdetaillist=data.list;
+      }else{
+        alert(data.errmsg)
+      }
+    })
+  }
+//终止工单
  showPopup(){
-   this.div.style.display = "block";  
+   this.div.style.display = "block"; 
+   this.editcloselist.listId=this.repairDetial.List_Id;
+   this.editcloselist.token=this.storage.get('token');
+    var that = this;
+    var api = this.config.apiUrl+'/api/crm/srq/list/edit_close';
+    this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
+      if(data.errcode===0&&data.errmsg==='OK'){
+        alert(data.errmsg)
+      }else{
+        alert(data.errmsg)
+      }
+    })
  }
-
+ //跳转到
+ showevaluate(){
+  this.navCtrl.push(RepairevaluatePage,{id:this.repairDetial.List_Id})
+ }
  closePopup(){
    this.div.style.display = "none";
  }
@@ -64,6 +110,15 @@ export class RepairdetailsPage {
       // }
    
       })
+  }
+
+  backToRepair(){
+    this.navCtrl.pop();
+  }
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
   
 

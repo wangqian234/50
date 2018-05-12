@@ -14,5 +14,22 @@
 
 
 <ion-content padding>
-
+ <div style="background-color:white">
+    <ion-item>
+        <ion-label>请选择房屋</ion-label>
+        <ion-select style="max-width: 74%;" [(ngModel)]='roomname' cancelText="取消" okText="确认">
+        <ion-option value="1">凤城世家-1号楼(1-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="2">苏州澳韵花园-32号楼(32-217)&nbsp;&nbsp;</ion-option>
+        <ion-option value="4">--添加房屋--</ion-option>
+        </ion-select>
+    </ion-item>
+   </div>
+   <div>
+     <span>欠费总计{{modellist.totalFee}}</span>
+     <span>预存总计{{modellist.totalPrepay}}</span>
+   </div>
+   <div>
+     <button>在线缴费</button>
+     <button>费用预存</button>
+   </div>
 </ion-content>
