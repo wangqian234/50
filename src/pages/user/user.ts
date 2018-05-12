@@ -13,7 +13,6 @@ import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { TabsPage } from '../tabs/tabs';
 
-@IonicPage()
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',

@@ -4,6 +4,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import $ from 'jquery';
 
 //房屋报修
 import { RepairaddPage } from '../repairadd/repairadd';
@@ -174,7 +175,6 @@ export class HomePage {
   }
   //测试跳转至商品  
 goShop(){
-
   this.navCtrl.push(TestPage);
 }
 

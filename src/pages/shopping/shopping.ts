@@ -51,13 +51,14 @@ export class ShoppingPage {
   public list=[];
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
+
+  shop = true;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
   this.getLunbo();  
 } 
 //主页面加载函数 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 18) + 'px';
+    this.getRem();
     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
      //var api =  '';
@@ -78,10 +79,15 @@ export class ShoppingPage {
     that.tuijList=data.json['data_Recommend'].list;
     // console.log(this.tuijList);
      })
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingPage');
+     $('.facediv li:nth-of-type(1)').attr("class","active");
+  }
+  shopFn(){
+    alert('123');
   }
 
 /**轮播图 */
@@ -100,6 +106,11 @@ getLunbo(){
     var rem = index * 7.5 + 'rem';
     console.log(rem)
     $('.jiantou_button').css("left",rem)
+  }
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
 
 }
