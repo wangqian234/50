@@ -101,9 +101,13 @@ page-shopping {
 }
 
 #mallhome-content .goods-list .goods-item .information .price{
-    font-size: 0.23rem;
+    font-size: 0.28rem;
     color: rgba(253,53,37,1);
     line-height: 0.3rem
+}
+
+#mallhome-content .goods-list .goods-item .information .price span{
+    font-size: 0.3rem;
 }
 
 #mallhome-content .goods-list .goods-item .information .sales-count{
@@ -370,11 +374,11 @@ page-shopping {
     display: -webkit-box;
     overflow-y: hidden;
     overflow-x: scroll;
-    -webkit-overflow-scrolling:touch !important;
+    -webkit-overflow-scrolling:touch;
     border-bottom: 1px solid ghostwhite;
     font-size: 0.23rem;
     padding: 0 0.3rem;
-    flex-flow:row nowwrap; overflow:auto;
+    height:1.6rem;
 }
 .facediv li{
     float:none;
@@ -387,7 +391,7 @@ page-shopping {
         color:#818181;
     }
 }
-.active {
+.activety {
 border-bottom: 3px solid #FF971C;
 }
 .facediv img{
@@ -408,7 +412,7 @@ border-bottom: 3px solid #FF971C;
     img{
         float: left;
         margin-top: -0.1rem;
-        width: 0.4rem;
+        width: 0.35rem;
         height: 0.5rem;
     }
 }
