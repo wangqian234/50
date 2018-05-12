@@ -1,56 +1,49 @@
-<ion-header>
+<ion-content>
 
-  <ion-navbar>
-    <ion-title>工单详情</ion-title>
-  </ion-navbar>
+  <div style="margin-bottom:10px;" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToRepair()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">房屋基本信息</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
 
-</ion-header>
+<div>
+  <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>报修类型-时间</p>
+  <p class="repair-state">派工状态</p>
+  <p class="detail">说明：这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是</p>
+  <div>
+    <img src="assets/imgs/08.jpg" />
+  </div>
+</div>
+<p class="detail1">处理进度如下：</p>
+<div id="app">
+    <ul>
+        <li>
+          <p>20131314</p>
+          <p>工单执行内容说明</p>
+        </li>
 
+        <li>
+          <p>20131314</p>
+          <p>工单执行内容说明2</p>
+        </li>
 
-<ion-content padding>
-<ion-icon class="repair-ion" name="build"></ion-icon><p>报修类型-时间</p>
-<!--<p class="repair-state">派工状态</p>-->
-<p class="detail"><span>说明：</span>这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些
-  说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明</p>
-<p class="detail">处理进度如下：</p>
-
-<ul class="step-container">  
-        <li class="step-past">工单已提交  
-            <span class="arrow arrow-past">  
-                <span class="arrow-pre"></span>   
-            </span>  
-        </li>  
-        <li class="step-current">工单已受理  
-            <span class="arrow arrow-current">  
-                <span class="arrow-pre"></span>  
-            </span>  
-        </li>  
-        <li class="step-next">工单完成</li>  
+        <li>
+          <p>20131314</p>
+          <p>工单执行内容说明3</p>
+        </li>
     </ul>
-<!--
-            <ion-list inset>
-            <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">  
-              <h4> {{item.time}}</h4>
-              <h4> {{item.details}}</h4>        
-            </ion-item>
-          </ion-list>-->
+</div>  
 
-          <ion-list>
-            <ion-item>  
-              <h4> 2018-06-05 20:10:20</h4>
-              <h4>您的工单已经提交</h4>        
-            </ion-item>
-            <ion-item>  
-              <h4> 2018-06-05 20:10:20</h4>
-              <h4>您的工单已经受理</h4>        
-            </ion-item>
-            <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">  
-              <h4> 2018-06-05 20:10:20</h4>
-              <h4>您的工单已经完成</h4>        
-            </ion-item>
-          </ion-list>
 
 <button ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+<button ion-button block color="#f53d3d" (click)="showevaluate()">评价</button>
 
   
     <!-- 弹窗内容开始 -->  
@@ -71,7 +64,7 @@
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-textarea class="add-some" placeholder="有没有什么补充说明的？"></ion-textarea>
+              <textarea class="add-some" placeholder="有没有什么补充说明的？"></textarea>
               </ion-item>
             </div>  
             <h3 id="foot" class="foot" (click)="enSureStop()">确认终止工单</h3>  

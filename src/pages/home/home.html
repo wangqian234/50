@@ -1,11 +1,11 @@
-<ion-content style="background-color:#f0f0f0">
+<ion-content style="background-color:#F5F5F5">
     <div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
       <p>您还没有绑定房屋&nbsp;</p>
       <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
     </div>
 <div *ngIf="enSureLogin" style="background-color:white">
     <ion-item>
-		 <ion-label>请选择房屋</ion-label>
+		<ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
         <ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
         <ion-option value="add">--添加房屋--</ion-option>
@@ -41,9 +41,9 @@
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a [navPush]="RepairaddPage">
 				<h1><img src="assets/imgs/repair2.png"></h1>
-				<p>在线报修</p>
+				<p >在线报修</p>
 			</a>
 		</li>
 		<li>
@@ -94,7 +94,7 @@
 
     <div class="new_zixun">
         <div class="bangding">
-            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span>
+            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span><a [navPush]="NewslistPage">更多</a>
         </div>
         <div id="order-content">
             <div class="order-list">

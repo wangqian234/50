@@ -73,9 +73,8 @@ export class ShopgoodsinfoPage {
     console.log(this.token)
     var date = this.addcarList;
     alert(JSON.stringify(date))
-    var api = this.aa+'/api/usercart/add?'
+    var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
-       alert(1)
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("成功加入购物车");
       }else{

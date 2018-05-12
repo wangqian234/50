@@ -34,7 +34,7 @@ export class ShopmalllistPage {
   //搜索商品接口
   reserchGoods(){
     //this.keywords = this.navParams.get("keyWords");
-    var api = this.aa+'/api/goods/list?pageSize=10&pageIndex=1&keyWord='+ this.navParams.get("keyWords")+'&curCityCode=4403';
+    var api = this.aa+'/api/goods/list?pageSize=10&pageIndex=1&keyWord='+ this.navParams.get("keyWords")+'&curCityCode=4403&shop_Id=1';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list = data.list;

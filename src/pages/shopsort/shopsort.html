@@ -23,9 +23,9 @@
           <ion-row>
 
               <!--<ion-col col-4 *ngFor="let iteme of fenllist" [navPush]='ProductlistPage' [navParams]="{'cid':item['_id']}">              -->
-                <ion-col col-4 *ngFor="let iteme of fenllist">
+                <ion-col col-4 *ngFor="let item of fenllist">
                     <!--<img [src]="config.apiUrl+item.pic" />-->
-                    <p>{{iteme}}</p>                           
+                    <p>{{item.title}}</p>                           
 
               </ion-col>
           </ion-row>

@@ -43,6 +43,8 @@ import { RepairlistPage } from '../pages/repairlist/repairlist';
 //工单详情页
 import { RepairdetailsPage } from '../pages/repairdetails/repairdetails';
 
+//工单评价页面
+import {RepairevaluatePage} from '../pages/repairevaluate/repairevaluate'
 //商城首页
 import { ShoppingPage } from '../pages/shopping/shopping';
 
@@ -94,7 +96,8 @@ import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
 import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund';
 //商品订单详情
 import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
-
+//商品评价列表界面
+import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -102,7 +105,10 @@ import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 //新闻详情页面
 import { NewinfoPage }from '../pages/newinfo/newinfo';
 
-//新闻详情页面
+//新闻列表
+import {NewslistPage} from '../pages/newslist/newslist';
+
+//物业缴费页面
 import { PayfeePage }from '../pages/payfee/payfee';
 
 //费用预存页面
@@ -110,6 +116,7 @@ import { PayprefeePage }from '../pages/payprefee/payprefee';
 
 //在线缴费页面
 import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
+
 
 
 
@@ -162,11 +169,16 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,
+    GoodsoderevaluatePage,
+
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
     PayprefeePage,
     OnlinepaymentPage,
+    RepairevaluatePage,
+    NewslistPage,
+
 
   ],
   imports: [
@@ -218,11 +230,14 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
+    GoodsoderevaluatePage,
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
     PayprefeePage,
     OnlinepaymentPage,
+    RepairevaluatePage,
+    NewslistPage,
 
   ],
   providers: [  /*引入了自定义的服务*/

@@ -135,7 +135,6 @@ export class CartPage {
       this.allPrice=tempAllPrice;
   }
 
-
   //全选反选
   //ionChange  事件只要checkbox改变就会触发
   checkAll(){ 
@@ -174,6 +173,7 @@ export class CartPage {
     this.updateList.goodsNum=item.num;
     this.updateList.token=this.storage.get('token');
     var data = this.updateList;
+    console.log(this.updateList.token)
     var that = this;
     var api = this.config.apiUrl+'/api/usercart/update';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
