@@ -89,6 +89,9 @@ import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund'
 import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
 //商品评价列表界面
 import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
+//评价详情
+import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tradegoods-evaluatedetail';
+
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -115,6 +118,8 @@ import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
 import { CityDataProvider } from '../providers/city-data/city-data';
+import { CutPipe } from '../pipes/cut/cut';
+import { CutSPipe } from '../pipes/cut-s/cut-s';
 
 @NgModule({
   declarations: [
@@ -148,11 +153,14 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     PipeMultiplePipe,
     GroupdetailPage,
     ShopbuyPage,
+    CutPipe,
+    CutSPipe,
     //王慧敏
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,
     GoodsoderevaluatePage,
+    TradegoodsEvaluatedetailPage,
 
     HouseinfoPage,
     NewinfoPage,
@@ -209,6 +217,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
     GoodsoderevaluatePage,
+    TradegoodsEvaluatedetailPage,
 
     HouseinfoPage,
     NewinfoPage,

@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background-color:#f5f5f5">
 <div id="yemnr">
 
 
@@ -30,16 +30,22 @@
 	</div>
 	<ul class="shangp_lieb_k_er">
 		<li *ngFor="let item of list">
-			<a href="XiangQ_Y.html">
+			<a>
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
-					<p class="biao">{{item.title}}</p>
-					<p class="px26">底价¥{{item.pricemin}}</p>
-          <p class="bend">抢购数量：{{item.whennum}}</p>
+					<p class="biao">{{item.title | cutSPipe}}</p>
+					<p class="bend">抢购价 ¥<span>{{item.pricewhen}}</span></p>
+					<p class="px26">原价   ¥<span>{{item.pricemin}}</span></p>
+          <p class="bend">抢购数量：<span>{{item.whennum}}</span></p>
 		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
+					<div class="wli01">
+					<p class="wp01">	剩余倒计时：！！！</p>
+					</div>
 			</a>
+				
 		</li>
+		
 	</ul>
 </div>
 </div>

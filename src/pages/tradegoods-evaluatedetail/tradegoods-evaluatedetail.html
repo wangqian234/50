@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>商品评价详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+      <!--商品评价详情--> 
+  <div id="order-content">
+        <div class="order-list">
+            <div class="order-item">
+            <li *ngFor="let item of list" >
+			    <a href="XiangQ_Y.html" >
+			    	<div class="lieb_img"><img src={{item.img}}></div>
+			    	<div class="lieb_txt">
+		    		<p class="biao">ID:{{item.id}}</p>
+                    <p class="biao">名称：{{item.title}}</p>
+                    <p class="biao">成交价格：{{item.preprice}}</p>
+                    <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
+                    <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
+		    		</div>
+		    	</a>
+		    </li> 
+                
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>

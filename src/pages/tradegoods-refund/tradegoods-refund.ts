@@ -30,7 +30,6 @@ export class TradegoodsRefundPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         this.trade_id=navParams.get('tradeId');
-        alert("退款页面");
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -45,17 +44,19 @@ export class TradegoodsRefundPage {
      var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.trade_id+'&token='+this.token;
      alert("看是否发送了请求");
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg == 'OK'){
+       if(data.errode==0 && data.errmsg == 'OK'){
          this.list = data.model;
+         alert("请求成功");
          console.log(data);
          alert(JSON.stringify(data));
      } else {
         alert(data.errmsg);
+         alert("请求失败");
      }
      })
   }
-  refundApplicationEvent(){
-        this.navCtrl.push(TradegoodsReapPage,{tradeId:this.trade_id});
+  refundApplicationEvent(item,trade_id){
+        this.navCtrl.push(TradegoodsReapPage,{item:item,tradeId:this.trade_id});
   }
 
   ionViewDidLoad() {

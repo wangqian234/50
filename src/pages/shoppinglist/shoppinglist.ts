@@ -19,6 +19,8 @@ import { GoodsoderdetailPage } from '../goodsoderdetail/goodsoderdetail';
 import { GoodsoderevaluatePage } from '../goodsoderevaluate/goodsoderevaluate';
 //商品退款详情
 import { TradegoodsRefundPage } from '../tradegoods-refund/tradegoods-refund';
+//商品评价详情
+import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/tradegoods-evaluatedetail';
 
 @Component({
   selector: 'page-shoppinglist',
@@ -34,12 +36,20 @@ export class ShoppinglistPage {
   public receivelist=[];
   public GoodsoderdetailPage=GoodsoderdetailPage;
   public TradegoodsRefundPage=TradegoodsRefundPage;
+  public TradegoodsEvaluatedetailPage=TradegoodsEvaluatedetailPage;
     public addressList={
     trade_Id:'',
     commentGroup:'',
-    token : ''
+    token : '',
   };
-
+  public receivegoodsList={
+    trade_Id:'',
+    token:'',
+  }
+    public cancelpaymentList={
+    trade_Id:'',
+    token:'',
+  }
   public tabTest={
     li00:"type current",
     li01:"type",
@@ -126,12 +136,56 @@ export class ShoppinglistPage {
      }
      })
   }
+  //商品评价
   evaluationEvent(trade_id){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id});
+  }
+  //商品评价详情
+  evaluationdetailEvent(trade_id){
+    this.navCtrl.push(TradegoodsEvaluatedetailPage,{tradeId:trade_id});
   }
    //商品退款详情页
    refundEvent(trade_id){
      this.navCtrl.push(TradegoodsRefundPage,{tradeId:trade_id});
+   }
+   //商品待付款
+   obligationEvent(trade_id){
+
+   }
+   //商品取消付款
+   cancelpaymentEvent(trade_id){
+        alert("取消付款");
+        this.cancelpaymentList.trade_Id=trade_id;
+        this.cancelpaymentList.token=this.token;
+        var api = this.aa+'/api/trade/colse_update';
+        this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
+        if (data.errcode === 0 && data.errmsg === 'OK') {
+          alert("取消付款成功！");
+          //this.navCtrl.push(TradegoodsRefundPage);
+        } else {
+          alert("取消付款失败！");
+        }
+      });
+
+   }
+   //商品确认收货
+   receiveEvent(trade_id){
+        alert("确认收货");
+        this.receivegoodsList.trade_Id=trade_id;
+        this.receivegoodsList.token=this.token;
+        var api = this.aa+'/api/trade/update';
+        this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
+        if (data.errcode === 0 && data.errmsg === 'OK') {
+          alert("收货成功！");
+          //this.navCtrl.push(TradegoodsRefundPage);
+        } else {
+          alert("收货失败！");
+        }
+      });
+   }
+   //修改地址
+   modifyaddress(trade_id){
+
    }
 
 
@@ -144,7 +198,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-        // alert(JSON.stringify(data));
+         //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          //this.good_list=data.list[0].goods_list;
          //alert(JSON.stringify(data.list[0].goods_list));
