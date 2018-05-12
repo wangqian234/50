@@ -129,7 +129,7 @@ export class ShoppingPage {
   getshoplist(id,i){
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
-    $(span).attr("class","active");
+    $(span).attr("class","activety");
 
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
