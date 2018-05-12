@@ -24,7 +24,7 @@
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
-</div>
+   </div>
 
   <div class="otherUser_content" style="margin-top:10px">
     <ion-list>
@@ -32,9 +32,9 @@
             <div class="fee_time">
                 <input type="radio" />
             </div>
-          <div class="fee_content">2018-02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="fee_content">{{list.data}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               物业管理费</div>
-          <div class="fee_num">￥264元</div>
+          <div class="fee_num">￥{{list.price}}</div>
         </ion-item>
       </ion-list>
   </div>
@@ -49,7 +49,7 @@
 		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allPrice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
-				<a style="background-color:#488aff">去结算</a>  
+				<a style="background-color:#488aff" (tap)="gopay(allPrice)">去结算</a>  
 			</div>
 		</div>
 	</div>

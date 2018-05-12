@@ -2,12 +2,12 @@
 
 <ion-content>
 <div class="toub_beij toub_beij_zy">
-	<div class="zhongj_k zhongj_k_z">
+	<div class="zhongj_k zhongj_k_z">	
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="zyyge">购物车</a></li>  
+					<li><a class="zyyge">购物车</a></li> 
 				</ul>
 			</div>
 		</div>
@@ -25,20 +25,26 @@
  			<div class="diannao_shanp">
  				<i class="i1 i1-i" (tap)="changeCarts()">
 					<dt>
+<<<<<<< HEAD
 					<ion-checkbox color="danger"(ionChange)="changeCarts()"></ion-checkbox>
 					<img [src]="" />
+=======
+					<ion-checkbox color="danger" [(ngModel)]="item.checked" (ionChange)="changeCarts()"></ion-checkbox>
+					<img [src]=" "/>
+>>>>>>> 005047af55f2da677a2f141100c1d9ecf4a05790
 					</dt> 
 				 </i>
  				<h1><img src="assets/imgs/001.jpg"></h1>
  				<div class="you">
- 					<p class="px24 bt">{{item.product_title}}</p>
- 					<p class="xh">{{item.product_title}}</p>
+ 					<p class="px24 bt">{{item.title}}</p>
+ 					<p class="xh">{{item.size_name}}</p>
  					<div class="youjfy">
+						 <button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  
 						<div class="goum_sl">
-							<p class="px26 jiaq">￥{{item.product_price}}</p>
+							<p class="px26 jiaq">￥{{item.price}}</p>
 							<div class="counter_box">
 								<i class="jian" (tap)="decCount(item)">-</i>
-								<input type="text" readonly="readonly" [(ngModel)]="item.product_count" name="num" id="num">
+								<input type="text" readonly="readonly" [(ngModel)]="item.num" name="num" id="num">
 								<i class="jia" (tap)="incCount(item)">+</i>
 							</div>
 						</div>

@@ -81,27 +81,27 @@
       <ion-list>
         <ion-item>
           <div class="fee_list"><span>管理费：</span></div>
-          <input class="fee_input" type="number" />
+          <input class="fee_input" type="number" [(ngModel)]="payrefeeList.management" />
           <div class="fee_num">元</div>
         </ion-item>
         <ion-item>
           <div class="fee_list"><span>水费：</span></div>
-          <input class="fee_input" type="number" />
+          <input class="fee_input" type="number" [(ngModel)]="payrefeeList.water" />
           <div class="fee_num">元</div>
         </ion-item>
         <ion-item>
           <div class="fee_list"><span>电费：</span></div>
-          <input class="fee_input" type="number" />
+          <input class="fee_input" type="number" [(ngModel)]="payrefeeList.electricity"/>
           <div class="fee_num">元</div>
         </ion-item>
         <ion-item>
           <div class="fee_list"><span>车位管理费：</span></div>
-          <input class="fee_input" type="number" />
+          <input class="fee_input" type="number" [(ngModel)]="payrefeeList.parking"/>
           <div class="fee_num">元</div>
         </ion-item>
         <ion-item>
           <div class="fee_list"><span>生活垃圾处理费：</span></div>
-          <input class="fee_input" type="number" />
+          <input class="fee_input" type="number" [(ngModel)]="payrefeeList.rubbish"/>
           <div class="fee_num">元</div>
         </ion-item>
       </ion-list>
@@ -119,7 +119,7 @@
 		<div class="zhong"><p>总计：<em>{{allPrice}}</em></p></div>
 		<div class="you" style="position:absolute;right:0;">
 			<div class="goum">
-				<a style="background-color:#488aff">去结算</a>
+				<a style="background-color:#488aff" (click)="gopay()">去结算</a>
 			</div>
 		</div>
 	</div>

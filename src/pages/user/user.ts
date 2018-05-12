@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { StorageProvider } from '../../providers/storage/storage';
-
 //引入账户设置页面
 import { PersonalPage } from '../personal/personal';
 //引入收货地址界面
@@ -11,6 +9,9 @@ import { AddressPage } from '../address/address';
 import { RepairlistPage } from '../repairlist/repairlist';
 //引入购物清单界面
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+//storag服务
+import { StorageProvider } from '../../providers/storage/storage';
+
 import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -19,22 +20,18 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class UserPage {
 
+  //页面跳转
   public userLoginName = ''
-
   public enSureLogin:boolean = false;
 
+
   public LoginPage=LoginPage;
-
   public PersonalPage=PersonalPage;
-
   public AddressPage = AddressPage;
-
   public  RepairlistPage = RepairlistPage;
-
   public ShoppinglistPage = ShoppinglistPage;
-
+   //自定义的变量
     public userinfo='';
-
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
       
     }
@@ -63,5 +60,25 @@ export class UserPage {
         } else {
           this.navCtrl.push(AddressPage);
         }
-      }
+    }
+
+    // ionViewDidEnter(){
+    //    console.log("3.0 ionViewDidEnter 当进入页面时触发");
+    // }
+    // ionViewWillLeave(){
+    //     console.log("4.0 ionViewWillLeave 当将要从页面离开时触发");
+    // }
+    // ionViewDidLeave(){
+    //     console.log("5.0 ionViewDidLeave 离开页面时触发");
+    // }
+    // ionViewWillUnload(){
+    //    console.log("6.0 ionViewWillUnload 当页面将要销毁同时页面上元素移除   时触发");
+    // }
+    // ionViewCanEnter(){
+    //    console.log("ionViewCanEnter");
+    // }
+    // ionViewCanLeave(){
+    //      console.log("ionViewCanLeave");
+    // }
+
 }

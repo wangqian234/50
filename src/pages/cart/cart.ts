@@ -14,38 +14,8 @@ export class CartPage {
 
   pageSize = 10;
   pageIndex = 1;
-
-  public list=[{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  },{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  },{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  },{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  },{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  },{
-    "checked":false,
-    "product_title":"这是一瓶矿泉水",
-    "product_price": 123,
-    "product_count":1
-  }];
+  checked =false
+  public list=[];
 
   public allPrice=0;  /*总价*/
 
@@ -54,6 +24,17 @@ export class CartPage {
   public isEdit=false;   /*是否编辑*/
 
   public hasData=true;   /*是否有数据*/
+  //修改商品数量
+  public updateList = {
+    gsId:'',
+    goodsNum:'',
+    token:''
+  }
+  //删除选中商品
+  public deleatcartList ={
+    gsId:'',
+    token:'',
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public config:ConfigProvider,public storage:StorageProvider, public http: Http) {
@@ -63,7 +44,6 @@ export class CartPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
     this.getCartsData('');
-
   }
   
   ionViewDidLoad() {
@@ -75,7 +55,8 @@ export class CartPage {
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        this.list=this.list.concat(data.result);  /*数据拼接*/
+        this.list=this.list.concat(data.list);  /*数据拼接*/
+        console.log(this.list);
         this.hasData=true;
         if(infiniteScroll){
           //告诉ionic 请求数据完成
@@ -99,24 +80,28 @@ export class CartPage {
   }
 
   //删除选中商品
-  delCartsData(){
+  delCartsData(item){
+    this.deleatcartList.gsId=item.size_id;
+    this.deleatcartList.token=this.storage.get('token');
+    var data = this.deleatcartList;
+    alert(JSON.stringify(data));
     var j = 3;  //确定递归次数，避免死循环
-    var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
+    var api = this.config.apiUrl + '/api/usercart/delete?';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      alert(1)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        this.list=this.list.concat(data.result);  /*数据拼接*/
-        this.hasData=true;
-        this.pageIndex++
+        console.log("删除成功");
       } else if(data.errcode === 40002) {
           j--;
           if(j>0){
             this.config.doDefLogin();
-            this.delCartsData();
+            this.delCartsData(item);
           }
       } else {
         alert(data.errmsg);
       }
     });
+    //刷新界面
   }
 
   changeCarts(){
@@ -144,12 +129,11 @@ export class CartPage {
       var tempAllPrice=0;
       for(let i=0;i<this.list.length;i++){
         if(this.list[i].checked==true){
-          tempAllPrice+=this.list[i].product_count*this.list[i].product_price;
+          tempAllPrice+=this.list[i].num*this.list[i].price;
         }
       }
       this.allPrice=tempAllPrice;
   }
-
 
   //全选反选
   //ionChange  事件只要checkbox改变就会触发
@@ -169,17 +153,36 @@ export class CartPage {
    }
 
   incCount(item){    
-    ++item.product_count;
+    ++item.num;
     this.sumPrice();  
+    this.updatenum(item);
   }
 
   //数量变化  双向数据绑定
   decCount(item){
     // console.log(item);
-    if(item.product_count>1){
-      --item.product_count;
+    if(item.num>1){
+      --item.num;
     }
     this.sumPrice();  
+    this.updatenum(item);
+  }
+  //修改购物车数量
+  updatenum(item){
+    this.updateList.gsId=item.size_id;
+    this.updateList.goodsNum=item.num;
+    this.updateList.token=this.storage.get('token');
+    var data = this.updateList;
+    console.log(this.updateList.token)
+    var that = this;
+    var api = this.config.apiUrl+'/api/usercart/update';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if(data.errcode ===0&&data.errmsg==='OK'){
+        console.log("修改成功")
+      }else{
+        alert(data.errmsg)
+      }
+    })
   }
 
   //加载更多
