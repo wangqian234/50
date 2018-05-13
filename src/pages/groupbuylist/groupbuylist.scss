@@ -1,9 +1,23 @@
 page-groupbuy {
+
 .toolbar-title-ios {
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.3rem;
     font-weight: 600;
     color: #000;
     pointer-events: auto;
 }
+
+.shangp_lieb_k_er li .lieb_txt p {
+    color: #555;
+    font-size: 0.28rem;
+    line-height: 0.35rem;
+    text-align: justify;
+}
+
+.shangp_lieb_k_er li .lieb_txt p.px26 {
+    font-size: 0.28rem;
+    color: #e10601;
+}
+
 }

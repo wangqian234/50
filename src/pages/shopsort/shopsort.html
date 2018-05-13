@@ -11,25 +11,24 @@
 <ion-content>
   <div class="cate_content">
       <div class="cate_left">
-          <ion-list>
+          <ion-list no-lines>
             <ion-item *ngFor="let item of list" (tap)="getRightCateData(item['id'])">
-              {{item.name}}
-
-            </ion-item>
+              {{item.name}}</ion-item>
           </ion-list>
       </div>
 
       <div class="cate_right">
-          <ion-row>
-
-              <!--<ion-col col-4 *ngFor="let iteme of fenllist" [navPush]='ProductlistPage' [navParams]="{'cid':item['_id']}">              -->
-                <ion-col col-4 *ngFor="let item of fenllist">
-                    <!--<img [src]="config.apiUrl+item.pic" />-->
-                    <p>{{item.title}}</p>                           
-
-              </ion-col>
-          </ion-row>
-
+          <ul class="shangp_lieb_k_er">
+            <li *ngFor="let item of fenllist">
+              <a>
+                <div class="lieb_img"><img src={{item.img}}></div>
+				        <div class="lieb_txt">
+					        <p class="biao">{{item.title | cutSPipe}}</p>
+				        	<p class="px26">￥{{item.goodspricemin}}</p>
+                </div>
+			        </a>
+		        </li>
+	        </ul>
       </div>
   </div>
 </ion-content>

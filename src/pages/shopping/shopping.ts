@@ -24,13 +24,13 @@ import { BigsalePage } from '../bigsale/bigsale';
 import { SalePage } from '../sale/sale';
 //团购界面
 
-import { GroupbuyPage } from '../groupbuy/groupbuy';
+import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 //搜索出的商品列表页
 import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 
-import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
+
 
 @Component({
   selector: 'page-shopping',
@@ -44,14 +44,13 @@ export class ShoppingPage {
   //页面跳转
   public ShopsortPage = ShopsortPage;
   public ShopgoodsinfoPage = ShopgoodsinfoPage;
-
   public BigsalePage = BigsalePage;
-  public GroupbuyPage = GroupbuyPage;
+  public GroupbuylistPage = GroupbuylistPage;
 
    //定义接收数据的list
   public l=[];
  public SalePage = SalePage;
- public GroupbuylistPage = GroupbuylistPage;
+
 
   public lunboList=[];
   public tuangouList=[];
@@ -65,6 +64,7 @@ export class ShoppingPage {
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
+
     //定义token
   public token=this.storage.get('token');
   //构造函数
@@ -75,6 +75,7 @@ export class ShoppingPage {
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
+
     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
      this.http.get(api).map(res => res.json()).subscribe(data =>{

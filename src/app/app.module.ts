@@ -78,13 +78,13 @@ import {SalePage}from '../pages/sale/sale';
 //新建热销
 import {BigsalePage}from '../pages/bigsale/bigsale';
    
-//新建团购
 
-import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+
 //商品详情页面
 import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
 //物业缴费
 import{PaymentPage} from '../pages/payment/payment'
+//新建团购
 import {GroupbuylistPage}from '../pages/groupbuylist/groupbuylist';
 import { GroupdetailPage } from '../pages/groupdetail/groupdetail';
 //商品购买页面
@@ -98,6 +98,9 @@ import {TradegoodsRefundPage}from '../pages/tradegoods-refund/tradegoods-refund'
 import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
 //商品评价列表界面
 import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
+//评价详情
+import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tradegoods-evaluatedetail';
+
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -134,6 +137,8 @@ import { ToolsProvider } from '../providers/tools/tools';
 import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
 import { PipeTimePipe } from '../pipes/pipe-time/pipe-time';
 import { CityDataProvider } from '../providers/city-data/city-data';
+import { CutPipe } from '../pipes/cut/cut';
+import { CutSPipe } from '../pipes/cut-s/cut-s';
 
 @NgModule({
   declarations: [
@@ -161,20 +166,23 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     ShopmalllistPage,
     TestPage,
     SalePage,
-    BigsalePage,
-    GroupbuyPage,
+    BigsalePage,  
     PipeMultiplePipe,
     ShopgoodsinfoPage,
     GroupbuylistPage,
     PipeTimePipe,
     GroupdetailPage,
     ShopbuyPage,
+    CutPipe,
+    CutSPipe,
     PaymentPage,
+
     //王慧敏
     TradegoodsReapPage,
     TradegoodsRefundPage,
     GoodsoderdetailPage,
     GoodsoderevaluatePage,
+    TradegoodsEvaluatedetailPage,
 
     HouseinfoPage,
     NewinfoPage,
@@ -236,6 +244,8 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     TradegoodsRefundPage,
     GoodsoderdetailPage,   
     GoodsoderevaluatePage,
+    TradegoodsEvaluatedetailPage,
+
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
