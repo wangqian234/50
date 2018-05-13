@@ -257,11 +257,11 @@ display: inline-block;
 .zhongjain_daoh ul li a{
 	line-height:  0.78rem;
 	font-size: 0.22rem;
-	color: #828282;
+	color: white;
 	display: inline-block;
 }
 .zhongjain_daoh ul li a.zyyge{
-	color: #535353;
+	color: white;
 	font-size: 0.26rem;
 }
 .zhongjain_daoh ul li.xiangq a{
@@ -961,7 +961,7 @@ div.dk a{color: #fff; line-height: 0.8rem; font-size: 0.26rem;}
 .grzx_toub_beij{width: 100%;height: 3rem;}
 .grzx_toub_beij img{width:100%;height: 3rem;}
 .grzx_toux_fus{position: absolute; top:0;left: 0;z-index: 1; width: 100%;height: 3rem; text-align:center; }
-.grzx_toux_fus .of{display: inline-block; padding-top: 0.6rem;text-align: center;}
+.grzx_toux_fus .of{display: inline-block; padding-top: 0.8rem;text-align: center;}
 .grzx_toux_fus .of h2{width: 1.24rem; height: 1.24rem; border-radius:50%; overflow: hidden; display: inline-block;}
 .grzx_toux_fus .of p{color: #fff;font-size: 0.26rem;line-height: 0.4rem;}
 .grzx_toux_fus h2 img{width: 100%; height: 100%;}
@@ -1408,11 +1408,11 @@ background: #fafafa;}
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx{overflow: hidden;margin: 0.2rem;}
 
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx p{width:0.32rem; height: 0.32rem;float:left;
- background:no-repeat center url(../images/web/xx_ingj_2.png);
+ background:no-repeat center url(../assets/imgs/xx_ingj_2.png);
  background-size: 100%;margin: 0.1rem;
 }
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx p.no{
-	background:no-repeat center url(../images/web/xx_ingj_1.png);
+	background:no-repeat center url(../assets/imgs/xx_ingj_1.png);
  background-size: 100%;margin: 0.1rem;
 }
 

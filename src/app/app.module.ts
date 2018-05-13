@@ -117,6 +117,10 @@ import { PayprefeePage }from '../pages/payprefee/payprefee';
 //在线缴费页面
 import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
 
+//我的房屋页面
+import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
+
+
 
 
 
@@ -128,6 +132,7 @@ import { HttpServicesProvider } from '../providers/http-services/http-services';
 import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
+import { PipeTimePipe } from '../pipes/pipe-time/pipe-time';
 import { CityDataProvider } from '../providers/city-data/city-data';
 
 @NgModule({
@@ -161,7 +166,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     PipeMultiplePipe,
     ShopgoodsinfoPage,
     GroupbuylistPage,
-    PipeMultiplePipe,
+    PipeTimePipe,
     GroupdetailPage,
     ShopbuyPage,
     PaymentPage,
@@ -178,7 +183,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-
+    HouseinfolistPage
 
   ],
   imports: [
@@ -238,7 +243,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-
+    HouseinfolistPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

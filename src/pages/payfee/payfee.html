@@ -1,5 +1,5 @@
 <ion-content style="background-color:#E3E3E3">
-<div class="toub_beij toub_beij_zy">
+<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -27,9 +27,21 @@
 </div>
 
     <div class="fee">
-        <div class="fee1"><p>￥0.002</p><p>欠费总计</p></div>
-        <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
-    </div>
+		<div class="fee1">
+			<div class="fee11">
+				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
+				<p class="fee11_p1">欠费总计</p>
+				<p class="fee11_p2">￥0.002</p>
+			</div>
+		</div>
+		<div class="fee2">
+			<div class="fee21" >
+				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
+				<p class="fee21_p1">预存款总计</p>
+				<p class="fee21_p2">￥0.002</p>
+			</div>
+		</div>
+	</div>
 
   <div class="otherUser_title">
     <div class="user_titlediv" (click)="appearPayFee()">

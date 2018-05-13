@@ -1,5 +1,177 @@
 <ion-content style="background-color:#F5F5F5">
-    <div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
+
+	<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:48px;">
+		<div class="zhongj_k">
+			<div class="shous_k  shous_div">
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom()" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<ion-option *ngFor="let room of roomname" value="{{room.Id}}">{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
+						<ion-option value="add" selected>--添加房屋--</ion-option>
+					</ion-select>
+				</ion-item>
+			</div>
+		</div>
+	</div>
+	<div class="lunbo_item">
+		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
+			<ion-slide *ngFor="let item of focusList">
+				<img [src]="item" />
+			</ion-slide>
+		</ion-slides>
+	</div>
+
+
+	<div class="daohang_bd" style="background-color:white;margin:0;color:#646464">
+		<ul>
+			<li [navPush]="payfeePage">
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/fee.png"></h1>
+					<p>物业缴费</p>
+				</a>
+			</li>
+			<li [navPush]="RepairlistPage">
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
+					<p>投诉建议</p>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/roommanger.png"></h1>
+					<p>房屋管理</p>
+				</a>
+			</li>
+			<li [navPush]="RepairaddPage">
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
+					<p>在线报修</p>
+				</a>
+			</li>
+			<li [navPush]="PayprefeePage">
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/prefee.png"></h1>
+					<p>费用预存</p>
+				</a>
+			</li>
+			<li [navPush]="ShoppinglistPage">
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/shop.png"></h1>
+					<p>我的订单</p>
+				</a>
+			</li>
+
+			<li>
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/pushroom.png"></h1>
+					<p>房源发布</p>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<h1><img src="assets/imgs/propertyPage/opendoor.png"></h1>
+					<p>一键开门</p>
+				</a>
+			</li>
+		
+		<li [navPush]="NewslistPage">
+			<a href="#">
+				<h1><img src="assets/imgs/complain.png"></h1>
+				<p>社区资讯</p>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<h1><img src="assets/imgs/massage.png"></h1>
+				<p>公示公告</p>
+			</a>
+		</li>
+		</ul>
+	</div>
+
+	<div class="fee">
+		<div class="fee1">
+			<div class="fee11">
+				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
+				<p class="fee11_p1">欠费总计</p>
+				<p class="fee11_p2">￥0.002</p>
+			</div>
+		</div>
+		<div class="fee2">
+			<div class="fee21" >
+				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
+				<p class="fee21_p1">预存款总计</p>
+				<p class="fee21_p2">￥0.002</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="zixun_div">
+		<div class="zixun_title">
+			<img src="assets/imgs/propertyPage/zixun.png">
+			<span class="p_title">最新资讯</span>
+			<div class="zixun_more" [navPush]='NewslistPage'>
+				<img src="assets/imgs/propertyPage/more.png">
+				<span class="p_more">查看更多</span>
+
+			</div>
+		</div>
+	</div>
+	<div class="zixun_content" *ngFor="let newList of newsList">
+		<div (click)="getNewInfo(newList.id)" class="zixun_li">
+			<img src="{{config.apiUrl}}{{newList.imgurl}}">
+			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
+			<span class="line"></span>
+		</div>
+	</div>
+
+	<div class="zixun_div" style="margin-top:0.1rem;">
+		<div class="zixun_title">
+			<img src="assets/imgs/propertyPage/public.png">
+			<span class="p_title">公示公告</span>
+			<div class="zixun_more" (click)="getNews()">
+				<img src="assets/imgs/propertyPage/more.png">
+				<span class="p_more">查看更多</span>
+
+			</div>
+		</div>
+	</div>
+	<div class="zixun_content">
+		<div class="zixun_li">
+			<img src="assets/imgs/propertyPage/tong.png">
+			<span class="content">【东方巴黎】 &nbsp;&nbsp;&nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
+			<span class="line"></span>
+		</div>
+		<div class="zixun_li">
+			<img src="assets/imgs/propertyPage/tong.png">
+			<span class="content">【东方巴黎】 &nbsp;&nbsp;&nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
+			<span class="line"></span>
+		</div>
+		<div class="zixun_li" >
+			<img  src="assets/imgs/propertyPage/tong.png">
+			<span class="content" >【东方巴黎】 &nbsp;&nbsp;&nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
+			
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--<div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
       <p>您还没有绑定房屋&nbsp;</p>
       <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
     </div>
@@ -26,10 +198,15 @@
         <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
     </div>
 
+
+
+
+
+
 <div class="daohang_bd" style="background-color:white;margin:0;">
 	<ul>
 		<li>
-			<a [navPush]="payfeePage" >
+			<a href="#">
 				<h1><img src="assets/imgs/fee.png"></h1>
 				<p>物业缴费</p>
 			</a>
@@ -41,9 +218,9 @@
 			</a>
 		</li>
 		<li>
-			<a [navPush]="RepairaddPage">
+			<a href="#">
 				<h1><img src="assets/imgs/repair2.png"></h1>
-				<p >在线报修</p>
+				<p>在线报修</p>
 			</a>
 		</li>
 		<li>
@@ -94,14 +271,14 @@
 
     <div class="new_zixun">
         <div class="bangding">
-            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span><a [navPush]="NewslistPage">更多</a>
+            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span>
         </div>
         <div id="order-content">
             <div class="order-list">
                     <div class="order-item" *ngFor="let newList of newsList">
                         <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
                             <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
-                            <p style="font-size: 0.5rem">{{newList.topic}}{{newList.addDate}}</p>
+                            <p>{{newList.topic}}{{newList.addDate}}</p>
                         </div>
                     </div>
             </div>
@@ -135,5 +312,5 @@
         </div>
     </div>
       <ion-list inset class="user_list">
-      </ion-list>
+      </ion-list>-->
 </ion-content>

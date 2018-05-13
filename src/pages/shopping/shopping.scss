@@ -543,4 +543,25 @@ ion-slides{
 .slide-zoom{
     height:100%;
     }
+.remen_sos{
+    margin: 0;
+    padding: 0.2rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    margin-top: 48px;
+    background-color: white;
+}
+.history{
+    margin-bottom: 0.2rem;
+    ion-icon{
+        position: absolute;
+        right: 0.5rem;
+        margin-top: -0.3rem;
+    }
+}
+.remen_sos .history ul li{
+    padding-right: 0.1rem;
+}
 }
