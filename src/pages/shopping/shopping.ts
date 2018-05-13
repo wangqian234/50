@@ -24,13 +24,13 @@ import { BigsalePage } from '../bigsale/bigsale';
 import { SalePage } from '../sale/sale';
 //团购界面
 
-import { GroupbuyPage } from '../groupbuy/groupbuy';
+import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 //搜索出的商品列表页
 import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 
-import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
+
 
 @Component({
   selector: 'page-shopping',
@@ -44,14 +44,13 @@ export class ShoppingPage {
   //页面跳转
   public ShopsortPage = ShopsortPage;
   public ShopgoodsinfoPage = ShopgoodsinfoPage;
-
   public BigsalePage = BigsalePage;
-  public GroupbuyPage = GroupbuyPage;
+  public GroupbuylistPage = GroupbuylistPage;
 
    //定义接收数据的list
   public l=[];
  public SalePage = SalePage;
- public GroupbuylistPage = GroupbuylistPage;
+
 
   public lunboList=[];
   public tuangouList=[];

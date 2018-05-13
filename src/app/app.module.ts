@@ -78,13 +78,13 @@ import {SalePage}from '../pages/sale/sale';
 //新建热销
 import {BigsalePage}from '../pages/bigsale/bigsale';
    
-//新建团购
 
-import {GroupbuyPage}from '../pages/groupbuy/groupbuy';
+
 //商品详情页面
 import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
 //物业缴费
 import{PaymentPage} from '../pages/payment/payment'
+//新建团购
 import {GroupbuylistPage}from '../pages/groupbuylist/groupbuylist';
 import { GroupdetailPage } from '../pages/groupdetail/groupdetail';
 //商品购买页面
@@ -161,12 +161,10 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     ShopmalllistPage,
     TestPage,
     SalePage,
-    BigsalePage,
-    GroupbuyPage,
+    BigsalePage,  
     PipeMultiplePipe,
     ShopgoodsinfoPage,
     GroupbuylistPage,
-    PipeMultiplePipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,
