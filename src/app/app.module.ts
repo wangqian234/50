@@ -165,7 +165,6 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     PipeMultiplePipe,
     ShopgoodsinfoPage,
     GroupbuylistPage,
-    PipeMultiplePipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,
