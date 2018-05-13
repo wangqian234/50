@@ -11,6 +11,8 @@ import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 //storag服务
 import { StorageProvider } from '../../providers/storage/storage';
+//我的房屋
+import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -28,8 +30,9 @@ export class UserPage {
   public LoginPage=LoginPage;
   public PersonalPage=PersonalPage;
   public AddressPage = AddressPage;
-  public  RepairlistPage = RepairlistPage;
+  public RepairlistPage = RepairlistPage;
   public ShoppinglistPage = ShoppinglistPage;
+  public HouseinfolistPage = HouseinfolistPage
    //自定义的变量
     public userinfo='';
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
@@ -43,15 +46,23 @@ export class UserPage {
       if(this.storage.get('token')){
         this.enSureLogin = true;
         this.userLoginName = this.storage.get('username1')
+      } else {
+        this.navCtrl.push(LoginPage);
       }
       var w = document.documentElement.clientWidth || document.body.clientWidth;
-      document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+      document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
       }
 
       outLogin(){//退出登录
-        this.storage.remove("token");
-        this.navCtrl.popToRoot(); /*回到根页面*/
-        this.navCtrl.push(TabsPage);
+        var r= confirm("确认退出登录吗？")
+        if (r==true)
+        {
+          this.storage.remove("token");
+          this.navCtrl.popToRoot(); /*回到根页面*/
+          this.navCtrl.push(TabsPage);
+        } else{
+          return;
+        }
       }
 
       gotoAddressPage(){

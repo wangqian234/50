@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { PipeMultiplePipe } from './pipe-multiple/pipe-multiple';
 import { CutPipe } from './cut/cut';
 import { CutSPipe } from './cut-s/cut-s';
+import { PipeTimePipe } from './pipe-time/pipe-time';
+
 @NgModule({
 	declarations: [PipeMultiplePipe,
     CutPipe,
@@ -9,7 +11,8 @@ import { CutSPipe } from './cut-s/cut-s';
 	imports: [],
 	exports: [PipeMultiplePipe,
     CutPipe,
-    CutSPipe]
+    CutSPipe,
+    PipeTimePipe,]
 })
 export class PipesModule {
 	

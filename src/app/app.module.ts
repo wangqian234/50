@@ -120,6 +120,10 @@ import { PayprefeePage }from '../pages/payprefee/payprefee';
 //在线缴费页面
 import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
 
+//我的房屋页面
+import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
+
+
 
 
 
@@ -131,6 +135,7 @@ import { HttpServicesProvider } from '../providers/http-services/http-services';
 import { StorageProvider } from '../providers/storage/storage';
 import { ToolsProvider } from '../providers/tools/tools';
 import { PipeMultiplePipe } from '../pipes/pipe-multiple/pipe-multiple';
+import { PipeTimePipe } from '../pipes/pipe-time/pipe-time';
 import { CityDataProvider } from '../providers/city-data/city-data';
 import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
@@ -165,6 +170,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     PipeMultiplePipe,
     ShopgoodsinfoPage,
     GroupbuylistPage,
+    PipeTimePipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,
@@ -185,7 +191,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-
+    HouseinfolistPage
 
   ],
   imports: [
@@ -247,7 +253,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-
+    HouseinfolistPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

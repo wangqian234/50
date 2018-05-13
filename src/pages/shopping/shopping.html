@@ -7,8 +7,9 @@
 <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:48px;">
 	<div class="zhongj_k">
 		<div class="logo_k"><img src="assets/imgs/class.png"><p>分类</p></div>
-		<div class="shous_k"><input id="sos_tanc"  type="search" input_key="" placeholder="限时疯抢，好物低至1元">
-        <img src="assets/imgs/sos.png">
+		<div class="shous_k">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn($event)" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl">
 			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>西安市</p></div>
@@ -79,5 +80,26 @@
             </a>
         </li>
     </ul>
+
+    <div id="searchInput" class="remen_sos" style="display:none">
+        <div class="history" *ngIf="shopKeyList.toString().length != 0">
+		<p>历史搜索：</p><ion-icon (click)="clearShopKey()" name="trash"></ion-icon>
+			<ul>
+				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
+			</ul>
+        </div>
+
+        <div class="remen">
+		<p>热门搜索：</p>
+			<ul>
+				<li><a href="#">笔记本</a></li>
+				<li><a href="#">游戏本</a></li>
+				<li><a href="#">工作站笔记本</a></li>
+				<li><a href="#">平板电脑</a></li>
+				<li><a href="#">台式机</a></li>
+				<li><a href="#">一体机服务器</a></li>
+			</ul>
+        </div>
+	</div>
 
 </ion-content>
