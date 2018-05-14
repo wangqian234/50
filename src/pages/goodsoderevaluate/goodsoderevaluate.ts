@@ -82,4 +82,8 @@ export class GoodsoderevaluatePage {
     //console.log('ionViewDidLoad ShoppingevaluatePage');
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 }

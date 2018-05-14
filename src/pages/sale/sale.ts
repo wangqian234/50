@@ -4,12 +4,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
+
+//商品详情界面
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+
 @IonicPage()
 @Component({
   selector: 'page-sale',
   templateUrl: 'sale.html',
 })
 export class SalePage {
+
+public ShopgoodsinfoPage=ShopgoodsinfoPage;
 public list = [];
 public mode = 0 ;
  public tabTest={

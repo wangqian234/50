@@ -7,6 +7,8 @@ import { ConfigProvider } from '../../providers/config/config';
 //商品购买页面
 import { ShopbuyPage } from '../shopbuy/shopbuy';
 
+//团购详情界面
+import { GroupdetailPage } from '../groupdetail/groupdetail';
 /**
  * Generated class for the GroupbuyPage page.
  *
@@ -20,7 +22,8 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
   templateUrl: 'groupbuylist.html',
 })
 export class GroupbuylistPage {
-
+  public GroupdetailPage=GroupdetailPage;
+  
   public list = [];
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
