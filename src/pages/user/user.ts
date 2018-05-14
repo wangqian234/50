@@ -15,6 +15,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 //修改个人信息
 import { EditorinfoPage } from '../editorinfo/editorinfo';
+//重置登录密码
+import { RebuildpassPage } from '../rebuildpass/rebuildpass';
 
 import { TabsPage } from '../tabs/tabs';
 //王慧敏
@@ -38,6 +40,7 @@ export class UserPage {
   public RepairlistPage = RepairlistPage;
   public ShoppinglistPage = ShoppinglistPage;
   public EditorinfoPage = EditorinfoPage;
+  public RebuildpassPage = RebuildpassPage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
   public HouseinfolistPage = HouseinfolistPage

@@ -259,11 +259,11 @@ export class HomePage {
     });
   }
 
-  // changeRoom() {
-  //   if (this.roomid === "add") {
-  //     this.navCtrl.push(BindroomPage);
-  //   }
-  // }
+  changeRoom() {
+    if (this.roomid === "add") {
+      this.navCtrl.push(BindroomPage);
+    }
+  }
 
   getRem() {
     var w = document.documentElement.clientWidth || document.body.clientWidth;

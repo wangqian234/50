@@ -1,53 +1,32 @@
-<!--
-  Generated template for the RebuildpassPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>找回登录密码</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content>
 
-<div style="margin-top:2px;">
-  <div class="login_box">
-  <form class="search_form">
-    <input type="text" id="s" placeholder="请输入手机号码" class="swap_value" />
+      <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">重置登录密码</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+  </div>
 
-  </form>
-</div>
-
-
-<div class="login_box">
-  <form class="search_form">
-    <input type="text" id="s" placeholder="请输入验证码" class="swap_value" />
-    <button *ngIf="isShowSend" (click)="ownRegist()">点击获取验证码</button>
-    <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
-  </form>
-</div>
-
-  <div class="login_box">
-  <form class="search_form">
-    <input type="password" id="s" placeholder="请输入新密码" class="swap_value" />
-
-  </form>
-</div>
-
-
-
-  <div class="login_box">
-  <form class="search_form">
-    <input type="password" id="s" placeholder="确认新密码" class="swap_value" />
-
-  </form>
-</div>
-<button ion-button block style="border-radius:0.8rem;width:95%;margin:auto;margin-top:1rem;" (click)="addAddress()">确认密码</button>
-</div>
+   <div class="xiugmim_k">
+ 	<p class="px26" style="text-align: center;">已绑定手机：<em>1827******710</em></p>
+ 	<div class="yanzm_k">
+ 		<input type="text" name="" placeholder="输入验证码">
+ 		<a style="color:black;float:right;" *ngIf="isShowSend" (click)="ownRegist()">获取验证码</a>
+    <a *ngIf="!isShowSend">{{num}}秒后重新发送</a>
+ 	</div>
+    	<div class="yanzm_k">
+ 		<input style="width:100%" type="text" name="" placeholder="输入新密码">
+ 	</div>
+    	<div class="yanzm_k">
+ 		<input style="width:100%" type="text" name="" placeholder="确认新密码">
+ 	</div>
+ 	<div class="querenann" (click)="addAddress()"><a>确认密码</a></div>
+ </div>
 
 </ion-content>

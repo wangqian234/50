@@ -23,52 +23,52 @@
 			<div class="denglu_k denglu_k_k">
 				<div class="denglk denglk_l">
 					<div class="mz px24">收货人：</div>
-					<input type="text" placeholder="" [(ngModel)]='addressList.name'>
+					<input type="text" [(ngModel)]='addressList.name'>
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">联系方式：</div>
-					<input type="text" placeholder="请输入手机号码" [(ngModel)]='addressList.mobile'>
+					<input type="text" [(ngModel)]='addressList.mobile'>
 				</div>
 				<div class="denglk denglk_l">
-					<div class="mz px24">所在地区：</div>
-					<input type="text" placeholder="请输入所在地区">
-					<!--<ion-item>
-					<ion-multi-picker item-content [multiPickerColumns]="cityColumns" [cancelText]="'取消'" [doneText]="'完成'"></ion-multi-picker>
-					</ion-item>-->
+					<div class="mz px24">所在省份：</div>
+					<form class="choose">
+							<img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+							<select name="provinces" [(ngModel)]="addressList.provinceVal" (ngModelChange)="getCities()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+								<option *ngFor="let provs of provinces"  value={{provs.code}}>{{provs.name}}</option>
+							</select>
+					</form>
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">所在城市：</div>
+					<form class="choose">
+							<img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+							<select name="cities" [(ngModel)]="addressList.cityVal"  (ngModelChange)="getDistricts()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+								<option *ngFor="let city of cities" value={{city.code}}>{{city.name}}</option>
+							</select>
+					</form>
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">所在县区：</div>
+					<form class="choose">
+							<img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+							<select name="districts"  [(ngModel)]="addressList.districtVal" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+								<option *ngFor="let dis of districts" value={{dis.code}}>{{dis.name}}</option>
+							</select>
+					</form>
 				</div>
 				<div class="denglk denglk_l">
 					<div class="mz px24">详细地址：</div>
-					<input type="text" placeholder="请输入详细地址" [(ngModel)]='addressList.address'>
+					<input type="text" [(ngModel)]='addressList.address'>
+				</div> 
+				<div class="denglk denglk_l">
+					<div class="mz px24">邮编：</div>
+					<input type="text" [(ngModel)]='addressList.code'>
 				</div> 
 			</div>
 		</div>
-		<div class="shouh_dange_beijin dk"><a href="#">确 认</a></div>
+		<div class="shouh_dange_beijin dk" (click)="addAddress()"><a href="#">提交收货地址</a></div>
 	</div>
 </div>  
 
-
-
-  <!--<ion-list class="login_list">        
-    <ion-item>
-      <ion-label fixed>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</ion-label>
-      <ion-input type="text" placeholder="姓名" [(ngModel)]='addressList.name'></ion-input>
-    </ion-item>        
-    <ion-item>
-        <ion-label fixed>电话号码:</ion-label>
-        <ion-input type="text" placeholder="电话号码"  [(ngModel)]='addressList.phone'></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>收货地址:</ion-label>
-        <ion-input type="text" placeholder="收货地址"  [(ngModel)]='addressList.address'></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>邮政编码:</ion-label>
-        <ion-input type="text" placeholder="邮政编码"  [(ngModel)]='addressList.address'></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label style="width:20rem;position:absolute;margin-top:0.2rem"><input type="checkbox">&nbsp;&nbsp;设为默认收货地址</ion-label>
-    </ion-item>
-  </ion-list>
-    <button ion-button block color="#488aff" (click)="addAddress()">提交收货地址</button>-->
   </ion-content>
   
