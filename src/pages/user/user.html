@@ -2,7 +2,7 @@
 
 <!--内容--> 
 <div class="gerenzhonhx">
-    <div class="iondiv"> <ion-icon name="create-outline"></ion-icon></div>
+    <div class="iondiv" [navPush]="EditorinfoPage"> <ion-icon name="create-outline"></ion-icon></div>
 	<h1 class="grzx_toub_beij"></h1>
 	<div class="grzx_toux_fus">
 		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p *ngIf="enSureLogin">您好，{{userLoginName}}</p></div>

@@ -13,6 +13,8 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { StorageProvider } from '../../providers/storage/storage';
 //我的房屋
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
+//修改个人信息
+import { EditorinfoPage } from '../editorinfo/editorinfo';
 
 import { TabsPage } from '../tabs/tabs';
 
@@ -32,7 +34,8 @@ export class UserPage {
   public AddressPage = AddressPage;
   public RepairlistPage = RepairlistPage;
   public ShoppinglistPage = ShoppinglistPage;
-  public HouseinfolistPage = HouseinfolistPage
+  public HouseinfolistPage = HouseinfolistPage;
+  public EditorinfoPage = EditorinfoPage;
    //自定义的变量
     public userinfo='';
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {

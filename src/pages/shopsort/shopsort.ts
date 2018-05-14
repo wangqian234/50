@@ -67,7 +67,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var span = "#cate_left li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
     //alert(pid);
-    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403 ';
+    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
          this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;

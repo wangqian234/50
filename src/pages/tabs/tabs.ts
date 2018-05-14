@@ -8,7 +8,7 @@ import { RepairlistPage } from '../repairlist/repairlist';
 import { ShoppingPage } from '../shopping/shopping';
 
 
-import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
+import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
 
 import { UserPage } from '../user/user';
@@ -28,11 +28,11 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = RepairlistPage;
   tab3Root = ShoppingPage;
-  tab4Root=UserPage;
+  tab4Root = UserPage;
 
   tab5Root = ShoppingPage;
-  tab6Root = PayfeePage;
-  tab7Root = TradegoodsOrderPage;
+  tab6Root = ShoppinglistPage;
+  tab7Root = CartPage;
   tab8Root = UserPage;
 
   constructor(public config:ConfigProvider,public http: Http,public navCtrl: NavController) {

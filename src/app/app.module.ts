@@ -123,6 +123,9 @@ import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
 //我的房屋页面
 import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
 
+//个人信息修改
+import { EditorinfoPage }from '../pages/editorinfo/editorinfo';
+
 
 
 
@@ -191,8 +194,8 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-    HouseinfolistPage
-
+    HouseinfolistPage,
+    EditorinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -254,6 +257,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     RepairevaluatePage,
     NewslistPage,
     HouseinfolistPage,
+    EditorinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
