@@ -110,7 +110,7 @@ public history='';
     }
     console.log(JSON.stringify(data))
     var api = this.config.apiUrl + '/api/vcode/register';
-    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.num = 5;
         this.isShowSend = false;

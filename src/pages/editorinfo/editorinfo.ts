@@ -87,15 +87,18 @@ export class EditorinfoPage {
     //修改用户基本信息，点击提交时生效
     editBasicInfo(){
       var data = {
+        "token": this.storage.get('token'),
         "name": this.personInfo.name,
         "birthday":this.personInfo.birthday,
         "sex":this.personInfo.sex,
       }
       console.log(JSON.stringify(data))
-    var api = this.config.apiUrl + '/api/User/edit_Basic?token' +  this.storage.get('token');
+    var api = this.config.apiUrl + '/api/User/edit_Basic';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("修改成功！");
+      alert("修改成功");
+      this.navCtrl.pop();
       } else {
         console.log("pg" + data.errmsg);
       }
@@ -114,10 +117,12 @@ export class EditorinfoPage {
         "industryInfo":this.personInfo.industryinfo,
       }
       console.log(JSON.stringify(data))
-    var api = this.config.apiUrl + '/api/User/edit_More?token' +  this.storage.get('token');
-    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+    var api = this.config.apiUrl + '/api/User/edit_More';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("修改成功!");
+      alert("修改成功");
+      this.navCtrl.pop();
       } else {
         console.log("pg" + data.errmsg);
       }

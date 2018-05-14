@@ -8,8 +8,9 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+//商城订单
+import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-groupbuy',
   templateUrl: 'tradegoods-groupbuy.html',
@@ -22,6 +23,8 @@ export class TradegoodsGroupbuyPage {
 
   public list=[];
   public SD_id;
+
+  ShoppinglistPage = ShoppinglistPage;
 
     public tabTest={
     li00:"type current",

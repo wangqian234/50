@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
-import {CityDataProvider} from "../../providers/city-data/city-data";
+import { StorageProvider } from '../../providers/storage/storage';
 
 //收货地址列表
 import { AddressPage } from '../address/address';
@@ -14,6 +14,16 @@ import { AddressPage } from '../address/address';
 })
 export class AddaddressPage {
 
+  public provinces = [];
+  public provinceCode = [];
+  public cities = [];
+  public cityCode = [];
+  public districts = [];
+  public provinceVal = ""; //省份id
+  public cityVal = ""; //城市id
+  public districtVal = ""; //街区id
+
+  public addressId ="";
   public token = "";
   public areaList;
   public provice = [];
@@ -35,15 +45,13 @@ export class AddaddressPage {
     token : ''
   }
 
-  cityColumns: any[];
-
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public cityDataProvider: CityDataProvider) {
-    this.cityColumns = this.cityDataProvider.cities;
+    public storage:StorageProvider) {
   }
 
   ionViewWillEnter(){
     this.getRem();
+    this.getProvinces();
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
       var ss = this.addressList.address.split("〡");
@@ -66,22 +74,20 @@ export class AddaddressPage {
 
   
   addAddress(){
-    // var data = {
-    //   'token' : this.token,
-    //   'provinceVal' : this.addressList.provinceVal,
-    //   'cityVal' : this.addressList.cityVal,
-    //   'districtVal' : this.addressList.districtVal,
-    //   'province' : this.addressList.province,
-    //   'city' : this.addressList.city,
-    //   'district' : this.addressList.district,
-    //   'address' : this.addressList.address,
-    //   'code' : this.addressList.code,
-    //   'mobile' : this.addressList.mobile,
-    //   'tel' : this.addressList.tel,
-    //   'default' : this.addressList.default,
-    // }
-    this.addressList.token = this.token;
-    var data = this.addressList;
+    var data = {
+      'token' : this.storage.get("token"),
+      'provinceVal' : this.addressList.provinceVal,
+      'cityVal' : this.addressList.cityVal,
+      'districtVal' : this.addressList.districtVal,
+      'province' : this.getName(this.provinces,this.addressList.provinceVal),
+      'city' : this.getName(this.cities,this.addressList.cityVal),
+      'district' : this.getName(this.districts,this.addressList.districtVal),
+      'address' : this.addressList.address,
+      'code' : this.addressList.code,
+      'mobile' : this.addressList.mobile,
+      'tel' : this.addressList.tel,
+      'default' : this.addressList.default,
+    }
     if(!this.navParams.get('item')){  //新加还是修改判断
       var api = this.config.apiUrl + '/user/address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
@@ -108,6 +114,57 @@ export class AddaddressPage {
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+  }
+
+    //获取省份信息
+  getProvinces(){
+    var api = this.config.apiUrl + '/api/Address/dw_Province?token=' + this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.provinces = data.list;
+      } else {
+        alert(data.errmsg);
+      }
+      console.log(data.list);
+    });
+  }
+
+  //获取城市信息
+  getCities(){
+    var api = this.config.apiUrl + '/api/Address/dw_City?provinceCode=' + this.addressList.provinceVal;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.cities = data.list;
+        alert(data.list);
+      } else {
+        alert(data.errmsg);
+      }
+      console.log(data.list);
+    });
+  }
+
+  //获取街区信息
+  getDistricts(){
+    var api = this.config.apiUrl + '/api/Address/dw_District?cityCode=' + this.addressList.cityVal;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.districts = data.list;
+        alert(data.list);
+      } else {
+        alert(data.errmsg);
+      }
+      console.log(data.list);
+    });
+  }
+
+  //根据code获取地区名
+  getName(arr,code){
+    for(var i=0;i<arr.length;i++){
+      if(arr[i].code = code){
+        return arr[i].name;
+      }
+    }
+    return "";
   }
  
 }
