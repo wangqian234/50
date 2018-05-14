@@ -10,22 +10,25 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content >
     <!--商品订单列表--> 
   <div id="order-content">
 
       <div class="order-list">
             <div class="order-item">
-            <li *ngFor="let item of list" >
-			    <a href="XiangQ_Y.html">
-			    	<div class="lieb_img"><img src={{item.img}}></div>
-			    	<div class="lieb_txt">
-                    <p class="biao">{{item.model.tradeaddress}}</p>
-                    <p class="biao">{{item.model.pretotalprice}}</p>
-                    <p class="biao">{{item.list[0].goods_title}}</p>
-		    		</div>
-		    	</a>
+            <li >
+            <a href="XiangQ_Y.html">
+              <div class="lieb_img"><img src={{list.img}}></div>
+              <div class="lieb_txt">
+                      <p class="biao">{{model.tradeaddress}}</p>
+                      <p class="biao">订单状态——{{model.tradestate}}</p>
+                      <p class="biao">订单状态名称——{{model.statename}}</p>
+                      <p class="biao">{{model.pretotalprice}}</p>
+                      <p class="biao">{{list.goods_title}}</p>
+                      <p class="biao">购买数量——{{list.goods_num}}</p>
+                      <p class="biao">商品退款状态——{{list.refund_state}}</p>
+              </div>
+            </a>
 		        </li> 
             </div>
        </div>

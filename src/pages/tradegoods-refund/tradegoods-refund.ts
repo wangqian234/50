@@ -29,7 +29,8 @@ export class TradegoodsRefundPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-        this.trade_id=navParams.get('tradeId');
+        this.trade_id=this.navParams.get('tradeId');
+        alert(this.trade_id);
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -41,17 +42,26 @@ export class TradegoodsRefundPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
     getdetaillist(){
+     var j=3;
      var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.trade_id+'&token='+this.token;
-     alert("看是否发送了请求");
+     alert("看是否发送了请求"+api);
+     console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errode==0 && data.errmsg == 'OK'){
+        alert("请求成功");
+       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list = data.model;
-         alert("请求成功");
+        
          console.log(data);
          alert(JSON.stringify(data));
-     } else {
+     } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.getdetaillist();
+          }
+      } else {
         alert(data.errmsg);
-         alert("请求失败");
+        alert("请求失败");
      }
      })
   }

@@ -19,6 +19,7 @@
             <span>关联房屋信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
+        
         <ion-item>
             <ion-icon style="color:#8DC43C;" name="logo-yen"></ion-icon>
             <span>费用明细</span>
@@ -43,7 +44,7 @@
             <span>商城订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item [navPush]="ShoppinglistPage">
+        <ion-item [navPush]="TradegoodsGroupbuyPage" [navParams]="{id:0}">
              <ion-icon style="color:#CC8F33;" name="star-half"></ion-icon>
             <span>团购订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
@@ -82,7 +83,6 @@
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
     </div>
-
 
         <ion-item-divider >
         </ion-item-divider>
