@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>团购订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+      <!--团购订单列表--> 
+  <div id="order-content">
+        <ul class="order-nav clearfix" id="test">
+            <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:;">待开团</a></li>
+            <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)"><a href="javascript:;">组团中</a></li>
+            <li class={{tabTest.li02}} data-nav="receive" (click)="paymentEvent(2)"><a href="javascript:;">组团成功</a></li>
+            <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(3)"><a href="javascript:;">组团失败</a></li>
+        </ul>
+        <div class="order-list">
+            <div class="order-item">
+            <li *ngFor="let item of list" >
+			    <a href="XiangQ_Y.html" >
+			    	<div class="lieb_img"><img src={{item.img}}></div>
+			    	<div class="lieb_txt">
+		    		<p class="biao">{{item.goods_id}}</p>
+                    <p class="biao">订单状态——{{item.buy_state}}</p>
+                    <p class="biao">{{item.buy_state}}</p>
+                    <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
+                    <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
+                    <p class="bend"><i>{{item.preprice}}</i></p>
+                    <p class="bend">购买数量<i>{{item.goods_num}}</i></p>
+		    		</div>
+		    	</a>
+
+		    </li> 
+                
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>

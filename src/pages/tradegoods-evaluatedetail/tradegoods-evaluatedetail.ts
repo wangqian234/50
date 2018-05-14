@@ -35,6 +35,7 @@ export class TradegoodsEvaluatedetailPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
+    var j=3;
      var api = this.aa+'/api/tradegoods/info?trade_Id='+this.SD_id+'&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
@@ -46,7 +47,13 @@ export class TradegoodsEvaluatedetailPage {
          //alert(JSON.stringify(data.list[0].goods_list));
          // alert(JSON.parse(data));
          console.log(data);
-     } else {
+     } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.getdetaillist();
+          }
+      }else {
         alert(data.errmsg);
      }
      })

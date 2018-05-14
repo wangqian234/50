@@ -13,6 +13,9 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { StorageProvider } from '../../providers/storage/storage';
 
 import { TabsPage } from '../tabs/tabs';
+//王慧敏
+//团购订单
+import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
 
 @Component({
   selector: 'page-user',
@@ -30,6 +33,9 @@ export class UserPage {
   public AddressPage = AddressPage;
   public  RepairlistPage = RepairlistPage;
   public ShoppinglistPage = ShoppinglistPage;
+  //王慧敏
+  public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
+
    //自定义的变量
     public userinfo='';
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {

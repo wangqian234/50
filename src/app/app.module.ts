@@ -100,6 +100,8 @@ import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
 import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
 //评价详情
 import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tradegoods-evaluatedetail';
+//团购列表界面
+import {TradegoodsGroupbuyPage}from '../pages/tradegoods-groupbuy/tradegoods-groupbuy';
 
 
 //房屋基本信息
@@ -177,6 +179,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     GoodsoderdetailPage,
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
+    TradegoodsGroupbuyPage,
 
     HouseinfoPage,
     NewinfoPage,
@@ -239,7 +242,8 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     GoodsoderdetailPage,   
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
-
+    TradegoodsGroupbuyPage,
+    
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
