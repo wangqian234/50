@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the RebuildpassPage page.
@@ -21,9 +22,12 @@ export class RebuildpassPage {
   public isShowSend=true;   /*是否显示发送验证码的按钮*/
   public num=5 ;   /*倒计时的数量*/
   public tel='';
+  public tel2='';
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
-  public config:ConfigProvider,public http: Http) {
+  public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
+    this.tel = this.storage.get("userName")
+    this.tel2 = this.tel.substr(0,3)+"****"+this.tel.substr(7);
   }
 
   ionViewDidLoad() {
