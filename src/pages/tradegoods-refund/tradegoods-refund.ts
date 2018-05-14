@@ -89,4 +89,9 @@ export class TradegoodsRefundPage {
 // 		}
 //   }
 
+
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

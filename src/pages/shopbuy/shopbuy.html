@@ -1,66 +1,81 @@
-<!--
-  Generated template for the ShopbuyPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>确认订单</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
 
 <ion-content >
-<div class="shangp_lieb_beij">
-	<div class="sp_daoh">
-	
-	</div>
-	
-	<ul class="shangp_lieb_k_er">
-    <!--第一部分-->
-		<li >
-			<a>
-        
-					<p class="biao">收货人:{{addlist.address_name}}</p>
-					<p class="px26">联系方式:{{addlist.address_mobile}}</p>
-          <p >地址：{{addlist.Address}}</p>
 
-			</a>
-		</li>
-    <!--第二部分-->
-    <li >
-			<a>
-          <p class="px26">店铺：{{shoplist.name}}</p>
-				<!--<div class="lieb_img"><img src={{item.img}}></div>-->
-          <p class="px26">项目：{{goodSlist.title}}</p>
-          <p class="px26">价格:{{dtlist.totalprice}}</p>
-		  
-			</a>
-		</li>
+ <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">确认订单</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+
+    <!--收货信息-->
+		<div class="jie_diz">
+				<a href="ShouHuoDiZhi.html">
+					<p>收货人:{{addlist.address_name}} &nbsp; {{addlist.address_mobile}}</p>
+					<p class="p">地址：{{addlist.Address}}<i></i></p>
+				</a>
+		</div>
+   
+    <!--商品信息-->
+<div class="caix"></div>
+<div class="gouwuc_kk gouwuc_kk_jies">
+ 	<ul>
+ 		<li> 
+ 			<div class="diannao_shanp"> 
+				 <p class="px26 bt">{{shoplist.name}}</p>
+
+ 				<a href="XiangQ_Y.html"><h1><img src="goodSlist.img"></h1></a>
+ 				<div class="you">
+ 					<a href="XiangQ_Y.html"><p class="px24 bt">{{goodSlist.title}}</p></a>
+ 					<p class="xh">规格</p>
+ 					<div class="youjfy">
+						<div class="goum_sl">
+							<p class="px26 jiaq">￥{{dtlist.totalprice}}</p>
+							<div class="counter_box">
+								<i class="jian">-</i>
+								<input type="text" value="1">
+								<i class="jia">+</i>
+							</div>
+						</div>
+ 					</div> 
+ 				</div>
+ 			</div> 
+ 		</li>
+ 	</ul>
+</div>
+
     <!--第三部分-->
-     <li >
-			<a>
-          <p class="px26">数量：{{goodSlist.buynum}}</p>
-          <p class="px26">运费：￥{{carriagelist.postage}}元</p>
-          <p class="px26">积分抵扣:{{creditslist.pricemax}}元</p>
-					<p class="px26">ceshi:{{test}}元</p>
-		  
-			</a>
-		</li>
+		<div class="gei_shangj_ly">
+			<h1>给商家留言：</h1>
+			<input type="text" name="trade_Memo" placeholder="请您留言">
+		</div>
+		<div class="jies_qian">
+	
+		<p class="px26">运费: ￥{{carriagelist.postage}}元</p> 
+		<p class="px26"><input type="checkbox" 
+		 name="jf" value="Car" checked="checked" /> {{dtlist.useintegraltitle}}</p>
+		</div>
 <!--第四部分-->
-      <li >
-			<a>
-                  
-		  <p>总计：{{totalPrice}}元</p>
-			
-      <!--*dtlist.buynum+carriagelist.postage-->
      
-			 <button ion-button (click)="goBuy()">提交订单</button>
-			</a>
-		</li>
-	</ul>
+			 <!--<button ion-button (click)="goBuy()">提交订单</button>-->
+		
+<!--底部导航-->
+
+<div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem jiesy"> 
+		<div class="zhong"><p>总计：<em>￥{{totalPrice}}</em></p></div>
+		<div class="you">
+			<div class="goum">
+				<a href="wanagid_JieSuan.html">提交订单</a>  
+			</div>
+		</div>
+	</div>
 </div>
 </ion-content>

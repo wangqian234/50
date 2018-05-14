@@ -149,4 +149,9 @@ export class TradegoodsReapPage {
 // 		}
 //   }
 
+
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 }

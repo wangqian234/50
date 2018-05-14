@@ -68,38 +68,53 @@ this.totalPrice=this.test*this.te;
       that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
       //alert(JSON.stringify(that.addlist));
       console.log(that.addlist);
-
-     
-           
+    
     })
-  
+
      //店铺信息
       var api2=this.wdh+'/api/shop/info?sId=1';
             this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
+               
             console.log(data2);
       that.shoplist = data2.model;
+      
       console.log(data2);
-      })
+    })
+
+     
+    this.post();
+}
+post(){
+    //alert("进入post");
+    var that=this;
      //运费postage
-     var api3=this.wdh+'/api/trade/info?addressId=1&gId=1&gsId=1&goodsNum=1'+this.token;
-            this.http.get(api3).map(res => res.json()).subscribe(data3 =>{
-            console.log(data3);
-      that.carriagelist = data3.model;
-      console.log(data3);
+     var api=this.wdh+'/api/trade/info?addressId=1&gId=1&gsId=1&goodsNum=1&token='+this.token;
+            this.http.get(api).map(res => res.json()).subscribe(data =>{
+            
+            console.log(data);
+      that.carriagelist = data.model;
+      console.log(data);
        })
      //积分抵扣pricemax
-     var api4=this.wdh+'/api/userintegral/info?preDecimal=111'+this.token;
+         
+  var api4=this.wdh+'/api/userintegral/info?preDecimal=111&token='+this.token;
             this.http.get(api4).map(res => res.json()).subscribe(data4 =>{
             console.log(data4);
       that.creditslist = data4.model;
-      console.log(data4);
-       })
+      
+      console.log(data4);})
+    
+       
      //提交订单
    
      //this.sumPrice();
     
   }
   
+
+    backTo(){
+    this.navCtrl.pop();
+  }
 //计算总价
 //  sumPrice(){
 //        var tempAllPrice=0;

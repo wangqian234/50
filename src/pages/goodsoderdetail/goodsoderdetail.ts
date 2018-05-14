@@ -70,5 +70,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
    //this.onload2();
   }
 
-
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

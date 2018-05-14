@@ -117,4 +117,8 @@ export class TradegoodsGroupbuyPage {
     //console.log('ionViewDidLoad TradegoodsGroupbuyPage');
   }
 
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

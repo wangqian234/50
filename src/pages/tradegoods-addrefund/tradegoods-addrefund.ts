@@ -73,4 +73,8 @@ export class TradegoodsAddrefundPage {
     //console.log('ionViewDidLoad TradegoodsAddrefundPage');
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 }
