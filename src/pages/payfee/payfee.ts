@@ -20,11 +20,10 @@ import { OnlinepaymentPage } from '../onlinepayment/onlinepayment';
   templateUrl: 'payfee.html',
 })
 export class PayfeePage {
+ // public roomid:'';
    
     //获取费用明细
-  public paymentList={
-    roomId:''
-  }
+  public roomId=[];/*数组  房屋id */
   //接收数据用
   public modellist=[];
   public expenselist=[];
@@ -97,18 +96,11 @@ export class PayfeePage {
     changeRoom(roomid){
     if(roomid === "add"){
       this.navCtrl.push(BindroomPage);
-    }
-  }
-  getRem(){
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-  }
-  //查询物业总费用列表
-  getallpaylist(){
-      this.paymentList.roomId='1';
+    }else{
     var that=this;
-    var api = this.config.apiUrl+'/house/charge/list?';
-     this.http.post(api,this.paymentList).map(res => res.json()).subscribe(data =>{
+    var api = this.config.apiUrl+'/api/charge/list?roomId='+roomid;//获取前台界面上显示的房屋id
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       console.log(JSON.stringify(data))
           if(data.errcode===0&&data.errmsg==='OK'){
               //总计金额
               this.modellist=data.json.totalNum.model;
@@ -117,17 +109,28 @@ export class PayfeePage {
               //预交剩余
               this.prepayslist=data.prepays.list;
               //半年缴费记录
-              this.fundloglist=data.fundLog.list;
+              this.fundloglist=data.fundLog.list;   
+          }else{       
+            alert(data.errmsg)
           }
      })
   }
-   //查询用户绑定的所有房屋
+ }
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+  }
+  //查询物业总费用列表
+  getallpaylist(){
+
+  }
+  //查询用户绑定的所有房屋
   getroomId(){
     var that=this;
-    var api = this.config.apiUrl+'/vuserroom/dw?token='+this.storage.get('token');
+    var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.roomidlist=data.list;//怎么知道那个是默认房屋
+            that.roomidlist=data.list;    //怎么知道那个是默认房屋
             console.log(this.roomidlist)
           }else{
             alert(data.errmsg)

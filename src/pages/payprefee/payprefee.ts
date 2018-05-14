@@ -16,8 +16,9 @@ export class PayprefeePage {
 
   public projectlist=[];
   public edificelist=[];
+  public roomlist=[];
   public roomidlist=[];
-  
+
   //post请求
   public payrefeeList={
     management:'',
@@ -25,7 +26,8 @@ export class PayprefeePage {
     electricity:'',
     parking:'',
     rubbish:'',
-
+    roomId:'',
+    token:'',
   }
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
@@ -35,8 +37,7 @@ export class PayprefeePage {
     
     ionViewWillLoad(){
     this.getRem();
-
-   
+    this.getroomId();   
   }
 
   ionViewDidLoad() {
@@ -50,6 +51,7 @@ export class PayprefeePage {
   changeRoom(roomid){
     if(roomid === "add"){
       $('#selectOther').css('display','block');
+      this.dw_Project();
     } else {
       $('#selectOther').css('display','none');
     }
@@ -58,10 +60,33 @@ export class PayprefeePage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
+  //查询用户绑定的所有房屋
+  getroomId(){
+    var that=this;
+    var j=3;
+    var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if(data.errcode===0&&data.errmsg==='OK'){
+            this.roomidlist=data.list;//怎么知道那个是默认房屋,得到前台显示的房屋
+            console.log(this.roomidlist)
+          } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.getroomId();
+          }
+      }else{
+            alert(data.errmsg)
+          }
+     })
+  }
+
 //结算函数 
  gopay(){
     var that=this;
-    var api = this.config.apiUrl+'/house/charge/add?';
+    // this.payrefeeList.roomId=roomid;
+    // this.payrefeeList.token=this.storage.get("token")
+    var api = this.config.apiUrl+'/api/charge/add?';
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
          alert("高海乐支付成功")
           if(data.errcode===0&&data.errmsg==='OK'){
@@ -74,34 +99,39 @@ export class PayprefeePage {
  //项目下拉列表
  dw_Project(){
       var that=this;
-    var api = this.config.apiUrl+'/house/house/dw_Project?';
+    var api = this.config.apiUrl+'/api/house/dw_Project?';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             this.projectlist=data.list;
+            console.log(this.projectlist)
           }else{
             alert(data.errmsg)
           }
      })
  }
-  //项目下拉列表
- dw_Edifice(id){
-      var that=this;
-    var api = this.config.apiUrl+'/house/house/dw_Edifice?projectId='+id;
+  //楼栋下拉列表
+ getEdifice(projectId){
+    var that=this;
+    var api = this.config.apiUrl+'/api/house/dw_Edifice?projectId='+projectId;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             this.edificelist=data.list;
+            alert(1)
+            console.log(this.edificelist)
           }else{
             alert(data.errmsg)
           }
      })
  }
-  //项目下拉列表
- dw_Room(id){
-      var that=this;
-    var api = this.config.apiUrl+'/house/house/dw_Room?edificeId='+id;
+  //房屋下拉列表
+ getRoom(edificeId){
+     var that=this;
+    var api = this.config.apiUrl+'/api/house/dw_Room?edificeId='+edificeId;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.roomidlist=data.list;
+            alert("房屋")
+            this.roomlist=data.list;
+            console.log(this.roomlist)
           }else{
             alert(data.errmsg)
           }

@@ -46,13 +46,13 @@ export class RepairaddPage {
     this.navCtrl.pop();
   }
 
-    //查询小区-楼栋-房屋
+    //查询所有小区
   getroomId(){
     var that=this;
-    var api = this.config.apiUrl+'/crm/project/dw?';
+    var api = this.config.apiUrl+'/api/project/dw';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.roomidlist=data.list;//怎么知道那个是默认房屋
+            that.roomidlist=data.list;
             console.log(this.roomidlist)
           }else{
             alert(data.errmsg)
@@ -62,11 +62,11 @@ export class RepairaddPage {
   //根据工单类型查询类别
   getcategory(i){
     var that=this;
-    var api = this.config.apiUrl+'/crm/sqr/category/dw?type='+i;
+    var api = this.config.apiUrl+'/api/category/dw?type='+i;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.stypelist=data.list;//怎么知道那个是默认房屋
-            console.log(this.roomidlist)
+            that.stypelist=data.list;
+            console.log(this.stypelist)
           }else{
             alert(data.errmsg)
           }
@@ -74,17 +74,15 @@ export class RepairaddPage {
   }
   //添加工单
   showPopup(){
-        var that=this;
-    var api = this.config.apiUrl+'/crm/srq/list/add?';
+    var that=this;
+    var api = this.config.apiUrl+'/api/list/add?';
      this.http.post(api,this.addlist).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.repairlist=data.list;//怎么知道那个是默认房屋
-            console.log(this.roomidlist)
+            that.repairlist=data.list;//怎么知道那个是默认房屋
+            console.log(this.repairlist)
           }else{
             alert(data.errmsg)
           }
      })
   }
-
-
 }

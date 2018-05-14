@@ -55,6 +55,8 @@ export class RegisterpasswordPage {
         alert('确认密码和密码不一样');
       }else if(this.registerinfo.password.length<6){
         alert('密码长度不能小于6位');
+      }else if(this.registerinfo.ckecked == false) {
+        alert('请阅读汇生活注册条款')
       }else{
         var api = this.config.apiUrl + '/api/user/register?userName=' + this.registerinfo.userName + "&userPwd=" + this.registerinfo.password +
         "&mobile=" + this.registerinfo.userTel + "&code=" + this.registerinfo.regist;
@@ -70,16 +72,15 @@ export class RegisterpasswordPage {
           }
         })
       }
-
   }
 
   //发送验证码
   ownRegist(){
-    if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.registerinfo.userName))){
+    if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.registerinfo.userTel))){
       alert('请输入正确的手机号码');
       return;
     }
-    var tel = this.registerinfo.userName
+    var tel = this.registerinfo.userTel
     var data= {
       "mobile": tel
     }

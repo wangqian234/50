@@ -74,11 +74,11 @@ export class RepairlistPage {
 
 //   }
   getProductList(infiniteScroll){
-     var that=this;
-    var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
+    var that=this;
+    var api= this.config.apiUrl + '/api/srq/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.repairlist=data.list;//怎么知道那个是默认房屋
+            that.repairlist=data.list;//怎么知道那个是默认房屋
             console.log(this.repairlist)
           }else{
             alert(data.errmsg)

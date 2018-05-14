@@ -15,7 +15,7 @@ import { UserPage } from '../user/user';
 
 import{ PayfeePage } from '../payfee/payfee';
 
-import {TestPage}from '../test/test'
+
 
 @Component({
   templateUrl: 'tabs.html'
@@ -23,8 +23,8 @@ import {TestPage}from '../test/test'
 export class TabsPage {
 
 
-  tab1Root = TestPage;
- // tab1Root = HomePage;
+  
+  tab1Root = HomePage;
   tab2Root = RepairlistPage;
   tab3Root = ShoppingPage;
   tab4Root=UserPage;

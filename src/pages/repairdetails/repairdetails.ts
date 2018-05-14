@@ -58,7 +58,7 @@ export class RepairdetailsPage {
   //获取工单详情信息
   getrepairdetails(){
     var that = this;
-    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
+    var api = this.config.apiUrl+'/api/srq/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
       if(data.errcode===0&&data.errmsg==='OK'){
         this.repairdetaillist=data.list;
@@ -73,7 +73,7 @@ export class RepairdetailsPage {
    this.editcloselist.listId=this.repairDetial.List_Id;
    this.editcloselist.token=this.storage.get('token');
     var that = this;
-    var api = this.config.apiUrl+'/api/crm/srq/list/edit_close';
+    var api = this.config.apiUrl+'/api/srq/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)

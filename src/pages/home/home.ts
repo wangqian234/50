@@ -53,7 +53,7 @@ export class HomePage {
   public focusList=[];  /*数组 轮播图*/
   public newsList=[];   /*数组 最新资讯*/
   public publicget=[];  /*数组 公示公告*/
-
+  public paymentList=[];/*数组 物业缴费明细 */
   //跳转页面
   public RepairaddPage=RepairaddPage;
   public BindroomPage=BindroomPage;
@@ -78,6 +78,8 @@ export class HomePage {
           this.getNews();
           //获取最新公告
           this.getPublic();
+          //获取物业缴费
+          this.getpayment();
       } else {
           this.enSureLoginHome = false;
       }
@@ -248,6 +250,28 @@ goShop(){
       id:id
     });
   }
+//获取物业费用
+getpayment(){
+   var that=this;
+   var j = 3;
+    var api = this.config.apiUrl + '/api/charge/list?roomId='+this.roomid;   //获取到绑定的房屋
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.paymentList = data.json.totalNum.model;
+        console.log(this.paymentList);
+      } else if(data.errcode === 40002){
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getpayment();
+          }
+      } else {
+        alert(data.errmsg)
+      }
+       console.log("获取物业费用" , data)
+    });
+
+}
 
   changeRoom(){
     alert(this.roomid);

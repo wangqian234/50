@@ -45,7 +45,7 @@ export class RepairevaluatePage {
       this.evaluate.listId=this.listId;
       //this.evaluate.qualityscore= 通过ngmodel来获取
       var that =this;
-      var api = this.config.apiUrl+'/api/list/edit_Score';
+      var api = this.config.apiUrl+'/api/srq/list/edit_Score';
       this.http.post(api,this.evaluate).map(res => res.json()).subscribe(data =>{
         if(data.errcode===0&&data.errmsg==='OK'){
             alert("评价成功")

@@ -17,7 +17,7 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option selected *ngFor="let item of roomidlist" value={{roomidlist.id}}>{{item.name}}</ion-option>
         <ion-option>这是两栋楼</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
@@ -27,10 +27,12 @@
    </div>
 
   <div class="otherUser_content" style="margin-top:10px">
-    <ion-list>
+    <ion-list *ngFor="let list of list">
         <ion-item>
-            <div class="fee_time">
-                <input type="radio" />
+            <div class="fee_time"  (tap)="changePays()">
+               <dt>
+					<ion-checkbox color="danger" [(ngModel)]="list.checked" (ionChange)="changePays()"></ion-checkbox>
+				</dt> 
             </div>
           <div class="fee_content">{{list.data}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               物业管理费</div>

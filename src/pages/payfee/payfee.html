@@ -17,7 +17,7 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option selected *ngFor="let item of roomidlist" value={{item.id}}>{{item.name}}</ion-option>
         <ion-option>这是两栋楼</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
@@ -27,7 +27,7 @@
 </div>
 
     <div class="fee">
-        <div class="fee1"><p>￥0.002</p><p>欠费总计</p></div>
+        <div class="fee1"><p>￥0.002{{modellist.totalFee}}</p><p>欠费总计</p></div>
         <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
     </div>
 

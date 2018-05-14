@@ -17,7 +17,7 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
+        <ion-option selected  *ngFor="let roomidlist of roomidlist" value={{roomidlist.id}}>{{roomidlist.name}}</ion-option>
         <ion-option>这是两栋楼</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
@@ -29,43 +29,32 @@
 <div id="selectOther" style="margin-top:10px;display:none">
       <ion-item>
       <ion-label>请选择房屋</ion-label>
-        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
-        <ion-option selected>请选择小区</ion-option>
-        <ion-option>这是两栋楼</ion-option>
+        <ion-select [(ngModel)]="projectId" (ngModelChange)="getEdifice(projectId)"  style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-option selected >请选择小区</ion-option>
+        <ion-option *ngFor="let list of projectlist" value={{list.id}}>{{list.name}}</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
     </ion-item>
           <ion-item>
+           
       <ion-label>请选择房屋</ion-label>
-        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-select  [(ngModel)]="edificeId" (ngModelChange)="getRoom(edificeId)" style="max-width:74%;" cancelText="取消" okText="确认">
         <ion-option selected>请选择楼栋</ion-option>
-        <ion-option>这是两栋楼</ion-option>
+        <ion-option *ngFor="let edificelist of edificelist" value={{edificelist.id}}>{{edificelist.name}}</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
     </ion-item>
           <ion-item>
+           
       <ion-label>请选择房屋</ion-label>
-        <ion-select style="max-width:74%;" cancelText="取消" okText="确认">
-        <ion-option selected>请选择房屋</ion-option>
-        <ion-option>这是两栋楼</ion-option>
+        <ion-select   [(ngModel)]="roomId"  style="max-width:74%;" cancelText="取消" okText="确认">
+        <ion-option selected >请选择房屋</ion-option>
+        <ion-option *ngFor="let item of roomlist"  value={{item.id}}> {{item.code}}</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
