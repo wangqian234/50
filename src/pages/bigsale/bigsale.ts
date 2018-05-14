@@ -83,6 +83,10 @@ export class BigsalePage {
      })
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 
 
 }
