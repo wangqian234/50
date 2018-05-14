@@ -63,4 +63,8 @@ export class TradegoodsEvaluatedetailPage {
     //console.log('ionViewDidLoad TradegoodsEvaluatedetailPage');
   }
 
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

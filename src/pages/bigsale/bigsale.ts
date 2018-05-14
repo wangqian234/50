@@ -8,15 +8,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
-//团购详情界面
-import { GroupdetailPage } from '../groupdetail/groupdetail';
+//商品详情界面
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
-/**
- * Generated class for the BigsalePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -24,7 +18,7 @@ import { GroupdetailPage } from '../groupdetail/groupdetail';
   templateUrl: 'bigsale.html',
 })
 export class BigsalePage {
-  public GroupdetailPage=GroupdetailPage;
+  public ShopgoodsinfoPage=ShopgoodsinfoPage;
   public dataGlist=[];
   public goodMlist=[];
   public dataSlist=[];
@@ -59,29 +53,6 @@ export class BigsalePage {
   }
 
 
-//测试传递
-  getDetailData(pid){
-   //alert(pid);
-    var that=this;
-    var api=this.wdh+'/api/goods/info?goods_Id='+pid+'&token='+this.token;
-        this.http.get(api).map(res => res.json()).subscribe(data =>{
-     
-              
-       that.dataGlist = data.json['data_group'].list;//list为空
-             // console.log(that.dataGlist);
-      that.goodMlist=data.json['good_Model'].model;
-     // alert(JSON.stringify(that.goodMlist));
-      console.log(that.goodMlist);
-
-      that.dataSlist=data.json['data_Sizes'].list;
-      // alert(JSON.stringify(that.dataGlist));
-      // alert(JSON.stringify(that.dataSlist));
-      console.log(that.dataSlist);
-       
-      
-     
-     })
-  }
 
   backTo(){
     this.navCtrl.pop();

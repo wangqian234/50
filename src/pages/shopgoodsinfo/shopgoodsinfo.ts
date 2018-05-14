@@ -10,6 +10,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import {ShoppingevaluatePage} from '../shoppingevaluate/shoppingevaluate'
 //购物车
 import { CartPage} from '../cart/cart'
+//商品购买页面
+import { ShopbuyPage } from '../shopbuy/shopbuy';
 /**
  * Generated class for the ShopgoodsinfoPage page.
  *
@@ -26,6 +28,7 @@ export class ShopgoodsinfoPage {
   //跳转页面
     public ShoppingevaluatePage=ShoppingevaluatePage;
     public CartPage = CartPage;
+    public ShopbuyPage=ShopbuyPage;
     //定义需要隐藏的标志变量
     public showpingj =false;
     //接收数据的 list
@@ -33,6 +36,7 @@ export class ShopgoodsinfoPage {
     public goodMlist=[];
     public dataGlist=[];
     public dataSlist =[];
+    public strs=[];
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
     //定义token
@@ -61,12 +65,19 @@ export class ShopgoodsinfoPage {
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
     
         that.goodMlist = data.json['good_Model'].model;
+        this.fenge(data.json['good_Model'].model.imgsrc_list);
         that.dataGlist = data.json.data_group.list;
         that.dataSlist = data.json.data_Sizes.list[0];  
       
     })
   }
 
+fenge(str){ 
+ 
+ this.strs=str.split(","); //字符分割
+//alert(this.strs[0]);
+
+}
   //加入购物车函数
    addcart(){ 
     this.addcarList.token=this.token;
@@ -104,5 +115,4 @@ export class ShopgoodsinfoPage {
   backTo(){
     this.navCtrl.pop();
   }
-
 }
