@@ -8,7 +8,7 @@
 	<div class="zhongj_k">
 		<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>
 		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn($event)" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl">

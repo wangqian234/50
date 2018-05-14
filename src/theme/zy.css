@@ -1458,15 +1458,15 @@ background: #fafafa;}
 
 /**/
 .zhongjain_daoh ul li.qbdd{
-	border:solid 1px #e32c27;
+	border:solid 1px #ffe0ba;
 	border-top-left-radius: 0.08rem;
 	border-bottom-left-radius: 0.08rem;
 	margin: 0;
 }
 .zhongjain_daoh ul li.qbdd.no{
-	background: #e32c27;
+	background: #ffe0ba;
 }
-.zhongjain_daoh ul li.qbdd.no a{color: #fff;}
+.zhongjain_daoh ul li.qbdd.no a{color: gray;}
 .zhongjain_daoh ul li.qbdd_you{
 	border-top-left-radius: 0rem;
 	border-bottom-left-radius: 0rem;

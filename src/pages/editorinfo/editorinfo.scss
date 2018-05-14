@@ -1,0 +1,35 @@
+page-editorinfo {
+    .zhuc_qieh{
+        margin: 0;
+    }
+    .dengl_anniu a{
+        background: #448AFF;
+        border: solid #448AFF 1px;
+    }
+    .zhuc_qieh div.zhuc a{
+        color:gray
+    }
+    .zhuc_qieh div.zhuc{
+        height:0.66rem;
+        border-bottom: solid 1px #448AFF;
+    }
+    .denglu_k {
+        margin: 0.4rem 0.2rem;
+    }
+    .choose {
+        float: right;
+        cursor: pointer;
+        height: 32px;
+        width: 60%;
+        display: inline-block;
+        position: relative;
+        line-height: 32px;
+        font-size: 18px;
+        text-align: center;
+        padding-right: 10px;
+    }
+    .denglu_k .denglk_l .mz{
+        width:25%;
+    }
+
+}

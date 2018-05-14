@@ -101,4 +101,8 @@ export class ShopgoodsinfoPage {
     console.log('ionViewDidLoad ShopgoodsinfoPage');
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 }
