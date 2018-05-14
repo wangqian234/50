@@ -50,21 +50,34 @@ ion-item{
 .input_box{
     z-index: 4;
     position: absolute;
-    margin-top: 37rem;
-    width: 40rem;
+    margin-top: 40%;
+    width: 70%;
     margin-left:auto;
     margin-right:auto;
     left: 0; right: 0;
 }
 .ensure_button{
-   z-index: 5 !important;
-   font-size: 3rem !important;
-   height: 6rem;
-   margin-top: 2.5rem;
+   z-index: 5;
+   font-size: 0.4rem;
+   height: 0.7rem;
+   color: #535353;
+   background-color: #D7EAFE;
+   border-radius: 5px;
+    span{
+        font-size: 0.3rem;
+    }
 }
 .div_a{
+    font-size: 0.25rem;
     text-align:center;
-    margin-top: 2rem;
+    color: rgba(255,255,255,1);
+}
+.div_a_pass{
+    font-size: 0.25rem;
+    text-align:center;
+    margin-top: -0.2rem;
+    margin-bottom: 0.15rem;
+    color: rgba(255,255,255,1);
 }
 a{
     font-size: 2rem !important;
@@ -74,8 +87,29 @@ a{
     width: 98%;
     margin:auto;
     margin-top: 0.3rem;
-    height: 5.5rem; 
-    border-bottom:1px solid gainsboro;
+    height: 0.7rem; 
+    border:1px solid #87B2EC;
+    border-radius: 5px;
+    background-color: #87B2EC;
+    ion-icon{
+        margin-top: 0.1rem;
+            font-size:0.5rem;
+            margin-left: 0.2rem;
+            float:left;
+            color:white;
+            position: absolute;
+        }
+    form{
+        width:78%;
+        height:100%;
+        margin-left: 22%;
+        input{
+            height: 100%;
+            width:100%;
+            background-color: #87B2EC;
+            color:white;
+        }
+    }
 } 
 .login_box #s { 
     float: left; 
@@ -92,12 +126,12 @@ a{
     margin: 3px 4px 0 0; 
 }
 .search_form button{
-    border-radius: 0.3rem;
-    padding: 0.5rem;
+    padding: 0.13rem;
     float: right;
-    font-size: 2rem;
-    margin-top: 1rem;
-    margin-right: 0.5rem;
+    font-size: 0.23rem;
+    margin-top: 0.08rem;
+    background: rgb(135, 178, 236) none repeat scroll 0% 0%;
+    color: white;
 }
 
 .timer{
@@ -105,10 +139,10 @@ a{
         height: 3.6rem;
         line-height: 3.6rem;
         margin-left: 1rem;
-
         text-align: center;
         background: #eee;
         color:#666;
         
     }
+
 }

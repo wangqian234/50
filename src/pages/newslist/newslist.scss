@@ -1,3 +1,38 @@
 page-newslist {
-
+    .toub_beij_zy{
+        background-color: #448AFF;
+    }
+    li a{
+        color:white !important;
+    }
+     .zixun_content .zixun_li img{
+        float:left;
+        width: 1rem;
+        height: 1rem;
+        margin-left: 0.2rem;
+    }
+    .zixun_content .zixun_li .content{
+        float:left;
+        color:#646464;
+        font-size:0.28rem;
+        line-height:0.38rem;
+        width:70%;
+        margin-left:0.23rem;
+    }
+    .zixun_content .zixun_li .line{
+        float:left;
+        margin:0.15rem 0;
+        width:95%;
+        margin-left:2.5%;
+        margin-right:2.5%;
+        border-bottom:1px ridge rgba(245,245,245,1);
+    }
+    .shous_k{
+        width:100%;
+        height: 0.55rem;
+    }
+    .shous_k img{
+        width: 0.5rem;
+        float: right;
+    }
 }

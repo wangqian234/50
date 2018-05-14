@@ -1,0 +1,39 @@
+<ion-content>
+<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24">我的房屋</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<!--内容-->
+<div class="shouhdz_hk">
+	<div class="shouh_zk">
+		<div class="shouh_dange_beijin" (click)="getHouseInfo()">
+			<div class="shang">
+				<div class="mz" style="width:98%">
+					<p><em>name</em>&nbsp;<em>mobile</em></p>
+					<p>address</p>
+				</div>
+			</div>
+			<div class="boanjk">
+        <!--<div *ngIf="item.default" class="def">默认房屋</div>
+        <div *ngIf="!item.default" class="def"><input type="radio" (change)="clickToDef(item.id)"/>设为默认</div>-->
+        <a style="display:inline;" (click)="deleteAddress()">删除</a>
+      </div>
+		</div>
+	</div>
+</div> 
+<div class="dib_daoh_b">
+	<div class="gouwuc_ Xinz" style="background-color:#488aff">
+		 <a [navPush]='AddaddressPage'>新添房屋</a>
+	</div>
+</div>
+</ion-content>

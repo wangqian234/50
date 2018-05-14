@@ -33,8 +33,9 @@ export class RepairlistPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
-
-    this.cid=this.navParams.get('cid');
+    if(this.navParams.get('cid')){
+      this.cid=this.navParams.get('cid');
+    }
 
     this.getProductList('');
 
@@ -53,7 +54,7 @@ export class RepairlistPage {
   }
 
   repairTypeSub(){
-    alert();
+    
   }
 
 // getProductList(infiniteScroll){
@@ -81,7 +82,7 @@ export class RepairlistPage {
             this.repairlist=data.list;//怎么知道那个是默认房屋
             console.log(this.repairlist)
           }else{
-            alert(data.errmsg)
+            
           }
      })
   }

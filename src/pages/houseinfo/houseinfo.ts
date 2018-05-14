@@ -103,6 +103,10 @@ export class HouseinfoPage {
     }
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';

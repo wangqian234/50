@@ -59,6 +59,8 @@ export class ShoppingPage {
   public shoplist=[];
   public keywords="";
 
+  public shopKeyList = [];
+
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -68,7 +70,7 @@ export class ShoppingPage {
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    this.getLunbo();  
+    this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -98,14 +100,14 @@ export class ShoppingPage {
           alert(data.errmsg);
         }
       })
+      if(this.storage.get("shopKewWords")){
+        this.shopKeyList = this.storage.get("shopKewWords");
+      }
     }
   //自带函数
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ShoppingPage');
-     $('.facediv li:nth-of-type(1)').attr("class","active");
-  }
-  shopFn(){
-    alert('123');
+    //给第一个商品分类hr
+    $('.facediv li:nth-of-type(1)').attr("class","active");
   }
   /**轮播图 */
   getLunbo(){
@@ -141,12 +143,36 @@ export class ShoppingPage {
     }
     })
   }
+  searchBoxFn(event){
+    $("#searchInput").css("display","block")
+  }
+
+  clearShopKey(){
+    this.storage.remove("shopKewWords");
+    this.shopKeyList = [];
+  }
   //输入框搜索，跳转到列表详情界面
   doReserch(){
+    var key = [];
+    if(this.storage.get("shopKewWords")){
+      key = this.storage.get("shopKewWords");
+      key.push(this.keywords);
+      this.storage.set("shopKewWords",key);
+    } else {
+      key.push(this.keywords)
+      this.storage.set("shopKewWords",key);
+    }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
     })  
   }
+
+  onSearchKeyUp(event){
+    if("Enter"==event.key){
+     this.doReserch();
+    }
+  }
+
   //跳转到商品详情页面
   goGoodsInfo(id){
      this.navCtrl.push(ShopgoodsinfoPage,{id:id});

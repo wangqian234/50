@@ -78,4 +78,55 @@ ion-item-divider{
 .button-ios{
     height: 0.5rem;
 }
+
+.gerenzhonhx{
+  height:3.5rem;
+  background: -webkit-linear-gradient(#2979FF, #3FA2F9); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#2979FF, #3FA2F9); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#2979FF, #3FA2F9); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#2979FF, #3FA2F9); /* 标准的语法 */
+}
+.jifen{
+    height:0.7rem;
+    background-color: white;
+    padding: 0.2rem 0.4rem;
+    img{
+        width:0.4rem;
+        height:0.4rem;
+        float: left;
+    }
+    p{
+        font-size: 0.28rem;
+        margin-left: 0.2rem;
+        float:left;
+    }
+    span{
+        font-size: 0.28rem;
+        position: absolute;
+        right:0.8rem;
+    }
+}
+.item-ios{
+    padding-left: 0;
+}
+.label-ios{
+    margin: 11px 8px 11px 16px;
+}
+.iondiv{
+    font-size: 0.4rem;
+    position: absolute;
+    right: 0.4rem;
+    top: 0.2rem;
+    color: white;
+}
+.blockdiv{
+    margin-top: 10px;
+    background-color: white;
+    padding: 0.2rem 0 0 0.2rem;
+    p{
+        font-size: 0.3rem;
+        padding-bottom: 0.1rem;
+        color: #646464;
+    }
+}
 }
