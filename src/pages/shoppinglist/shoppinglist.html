@@ -1,4 +1,4 @@
-//王慧敏
+<!--王慧敏-->
 <ion-header>
   <ion-navbar>
     <ion-title>商品订单</ion-title>
@@ -33,16 +33,17 @@
 		    	</a>
                  <div class="evaluation" *ngIf="item.trade_state==1">
                 <p (click)="obligationEvent(item.trade_id)">商品付款：<span>待付款按钮！</span></p>
-                <p (click)="cancelpaymentEvent(item.trade_id)">商品取消付款：<span>取消付款按钮！</span></p>
+                <p (click)="cancelpaymentEvent(item.trade_id)">取消订单：<span>取消付款按钮！</span></p>
                 </div>
                 <div class="evaluation" *ngIf="item.trade_state==3" (click)="receiveEvent(item.trade_id)">
                 <p>商品收货：<span>确认收货按钮！</span></p>
                 </div>
                 <div class="evaluation" *ngIf="item.trade_state==4" >
-                <p (click)="evaluationEvent(item.trade_id)">商品评价：<span>待评价按钮！</span></p>
+                <p (click)="evaluationEvent(item.trade_id)">商品评价：<span>添加评价按钮！</span></p>
                 <p (click)="evaluationdetailEvent(item.trade_id)">商品评价详情：<span>评价详情按钮！</span></p>
                 </div>
                 <div class="refund" *ngIf="item.trade_state==2" >
+                <p (click)="addrefundEvent(item.trade_id)">商品退款：<span>添加退款按钮！</span></p>
                 <p (click)="refundEvent(item.trade_id)">商品退款：<span>退款按钮——显示退款详情！</span></p>
                 <p (click)="modifyaddressEvent(item.trade_id)">修改地址：<span>修改地址按钮！</span></p>
                 </div>

@@ -8,25 +8,17 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-//商品购物列表
-import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
-import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
+import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
 @IonicPage()
 @Component({
-  selector: 'page-goodsoderevaluate',
-  templateUrl: 'goodsoderevaluate.html',
+  selector: 'page-tradegoods-addrefund',
+  templateUrl: 'tradegoods-addrefund.html',
 })
-
-export class GoodsoderevaluatePage {
-
-
-    public list=[];
-    public ShoppinglistPage=ShoppinglistPage;
-
-    public SD_id;
-    public evaluateList={
+export class TradegoodsAddrefundPage {
+  public SD_id;    
+  public evaluateList={
     trade_Id:'',
     commentGroup:'',
     token : ''
@@ -39,9 +31,7 @@ export class GoodsoderevaluatePage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         this.SD_id=navParams.get('tradeId');
-        this.evaluateList.trade_Id= this.SD_id;
       
-
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();
@@ -54,7 +44,7 @@ export class GoodsoderevaluatePage {
   getdetaillist(){
   }
   addEvaluate(){
-    alert("评价添加");
+    alert("添加退款申请");
       var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.token = this.token;
@@ -65,7 +55,7 @@ export class GoodsoderevaluatePage {
         alert(JSON.stringify(data));
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
-        this.navCtrl.push(ShoppinglistPage);
+        //this.navCtrl.push(ShoppinglistPage);
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -78,8 +68,9 @@ export class GoodsoderevaluatePage {
     });
     
   }
+
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad ShoppingevaluatePage');
+    //console.log('ionViewDidLoad TradegoodsAddrefundPage');
   }
 
 }
