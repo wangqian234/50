@@ -13,6 +13,10 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { StorageProvider } from '../../providers/storage/storage';
 //我的房屋
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
+//修改个人信息
+import { EditorinfoPage } from '../editorinfo/editorinfo';
+//重置登录密码
+import { RebuildpassPage } from '../rebuildpass/rebuildpass';
 
 import { TabsPage } from '../tabs/tabs';
 //王慧敏
@@ -35,10 +39,10 @@ export class UserPage {
   public AddressPage = AddressPage;
   public RepairlistPage = RepairlistPage;
   public ShoppinglistPage = ShoppinglistPage;
-
+  public EditorinfoPage = EditorinfoPage;
+  public RebuildpassPage = RebuildpassPage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
-
   public HouseinfolistPage = HouseinfolistPage
 
    //自定义的变量

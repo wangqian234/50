@@ -57,35 +57,35 @@ export class RepairlistPage {
     
   }
 
-// getProductList(infiniteScroll){
-//     var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
-//     this.httpService.requestData(api,(data)=>{
-//       // console.log(data);
-//       this.list=this.list.concat(data.result);  /*数据拼接*/
-//       if(infiniteScroll){
-//         //告诉ionic 请求数据完成
-//         infiniteScroll.complete();
-//         if(data.result.length<10){  /*没有数据停止上拉更新*/
-//           infiniteScroll.enable(false);
-//           $('.nomore').css('display','block');
-//         }
-//       };
-//       this.page++;
-//     })
+getProductList(infiniteScroll){
+    var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+ this.page +'&pageSize=10&token='+this.storage.get('token');
+    this.httpService.requestData(api,(data)=>{
+      // console.log(data);
+      this.list=this.list.concat(data.result);  /*数据拼接*/
+      if(infiniteScroll){
+        //告诉ionic 请求数据完成
+        this.page++;
+        infiniteScroll.complete();
+        if(data.result.length<10){  /*没有数据停止上拉更新*/
+          infiniteScroll.enable(false);
+          $('.nomore').css('display','block');
+        }
+      };
+    })
 
-//   }
-  getProductList(infiniteScroll){
-     var that=this;
-    var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            this.repairlist=data.list;//怎么知道那个是默认房屋
-            console.log(this.repairlist)
-          }else{
-            
-          }
-     })
   }
+  // getProductList(infiniteScroll){
+  //    var that=this;
+  //   var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+ this.page +'&pageSize=10&token='+this.storage.get('token');
+  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //         if(data.errcode===0&&data.errmsg==='OK'){
+  //           this.repairlist=data.list;//怎么知道那个是默认房屋
+  //           console.log(this.repairlist)
+  //         }else{
+            
+  //         }
+  //    })
+  // }
   //加载更多
   doLoadMore(infiniteScroll){
     this.getProductList(infiniteScroll);

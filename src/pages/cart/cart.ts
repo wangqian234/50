@@ -102,6 +102,7 @@ export class CartPage {
       }
     });
     //刷新界面
+    this.navCtrl.push(CartPage);
   }
 
   changeCarts(){

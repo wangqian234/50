@@ -34,7 +34,7 @@
 					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
 					<p class="bend">抢购价：<span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;">¥{{item.pricemin}}</span></p>
           <p class="bend">已售：<span>{{item.whennum}}</span>份</p>
-					<p class="wp01">	剩余倒计时：！！！</p>
+					<p class="wp01" style="text-align:left">	团购结束时间：{{item.endtime | pipeTime}}</p>
 		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
 

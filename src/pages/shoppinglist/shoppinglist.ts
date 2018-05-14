@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
+import { App } from 'ionic-angular';  
+
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -23,6 +25,8 @@ import { TradegoodsRefundPage } from '../tradegoods-refund/tradegoods-refund';
 import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/tradegoods-evaluatedetail';
 //添加商品退款申请
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
+//团购订单页面
+import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
 
 @Component({
   selector: 'page-shoppinglist',
@@ -40,6 +44,7 @@ export class ShoppinglistPage {
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public TradegoodsEvaluatedetailPage=TradegoodsEvaluatedetailPage;
   public TradegoodsReapPage=TradegoodsReapPage;
+  public  TradegoodsGroupbuyPage = TradegoodsGroupbuyPage;
     public addressList={
     trade_Id:'',
     commentGroup:'',
@@ -65,8 +70,10 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-        this.SD_id=navParams.get('id');
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
+  public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,
+  /*引用服务*/public config:ConfigProvider,private app:App) {
+        this.SD_id=0;
         //alert(this.SD_id);
 
   }
@@ -302,6 +309,19 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   }
   ionViewDidLoad() {
    //this.onload2();
+  }
+
+  gotoGroup(){
+    $("#group-content").css("display", "block") ;
+    $("#order-content").css("display", "none") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
+    $("#title li:nth-of-type(2)").attr("class","qbdd no")
+  }
+  gotoOrder(){
+    $("#group-content").css("display", "none") ;
+    $("#order-content").css("display", "block") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd no")
+    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
 // onload2 = function(){
 //     var Sos=document.getElementById('sos_tanc');

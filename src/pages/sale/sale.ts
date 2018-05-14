@@ -56,6 +56,7 @@ ifontime(mode){
      
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
+         var newDate = new Date(data.list.endtime)
          this.list = data.list;
          console.log(data);
      } else {
@@ -70,6 +71,31 @@ ifontime(mode){
   backTo(){
     this.navCtrl.pop();
   }
+
+//   leftTimer(str){ 
+//     var newDate = (new Date(str)).getTime;
+//     var now = (new Date()).getTime;
+//     var leftTime = newDate - now;
+  
+
+//   var days = parseInt(leftTime / 1000 / 60 / 60 / 24 , 10); //计算剩余的天数 
+//   var hours = parseInt(leftTime / 1000 / 60 / 60 % 24 , 10); //计算剩余的小时 
+//   var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟 
+//   var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数 
+//   days = this.checkTime(days); 
+//   hours = this.checkTime(hours); 
+//   minutes = this.checkTime(minutes); 
+//   seconds = this.checkTime(seconds); 
+//   setInterval("leftTimer(2016,11,11,11,11,11)",1000); 
+//   document.getElementById("timer").innerHTML = days+"天" + hours+"小时" + minutes+"分"+seconds+"秒";  
+// } 
+// checkTime(i){ //将0-9的数字前面加上0，例1变为01 
+//   if(i<10) 
+//   { 
+//     i = "0" + i; 
+//   } 
+//   return i; 
+// } 
 
 
 

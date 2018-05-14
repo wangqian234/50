@@ -1,16 +1,16 @@
 
 
 <ion-content>
-<div class="toub_beij toub_beij_zy">
-	<div class="zhongj_k zhongj_k_z">	
+		  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
-			<div class="zhongjain_daoh">
+			<!--<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>-->
+			<div class="zhongjain_daoh" style="margin-left:15%">
 				<ul>
-					<li><a class="zyyge">购物车</a></li> 
+					<li><a class="px24 zyyge">购物车</a></li>  
 				</ul>
 			</div>
-		</div>
+		</div> 
 	</div>
 </div>
 
@@ -25,13 +25,8 @@
  			<div class="diannao_shanp">
  				<i class="i1 i1-i" (tap)="changeCarts()">
 					<dt>
-<<<<<<< HEAD
-					<ion-checkbox color="danger"(ionChange)="changeCarts()"></ion-checkbox>
-					<img [src]="" />
-=======
 					<ion-checkbox color="danger" [(ngModel)]="item.checked" (ionChange)="changeCarts()"></ion-checkbox>
 					<img [src]=" "/>
->>>>>>> 005047af55f2da677a2f141100c1d9ecf4a05790
 					</dt> 
 				 </i>
  				<h1><img src="assets/imgs/001.jpg"></h1>
@@ -39,7 +34,8 @@
  					<p class="px24 bt">{{item.title}}</p>
  					<p class="xh">{{item.size_name}}</p>
  					<div class="youjfy">
-						 <button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  
+						  <ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
+						 <!--<button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  -->
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{item.price}}</p>
 							<div class="counter_box">

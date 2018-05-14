@@ -51,23 +51,24 @@ ionViewWillLoad() {
     var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;//id目前写死
             this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
+      that.dtlist=data.json.dt.model;
+      //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
+      //alert(JSON.stringify(that.dtlist));
+      console.log(that.dtlist);
+      that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
+      //alert(JSON.stringify(that.addlist));
+      console.log(that.addlist);
        that.goodSlist = data.json.dt_GoodsSize.list[0];
        //商品内容（名称title、图片img、购买数量buynum）
       //alert(JSON.stringify(that.goodSlist));
      
 this.test=data.json.dt_GoodsSize.list[0].buynum;
 //this.test=that.goodSlist[0].buynum;
-      that.dtlist=data.json.dt.model;
-      //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
-      //alert(JSON.stringify(that.dtlist));
+      
 this.te= data.json.dt.model.totalprice;
 //alert(this.test);
 this.totalPrice=this.test*this.te;
-      console.log(that.dtlist);
-
-      that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
-      //alert(JSON.stringify(that.addlist));
-      console.log(that.addlist);
+      
     
     })
 
