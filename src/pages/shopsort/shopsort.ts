@@ -5,6 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
+import $ from 'jquery';
 
 
 
@@ -26,8 +27,9 @@ export class ShopsortPage {
     this.getLeftCateData();/*获取左侧分类*/
   }
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+  //$('#cate_left li:nth-of-type(1)').attr("class","active");
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 18) + 'px';}
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';}
  ionViewDidLoad() {
        
     }
@@ -55,13 +57,15 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
       //     this.leftCate=data.result;
 
       //  右侧内容的初始显示
-           this.getRightCateData(21);        
+           this.getRightCateData(21,0);        
       // })
   }
 
 
-  getRightCateData(pid){
-         
+  getRightCateData(pid,i){
+     $("#cate_left li").removeAttr("class");
+    var span = "#cate_left li:nth-of-type(" + ++i +")"
+    $(span).attr("class","activety");
     //alert(pid);
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403 ';
          this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -73,6 +77,11 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         alert(data.errmsg);
      }
      })
+  }
+
+
+  backTo(){
+    this.navCtrl.pop();
   }
   
 

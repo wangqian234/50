@@ -50,5 +50,9 @@ export class GroupbuylistPage {
    
   }
 
+    backTo(){
+    this.navCtrl.pop();
+  }
+
 
 }
