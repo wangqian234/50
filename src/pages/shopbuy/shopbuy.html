@@ -38,11 +38,13 @@
  					<div class="youjfy">
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{dtlist.totalprice}}</p>
-							<div class="counter_box">
-								<i class="jian">-</i>
-								<input type="text" value="1">
-								<i class="jia">+</i>
-							</div>
+<div class="goum_sl">
+	<div class="counter_box">
+		<i class="jian" (tap)="decCount()">-</i>
+		<input type="text" readonly="readonly" [(ngModel)]="buynum" name="num" id="num">
+		<i class="jia" (tap)="incCount()">+</i>
+	</div>
+</div>
 						</div>
  					</div> 
  				</div>

@@ -7,12 +7,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-/**
- * Generated class for the ShopbuyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -30,6 +24,7 @@ export class ShopbuyPage {
   public carriagelist=[];
   public creditslist=[];
   public totalPrice=0;  /*总价*/
+  public buynum = 1;
   public test=123;
   public te=123;
   //定义congfig中公共链接的变量aa
@@ -116,6 +111,18 @@ post(){
     backTo(){
     this.navCtrl.pop();
   }
+
+    incCount(){    
+    ++this.buynum;
+  }
+
+  //数量变化  双向数据绑定
+  decCount(){
+    if(this.buynum>1){
+      --this.buynum;
+    }
+  }
+
 //计算总价
 //  sumPrice(){
 //        var tempAllPrice=0;
