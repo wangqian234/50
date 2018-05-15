@@ -34,22 +34,22 @@
 	</a>
 </div>
 <!--规格-->
-<div class="banb" id="banb">
+<!--<div class="banb" id="banb">
 				<ul>
 					<h1>规格</h1>
 					<li class="no">潮5000/I5-7200/4G/1T/2G</li>
 					<li>I7-7500/4G/500G/2G</li>
 				</ul>
-			</div>
+			</div>-->
 <!--数量-->
-			<div class="goum_sl">
-				<p class="px22">数量<em>限购20件</em></p>
-				<div class="counter_box">
-					<i class="jian">-</i>
-					<input type="text" value="1">
-					<i class="jia">+</i>
-				</div>
-			</div>
+<div class="goum_sl">
+	<p class="px26 jiaq">购买数量</p>
+	<div class="counter_box">
+		<i class="jian" (tap)="decCount()">-</i>
+		<input type="text" readonly="readonly" [(ngModel)]="addcarList.goodsNum" name="num" id="num">
+		<i class="jia" (tap)="incCount()">+</i>
+	</div>
+</div>
 <!--配送-->
 			<div class="goum_sl">
 				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
@@ -63,11 +63,11 @@
 			<p class="px24">{{goodMlist.shop_name}}</p>
 			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
 		</div>
+	<div class="guangguang">
+		<a class="a1"><h1><img src="assets/imgs/dainp01.png"></h1>进店逛逛</a>
 	</div>
-	<div class="jindain_anniu">
-		<a href="ShangJia_DianPu.html" class="a1"><h1><img src="images/web/dainp01.png"></h1>进店逛逛</a>
-		<a href="#" class="a2"><h1><img src="images/web/dianpu_shouc.png"></h1>收藏店铺</a>
 	</div>
+
 </div>
 <!--图文&评价-->
 
@@ -78,7 +78,7 @@
 	</h1>
 </div>
 <!--图文-->
-<div class="tuwen">
+<div class="tuwen" id="tuwen">
 	{{goodMlist.detail}}
 </div>
 
@@ -90,12 +90,12 @@
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
 		
-		<div class="you">
+		<div id="cart" class="you">
 			<div class="goum">
-				<a href="wanagid_JieSuan.html">加入购物车</a>  
+				<a>加入购物车</a>  
 			</div>
 		</div>
-		<div class="you">
+		<div id="buy" class="you">
 			<div class="goum">
 				<a [navPush]='ShopbuyPage'>立即购买</a>  
 			</div>
