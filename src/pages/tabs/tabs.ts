@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { RepairlistPage } from '../repairlist/repairlist';
+import { RentsalePage } from '../rentsale/rentsale';
 import { ShoppingPage } from '../shopping/shopping';
 
 
@@ -26,7 +26,7 @@ import {TestPage}from '../test/test'
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = RepairlistPage;
+  tab2Root = RentsalePage;
   tab3Root = ShoppingPage;
   tab4Root = UserPage;
 

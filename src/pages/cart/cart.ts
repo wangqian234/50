@@ -146,7 +146,7 @@ export class CartPage {
          this.isChencked=false;
       }else{
          for(let i=0;i<this.list.length;i++){          
-            this.list[i].checked=true;              
+            this.list[i].checked=true;
          }
          this.isChencked=true; 
       }
