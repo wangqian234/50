@@ -32,9 +32,9 @@
  				<h1><img src="assets/imgs/001.jpg"></h1>
  				<div class="you">
  					<p class="px24 bt">{{item.title}}</p>
- 					<p class="xh">{{item.size_name}}</p>
+ 					<p class="xh">{{item.size_name}}</p><ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
  					<div class="youjfy">
-						  <ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
+						  
 						 <!--<button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  -->
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{item.price}}</p>

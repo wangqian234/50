@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
+import $ from 'jquery';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -45,7 +46,7 @@ export class ShopgoodsinfoPage {
   public addcarList={
     gId: "1",
     gsId: "1",
-    goodsNum: "1",
+    goodsNum: 1,
     token: "",
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
@@ -63,8 +64,9 @@ export class ShopgoodsinfoPage {
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-    
+        console.log(JSON.stringify(data))
         that.goodMlist = data.json['good_Model'].model;
+        $("#tuwen").html(data.json['good_Model'].model.detail);
         this.fenge(data.json['good_Model'].model.imgsrc_list);
         that.dataGlist = data.json.data_group.list;
         that.dataSlist = data.json.data_Sizes.list[0];  
@@ -110,6 +112,17 @@ fenge(str){
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopgoodsinfoPage');
+  }
+
+  incCount(){    
+    ++this.addcarList.goodsNum;
+  }
+
+  //数量变化  双向数据绑定
+  decCount(){
+    if(this.addcarList.goodsNum>1){
+      --this.addcarList.goodsNum;
+    }
   }
 
   backTo(){
