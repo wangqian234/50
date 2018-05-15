@@ -128,9 +128,11 @@ import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
 //个人信息修改
 import { EditorinfoPage }from '../pages/editorinfo/editorinfo';
 
+//房屋租售首页
+import { RentsalePage }from '../pages/rentsale/rentsale';
 
-
-
+//房屋租售详细信息
+import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -144,6 +146,7 @@ import { PipeTimePipe } from '../pipes/pipe-time/pipe-time';
 import { CityDataProvider } from '../providers/city-data/city-data';
 import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
+import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 
 @NgModule({
   declarations: [
@@ -176,6 +179,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     ShopgoodsinfoPage,
     GroupbuylistPage,
     PipeTimePipe,
+    PipeMoneyPipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,
@@ -199,6 +203,8 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     NewslistPage,
     HouseinfolistPage,
     EditorinfoPage,
+    RentsalePage,
+    RentsaleinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -262,6 +268,8 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     NewslistPage,
     HouseinfolistPage,
     EditorinfoPage,
+    RentsalePage,
+    RentsaleinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
