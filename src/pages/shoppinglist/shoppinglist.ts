@@ -1,9 +1,7 @@
 //商品订单详情
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import $ from 'jquery';
-import { App } from 'ionic-angular';  
-
+import $ from 'jquery';//实现列表缓存
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -25,8 +23,6 @@ import { TradegoodsRefundPage } from '../tradegoods-refund/tradegoods-refund';
 import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/tradegoods-evaluatedetail';
 //添加商品退款申请
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
-//团购订单页面
-import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
 
 @Component({
   selector: 'page-shoppinglist',
@@ -39,12 +35,12 @@ export class ShoppinglistPage {
   public list=[];
   public good_list=[];
   public SD_id;
+  public page=1; //实现列表缓存
   public receivelist=[];
   public GoodsoderdetailPage=GoodsoderdetailPage;
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public TradegoodsEvaluatedetailPage=TradegoodsEvaluatedetailPage;
   public TradegoodsReapPage=TradegoodsReapPage;
-  public  TradegoodsGroupbuyPage = TradegoodsGroupbuyPage;
     public addressList={
     trade_Id:'',
     commentGroup:'',
@@ -70,12 +66,10 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
-  public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,
-  /*引用服务*/public config:ConfigProvider,private app:App) {
-        this.SD_id=0;
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+        this.SD_id=navParams.get('id');
+        //this.getProductList('');//实现列表缓存
         //alert(this.SD_id);
-
   }
   paymentEvent(trade_state){
     switch(trade_state){
@@ -154,21 +148,22 @@ export class ShoppinglistPage {
      })
   }
   //商品评价
-  evaluationEvent(trade_id){
-    this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id});
+  evaluationEvent(trade_id,tradegoods_id){
+    this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
+    //alert("王慧敏"+tradegoods_id);
   }
   //商品评价详情
   evaluationdetailEvent(trade_id){
     this.navCtrl.push(TradegoodsEvaluatedetailPage,{tradeId:trade_id});
   }
-   //添加商品退款
-   addrefundEvent(trade_id){
-     alert("添加商品退款"+trade_id);
-     this.navCtrl.push(TradegoodsReapPage,{tradeId:trade_id});
+   //添加商品退款申请
+   addrefundEvent(tradegoods_id){
+     alert("添加商品退款"+tradegoods_id);
+     this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
    }
    //商品退款详情页
-   refundEvent(trade_id){
-     this.navCtrl.push(TradegoodsRefundPage,{tradeId:trade_id});
+   refundEvent(tradegoods_id){
+     this.navCtrl.push(TradegoodsRefundPage,{tradegoodsId:tradegoods_id});
    }
    //商品待付款
    obligationEvent(trade_id){
@@ -229,9 +224,9 @@ export class ShoppinglistPage {
 
 
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-    switch(this.SD_id){
+    this.getRem();
+    //this.getProductList(infiniteScroll);
+      switch(this.SD_id){
       case 0:
       this.tabTest={
         li00:"type current",
@@ -283,18 +278,12 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
       };
       break;
     }
-
     var j=3;
      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+this.SD_id+'&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         //alert(JSON.stringify(data));
-          //alert(JSON.stringify(data.list));
-         //this.good_list=data.list[0].goods_list;
-         //alert(JSON.stringify(data.list[0].goods_list));
-         // alert(JSON.parse(data));
          console.log(data);
      } else if(data.errcode === 40002){
               j--;
@@ -307,21 +296,78 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      }
      })
   }
+  // getProductList(infiniteScroll){
+  //   alert("王慧敏"+this.SD_id);
+  //     switch(this.SD_id){
+  //     case 0:
+  //     this.tabTest={
+  //       li00:"type current",
+  //       li01:"type",
+  //       li02:"type",
+  //       li03:"type",
+  //       li04:"type",
+  //       li05:"type",
+  //     };
+  //     break;
+  //     case 1:
+  //     this.tabTest={
+  //       li00:"type",
+  //       li01:"type current",
+  //       li02:"type",
+  //       li03:"type",
+  //       li04:"type",
+  //       li05:"type",
+  //     };
+  //     break;
+  //     case 2:
+  //     this.tabTest={
+  //       li00:"type",
+  //       li01:"type",
+  //       li02:"type current",
+  //       li03:"type",
+  //       li04:"type",
+  //       li05:"type",
+  //     };
+  //     break;
+  //     case 3:
+  //     this.tabTest={
+  //       li00:"type",
+  //       li01:"type",
+  //       li02:"type",
+  //       li03:"type current",
+  //       li04:"type",
+  //       li05:"type",
+  //     };
+  //     break;
+  //     case 4:
+  //     this.tabTest={
+  //       li00:"type",
+  //       li01:"type",
+  //       li02:"type",
+  //       li03:"type",
+  //       li04:"type current",
+  //       li05:"type",
+  //     };
+  //     break;
+  //   }
+  //   var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
+  //   //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
+  //   this.httpService.requestData(api,(data)=>{
+  //     // console.log(data);
+  //     this.list=this.list.concat(data.result);  /*数据拼接*/
+  //     if(infiniteScroll){
+  //       //告诉ionic 请求数据完成
+  //       infiniteScroll.complete();
+  //       if(data.result.length<10){  /*没有数据停止上拉更新*/
+  //         infiniteScroll.enable(false);
+  //         $('.nomore').css('display','block');
+  //       }
+  //     };
+  //     this.page++;
+  //   })
+  // }
   ionViewDidLoad() {
    //this.onload2();
-  }
-
-  gotoGroup(){
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
-    $("#title li:nth-of-type(2)").attr("class","qbdd no")
-  }
-  gotoOrder(){
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd no")
-    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
 // onload2 = function(){
 //     var Sos=document.getElementById('sos_tanc');
@@ -339,5 +385,26 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 // 			SosYe.style.display=('none');
 // 		}
 //   }
+
+
+  getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+  backTo(){
+    this.navCtrl.pop();
+  }
+  gotoGroup(){
+    $("#group-content").css("display", "block") ;
+    $("#order-content").css("display", "none") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
+    $("#title li:nth-of-type(2)").attr("class","qbdd no")
+  }
+  gotoOrder(){
+    $("#group-content").css("display", "none") ;
+    $("#order-content").css("display", "block") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd no")
+    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
+  }
 
 }
