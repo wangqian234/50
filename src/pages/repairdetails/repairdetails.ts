@@ -29,7 +29,9 @@ export class RepairdetailsPage {
   public btn:any;  
   public div :any;  
   public close :any;  
-  
+  public stop :any;
+  public evaluate : any;
+  public type;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
 
@@ -39,11 +41,8 @@ export class RepairdetailsPage {
     this.getRem();
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
-     //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
-
-
-
     }
+    this. getrepairdetails();
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
     $(".arrow-current .arrow-pre").css('border-left', '15px solid #00a2ca');
@@ -54,12 +53,17 @@ export class RepairdetailsPage {
       this.btn = document.getElementById('open_btn');  
       this.div = document.getElementById('background');
       this.close = document.getElementById('close-button'); 
+      this.stop = document.getElementById('stop');
+      this.evaluate=document.getElementById('evaluate');
   }
+  
   //获取工单详情信息
   getrepairdetails(){
     var that = this;
-    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
+    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId=25';
+    console.log(api)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
+      console.log(data)
       if(data.errcode===0&&data.errmsg==='OK'){
         this.repairdetaillist=data.list;
       }else{
@@ -68,12 +72,11 @@ export class RepairdetailsPage {
     })
   }
 //终止工单
- showPopup(){
-   this.div.style.display = "block"; 
+ stopRepaird(){
    this.editcloselist.listId=this.repairDetial.List_Id;
    this.editcloselist.token=this.storage.get('token');
     var that = this;
-    var api = this.config.apiUrl+'/api/crm/srq/list/edit_close';
+    var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)
@@ -81,6 +84,17 @@ export class RepairdetailsPage {
         alert(data.errmsg)
       }
     })
+ }
+ //工单处理
+ showPopup(){
+  this.div.style.display = "block"; 
+ }
+ //工单处理应该显示的状态
+ repairdState(){
+   if(this.type=="0"||this.type=="1"||this.type=="2"){
+     
+     this.stop.style.display = "block" 
+   }
  }
  //跳转到
  showevaluate(){

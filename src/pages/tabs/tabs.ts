@@ -17,14 +17,15 @@ import { CartPage } from '../cart/cart';
 
 import{ PersonalPage } from '../personal/personal';
 import $ from 'jquery';
+import {TestPage} from '../test/test'
 
-import {TestPage}from '../test/test'
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
+ //tab1Root = TestPage
   tab1Root = HomePage;
   tab2Root = RentsalePage;
   tab3Root = ShoppingPage;
