@@ -424,9 +424,8 @@ border-bottom: 3px solid #FF971C;
 }
 .p_shop2{
     color: #FF971C;
-    font-size: 0.32rem;
+    font-size: 0.3rem;
     float: right;
-    font-weight:bold;;
 }
 .special{
     font-size: 1.5rem;
@@ -522,6 +521,9 @@ border-bottom: 3px solid #FF971C;
     font-size: 0.23rem;
     margin-top: 0.24rem;
     white-space:nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .shous_k img{
     float: right;

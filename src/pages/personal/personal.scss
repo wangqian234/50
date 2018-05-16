@@ -1,27 +1,38 @@
-.personal{
-
-    .item-note{
-        font-size: 1.4rem;
-        color: #666;
-        float: right;
-
-        img{
-
-            width: 4rem;
-            height: 4rem;
-            border-radius: 4rem;
-        }
-
-
+page-personal{
+    .shous_k{
+    background: #ffb661;
+    border-radius: 0.25rem;
+    width: 70%;
+}
+    .shous_k img{
+    float: right;
+    height:0.4rem;
+    width:0.4rem;
+    margin-top:0.04rem;
+    margin-right:0.04rem;
+}
+.shous_k input{
+    width: 80%;
+    height:0.45rem;
+    margin-left: 3%;
+}
+#current{
+    font-size: 15px;
+    margin: 0.3rem 0;
+    border-bottom: none;
+    em{
+        color:#afafaf;
+        margin-left: 0.2rem;
     }
-
-/*箭头*/
-.item-ios ion-icon[item-left], .item-ios ion-icon[item-right], .item-ios ion-icon[item-start], .item-ios ion-icon[item-end]{
-
-    color: #666;
-
-    font-size:2.4rem;
-
-
+}
+.city{
+    padding: 0 0 0 0;
+    width: 100%;
+    }
+.city-list {
+    width: 100%;
+    margin-top: 10px;
+    background-color: white;
+    padding: 0 20px;
 }
 }

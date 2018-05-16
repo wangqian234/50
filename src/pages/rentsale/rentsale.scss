@@ -1,0 +1,140 @@
+page-rentsale {
+.shous_k{
+    background: #C3D8FB;
+    border-radius: 0.25rem;
+    width: 65%;
+}
+.logo_k{
+    width:23%;
+}
+.logo_k img{
+    height:0.4rem;
+    width:0.4rem;
+    float:left;
+    margin-right: 0.03rem;
+}
+.logo_k p{
+    color: #ffffff;
+    font-size: 0.26rem;
+    margin-top: 0.2rem;
+    margin-left: 0.1rem;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shous_k img{
+    float: right;
+    height:0.4rem;
+    width:0.4rem;
+    margin-top:0.04rem;
+    margin-right:0.04rem;
+}
+.shous_k input{
+    width: 80%;
+    height:0.45rem;
+    margin-left: 3%;
+}
+.dengl .caid_img {
+    width: 100%;
+    float: left;
+}
+.dengl .caid_img img{
+    height: 0.5rem;
+    width: 0.5rem;
+}
+.lunbo_item{
+    background-color: white
+}
+.titleIcon{
+    padding: 0 0.2rem;
+    li{
+        width: 25%; 
+    }
+}
+.daohang_bd{
+    margin-top: 10px !important;
+}
+#test{
+     position:sticky;
+    top:0.8rem;
+    z-index: 500;
+    background-color: white;
+}
+#group-content ul{
+    padding: 0 0.2rem;
+}
+#group-content .order-nav .type{
+    height:0.7rem;
+    width: 25%;
+    text-align: center;
+    float: left;
+    height:0.8rem;
+    font-family: Roboto;
+}
+
+#group-content .order-nav .type a{
+    height:0.7rem;
+    padding: 0.3rem 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: #000;
+    font-size: 0.28rem;
+}
+#group-content .order-nav .type.current a{
+    color: #2979FF;
+}
+#group-content .order-nav .type.current{
+    border-bottom: 2px solid #2979FF;
+}
+#group-content{
+    background-color: white;
+    margin-top: 10px;
+}
+
+.zixun_content{
+    width:100%;
+    height:auto;
+    background-color:rgba(255,255,255,1);
+}
+ .zixun_content .zixun_li{
+    padding:0rem 0.2rem 0.1rem 0.35rem;
+    height:1.5rem;
+}
+ .zixun_content .zixun_li img{
+    float:left;
+    margin-top:0.15rem;
+    width:20%;
+}
+ .zixun_content .zixun_li .content{
+    float:left;
+    color:#646464;
+    font-size:0.28rem;
+    line-height:0.38rem;
+    width:75%;
+    margin-left:0.23rem;
+    margin-top:0.15rem;
+}
+.zixun_content .zixun_li .line{
+    float:left;
+    margin-top:0.15rem;
+    width:95%;
+    margin-left:2.5%;
+    margin-right:2.5%;
+    border-bottom:1px ridge rgba(245,245,245,1);
+}
+.shangp_lieb_k_er li{
+    height:auto;
+}
+.shangp_lieb_k_er li .lieb_txt{
+    padding-left: 0.2rem;
+}
+.showMore{
+    padding: 0.2rem;
+    font-size: 0.3rem;
+    font-family: sans-serif;
+    text-align: center;
+    color: gray;
+    display:none;
+}
+}

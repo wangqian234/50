@@ -1,7 +1,9 @@
 page-home{
     margin: 0px;
     padding:0px;
-
+.zixun{
+    background-color: white;
+}
 .item-block{
     height:27px;
 }
@@ -79,15 +81,17 @@ background-color:rgba(255,255,255,1);
 }
  .zixun_content .zixun_li{
 padding:0rem 0.2rem 0.1rem 0.35rem;
-height:1.4rem;
+height:1.5rem;
 }
  .zixun_content .zixun_li img{
 float:left;
 margin-top:0.15rem;
-width:25%;
+height:1.2rem;
+width:1.2rem;
 }
  .zixun_content .zixun_li .content{
 float:left;
+margin-top:0.15rem;
 color:#646464;
 font-size:0.28rem;
 line-height:0.38rem;
@@ -102,7 +106,19 @@ margin-left:2.5%;
 margin-right:2.5%;
 border-bottom:1px ridge rgba(245,245,245,1);
 }
-
+.title_p{
+    font-family:MicrosoftYaHei;
+    color:white;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 40px;
+}
+.bangding_p{
+    float: right;
+    margin-top: -20px;
+    font-size: 13px;
+    color: white;
+}
 }
 
 
@@ -198,8 +214,8 @@ margin-top:0.02rem;
 }
 .fee{
     height: 1rem;
-    margin-top:0.1rem;
-    margin-bottom:0.1rem;
+    margin-top:10px;
+    margin-bottom:10px;
     background-color: white;
     text-align: center;
 }
