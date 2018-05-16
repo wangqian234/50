@@ -229,7 +229,7 @@ export class HomePage {
             this.config.doDefLogin();
             this.getiof_def();
           }else{
-            alert(data.errmsg)
+            //alert(data.errmsg)
           }
      })
   }

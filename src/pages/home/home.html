@@ -1,6 +1,6 @@
 <ion-content style="background-color:#F5F5F5">
 
-	<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:48px;">
 		<div class="zhongj_k">
 			<div class="shous_k  shous_div">
 				<ion-item class="select-item">
@@ -15,12 +15,12 @@
 		</div>
 	</div>
 
-	<!--<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0" style="background-color:#448AFF;height:48px;">
 		<div class="zhongj_k" style="text-align:center;">
 			<p class="title_p">公元物业</p>
 			<p class="bangding_p" [navPush]="BindroomPage">请绑定房屋</p>
 		</div>
-	</div>-->
+	</div>
 
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
