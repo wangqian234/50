@@ -29,7 +29,9 @@ export class RepairdetailsPage {
   public btn:any;  
   public div :any;  
   public close :any;  
-  
+  public stop :any;
+  public evaluate : any;
+  public type;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
 
@@ -51,6 +53,8 @@ export class RepairdetailsPage {
       this.btn = document.getElementById('open_btn');  
       this.div = document.getElementById('background');
       this.close = document.getElementById('close-button'); 
+      this.stop = document.getElementById('stop');
+      this.evaluate=document.getElementById('evaluate');
   }
   
   //获取工单详情信息
@@ -88,7 +92,7 @@ export class RepairdetailsPage {
  //工单处理应该显示的状态
  repairdState(){
    if(this.type=="0"||this.type=="1"||this.type=="2"){
-     this.stop = document.getElementById('stop');
+     
      this.stop.style.display = "block" 
    }
  }
