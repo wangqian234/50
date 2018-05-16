@@ -40,6 +40,8 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   }
   getdetaillist(){
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
+     alert("王慧敏"+api);
+     console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;

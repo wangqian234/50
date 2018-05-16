@@ -1,5 +1,5 @@
 <ion-content style="background-color:#E3E3E3">
-<div class="toub_beij toub_beij_zy">
+<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -17,8 +17,8 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected  *ngFor="let roomidlist of roomidlist" value={{roomidlist.id}}>{{roomidlist.name}}</ion-option>
-        <ion-option>这是两栋楼</ion-option>
+        <ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>
+        <ion-option   *ngFor="let roomidlist of roomidlist" value={{roomidlist.id}}>{{roomidlist.name}}</ion-option>
         <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>

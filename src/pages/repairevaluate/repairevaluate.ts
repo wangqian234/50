@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import $ from 'jquery';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
-/**
- * Generated class for the RepairevaluatePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,9 +16,9 @@ export class RepairevaluatePage {
   public listId='';
    //评价post
   public evaluate={
-  servicescore:'',
-  timelyscore:'',
-  qualityscore:'',
+  servicescore:0,
+  timelyscore:0,
+  qualityscore:0,
   listId:'',
   txtScoreMemo:'',
 
@@ -36,16 +31,15 @@ export class RepairevaluatePage {
     if(this.navParams.get('id')){
       this.listId=this.navParams.get('id');
      //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
-
-
       }
+      
     }
     //添加评价
     addevaluate(){
       this.evaluate.listId=this.listId;
       //this.evaluate.qualityscore= 通过ngmodel来获取
       var that =this;
-      var api = this.config.apiUrl+'/api/srq/list/edit_Score';
+      var api = this.config.apiUrl+'/api/list/edit_Score';
       this.http.post(api,this.evaluate).map(res => res.json()).subscribe(data =>{
         if(data.errcode===0&&data.errmsg==='OK'){
             alert("评价成功")
@@ -55,12 +49,70 @@ export class RepairevaluatePage {
       })
     }
 
+    enSureSub(){
+      alert(JSON.stringify(this.evaluate));
+    }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RepairevaluatePage');
+    this.getNum();
+  }
+  backToRepair(){
+    this.navCtrl.pop();
   }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+
+  getNum(){
+    var _this = this;
+      $('#service').each(function () {
+        $(this).find('.pj_xx p').on('click', function () {
+          var clickedStar = $(this);
+          var stars = clickedStar.parent().find('p');
+          var score = +clickedStar.attr('data-score');
+          for (var i = 0; i < stars.length; i++) {
+            if (i < score) {
+              stars.eq(i).addClass('no');
+            } else {
+              stars.eq(i).removeClass('no');
+            }
+          }
+          _this.evaluate.servicescore = score;
+        });
+      });
+
+      $('#sertime').each(function () {
+        $(this).find('.pj_xx p').on('click', function () {
+          var clickedStar = $(this);
+          var stars = clickedStar.parent().find('p');
+          var score = +clickedStar.attr('data-score');
+          for (var j = 0; j < stars.length; j++) {
+            if (j < score) {
+              stars.eq(j).addClass('no');
+            } else {
+              stars.eq(j).removeClass('no');
+            }
+          }
+          _this.evaluate.timelyscore = score;
+        });
+      });
+
+      $('#quility').each(function () {
+        $(this).find('.pj_xx p').on('click', function () {
+          var clickedStar = $(this);
+          var stars = clickedStar.parent().find('p');
+          var score = +clickedStar.attr('data-score');
+          for (var k = 0; k < stars.length; k++) {
+            if (k < score) {
+              stars.eq(k).addClass('no');
+            } else {
+              stars.eq(k).removeClass('no');
+            }
+          }
+          _this.evaluate.qualityscore = score;
+        });
+      });
   }
 
 }

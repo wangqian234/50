@@ -54,28 +54,20 @@ onload2 = function(){
 
   //添加工单"servicescore":1,"timelyscore":1,"qualityscore":1,"listId":1,"scoreMemo":"评价"
   showPopup(){
-    var that=this;
-    var api = this.config.apiUrl+'/api/TradeGoods_Refund/info';
-     this.http.post(api,{"servicescore":1,"timelyscore":1,"qualityscore":1,"listId":1,"scoreMemo":"评价"} 
-     ).map(res => res.json()).subscribe(data =>{
-       alert(1)
+   var that = this;
+   var token=this.storage.get('token');
+
+       var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+           alert('get')
           if(data.errcode===0&&data.errmsg==='OK'){
-            
-            this.alist=data.list;//怎么知道那个是默认房屋
-            console.log(this.alist)
+            alert(1)
+            console.log(data.model)
           }else{
             alert(data.errmsg)
           }
      })
   }
-
-
-
-
-
-
-
-
 
 
 

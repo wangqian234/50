@@ -5,7 +5,16 @@ page-shopsort {
   }
   .cate_left{
     width: 25%;
-    border-right: 1px solid gainsboro;
+    background-color: #f5f5f5;
+    position: absolute;
+    ul{
+      li{
+        line-height: 0.7rem;
+        font-size: 0.28rem;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
   }
   .label-ios{
     padding-left:8px;
@@ -14,5 +23,23 @@ page-shopsort {
   .item-ios{
     padding-left:0;
   }
-
+  .list-ios{
+    float: left;
+  }
+.list-ios[no-lines] ion-list-header, .list-ios[no-lines] ion-item-options, .list-ios[no-lines] .item, .list-ios[no-lines] .item .item-inner{
+  min-height:0;
+  background-color:#f5f5f5
+}
+.cate_right{
+  margin-left:  25%;
+}
+.activety {
+background-color: white;
+}
+.shangp_lieb_k_er li .lieb_img{
+  width:35%
+}
+.shangp_lieb_k_er li .lieb_txt{
+   width:64%
+}
 }

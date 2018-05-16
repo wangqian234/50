@@ -1,27 +1,35 @@
-<!--
-  Generated template for the NewslistPage page.
+<ion-content>
+  <div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li *ngIf="type==1"><a class="px24">最新资讯</a></li> 
+					<li *ngIf="type==3"><a class="px24">公示公告</a></li>   
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>newslist</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-        <div id="order-content">
-            <div class="order-list">
-                    <div class="order-item" *ngFor="let newList of newsList">
-                        <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
-                            <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
-                            <p style="font-size: 0.5rem">{{newList.topic}}{{newList.addDate}}</p>
-                        </div>
-                    </div>
-            </div>
+		<div class="shous_k">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="请输入关键字进行搜索">
+            <img (click)="doReserch(type)" src="assets/imgs/sos.png">
         </div>
+
+<div>
+  <div class="zixun_content" *ngFor="let newList of newsList">
+		<div (click)="getNewInfo(newList.id)" class="zixun_li">
+			<img src="{{config.apiUrl}}{{newList.imgurl}}">
+			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
+			<span class="line"></span>
+		</div>
+	</div>
+  </div>
+	<div class="nomore" style="display: none">没有更多数据了...</div>
+	  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

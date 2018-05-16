@@ -92,14 +92,19 @@ $colors: (
 
 
 .mytabs .tab-button[aria-selected=true] .tab-button-icon{
-
   color: #0082ca !important;  /*优先级高*/
 }
 
 .mytabs .tab-button:hover:not(.disable-hover), .mytabs .tab-button[aria-selected=true]{
-
   color: #0082ca !important;  /*优先级高*/
+}
 
+.mytabs2 .tab-button[aria-selected=true] .tab-button-icon{
+  color: #ff971c !important;  /*优先级高*/
+}
+
+.mytabs2 .tab-button:hover:not(.disable-hover), .mytabs2 .tab-button[aria-selected=true]{
+  color: #ff971c !important;  /*优先级高*/
 }
 
 .clearfix:after{

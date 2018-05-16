@@ -55,24 +55,9 @@ export class BigsalePage {
      })
   }
   ionViewDidLoad() {
-   this.onload2();
+   
   }
-onload2 = function(){
-    var Sos=document.getElementById('sos_tanc');
-		var ShouYe=document.getElementById('yemnr');
-		var SosYe=document.getElementById('shous_yem');
-		var SosFanHui=document.getElementById('sous_fanh_sy');
-		Sos.onclick=function()
-		{
-			ShouYe.style.display=('none');
-			SosYe.style.display=('block');
-		}
-		SosFanHui.onclick=function()
-		{
-			ShouYe.style.display=('block');
-			SosYe.style.display=('none');
-		}
-  }
+
 
 //测试传递
   getDetailData(pid){
@@ -96,6 +81,10 @@ onload2 = function(){
       
      
      })
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 

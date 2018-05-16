@@ -1,5 +1,5 @@
 <ion-content style="background-color:#E3E3E3">
-<div class="toub_beij toub_beij_zy">
+<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -17,9 +17,8 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected *ngFor="let item of roomidlist" value={{item.id}}>{{item.name}}</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
+        <ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>
+        <ion-option *ngFor="let item of roomidlist" value={{item.id}}>{{item.name}}</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
@@ -27,9 +26,21 @@
 </div>
 
     <div class="fee">
-        <div class="fee1"><p>￥0.002{{modellist.totalFee}}</p><p>欠费总计</p></div>
-        <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
-    </div>
+		<div class="fee1">
+			<div class="fee11">
+				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
+				<p class="fee11_p1">欠费总计</p>
+				<p class="fee11_p2">￥{{modellist.totalFee}}</p>
+			</div>
+		</div>
+		<div class="fee2">
+			<div class="fee21" >
+				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
+				<p class="fee21_p1">预存款总计</p>
+				<p class="fee21_p2">￥{{modellist.totalPrepay}}</p>
+			</div>
+		</div>
+	</div>
 
   <div class="otherUser_title">
     <div class="user_titlediv" (click)="appearPayFee()">
@@ -39,30 +50,10 @@
     <div id="payFee" class="otherUser_content" style="display:none">
      
       <ion-list>
-        <ion-item>
-          <div class="fee_time">2018-02</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">￥283</div>
-        </ion-item>
-        <ion-item>
-          <div class="fee_time">2018-02</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">￥283</div>
-        </ion-item>
-        <ion-item>
-          <div class="fee_time">2018-02</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">￥283</div>
-        </ion-item>
-        <ion-item>
-          <div class="fee_time">2018-02</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">￥283</div>
-        </ion-item>
-        <ion-item>
-          <div class="fee_time">2018-02</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">￥283</div>
+        <ion-item *ngFor="let list of expenselist" >
+          <div class="fee_time">{{list.yearmonth}}</div>
+          <div class="fee_content">{{list.alias}}</div>
+          <div class="fee_num">￥{{list.outlay}}</div>
         </ion-item>
       </ion-list>
     </div>
@@ -75,20 +66,10 @@
     </div>
     <div id="preDetail" class="otherUser_content" style="display:none">
       <ion-list>
-        <ion-item>
-          <div class="fee_time">这是一段文字</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">这是一段文字</div>
-        </ion-item>
-         <ion-item>
-          <div class="fee_time">这是一段文字</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">这是一段文字</div>
-        </ion-item>
-         <ion-item>
-          <div class="fee_time">这是一段文字</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">这是一段文字</div>
+        <ion-item *ngFor="let list of prepayslist">
+          <div class="fee_time">{{list.prepay_cas}}</div>
+          <div class="fee_content">{{list.prepay_addate}}</div>
+          <div class="fee_num">{{list.statmode}}</div>
         </ion-item>
       </ion-list>
     </div>
@@ -101,10 +82,10 @@
     </div>
     <div id="feeList" class="otherUser_content" style="display:none">
       <ion-list>
-        <ion-item>
-          <div class="fee_time">这是一段文字</div>
-          <div class="fee_content">这是一段文字</div>
-          <div class="fee_num">这是一段文字</div>
+        <ion-item *ngFor="let list of fundloglist">
+          <div class="fee_time">{{list.date }}</div>
+          <div class="fee_content">{{list.money}}</div>
+          <div class="fee_num">{{list.modename}}</div>
         </ion-item>
       </ion-list>
     </div>

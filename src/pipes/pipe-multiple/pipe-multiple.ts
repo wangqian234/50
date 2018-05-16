@@ -27,4 +27,5 @@ isTrue="推荐";
 
     return isTrue;
   }
+
 }

@@ -1,36 +1,24 @@
 
-<ion-content  style="background-color:#f0f0f0">
-    
-        <!-- 商城首页head 分类、搜索、定位界面
-            <div class="jd_header">
-			 <ion-icon ios="ios-list" md="md-list" class="classlist"></ion-icon>
-	    		<div id="search_box" style="width:75%;margin-left:4rem;height:3.5rem;background-color:antiquewhite"> 
-                <form id="search_form"> 
-                    <input type="text" id="s" placeholder="请输入搜索关键字" class="swap_value" /> 
-                </form> 
-            </div>
-            <div class="location">
-                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
-                <span class="dw_font" id="curcity">西安</span>
-                <ion-icon name="arrow-dropdown"></ion-icon>
-            </div>
-		</div>-->
- <!-- 首页head 分类、搜索、定位-->
-        <div style="background-color:white;padding:0.3rem 0;">
-            <div class="classify"><img [navPush]="ShopsortPage" src="assets/imgs/point_list.png"/><span>分类</span></div>
-			<div class="search_box" style="float:left;width:58%;margin-top:0.25rem;height:3.5rem;"> 
-                <form id="search_form"> 
-                    <input type="text" id="s" placeholder="商城商品搜索" [(ngModel)]='keywords' name='keywords'  class="swap_value" /> 
-                </form> 
-                <button (click)="doReserch()">搜索</button>
-            </div>
-            <div class="location">&nbsp;
-                <ion-icon style="color:red" ios="ios-pin-outline" md="md-pin-outline"></ion-icon>
-                <span class="dw_font" id="curcity">西安</span>
-            </div>
+<ion-content  style="background-color:#f5f5f5">
+
+
+
+
+<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.8rem;">
+	<div class="zhongj_k">
+		<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>
+		<div class="shous_k">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn($event)" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
+		<div class="dengl">
+			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>西安市</p></div>
+		</div>
+	</div>
+</div>
+
 <!-- 轮播图 -->
-        <ion-slides>    
+        <ion-slides class="focus" pager  loop="true" autoplay="3000">    
             <ion-slide *ngFor="let item of l">
                <img class="img1" src="{{item}}" />
            </ion-slide>         
@@ -39,152 +27,79 @@
   
    <!-- 团购图标-->
   <div class="tupian-div">
-
-        <img [navPush]="GroupbuylistPage"  src="assets/imgs/tuangou1.jpg" alt="aa" class="div1">
+        <img [navPush]="SalePage" src="assets/imgs/qianggou.png">
         <div class="tupian-div2">
-            <img [navPush]="SalePage"  src="assets/imgs/tuangou2.jpg" alt="aa" class="div2">
-            <img [navPush]="BigsalePage"  src="assets/imgs/tuangou3.jpg" alt="aa" class="div3">
-
+            <img src="assets/imgs/renmai.png" [navPush]="BigsalePage"  class="div2">
+            <img src="assets/imgs/tuangou.png" [navPush]="GroupbuylistPage" class="div3">
         </div> 
   </div>
-<!-- 团购、限时抢购图标-->    <!-- 图片布局怎么显示-->
-<!--
-             <div class="tupian-div">
-                 <a href="#"> <img src="{{aa}}{{tuangouList[0]}}" alt="aa" class="div1"> </a>
-             <div class="tupian-div2">
-                 <a href="#"><img src="{{tuangouList[1]}}" alt="aa" class="div2"></a>               
-                 <a href="#"><img src="{{tuangouList[2]}}" alt="aa" class="div3"></a>
-             </div> 
-           </div>-->
-<!-- 推荐分类-->
-        <div style="clear:both"></div> 
+
+  <div style="clear:both"></div>
+
+
             <div class="titleshop">
-                <span class="p_shop">&nbsp;推荐分类</span>
-                <span class="p_shop2">更多></span>
+                <img src="assets/imgs/recommend.png">
+                <span class="p_shop">&ensp;推荐分类</span>
+                <span class="p_shop2" [navPush]="ShopsortPage">更多>></span>
             </div>               
-        <div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
-		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>
+        <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
+		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
               <!--图标遍历-->             
         <ul class="facediv" >
-            <li *ngFor= "let item of tubList">   
-                    <div (tap)="getshoplist(item['id'])">
-                    <a href="#"><img index="0" src="{{item.img}}"/></a>
-                    <p index="0">{{item.name}}</p>                   
+            <li *ngFor= "let item of tubList;let i = index">   
+                    <div (tap)="getshoplist(item['id'],i)">
+                    <a href="#"><img src="{{item.img}}"/></a>
+                    <p>{{item.name}}</p>                   
                     </div>
             </li>
         </ul>
-        <div (click)="clickEvent()"> <img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/></div>
         
-              
-
-        <!--<div class="facediv" (click)="clickEvent()">
-      
-        <div>
-            <a href="#"><img index="0" src="assets/imgs/lvyou.png"/></a>
-            <p index="0">旅游服务</p>
-            //<img class="jiantou_button" style="position:relative;" src="assets/imgs/jiantou.png"/>
-        </div>
-        <div>
-            <a href="#"><img index="1" src="assets/imgs/shuiguo.png"/></a>
-            <p index="1">新鲜水果</p>
-        </div>
-        <div>
-            <a href="#"><img index="2" src="assets/imgs/yinliao.png"/></a>
-            <p index="2">酒水饮料</p>
-       </div>
-       <div>
-            <a href="#"><img index="3" src="assets/imgs/educate.png"/>  </a>
-            <p index="3">儿童教育</p>
-       </div>
-        <div>
-            <a href="#"><img index="4" src="assets/imgs/meizhuang.png"/>  </a>
-            <p index="4">个护美妆</p>
-        </div>
-         <div>
-            <a href="#"><img index="5" src="assets/imgs/chaoshi.png"/>  </a>
-            <p index="5">汇超市</p>
-         </div>
-         <div>
-            <a href="#"><img index="6" src="assets/imgs/gongyi.png"/>  </a>
-            <p index="6">日用工艺</p>
-        </div>
-        <div>
-            <a href="#"><img index="7" src="assets/imgs/liangshi.png"/>  </a>
-            <p index="7">粮食副食</p>
-        </div>
-        <div id="living">
-            <a href="#"><img index="8" src="assets/imgs/jujiafuwu.png"/>  </a>
-            <p index="8">居家服务</p>
-        </div>
-        <div id="family">
-            <a href="#"><img index="9" src="assets/imgs/dianqi.png"/>  </a>
-            <p index="9">家用电器</p>
-        </div>
-        <div id="tee">
-            <a href="#"><img index="10" src="assets/imgs/yangshengcha-.png"/>  </a>
-            <p index="10">养生茗茶</p> 
-        </div>
-         <div>
-            <a href="#"><img index="11" src="assets/imgs/jujiajiancai.png"/>  </a>
-            <p index="11">居家建材</p>
-        </div>
-                <div>
-            <a href="#"><img index="12" src="assets/imgs/yinyongshui.png"/>  </a>
-            <p index="12">饮用水</p>
-        </div>
-         <div>
-            <a href="#"><img index="13" src="assets/imgs/xianhua.png"/>  </a>
-            <p index="13">鲜花绿植</p>
-        </div>
-        <div>
-            <a href="#"><img index="14" src="assets/imgs/car.png"/>  </a>
-            <p index="14"> 汽车服务</p>
-        </div>
-   </div>-->
-<div id="mallhome-content" style="margin-top:-1rem">
+<div id="mallhome-content" style="margin-top:10px">
    <ul class="goods-list" >
                 <li class="goods-item clearfix" *ngFor="let item of shoplist" >
                     <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
                     <div class="information" (tap)="goGoodsInfo(item['id'])">
                         <p class="name">{{item.title}}</p>
-                        <p class="tip">{{item.prename}}</p>
+                        <p class="tip">{{item.prename}}<span *ngIf="item.recommend==true">推荐</span></p>
+                        <p class="sales-count">已售<span>{{item.soldnum}}</span>份</p>
                         <p class="price">￥<span>{{item.price}}</span></p>
-                        <p class="sales-count"><span>{{item.soldnum}}</span>人已付款</p>
-                        <button>推荐</button><button>促销</button>
                     </div>
                 </li>
         </ul>
-        <div style="padding-top:1rem" class="bangding">
-            <span class="p_more">查看更多</span>
-        </div>
 </div>
-   <div style="clear:both"></div>
 
-    <div class="titleshop">
-        <span class="p_shop">&nbsp;精品推荐</span>
-        <span class="p_shop2">更多></span>
-    </div>
-    <ul>
+        <div class="titleshop">
+            <img src="assets/imgs/recommend.png">
+            <span class="p_shop">&ensp;精品推荐</span>
+            <span class="p_shop2">更多>></span>
+        </div>
+        <ul style="margin-bottom:50px">
         <li *ngFor= "let item of tuijList">
             <a href="{{item.url}}">
-               <div><img src= "{{item.img}}"> </div>
+               <div><img src="{{item.img}}"></div>
             </a>
         </li>
     </ul>
-       <div style="padding-top:1rem" class="bangding">
-            <span class="p_more">查看更多</span>
+
+    <div id="searchInput" class="remen_sos" style="display:none">
+        <div class="history" *ngIf="shopKeyList.toString().length != 0">
+		<p>历史搜索：</p><ion-icon (click)="clearShopKey()" name="trash"></ion-icon>
+			<ul>
+				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
+			</ul>
         </div>
-   <br />
-   <br />
-   <br />
-   <br />
-  
-    
-         <!--右下角导航 
-        <ul class="main-nav">
-            <li class="mall"><a href="javascript:;"><ion-icon name="home"></ion-icon></a></li>
-            <li class="cart"><a href="javascript:;"> <ion-icon name="cart"></ion-icon></a></li>
-            <li class="order"><a href="javascript:;"><ion-icon name="paper"></ion-icon></a></li>
-        </ul>-->
-    
+
+        <div class="remen">
+		<p>热门搜索：</p>
+			<ul>
+				<li><a href="#">笔记本</a></li>
+				<li><a href="#">游戏本</a></li>
+				<li><a href="#">工作站笔记本</a></li>
+				<li><a href="#">平板电脑</a></li>
+				<li><a href="#">台式机</a></li>
+				<li><a href="#">一体机服务器</a></li>
+			</ul>
+        </div>
+	</div>
+
 </ion-content>

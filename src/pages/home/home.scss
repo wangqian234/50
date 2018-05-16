@@ -1,63 +1,108 @@
 page-home{
     margin: 0px;
     padding:0px;
-    .price{
-    color:red;
-}
-.old_price{
-    text-decoration: line-through;
-}
-.focus{
-    width:100%;
-    height: 4rem;
 
-    img{
-        width:100%;
-        height: 4rem;
-    }
+.item-block{
+    height:27px;
+}
+.select-item{
+    background-color:#2979FF;
+    color:#F5F5F5;
+}
+.shous_div{
+    margin-left:10% !important;
+    background-color:#2979FF;
+    width:80%
+}
+.select-goal{
+    max-width:80%;
+}
+//下拉框修改ionic原始样式
+.toub_beij_zy{
+    border-bottom: solid 1px #2979FF !important;
+}
+.item-ios.item-block .item-inner{
+    border-bottom: 0.55px solid #2979FF !important;
+}
+//修改ionic原始样式
+
+ .lunbo_item{
+     width:100%;
+     height:3.0rem;
+ }
+
+.zixun_div{
+width:100%;
+height:1rem;
+background-color:rgba(255,255,255,1);
+}
+.zixun_div .zixun_title{
+float:left;
+margin-left:0.22rem;
+height:100%;width:100%;
+}
+.zixun_div .zixun_title img{
+float:left;
+margin-top:0.2rem
 }
 
-.plist{
-    list-style: none;
-    padding:4rem;
-    
-    li{
-        width: 6.6rem;
-        height: 14.8rem;
-        float: left;
-        margin-right: 6rem;
-        .rec_shop_detial{
-            padding:4rem 0rem;
-            margin:0px;
-            height: 302rem;
-            overflow: hidden;
-        }
-        img{
-            width:60rem;
-            height: 60rem;
-            display: block;
-            margin:0 auto;
-        }
-        p{
-            padding:2rem 0px;
-            text-align: center;
-        }
-        
-    }
+.zixun_div .zixun_title .p_title{
+float:left;
+font-size:0.32rem;
+color:rgba(100,100,100,1);
+font-family:MicrosoftYaHei;
+margin-left:0.2rem;
+margin-top:0.22rem;
+font-weight: bold;
+}
+.zixun_div .zixun_title .zixun_more{
+margin-right:0.5rem;
+float:right;height:100%;
 }
 
-.rec_shop {
-    ion-scroll{
-        width: 100%;
-        height: 14.8rem;
-        overflow-x: auto;
-    }
-    .plist{
-        width:auto;
-    }
-    .rec_shop_detial{
-        font-size: 12rem;
-    }
+.zixun_div .zixun_title .zixun_more img{
+float:right;
+margin-top:0.24rem
+}
+.zixun_div .zixun_title .zixun_more .p_more{
+float:right;
+font-size:0.22rem;
+color:rgba(100,100,100,1);
+font-family:MicrosoftYaHei;
+margin-right:0.1rem;margin-top:0.24rem
+}
+
+ .zixun_content{
+width:100%;
+height:auto;
+background-color:rgba(255,255,255,1);
+}
+ .zixun_content .zixun_li{
+padding:0rem 0.2rem 0.1rem 0.35rem;
+height:1.4rem;
+}
+ .zixun_content .zixun_li img{
+float:left;
+margin-top:0.15rem;
+width:25%;
+}
+ .zixun_content .zixun_li .content{
+float:left;
+color:#646464;
+font-size:0.28rem;
+line-height:0.38rem;
+width:70%;
+margin-left:0.23rem;
+}
+.zixun_content .zixun_li .line{
+float:left;
+margin-top:0.15rem;
+width:95%;
+margin-left:2.5%;
+margin-right:2.5%;
+border-bottom:1px ridge rgba(245,245,245,1);
+}
+
 }
 
 
@@ -74,84 +119,82 @@ page-home{
     text-align: center;
     font-size: 0.03rem;
 }
-.p_more{
-    margin-top: 0.05rem;
-    margin-bottom: 0.05rem;
-    color: grey;
-    text-align: center;
-    font-size: 0.03rem;
-}
-.smallnav{
-     font-size:2rem;
-}
-.smallnav img{
-    max-width:6rem;
-}
-.am-u-sm-3{
-     display: table-cell;
-     text-align:center;
-}
-
-
-area{outline:none;}
-.clearfix:after {
-    content: ".";
-    display: block;
-    width: 0;
-    height: 0;
-    line-height: 0;
-    font-size: 0;
-    clear: both;
-    visibility: hidden;
-}
-
-#main-container{
-    padding: 0.1rem 0 0.25rem 0;
-    background-color: white;
-}
-
-#main-container .main-nav{
-    font-size: 0.2rem;
-}
-
-#main-container .main-nav:first-child{
-    margin: 0 auto 0.2rem auto;
-    padding-top: 0.1rem;
-    font-size: 0.3rem;
-}
-
-#main-container .main-nav .nav-item{
-    float: left;
-    width: 1rem;
-    height: 1.1rem;
-    margin: 0 0.1rem 0rem 0.03rem;
-}
-
-#main-container .main-nav img{
-    margin-left: 0.1rem;
-    width: 0.8rem;
-    height: 0.8rem;
-}
-
-#main-container .main-nav p{
-    text-align: center;
-}
-
-.zixun img{
-    width: 0.8rem !important;
-    height: 0.8rem !important;
-}
-
-.zixun p{
-    width: 80% !important;
-    font-size: 0.3rem;
-    color: #0082ca;
-    float: right;
-}
 .new_zixun{
     margin-top: 0.02rem;
     background-color: white;
     padding-top: 0.02rem;
+}
+
+.bangding_title{
+    background-color: white;
+    padding: 0.3rem 0 0.1rem 0.2rem;
+}
+.bangding_title p{
+    display: inline;
+}
+.bangding_title button{
+
+    height: 0.5rem;
+    margin: 0;
+    width: 20%;
+    margin-top: -0.2rem;
+
+}
+
+body {font-family: Microsoft YaHei;}
+div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,textarea,table,td{ margin:0; padding:0;font-family: Microsoft YaHei;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;font-family: Microsoft YaHei;}
+.item-block{
+    min-height: 0;
+}
+.tabs-ios .tab-button-text{
+    font-size: 12px;
+    min-height: 15px;
+}
+.select .item-ios.item-block .item-inner{
+    border-bottom:none;
+}
+.select-ios .select-icon{
+    margin-right: 12px;
+}
+.fee11{
+width:100%;
+height:1rem;
+margin-top:0.28rem;
+margin-left:0.35rem;
+font-size:0.28rem;
+color:#646464
+}
+.fee11 img{
+float:left;
+}
+.fee11 .fee11_p1{
+float:left;
+margin-left:0.1rem;
+margin-top:0.04rem;
+}
+.fee11 .fee11_p2{
+float:left;
+margin-left:0.3rem;
+margin-top:0.04rem
+}
+.fee21{
+width:100%;
+height:1rem;
+margin-top:0.28rem;
+margin-left:0.35rem;
+font-size:0.28rem;
+color:#646464
+}
+.fee21 .fee21_p1{
+float:left;
+margin-left:0.1rem;
+margin-top:0.02rem;
+}
+.fee21 .fee21_p2{
+float:left;
+margin-left:0.3rem;
+margin-top:0.02rem;
 }
 .fee{
     height: 1rem;
@@ -172,56 +215,4 @@ area{outline:none;}
     float:left;
     height: 0.8rem;
     border-left:1px ridge gainsboro;
-}
-.fee1 p:nth-of-type(1){
-    color :red;
-    font-size: 0.4rem;
-    margin-top: 0.1rem;
-}
-.fee2 p:nth-of-type(1){
-    color :blue;
-    font-size: 0.4rem;
-    margin-top: 0.1rem;
-}
-.fee2 p:nth-of-type(2),.fee1 p:nth-of-type(2){
-    margin-top: 0.1rem;
-    bottom: 0.1rem;
-    color :grey;
-    font-size: 0.2rem;
-}
-.bangding_title{
-    background-color: white;
-    padding: 0.3rem 0 0.1rem 0.2rem;
-}
-.bangding_title p{
-    display: inline;
-}
-.bangding_title button{
-
-    height: 0.5rem;
-    margin: 0;
-    width: 20%;
-    margin-top: -0.2rem;
-
-}
-#order-content{
-    padding: 0 0.1rem;
-}
-
-}
-body {font-family: Microsoft YaHei;}
-div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,textarea,table,td{ margin:0; padding:0;font-family: Microsoft YaHei;}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;font-family: Microsoft YaHei;}
-.item-block{
-    min-height: 0;
-}
-.tabs-ios .tab-button-text{
-    font-size: 12px;
-    min-height: 15px;
-}
-.select .item-ios.item-block .item-inner{
-    border-bottom:none;
-}
-.select-ios .select-icon{
-    margin-right: 12px;
 }

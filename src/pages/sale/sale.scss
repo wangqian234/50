@@ -1,9 +1,55 @@
 page-sale {
 .toolbar-title-ios {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.3rem;
     font-weight: 600;
     color: #000;
     pointer-events: auto;
+}
+.shangp_lieb_k_er li {
+    margin: 0.2rem 0;
+    padding-bottom: 0.2rem;
+    border-bottom: solid 1px #dedede;
+    overflow: hidden;
+    height: 1.7rem;
+}
+
+.shangp_lieb_k_er li .lieb_txt p {
+    color: #555;
+    font-size: 0.28rem;
+    line-height: 0.35rem;
+    text-align: justify;
+}
+.shangp_lieb_k_er li .wli01 p {
+    color: #e10601;
+    font-size: 0.3rem;
+    line-height: 0.35rem;
+    text-align: justify;
+}
+.shangp_lieb_k_er li .lieb_txt p.px26 span {
+    text-decoration: line-through;
+    color: #979797;
+    margin: 0 0.08rem;
+    font-size: 0.22rem;
+}
+
+.shangp_lieb_k_er li .lieb_txt p.px26 {
+    font-size: 0.24rem;
+    color: #999;
+}
+.shangp_lieb_k_er li .lieb_txt p.bend {
+    color: #979797;
+    font-size: 0.24rem;
+}
+.shangp_lieb_k_er li .lieb_txt p.bend span{
+    color: #e10601;
+   font-size: 0.26rem;
+}
+.wp01{
+   color: #e10601 !important;
+   font-size: 0.23rem !important;
+}
+.activety {
+border-bottom: 3px solid #FF971C;
 }
 }

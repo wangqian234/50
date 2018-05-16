@@ -1,44 +1,25 @@
-<ion-content>
-<div class="toub_beij toub_beij_zy">
-	<div class="zhongj_k zhongj_k_z">
-		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img class="fanh_ann" src=""></a></div>
-			<div class="zhongjain_daoh">
-				<ul>
-					<li><a class="zyyge">个人中心</a></li>  
-				</ul>
-			</div>
-		</div>
-
-	</div>
-</div>
+<ion-content style="background-color:#f5f5f5">
 
 <!--内容--> 
 <div class="gerenzhonhx">
-	<h1 class="grzx_toub_beij"><img src="assets/imgs/user_title.png"></h1>
+    <div class="iondiv"> <ion-icon name="create-outline"></ion-icon></div>
+	<h1 class="grzx_toub_beij"></h1>
 	<div class="grzx_toux_fus">
 		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p *ngIf="enSureLogin">您好，{{userLoginName}}</p></div>
 	</div>
 </div>
-
-<button *ngIf="!enSureLogin" ion-button [navPush]='LoginPage'>登录</button>
-<button *ngIf="enSureLogin" ion-button (click)="outLogin()">退出登录</button>
-
+<div class="jifen"><img src="assets/imgs/jifen.png"><p>剩余积分</p><span>123</span></div>
 
 
   <ion-list inset class="user_list">
-
-        <ion-item [navPush]="ShoppinglistPage" [navParams]="{id:0}">
+     <div class="blockdiv">
+        <p>物业管理</p>
+        <ion-item [navPush]="HouseinfolistPage">
             <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
-            <span>商城订单</span>
+            <span>关联房屋信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item [navPush]="ShoppinglistPage">
-             <ion-icon style="color:#CC8F33;" name="star-half"></ion-icon>
-            <span>团购订单</span>
-            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
-        </ion-item>
-        <ion-item [navPush]="RepairlistPage">
+        <ion-item>
             <ion-icon style="color:#8DC43C;" name="logo-yen"></ion-icon>
             <span>费用明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
@@ -49,13 +30,22 @@
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item>
-            <ion-icon style="color:#4474BB;" name="chatboxes"></ion-icon>
-            <span>我的发布信息</span>
-            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
-        </ion-item>
-        <ion-item>
             <ion-icon style="color:#8C44BB;" name="attach"></ion-icon>
             <span>积分收支明细</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="blockdiv">
+        <p>我的商城</p>
+        <ion-item [navPush]="ShoppinglistPage" [navParams]="{id:0}">
+            <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
+            <span>商城订单</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+        <ion-item [navPush]="ShoppinglistPage">
+             <ion-icon style="color:#CC8F33;" name="star-half"></ion-icon>
+            <span>团购订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item (click)="gotoAddressPage()">
@@ -63,11 +53,37 @@
             <span>收货地址管理</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
+    </div>
+
+    <div class="blockdiv">
+        <p>房屋租售</p>
         <ion-item>
-            <ion-icon style="color:#BB445C;" name="ios-people-outline"></ion-icon>
-            <span>重置登录密码</span>
+            <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
+            <span>我的发布信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
+        <ion-item>
+            <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
+            <span>后台管理</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+    </div>
+
+    <div class="blockdiv">
+        <p>设置</p>
+        <ion-item>
+            <ion-icon style="color:#BB445C;" name="ios-people-outline"></ion-icon>
+            <span>账户安全</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+        <ion-item (click)="outLogin()">
+            <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
+            <span>退出登录</span>
+            <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
+        </ion-item>
+    </div>
+
+
         <ion-item-divider >
         </ion-item-divider>
 

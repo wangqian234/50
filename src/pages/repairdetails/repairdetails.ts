@@ -39,10 +39,6 @@ export class RepairdetailsPage {
     this.getRem();
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
-     //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
-
-
-
     }
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
@@ -55,10 +51,11 @@ export class RepairdetailsPage {
       this.div = document.getElementById('background');
       this.close = document.getElementById('close-button'); 
   }
+  
   //获取工单详情信息
   getrepairdetails(){
     var that = this;
-    var api = this.config.apiUrl+'/api/srq/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
+    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
       if(data.errcode===0&&data.errmsg==='OK'){
         this.repairdetaillist=data.list;
@@ -68,12 +65,12 @@ export class RepairdetailsPage {
     })
   }
 //终止工单
- showPopup(){
+ stopRepaird(){
    this.div.style.display = "block"; 
    this.editcloselist.listId=this.repairDetial.List_Id;
    this.editcloselist.token=this.storage.get('token');
     var that = this;
-    var api = this.config.apiUrl+'/api/srq/list/edit_close';
+    var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)
@@ -118,7 +115,7 @@ export class RepairdetailsPage {
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
   
 

@@ -20,16 +20,19 @@ import { OnlinepaymentPage } from '../onlinepayment/onlinepayment';
   templateUrl: 'payfee.html',
 })
 export class PayfeePage {
- // public roomid:'';
+ public defRoomId:'';
    
     //获取费用明细
-  public roomId=[];/*数组  房屋id */
+  public roomId={
+    roomId:'',
+  };/*  房屋id */
   //接收数据用
   public modellist=[];
   public expenselist=[];
   public prepayslist=[];
   public fundloglist=[];
   public roomidlist=[];
+  public iof_defList=[];
   
   public PayprefeePage = PayprefeePage;
 
@@ -40,8 +43,7 @@ export class PayfeePage {
   //主页面加载函数 
   ionViewWillLoad(){
     this.getRem();
-    this.getroomId();
-    this.getallpaylist();
+    this.getiof_def();
   }
 
   ionViewDidLoad() {
@@ -97,45 +99,76 @@ export class PayfeePage {
     if(roomid === "add"){
       this.navCtrl.push(BindroomPage);
     }else{
+      this.getallpaylist(roomid);
+    }
+  }
+
+  //查询物业总费用列表
+  getallpaylist(roomid){
+    if(roomid==="defId"){
+      roomid=this.defRoomId;
+    }
     var that=this;
     var api = this.config.apiUrl+'/api/charge/list?roomId='+roomid;//获取前台界面上显示的房屋id
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       console.log(JSON.stringify(data))
-          if(data.errcode===0&&data.errmsg==='OK'){
               //总计金额
               this.modellist=data.json.totalNum.model;
               //代缴
-              this.expenselist=data.expense.list;
+              this.expenselist=data.json.expense.list;
               //预交剩余
-              this.prepayslist=data.prepays.list;
+              this.prepayslist=data.json.prepays.list;
               //半年缴费记录
-              this.fundloglist=data.fundLog.list;   
-          }else{       
+              this.fundloglist=data.json.fundLog.list;   
+     })
+  }
+
+ getRem(){
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+  }
+  //查询用户绑定的所有房屋
+  getroomId(){   
+    var that=this;
+    var j=3;
+    var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if(data.errcode===0&&data.errmsg==='OK'){
+            for(var i=0;i<data.list.length;i++){
+              if(data.list[i].id == this.defRoomId){
+                data.list.splice(i,1)
+              }
+            }
+            that.roomidlist=data.list;  
+          }else if (data.errcode===4002){
+            j--;
+            this.config.doDefLogin();
+            this.getroomId();
+          } else{
             alert(data.errmsg)
           }
      })
   }
- }
-  getRem(){
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-  }
-  //查询物业总费用列表
-  getallpaylist(){
-
-  }
-  //查询用户绑定的所有房屋
-  getroomId(){
-    var that=this;
-    var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
+  //查询默认房屋
+  getiof_def(){
+    var j=3
+    var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            that.roomidlist=data.list;    //怎么知道那个是默认房屋
-            console.log(this.roomidlist)
+            this.iof_defList=data.model;
+            this.defRoomId=data.model.House_Room_Id;
+            this.getallpaylist(data.model.House_Room_Id);
+            this.getroomId();
+          }else if (data.errcode===4002){
+            j--;
+            this.config.doDefLogin();
+            this.getiof_def();
           }else{
             alert(data.errmsg)
           }
      })
   }
 
-}
+ }
+
+
+
