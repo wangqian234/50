@@ -100,6 +100,8 @@ import {GoodsoderdetailPage}from '../pages/goodsoderdetail/goodsoderdetail';
 import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate';
 //评价详情
 import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tradegoods-evaluatedetail';
+//团购列表界面
+import {TradegoodsGroupbuyPage}from '../pages/tradegoods-groupbuy/tradegoods-groupbuy';
 
 
 //房屋基本信息
@@ -123,9 +125,14 @@ import { OnlinepaymentPage }from '../pages/onlinepayment/onlinepayment';
 //我的房屋页面
 import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
 
+//个人信息修改
+import { EditorinfoPage }from '../pages/editorinfo/editorinfo';
 
+//房屋租售首页
+import { RentsalePage }from '../pages/rentsale/rentsale';
 
-
+//房屋租售详细信息
+import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -139,6 +146,7 @@ import { PipeTimePipe } from '../pipes/pipe-time/pipe-time';
 import { CityDataProvider } from '../providers/city-data/city-data';
 import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
+import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 
 @NgModule({
   declarations: [
@@ -171,6 +179,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     ShopgoodsinfoPage,
     GroupbuylistPage,
     PipeTimePipe,
+    PipeMoneyPipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,
@@ -183,6 +192,7 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     GoodsoderdetailPage,
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
+    TradegoodsGroupbuyPage,
 
     HouseinfoPage,
     NewinfoPage,
@@ -191,8 +201,10 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     OnlinepaymentPage,
     RepairevaluatePage,
     NewslistPage,
-    HouseinfolistPage
-
+    HouseinfolistPage,
+    EditorinfoPage,
+    RentsalePage,
+    RentsaleinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -245,7 +257,8 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     GoodsoderdetailPage,   
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
-
+    TradegoodsGroupbuyPage,
+    
     HouseinfoPage,
     NewinfoPage,
     PayfeePage,
@@ -254,6 +267,9 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
     RepairevaluatePage,
     NewslistPage,
     HouseinfolistPage,
+    EditorinfoPage,
+    RentsalePage,
+    RentsaleinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

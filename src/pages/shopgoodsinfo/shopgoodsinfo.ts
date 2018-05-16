@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
+import $ from 'jquery';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -10,6 +11,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import {ShoppingevaluatePage} from '../shoppingevaluate/shoppingevaluate'
 //购物车
 import { CartPage} from '../cart/cart'
+//商品购买页面
+import { ShopbuyPage } from '../shopbuy/shopbuy';
 /**
  * Generated class for the ShopgoodsinfoPage page.
  *
@@ -26,6 +29,7 @@ export class ShopgoodsinfoPage {
   //跳转页面
     public ShoppingevaluatePage=ShoppingevaluatePage;
     public CartPage = CartPage;
+    public ShopbuyPage=ShopbuyPage;
     //定义需要隐藏的标志变量
     public showpingj =false;
     //接收数据的 list
@@ -33,6 +37,7 @@ export class ShopgoodsinfoPage {
     public goodMlist=[];
     public dataGlist=[];
     public dataSlist =[];
+    public strs=[];
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
     //定义token
@@ -41,7 +46,7 @@ export class ShopgoodsinfoPage {
   public addcarList={
     gId: "1",
     gsId: "1",
-    goodsNum: "1",
+    goodsNum: 1,
     token: "",
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
@@ -59,14 +64,22 @@ export class ShopgoodsinfoPage {
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-    
+        console.log(JSON.stringify(data))
         that.goodMlist = data.json['good_Model'].model;
+        $("#tuwen").html(data.json['good_Model'].model.detail);
+        this.fenge(data.json['good_Model'].model.imgsrc_list);
         that.dataGlist = data.json.data_group.list;
         that.dataSlist = data.json.data_Sizes.list[0];  
       
     })
   }
 
+fenge(str){ 
+ 
+ this.strs=str.split(","); //字符分割
+//alert(this.strs[0]);
+
+}
   //加入购物车函数
    addcart(){ 
     this.addcarList.token=this.token;
@@ -101,4 +114,18 @@ export class ShopgoodsinfoPage {
     console.log('ionViewDidLoad ShopgoodsinfoPage');
   }
 
+  incCount(){    
+    ++this.addcarList.goodsNum;
+  }
+
+  //数量变化  双向数据绑定
+  decCount(){
+    if(this.addcarList.goodsNum>1){
+      --this.addcarList.goodsNum;
+    }
+  }
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

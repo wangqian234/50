@@ -1,26 +1,44 @@
-<!--
-  Generated template for the TradegoodsReapPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>申请商品退款</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
 
 <ion-content >
+
+ <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">申请退款</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
 	<ion-list class="login_list">        
     <ion-item>
-      <ion-label>订单号:{{reapList.trade_Id}}</ion-label>
+      <ion-label>订单号:{{reapList.tgId}}</ion-label>
     </ion-item>        
     <ion-item>
-        <ion-label fixed>评价内容:</ion-label>
-        <ion-input type="text" placeholder="评价内容"  [(ngModel)]='reapList.memo'></ion-input>
+        <ion-label fixed>退款模式:</ion-label>
+        <ion-select  type="text" placeholder="退款原因"  [(ngModel)]='reapList.mode'>
+          <ion-option value="1">仅退款</ion-option>
+          <ion-option value="2">退货退款</ion-option>
+          <ion-option value="3">售后退款</ion-option>
+          <ion-option value="4">售后退货</ion-option>
+        </ion-select>
+        <!--<ion-input type="text" placeholder="退款原因"  [(ngModel)]='reapList.type'></ion-input>-->
+    </ion-item>
+    <ion-item>
+        <ion-label fixed>退款原因:</ion-label>
+        <ion-input type="text" placeholder="退款原因"  [(ngModel)]='reapList.type'></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label fixed>退款金额:</ion-label>
+        <ion-input type="text" placeholder="退款金额"  [(ngModel)]='reapList.price'></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label fixed>商品退款说明:</ion-label>
+        <ion-input type="text" placeholder="商品退款说明"  [(ngModel)]='reapList.memo'></ion-input>
     </ion-item>
   </ion-list>
     

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
+import { ConfigProvider } from '../../providers/config/config';
+import { Http } from '@angular/http';
+import { StorageProvider } from '../../providers/storage/storage';
 
 /**
  * Generated class for the RebuildpassPage page.
@@ -19,8 +22,12 @@ export class RebuildpassPage {
   public isShowSend=true;   /*是否显示发送验证码的按钮*/
   public num=5 ;   /*倒计时的数量*/
   public tel='';
+  public tel2='';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
+  public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
+    this.tel = this.storage.get("userName")
+    this.tel2 = this.tel.substr(0,3)+"****"+this.tel.substr(7);
   }
 
   ionViewDidLoad() {
@@ -53,7 +60,6 @@ export class RebuildpassPage {
   }
   //倒计时的方法
   doTimer(){
-
     var timer=setInterval(()=>{
           --this.num; 
           if(this.num==0){
@@ -80,6 +86,26 @@ export class RebuildpassPage {
         }
     })
 
+  }
+
+    //修改密码(点击修改按钮时生效)
+  modifyPwd(){
+    var data = {
+      'mobile':'',
+      'pwd':'',
+    }
+    var api = this.config.apiUrl + '/api/User/edit_Pwd';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+      console.log("成功修改密码!");
+      } else {
+        console.log(data.errmsg);
+      }
+    });
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }

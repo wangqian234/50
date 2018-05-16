@@ -12,6 +12,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 //商品退款详情
 import {TradegoodsRefundPage}from '../tradegoods-refund/tradegoods-refund';
+//商品订单列表
+import {ShoppinglistPage}from '../shoppinglist/shoppinglist';
 
 
 @IonicPage()
@@ -39,6 +41,7 @@ export class TradegoodsReapPage {
 
   public list = [];
   public TradegoodsRefundPage=TradegoodsRefundPage;
+  public ShoppinglistPage=ShoppinglistPage;
   public trade_id;
 
   //定义congfig中公共链接的变量aa
@@ -48,6 +51,7 @@ export class TradegoodsReapPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
             this.trade_id=navParams.get('tradeId');
+            this.reapList.tgId=this.trade_id;
 
   }
 
@@ -55,9 +59,9 @@ export class TradegoodsReapPage {
       this.getRem();
       this.getdetaillist();
 
-    if(this.navParams.get('item')){
-      this.refundList=this.navParams.get('item');
-    } 
+    // if(this.navParams.get('item')){
+    //   this.refundList=this.navParams.get('item');
+    // } 
   }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -69,21 +73,30 @@ export class TradegoodsReapPage {
   //添加商品退款申请
   addRefundApplicationEvent(){
       alert("评价添加");
-      var api = this.aa+'/api/tradegoods/add';
+      var j=3;
+      var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;
-      this.reapList.mode=this.refundList.refund_mode;
-      this.reapList.type=this.refundList.refund_type;
-      this.reapList.price=this.refundList.refund_price;
-      this.reapList.tgId=this.trade_id;
+      //this.reapList.mode=this.refundList.refund_mode;
+      //this.reapList.type=this.refundList.refund_type;
+      //this.reapList.price=this.refundList.refund_price;
       this.reapList.act="add";
       this.reapList.token=this.token;
       //var date = this.evaluateList;
-        this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
-        if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert("修改成功！");
-          this.navCtrl.push(TradegoodsRefundPage);
-        } else {
-          alert("修改失败！");
+      alert("王慧敏"+JSON.stringify(this.reapList));
+      this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
+        alert(JSON.stringify(data));
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+          alert("添加成功！");
+          //this.navCtrl.push(ShoppinglistPage,{id:2});
+      }else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.addRefundApplicationEvent();
+          }
+      } else {
+          alert("添加失败！");
+          //this.navCtrl.push(ShoppinglistPage,{id:2});
         }
       });
 
@@ -91,20 +104,26 @@ export class TradegoodsReapPage {
   //修改商品退款申请
   modifyRefundApplicationEvent(){
       alert("评价修改");
-      var api = this.aa+'/api/tradegoods/add';
+      var j=3;
+      var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;
-      this.reapList.mode=this.refundList.refund_mode;
-      this.reapList.type=this.refundList.refund_type;
-      this.reapList.price=this.refundList.refund_price;
+
       this.reapList.tgId=this.trade_id;
       this.reapList.act="edit";
       this.reapList.token=this.token;
+      alert("王慧敏"+JSON.stringify(this.reapList));
       //var date = this.evaluateList;
         this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("修改成功！");
           this.navCtrl.push(TradegoodsRefundPage);
-        } else {
+        }else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.addRefundApplicationEvent();
+          }
+      } else {
           alert("修改失败！");
         }
       });
@@ -129,5 +148,10 @@ export class TradegoodsReapPage {
 // 			SosYe.style.display=('none');
 // 		}
 //   }
+
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 
 }

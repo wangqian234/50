@@ -17,11 +17,11 @@ import {Http,Jsonp}from '@angular/http';
 export class RepairlistPage {
   public list =[];
   public repairlist=[];
-  public type="";
+  public type="-1";
   public keywords='';
-  public list1=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-   {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-   {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"}];
+  // public list1=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
+  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
+  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"}];
 
   public cid='';/*获取分类id*/
   public page=1; /*分页*/
@@ -55,9 +55,11 @@ export class RepairlistPage {
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-          // console.log(data);
-          this.list=this.list.concat(data.list);  /*数据拼接*/
+          console.log(JSON.stringify(data))
+          console.log(data.errcode)
+          if(data.errcode===0 && data.errmsg==="OK"){
+          this.list=this.list.concat(data.list);
+          console.log(data.list)  /*数据拼接*/
           if(infiniteScroll){
             //告诉ionic 请求数据完成
               this.page++;

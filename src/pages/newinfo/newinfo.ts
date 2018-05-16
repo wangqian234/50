@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
+import $ from 'jquery';
 
 @Component({
   selector: 'page-newinfo',
@@ -30,11 +31,17 @@ export class NewinfoPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newInfo = data.model;
-        alert(this.newInfo)
+        $("#content").html(data.model.addDate)
+        $("#content").html(data.model.body)
+        console.log(JSON.stringify(data))
       } else {
         alert("data.errmsg")
       }
     });
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }

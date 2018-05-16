@@ -1,44 +1,108 @@
-<!--
-  Generated template for the ShopgoodsinfoPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-  <ion-navbar style="opacity: 0.8" no-border-bottom color="primary">
-    <ion-title>商品详情</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="share($event)">
-          <ion-icon name="share"></ion-icon>
-        </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-<ion-content >
-      <div>
-        <span>{{goodMlist.title}}</span><br/>
-        <span>{{goodMlist.uaddName}}</span><br/>
-        <span>{{goodMlist.state}}</span><br/>
-        <span>{{goodMlist.detail}}</span><br/>
-        <span>{{goodMlist.preName}}</span><br/>
-        <span>{{dataGlist}}</span><br/>
-        <span> {{dataSlist.num}} </span><br/>
-         <span> {{dataSlist.price}} </span><br/>
-         <span> {{dataSlist.preprice}} </span><br/>
-      </div>
-      <button (tap)="getshopinfo(dataSlist['id'])">评价列表 </button>  <a [navPush]="ShoppingevaluatePage" >  更多评价</a><br/>
-      <button (tap)="addcart()" >加入购物车 </button><br/>
-      <ion-icon name="alarm" [navPush]="CartPage"></ion-icon> <br/>
-      <button (tap)="addcart()" >还有分享按钮 </button><br/>
-      <!--<ul>
-        <li *ngFor="let item of list">
-            <div>
-              <span>{{item.user_name}} </span>
-              <span>{{item.score}}</span>
-              <span></span>
+<ion-content>
 
-            </div>
-        </li>
-      </ul>-->
+
+<div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">商品详情</a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<!--详情界面-->
+<!--图片-->
+<div class="lunbo_item">
+		<ion-slides *ngIf="strs.length>0" pager loop="true" autoplay="3000">
+			<ion-slide *ngFor="let item of strs">
+				<img [src]="item" />
+			</ion-slide>
+		</ion-slides>
+	</div>
+
+<!--商品名称-->
+<div class="xiangq_shangp_m">
+	<a [navPush]='ShopbuyPage'>
+	<p class="px24">{{goodMlist.title}}</p>
+	<div class="xq_jiaq"><p>￥{{dataSlist.preprice}}</p>
+	<span>原价:¥{{goodMlist.price}}</span></div>
+	</a>
+</div>
+<!--规格-->
+<!--<div class="banb" id="banb">
+				<ul>
+					<h1>规格</h1>
+					<li class="no">潮5000/I5-7200/4G/1T/2G</li>
+					<li>I7-7500/4G/500G/2G</li>
+				</ul>
+			</div>-->
+<!--数量-->
+<div class="goum_sl">
+	<p class="px26 jiaq">购买数量</p>
+	<div class="counter_box">
+		<i class="jian" (tap)="decCount()">-</i>
+		<input type="text" readonly="readonly" [(ngModel)]="addcarList.goodsNum" name="num" id="num">
+		<i class="jia" (tap)="incCount()">+</i>
+	</div>
+</div>
+<!--配送-->
+			<div class="goum_sl">
+				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
+			</div>
+
+<!--店铺-->
+<div class="xiangq_dp_k">
+	<div class="dianpulogo">
+		<h1><img src="goodMlist.shopimg"></h1>
+		<div class="dianp_pf">
+			<p class="px24">{{goodMlist.shop_name}}</p>
+			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
+		</div>
+	<div class="guangguang">
+		<a class="a1"><h1><img src="assets/imgs/dainp01.png"></h1>进店逛逛</a>
+	</div>
+	</div>
+
+</div>
+<!--图文&评价-->
+
+<div class="jiss_df">
+	<h1>
+		<p><a class="d" href="XiangQ_Y_2.html">图文详情</a></p>
+		<p><a  href="XiangQ_Y_2-2.html">产品评价</a></p>
+	</h1>
+</div>
+<!--图文-->
+<div class="tuwen" id="tuwen">
+	{{goodMlist.detail}}
+</div>
+
+<!--评价-->
+
+
+<!--底部导航-->
+
+<div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem jiesy"> 
+		
+		<div id="cart" class="you">
+			<div class="goum">
+				<a>加入购物车</a>  
+			</div>
+		</div>
+		<div id="buy" class="you">
+			<div class="goum">
+				<a [navPush]='ShopbuyPage'>立即购买</a>  
+			</div>
+		</div>
+		</div>
+	</div>
+
+
 
 </ion-content>

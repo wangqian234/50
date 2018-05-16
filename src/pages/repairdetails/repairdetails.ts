@@ -40,6 +40,7 @@ export class RepairdetailsPage {
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
     }
+    this. getrepairdetails();
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
     $(".arrow-current .arrow-pre").css('border-left', '15px solid #00a2ca');
@@ -55,8 +56,10 @@ export class RepairdetailsPage {
   //获取工单详情信息
   getrepairdetails(){
     var that = this;
-    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial.List_Id;
+    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId=25';
+    console.log(api)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
+      console.log(data)
       if(data.errcode===0&&data.errmsg==='OK'){
         this.repairdetaillist=data.list;
       }else{
@@ -66,7 +69,6 @@ export class RepairdetailsPage {
   }
 //终止工单
  stopRepaird(){
-   this.div.style.display = "block"; 
    this.editcloselist.listId=this.repairDetial.List_Id;
    this.editcloselist.token=this.storage.get('token');
     var that = this;
@@ -78,6 +80,17 @@ export class RepairdetailsPage {
         alert(data.errmsg)
       }
     })
+ }
+ //工单处理
+ showPopup(){
+  this.div.style.display = "block"; 
+ }
+ //工单处理应该显示的状态
+ repairdState(){
+   if(this.type=="0"||this.type=="1"||this.type=="2"){
+     this.stop = document.getElementById('stop');
+     this.stop.style.display = "block" 
+   }
  }
  //跳转到
  showevaluate(){

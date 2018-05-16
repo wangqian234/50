@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
+import { StorageProvider } from '../../providers/storage/storage';
 
 @Component({
   selector: 'page-bindroom',
@@ -14,25 +15,42 @@ export class BindroomPage {
   public room = [];
 
   public bindRoom = {
+    token: '',
     projectId : '',
     edificeId : '',
     roomId : '',
-    relation : ''
+    relation : '',
+    memo:"",
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
   }
 
   ionViewWillLoad() {
-    //this.getProject();
+    this.getProject();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BindroomPage');
+    this.bindRoom.token = this.storage.get('token');
   }
 
+  editBindInfo(){
+    console.log(JSON.stringify(this.bindRoom))
+     var api = this.config.apiUrl + '/api/UserRoom/add';
+    this.http.post(api,(this.bindRoom)).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert("添加房屋成功");
+        this.navCtrl.pop();
+      } else {
+        alert(data.errmsg);
+      }
+    });
+
+  }
+  //获取项目下拉列表（小区信息）
   getProject(){
-    var api = this.config.apiUrl + '/house/house/dw_Project';
+    var api = this.config.apiUrl + '/api/House/dw_Project';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.project = data.list;
@@ -45,7 +63,7 @@ export class BindroomPage {
   }
 
   getEdifice(){
-    var api = this.config.apiUrl + '/house/house/dw_Edifice?projectId=' + this.bindRoom.projectId;
+    var api = this.config.apiUrl + '/api/House/dw_Edifice?projectId=' + this.bindRoom.projectId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.edifice = data.list;
@@ -58,7 +76,7 @@ export class BindroomPage {
   }
 
   getRoom(){
-    var api = this.config.apiUrl + '/house/house/dw_Room?edificeId=' + this.bindRoom.edificeId;
+    var api = this.config.apiUrl + '/api/House/dw_Room?edificeId=' + this.bindRoom.edificeId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.room = data.list;
@@ -68,6 +86,10 @@ export class BindroomPage {
       }
       console.log(this.room);
     });
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 

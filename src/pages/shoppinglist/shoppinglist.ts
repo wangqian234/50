@@ -2,11 +2,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
+import { App } from 'ionic-angular';  
+
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-import { ChangeDetectorRef } from '@angular/core'; //添加成功刷新页面
+import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
@@ -21,6 +23,10 @@ import { GoodsoderevaluatePage } from '../goodsoderevaluate/goodsoderevaluate';
 import { TradegoodsRefundPage } from '../tradegoods-refund/tradegoods-refund';
 //商品评价详情
 import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/tradegoods-evaluatedetail';
+//添加商品退款申请
+import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
+//团购订单页面
+import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
 
 @Component({
   selector: 'page-shoppinglist',
@@ -37,6 +43,8 @@ export class ShoppinglistPage {
   public GoodsoderdetailPage=GoodsoderdetailPage;
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public TradegoodsEvaluatedetailPage=TradegoodsEvaluatedetailPage;
+  public TradegoodsReapPage=TradegoodsReapPage;
+  public  TradegoodsGroupbuyPage = TradegoodsGroupbuyPage;
     public addressList={
     trade_Id:'',
     commentGroup:'',
@@ -62,8 +70,10 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-        this.SD_id=navParams.get('id');
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
+  public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,
+  /*引用服务*/public config:ConfigProvider,private app:App) {
+        this.SD_id=0;
         //alert(this.SD_id);
 
   }
@@ -120,6 +130,7 @@ export class ShoppinglistPage {
       };
       break;
     }
+    var j=3;
      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+trade_state+'&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
@@ -131,7 +142,13 @@ export class ShoppinglistPage {
          //alert(JSON.stringify(data.list[0].goods_list));
          // alert(JSON.parse(data));
          console.log(data);
-     } else {
+     }  else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.paymentEvent(trade_state);
+          }
+      }else {
         alert(data.errmsg);
      }
      })
@@ -144,6 +161,11 @@ export class ShoppinglistPage {
   evaluationdetailEvent(trade_id){
     this.navCtrl.push(TradegoodsEvaluatedetailPage,{tradeId:trade_id});
   }
+   //添加商品退款
+   addrefundEvent(trade_id){
+     alert("添加商品退款"+trade_id);
+     this.navCtrl.push(TradegoodsReapPage,{tradeId:trade_id});
+   }
    //商品退款详情页
    refundEvent(trade_id){
      this.navCtrl.push(TradegoodsRefundPage,{tradeId:trade_id});
@@ -157,13 +179,22 @@ export class ShoppinglistPage {
         alert("取消付款");
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
+        var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("取消付款成功！");
+          this.cd.detectChanges();//更新页面
           //this.navCtrl.push(TradegoodsRefundPage);
-        } else {
+        } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.cancelpaymentEvent(trade_id);
+          }
+      } else {
           alert("取消付款失败！");
+          this.cd.detectChanges();//更新页面
         }
       });
 
@@ -173,12 +204,20 @@ export class ShoppinglistPage {
         alert("确认收货");
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
+        var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("收货成功！");
+          this.cd.detectChanges(); //更新页面
           //this.navCtrl.push(TradegoodsRefundPage);
-        } else {
+        }else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.receiveEvent(trade_id);
+          }
+      } else {
           alert("收货失败！");
         }
       });
@@ -192,7 +231,60 @@ export class ShoppinglistPage {
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    switch(this.SD_id){
+      case 0:
+      this.tabTest={
+        li00:"type current",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 1:
+      this.tabTest={
+        li00:"type",
+        li01:"type current",
+        li02:"type",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 2:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type current",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 3:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type current",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 4:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+        li04:"type current",
+        li05:"type",
+      };
+      break;
+    }
 
+    var j=3;
      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+this.SD_id+'&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
@@ -204,13 +296,32 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
          //alert(JSON.stringify(data.list[0].goods_list));
          // alert(JSON.parse(data));
          console.log(data);
-     } else {
+     } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.ionViewWillLoad();
+          }
+      } else {
         alert(data.errmsg);
      }
      })
   }
   ionViewDidLoad() {
    //this.onload2();
+  }
+
+  gotoGroup(){
+    $("#group-content").css("display", "block") ;
+    $("#order-content").css("display", "none") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
+    $("#title li:nth-of-type(2)").attr("class","qbdd no")
+  }
+  gotoOrder(){
+    $("#group-content").css("display", "none") ;
+    $("#order-content").css("display", "block") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd no")
+    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
 // onload2 = function(){
 //     var Sos=document.getElementById('sos_tanc');
@@ -228,5 +339,10 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 // 			SosYe.style.display=('none');
 // 		}
 //   }
+
+
+  backTo(){
+    this.navCtrl.pop();
+  }
 
 }

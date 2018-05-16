@@ -111,4 +111,44 @@ export class HouseinfoPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
+
+    //设置默认房屋
+  setDefaultHouse(){
+    var data;
+    var j = 3;
+    var api = this.config.apiUrl + 'api/crm/srq/userroom/edit_Default?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert("成功设置默认房屋");
+      } else if(data.errcode === 40002){
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getUserRoom();
+          }
+      } else {
+        alert(data.errmsg)
+      }
+    });
+  }
+    //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
+  delOtherUser(){
+    var data;
+    var j = 3;
+    var api = this.config.apiUrl + '/api/UserRoom/del_User?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert("成功解除其他用户的绑定");
+      } else if(data.errcode === 40002){
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getUserRoom();
+          }
+      } else {
+        alert(data.errmsg)
+      }
+    });
+  }
+
 }

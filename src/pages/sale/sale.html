@@ -1,6 +1,4 @@
 
-
-
 <ion-content style="background-color:#f5f5f5">
 
 	  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
@@ -29,14 +27,14 @@
 		</ul>
 	</div>
 	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of list">
+		<li *ngFor="let item of list"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a>
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
 					<p class="bend">抢购价：<span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;">¥{{item.pricemin}}</span></p>
           <p class="bend">已售：<span>{{item.whennum}}</span>份</p>
-					<p class="wp01">	剩余倒计时：！！！</p>
+					<p class="wp01" style="text-align:left">	团购结束时间：{{item.endtime | pipeTime}}</p>
 		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
 

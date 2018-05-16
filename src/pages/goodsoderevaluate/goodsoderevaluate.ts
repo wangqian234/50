@@ -10,6 +10,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 //商品购物列表
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+import { ChangeDetectorRef } from '@angular/core'; //更新页面
+
 
 @IonicPage()
 @Component({
@@ -35,7 +37,7 @@ export class GoodsoderevaluatePage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/tradegoods/add?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         this.SD_id=navParams.get('tradeId');
         this.evaluateList.trade_Id= this.SD_id;
       
@@ -53,14 +55,23 @@ export class GoodsoderevaluatePage {
   }
   addEvaluate(){
     alert("评价添加");
+      var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.token = this.token;
+       alert(JSON.stringify(this.evaluateList));
       //var date = this.evaluateList;
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
         alert("高海乐视察");
+        alert(JSON.stringify(data));
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
         this.navCtrl.push(ShoppinglistPage);
+      }else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.addEvaluate();
+          }
       } else {
         alert("添加失败！");
       }
@@ -69,6 +80,10 @@ export class GoodsoderevaluatePage {
   }
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ShoppingevaluatePage');
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }

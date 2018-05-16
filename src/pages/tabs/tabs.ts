@@ -4,11 +4,11 @@ import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { RepairlistPage } from '../repairlist/repairlist';
+import { RentsalePage } from '../rentsale/rentsale';
 import { ShoppingPage } from '../shopping/shopping';
 
 
-import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
+import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 
 
 import { UserPage } from '../user/user';
@@ -24,15 +24,16 @@ import {TestPage} from '../test/test'
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+
  //tab1Root = TestPage
- tab1Root = HomePage;
-  tab2Root = RepairlistPage;
+  tab1Root = HomePage;
+  tab2Root = RentsalePage;
   tab3Root = ShoppingPage;
-  tab4Root=UserPage;
+  tab4Root = UserPage;
 
   tab5Root = ShoppingPage;
-  tab6Root = PayfeePage;
-  tab7Root = TradegoodsOrderPage;
+  tab6Root = ShoppinglistPage;
+  tab7Root = CartPage;
   tab8Root = UserPage;
 
   constructor(public config:ConfigProvider,public http: Http,public navCtrl: NavController) {

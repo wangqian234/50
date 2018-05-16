@@ -22,4 +22,7 @@ export class TradegoodsReceivePage {
     console.log('ionViewDidLoad TradegoodsReceivePage');
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
 }

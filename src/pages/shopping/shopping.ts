@@ -143,8 +143,8 @@ export class ShoppingPage {
     }
     })
   }
-  searchBoxFn(event){
-    $("#searchInput").css("display","block")
+  searchBoxFn(){
+    $("#searchInput").removeAttr("style");
   }
 
   clearShopKey(){

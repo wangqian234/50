@@ -1,48 +1,57 @@
-<ion-header>
+<ion-content>
+    <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">绑定房屋</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+  </div>
 
-  <ion-navbar>
-    <ion-title>绑定房屋</ion-title>
-  </ion-navbar>
 
-</ion-header>
+  <div class="denglu_k" id="base">
 
+	<div class="denglk denglk_l">
+		<div class="mz px24">请选择小区：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+        <select name="project" [(ngModel)]="bindRoom.projectId" (ngModelChange)="getEdifice()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let pro of project" value={{pro.id}}>{{pro.name}}</option>
+        </select>
+    </form>
+	</div>
+  	<div class="denglk denglk_l">
+		<div class="mz px24">请选择楼栋：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+        <select name="edifice" [(ngModel)]="bindRoom.edificeId"  (ngModelChange)="getRoom()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let edi of edifice" value={{edi.id}}>{{edi.name}}</option>
+        </select>
+    </form>
+	</div>
+  	<div class="denglk denglk_l">
+		<div class="mz px24">请选择房间：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+        <select name="room" [(ngModel)]="bindRoom.roomId" (ngModelChange)="getEdifice()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let myroom of room" value={{myroom.id}}>{{myroom.code}}</option>
+        </select>
+    </form>
+	</div>
+	<div class="denglk denglk_l">
+		<div class="mz px24">与业主关系：</div>
+		<input type="text"  [(ngModel)]="bindRoom.relation">
+	</div>
+  	<div class="denglk denglk_l">
+		<div class="mz px24 addSome">备注：</div>
+		<textarea placeholder="添加备注有助于快速审核哦！" [(ngModel)]="bindRoom.memo"></textarea>
+	</div>
 
-<ion-content padding>
-<ion-list>
-
-    <ion-item>
-      <ion-label>请选择小区</ion-label>
-      <ion-select [(ngModel)]="bindRoom.projectId" (ngModelChange)="getEdifice()" cancelText="取消" okText="确认">
-        <ion-option *ngFor="let project of project" value={{project.Id}}>{{project.Name}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>请选择楼栋</ion-label>
-      <ion-select [(ngModel)]="bindRoom.edificeId" cancelText="取消" okText="确认">
-        <ion-option *ngFor="let edifice of edifice" value={{edifice.Id}}>{{edifice.Name}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>请选择房间</ion-label>
-      <ion-select [(ngModel)]="bindRoom.roomId" cancelText="取消" okText="确认">
-        <ion-option *ngFor="let room of room" value={{room.Id}}>{{room.Name}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-input [(ngModel)]="bindRoom.relation" placeholder="请描述与业主关系"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-textarea class="add-some" placeholder="添加备注，会方便管理员快速审核哦！"></ion-textarea>
-    </ion-item>
-
-    <div class="add_address" [navPush]='AddaddressPage'>
-       确认提交
-    </div>
-
- </ion-list>
+	<div class="dengl_anniu" (click)="editBindInfo()"><a href="#">提 交</a></div> 
+</div>
       
 </ion-content>

@@ -92,7 +92,7 @@ ion-item-divider{
     padding: 0.2rem 0.4rem;
     img{
         width:0.4rem;
-        height:0.4rem;
+        height:0.3rem;
         float: left;
     }
     p{
@@ -118,6 +118,7 @@ ion-item-divider{
     right: 0.4rem;
     top: 0.2rem;
     color: white;
+    z-index: 100;
 }
 .blockdiv{
     margin-top: 10px;
