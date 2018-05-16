@@ -32,7 +32,7 @@ font-size:1.1em;}
 .container{width:70%;}
 .letter{width:auto;position:fixed;top:10%;right:10px;text-align:center;}
 .letter ul{list-style-type:none;}
-.letter ul li a{text-decoration:none;color:#00C7C7;font-size: 18px}
+.letter ul li a{text-decoration:none;color:gray;font-size: 0.2rem}
 .city{width:90%;overflow:hidden;padding:20px;}
 .city-list{width:100%;}
 .city-list .city-letter{font-size:20px;display:inline-block;padding-top:15px;padding-bottom:5px;border-bottom:1px solid #e8ecf1;width:100%;}

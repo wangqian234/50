@@ -15,7 +15,7 @@ import { UserPage } from '../user/user';
 import { TradegoodsOrderPage } from '../tradegoods-order/tradegoods-order';
 import { CartPage } from '../cart/cart';
 
-import{ PayfeePage } from '../payfee/payfee';
+import{ PersonalPage } from '../personal/personal';
 import $ from 'jquery';
 import {TestPage} from '../test/test'
 

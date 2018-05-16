@@ -6,6 +6,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 //房屋详细信息页
 import { RentsaleinfoPage } from '../rentsaleinfo/rentsaleinfo';
+//地区选择页
+import { PersonalPage } from '../personal/personal';
 
 @IonicPage()
 @Component({
@@ -23,6 +25,8 @@ export class RentsalePage {
   showMore = false;
   housType = "1";
   pageIndex=2;
+  public currentPlace = "";
+  public currentPlaceCode = "";
 
   public tabTest={
     li00:"type current",
@@ -33,6 +37,7 @@ export class RentsalePage {
   };
 
   RentsaleinfoPage = RentsaleinfoPage;
+  PersonalPage = PersonalPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http) {
@@ -42,6 +47,7 @@ export class RentsalePage {
 
   ionViewDidLoad() {
     this.getFirstHouse();
+    this.currentPlace = this.storage.get("currentPlace");
   }
 
  paymentEvent(trade_state){
@@ -162,5 +168,26 @@ export class RentsalePage {
         alert("data.errmsg")
       }
     });  
-}
+  }
+    gotoPlace(){
+    this.navCtrl.push(PersonalPage, {
+        callback: this.myCallbackFunction
+    })
+  }
+
+  myCallbackFunction  =(params) => {
+    var that = this;
+     return new Promise((resolve, reject) => {
+
+      if(typeof(params)!='undefined'){
+          resolve('ok');
+          that.currentPlace = params.changePlace;
+          that.currentPlaceCode = params.changePlaceCode;
+      }else{
+
+          reject(Error('error'))
+      }
+            
+   });
+ }
 }

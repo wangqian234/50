@@ -2,10 +2,10 @@ page-rentsale {
 .shous_k{
     background: #C3D8FB;
     border-radius: 0.25rem;
-    width: 70%;
+    width: 65%;
 }
 .logo_k{
-    width:18%;
+    width:23%;
 }
 .logo_k img{
     height:0.4rem;
@@ -18,6 +18,10 @@ page-rentsale {
     font-size: 0.26rem;
     margin-top: 0.2rem;
     margin-left: 0.1rem;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .shous_k img{
     float: right;
