@@ -48,7 +48,7 @@ export class UserPage {
    //自定义的变量
     public userinfo='';
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
-      
+     
     }
     ionViewDidLoad(){
          

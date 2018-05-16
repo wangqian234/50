@@ -5,9 +5,10 @@
 			<div class="shous_k  shous_div">
 				<ion-item class="select-item">
 					<ion-label>请选择房屋</ion-label>
-					<ion-select class="select-goal" (ionChange)="changeRoom()" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-						<ion-option *ngFor="let room of roomname" value="{{room.Id}}">{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
-						<ion-option value="add" selected>--添加房屋--</ion-option>
+					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>
+						<ion-option *ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<ion-option value="add">--添加房屋--</ion-option>
 					</ion-select>
 				</ion-item>
 			</div>
@@ -102,14 +103,14 @@
 			<div class="fee11">
 				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
 				<p class="fee11_p1">欠费总计</p>
-				<p class="fee11_p2">￥0.002</p>
+				<p class="fee11_p2">￥{{paymentList.totalFee}}</p>
 			</div>
 		</div>
 		<div class="fee2">
 			<div class="fee21" >
 				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
 				<p class="fee21_p1">预存款总计</p>
-				<p class="fee21_p2">￥0.002</p>
+				<p class="fee21_p2">￥{{paymentList.totalPrepay}}</p>
 			</div>
 		</div>
 	</div>
@@ -119,7 +120,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/zixun.png">
 			<span class="p_title">最新资讯</span>
-			<div class="zixun_more" [navPush]='NewslistPage'>
+			<div class="zixun_more" (click)="getNewsList(1)">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 
@@ -141,31 +142,22 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/public.png">
 			<span class="p_title">公示公告</span>
-			<div class="zixun_more" (click)="getNews()">
+			<div class="zixun_more" (click)="getNewsList(3)">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
-
 			</div>
 		</div>
 	</div>
-	<div class="zixun_content">
-		<div class="zixun_li">
-			<img src="assets/imgs/propertyPage/tong.png">
-			<span class="content">【东方巴黎】 &nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
+		<div class="zixun_content" *ngFor="let publicget of publicget">
+		<div (click)="getNewInfo(publicget.id)" class="zixun_li">
+			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
+			<span class="content">{{publicget.topic}} <br />{{publicget.adddate | pipeTime}}</span>
 			<span class="line"></span>
-		</div>
-		<div class="zixun_li">
-			<img src="assets/imgs/propertyPage/tong.png">
-			<span class="content">【东方巴黎】 &nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
-			<span class="line"></span>
-		</div>
-		<div class="zixun_li" >
-			<img  src="assets/imgs/propertyPage/tong.png">
-			<span class="content" >【东方巴黎】 &nbsp;&nbsp;   清远市人民政府关于2018年春节、元宵节期间市区禁止燃放烟花爆竹事项的通知。</span>
 		</div>
 	</div>
 	</div>
 	<div style="clear:both"></div>
+
 
 
 
@@ -206,8 +198,8 @@
    </ion-slides>
 
     <div class="fee">
-        <div class="fee1"><p>￥0.002</p><p>欠费总计</p></div>
-        <div class="fee2"><p>￥0.002</p><p>预存款总计</p></div>
+        <div class="fee1"><p>￥{{paymentList.totalFee}}</p><p>欠费总计</p></div>
+        <div class="fee2"><p>￥{{paymentList.totalPrepay}}</p><p>预存款总计</p></div>
     </div>
 
 
