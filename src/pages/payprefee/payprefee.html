@@ -51,7 +51,6 @@
         <ion-select   [(ngModel)]="roomId"  style="max-width:74%;" cancelText="取消" okText="确认">
         <ion-option selected >请选择房屋</ion-option>
         <ion-option *ngFor="let item of roomlist"  value={{item.id}}> {{item.code}}</ion-option>
-        <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
@@ -101,7 +100,7 @@
 
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem">
-		<div class="zhong"><p>总计：<em>{{allPrice}}</em></p></div>
+		<div class="zhong"><p>总计：<em>{{allPrice}}</em>&nbsp;元</p></div>
 		<div class="you" style="position:absolute;right:0;">
 			<div class="goum">
 				<a style="background-color:#488aff" (click)="gopay()">去结算</a>

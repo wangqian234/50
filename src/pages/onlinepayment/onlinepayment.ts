@@ -6,14 +6,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
+import $ from 'jquery';
 //绑定房屋
 import { BindroomPage } from '../bindroom/bindroom';
-/**
- * Generated class for the PaymentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -50,6 +45,17 @@ export class OnlinepaymentPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
+  //   $("input[name='check']").each(function(){
+  //     console.log($(this))
+  //     $(this).click(function(){
+  //     for(let i=0;i<this.list.length;i++){
+  //       console.log(i+this.list[i].val())
+  //       if(this.list[i].checked==true){
+  //         alert("进来了")
+  //       }
+  //     }
+  //   });
+  // })
   }
 
   backTo(){
@@ -117,11 +123,10 @@ export class OnlinepaymentPage {
     var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.list= data.list;
-            for(var i=0;i<this.list.length;i++){
-              this.list[i].checked = false;
+            that.list= data.list;
+            for(var i=0;i<that.list.length;i++){
+              that.list[i].checked = false;
             }
-            console.log(this.list)
           }else{
             alert(data.errmsg);
           }
@@ -142,7 +147,6 @@ export class OnlinepaymentPage {
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             this.roomidlist=data.list;//怎么知道那个是默认房屋
-            console.log(this.roomidlist)
           }else{
             alert(data.errmsg)
           }
@@ -154,13 +158,10 @@ export class OnlinepaymentPage {
   getcheckNum(){
     let sum=0;
     for(let i=0;i<this.list.length;i++){
-      console.log(this.list[i].checked)
       if(this.list[i].checked==true){
-        console.log("进来了")
         sum+=1;;
       }
     }
-    console.log("wang123"+sum)
     return sum;
   }
   //当全选中时，全选按钮也被选中

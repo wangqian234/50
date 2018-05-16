@@ -134,6 +134,9 @@ import { RentsalePage }from '../pages/rentsale/rentsale';
 //房屋租售详细信息
 import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
+//敬请期待页面
+import { LoadingPage }from '../pages/loading/loading';
+
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -205,6 +208,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     EditorinfoPage,
     RentsalePage,
     RentsaleinfoPage,
+    LoadingPage,
   ],
   imports: [
     BrowserModule,
@@ -270,6 +274,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     EditorinfoPage,
     RentsalePage,
     RentsaleinfoPage,
+    LoadingPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

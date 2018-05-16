@@ -21,7 +21,7 @@ export class PayprefeePage {
   public roomlist=[];     /**房屋列表 */
   public roomidlist=[];   /**用户绑定的房屋列表 */
   public roomId;       /**为其他房屋交费时选择的房屋id */
-  public allPrices=0;
+  public allPrice=0;
 
   //post请求
   public payrefeeList={
@@ -46,6 +46,18 @@ export class PayprefeePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PayprefeePage');
+    this.getTotal();
+  }
+
+  getTotal(){
+    var that = this;
+    $("input").change(function(){
+        that.allPrice = that.payrefeeList.management+
+              that.payrefeeList.water+
+              that.payrefeeList.electricity+
+              that.payrefeeList.parking+
+              that.payrefeeList.rubbish
+    })
   }
 
   backTo(){

@@ -17,6 +17,8 @@ import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 import { EditorinfoPage } from '../editorinfo/editorinfo';
 //重置登录密码
 import { RebuildpassPage } from '../rebuildpass/rebuildpass';
+//更多精彩敬请期待
+import { LoadingPage } from '../loading/loading';
 
 import { TabsPage } from '../tabs/tabs';
 //王慧敏
@@ -41,6 +43,7 @@ export class UserPage {
   public ShoppinglistPage = ShoppinglistPage;
   public EditorinfoPage = EditorinfoPage;
   public RebuildpassPage = RebuildpassPage;
+  public LoadingPage = LoadingPage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
   public HouseinfolistPage = HouseinfolistPage

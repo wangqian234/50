@@ -79,6 +79,12 @@ export class RepairlistPage {
         })
       }
 
+    getProduct(){
+      this.list = [];
+      this.page=1;
+      this.getProductList("");
+    }
+
   //加载更多
   doLoadMore(infiniteScroll){
     this.getProductList(infiniteScroll);
