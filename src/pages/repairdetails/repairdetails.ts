@@ -13,7 +13,7 @@ import {RepairevaluatePage} from '../repairevaluate/repairevaluate'
 })
 export class RepairdetailsPage {
 
-  public repairDetial = {List_Id:''};
+  public repairDetial ;
   public repairdetaillist =[];
   
   //工单处理post
@@ -24,8 +24,6 @@ export class RepairdetailsPage {
     stopType:'',
     act:'',
   };
- 
-
   public btn:any;  
   public div :any;  
   public close :any;  
@@ -34,7 +32,6 @@ export class RepairdetailsPage {
   public type;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
-
   }
 
   ionViewWillLoad() {
@@ -60,7 +57,7 @@ export class RepairdetailsPage {
   //获取工单详情信息
   getrepairdetails(){
     var that = this;
-    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId=25';
+    var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial;
     console.log(api)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
       console.log(data)
@@ -92,8 +89,14 @@ export class RepairdetailsPage {
  //工单处理应该显示的状态
  repairdState(){
    if(this.type=="0"||this.type=="1"||this.type=="2"){
+     this.stop.style.display = "block" ;
+   }else if(this.type="3"){
+    this.evaluate.style.display="block";
+   }else if(this.type="4"){
+     this.stop.style.display = "none" ;
+    this.evaluate.style.display="none";
+   }else{
      
-     this.stop.style.display = "block" 
    }
  }
  //跳转到
