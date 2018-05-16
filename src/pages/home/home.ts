@@ -95,19 +95,21 @@ export class HomePage {
   }
 
    ionViewDidEnter() {
-      //this.getPosition();
+      this.getPosition();
    }
 
   getPosition() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-       alert(resp.coords.longitude + "sdsds" + resp.coords.latitude);
-        var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+    var that = this;
+    // this.geolocation.getCurrentPosition().then((resp) => {
+      //var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+      var point = new BMap.Point(104.07642,38.6518);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
-        alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+        console.log(addComp.city)
+        that.storage.set("currentPlace",addComp.city);
       });
-      });
+      // });
 }
 
   //轮播图

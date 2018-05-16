@@ -3,7 +3,7 @@
 
 <div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:0.85rem;">
 	<div class="zhongj_k">
-    <div class="logo_k"><img src="assets/imgs/location.png"><p>深圳</p></div>
+    <div class="logo_k" (click)="gotoPlace()"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
 		<div class="shous_k">
             <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="找房不麻烦，有我来帮忙">
             <img (click)="doReserch()" src="assets/imgs/sos.png">

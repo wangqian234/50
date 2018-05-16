@@ -29,6 +29,8 @@ import { GroupbuylistPage } from '../groupbuylist/groupbuylist';
 import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+//地区选择页
+import { PersonalPage } from '../personal/personal';
 
 
 
@@ -46,10 +48,11 @@ export class ShoppingPage {
   public ShopgoodsinfoPage = ShopgoodsinfoPage;
   public BigsalePage = BigsalePage;
   public GroupbuylistPage = GroupbuylistPage;
+  public PersonalPage = PersonalPage;
 
    //定义接收数据的list
   public l=[];
- public SalePage = SalePage;
+  public SalePage = SalePage;
 
 
   public lunboList=[];
@@ -58,7 +61,9 @@ export class ShoppingPage {
   public tuijList=[];
   public shoplist=[];
   public keywords="";
-
+  public currentPlace = "";
+  public currentPlaceCode = "";
+  public changePlace = "";
   public shopKeyList = [];
 
 
@@ -75,10 +80,10 @@ export class ShoppingPage {
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
-
+    this.currentPlace = this.storage.get("currentPlace");
     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
      // console.log(this.lunboList);
@@ -178,6 +183,27 @@ export class ShoppingPage {
      this.navCtrl.push(ShopgoodsinfoPage,{id:id});
   }
 
+  gotoPlace(){
+    this.navCtrl.push(PersonalPage, {
+        callback: this.myCallbackFunction
+    })
+  }
+
+  myCallbackFunction  =(params) => {
+    var that = this;
+     return new Promise((resolve, reject) => {
+
+      if(typeof(params)!='undefined'){
+          resolve('ok');
+          that.currentPlace = params.changePlace;
+          that.currentPlaceCode = params.changePlaceCode;
+      }else{
+
+          reject(Error('error'))
+      }
+            
+   });
+ }
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
