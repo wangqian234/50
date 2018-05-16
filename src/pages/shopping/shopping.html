@@ -11,8 +11,8 @@
             <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
-		<div class="dengl">
-			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>西安市</p></div>
+		<div class="dengl" (click)="gotoPlace()">
+			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
 		</div>
 	</div>
 </div>
