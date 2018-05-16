@@ -52,11 +52,17 @@ export class PayprefeePage {
   getTotal(){
     var that = this;
     $("input").change(function(){
-        that.allPrice = that.payrefeeList.management+
-              that.payrefeeList.water+
-              that.payrefeeList.electricity+
-              that.payrefeeList.parking+
-              that.payrefeeList.rubbish
+      var management = that.payrefeeList.management;
+      var water = that.payrefeeList.water;
+      var electricity = that.payrefeeList.electricity;
+      var parking = that.payrefeeList.parking;
+      var rubbish = that.payrefeeList.rubbish;
+      if(!parseInt(that.payrefeeList.management)) {management = 0;}
+      if(!parseInt(that.payrefeeList.water)) {water = 0;}
+      if(!parseInt(that.payrefeeList.electricity)) {electricity = 0;}
+      if(!parseInt(that.payrefeeList.parking)) {parking = 0;}
+      if(!parseInt(that.payrefeeList.rubbish)) {rubbish = 0;}
+        that.allPrice = management+water+electricity+parking+rubbish;
     })
   }
 
