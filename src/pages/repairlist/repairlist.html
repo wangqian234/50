@@ -35,10 +35,9 @@
   </div>
 
   <ion-list>
-    <ion-item *ngFor="let item of list" (tap)="repairDetails(item)">     
-      <h4> {{item.title}}>>{{item.title}}</h4>
-      <h4> 这是一个房屋信息这是一个房屋信息</h4>
-      <p>价格:<span class="price">{{item.price}}</span>元</p> 
+    <ion-item *ngFor="let item of list" (tap)="repairDetails(item['id'])">     
+      <a [navPush]="RepairdetailsPage"> {{item.typename}}>>{{item.time |pipeTime}}</a>
+      <h4>{{item.roominfostr}} </h4><p>{{item.name}}</p><p>{{item.memo}}</p>
       <button ion-button clear item-end icon-only>
         <ion-icon style="font-size:0.3rem" name="arrow-dropright"></ion-icon>
       </button> 
