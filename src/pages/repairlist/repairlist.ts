@@ -55,11 +55,9 @@ export class RepairlistPage {
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          console.log(JSON.stringify(data))
-          console.log(data.errcode)
           if(data.errcode===0 && data.errmsg==="OK"){
-          this.list=this.list.concat(data.list);
-          console.log(data.list)  /*数据拼接*/
+          this.list=this.list.concat(data.list); /*数据拼接*/
+          console.log(this.list)
           if(infiniteScroll){
             //告诉ionic 请求数据完成
               this.page++;
@@ -80,19 +78,7 @@ export class RepairlistPage {
         }
         })
       }
-  // getProductList(){
-  //   var that=this;
-  //   var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=&pageIndex=1&pageSize=15&token='+this.storage.get('token');
-  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
-  //      alert(JSON.stringify(data))
-  //         if(data.errcode===0&&data.errmsg==='OK'){
-  //           that.repairlist=data.list;//怎么知道那个是默认房屋
-  //           console.log(this.repairlist)
-  //         }else{
-  //           alert(data.errmsg)
-  //         }
-  //    })
-  // }
+
   //加载更多
   doLoadMore(infiniteScroll){
     this.getProductList(infiniteScroll);
@@ -104,9 +90,9 @@ export class RepairlistPage {
     }
   }
 
-  repairDetails(item){
+  repairDetails(id){
       this.navCtrl.push(RepairdetailsPage,{
-      item:item
+      item:id
     })
   }
 
