@@ -25,14 +25,20 @@ export class PayprefeePage {
 
   //post请求
   public payrefeeList={
-    management:'',
-    water:'',
-    electricity:'',
-    parking:'',
-    rubbish:'',
+    management:0,
+    water:0,
+    electricity:0,
+    parking:0,
+    rubbish:0,
     roomId:'',
     token:'',
   }
+
+    management:number;
+    water:number;
+    electricity:number;
+    parking:number;
+    rubbish:number;
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
@@ -50,19 +56,29 @@ export class PayprefeePage {
   }
 
   getTotal(){
-    var that = this;
+    var that =  this;
     $("input").change(function(){
-      var management = that.payrefeeList.management;
-      var water = that.payrefeeList.water;
-      var electricity = that.payrefeeList.electricity;
-      var parking = that.payrefeeList.parking;
-      var rubbish = that.payrefeeList.rubbish;
-      if(!parseInt(that.payrefeeList.management)) {management = 0;}
-      if(!parseInt(that.payrefeeList.water)) {water = 0;}
-      if(!parseInt(that.payrefeeList.electricity)) {electricity = 0;}
-      if(!parseInt(that.payrefeeList.parking)) {parking = 0;}
-      if(!parseInt(that.payrefeeList.rubbish)) {rubbish = 0;}
-        that.allPrice = management+water+electricity+parking+rubbish;
+          var num1 = 0;
+          var num2 = 0;
+          var num3 = 0;
+          var num4 = 0;
+          var num5 = 0;
+          if(that.management){
+            num1 = that.management;
+          }
+          if(that.water){
+            num2 = that.water;
+          }
+          if(that.electricity){
+            num3 = that.electricity;
+          }
+          if(that.parking){
+            num4 = that.parking;
+          }
+          if(that.rubbish){
+            num5 = that.rubbish;
+          }
+         that.allPrice = num1+num2+num3+num4+num5;
     })
   }
 
@@ -141,6 +157,11 @@ export class PayprefeePage {
      this.payrefeeList.roomId=this.roomid;
    }
     this.payrefeeList.token=this.storage.get("token")
+    this.payrefeeList.management = this.management;
+    this.payrefeeList.water = this.water;
+    this.payrefeeList.electricity = this.electricity;
+    this.payrefeeList.parking = this.parking;
+    this.payrefeeList.rubbish = this.rubbish;
     console.log(this.payrefeeList)
     var api = this.config.apiUrl+'/api/charge/add?';
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{

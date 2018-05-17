@@ -6,7 +6,8 @@ import { Http } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
-
+//商品详情界面
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
 
 @Component({
@@ -15,7 +16,7 @@ import $ from 'jquery';
 })
 export class ShopsortPage {
 
-
+  public ShopgoodsinfoPage=ShopgoodsinfoPage;
   public leftCate=[];  /*左侧分类数据*/
   public list=[];
   public fenllist=[];

@@ -25,6 +25,10 @@ import { NewslistPage } from '../newslist/newslist';
 import { RepairlistPage } from '../repairlist/repairlist';
 //商城订单
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+//房屋明细
+import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
+//loading
+import { LoadingPage } from '../loading/loading';
 
 
 //测试页面跳转到shopmallist
@@ -69,11 +73,13 @@ export class HomePage {
   //跳转页面
   public RepairaddPage = RepairaddPage;
   public BindroomPage = BindroomPage;
-  public payfeePage=PayfeePage;
+  public PayfeePage=PayfeePage;
   public NewslistPage=NewslistPage;
   public RepairlistPage = RepairlistPage;
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
+  public HouseinfolistPage = HouseinfolistPage;
+  public LoadingPage = LoadingPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
     public storage: StorageProvider, private geolocation: Geolocation) {

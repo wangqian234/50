@@ -19,18 +19,19 @@ import {TradegoodsReapPage}from '../tradegoods-reap/tradegoods-reap';
 })
 export class TradegoodsRefundPage {
   public list = [];
-  public trade_id;
+  public tradegoods_id;//商品订单编号
   public TradegoodsReapPage=TradegoodsReapPage;
 
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
+
     //定义token
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-        this.trade_id=this.navParams.get('tradeId');
-        alert(this.trade_id);
+        this.tradegoods_id=this.navParams.get('tradegoodsId');
+        //alert(this.tradegoods_id);
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -43,16 +44,13 @@ export class TradegoodsRefundPage {
   }
     getdetaillist(){
      var j=3;
-     var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.trade_id+'&token='+this.token;
-     alert("看是否发送了请求"+api);
+     var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.tradegoods_id+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-        alert("请求成功");
        if(data.errcode === 0 && data.errmsg === 'OK'){
-         this.list = data.model;
-        
-         console.log(data);
-         alert(JSON.stringify(data));
+         this.list=data.model ;
+         console.log(JSON.stringify(data))
+         //alert("王慧敏"+JSON.stringify(this.list) );
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -66,7 +64,7 @@ export class TradegoodsRefundPage {
      })
   }
   refundApplicationEvent(item,trade_id){
-        this.navCtrl.push(TradegoodsReapPage,{item:item,tradeId:this.trade_id});
+        //this.navCtrl.push(TradegoodsReapPage,{item:item,tradeId:this.trade_id});
   }
 
   ionViewDidLoad() {

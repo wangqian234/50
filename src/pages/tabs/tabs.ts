@@ -15,10 +15,9 @@ import { UserPage } from '../user/user';
 import { TradegoodsOrderPage } from '../tradegoods-order/tradegoods-order';
 import { CartPage } from '../cart/cart';
 
-import{ PersonalPage } from '../personal/personal';
 import $ from 'jquery';
 import {TestPage} from '../test/test'
-
+import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund';
 
 @Component({
   templateUrl: 'tabs.html'

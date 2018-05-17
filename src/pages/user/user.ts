@@ -21,6 +21,8 @@ import { RebuildpassPage } from '../rebuildpass/rebuildpass';
 import { LoadingPage } from '../loading/loading';
 
 import { TabsPage } from '../tabs/tabs';
+//费用明细
+import { PayfeePage } from '../payfee/payfee';
 //王慧敏
 //团购订单
 import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
@@ -44,6 +46,7 @@ export class UserPage {
   public EditorinfoPage = EditorinfoPage;
   public RebuildpassPage = RebuildpassPage;
   public LoadingPage = LoadingPage;
+  public PayfeePage = PayfeePage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
   public HouseinfolistPage = HouseinfolistPage

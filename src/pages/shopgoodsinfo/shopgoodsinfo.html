@@ -63,12 +63,14 @@
 			<p class="px24">{{goodMlist.shop_name}}</p>
 			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
 		</div>
+	</div>
 	<div class="guangguang">
-		<a class="a1"><h1><img src="assets/imgs/dainp01.png"></h1>进店逛逛</a>
+		<a class="a1"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
 	</div>
-	</div>
-
 </div>
+
+
+
 <!--图文&评价-->
 
 <div class="jiss_df">
@@ -92,12 +94,12 @@
 		
 		<div id="cart" class="you">
 			<div class="goum">
-				<a>加入购物车</a>  
+				<a (click)="addcart()">加入购物车</a>  
 			</div>
 		</div>
 		<div id="buy" class="you">
 			<div class="goum">
-				<a [navPush]='ShopbuyPage'>立即购买</a>  
+				<a (click)="buygoods()">立即购买</a>  
 			</div>
 		</div>
 		</div>

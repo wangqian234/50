@@ -24,7 +24,7 @@
 
       <div class="cate_right">
           <ul class="shangp_lieb_k_er">
-            <li *ngFor="let item of fenllist">
+            <li *ngFor="let item of fenllist" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
               
                 <div class="lieb_img"><img src={{item.img}}></div>
 				        <div class="lieb_txt">

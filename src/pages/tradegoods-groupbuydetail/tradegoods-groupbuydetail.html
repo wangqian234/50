@@ -1,0 +1,44 @@
+<!--<ion-header>
+  <ion-navbar>
+    <ion-title>团购商品详情</ion-title>
+  </ion-navbar>
+</ion-header>-->
+
+<ion-content >
+  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+    <div class="zhongj_k zhongj_k_z">
+      <div class="jiu_feo">
+        <div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+        <div class="zhongjain_daoh">
+          <ul>
+            <li><a class="px24 zyyge">我的团购</a></li>  
+          </ul>
+        </div>
+      </div> 
+    </div>
+</div>
+
+      <!--团购订单详情--> 
+  <div id="order-content">
+        <div class="order-list">
+            <div class="order-item">
+            <li  >
+              <a href="XiangQ_Y.html" >
+                <div class="lieb_img"><img src={{list.img}}></div>
+                <div class="lieb_txt">
+                <p class="biao">{{list.title}}</p>
+                        <!--<p class="biao">{{item.buy_state}}</p>-->
+                        <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
+                        <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
+                        <p class="bend">团购价格-<i>{{list.price}}</i></p>
+                        <p class="bend">商品规格名称-<i>{{list.num}}</i></p>
+                        <p class="bend">几人团-<i>{{list.num}}</i></p>
+                </div>
+              </a>
+		       </li>          
+            </div>
+        </div>
+
+    </div>
+
+</ion-content>
