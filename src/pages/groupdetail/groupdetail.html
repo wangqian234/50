@@ -35,17 +35,17 @@
 <div class="banb" id="banb">
 				<ul>
 					<h1>规格</h1>
-					<li class="no">潮5000/I5-7200/4G/1T/2G</li>
-					<li>I7-7500/4G/500G/2G</li>
+					<li class="no">{{dataSlist.name}}</li>
+					<li>规格2</li>
 				</ul>
-			</div>
+</div>
 <!--数量-->
 			<div class="goum_sl">
 				<p class="px22">数量<em>限购20件</em></p>
 				<div class="counter_box">
-					<i class="jian">-</i>
-					<input type="text" value="1">
-					<i class="jia">+</i>
+					<i class="jian" (tap)="decCount()">-</i>
+					<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
+					<i class="jia" (tap)="incCount()">+</i>
 				</div>
 			</div>
 <!--配送-->
@@ -62,11 +62,12 @@
 			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
 		</div>
 	</div>
-	<div class="jindain_anniu">
-		<a href="ShangJia_DianPu.html" class="a1"><h1><img src="images/web/dainp01.png"></h1>进店逛逛</a>
-		<a href="#" class="a2"><h1><img src="images/web/dianpu_shouc.png"></h1>收藏店铺</a>
+	<div class="guangguang">
+		<a class="a1"><h1><img src="assets/imgs/dainp01.png"></h1>进店逛逛</a>
 	</div>
+	
 </div>
+
 <!--图文&评价-->
 
 <div class="jiss_df">
@@ -76,7 +77,7 @@
 	</h1>
 </div>
 <!--图文-->
-<div class="tuwen">
+<div class="tuwen" id="tuwen">
 	{{goodMlist.detail}}
 </div>
 
@@ -88,14 +89,14 @@
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
 		
-		<div class="you">
-			<div class="goum">
-				<a [navPush]='ShopbuyPage'>单独购买(￥{{dataSlist.preprice}})</a>  
+		<div id="sbuy" class="you">
+			<div class="goum" >
+				<a (click)="buygoods()" >单独购买(￥{{dataSlist.preprice}})</a>  
 			</div>
 		</div>
-		<div class="you">
+		<div id="gbuy" class="you">
 			<div class="goum">
-				<a [navPush]='ShopbuyPage'>{{goodMlist.groupnum}}人团(￥{{goodMlist.groupgoods_price}})</a>  
+				<a (click)="gbuygoods()">{{goodMlist.groupnum}}人团(￥{{goodMlist.groupgoods_price}})</a>  
 			</div>
 		</div>
 	</div>

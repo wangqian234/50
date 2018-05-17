@@ -156,7 +156,6 @@ export class OnlinepaymentPage {
     for(let i=0;i<this.list.length;i++){
       console.log(this.list[i].checked)
       if(this.list[i].checked==true){
-        console.log("进来了")
         sum+=1;;
       }
     }

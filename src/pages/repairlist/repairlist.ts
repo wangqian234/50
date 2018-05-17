@@ -57,7 +57,6 @@ export class RepairlistPage {
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0 && data.errmsg==="OK"){
           this.list=this.list.concat(data.list); /*数据拼接*/
-          console.log(this.list)
           if(infiniteScroll){
             //告诉ionic 请求数据完成
               this.page++;

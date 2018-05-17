@@ -22,6 +22,7 @@ export class AddaddressPage {
   public provinceVal = ""; //省份id
   public cityVal = ""; //城市id
   public districtVal = ""; //街区id
+  public addressInfo = [];
 
   public addressId ="";
   public token = "";
@@ -72,7 +73,7 @@ export class AddaddressPage {
     
   }
 
-  
+  //添加收货地址（添加或编辑）
   addAddress(){
     var data = {
       'token' : this.storage.get("token"),
@@ -89,8 +90,9 @@ export class AddaddressPage {
       'default' : this.addressList.default,
     }
     if(!this.navParams.get('item')){  //新加还是修改判断
-      var api = this.config.apiUrl + '/user/address/add';
+      var api = this.config.apiUrl + '/api/Address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+        alert("pg");
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
         this.navCtrl.push(AddressPage);
@@ -98,8 +100,8 @@ export class AddaddressPage {
         alert("添加失败！");
       }
     });
-    } else {
-      var api = this.config.apiUrl + '/user/address/edit';
+    } else { //api/Address/edit
+      var api = this.config.apiUrl + '/api/Address/edit';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
@@ -165,6 +167,19 @@ export class AddaddressPage {
       }
     }
     return "";
+  }
+    //获取地址信息（地址详情）
+  getAddressInfo(){
+    var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + '&addressId=' +this.addressId;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+         this.addressInfo = data.model;
+         console.log(data.model);
+      } else {
+        console.log(data.errmsg);
+      }
+      console.log(data.moedel);
+    })
   }
  
 }

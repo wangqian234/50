@@ -14,35 +14,30 @@
 </div>
 
 <div>
-  <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>报修类型-时间</p>
-  <p class="repair-state">派工状态</p>
-  <p class="detail">说明：这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是一些说明这里是</p>
+  <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time }}</p>
+  <p class="repair-state">{{repairdetaillist.statename}}</p>
+  <p class="detail">说明：{{repairdetaillist.mome}}</p>
   <div>
     <img src="assets/imgs/08.jpg" />
   </div>
 </div>
 <p class="detail1">处理进度如下：</p>
-<div id="app">
+<div id="app" style="display: none">
     <ul>
-        <li>
-          <p>20131314</p>
-          <p>工单执行内容说明</p>
-        </li>
-
-        <li>
-          <p>20131314</p>
-          <p>工单执行内容说明2</p>
-        </li>
-
-        <li>
-          <p>20131314</p>
-          <p>工单执行内容说明3</p>
+        <li *ngFor="let item of disposememo">
+          {{item}}
         </li>
     </ul>
 </div>  
 
-
-<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+<div id="evaluateContent" style="display: none">
+      <p>服务态度：{{repairdetaillist.servicescore}}</p>
+      <p>处理及时：{{repairdetaillist.timelyscore}}</p>
+      <p>处理质量：{{repairdetaillist.qualityscore}}</p>
+      <!--<p>评价内容：{{}}</p>-->
+</div>
+<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">终止工单</button>
+<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">完成</button> 
 <button id="evaluate"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
     <div id="background" class="back">  
@@ -54,12 +49,14 @@
             <div id="div2" class="div2">   
             <ion-item>
               <ion-label>请选择取消原因</ion-label>
-              <ion-select  [(ngModel)]="editcloselist.stopType" cancelText="取消" okText="确认">
-                <ion-option value="">我已自己解决</ion-option>
-                <ion-option value="">太慢了，等不及</ion-option>
-                <ion-option value="">一直没有人联系我</ion-option>
-                <ion-option value="">其他原因（填写说明）</ion-option>
-              </ion-select>
+              <ion-select name="type" [(ngModel)]="editcloselist.stopType" cancelText="取消" okText="确认">
+                 <ion-option selected value="-1">请选择原因</ion-option>
+                <ion-option value="1">我已自己解决</ion-option>
+                <ion-option value="2">太慢了，等不及</ion-option>
+                <ion-option value="3">一直没有人联系我</ion-option>
+                 <ion-option value="4">提交填写错误</ion-option>
+                <ion-option value="0">其他原因（填写说明）</ion-option>
+              </ion-select> 
             </ion-item>
             <ion-item>
               <textarea class="add-some" [(ngModel)]="editcloselist.memo" placeholder="有没有什么补充说明的？"></textarea>

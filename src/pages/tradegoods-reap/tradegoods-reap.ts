@@ -42,7 +42,7 @@ export class TradegoodsReapPage {
   public list = [];
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public ShoppinglistPage=ShoppinglistPage;
-  public trade_id;
+  public tradegoods_id;
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -50,9 +50,8 @@ export class TradegoodsReapPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-            this.trade_id=navParams.get('tradeId');
-            this.reapList.tgId=this.trade_id;
-
+            this.tradegoods_id=navParams.get('tradegoodsId');
+            this.reapList.tgId=this.tradegoods_id;
   }
 
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -72,7 +71,7 @@ export class TradegoodsReapPage {
   }
   //添加商品退款申请
   addRefundApplicationEvent(){
-      alert("评价添加");
+      //alert("评价添加");
       var j=3;
       var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;
@@ -87,7 +86,7 @@ export class TradegoodsReapPage {
         alert(JSON.stringify(data));
       if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("添加成功！");
-          //this.navCtrl.push(ShoppinglistPage,{id:2});
+          this.navCtrl.push(ShoppinglistPage,{id:2});
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -96,10 +95,9 @@ export class TradegoodsReapPage {
           }
       } else {
           alert("添加失败！");
-          //this.navCtrl.push(ShoppinglistPage,{id:2});
+          this.navCtrl.push(ShoppinglistPage,{id:2});
         }
       });
-
   }
   //修改商品退款申请
   modifyRefundApplicationEvent(){
@@ -107,16 +105,13 @@ export class TradegoodsReapPage {
       var j=3;
       var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;
-
-      this.reapList.tgId=this.trade_id;
       this.reapList.act="edit";
-      this.reapList.token=this.token;
-      alert("王慧敏"+JSON.stringify(this.reapList));
+      //alert("王慧敏"+JSON.stringify(this.reapList));
       //var date = this.evaluateList;
         this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("修改成功！");
-          this.navCtrl.push(TradegoodsRefundPage);
+          this.navCtrl.push(ShoppinglistPage,{id:2});
         }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -125,6 +120,7 @@ export class TradegoodsReapPage {
           }
       } else {
           alert("修改失败！");
+          this.navCtrl.push(ShoppinglistPage,{id:2});
         }
       });
 

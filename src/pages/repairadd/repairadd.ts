@@ -38,6 +38,10 @@ export class RepairaddPage {
   }
 
   ionViewWillLoad(){
+    if(this.navParams.get("type")){
+      this.addlist.type=this.navParams.get("type")
+      this.changeType();
+    }
     this.getRem();
     this.getiof_def();
     //this.getproject();

@@ -11,62 +11,53 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-tradegoods-evaluatedetail',
-  templateUrl: 'tradegoods-evaluatedetail.html',
+  selector: 'page-tradegoods-groupbuydetail',
+  templateUrl: 'tradegoods-groupbuydetail.html',
 })
-export class TradegoodsEvaluatedetailPage {
-      public list=[];
-      //public tradegoods_id;//商品订单编号
-      public SD_id;
+export class TradegoodsGroupbuydetailPage {
+      //定义congfig中公共链接的变量aa
+    public aa = this.config.apiUrl;
+      //定义token
+    public token=this.storage.get('token');
 
-  //定义congfig中公共链接的变量aa
-  public aa = this.config.apiUrl;
-  //定义token
-  public token=this.storage.get('token');
+    public list=[];
+    public groupbuyid;
+
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-        //this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
-          this.SD_id=navParams.get('tradeId');
-  
+        //this.trade_id=navParams.get('tradeId');
+        this.groupbuyid=navParams.get('gbId');
+        //this.getProductList('');//实现列表缓存
   }
+
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-        this.getRem();
-        this.getdetaillist();
+    this.getRem();
+    this.getdetaillist();
   }
-  getRem(){
+    getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
-  getdetaillist(){
-    var j=3;
-     var api = this.aa+'/api/tradegoods/info?trade_Id='+this.SD_id+'&token='+this.token;
+     getdetaillist(){
+     var api = this.aa+'/api/groupgoods/info?gbId='+this.groupbuyid+'&token='+this.token;
+     console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
-         this.list=data.list;
+         this.list=data.model;
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
-         //this.good_list=data.list[0].goods_list;
-         //alert(JSON.stringify(data.list[0].goods_list));
          // alert(JSON.parse(data));
          console.log(data);
-     } else if(data.errcode === 40002){
-              j--;
-              if(j>0){
-                this.config.doDefLogin();
-                this.getdetaillist();
-          }
-      }else {
+     } else {
         alert(data.errmsg);
      }
      })
-
-  }
+   }
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad TradegoodsEvaluatedetailPage');
+    //console.log('ionViewDidLoad TradegoodsGroupbuydetailPage');
   }
-
-
-  backTo(){
+    backTo(){
     this.navCtrl.pop();
   }
+
 }
