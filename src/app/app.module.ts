@@ -89,6 +89,10 @@ import {GroupbuylistPage}from '../pages/groupbuylist/groupbuylist';
 import { GroupdetailPage } from '../pages/groupdetail/groupdetail';
 //商品购买页面
 import { ShopbuyPage } from '../pages/shopbuy/shopbuy';
+//选择收货地址
+import { ChangeaddrPage } from '../pages/changeaddr/changeaddr';
+
+
 //王慧敏
 //添加、修改商品退款申请
 import {TradegoodsReapPage}from '../pages/tradegoods-reap/tradegoods-reap';
@@ -102,7 +106,8 @@ import {GoodsoderevaluatePage}from '../pages/goodsoderevaluate/goodsoderevaluate
 import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tradegoods-evaluatedetail';
 //团购列表界面
 import {TradegoodsGroupbuyPage}from '../pages/tradegoods-groupbuy/tradegoods-groupbuy';
-
+//团购订单详情
+import { TradegoodsGroupbuydetailPage } from '../pages/tradegoods-groupbuydetail/tradegoods-groupbuydetail';
 
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
@@ -187,6 +192,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     CutPipe,
     CutSPipe,
     PaymentPage,
+    ChangeaddrPage,
 
     //王慧敏
     TradegoodsReapPage,
@@ -195,6 +201,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuydetailPage,
 
     HouseinfoPage,
     NewinfoPage,
@@ -253,6 +260,8 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GroupdetailPage,
     ShopbuyPage,
     PaymentPage,
+    ChangeaddrPage,
+
     //王慧敏
     TradegoodsReapPage,
     TradegoodsRefundPage,
@@ -260,6 +269,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuydetailPage,
     
     HouseinfoPage,
     NewinfoPage,

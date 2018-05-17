@@ -18,22 +18,21 @@
   <div id="order-content">
         <div class="order-list">
             <div class="order-item">
-            <li *ngFor="let item of list" (click)="refundApplicationEvent(item,trade_id)">
+            <li  (click)="refundApplicationEvent(item,trade_id)">
                 <a href="XiangQ_Y.html" >
-                  <div class="lieb_img"><img src={{item.img}}></div>
+                  <div class="lieb_img"><img src={{list.img}}></div>
                   <div class="lieb_txt">
-                          <p class="biao">{{item.refund_mode}}</p>
-                          <p class="biao">{{item.refund_type}}</p>
-                          <p class="biao">{{item.refund_price}}</p>                  
+                      <p class="biao">{{list.title}}</p>
+                      <p class="biao">{{list.refund_mode}}</p>
+                      <p class="biao">{{list.refund_type}}</p>
+                      <p class="biao">{{list.refund_price}}</p>                  
                   </div>
                 </a>
-                <div class="refund"  (click)="refundApplicationEvent(item,trade_id)">
-                <p>商品退款：<span>退款列表！</span></p>
-                </div>
+
  		       </li> 
-                <div class="refund"  (click)="refundApplicationEvent(item,trade_id)">
+                <!--<div class="refund"  (click)="refundApplicationEvent(item,trade_id)">
                 <p>商品退款：<span>退款列表！</span></p>
-                </div>     
+                </div>     -->
           </div>
         </div>
     </div>
