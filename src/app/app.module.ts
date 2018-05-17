@@ -128,6 +128,8 @@ import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
 //个人信息修改
 import { EditorinfoPage }from '../pages/editorinfo/editorinfo';
 
+
+
 //房屋租售首页
 import { RentsalePage }from '../pages/rentsale/rentsale';
 

@@ -25,10 +25,12 @@ import { NewslistPage } from '../newslist/newslist';
 import { RepairlistPage } from '../repairlist/repairlist';
 //商城订单
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
-
+//在线缴费
+import{OnlinepaymentPage}from '../onlinepayment/onlinepayment'
 
 //测试页面跳转到shopmallist
 import { TestPage } from '../test/test';
+
 import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
 
 
@@ -74,6 +76,7 @@ export class HomePage {
   public RepairlistPage = RepairlistPage;
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
+  public OnlinepaymentPage=OnlinepaymentPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
     public storage: StorageProvider, private geolocation: Geolocation) {

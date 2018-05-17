@@ -39,7 +39,7 @@
 					<p>物业缴费</p>
 				</a>
 			</li>
-			<li [navPush]="RepairlistPage">
+			<li [navPush]="RepairaddPage" [navParams]="{type:1}">
 				<a href="#">
 					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
 					<p>投诉建议</p>
@@ -51,7 +51,7 @@
 					<p>房屋管理</p>
 				</a>
 			</li>
-			<li [navPush]="RepairaddPage">
+			<li [navPush]="RepairaddPage" [navParams]="{type:0}">
 				<a href="#">
 					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
 					<p>在线报修</p>
@@ -83,13 +83,13 @@
 				</a>
 			</li>
 		
-		<li [navPush]="NewslistPage">
+		<li [navPush]="NewslistPage" [navParams]="{type:1}">
 			<a href="#">
 				<h1><img src="assets/imgs/complain.png"></h1>
 				<p>社区资讯</p>
 			</a>
 		</li>
-		<li>
+		<li [navPush]="NewslistPage" [navParams]="{type:3}">
 			<a href="#">
 				<h1><img src="assets/imgs/massage.png"></h1>
 				<p>公示公告</p>
@@ -97,8 +97,7 @@
 		</li>
 		</ul>
 	</div>
-
-	<div class="fee">
+	<div class="fee" [navPush]="OnlinepaymentPage">
 		<div class="fee1">
 			<div class="fee11">
 				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
@@ -106,7 +105,7 @@
 				<p class="fee11_p2">￥{{paymentList.totalFee}}</p>
 			</div>
 		</div>
-		<div class="fee2">
+		<div class="fee2" [navPush]="PayprefeePage">
 			<div class="fee21" >
 				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
 				<p class="fee21_p1">预存款总计</p>

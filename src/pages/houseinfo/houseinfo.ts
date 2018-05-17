@@ -16,6 +16,7 @@ export class HouseinfoPage {
   private houseInfo = [];
   houseId = '';
   houseUser = [];
+  projectinfo = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
   public storage:StorageProvider) {
@@ -34,7 +35,7 @@ export class HouseinfoPage {
   //获取用户房屋信息
   getUserRoom(){
     var j = 3;
-    var api = this.config.apiUrl + 'api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var api = this.config.apiUrl + '/api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         for(var i=0; i< data.model.length(); i++){
@@ -57,7 +58,7 @@ export class HouseinfoPage {
   //根据房屋获取绑定的用户列表
   getRoomUser(){
     var j = 3;
-    var api = this.config.apiUrl + 'api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var api = this.config.apiUrl + '/api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseUser = data.list;
@@ -75,9 +76,14 @@ export class HouseinfoPage {
 
   //解除用户自己的绑定
   delUserRoom(houseId){
+    var data = {
+      'token':token,
+      'roomId':this.houseId,
+    };
+    var token = this.storage.get('token');
     var j = 3;
-    var api = this.config.apiUrl + 'api/UserRoom/del?token=' + this.storage.get('token') + '&roomId=' + houseId;
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
+    var api = this.config.apiUrl + '/api/UserRoom/del?';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert('解除绑定成功');
         this.navCtrl.pop();
@@ -97,6 +103,7 @@ export class HouseinfoPage {
     if($('.otherUser_content').css('display') == 'block'){
       $('.otherUser_content').css('display','none');
       $('.appear img').css('transform', 'rotate(180deg)')
+      this.getRoomUser();
     } else {
       $('.otherUser_content').css('display','block');
       $('.appear img').css('transform', 'rotate(270deg)')
@@ -114,9 +121,13 @@ export class HouseinfoPage {
 
     //设置默认房屋
   setDefaultHouse(){
-    var data;
+    var data ={
+      'token': token,
+      'roomId':this.houseId,
+    };
+    var token = this.storage.get('token');
     var j = 3;
-    var api = this.config.apiUrl + 'api/crm/srq/userroom/edit_Default?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var api = this.config.apiUrl + '/api/crm/srq/userroom/edit_Default?';
     this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("成功设置默认房屋");
@@ -131,11 +142,15 @@ export class HouseinfoPage {
       }
     });
   }
-    //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
+  //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
   delOtherUser(){
-    var data;
+    var data = {
+      'token': token,
+      'roomId':this.houseId,
+    };
     var j = 3;
-    var api = this.config.apiUrl + '/api/UserRoom/del_User?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var token = this.storage.get('token');
+    var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("成功解除其他用户的绑定");
@@ -149,6 +164,19 @@ export class HouseinfoPage {
         alert(data.errmsg)
       }
     });
+  }
+
+  //获取用户楼栋信息
+  getProjectInfo(){
+    var api = this.config.apiUrl + '/api/VUserRoom/info?roomId=' + this.houseId;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.projectinfo=data.model;
+        console.log(data.model);
+      } else {
+        console.log(data.msg);
+          }
+      })
   }
 
 }

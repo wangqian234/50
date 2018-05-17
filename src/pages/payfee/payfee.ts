@@ -133,6 +133,9 @@ export class PayfeePage {
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
+            if(data.list.length == 0){
+              that.navCtrl.pop();
+            }
             for(var i=0;i<data.list.length;i++){
               if(data.list[i].id == this.defRoomId){
                 data.list.splice(i,1)
@@ -164,6 +167,7 @@ export class PayfeePage {
             this.getiof_def();
           }else{
             alert(data.errmsg)
+            this.navCtrl.pop();
           }
      })
   }
