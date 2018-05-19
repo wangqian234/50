@@ -1,10 +1,7 @@
-
-
-
-     <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+<!--<div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:void(0)"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a class="px24 zyyge">我的团购</a></li>  
@@ -12,18 +9,18 @@
 			</div>
 		</div> 
 	</div>
-</div>
+</div>-->
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
 
-    <div class="toub_beij toub_beij_zy">
+<div class="toub_beij toub_beij_w">
 	<div  style="background-color:#ff971c" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-            <div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+            <div class="logo_k logo_k_fanh"><a href="javascript:void(0)"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li class="qbdd qbdd_you" [navPush]='ShoppinglistPage'><a class="zyyge">商城订单</a></li>
-					<li class="qbdd no"><a href="#" class="zyyge">团购订单</a></li> 
+					<li class="qbdd no"><a href="javascript:void(0)" class="zyyge">团购订单</a></li> 
 				</ul>
 			</div>
 		</div>
@@ -33,15 +30,15 @@
     <!--商品订单列表--> 
   <div id="order-content">
         <ul class="order-nav clearfix" id="test">
-            <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:;">待开团</a></li>
-            <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)"><a href="javascript:;">组团中</a></li>
-            <li class={{tabTest.li02}} data-nav="receive" (click)="paymentEvent(2)"><a href="javascript:;">组团成功</a></li>
-            <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(3)"><a href="javascript:;">组团失败</a></li>
+            <li class={{tabTest.li00}} data-nav="all" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
+            <li class={{tabTest.li01}} data-nav="payment" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
+            <li class={{tabTest.li02}} data-nav="receive" (click)="groupEvent(2)"><a href="javascript:void(0);">组团成功</a></li>
+            <li class={{tabTest.li03}} data-nav="done" (click)="groupEvent(3)"><a href="javascript:void(0);">组团失败</a></li>
         </ul>
         <div class="order-list">
             <div class="order-item">
             <li *ngFor="let item of list" >
-			    <a href="XiangQ_Y.html" >
+			    <a href="javascript:void(0)" >
 			    	<div class="lieb_img"><img src={{item.img}}></div>
 			    	<div class="lieb_txt">
 		    		<p class="biao">{{item.title}}</p>
@@ -54,7 +51,7 @@
 		    	</a>
 
                 <div class="zuihann" (click)="groupbuyEvent(item.groupbuy_Id)">
-                    <div class="shouh_dange_beijin dk" style="background-color:#448AFF"><a href="#">团购详情</a></div>
+                    <div class="shouh_dange_beijin dk" style="background-color:#448AFF"><a href="javascript:void(0)">团购详情</a></div>
                 </div>
 
 		    </li>          
@@ -62,7 +59,8 @@
         </div>
 
     </div>
-  <!--<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <div class="nomore">没有更多数据了...</div>
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>-->
+  </ion-infinite-scroll>
 </ion-content>

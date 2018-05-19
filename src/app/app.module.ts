@@ -109,7 +109,8 @@ import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tr
 import {TradegoodsGroupbuyPage}from '../pages/tradegoods-groupbuy/tradegoods-groupbuy';
 //团购订单详情
 import { TradegoodsGroupbuydetailPage } from '../pages/tradegoods-groupbuydetail/tradegoods-groupbuydetail';
-
+//团购-订单界面
+import { TradegoodsGroupbuyingPage } from '../pages/tradegoods-groupbuying/tradegoods-groupbuying';
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 
@@ -213,6 +214,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuyingPage,
     TradegoodsGroupbuydetailPage,
 
     HouseinfoPage,
@@ -286,6 +288,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuyingPage,
     TradegoodsGroupbuydetailPage,
     
     HouseinfoPage,

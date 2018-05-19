@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
+import { LoadingController } from 'ionic-angular';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 //请求数据
@@ -27,7 +28,7 @@ export class BigsalePage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
 
 
   }
@@ -36,9 +37,12 @@ export class BigsalePage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
 
-    
+      let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+      });
+      loading.present();
     var api = this.wdh+ '/api/goods/list?pageSize=10&pageIndex=1&curCityCode=4403';
-     
+      loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.list = data.list;

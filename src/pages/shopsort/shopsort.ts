@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
+import { LoadingController } from 'ionic-angular';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
@@ -24,7 +25,7 @@ export class ShopsortPage {
   public rightCate=[];  /*右侧分类数据*/
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, 
-  public httpService:HttpServicesProvider,public config:ConfigProvider) {
+  public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.getLeftCateData();/*获取左侧分类*/
   }
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -40,9 +41,8 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 
   getLeftCateData(){
 
-  //  this.leftCate=["第一个分类","第二个分类","第三个分类","第四个分类","第五个分类",
-  // "第六个分类","第七个分类","第八个分类"];
        var api=this.wdh+'/api/goods_sort/list';
+      
         this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.list = data.list;
@@ -64,11 +64,16 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 
 
   getRightCateData(pid,i){
+     let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
      $("#cate_left li").removeAttr("class");
     var span = "#cate_left li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
     //alert(pid);
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
+    loading.dismiss();
          this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;
