@@ -89,9 +89,9 @@ export class ShopgoodsinfoPage {
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-        console.log(JSON.stringify(data))
         that.goodMlist = data.json['good_Model'].model;
         $("#tuwen").html(data.json['good_Model'].model.detail);
+        console.log($("#tuwen"));
         this.sid=data.json['good_Model'].model.shopid;
         this.fenge(data.json['good_Model'].model.imgsrc_list);
 

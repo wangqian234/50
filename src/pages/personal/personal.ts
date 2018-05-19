@@ -65,9 +65,21 @@ export class PersonalPage {
   }
 
   onSearchKeyUp(e){
-    if("Enter"==e.key){
-     //alert(this.keywords);
+
+      var val = this.keywords;
+      if(!val || val.trim().length === 0){
+          $('.city-list p[data-id]').removeClass('hidden');
+          return;
+      }
+      $('.city-list p[data-id]').each(function(){
+          var $cityItem = $(this);
+          if($cityItem.html().indexOf(val) < 0){
+              $cityItem.addClass('hidden');
+          } else{
+              $cityItem.removeClass('hidden');
+          }
+      });
+
     }
-  }
 
 }

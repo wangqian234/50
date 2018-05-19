@@ -155,7 +155,8 @@ export class RepairaddPage {
     var that=this;
     var api = this.config.apiUrl+'/api/list/add?';
      this.http.post(api,this.addlist).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){ 
+          if(data.errcode===0&&data.errmsg==='OK'){
+            console.log(JSON.stringify(data))
               this.navCtrl.pop();
           }else{
             alert(data.errmsg)

@@ -32,7 +32,12 @@
 				</div>
 		</li>
 	</ul>
-	<div class="showMore">没有更多数据了...</div>
 </div>
+
+<div class="nomore">没有更多数据了...</div>
+
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

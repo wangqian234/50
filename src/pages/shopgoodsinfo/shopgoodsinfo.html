@@ -69,23 +69,25 @@
 
 <div class="jiss_df">
 	<h1>
-		<p><a class="d" href="XiangQ_Y_2.html">图文详情</a></p>
-		<p><a  href="XiangQ_Y_2-2.html">产品评价</a></p>
+		<p><a class="d" href="javascript:;">图文详情</a></p>
+		<p><a  href="javascript:;">产品评价</a></p>
 	</h1>
 </div>
 <!--图文-->
-<div class="tuwen" id="tuwen">
-	{{goodMlist.detail}}
-</div>
+<div class="tuwen" id="tuwen"></div>
 
 <!--评价-->
 
 <!--推荐商品-->
-	<div class="xiangq_dp_k">
-!!!！！！为您推荐！！！!!!
+<div class="rem_shangp_bt_b">
+	<div class="waik">
+		<em></em>
+		<div class="mingz"><p class="px26">为您推荐</p></div>
+		<em></em>
 	</div>
+</div>
 
-<div id="yemnr">
+<div id="yemnr" style="margin-bottom:1rem;">
 <ul class="shangp_lieb_k">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a>
