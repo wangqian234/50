@@ -13,7 +13,7 @@ import { LoadingController, Loading } from 'ionic-angular';
 })
 export class RentsalelistPage {
 
-  houseInfo;
+  houseInfo = [];
   houseType;
   pageIndex = 1;
   curCityCode = 4403;
@@ -37,7 +37,7 @@ export class RentsalelistPage {
   }
 
   getRentInfo(){
-    var api = this.config.apiUrl + "api/rental/info?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.housType;
+    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -49,8 +49,25 @@ export class RentsalelistPage {
     });  
   }
 
+  orderBy(item){
+
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RentsalelistPage');
+    this.clickCSS();
+  }
+
+    clickCSS(){
+    $("#test li").click(function(){
+      $("#test li").each(function(){
+        $(this).attr("class","type");
+      })
+      $(this).attr("class","type current");
+    })
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }
