@@ -137,7 +137,7 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-        let loading = this.loadingCtrl.create({
+    let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
   loading.present();

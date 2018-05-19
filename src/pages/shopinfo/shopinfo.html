@@ -1,0 +1,53 @@
+<ion-content >
+
+<div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a href="javascript:;" class="px24 zyyge">店铺信息</a></li>  
+				</ul>
+
+			</div>
+		</div> 
+	</div>
+</div>
+<!--店铺信息-->
+<div class="xiangq_dp_k">
+	<div class="dianpulogo">
+		<h1><img src="goodMlist.shopimg"></h1>
+		<div class="dianp_pf">
+			<p class="px24">{{goodMlist.shop_name}}</p>
+			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
+		</div>
+	</div>
+</div>
+
+<div class="rem_shangp_bt_b">
+	<div class="waik">
+		<em></em>
+		<div class="mingz"><p class="px26">全部商品</p></div>
+		<em></em>
+	</div>
+</div>
+	
+<!--店内商品-->
+<div id="yemnr">
+<ul class="shangp_lieb_k">
+		<li *ngFor="let item of list"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+			<a href="javascript:;">
+				<div class="lieb_img"><img src={{item.img}}></div>
+				<div class="lieb_txt">
+					<p class="biao">{{item.title | cutPipe}}</p>
+					<p class="bend">已售数量：{{item.soldnum}}</p>
+					<p class="px26">¥ {{item.pricemin}}</p>
+					
+				</div>
+			</a>
+		</li>
+		
+	</ul>
+
+</div>
+</ion-content>

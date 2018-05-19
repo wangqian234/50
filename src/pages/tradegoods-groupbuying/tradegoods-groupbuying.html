@@ -4,19 +4,50 @@
 <div class="toub_beij toub_beij_zy">
 	<div  style="background-color:#ff971c" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<a href="javascript:;" style="width:15%;float:left"><img id="backTo"  (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a>
+				<a href="#" style="width:15%;float:left"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a>
 			<div class="zhongjain_daoh">
 				<ul id="title">
-					<li class="qbdd no" (click)="gotoOrder()"><a class="zyyge">商城订单</a></li>
-					<li class="qbdd qbdd_you" (click)="gotoGroup()"><a class="zyyge">团购订单</a></li> 
+					<li class="qbdd qbdd_you" (click)="gotoOrder()"><a class="zyyge">商城订单</a></li>
+          <li class="qbdd no" (click)="gotoGroup()"><a class="zyyge">团购订单</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </div>
+	    <!--团购列表--> 
+  <div id="group-content" >
+        <ul class="order-nav clearfix" id="test2">
+            <li class={{tab_test.li00}} data-nav="waitGroup" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
+            <li class={{tab_test.li01}} data-nav="groupIng" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
+            <li class={{tab_test.li02}} data-nav="groupFailure" (click)="groupEvent(2)"><a href="javascript:void(0);">组团成功</a></li>
+            <li class={{tab_test.li03}} data-nav="groupSuccess" (click)="groupEvent(3)"><a href="javascript:void(0);">组团失败</a></li>
+        </ul>
+    <div class="order-list">
+            <div class="order-item">
+            <ul class="offent">
+                <li *ngFor="let item of groupBuyList" >
+                  <a>
+                    <div class="lieb_img"><img src={{item.img}}></div>
+                    <div class="lieb_txt">
+                    <p class="biao">{{item.title}}</p>
+                            <!--<p class="biao">{{item.buy_state}}</p>-->
+                            <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
+                            <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
+                            <p class="bend">成交单价<i>{{item.preprice}}</i></p>
+                            <p class="bend">购买数量<i>{{item.goods_num}}</i></p>
+                    </div>
+                  </a>
+                  <div class="zuihann" (click)="groupbuyEvent(item.groupbuy_Id)">
+                      <div class="shouh_dange_beijin dk" style="background-color:#448AFF"><a href="javascript:void(0)">团购详情</a></div>
+                  </div>
+                </li> 
+            </ul>         
+            </div>
+    </div>
+    </div>
 
     <!--商品订单列表--> 
-  <div id="order-content">
+  <div id="order-content" style="display:none">
         <ul class="order-nav clearfix" id="test">
             <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:void(0);">全部</a></li>
             <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)" ><a href="javascript:void(0);">待付款</a></li>
@@ -56,7 +87,7 @@
 	 					</p>
 	 					<p *ngIf="item.trade_state==4">
 		 					<a (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id)">去评价</a>
-		 					<a (click)="buyagainEvent(item.goods_list[0].goods_id)" class="color_1">再次购买</a>
+		 					<a href="javascript:void(0)" class="color_1">再次购买</a>
 	 					</p>
 
                         <p *ngIf="item.trade_state==1">
@@ -77,43 +108,6 @@
 
     </div>
 
-
-
-	    <!--团购列表--> 
-  <div id="group-content" style="display:none">
-        <ul class="order-nav clearfix" id="test2">
-            <li class={{tab_test.li00}} data-nav="waitGroup" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
-            <li class={{tab_test.li01}} data-nav="groupIng" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
-            <li class={{tab_test.li02}} data-nav="groupFailure" (click)="groupEvent(2)"><a href="javascript:void(0);">组团成功</a></li>
-            <li class={{tab_test.li03}} data-nav="groupSuccess" (click)="groupEvent(3)"><a href="javascript:void(0);">组团失败</a></li>
-        </ul>
-
-    <div class="order-list">
-            <div class="order-item">
-				<ul class="offent">
-            <li *ngFor="let item of groupBuyList" >
-			    <a>
-			    	<div class="lieb_img"><img src={{item.img}}></div>
-			    	<div class="lieb_txt">
-		    		<p class="biao">{{item.title}}</p>
-                    <!--<p class="biao">{{item.buy_state}}</p>-->
-                    <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
-                    <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
-                    <p class="bend">成交单价<i>{{item.preprice}}</i></p>
-                    <p class="bend">购买数量<i>{{item.goods_num}}</i></p>
-		    		</div>
-		    	</a>
-
-                <div class="zuihann" (click)="groupbuyEvent(item.groupbuy_Id)">
-                    <div class="shouh_dange_beijin dk" style="background-color:#448AFF"><a href="javascript:void(0)">团购详情</a></div>
-                </div>
-
-		    </li> 
-				</ul>         
-            </div>
-        </div>
-
-    </div>
 	<div class="nomore">没有更多数据了...</div>
   <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

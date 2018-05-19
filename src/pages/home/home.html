@@ -6,8 +6,8 @@
 				<ion-item class="select-item">
 					<ion-label>请选择房屋</ion-label>
 					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-						<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>
-						<ion-option *ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<!--<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
 						<ion-option value="add">--添加房屋--</ion-option>
 					</ion-select>
 				</ion-item>

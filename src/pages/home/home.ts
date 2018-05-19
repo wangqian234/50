@@ -107,8 +107,13 @@ export class HomePage {
           //获取最新公告
           this.getPublic();
           //获取默认房屋
-           this.getiof_def();
-           // this.getroomId();
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.getroomId();
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
       } else {
           this.enSureLoginHome = false;
       }
@@ -233,8 +238,9 @@ export class HomePage {
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.iof_defList=data.model;
+            //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
+            this.storage.set('roomId',this.defRoomId)
             this.getpayment(data.model.House_Room_Id);
             this.getroomId();
           }else if (data.errcode===4002){
@@ -252,13 +258,9 @@ export class HomePage {
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            for(var i=0;i<data.list.length;i++){
-              if(data.list[i].id == this.defRoomId){
-                data.list.splice(i,1)
-              }
-            } 
+          if(data.errcode===0&&data.errmsg==='OK'){ 
             that.roomidlist=data.list;
+            console.log(that.roomidlist)
           }else if (data.errcode===4002){
             j--;
             this.config.doDefLogin();
@@ -270,9 +272,6 @@ export class HomePage {
   }
 //获取物业费用
 getpayment(roomid){
-  if(roomid === "defId"){
-    roomid=this.defRoomId;
-  }
    var that=this;
    var j = 3;
     var api = this.config.apiUrl + '/api/charge/list?roomId='+roomid;   //获取到绑定的房屋
@@ -288,6 +287,7 @@ changeRoom(roomid) {
     if (this.roomid === "add") {
       this.navCtrl.push(BindroomPage);
     }else{
+      this.storage.set('roomId',roomid)
       this.getpayment(roomid)
     }
   }

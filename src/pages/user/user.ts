@@ -26,7 +26,8 @@ import { PayfeePage } from '../payfee/payfee';
 //王慧敏
 //团购订单
 import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
-
+//团购-界面
+import { TradegoodsGroupbuyingPage } from '../tradegoods-groupbuying/tradegoods-groupbuying';
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
@@ -49,6 +50,9 @@ export class UserPage {
   public PayfeePage = PayfeePage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
+  public TradegoodsGroupbuyingPage=TradegoodsGroupbuyingPage;
+
+
   public HouseinfolistPage = HouseinfolistPage
 
    //自定义的变量

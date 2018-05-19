@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class RentsalemyPage {
   mylist = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
-  public storage :StorageProvider,public http:Http) {
+  public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -28,11 +29,16 @@ export class RentsalemyPage {
   }
 
   myPublish(type){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     this.pageIndex = 1;
     this.type = type;
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
       this.http.get(api).map(res => res.json()).subscribe(data => {
+        loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         if(data.list.length == 0){
           $('.nomore').css("display","block")
@@ -44,9 +50,14 @@ export class RentsalemyPage {
   }
 
   myPublishList(infiniteScroll){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
     this.http.get(api).map(res => res.json()).subscribe(data => {
+        loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
           this.mylist = this.mylist.concat(data.list);
           if(infiniteScroll) {

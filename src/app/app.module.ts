@@ -78,7 +78,8 @@ import {SalePage}from '../pages/sale/sale';
 //新建热销
 import {BigsalePage}from '../pages/bigsale/bigsale';
    
-
+//店铺信息
+import {ShopinfoPage}from '../pages/shopinfo/shopinfo';
 
 //商品详情页面
 import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
@@ -108,7 +109,8 @@ import {TradegoodsEvaluatedetailPage}from '../pages/tradegoods-evaluatedetail/tr
 import {TradegoodsGroupbuyPage}from '../pages/tradegoods-groupbuy/tradegoods-groupbuy';
 //团购订单详情
 import { TradegoodsGroupbuydetailPage } from '../pages/tradegoods-groupbuydetail/tradegoods-groupbuydetail';
-
+//团购-订单界面
+import { TradegoodsGroupbuyingPage } from '../pages/tradegoods-groupbuying/tradegoods-groupbuying';
 //房屋基本信息
 import {HouseinfoPage}from '../pages/houseinfo/houseinfo'
 
@@ -144,7 +146,7 @@ import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
 //敬请期待页面
 import { LoadingPage }from '../pages/loading/loading';
-
+import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
 
@@ -203,6 +205,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     CutSPipe,
     PaymentPage,
     ChangeaddrPage,
+    ShopinfoPage,
 
     //王慧敏
     TradegoodsReapPage,
@@ -211,6 +214,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuyingPage,
     TradegoodsGroupbuydetailPage,
 
     HouseinfoPage,
@@ -228,6 +232,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -275,6 +280,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     ShopbuyPage,
     PaymentPage,
     ChangeaddrPage,
+    ShopinfoPage,
 
     //王慧敏
     TradegoodsReapPage,
@@ -283,6 +289,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     GoodsoderevaluatePage,
     TradegoodsEvaluatedetailPage,
     TradegoodsGroupbuyPage,
+    TradegoodsGroupbuyingPage,
     TradegoodsGroupbuydetailPage,
     
     HouseinfoPage,
@@ -300,6 +307,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
