@@ -51,7 +51,6 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
     this.wid=navParams.get('id');
-    alert(this.wid);
   }
 
   ionViewDidLoad() {
@@ -91,7 +90,6 @@ ionViewWillLoad() {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
-         alert(JSON.stringify(this.list));
       }else{
         alert(data.errmsg);
       }
@@ -110,7 +108,6 @@ ionViewWillLoad() {
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -149,7 +146,6 @@ ionViewWillLoad() {
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){

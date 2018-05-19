@@ -69,7 +69,6 @@ export class ShopgoodsinfoPage {
   //显示商品详情页面
   goodsInfo(){
     var that =this;
-    alert(this.navParams.get("id"));
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
@@ -98,7 +97,6 @@ fenge(str){
         
     console.log(this.token)
     var date = this.addcarList;
-    alert(JSON.stringify(date))
     var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
@@ -116,7 +114,6 @@ fenge(str){
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
-         alert(JSON.stringify(this.list));
       }else{
         alert(data.errmsg);
       }
@@ -135,7 +132,6 @@ fenge(str){
     var api = this.aa+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){

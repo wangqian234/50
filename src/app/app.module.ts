@@ -133,11 +133,23 @@ import { HouseinfolistPage }from '../pages/houseinfolist/houseinfolist';
 //个人信息修改
 import { EditorinfoPage }from '../pages/editorinfo/editorinfo';
 
+//添加房屋租售信息
+import { RentsaleaddPage }from '../pages/rentsaleadd/rentsaleadd';
+
 //房屋租售首页
 import { RentsalePage }from '../pages/rentsale/rentsale';
 
 //房屋租售详细信息
 import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
+
+//敬请期待页面
+import { LoadingPage }from '../pages/loading/loading';
+
+//我的房屋租售信息
+import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
+
+//房屋租售列表
+import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -212,6 +224,10 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     EditorinfoPage,
     RentsalePage,
     RentsaleinfoPage,
+    LoadingPage,
+    RentsaleaddPage,
+    RentsalemyPage,
+    RentsalelistPage,
   ],
   imports: [
     BrowserModule,
@@ -280,6 +296,10 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     EditorinfoPage,
     RentsalePage,
     RentsaleinfoPage,
+    LoadingPage,
+    RentsaleaddPage,
+    RentsalemyPage,
+    RentsalelistPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

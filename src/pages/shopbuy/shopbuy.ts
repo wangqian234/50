@@ -23,6 +23,7 @@ export class ShopbuyPage {
   public dtlist=[];
   public goodSlist=[];
   public addlist=[];
+  public addListList;
 
   public shoplist=[];
   public carriagelist=[];
@@ -71,6 +72,7 @@ ionViewWillLoad() {
       that.buynum=data.json.dt.model.buynum;
       console.log(that.dtlist);
       that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
+      that.addListList = data.json.address_List.list;
       //alert(JSON.stringify(that.addlist));
       that.addID=data.json.address_List.list[0].dddress_id;
       console.log(that.addlist);
@@ -120,8 +122,25 @@ this.totalPrice=this.test*this.te;
 
   //修改收货地址
   changeAdd(){
-    this.navCtrl.push(ChangeaddrPage);
+    this.navCtrl.push(ChangeaddrPage, {
+        callback: this.myCallbackFunction,
+        addListList : this.addListList
+    });
   }
+
+  myCallbackFunction  =(params) => {
+    var that = this;
+     return new Promise((resolve, reject) => {
+      if(typeof(params)!='undefined'){
+          resolve('ok');
+          console.log(params)
+          that.addlist = params;
+      }else{
+          reject(Error('error'))
+      }
+            
+   });
+ }
 
 
 
@@ -137,12 +156,10 @@ this.totalPrice=this.test*this.te;
     var j=3;
     console.log(this.token)
     var date = this.addBuylist;
-    alert(JSON.stringify(date));
     console.log(date);
     var api = this.wdh+'/api/goods_param/add';
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -151,7 +168,6 @@ this.totalPrice=this.test*this.te;
           }
       }
       else{
-        alert("!!!");
         alert(data.errmsg);
       }
      });

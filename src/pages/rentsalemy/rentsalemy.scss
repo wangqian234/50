@@ -1,0 +1,43 @@
+page-rentsalemy {
+#test{
+     position:sticky;
+    top:0.8rem;
+    z-index: 500;
+    background-color: white;
+}
+#group-content ul{
+    padding: 0 0.2rem;
+}
+#group-content .order-nav .type{
+    height:0.7rem;
+    width: 25%;
+    text-align: center;
+    float: left;
+    height:0.8rem;
+    font-family: Roboto;
+}
+
+#group-content .order-nav .type a{
+    height:0.7rem;
+    padding: 0.3rem 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: #000;
+    font-size: 0.28rem;
+}
+#group-content .order-nav .type.current a{
+    color: #2979FF;
+}
+#group-content .order-nav .type.current{
+    border-bottom: 2px solid #2979FF;
+}
+#group-content{
+    background-color: white;
+}
+    .nomore{
+        margin-top: 0.1rem;
+        font-size: 0.28rem;
+        text-align: center;
+        color: gray;
+    }
+}

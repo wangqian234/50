@@ -19,8 +19,12 @@
 		<div class="shouh_dange_beijin" (click)="getHouseInfo()">
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p><em>name</em>&nbsp;<em>mobile</em></p>
-					<p>address</p>
+					<p><em>房屋ID：&nbsp;{{houseList.Id}}</em></p>
+					<p><em>是否默认：{{houseList.Default}}</em></p>
+					<p><em>状态：&nbsp;&nbsp;{{houseList.State}}</em></p>
+					<p><em>项目名称：{{houseList.Project_Name}}</em></p>
+					<p><em>楼栋名称：{{houseList.Edifice_Name}}</em></p>
+					<p><em>房间Code：{{houseList.Code}}</em></p>
 				</div>
 			</div>
 			<div class="boanjk">
@@ -33,7 +37,7 @@
 </div> 
 <div class="dib_daoh_b">
 	<div class="gouwuc_ Xinz" style="background-color:#488aff">
-		 <a [navPush]='AddaddressPage'>新添房屋</a>
+		 <a [navPush]='BindroomPage'>新添房屋</a>
 	</div>
 </div>
 </ion-content>

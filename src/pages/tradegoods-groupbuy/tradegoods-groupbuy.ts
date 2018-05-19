@@ -89,7 +89,57 @@ export class TradegoodsGroupbuyPage {
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+JSON.stringify(this.list));
+         //alert(JSON.stringify(data));
+          //alert(JSON.stringify(data.list));
+         // alert(JSON.parse(data));
+     } else {
+        alert(data.errmsg);
+     }
+     })
+  }
+
+  groupEvent(groupBuy_State){
+    switch(groupBuy_State){
+      case 0:
+      this.tabTest={
+        li00:"type current",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+      };
+      break;
+      case 1:
+      this.tabTest={
+        li00:"type",
+        li01:"type current",
+        li02:"type",
+        li03:"type",
+      };
+      break;
+      case 2:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type current",
+        li03:"type",
+      };
+      break;
+      case 3:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type current",
+      };
+      break;
+    }
+     //var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&groupBuy_State='+groupBuy_State+'&token='+this.token;
+     var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+groupBuy_State+'&token='+this.token;
+     console.log("王慧敏"+api);
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errcode === 0 &&data.errmsg == 'OK'){
+         //this.goods_list=data.list.goods_list;
+         this.list=data.list;
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));
@@ -114,7 +164,6 @@ export class TradegoodsGroupbuyPage {
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+this.list);
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));

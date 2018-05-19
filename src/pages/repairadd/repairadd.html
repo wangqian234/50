@@ -16,30 +16,28 @@
   <div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
       <ion-label>请选择房屋</ion-label>
-        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option selected>这是一栋楼这是一栋楼</ion-option>
-        <ion-option>这是两栋楼</ion-option>
-        <ion-option>这是三栋楼</ion-option>
+        <ion-select  style="max-width:74%;" [(ngModel)]='roomId' cancelText="取消" okText="确认">
+        <ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>
+        <ion-option *ngFor ="let list of roomidlist" value={{list.id}}>{{list.name}}</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
   </div>
 
-<ion-list style="background-color:white;margin:10px 0 50px 0;">
+<ion-list style="background-color:white;margin:10px 0 0 0;">
     <ion-item>
       <div class="repairList">
       <div class="repairType">报修类型：</div>
          <form class="choose">
            <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
-          <select style="-webkit-appearance: none;">
+          <select name="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.type" (ngModelChange)="changeType()">
           <option selected="selected">请选择报修类型</option>
-          <option value="">全部类型</option>
-          <option value="">业主维修</option>
-          <option value="">投诉</option>
-          <option value="">建议</option>
-          <option value="">其他</option>
-          <option value="">公共报修</option>
+          <option value="0">业主维修</option>
+          <option value="1">投诉</option>
+          <option value="2">建议</option>
+          <option value="3">其他</option>
+          <option value="4">公共报修</option>
           </select>
         </form>
       </div>
@@ -50,34 +48,34 @@
       <div class="repairType">故障类别：</div>
          <form class="choose">
            <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
-          <select style="-webkit-appearance: none;">
+          <select name ="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.category" >
           <option selected="selected">请选择工单类型</option>
-          <option value="">请选择</option>
-          <option value="">空调维修</option>
-          <option value="">水管漏水</option>
-          <option value="">室内灯不亮</option>
-          <option value="">建议</option>
-          <option value="">其他</option>
+          <option *ngFor="let list of stypelist"  value={{list.id}}>{{list.name}}</option>
           </select>
         </form>
       </div>
     </ion-item>
-
+    <ion-item>  
+      <div id="aa" style="display: none"class="repairList">
+      <div class="repairType">选择小区：</div>
+         <form class="choose">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <select name ="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.projectId" >
+          <option  selected="selected">请选择小区</option>
+          <option *ngFor="let list of projectlist"  value={{list.id}}>{{list.name}}</option>
+          </select>
+        </form>
+      </div>
+    </ion-item>
     <ion-item>
       <div class="repair">补充说明：</div>
-      <textarea placeholder="请简单补充说明您的相关请求..."></textarea>
+      <textarea [(ngModel)]="addlist.memo" placeholder="请简单补充说明您的相关请求..."></textarea>
     </ion-item>
     <ion-item>
       <div class="repair">描述不清？请拍照上传：</div>
         <img src="assets/imgs/addImg.png" />
     </ion-item>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
 
 
     

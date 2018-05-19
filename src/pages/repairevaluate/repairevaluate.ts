@@ -16,12 +16,11 @@ export class RepairevaluatePage {
   public listId='';
    //评价post
   public evaluate={
-  servicescore:0,
-  timelyscore:0,
-  qualityscore:0,
+  servicescore:'',
+  timelyscore:'',
+  qualityscore:'',
   listId:'',
   txtScoreMemo:'',
-
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
@@ -30,15 +29,13 @@ export class RepairevaluatePage {
     this.getRem();
     if(this.navParams.get('id')){
       this.listId=this.navParams.get('id');
-     //这里需要对工单状态的判断来修改CSS if(repairDetial.报修状态 == )
       }
-      
     }
     //添加评价
     addevaluate(){
+      this.getNum();
       this.evaluate.listId=this.listId;
-      //this.evaluate.qualityscore= 通过ngmodel来获取
-      var that =this;
+      console.log(this.evaluate)
       var api = this.config.apiUrl+'/api/list/edit_Score';
       this.http.post(api,this.evaluate).map(res => res.json()).subscribe(data =>{
         if(data.errcode===0&&data.errmsg==='OK'){
@@ -49,12 +46,12 @@ export class RepairevaluatePage {
       })
     }
 
-    enSureSub(){
-      alert(JSON.stringify(this.evaluate));
-    }
+    // enSureSub(){
+    //   alert(JSON.stringify(this.evaluate));
+    // }
 
   ionViewDidLoad() {
-    this.getNum();
+    //this.getNum();
   }
   backToRepair(){
     this.navCtrl.pop();
@@ -78,7 +75,7 @@ export class RepairevaluatePage {
               stars.eq(i).removeClass('no');
             }
           }
-          _this.evaluate.servicescore = score;
+        //  _this.evaluate.servicescore = score;
         });
       });
 
@@ -94,7 +91,7 @@ export class RepairevaluatePage {
               stars.eq(j).removeClass('no');
             }
           }
-          _this.evaluate.timelyscore = score;
+        //  _this.evaluate.timelyscore = score;
         });
       });
 
@@ -110,7 +107,7 @@ export class RepairevaluatePage {
               stars.eq(k).removeClass('no');
             }
           }
-          _this.evaluate.qualityscore = score;
+         // _this.evaluate.qualityscore = score;
         });
       });
   }

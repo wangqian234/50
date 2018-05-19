@@ -113,6 +113,12 @@ export class ShoppingPage {
   ionViewDidLoad() {
     //给第一个商品分类hr
     $('.facediv li:nth-of-type(1)').attr("class","active");
+    //  $("#sos_tanc").focus(function(){
+    //   $('#searchInput').show();
+    // })
+  }
+  doSomeThing(){
+   
   }
   /**轮播图 */
   getLunbo(){
@@ -147,9 +153,6 @@ export class ShoppingPage {
       alert(data.errmsg);
     }
     })
-  }
-  searchBoxFn(){
-    $("#searchInput").removeAttr("style");
   }
 
   clearShopKey(){
