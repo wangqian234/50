@@ -14,10 +14,7 @@
 	</div>
 </div>
 
-    <div class="cart_spinner" *ngIf="list.length==0 && hasData">
-      <ion-spinner></ion-spinner>
-    </div>  
-    <p style="text-align:center; padding-top:80px;" *ngIf="!hasData">您购入车没有数据!</p>
+ <p style="text-align:center;padding-top: 0.2rem;font-size: 0.28rem" *ngIf="!hasData">您还没有添加商品到购物车~</p>
 
  <div class="gouwuc_kk">
 	<ul>
@@ -32,13 +29,14 @@
  				<h1><img src="assets/imgs/001.jpg"></h1>
  				<div class="you">
  					<p class="px24 bt">{{item.title}}</p>
- 					<p class="xh">{{item.size_name}}</p><ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
+ 					<p class="xh">{{item.size_name}}</p>  <!--删除--> <ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
  					<div class="youjfy">
-						  
+						 
 						 <!--<button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  -->
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{item.price}}</p>
 							<div class="counter_box">
+								<!--数量-->
 								<i class="jian" (tap)="decCount(item)">-</i>
 								<input type="text" readonly="readonly" [(ngModel)]="item.num" name="num" id="num">
 								<i class="jia" (tap)="incCount(item)">+</i>
@@ -64,7 +62,7 @@
 		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allPrice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
-				<a href="wanagid_JieSuan.html">去结算</a>  
+				<a (click)="buy()">去结算</a>  
 			</div>
 		</div>
 	</div>

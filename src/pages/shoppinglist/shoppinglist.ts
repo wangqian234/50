@@ -34,7 +34,7 @@ export class ShoppinglistPage {
 
   public list=[];
   public good_list=[];
-  public SD_id;
+  public SD_id=0;
   public page=1; //实现列表缓存
   public receivelist=[];
   public GoodsoderdetailPage=GoodsoderdetailPage;
@@ -245,8 +245,10 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          this.cd.detectChanges();//更新页面
-          //this.navCtrl.push(TradegoodsRefundPage);
+          alert("取消付款成功！");
+          this.paymentEvent(1);
+          //this.cd.detectChanges();//更新页面
+          //this.navCtrl.push(ShoppinglistPage);
         } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -255,6 +257,7 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
           }
       } else {
           alert("取消付款失败！");
+          this.paymentEvent(1);
           this.cd.detectChanges();//更新页面
         }
       });
@@ -262,14 +265,17 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
    }
    //商品确认收货
    receiveEvent(trade_id){
+        
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
-        if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert("收货成功！");
-          this.cd.detectChanges(); //更新页面
+        if (data.errcode === 0 && data.errmsg === 'OK') {         
+          
+         alert("确认收货成功！");//
+         
+         this.paymentEvent(3);
           //this.navCtrl.push(TradegoodsRefundPage);
         }else if(data.errcode === 40002){
               j--;
@@ -281,6 +287,7 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
           alert("收货失败！");
         }
       });
+    
    }
    //修改地址
    modifyaddress(trade_id){
@@ -290,6 +297,7 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
 
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
+    this.SD_id=0;
     //this.getProductList(infiniteScroll);
       switch(this.SD_id){
       case 0:
@@ -344,7 +352,8 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
       break;
     }
     var j=3;
-     var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token='+this.token;
+      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+this.SD_id+'&token='+this.token;
+     //var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
