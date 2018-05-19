@@ -57,5 +57,8 @@ export class TabsPage {
     $(".mytabs").css("display", "block");
     this.tabRef.select(3);  
   }
+  getOder(Id){
+    this.navCtrl.push(ShoppinglistPage,{id:0});
+  }
 
 }

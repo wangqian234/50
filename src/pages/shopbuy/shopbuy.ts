@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
+import { LoadingController } from 'ionic-angular';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 //请求数据
@@ -63,7 +64,7 @@ export class ShopbuyPage {
   public token = this.storage.get('token');
 
   constructor(public storage: StorageProvider, public navCtrl: NavController, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider) {
+    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid = navParams.get('id');
   }
 
@@ -71,6 +72,10 @@ export class ShopbuyPage {
     console.log('ionViewDidLoad ShopbuyPage');
   }
   ionViewWillLoad() {
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+loading.present();
     //商品内容
     var that = this;
     var j = 3;
@@ -138,6 +143,7 @@ export class ShopbuyPage {
 
     //积分抵扣pricemax
     var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;
+    loading.dismiss();
     this.http.get(api4).map(res => res.json()).subscribe(data4 => {
       console.log(data4);
       that.creditslist = data4.model;
@@ -194,7 +200,7 @@ export class ShopbuyPage {
     var api =this.wdh + '/api/trade/add  ';
     this.http.post(api, date).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
-       // alert("成功!");
+        alert("成功!");
       } else if (data.errcode === 40002) {
         j--;
         if (j > 0) {

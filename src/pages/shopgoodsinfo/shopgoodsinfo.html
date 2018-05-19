@@ -5,10 +5,10 @@
 <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">商品详情</a></li>  
+					<li><a href="javascript:;" class="px24 zyyge">商品详情</a></li>  
 				</ul>
 			</div>
 		</div> 
@@ -69,8 +69,8 @@
 
 <div class="jiss_df">
 	<h1>
-		<p><a class="d" href="XiangQ_Y_2.html">图文详情</a></p>
-		<p><a  href="XiangQ_Y_2-2.html">产品评价</a></p>
+		<p><a class="d" href="javascript:;">图文详情</a></p>
+		<p><a  href="javascript:;">产品评价</a></p>
 	</h1>
 </div>
 <!--图文-->
@@ -88,7 +88,7 @@
 <div id="yemnr">
 <ul class="shangp_lieb_k">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
-			<a>
+			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title | cutPipe}}</p>
