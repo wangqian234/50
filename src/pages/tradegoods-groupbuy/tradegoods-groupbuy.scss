@@ -3,6 +3,8 @@ page-tradegoods-groupbuy {
     font-size: 1.6666666666666667rem;
     background-color: #fff;
     border-bottom: 1px solid rgb(239, 237, 237);
+    position: sticky;
+    top: 0.8rem;
 }
 
 #order-content .order-nav .type{
@@ -86,6 +88,9 @@ page-tradegoods-groupbuy {
     font-weight: 600;
     color: #000;
     pointer-events: auto;
+}
+.toub_beij_w{
+    height:0.8rem
 }
 
 }

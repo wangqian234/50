@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
+import { LoadingController } from 'ionic-angular';
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -14,6 +15,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ShopbuyPage } from '../shopbuy/shopbuy';
 //店铺详情页面
 import { ShopinfoPage } from '../shopinfo/shopinfo';
+//商品详情界面
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
 /**
  * Generated class for the GroupdetailPage page.
@@ -31,6 +34,7 @@ export class GroupdetailPage {
 
   public ShopbuyPage=ShopbuyPage;
   public ShopinfoPage=ShopinfoPage;
+  public ShopgoodsinfoPage=ShopgoodsinfoPage;
  //定义需要隐藏的标志变量
     public showpingj =false;
   
@@ -63,7 +67,7 @@ export class GroupdetailPage {
   //定义token
   public token=this.storage.get('token');
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider) {
+  public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
   }
 
@@ -71,9 +75,15 @@ export class GroupdetailPage {
     console.log('ionViewDidLoad GroupdetailPage');
   }
 ionViewWillLoad() {
+
+   let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+loading.present();
     
     var that=this;
     var api=this.wdh+'/api/goods/info?goods_Id='+this.wid+'&token='+this.token;
+loading.dismiss();
         this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
        that.dataGlist = data.json.data_group.list;//有些list为空

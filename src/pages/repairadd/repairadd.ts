@@ -165,6 +165,7 @@ export class RepairaddPage {
           if(data.errcode===0&&data.errmsg==='OK'){ 
               console.log(data)
               this.guidFile=data.model;
+              this.navCtrl.pop();
           }else{
             alert(data.errmsg)
           }

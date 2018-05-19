@@ -120,9 +120,9 @@ export class OnlinepaymentPage {
     var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.list= data.list;
-            for(var i=0;i<this.list.length;i++){
-              this.list[i].checked = false;
+            that.list= data.list;
+            for(var i=0;i<that.list.length;i++){
+              that.list[i].checked = false;
             }
             console.log(this.list) 
           }else{
@@ -153,12 +153,10 @@ export class OnlinepaymentPage {
   getcheckNum(){
     let sum=0;
     for(let i=0;i<this.list.length;i++){
-     console.log(this.list[1].checked)
       if(this.list[i].checked==true){
         sum+=1;;
       }
     }
-    console.log("wang123"+sum)
     return sum;
   }
   //当全选中时，全选按钮也被选中

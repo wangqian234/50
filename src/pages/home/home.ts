@@ -276,7 +276,8 @@ getpayment(roomid){
    var j = 3;
     var api = this.config.apiUrl + '/api/charge/list?roomId='+roomid;   //获取到绑定的房屋
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        this.paymentList = data.json.totalNum.model;
+      console.log(JSON.stringify( data))
+        // this.paymentList = data.json.totalNum.model;
     });
 
 

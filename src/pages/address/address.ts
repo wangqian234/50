@@ -90,8 +90,6 @@ export class AddressPage {
       token : this.storage.get('token'),
       addressId : id,
     }
-    // var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    // var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       console.log("6"+JSON.stringify(data))
