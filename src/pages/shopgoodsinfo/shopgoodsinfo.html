@@ -33,14 +33,7 @@
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
-<!--规格-->
-<!--<div class="banb" id="banb">
-				<ul>
-					<h1>规格</h1>
-					<li class="no">潮5000/I5-7200/4G/1T/2G</li>
-					<li>I7-7500/4G/500G/2G</li>
-				</ul>
-			</div>-->
+
 <!--数量-->
 <div class="goum_sl">
 	<p class="px26 jiaq">购买数量</p>
@@ -65,7 +58,8 @@
 		</div>
 	</div>
 	<div class="guangguang">
-		<a class="a1"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
+		<a class="a1"(click)="enterShop(wid,sid)"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
+
 	</div>
 </div>
 
@@ -85,6 +79,29 @@
 </div>
 
 <!--评价-->
+
+<!--推荐商品-->
+	<div class="xiangq_dp_k">
+!!!！！！为您推荐！！！!!!
+	</div>
+
+<div id="yemnr">
+<ul class="shangp_lieb_k">
+		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+			<a>
+				<div class="lieb_img"><img src={{item.img}}></div>
+				<div class="lieb_txt">
+					<p class="biao">{{item.title | cutPipe}}</p>
+					<p class="bend">已售数量：{{item.soldnum}}</p>
+					<p class="px26">¥ {{item.pricemin}}</p>
+					
+				</div>
+			</a>
+		</li>
+		
+	</ul>
+
+</div>
 
 
 <!--底部导航-->

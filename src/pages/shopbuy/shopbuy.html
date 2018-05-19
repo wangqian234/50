@@ -28,23 +28,24 @@
 <div class="caix"></div>
 <div class="gouwuc_kk gouwuc_kk_jies">
  	<ul>
- 		<li> 
+ 		<li *ngFor="let item of goodSlist"> 
  			<div class="diannao_shanp"> 
-				 <p class="px26 bt">{{shoplist.name}}</p>
+				 <p class="px26 bt">{{item.shopname}}</p>
 
- 				<a href="XiangQ_Y.html"><h1><img src="goodSlist.img"></h1></a>
+ 				<a><h1><img src="goodSlist.img"></h1></a>
  				<div class="you">
- 					<a href="XiangQ_Y.html"><p class="px24 bt">{{goodSlist.title}}</p></a>
- 					<p class="xh">规格:{{goodSlist.name}}</p>
-					 <p class="xh">已选数量:{{buynum}}</p>
+ 					<a href="XiangQ_Y.html"><p class="px24 bt">{{item.title}}</p></a>
+ 					<p class="xh">{{item.name}}</p>
  					<div class="youjfy">
 						<div class="goum_sl">
-							<p class="px26 jiaq">￥{{goodSlist.preprice}}</p>
+							<p class="px26 jiaq">￥{{item.preprice}}</p>
 <!--数量-->
 <!--<div class="goum_sl">
 	<div class="counter_box">
-		<i class="wdh" >已选数量：</i><input type="text" readonly="readonly" [(ngModel)]="buynum" name="num" id="num">
-	</div>
+		<!--<i class="jian" (tap)="decCount()">-</i>-->
+		<i class="wdh" >已选数量：</i><input type="text" readonly="readonly" [(ngModel)]="item.buynum" name="num" id="num">
+		<!--<i class="jia" (tap)="incCount()">+</i>-->
+	<!--</div>
 </div>-->
 						</div>
  					</div> 
