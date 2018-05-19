@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
+import { LoadingController } from 'ionic-angular';
 
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
@@ -27,7 +28,7 @@ public mode = 0 ;
   };
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider) {
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController) {
   }
 //抢购时间判断
 ifontime(mode){
@@ -51,9 +52,12 @@ ifontime(mode){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
 
-   
+   let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+   loading.present();
      var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode=0&curCityCode=4403';
-     
+     loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
          var newDate = new Date(data.list.endtime)

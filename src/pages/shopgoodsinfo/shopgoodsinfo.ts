@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
 import $ from 'jquery';
+import { LoadingController } from 'ionic-angular';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -33,6 +34,7 @@ export class ShopgoodsinfoPage {
     public CartPage = CartPage;
     public ShopbuyPage=ShopbuyPage;
     public ShopinfoPage=ShopinfoPage;
+    public ShopgoodsinfoPage=ShopgoodsinfoPage;
 
     public sid;
     public wid;
@@ -72,16 +74,22 @@ export class ShopgoodsinfoPage {
     token: "",
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
+  public loadingCtrl: LoadingController) {
 
     this.wid=this.navParams.get("id")
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
           var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+       let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+loading.present();
       //显示商品详情页面
       this.goodsInfo();
       this.recommend();
+loading.dismiss();
   }
   //显示商品详情页面
   goodsInfo(){
@@ -162,7 +170,7 @@ fenge(str){
     var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        // alert("成功加入购物车");
+         alert("成功加入购物车");
       }else{
         alert(data.errmsg);
       }

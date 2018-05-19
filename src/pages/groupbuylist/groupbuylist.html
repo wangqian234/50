@@ -5,10 +5,10 @@
 		  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">拼团热卖</a></li>  
+					<li><a href="javascript:;" class="px24 zyyge">拼团热卖</a></li>  
 				</ul>
 			</div>
 		</div> 
@@ -21,7 +21,7 @@
 	
 	<ul class="shangp_lieb_k_er">
 		<li *ngFor="let item of list" [navPush]='GroupdetailPage' [navParams]="{id:item['id']}">
-			<a >
+			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
