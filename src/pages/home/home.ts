@@ -25,8 +25,14 @@ import { NewslistPage } from '../newslist/newslist';
 import { RepairlistPage } from '../repairlist/repairlist';
 //商城订单
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+
+//房屋明细
+import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
+//loading
+import { LoadingPage } from '../loading/loading';
+
 //在线缴费
-import{OnlinepaymentPage}from '../onlinepayment/onlinepayment'
+import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 
 //测试页面跳转到shopmallist
 import { TestPage } from '../test/test';
@@ -71,11 +77,15 @@ export class HomePage {
   //跳转页面
   public RepairaddPage = RepairaddPage;
   public BindroomPage = BindroomPage;
-  public payfeePage=PayfeePage;
+  public PayfeePage=PayfeePage;
   public NewslistPage=NewslistPage;
   public RepairlistPage = RepairlistPage;
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
+
+  public HouseinfolistPage = HouseinfolistPage;
+  public LoadingPage = LoadingPage;
+
   public OnlinepaymentPage=OnlinepaymentPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
@@ -97,29 +107,34 @@ export class HomePage {
           //获取最新公告
           this.getPublic();
           //获取默认房屋
-           this.getiof_def();
-           // this.getroomId();
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.getroomId();
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
       } else {
           this.enSureLoginHome = false;
       }
+      
   }
 
    ionViewDidEnter() {
-      this.getPosition();
+      //this.getPosition();
    }
 
   getPosition() {
     var that = this;
-    // this.geolocation.getCurrentPosition().then((resp) => {
-      //var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
-      var point = new BMap.Point(104.07642,38.6518);
+     this.geolocation.getCurrentPosition().then((resp) => {
+      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         console.log(addComp.city)
         that.storage.set("currentPlace",addComp.city);
       });
-      // });
+       });
 }
 
   //轮播图
@@ -223,8 +238,9 @@ export class HomePage {
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            this.iof_defList=data.model;
+            //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
+            this.storage.set('roomId',this.defRoomId)
             this.getpayment(data.model.House_Room_Id);
             this.getroomId();
           }else if (data.errcode===4002){
@@ -232,7 +248,7 @@ export class HomePage {
             this.config.doDefLogin();
             this.getiof_def();
           }else{
-            alert(data.errmsg)
+            //alert(data.errmsg)
           }
      })
   }
@@ -242,13 +258,9 @@ export class HomePage {
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            for(var i=0;i<data.list.length;i++){
-              if(data.list[i].id == this.defRoomId){
-                data.list.splice(i,1)
-              }
-            } 
+          if(data.errcode===0&&data.errmsg==='OK'){ 
             that.roomidlist=data.list;
+            console.log(that.roomidlist)
           }else if (data.errcode===4002){
             j--;
             this.config.doDefLogin();
@@ -260,9 +272,6 @@ export class HomePage {
   }
 //获取物业费用
 getpayment(roomid){
-  if(roomid === "defId"){
-    roomid=this.defRoomId;
-  }
    var that=this;
    var j = 3;
     var api = this.config.apiUrl + '/api/charge/list?roomId='+roomid;   //获取到绑定的房屋
@@ -277,6 +286,7 @@ changeRoom(roomid) {
     if (this.roomid === "add") {
       this.navCtrl.push(BindroomPage);
     }else{
+      this.storage.set('roomId',roomid)
       this.getpayment(roomid)
     }
   }

@@ -8,8 +8,8 @@
 	<div class="zhongj_k">
 		<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>
 		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
-            <img (click)="doReserch()" src="assets/imgs/sos.png">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <img (click)="doSomething()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl" (click)="gotoPlace()">
 			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
@@ -44,7 +44,7 @@
             </div>               
         <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
-              <!--图标遍历-->             
+              <!--图标遍历-->          
         <ul class="facediv" >
             <li *ngFor= "let item of tubList;let i = index">   
                     <div (tap)="getshoplist(item['id'],i)">
@@ -76,12 +76,12 @@
         <ul style="margin-bottom:50px">
         <li *ngFor= "let item of tuijList">
             <a href="{{item.url}}">
-               <div><img src="{{item.img}}"></div>
+               <div><img style="width:100%" src="{{item.img}}"></div>
             </a>
         </li>
     </ul>
 
-    <div id="searchInput" class="remen_sos" style="display:none">
+    <div id="searchInput" class="remen_sos">
         <div class="history" *ngIf="shopKeyList.toString().length != 0">
 		<p>历史搜索：</p><ion-icon (click)="clearShopKey()" name="trash"></ion-icon>
 			<ul>

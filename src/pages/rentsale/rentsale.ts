@@ -4,10 +4,17 @@ import $ from 'jquery';
 import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
+import { LoadingController, Loading } from 'ionic-angular';
 //房屋详细信息页
 import { RentsaleinfoPage } from '../rentsaleinfo/rentsaleinfo';
 //地区选择页
 import { PersonalPage } from '../personal/personal';
+//添加租售信息
+import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
+//我的发布信息
+import { RentsalemyPage } from '../rentsalemy/rentsalemy';
+//租赁信息列表
+import { RentsalelistPage } from '../rentsalelist/rentsalelist';
 
 @IonicPage()
 @Component({
@@ -25,6 +32,7 @@ export class RentsalePage {
   showMore = false;
   housType = "1";
   pageIndex=2;
+  offent;
   public currentPlace = "";
   public currentPlaceCode = "";
 
@@ -38,9 +46,12 @@ export class RentsalePage {
 
   RentsaleinfoPage = RentsaleinfoPage;
   PersonalPage = PersonalPage;
+  RentsaleaddPage = RentsaleaddPage;
+  RentsalemyPage = RentsalemyPage;
+  RentsalelistPage = RentsalelistPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
-  public storage :StorageProvider,public http:Http) {
+  public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
      this.curCityCode = "4403";
   }
   
@@ -48,9 +59,18 @@ export class RentsalePage {
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
+    this.offent = $('#testcontent').offset();
+    console.log("这个offent是",this.offent)
   }
 
  paymentEvent(trade_state){
+
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+  loading.present();
+
+
    this.housType = trade_state;
    var api = this.config.apiUrl + "/api/rental/list?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
     switch(trade_state){
@@ -101,7 +121,10 @@ export class RentsalePage {
       break;
     }
     $(".showMore").css("display","none")
+    console.log(this.offent.top)
+    $('.scroll-content').scrollTop(this.offent.top);
   this.http.get(api).map(res => res.json()).subscribe(data => {
+    loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -114,9 +137,14 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+  loading.present();
     $(".showMore").css("display","none")
     var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
+      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -126,6 +154,12 @@ export class RentsalePage {
         alert("data.errmsg")
       }
     });
+  }
+
+  gotoList(id){
+    this.navCtrl.push(RentsalelistPage,{
+      id:id
+    })
   }
 
   searchBoxFn(){
@@ -156,6 +190,7 @@ export class RentsalePage {
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = this.houseInfo.concat(data.list);
+        console.log(this.houseInfo)
         if(infiniteScroll){
           //告诉ionic 请求数据完成
           infiniteScroll.complete();

@@ -79,7 +79,6 @@ export class RepairdetailsPage {
         }
          this.stateName=data.list[0].statename;
          this.repairdState();
-         alert(this.stateName+"00")
       }else{
         alert(data.errmsg)
       }
@@ -96,7 +95,6 @@ export class RepairdetailsPage {
     var that = this;
     var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
-      alert("终止成功")
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)
         this.closePopup();
@@ -113,7 +111,6 @@ export class RepairdetailsPage {
  }
  //工单处理应该显示的状态                   
  repairdState(){
-   alert(this.stateName+'11')
     switch(this.stateName)
     {
       case "待派工":

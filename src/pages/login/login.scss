@@ -49,9 +49,8 @@ ion-item{
 }
 .input_box{
     z-index: 4;
-    position: absolute;
-    margin-top: 40%;
-    width: 70%;
+    margin-top: 30%;
+    width: 90%;
     margin-left:auto;
     margin-right:auto;
     left: 0; right: 0;
@@ -62,22 +61,25 @@ ion-item{
    height: 0.7rem;
    color: #535353;
    background-color: #D7EAFE;
-   border-radius: 5px;
+   border-radius: 3rem;
+   margin-top: 1rem;
     span{
         font-size: 0.3rem;
     }
 }
 .div_a{
     font-size: 0.25rem;
-    text-align:center;
     color: rgba(255,255,255,1);
+    float: right;
+    margin-top: 0.35rem;
 }
 .div_a_pass{
+    padding-left:16px;
     font-size: 0.25rem;
-    text-align:center;
-    margin-top: -0.2rem;
+    margin-top: 0.35rem;
     margin-bottom: 0.15rem;
     color: rgba(255,255,255,1);
+    float:left;
 }
 a{
     font-size: 2rem !important;
@@ -145,4 +147,52 @@ a{
         
     }
 
+
+    ion-item{
+        background-color: rgba(0,0,0,0) !important;
+    }
+    ion-label{
+        color:white;
+        font-size: 0.3rem;
+    }
+    input{
+        color:white;
+    }
+    .login_title{
+        color: white;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem
+    }
+    .footer{
+        text-align: center;
+        color: white;
+        font-size: 0.28rem;
+        line-height: 0.5rem;
+    }
+    .footer.register{
+        font-weight: bold;
+    }
+    .footerdiv{
+        position: absolute;
+        bottom: 0.3rem;
+        width: 100%;
+    }
+    .password.item-ios.item-block .item-inner{
+        border-bottom: none;
+    }
+    .getregister{
+        color: white;
+        font-size: 0.28rem;
+        margin-top: -0.35rem;
+        position: absolute;
+        right: 0;
+        z-index: 500;
+        margin-right: 0.4rem
+    }
+    .content{
+        border-bottom: 0.55px solid #c8c7cc;
+        border-top: 0.55px solid #c8c7cc;
+    }
 }

@@ -3,10 +3,18 @@ page-shopsort {
   .item-block{
     min-height: 3rem;
   }
+  .cate_content{
+    overflow-y: hidden;
+    position: relative;
+    height:100%;
+  }
   .cate_left{
     width: 25%;
     background-color: #f5f5f5;
     position: absolute;
+    overflow-y: auto;
+    height: -webkit-fill-available;
+    margin-bottom: 30px;
     ul{
       li{
         line-height: 0.7rem;
@@ -32,6 +40,9 @@ page-shopsort {
 }
 .cate_right{
   margin-left:  25%;
+  height: -webkit-fill-available;
+  margin-left: 25%;
+  overflow-y: auto;
 }
 .activety {
 background-color: white;

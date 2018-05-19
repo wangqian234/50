@@ -17,8 +17,12 @@ import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 import { EditorinfoPage } from '../editorinfo/editorinfo';
 //重置登录密码
 import { RebuildpassPage } from '../rebuildpass/rebuildpass';
+//更多精彩敬请期待
+import { LoadingPage } from '../loading/loading';
 
 import { TabsPage } from '../tabs/tabs';
+//费用明细
+import { PayfeePage } from '../payfee/payfee';
 //王慧敏
 //团购订单
 import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
@@ -41,6 +45,8 @@ export class UserPage {
   public ShoppinglistPage = ShoppinglistPage;
   public EditorinfoPage = EditorinfoPage;
   public RebuildpassPage = RebuildpassPage;
+  public LoadingPage = LoadingPage;
+  public PayfeePage = PayfeePage;
   //王慧敏
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
   public HouseinfolistPage = HouseinfolistPage

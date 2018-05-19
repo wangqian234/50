@@ -1,13 +1,13 @@
 <ion-content style="background-color:#F5F5F5">
 
-	<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:48px;">
 		<div class="zhongj_k">
 			<div class="shous_k  shous_div">
 				<ion-item class="select-item">
 					<ion-label>请选择房屋</ion-label>
 					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-						<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>
-						<ion-option *ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<!--<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
 						<ion-option value="add">--添加房屋--</ion-option>
 					</ion-select>
 				</ion-item>
@@ -15,12 +15,12 @@
 		</div>
 	</div>
 
-	<!--<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0" style="background-color:#448AFF;height:48px;">
 		<div class="zhongj_k" style="text-align:center;">
 			<p class="title_p">公元物业</p>
 			<p class="bangding_p" [navPush]="BindroomPage">请绑定房屋</p>
 		</div>
-	</div>-->
+	</div>
 
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
@@ -33,72 +33,72 @@
 
 	<div class="daohang_bd" style="background-color:white;margin:10px 0 0 0;color:#646464">
 		<ul>
-			<li [navPush]="payfeePage">
-				<a href="#">
+			<li [navPush]="PayfeePage">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/fee.png"></h1>
 					<p>物业缴费</p>
 				</a>
 			</li>
 			<li [navPush]="RepairaddPage" [navParams]="{type:1}">
-				<a href="#">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
 					<p>投诉建议</p>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li [navPush]="HouseinfolistPage">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/roommanger.png"></h1>
 					<p>房屋管理</p>
 				</a>
 			</li>
 			<li [navPush]="RepairaddPage" [navParams]="{type:0}">
-				<a href="#">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
 					<p>在线报修</p>
 				</a>
 			</li>
 			<li [navPush]="PayprefeePage">
-				<a href="#">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/prefee.png"></h1>
 					<p>费用预存</p>
 				</a>
 			</li>
 			<li [navPush]="ShoppinglistPage">
-				<a href="#">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/shop.png"></h1>
 					<p>我的订单</p>
 				</a>
 			</li>
 
-			<li>
-				<a href="#">
+			<li [navPush]="LoadingPage">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/pushroom.png"></h1>
 					<p>房源发布</p>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li [navPush]="LoadingPage">
+				<a>
 					<h1><img src="assets/imgs/propertyPage/opendoor.png"></h1>
 					<p>一键开门</p>
 				</a>
 			</li>
-		
 		<li [navPush]="NewslistPage" [navParams]="{type:1}">
-			<a href="#">
+			<a>
 				<h1><img src="assets/imgs/complain.png"></h1>
 				<p>社区资讯</p>
 			</a>
 		</li>
+
 		<li [navPush]="NewslistPage" [navParams]="{type:3}">
-			<a href="#">
+			<a>
 				<h1><img src="assets/imgs/massage.png"></h1>
 				<p>公示公告</p>
 			</a>
 		</li>
 		</ul>
 	</div>
-	<div class="fee" [navPush]="OnlinepaymentPage">
-		<div class="fee1">
+	<div class="fee">
+		<div class="fee1" [navPush]="OnlinepaymentPage">
 			<div class="fee11">
 				<img src="assets/imgs/propertyPage/oweNum.png" style="float:left">
 				<p class="fee11_p1">欠费总计</p>

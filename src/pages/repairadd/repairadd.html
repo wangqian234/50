@@ -17,16 +17,15 @@
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select  style="max-width:74%;" [(ngModel)]='roomId' cancelText="取消" okText="确认">
-        <ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>
+        <!--<ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
         <ion-option *ngFor ="let list of roomidlist" value={{list.id}}>{{list.name}}</ion-option>
-        <ion-option>这是三栋楼</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
   </div>
 
-<ion-list style="background-color:white;margin:10px 0 50px 0;">
+<ion-list style="background-color:white;margin:10px 0 0 0;">
     <ion-item>
       <div class="repairList">
       <div class="repairType">报修类型：</div>
@@ -76,13 +75,7 @@
       <div class="repair">描述不清？请拍照上传：</div>
         <img src="assets/imgs/addImg.png" />
     </ion-item>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
 
 
     

@@ -21,30 +21,69 @@ export class PayprefeePage {
   public roomlist=[];     /**房屋列表 */
   public roomidlist=[];   /**用户绑定的房屋列表 */
   public roomId;       /**为其他房屋交费时选择的房屋id */
-  public allPrices=0;
+  public allPrice=0;
+
   //post请求
   public payrefeeList={
-    management:'',
-    water:'',
-    electricity:'',
-    parking:'',
-    rubbish:'',
+    management:0,
+    water:0,
+    electricity:0,
+    parking:0,
+    rubbish:0,
     roomId:'',
     token:'',
   }
 
+    management:number;
+    water:number;
+    electricity:number;
+    parking:number;
+    rubbish:number;
+
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+    }
   }
 
     
     ionViewWillLoad(){
-    this.getRem();
-    this.getiof_def();   
+    this.getRem();   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PayprefeePage');
+    this.getTotal();
+  }
+
+  getTotal(){
+    var that =  this;
+    $("input").change(function(){
+          var num1 = 0;
+          var num2 = 0;
+          var num3 = 0;
+          var num4 = 0;
+          var num5 = 0;
+          if(that.management){
+            num1 = that.management;
+          }
+          if(that.water){
+            num2 = that.water;
+          }
+          if(that.electricity){
+            num3 = that.electricity;
+          }
+          if(that.parking){
+            num4 = that.parking;
+          }
+          if(that.rubbish){
+            num5 = that.rubbish;
+          }
+         that.allPrice = num1+num2+num3+num4+num5;
+    })
   }
 
   backTo(){
@@ -60,25 +99,25 @@ export class PayprefeePage {
       $('#selectOther').css('display','none');
     }
   }
-  //查询默认房屋
-  getiof_def(){
-    var j=3
-    var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            this.iof_defList=data.model;
-            this.defRoomId=data.model.House_Room_Id;
-            console.log(this.iof_defList)
-            this.getroomId();
-          }else if (data.errcode===4002){
-            j--;
-            this.config.doDefLogin();
-            this.getiof_def();
-          }else{
-            alert(data.errmsg)
-          }
-     })
-  }
+  // //查询默认房屋
+  // getiof_def(){
+  //   var j=3
+  //   var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
+  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //         if(data.errcode===0&&data.errmsg==='OK'){
+  //           this.iof_defList=data.model;
+  //           this.defRoomId=data.model.House_Room_Id;
+  //           console.log(this.iof_defList)
+  //           this.getroomId();
+  //         }else if (data.errcode===4002){
+  //           j--;
+  //           this.config.doDefLogin();
+  //           this.getiof_def();
+  //         }else{
+  //           alert(data.errmsg)
+  //         }
+  //    })
+  // }
    //查询用户绑定的所有房屋
   getroomId(){   
     var that=this;
@@ -86,11 +125,6 @@ export class PayprefeePage {
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            for(var i=0;i<data.list.length;i++){
-              if(data.list[i].id == this.defRoomId){
-                data.list.splice(i,1)
-              }
-            }
             that.roomidlist=data.list; 
             console.log(that.roomidlist) 
           }else if (data.errcode===4002){
@@ -116,12 +150,15 @@ export class PayprefeePage {
  gopay(){
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
-   }else if(this.roomid==="defId"){
-     this.payrefeeList.roomId=this.defRoomId;
    }else{
      this.payrefeeList.roomId=this.roomid;
    }
     this.payrefeeList.token=this.storage.get("token")
+    this.payrefeeList.management = this.management;
+    this.payrefeeList.water = this.water;
+    this.payrefeeList.electricity = this.electricity;
+    this.payrefeeList.parking = this.parking;
+    this.payrefeeList.rubbish = this.rubbish;
     console.log(this.payrefeeList)
     var api = this.config.apiUrl+'/api/charge/add?';
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{

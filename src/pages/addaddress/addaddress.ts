@@ -19,9 +19,9 @@ export class AddaddressPage {
   public cities = [];
   public cityCode = [];
   public districts = [];
-  public provinceVal = ""; //省份id
-  public cityVal = ""; //城市id
-  public districtVal = ""; //街区id
+  public provinceVal ; //省份id
+  public cityVal ; //城市id
+  public districtVal ; //街区id
   public addressInfo = [];
 
   public addressId ="";
@@ -32,6 +32,7 @@ export class AddaddressPage {
   public district = [];
 
   public addressList={
+    name : '',
     provinceVal:'',
     cityVal:'',
     districtVal:'',
@@ -42,9 +43,10 @@ export class AddaddressPage {
     code:'',
     mobile:'',
     tel:'',
-    default:'',
-    token : ''
-  }
+    cbdefault:false,
+    token : '',
+    id :'',
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
     public storage:StorageProvider) {
@@ -75,8 +77,11 @@ export class AddaddressPage {
 
   //添加收货地址（添加或编辑）
   addAddress(){
-    var data = {
+    var data = {}; //定义空对象
+    if(!this.navParams.get('item')){  //新加还是修改判断
+      data = {
       'token' : this.storage.get("token"),
+      'name' : this.addressList.name,
       'provinceVal' : this.addressList.provinceVal,
       'cityVal' : this.addressList.cityVal,
       'districtVal' : this.addressList.districtVal,
@@ -86,28 +91,41 @@ export class AddaddressPage {
       'address' : this.addressList.address,
       'code' : this.addressList.code,
       'mobile' : this.addressList.mobile,
-      'tel' : this.addressList.tel,
-      'default' : this.addressList.default,
+      'cbdefault' : this.addressList.cbdefault
     }
-    if(!this.navParams.get('item')){  //新加还是修改判断
+    console.log(data)
       var api = this.config.apiUrl + '/api/Address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-        alert("pg");
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
-        this.navCtrl.push(AddressPage);
+        console.log(data)
+        this.navCtrl.pop();
       } else {
         alert("添加失败！");
       }
     });
-    } else { //api/Address/edit
+  } else {
+    data = {
+      'name' : this.addressList.name,
+      'provinceVal' : this.addressList.provinceVal,
+      'cityVal' : this.addressList.cityVal,
+      'districtVal' : this.addressList.districtVal,
+      'province' : this.getName(this.provinces,this.addressList.provinceVal),
+      'city' : this.getName(this.cities,this.addressList.cityVal),
+      'district' : this.getName(this.districts,this.addressList.districtVal),
+      'address' : this.addressList.address,
+      'code' : this.addressList.code,
+      'mobile' : this.addressList.mobile,
+      'cbdefault' : this.addressList.cbdefault,
+      'addressId' :this.addressList.id
+    }
       var api = this.config.apiUrl + '/api/Address/edit';
+      console.log(JSON.stringify(data)+'000')
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加成功！");
-        this.navCtrl.push(AddressPage);
+        this.navCtrl.pop();
       } else {
-        alert("添加失败！");
+        alert("编辑失败！"+data.errmsg+JSON.stringify(data));
       }
     });
     }
@@ -115,7 +133,7 @@ export class AddaddressPage {
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
     //获取省份信息
@@ -137,7 +155,6 @@ export class AddaddressPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.cities = data.list;
-        alert(data.list);
       } else {
         alert(data.errmsg);
       }

@@ -6,14 +6,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
+import $ from 'jquery';
 //绑定房屋
 import { BindroomPage } from '../bindroom/bindroom';
-/**
- * Generated class for the PaymentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -40,16 +35,32 @@ export class OnlinepaymentPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList(this.defRoomId);
+    }
   }
 
   //主页面加载函数 
   ionViewWillLoad(){
     this.getRem();
-    this.getiof_def(); 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
+  //   $("input[name='check']").each(function(){
+  //     console.log($(this))
+  //     $(this).click(function(){
+  //     for(let i=0;i<this.list.length;i++){
+  //       console.log(i+this.list[i].val())
+  //       if(this.list[i].checked==true){
+  //         alert("进来了")
+  //       }
+  //     }
+  //   });
+  // })
   }
 
   backTo(){
@@ -67,25 +78,25 @@ export class OnlinepaymentPage {
       this.getPayList(roomid);
     }
   }
-  //查询默认房屋
-  getiof_def(){
-    var j=3
-    var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            this.iof_defList=data.model;
-            this.defRoomId=data.model.House_Room_Id;
-            this.getPayList(data.model.House_Room_Id);
-            this.getroomId();
-          }else if (data.errcode===4002){
-            j--;
-            this.config.doDefLogin();
-            this.getiof_def();
-          }else{
-            alert(data.errmsg)
-          }
-     })
-  }
+  // //查询默认房屋
+  // getiof_def(){
+  //   var j=3
+  //   var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
+  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //         if(data.errcode===0&&data.errmsg==='OK'){
+  //           this.iof_defList=data.model;
+  //           this.defRoomId=data.model.House_Room_Id;
+  //           this.getPayList(data.model.House_Room_Id);
+  //           this.getroomId();
+  //         }else if (data.errcode===4002){
+  //           j--;
+  //           this.config.doDefLogin();
+  //           this.getiof_def();
+  //         }else{
+  //           alert(data.errmsg)
+  //         }
+  //    })
+  // }
    //查询用户绑定的所有房屋
   getroomId(){   
     var that=this;
@@ -93,11 +104,6 @@ export class OnlinepaymentPage {
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            for(var i=0;i<data.list.length;i++){
-              if(data.list[i].id == this.defRoomId){
-                data.list.splice(i,1)
-              }
-            }
             that.roomidlist=data.list;  
           }else if (data.errcode===4002){
             j--;
@@ -110,9 +116,6 @@ export class OnlinepaymentPage {
   }
   //获取房屋费用收取表
   getPayList(roomid){
-    if(roomid==="defId"){
-      roomid=this.defRoomId;
-    }
     var that=this;
     var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -121,7 +124,7 @@ export class OnlinepaymentPage {
             for(var i=0;i<this.list.length;i++){
               this.list[i].checked = false;
             }
-            console.log(this.list)
+            console.log(this.list) 
           }else{
             alert(data.errmsg);
           }
@@ -130,21 +133,17 @@ export class OnlinepaymentPage {
 
   //结算账单
   gopay(){
-     if(this.roomid==="defId"){
-      this.pay.roomId=this.defRoomId;
-    }else{
-      this.pay.roomId=this.roomid;
-    }
+    this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
-    this.pay.idG="2450790"
+    this.pay.idG="02645301cb,02645302cb,02645305cb,02645303cb"
     var that=this;
+    console.log(this.pay)
     var api = this.config.apiUrl+'/api/charge/edit_Save?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            this.roomidlist=data.list;//怎么知道那个是默认房屋
-            console.log(this.roomidlist)
+          if(data.errcode===0 ){
+            console.log(data.errmsg+"支付成功")
           }else{
-            alert(data.errmsg)
+            alert(data.errmsg+"支付失败")
           }
      })
   }
@@ -154,7 +153,7 @@ export class OnlinepaymentPage {
   getcheckNum(){
     let sum=0;
     for(let i=0;i<this.list.length;i++){
-      console.log(this.list[i].checked)
+     console.log(this.list[1].checked)
       if(this.list[i].checked==true){
         sum+=1;;
       }

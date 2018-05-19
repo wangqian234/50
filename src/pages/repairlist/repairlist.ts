@@ -42,6 +42,12 @@ export class RepairlistPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepairlistPage');
+    
+  }
+  ionViewDidEnter(){
+    this.list = [];
+    this.page = 0;
+    this.getProductList("")
   }
 
   onCancel(event){
@@ -73,10 +79,15 @@ export class RepairlistPage {
             this.getProductList(infiniteScroll);
           }
         }else{
-          alert(data.errmsg+"000000")
         }
         })
       }
+
+    getProduct(){
+      this.list = [];
+      this.page=1;
+      this.getProductList("");
+    }
 
   //加载更多
   doLoadMore(infiniteScroll){

@@ -49,6 +49,7 @@ export class TradegoodsRefundPage {
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list=data.model ;
+         console.log(JSON.stringify(data))
          //alert("王慧敏"+JSON.stringify(this.list) );
      } else if(data.errcode === 40002){
               j--;

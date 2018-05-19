@@ -5,6 +5,8 @@ import $ from 'jquery';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
+//商品购买页面
+import { ShopbuyPage } from '../shopbuy/shopbuy';
 
 @Component({
   selector: 'page-cart',
@@ -12,6 +14,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 })
 export class CartPage {
 
+  //跳转页面
+  public ShopbuyPage=ShopbuyPage;
   pageSize = 10;
   pageIndex = 1;
   checked =false
@@ -35,6 +39,13 @@ export class CartPage {
     gsId:'',
     token:'',
   }
+  //结算
+  public blist={
+    gidGroup:'',
+    gsIdGroup:'',
+    numGroup:'',
+    token:'',
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public config:ConfigProvider,public storage:StorageProvider, public http: Http) {
@@ -55,13 +66,14 @@ export class CartPage {
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        if(data.list.length == 0){
+          this.hasData = false;
+        }
         this.list=this.list.concat(data.list);  /*数据拼接*/
         console.log(this.list);
-        this.hasData=true;
         if(infiniteScroll){
           //告诉ionic 请求数据完成
           infiniteScroll.complete();
-
           if(data.result.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
           }
@@ -84,13 +96,14 @@ export class CartPage {
     this.deleatcartList.gsId=item.size_id;
     this.deleatcartList.token=this.storage.get('token');
     var data = this.deleatcartList;
-    alert(JSON.stringify(data));
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/delete?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      alert(1)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("删除成功");
+        this.pageIndex = 1;
+        this.list = [];
+        this.hasData = true;
+        this.getCartsData('');
       } else if(data.errcode === 40002) {
           j--;
           if(j>0){
@@ -101,8 +114,6 @@ export class CartPage {
         alert(data.errmsg);
       }
     });
-    //刷新界面
-    this.navCtrl.push(CartPage);
   }
 
   changeCarts(){
@@ -185,7 +196,54 @@ export class CartPage {
       }
     })
   }
-
+//结算
+buy(){
+  var gidGroup = [];
+  var gsIdGroup = [];
+  var numGroup = [];
+  this.blist.token=this.storage.get('token');
+  for(var i=0;i<this.list.length;i++){
+    if(this.list[i].checked == true){
+      gidGroup.push(this.list[i].good_id);
+     gsIdGroup.push(this.list[i].size_id);
+     numGroup.push(this.list[i].num);
+  //console.log(this.list[i].num)
+    }
+  }
+  this.blist.gidGroup = gidGroup.join(",");  
+  this.blist.gsIdGroup = gsIdGroup.join(",");
+  this.blist.numGroup=numGroup.join(",");
+  console.log(this.blist);
+  //接口
+  var j=3;
+   var date = this.blist;
+     //alert(JSON.stringify(date));
+    var api = this.config.apiUrl+'/api/usercart/add_settlement'
+     this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+        // alert("post成功!");
+         //跳转前验证
+      var api=this.config.apiUrl+'/api/goods/buy_list?caId=1&token='+this.blist.token;
+            this.http.get(api).map(res => res.json()).subscribe(data =>{
+               //if(data.errcode === 0 && data.errmsg === 'OK'){
+                  //alert("可以购买!");
+       this.navCtrl.push(ShopbuyPage);
+      // }else{
+      //   alert(data.errmsg);
+      // }
+            })
+      }else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.buy();
+          }
+      }
+      else{
+        alert(data.errmsg);
+      }
+     });
+}
   //加载更多
   doLoadMore(infiniteScroll){
     this.getCartsData(infiniteScroll);

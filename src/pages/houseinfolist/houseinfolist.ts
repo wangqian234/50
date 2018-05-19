@@ -6,7 +6,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
-//新添加房屋
+//?????
 import { BindroomPage } from '../bindroom/bindroom';
 
 /**
@@ -22,7 +22,8 @@ import { BindroomPage } from '../bindroom/bindroom';
   templateUrl: 'houseinfolist.html',
 })
 export class HouseinfolistPage {
-  public houseList = {};
+  houseId = '';
+  public houseList = [];
 
   public BindroomPage = BindroomPage;
 
@@ -31,31 +32,29 @@ export class HouseinfolistPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, ) {
   }
 
-  getHouseInfo(){
-    this.navCtrl.push(HouseinfoPage);
+  getHouseInfo(id){
+    this.navCtrl.push(HouseinfoPage,{id:id});
   }
 
   backTo(){
     this.navCtrl.pop();
   }
   
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HouseinfolistPage');
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter HouseinfolistPage');
     this.getHouseList();
-    console.log('pg is here');
   }
 
-  //获取房屋列表
+  //??????
   getHouseList(){
+    console.log(this.storage.get('token'));
     var api = this.config.apiUrl + '/api/VUserRoom/list_User?token='+ this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
-        console.log(this.houseList  + '成功获取房屋列表');
       } else {
         console.log(data.errmsg);
       }
-      console.log(data.list +"0");
     });
   }
  

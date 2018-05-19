@@ -63,6 +63,10 @@
 				<div class="denglk denglk_l">
 					<div class="mz px24">邮编：</div>
 					<input type="text" [(ngModel)]='addressList.code'>
+				</div>
+				<div class="denglk denglk_l">
+					<div class="mz px24">是否默认</div>
+					<input type="radio" [checked]='addressList.cbdefault' (change)="addressList.cbdefault=!addressList.cbdefault">
 				</div> 
 			</div>
 		</div>
