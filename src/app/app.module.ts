@@ -78,7 +78,8 @@ import {SalePage}from '../pages/sale/sale';
 //新建热销
 import {BigsalePage}from '../pages/bigsale/bigsale';
    
-
+//店铺信息
+import {ShopinfoPage}from '../pages/shopinfo/shopinfo';
 
 //商品详情页面
 import {ShopgoodsinfoPage} from '../pages/shopgoodsinfo/shopgoodsinfo'
@@ -191,6 +192,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     CutSPipe,
     PaymentPage,
     ChangeaddrPage,
+    ShopinfoPage,
 
     //王慧敏
     TradegoodsReapPage,
@@ -259,6 +261,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     ShopbuyPage,
     PaymentPage,
     ChangeaddrPage,
+    ShopinfoPage,
 
     //王慧敏
     TradegoodsReapPage,
