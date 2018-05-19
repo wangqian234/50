@@ -36,6 +36,7 @@ export class GroupdetailPage {
   
   public wid;
   public sid;
+  public lnum=0;
   public list=[];
   public dataGlist=[];
   public goodMlist=[];
@@ -50,12 +51,12 @@ export class GroupdetailPage {
     goodsNum:1,
     token:'',
   }
-  public carlist={
-    gidGroup:'782,785',
-    gsIdGroup:'859,862',
-    numGroup:'1,2',
-    token:'',
-  
+  //库存数量判断
+  public ifList={
+    gId:"",
+    gsId:"",
+    goodsNum:1,
+
   }
   //定义congfig中公共链接的变量aa
   public wdh = this.config.apiUrl;
@@ -64,7 +65,6 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider) {
     this.wid=navParams.get('id');
-    alert(this.wid);
   }
 
   ionViewDidLoad() {
@@ -83,7 +83,7 @@ ionViewWillLoad() {
       $("#tuwen").html(data.json['good_Model'].model.detail);//图文html
       //alert(JSON.stringify(that.goodMlist));
       this.sid=data.json['good_Model'].model.shopid;
-     
+      this.lnum=data.json['good_Model'].model.limitNum;//限购数量
       this.fenge(data.json['good_Model'].model.imgsrc_list);//分割轮播图字段
       //alert(data.json['good_Model'].model.imgsrc_list);
       console.log(that.goodMlist);
@@ -106,7 +106,23 @@ enterShop(wid,sid){
 
   });
 }
+//购买数量判断
+ifEnough(){
+  this.ifList.gId=this.wid;
+  this.ifList.gsId=this.goodSize;
+  this.ifList.goodsNum=this.buylist.goodsNum;
+  var date = this.ifList;
+  var api = this.wdh+'/api/goods_size/update'
+     this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+       
+         //alert("可以继续添加!");
+      }else{
+        alert(data.errmsg);
+      }
+     })
 
+}
     //显示商品评价列表
   getshopinfo(id){
     this.showpingj=!this.showpingj;
@@ -115,7 +131,6 @@ enterShop(wid,sid){
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
-         alert(JSON.stringify(this.list));
       }else{
         alert(data.errmsg);
       }
@@ -130,12 +145,11 @@ enterShop(wid,sid){
         var j=3;
     console.log(this.token)
     var date = this.buylist;
-     alert(JSON.stringify(date));
+     //alert(JSON.stringify(date));
     console.log(date);
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -160,42 +174,7 @@ enterShop(wid,sid){
             })
      
   }
-   //购物车结算测试
-   carbuy(){
-     this.carlist.token=this.token;
-     var j=3;
-    console.log(this.token)
-    var date = this.carlist;
-     alert(JSON.stringify(date));
-    console.log(date);
-    var api = this.wdh+'/api/goods_param/add'
-     this.http.post(api,date).map(res => res.json()).subscribe(data =>{
-      if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("购物车post成功!");
-      }else if(data.errcode === 40002){
-              j--;
-              if(j>0){
-                this.config.doDefLogin();
-                this.carbuy();
-          }
-      }
-      else{
-        alert(data.errmsg);
-      }
-     });
-     //跳转前的判断
-      var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
-            this.http.get(api).map(res => res.json()).subscribe(data =>{
-              //  if(data.errcode === 0 && data.errmsg === 'OK'){
-              //    alert("可以购买!");
-       this.navCtrl.push(ShopbuyPage);
-      // }
-      // else{
-      //   alert(data.errmsg);
-      // }
-            })
-
-   }
+   
    //团购
    gbuygoods(){ 
     this.buylist.token=this.token;
@@ -209,7 +188,6 @@ enterShop(wid,sid){
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -247,12 +225,19 @@ fenge(str){
 }
 
 
-incCount(){    
+incCount(){  
+  if(this.lnum==0){  
     ++this.buylist.goodsNum;
-    console.log("更新！");
-    this.cd.detectChanges();//更新页面
-    console.log("更新成功！");
-
+    //console.log("更新！");
+    //this.cd.detectChanges();//更新页面
+    //console.log("更新成功！");
+    this.ifEnough();}
+    else if(this.buylist.goodsNum>this.lnum)
+    {
+      alert("该商品限购"+this.lnum+"件!");
+    }
+    else
+    ++this.buylist.goodsNum;
   }
   //数量变化  双向数据绑定
   decCount(){

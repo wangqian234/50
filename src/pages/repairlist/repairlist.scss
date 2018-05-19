@@ -6,6 +6,9 @@ page-repairlist {
         border-top:1px solid #3e3e3e;
         border-bottom:1px solid #3e3e3e;
         text-align:center;
+        position: sticky;
+        top: 0.78rem;
+        z-index: 100;
     }
     /*.footerSearch .searchBar{margin:0 auto;}*/
     .searchTool{ 
@@ -37,9 +40,9 @@ page-repairlist {
     }
 
     .searchTextInit{
-        height:30px;
+        height:32px;
         line-height:30px;
-        border:0;
+        border-radius:0;
         border-left:1px solid #448aff;
         padding:0 8px;
         font-size:12px;
@@ -109,6 +112,11 @@ page-repairlist {
     }
     .dengl .caid_img{
         width: 80%;
+    }
+    .title_a{
+        font-size: 0.3rem;
+        margin: 0.2rem 0 0.2rem 0.3rem;
+        line-height: 0.5rem; 
     }
 }
 

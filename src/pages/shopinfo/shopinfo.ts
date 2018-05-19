@@ -30,7 +30,7 @@ export class ShopinfoPage {
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
-    alert("商品id:"+this.wid);
+    // alert("商品id:"+this.wid);
     
 
 }
@@ -56,7 +56,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   
 
     //商品列表
-    alert("店id:"+this.sid);  
+    // alert("店id:"+this.sid);  
     var api2 = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&curCityCode=4403&keyWord=111&shop_Id='+this.sid;
      
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{

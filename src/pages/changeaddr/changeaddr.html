@@ -15,13 +15,13 @@
 
 <!--内容-->
 <div class="shouhdz_hk">
-	<div class="shouh_zk" *ngFor="let item of addresslist">
+	<div class="shouh_zk" *ngFor="let item of addListList" (click)="gotoBuy(item)">
 		<div class="shouh_dange_beijin">
 			<div class="shang">
 				<div class="mz" style="width:98%" (click)="change()">
           
-					<p><em>{{item.name}}</em>&nbsp;<em>{{item.mobile}}</em></p>
-					<p>{{item.address}}</p>
+					<p><em>{{item.address_name}}</em>&nbsp;<em>{{item.address_mobile}}</em></p>
+					<p>{{item.Address}}</p>
 				</div>
 			</div>
 			

@@ -8,7 +8,7 @@
 		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p *ngIf="enSureLogin">您好，{{userLoginName}}</p></div>
 	</div>
 </div>
-<div class="jifen"><img src="assets/imgs/jifen.png"><p>剩余积分</p><span>123</span></div>
+<div class="jifen"><img src="assets/imgs/jifen.png"><p>剩余积分</p><span>0</span></div>
 
 
   <ion-list inset class="user_list">
@@ -20,7 +20,7 @@
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         
-        <ion-item>
+        <ion-item [navPush]="PayfeePage">
             <ion-icon style="color:#8DC43C;" name="logo-yen"></ion-icon>
             <span>费用明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
@@ -30,7 +30,7 @@
             <span>我的工单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item>
+        <ion-item [navPush]="LoadingPage">
             <ion-icon style="color:#8C44BB;" name="attach"></ion-icon>
             <span>积分收支明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
@@ -58,14 +58,14 @@
 
     <div class="blockdiv">
         <p>房屋租售</p>
-        <ion-item>
+        <ion-item [navPush]="LoadingPage">
             <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
             <span>我的发布信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
-        <ion-item>
+        <ion-item [navPush]="LoadingPage">
             <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
-            <span>后台管理</span>
+            <span>我的预约信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
     </div>

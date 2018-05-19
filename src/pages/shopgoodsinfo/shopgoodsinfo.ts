@@ -53,6 +53,13 @@ export class ShopgoodsinfoPage {
     goodsNum:1,
     token:'',
   }
+  //库存数量判断
+  public ifList={
+    gId:"",
+    gsId:"",
+    goodsNum:1,
+
+  }
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
     //定义token
@@ -79,7 +86,6 @@ export class ShopgoodsinfoPage {
   //显示商品详情页面
   goodsInfo(){
     var that =this;
-    alert(this.navParams.get("id"));
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
@@ -97,6 +103,24 @@ export class ShopgoodsinfoPage {
       
     })
   }
+//购买数量判断
+ifEnough(){
+  this.ifList.gId=this.wid;
+  this.ifList.gsId=this.goodSize;
+  this.ifList.goodsNum=this.buylist.goodsNum;
+  var date = this.ifList;
+  var api = this.aa+'/api/goods_size/update'
+     this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+       
+         //alert("可以继续添加!");
+      }else{
+        alert(data.errmsg);
+      }
+     })
+
+}
+
 //推荐商品列表
  recommend(){   
     var api2 = this.aa+'/api/goods/list?curCityCode=4403';
@@ -135,11 +159,10 @@ fenge(str){
         
     console.log(this.token)
     var date = this.addcarList;
-    alert(JSON.stringify(date))
     var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("成功加入购物车");
+        // alert("成功加入购物车");
       }else{
         alert(data.errmsg);
       }
@@ -153,7 +176,6 @@ fenge(str){
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
-         alert(JSON.stringify(this.list));
       }else{
         alert(data.errmsg);
       }
@@ -172,7 +194,7 @@ fenge(str){
     var api = this.aa+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("post成功!");
+        //alert("post成功!");
          //跳转前验证
       var api=this.aa+'/api/goods/buy_list?caId=1&token='+this.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -204,6 +226,7 @@ fenge(str){
   incCount(){    
     ++this.addcarList.goodsNum;
     ++this.buylist.goodsNum;
+    this.ifEnough();
   }
 
   //数量变化  双向数据绑定

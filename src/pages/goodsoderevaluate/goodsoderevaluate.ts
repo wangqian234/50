@@ -48,7 +48,6 @@ export class GoodsoderevaluatePage {
   constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
-        alert("王慧敏"+this.tradegoods_id);  
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();
@@ -70,10 +69,8 @@ export class GoodsoderevaluatePage {
       this.evaluateList.commentGroup="〢"+this.tradegoods_id+"〡"+this.shopgrade.goods_satisfactionlevel+"〡"+
       this.shopgrade.goods_serviceattitude+"〡"+this.shopgrade.goods_deliveryspeed+"〡"+this.shopgrade.commentgroup;
       this.evaluateList.token = this.token;
-      alert(JSON.stringify(this.evaluateList));
       var date = this.evaluateList;
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
-        alert(JSON.stringify(data));
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
         this.navCtrl.setRoot(ShoppinglistPage,{id:4});

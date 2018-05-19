@@ -147,6 +147,75 @@ export class ShoppinglistPage {
      }
      })
   }
+
+    groupEvent(trade_state){
+    switch(trade_state){
+      case 0:
+      this.tabTest={
+        li00:"type current",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 1:
+      this.tabTest={
+        li00:"type",
+        li01:"type current",
+        li02:"type",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 2:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type current",
+        li03:"type",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 3:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type current",
+        li04:"type",
+        li05:"type",
+      };
+      break;
+      case 4:
+      this.tabTest={
+        li00:"type",
+        li01:"type",
+        li02:"type",
+        li03:"type",
+        li04:"type current",
+        li05:"type",
+      };
+      break;
+    }
+var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+trade_state+'&token='+this.token;
+     console.log("王慧敏"+api);
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errcode === 0 &&data.errmsg == 'OK'){
+         //this.goods_list=data.list.goods_list;
+         this.list=data.list;
+         //alert(JSON.stringify(data));
+          //alert(JSON.stringify(data.list));
+         // alert(JSON.parse(data));
+     } else {
+        alert(data.errmsg);
+     }
+     })
+  }
+
   //商品评价
   evaluationEvent(trade_id,tradegoods_id){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
@@ -158,7 +227,6 @@ export class ShoppinglistPage {
   }
    //添加商品退款申请
    addrefundEvent(tradegoods_id){
-     alert("添加商品退款"+tradegoods_id);
      this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
    }
    //商品退款详情页
@@ -171,7 +239,6 @@ export class ShoppinglistPage {
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
-        alert("取消付款");
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
@@ -198,7 +265,7 @@ export class ShoppinglistPage {
    }
    //商品确认收货
    receiveEvent(trade_id){
-        // alert("确认收货");
+        
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
@@ -291,7 +358,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         console.log(data);
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -303,96 +369,45 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      }
      })
   }
-  // getProductList(infiniteScroll){
-  //   alert("王慧敏"+this.SD_id);
-  //     switch(this.SD_id){
-  //     case 0:
-  //     this.tabTest={
-  //       li00:"type current",
-  //       li01:"type",
-  //       li02:"type",
-  //       li03:"type",
-  //       li04:"type",
-  //       li05:"type",
-  //     };
-  //     break;
-  //     case 1:
-  //     this.tabTest={
-  //       li00:"type",
-  //       li01:"type current",
-  //       li02:"type",
-  //       li03:"type",
-  //       li04:"type",
-  //       li05:"type",
-  //     };
-  //     break;
-  //     case 2:
-  //     this.tabTest={
-  //       li00:"type",
-  //       li01:"type",
-  //       li02:"type current",
-  //       li03:"type",
-  //       li04:"type",
-  //       li05:"type",
-  //     };
-  //     break;
-  //     case 3:
-  //     this.tabTest={
-  //       li00:"type",
-  //       li01:"type",
-  //       li02:"type",
-  //       li03:"type current",
-  //       li04:"type",
-  //       li05:"type",
-  //     };
-  //     break;
-  //     case 4:
-  //     this.tabTest={
-  //       li00:"type",
-  //       li01:"type",
-  //       li02:"type",
-  //       li03:"type",
-  //       li04:"type current",
-  //       li05:"type",
-  //     };
-  //     break;
-  //   }
-  //   var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
-  //   //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex=1&pageSize=15&token='+this.storage.get('token');
-  //   this.httpService.requestData(api,(data)=>{
-  //     // console.log(data);
-  //     this.list=this.list.concat(data.result);  /*数据拼接*/
-  //     if(infiniteScroll){
-  //       //告诉ionic 请求数据完成
-  //       infiniteScroll.complete();
-  //       if(data.result.length<10){  /*没有数据停止上拉更新*/
-  //         infiniteScroll.enable(false);
-  //         $('.nomore').css('display','block');
-  //       }
-  //     };
-  //     this.page++;
-  //   })
-  // }
-  ionViewDidLoad() {
-   //this.onload2();
-  }
-// onload2 = function(){
-//     var Sos=document.getElementById('sos_tanc');
-// 		var ShouYe=document.getElementById('yemnr');
-// 		var SosYe=document.getElementById('shous_yem');
-// 		var SosFanHui=document.getElementById('sous_fanh_sy');
-// 		Sos.onclick=function()
-// 		{
-// 			ShouYe.style.display=('none');
-// 			SosYe.style.display=('block');
-// 		}
-// 		SosFanHui.onclick=function()
-// 		{
-// 			ShouYe.style.display=('block');
-// 			SosYe.style.display=('none');
-// 		}
-//   }
 
+  ionViewDidLoad() {
+  }
+
+getOrderList(infiniteScroll){
+    
+}
+     //实现列表缓慢加载
+   getGroupList(infiniteScroll){
+    var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
+    //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      console.log(data);
+      this.list=this.list.concat(data.list);  /*数据拼接*/
+      if(infiniteScroll){
+        infiniteScroll.complete();        //告诉ionic 请求数据完成
+        if(data.result.length<10){  /*没有数据停止上拉更新*/
+          infiniteScroll.enable(false);
+          $('.nomore').css('display','block');
+        }
+      };
+      this.page++;
+    })
+  }
+
+  gotoGroup(){
+    $("#group-content").css("display", "block") ;
+    $("#order-content").css("display", "none") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
+    $("#title li:nth-of-type(2)").attr("class","qbdd no")
+    this.SD_id = 0;
+    this.getGroupList("");
+  }
+  gotoOrder(){
+    $("#group-content").css("display", "none") ;
+    $("#order-content").css("display", "block") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd no")
+    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
+  }
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -400,18 +415,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   }
   backTo(){
     this.navCtrl.pop();
-  }
-  gotoGroup(){
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
-    $("#title li:nth-of-type(2)").attr("class","qbdd no")
-  }
-  gotoOrder(){
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd no")
-    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
 
 }

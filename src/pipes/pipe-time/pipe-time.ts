@@ -13,6 +13,6 @@ export class PipeTimePipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {
-    return value.replace("T", " ");
+    return value.replace("T", " ").substring(0,19);
   }
 }

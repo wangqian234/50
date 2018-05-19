@@ -23,8 +23,10 @@ export class ChangeaddrPage {
   //发送数据
   public idd:string = "";
   public token = "";
+  public callback;
   //获取数据
   public addresslist=[];
+  public addListList;
   //跳转页面
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
@@ -36,13 +38,22 @@ export class ChangeaddrPage {
     }
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
-    ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
+    ,public storage:StorageProvider,public httpService:HttpServicesProvider,public navParams: NavParams,) {
+      this.callback = this.navParams.get("callback");
+      this.addListList = this.navParams.get("addListList");
   }
 
   ionViewWillEnter(){
     this.getRem();
     this.getAddressList();
   }
+
+  gotoBuy(item){
+      this.callback(item).then(()=>{
+            this.navCtrl.pop();
+      });
+  }
+
   //获取当前用户的收货地址
   getAddressList(){
     console.log(this.storage.get('token'))

@@ -1,6 +1,6 @@
 <ion-content>
 
-   <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+      <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
@@ -20,19 +20,31 @@
 </div>-->
 
    <div class="xiugmim_k">
- 	<p class="px26" style="text-align: center;">已绑定手机：<em>{{tel2}}</em></p>
+ 	<p class="px26" style="text-align: center;">已绑定手机：<em>{{this.tel}}</em></p>
  	<div class="yanzm_k">
  		<input type="text" name="" placeholder="输入验证码">
  		<a style="color:black;float:right;" *ngIf="isShowSend" (click)="ownRegist()">获取验证码</a>
     <a *ngIf="!isShowSend">{{num}}秒后重新发送</a>
  	</div>
+
+	 <!--pg添加-->
+	 <!--<ion-item >  
+      	<ion-label>  
+        	验  证  码  
+      	</ion-label>  
+      	<ion-input placeholder="请输入验证码" [(ngModel)]="item.phoneCode"></ion-input>  
+      		<button color="custom" item-right ion-button (click)="getCode()" [disabled]="!verifyCode.disable">{{verifyCode.verifyCodeTips}}</button>  
+    </ion-item>-->
+
+
+
     	<div class="yanzm_k">
  		<input style="width:100%" type="text" name="" placeholder="输入新密码">
  	</div>
     	<div class="yanzm_k">
  		<input style="width:100%" type="text" name="" placeholder="确认新密码">
  	</div>
- 	<div class="querenann" (click)="addAddress()"><a>确认密码</a></div>
+ 	<div class="querenann" (click)="modifyPwd()"><a>确认密码</a></div>
  </div>
 
 </ion-content>

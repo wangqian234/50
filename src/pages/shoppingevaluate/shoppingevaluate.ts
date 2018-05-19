@@ -31,7 +31,6 @@ export class ShoppingevaluatePage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
-         alert(JSON.stringify(this.list));
       }else{
         alert(data.errmsg);
       }

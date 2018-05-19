@@ -1,6 +1,9 @@
 page-home{
     margin: 0px;
     padding:0px;
+    .daohang_bd ul li p{ 
+     font-size: 0.23rem;
+    }
 .zixun{
     background-color: white;
 }
@@ -188,11 +191,13 @@ float:left;
 float:left;
 margin-left:0.1rem;
 margin-top:0.04rem;
+font-size: 0.23rem;
 }
 .fee11 .fee11_p2{
 float:left;
 margin-left:0.3rem;
-margin-top:0.04rem
+margin-top:0.04rem;
+font-size: 0.23rem;
 }
 .fee21{
 width:100%;
@@ -206,11 +211,13 @@ color:#646464
 float:left;
 margin-left:0.1rem;
 margin-top:0.02rem;
+font-size: 0.23rem;
 }
 .fee21 .fee21_p2{
 float:left;
 margin-left:0.3rem;
 margin-top:0.02rem;
+font-size: 0.23rem;
 }
 .fee{
     height: 1rem;

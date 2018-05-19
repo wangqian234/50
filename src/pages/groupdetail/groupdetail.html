@@ -63,7 +63,8 @@
 		</div>
 	</div>
 	<div class="guangguang">
-		<a class="a1" (click)="enterShop(wid,sid)"><h1><img src="assets/imgs/dainp01.png" ></h1>进店逛逛</a>
+		<a class="a1" (click)="enterShop(wid,sid)"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
+
 	</div>
 	
 </div>
@@ -118,7 +119,7 @@
 		</div>
 		<div id="gbuy" class="you">
 			<div class="goum">
-				<a (click)="carbuy()">{{goodMlist.groupnum}}人团(￥{{goodMlist.groupgoods_price}})</a>  
+				<a (click)="gbuygoods()">{{goodMlist.groupnum}}人团(￥{{goodMlist.groupgoods_price}})</a>  
 			</div>
 		</div>
 	</div>

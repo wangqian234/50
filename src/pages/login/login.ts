@@ -4,6 +4,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
+import { LoadingController, Loading } from 'ionic-angular';
 
 //找回密码页
 import { RebuildpassPage } from '../rebuildpass/rebuildpass'
@@ -34,7 +35,8 @@ public history='';
 
   public loginNum : boolean;
 
-  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
+  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,
+  public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
@@ -50,9 +52,15 @@ public history='';
       alert('密码不能为空');
       return;
     }
+    let loading = this.loadingCtrl.create({
+      content: '请稍等...',
+	    showBackdrop: true,
+    });
+    loading.present();
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-        if (data.errcode === 0 && data.errmsg === 'OK') {
+        if (data.errcode === 0 && data.errmsg === 'OK') {  
+          loading.dismiss();
           this.storage.set('userName',this.userinfo.userName);
           this.storage.set('password',this.userinfo.userPwd);
           this.storage.set('token',data.model.token);
@@ -112,7 +120,7 @@ public history='';
     var api = this.config.apiUrl + '/api/vcode/register';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        this.num = 5;
+        this.num = 60;
         this.isShowSend = false;
         this.doTimer();  /*倒计时*/
       } else {
@@ -124,6 +132,10 @@ public history='';
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+
+  backTo(){
+    this.navCtrl.pop();
   }
 
 }

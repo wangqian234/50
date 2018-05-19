@@ -14,27 +14,78 @@
 	</div>
 </div>
 
-      <!--商品退款详情--> 
-  <div id="order-content">
-        <div class="order-list">
-            <div class="order-item">
-            <li  (click)="refundApplicationEvent(item,trade_id)">
-                <a href="XiangQ_Y.html" >
-                  <div class="lieb_img"><img src={{list.img}}></div>
-                  <div class="lieb_txt">
-                      <p class="biao">{{list.title}}</p>
-                      <p class="biao">{{list.refund_mode}}</p>
-                      <p class="biao">{{list.refund_type}}</p>
-                      <p class="biao">{{list.refund_price}}</p>                  
-                  </div>
-                </a>
+<div class="jie_diz">
+	<a>
+		<p>吴其龙 15263256235</p>
+		<p class="p">广东省〡江门市〡新会区〢离开的分工的复古风格劳动法1 <i></i></p>
+	</a>
+</div>
 
- 		       </li> 
-                <!--<div class="refund"  (click)="refundApplicationEvent(item,trade_id)">
-                <p>商品退款：<span>退款列表！</span></p>
-                </div>     -->
-          </div>
-        </div>
-    </div>
+
+<div class="caix"></div>
+<div class="gouwuc_kk gouwuc_kk_jies">
+ 	<ul>
+ 		<li> 
+ 			<div class="diannao_shanp"> 
+ 				<a><h1><img src="{{list.img}}"></h1></a>
+ 				<div class="you">
+ 					<a><p class="px24 bt">{{list.title}}</p></a>
+ 					<p class="xh">{{list.size_name}}</p>
+ 					<div class="youjfy">
+
+ 					</div> 
+ 				</div>
+ 			</div> 
+ 		</li>
+ 	</ul>
+</div>
+<div class="zhifu_fangs">
+	<h1>退款方式</h1>
+	<ul id="oul">
+		<li class="no">仅退款(无需退货)</li>
+		<li>退款退货</li>
+	</ul>
+</div>
+<div class="gei_shangj_ly">
+	<h1>给商家留言：</h1>
+	<input type="text" name="" placeholder="请您留言">
+</div>
+<div class="jies_qian">
+	<div class="shangpjis">
+		<h1>商品总计</h1>
+		<p>
+			<em>x{{list.num}}</em>
+        <span>{{list.preprice}}</span>
+		</p> 
+	</div>
+	<div class="shangpjis">
+		<h1>运费</h1>
+		<p> 
+			<span>¥00.00</span>
+		</p> 
+	</div>
+
+</div>
+
+
+
+<!--底部导航-->
+<!---->
+<div class="dib_daoh_b">
+	<div class="gouwuc_ gouwuc_yem jiesy"> 
+		<div class="zhong"><p>总计：<em>￥{{list.maxrefundprice}}</em></p></div>
+		<div class="you">
+			<div class="goum">
+				<a>提交订单</a>  
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--<div class="refund"  (click)="refundApplicationEvent(item,trade_id)">
+<p>商品退款：<span>退款列表！</span></p>
+</div>     -->
+
 	
 </ion-content>

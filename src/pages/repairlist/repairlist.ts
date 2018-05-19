@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
 import { ConfigProvider } from '../../providers/config/config';
-
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //工单详情页
 import { RepairdetailsPage } from '../repairdetails/repairdetails';
@@ -16,16 +15,15 @@ import {Http,Jsonp}from '@angular/http';
   templateUrl: 'repairlist.html',
 })
 export class RepairlistPage {
-
+  public list =[];
   public repairlist=[];
-  public type="";
-
-  public list=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-   {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-   {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"}];
+  public type="-1";
+  public keywords='';
+  // public list1=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
+  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
+  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"}];
 
   public cid='';/*获取分类id*/
-
   public page=1; /*分页*/
 
   public RepairdetailsPage=RepairdetailsPage;
@@ -37,16 +35,19 @@ export class RepairlistPage {
       this.cid=this.navParams.get('cid');
     }
 
-    this.getProductList('');
-
   }
-
   ionViewWillLoad(){
     this.getRem();
+    this.getProductList("");
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepairlistPage');
+    
+  }
+  ionViewDidEnter(){
+    this.list = [];
+    this.page = 0;
+    this.getProductList("")
   }
 
   onCancel(event){
@@ -56,44 +57,52 @@ export class RepairlistPage {
   repairTypeSub(){
     
   }
-
-getProductList(infiniteScroll){
-    var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+ this.page +'&pageSize=10&token='+this.storage.get('token');
-    this.httpService.requestData(api,(data)=>{
-      // console.log(data);
-      this.list=this.list.concat(data.result);  /*数据拼接*/
-      if(infiniteScroll){
-        //告诉ionic 请求数据完成
-        this.page++;
-        infiniteScroll.complete();
-        if(data.result.length<10){  /*没有数据停止上拉更新*/
-          infiniteScroll.enable(false);
-          $('.nomore').css('display','block');
+    getProductList(infiniteScroll){
+      var j = 3;
+        var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
+        this.http.get(api).map(res => res.json()).subscribe(data =>{
+          if(data.errcode===0 && data.errmsg==="OK"){
+          this.list=this.list.concat(data.list); /*数据拼接*/
+          if(infiniteScroll){
+            //告诉ionic 请求数据完成
+              this.page++;
+            infiniteScroll.complete();
+            if(data.list.length<10){  /*没有数据停止上拉更新*/
+              infiniteScroll.enable(false);
+              $('.nomore').css('display','block');
+            }
+          }
+        }else if(data.errcode === 40002){
+            j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.getProductList(infiniteScroll);
+          }
+        }else{
         }
-      };
-    })
+        })
+      }
 
-  }
-  // getProductList(infiniteScroll){
-  //    var that=this;
-  //   var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+ this.page +'&pageSize=10&token='+this.storage.get('token');
-  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
-  //         if(data.errcode===0&&data.errmsg==='OK'){
-  //           this.repairlist=data.list;//怎么知道那个是默认房屋
-  //           console.log(this.repairlist)
-  //         }else{
-            
-  //         }
-  //    })
-  // }
+    getProduct(){
+      this.list = [];
+      this.page=1;
+      this.getProductList("");
+    }
+
   //加载更多
   doLoadMore(infiniteScroll){
     this.getProductList(infiniteScroll);
   }
+    onSearchKeyUp(event){
+    if("Enter"==event.key){
+      this.page=1;
+     this.getProductList("");
+    }
+  }
 
-  repairDetails(item){
+  repairDetails(id){
       this.navCtrl.push(RepairdetailsPage,{
-      item:item
+      item:id
     })
   }
 
