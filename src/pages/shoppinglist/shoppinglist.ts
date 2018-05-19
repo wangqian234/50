@@ -207,7 +207,6 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+JSON.stringify(this.list));
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));
@@ -228,7 +227,6 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
   }
    //添加商品退款申请
    addrefundEvent(tradegoods_id){
-     alert("添加商品退款"+tradegoods_id);
      this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
    }
    //商品退款详情页
@@ -241,14 +239,12 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
-        alert("取消付款");
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert("取消付款成功！");
           this.cd.detectChanges();//更新页面
           //this.navCtrl.push(TradegoodsRefundPage);
         } else if(data.errcode === 40002){
@@ -266,7 +262,6 @@ var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex=1&groupBuy_State='+t
    }
    //商品确认收货
    receiveEvent(trade_id){
-        alert("确认收货");
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
@@ -354,7 +349,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         console.log(data);
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -370,10 +364,12 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   ionViewDidLoad() {
   }
 
+getOrderList(infiniteScroll){
+    
+}
      //实现列表缓慢加载
-   getProductList(infiniteScroll){
+   getGroupList(infiniteScroll){
     var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
-    console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       console.log(data);
@@ -389,6 +385,20 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     })
   }
 
+  gotoGroup(){
+    $("#group-content").css("display", "block") ;
+    $("#order-content").css("display", "none") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
+    $("#title li:nth-of-type(2)").attr("class","qbdd no")
+    this.SD_id = 0;
+    this.getGroupList("");
+  }
+  gotoOrder(){
+    $("#group-content").css("display", "none") ;
+    $("#order-content").css("display", "block") ;
+    $("#title li:nth-of-type(1)").attr("class","qbdd no")
+    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
+  }
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -396,19 +406,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   }
   backTo(){
     this.navCtrl.pop();
-  }
-  gotoGroup(){
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
-    $("#title li:nth-of-type(2)").attr("class","qbdd no")
-    this.getProductList("");
-  }
-  gotoOrder(){
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
-    $("#title li:nth-of-type(1)").attr("class","qbdd no")
-    $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
 
 }

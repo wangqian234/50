@@ -25,14 +25,18 @@ import { NewslistPage } from '../newslist/newslist';
 import { RepairlistPage } from '../repairlist/repairlist';
 //商城订单
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
+
 //房屋明细
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 //loading
 import { LoadingPage } from '../loading/loading';
 
+//在线缴费
+import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 
 //测试页面跳转到shopmallist
 import { TestPage } from '../test/test';
+
 import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
 
 
@@ -78,8 +82,11 @@ export class HomePage {
   public RepairlistPage = RepairlistPage;
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
+
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;
+
+  public OnlinepaymentPage=OnlinepaymentPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
     public storage: StorageProvider, private geolocation: Geolocation) {
@@ -105,24 +112,24 @@ export class HomePage {
       } else {
           this.enSureLoginHome = false;
       }
+      
   }
 
    ionViewDidEnter() {
-      this.getPosition();
+      //this.getPosition();
    }
 
   getPosition() {
     var that = this;
-    // this.geolocation.getCurrentPosition().then((resp) => {
-      //var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
-      var point = new BMap.Point(104.07642,38.6518);
+     this.geolocation.getCurrentPosition().then((resp) => {
+      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         console.log(addComp.city)
         that.storage.set("currentPlace",addComp.city);
       });
-      // });
+       });
 }
 
   //轮播图
@@ -270,7 +277,8 @@ getpayment(roomid){
    var j = 3;
     var api = this.config.apiUrl + '/api/charge/list?roomId='+roomid;   //获取到绑定的房屋
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        this.paymentList = data.json.totalNum.model;
+      console.log(JSON.stringify( data))
+        // this.paymentList = data.json.totalNum.model;
     });
 
 

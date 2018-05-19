@@ -23,6 +23,7 @@ export class AddressPage {
   public token = "";
   //获取数据
   public addresslist=[];
+  public addressId = "";
   //跳转页面
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
@@ -40,7 +41,7 @@ export class AddressPage {
     this.getRem();
     this.getAddressList();
   }
-  //获取当前用户的收货地址
+  //获取当前用户的收货地址列表
   getAddressList(){
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
@@ -73,9 +74,8 @@ export class AddressPage {
       }
     });
   }
-  //删除数据
+  //删除地址
   deleteAddress(id){
-    alert("进来了")
     var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
@@ -83,6 +83,8 @@ export class AddressPage {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("删除成功！");
         this.cd.detectChanges(); //更新页面
+      } else {
+        console.log(data.errmsg);
       }
     });
   }
@@ -103,6 +105,18 @@ export class AddressPage {
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+  }
+
+  //获取地址详情（页面没写）
+  getAddressDet(){
+    var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + "&addressId=" + this.addressId;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log(data.model);
+      } else {
+        console.log(data.errmsg + data.model);
+      }
+    });
   }
 
 }

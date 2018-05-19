@@ -38,6 +38,10 @@ export class RepairaddPage {
   }
 
   ionViewWillLoad(){
+    if(this.navParams.get("type")){
+      this.addlist.type=this.navParams.get("type")
+      this.changeType();
+    }
     this.getRem();
     this.getiof_def();
     //this.getproject();
@@ -152,7 +156,7 @@ export class RepairaddPage {
     var api = this.config.apiUrl+'/api/list/add?';
      this.http.post(api,this.addlist).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){ 
-              console.log(data.errmsg)
+              this.navCtrl.pop();
           }else{
             alert(data.errmsg)
           }

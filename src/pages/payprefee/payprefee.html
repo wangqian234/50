@@ -39,7 +39,7 @@
            
       <ion-label>请选择房屋</ion-label>
         <ion-select  [(ngModel)]="edificeId" (ngModelChange)="getRoom(edificeId)" style="max-width:74%;" cancelText="取消" okText="确认">
-        <ion-option selected>请选择楼栋</ion-option>
+        <ion-option selected value="qxz">请选择楼栋</ion-option>
         <ion-option *ngFor="let edificelist of edificelist" value={{edificelist.id}}>{{edificelist.name}}</ion-option>
         <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>

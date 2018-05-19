@@ -46,7 +46,6 @@ export class ShopmalllistPage {
   //推荐商品搜索
     tuijGoods(){
       var api = this.aa +'/api/goods/list?curCityCode=4403';
-      alert('safasfas')
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;

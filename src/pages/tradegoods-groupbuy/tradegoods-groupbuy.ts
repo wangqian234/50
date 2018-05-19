@@ -89,7 +89,6 @@ export class TradegoodsGroupbuyPage {
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+JSON.stringify(this.list));
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));
@@ -141,7 +140,6 @@ export class TradegoodsGroupbuyPage {
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+JSON.stringify(this.list));
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));
@@ -166,7 +164,6 @@ export class TradegoodsGroupbuyPage {
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;
-         alert("王慧敏"+this.list);
          //alert(JSON.stringify(data));
           //alert(JSON.stringify(data.list));
          // alert(JSON.parse(data));

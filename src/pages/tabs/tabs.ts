@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
+import { Tabs } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { RentsalePage } from '../rentsale/rentsale';
@@ -16,15 +17,17 @@ import { TradegoodsOrderPage } from '../tradegoods-order/tradegoods-order';
 import { CartPage } from '../cart/cart';
 
 import $ from 'jquery';
-import {TestPage} from '../test/test'
+import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd'
 import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('mainTabs') tabRef: Tabs;
+  @ViewChild('mainTabs2') tabRef2: Tabs;
 
- //tab1Root = TestPage
+ //tab1Root = RentsaleaddPage
   tab1Root = HomePage;
   tab2Root = RentsalePage;
   tab3Root = ShoppingPage;
@@ -46,11 +49,13 @@ export class TabsPage {
   getShopTab(){
     $(".mytabs").css("display","none");
     $(".mytabs2").css("display","block");
+    this.tabRef2.select(0);
   }
 
-  getTeneTab(){
-    this.navCtrl.setRoot(TabsPage);
+  getTeneTab() {
+    $(".mytabs2").css("display", "none");
+    $(".mytabs").css("display", "block");
+    this.tabRef.select(3);  
   }
-
 
 }

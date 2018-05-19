@@ -1,0 +1,31 @@
+
+<ion-content style="background-color:#f5f5f5">
+<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">我的租赁信息</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+ </div>
+
+ <div id="group-content">
+  <ul class="order-nav clearfix" id="test">
+      <li class="type current" data-nav="all" (click)="myPublish(1)"><a href="javascript:;">我的出售</a></li>
+      <li class="type" data-nav="receive" (click)="myPublish(2)"><a href="javascript:;">我的出租</a></li>
+      <li class="type" data-nav="payment" (click)="myPublish(3)"><a href="javascript:;">我的求购</a></li>
+      <li class="type" data-nav="done" (click)="myPublish(4)"><a href="javascript:;">我的求租</a></li>
+  </ul>
+ </div>
+
+ <div class="nomore">没有更多数据了...</div>
+
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+</ion-content>

@@ -89,6 +89,7 @@ export class PayprefeePage {
   changeRoom(roomid){
     if(roomid === "add"){
       $('#selectOther').css('display','block');
+
       this.dw_Project();      
     } else {
       $('#selectOther').css('display','none');
@@ -148,7 +149,6 @@ export class PayprefeePage {
 
 //结算函数 
  gopay(){
-
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
    }else if(this.roomid==="defId"){
@@ -174,7 +174,6 @@ export class PayprefeePage {
  }
  //项目下拉列表
  dw_Project(){
-      var that=this;
     var api = this.config.apiUrl+'/api/house/dw_Project?';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
@@ -200,7 +199,6 @@ export class PayprefeePage {
  }
   //房屋下拉列表
  getRoom(edificeId){
-     var that=this;
     var api = this.config.apiUrl+'/api/house/dw_Room?edificeId='+edificeId;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){

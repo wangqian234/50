@@ -156,12 +156,10 @@ this.totalPrice=this.test*this.te;
     var j=3;
     console.log(this.token)
     var date = this.addBuylist;
-    alert(JSON.stringify(date));
     console.log(date);
     var api = this.wdh+'/api/goods_param/add';
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert("成功!");
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -170,7 +168,6 @@ this.totalPrice=this.test*this.te;
           }
       }
       else{
-        alert("!!!");
         alert(data.errmsg);
       }
      });

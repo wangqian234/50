@@ -111,14 +111,18 @@ export class PayfeePage {
     var that=this;
     var api = this.config.apiUrl+'/api/charge/list?roomId='+roomid;//获取前台界面上显示的房屋id
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-              //总计金额
-              this.modellist=data.json.totalNum.model;
-              //代缴
-              this.expenselist=data.json.expense.list;
-              //预交剩余
-              this.prepayslist=data.json.prepays.list;
-              //半年缴费记录
-              this.fundloglist=data.json.fundLog.list;   
+       if(data.json.totalNum.errcode == 0){
+          //总计金额
+          that.modellist=data.json.totalNum.model;
+          //代缴
+          that.expenselist=data.json.expense.list;
+          //预交剩余
+          that.prepayslist=data.json.prepays.list;
+          //半年缴费记录
+          that.fundloglist=data.json.fundLog.list;   
+       } else {
+         alert(data.errmsg)
+       }
      })
   }
 

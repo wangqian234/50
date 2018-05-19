@@ -1,0 +1,128 @@
+<ion-content style="background-color:#F5F5F5">
+
+  <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">新增房屋租售信息</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+  </div>
+
+<ion-list style="background-color:white;margin:10px 0 1rem 0;">
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">租售类型：</div>
+         <form class="choose">
+            <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+            <select name="type" [(ngModel)]="type" style="-webkit-appearance: none;">
+            <option  style="color:#bbbbbb" selected>请选择租售类型</option>
+            <option value="1">房屋出售</option>
+            <option value="2">房屋出租</option>
+            <option value="3">房屋求购</option>
+            <option value="4">房屋求租</option>
+            </select>
+        </form>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">房源性质：</div>
+         <form class="choose">
+            <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+            <select [(ngModel)]="nature"  name="type" style="-webkit-appearance: none;">
+            <option style="color:#bbbbbb" selected="selected">请选择房源性质</option>
+
+            <option *ngIf=" type == 1 || type ==3" value="1">一手房</option>
+            <option *ngIf=" type == 1 || type ==3" value="2">二手房</option>
+
+            <option *ngIf=" type == 2 || type ==4" value="1">整租</option>
+            <option *ngIf=" type == 2 || type ==4" value="2">合租</option>
+            </select>
+
+        </form>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">标题：</div>
+        <input  [(ngModel)]="title" type="text" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">所在小区：</div>
+        <input  [(ngModel)]="district" type="text" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">所在位置：</div>
+        <input  [(ngModel)]="city" style="width:32%" type="text" />&nbsp;市&nbsp;
+        <input  [(ngModel)]="region" style="width:32%" type="text" />&nbsp;区&nbsp;
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">所在街道：</div>
+        <input [(ngModel)]="street" type="text" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">房屋面积：</div>
+        <input [(ngModel)]="space" style="width:70%" type="number" />&nbsp;㎡
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">户型：</div>
+        <input [(ngModel)]="halls" style="width:32%" type="number" />&nbsp;室&nbsp;
+        <input [(ngModel)]="rstroom" style="width:32%" type="number" />&nbsp;厅&nbsp;
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">联系人：</div>
+        <input [(ngModel)]="contacts" type="text" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">联系电话：</div>
+        <input [(ngModel)]="phone" type="number" />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repairList">
+      <div class="repairType">预期金额：</div>
+        <input [(ngModel)]="priceMin" style="width:32%" type="number" />&nbsp;~
+        <input [(ngModel)]="priceMax" style="width:32%" type="number" />&nbsp;元
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="repair">补充说明：</div>
+      <textarea [(ngModel)]="describe" placeholder="请简单补充说明您的相关请求..."></textarea>
+    </ion-item>
+   
+</ion-list>
+
+<button ion-button block color="#f53d3d" (click)="getRSInfo()">提交信息</button>
+
+</ion-content>
+

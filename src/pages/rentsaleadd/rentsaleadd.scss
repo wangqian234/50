@@ -1,4 +1,4 @@
-page-repairadd {
+page-rentsaleadd {
     .repair_button{
         width: 28rem;
     }
@@ -25,13 +25,22 @@ page-repairadd {
         border-radius: 4px;
         background-color: white;
     }
+    input{
+        width:75%; 
+        display:inline-block;
+        position:relative;
+        line-height:0.5rem;
+        font-size:0.28px; 
+        border: 1px solid #bbbbbb;
+        border-radius: 4px;
+        background-color: white;
+    }
     .choose select{
         width: 100%;
         height: 100%;
         background-color: white;
         font-size: 0.23rem;
         vertical-align: middle;
-        color:#bbbbbb;
     }
     img{
         margin-top:0.2rem;
@@ -64,7 +73,6 @@ page-repairadd {
         font-size: 0.32rem;
         margin:0;
         bottom:0;
-        position: absolute;
+        position: sticky;
     }
 }
-
