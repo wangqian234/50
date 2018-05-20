@@ -2,12 +2,6 @@ page-onlinepayment {
 .otherUser_content .item-ios{
         padding-left: 0;
     }
-    .fee_time{
-        float:left;
-        padding-left:16px;
-        width:10%;
-        font-size: 0.26rem;
-    }
     .fee_content{
         float:left;
         width:30%;
@@ -17,5 +11,37 @@ page-onlinepayment {
         margin-right: 4px;
         float: right;
         font-size: 0.26rem;
+    }
+    .otherUser_title{
+        margin-top: 10px;
+        background-color: white;
+        padding: 0.25rem;
+        font-size: 0.28rem;
+        box-shadow: 0 0 2px 2px #ece7e7;
+    }
+    .fee_time{
+        float:left;
+        width:70%;
+        font-size: 0.23rem;
+        padding-left: 15%;
+    }
+    .fee_content{
+        float:left;
+        width:30%;
+        font-size: 0.23rem;
+    }
+    .user_title{
+        display: inline;
+        font-size: 0.28rem;
+    }
+    .appear{
+        float: right;
+        margin-right: 0.5rem;
+    }
+    .list-ios{
+        margin:0;
+    }
+    ion-list{
+        margin-top: 0.2rem;
     }
 }

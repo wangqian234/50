@@ -24,27 +24,40 @@
     <p class="title">绑定状态：</p>    
   </div>
   <div class="content_info_content">
-    <p class="title_content">{{houseInfo.default}}</p>
+    <p *ngIf="houseInfo.default" class="title_content">不是默认房屋</p>
+    <p *ngIf="!houseInfo.default" class="title_content">是默认房屋</p>
      <p class="title_content">{{houseInfo.date }}</p>
-     <p class="title_content">{{houseInfo.relation }}</p>
-     <p class="title_content">{{houseInfo.state }}</p>
+
+     <p *ngIf="houseInfo.relation ==0" class="title_content">家庭成员</p>
+     <p *ngIf="houseInfo.relation ==1" class="title_content">朋友</p>
+     <p *ngIf="houseInfo.relation ==2" class="title_content">亲戚</p>
+     <p *ngIf="houseInfo.relation ==3" class="title_content">租户</p>
+     <p *ngIf="houseInfo.relation ==4" class="title_content">公司</p>
+
+     <p class="title_content">{{houseInfo.state | pipeRelation}}</p>
   </div>
   </div>
-  <div class="otherUser_title">
+  <div *ngIf="houseUser.length!=0" class="otherUser_title">
     <div class="user_titlediv">
       <div class="user_title">其他绑定此房屋用户</div>
       <div class="appear" (click)="appearOtherUser()"><img src="assets/imgs/back.png"></div>
     </div>
     <div class="otherUser_content" style="display:none">
       <div class="hrdiv"></div>
-      <div class="otherUser">
-        {{houseUser.name}}<br />
-        {{houseUser.customertype}}<br />
-        {{houseUser.mobile}}<br />
-        {{houseUser.date}}；<br />
+      <div class="otherUser" style="margin:0.1rem 0;" *ngFor="let house of houseUser">
+        <p style="width:20%;float:left;margin-left:5%">{{house.name}}</p>
+        <p style="width:30%;float:left">{{house.customertype}}</p>
+        <p>{{house.mobile}}</p>
       </div>
     </div>
   </div>
+
+  <div *ngIf="houseUser.length==0" class="otherUser_title">
+    <div class="user_titlediv">
+      <div class="user_title">没有其他用户绑定此房屋</div>
+    </div>
+  </div>
+
   
     <div class="otherUser_title">
     <div class="user_titlediv" (click)="delUserRoom()">
