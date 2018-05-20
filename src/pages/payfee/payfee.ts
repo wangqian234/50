@@ -23,7 +23,7 @@ export class PayfeePage {
  public defRoomId:'';
  public roomid;
    
-    //获取费用明细
+  //获取费用明细
   public roomId={
     roomId:'',
   };/*  房屋id */
@@ -123,6 +123,7 @@ export class PayfeePage {
           that.prepayslist=data.json.prepays.list;
           //半年缴费记录
           that.fundloglist=data.json.fundLog.list;   
+          console.log(data.json.expense.list);
        } else {
          alert(data.errmsg)
        }

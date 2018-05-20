@@ -10,6 +10,7 @@ import { RepairaddPage } from '../repairadd/repairadd';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import {Http,Jsonp}from '@angular/http';
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-repairlist',
   templateUrl: 'repairlist.html',
@@ -30,7 +31,7 @@ export class RepairlistPage {
   public RepairaddPage = RepairaddPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
     if(this.navParams.get('cid')){
       this.cid=this.navParams.get('cid');
     }
@@ -46,7 +47,7 @@ export class RepairlistPage {
   }
   ionViewDidEnter(){
     this.list = [];
-    this.page = 0;
+    this.page = 1;
     this.getProductList("")
   }
 
@@ -58,11 +59,18 @@ export class RepairlistPage {
     
   }
     getProductList(infiniteScroll){
+      let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+       });
+      loading.present();
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
+          loading.dismiss();
           if(data.errcode===0 && data.errmsg==="OK"){
           this.list=this.list.concat(data.list); /*数据拼接*/
+          console.log(this.list)
+          //console.log(this.page)
           if(infiniteScroll){
             //告诉ionic 请求数据完成
               this.page++;
@@ -74,20 +82,22 @@ export class RepairlistPage {
           }
         }else if(data.errcode === 40002){
             j--;
-          if(j>0){
+            if(j>0){
             this.config.doDefLogin();
             this.getProductList(infiniteScroll);
           }
         }else{
+          alert(data.errmsg)
         }
+        console.log(data.list)
         })
       }
 
-    getProduct(){
-      this.list = [];
-      this.page=1;
-      this.getProductList("");
-    }
+    // getProduct(){
+    //   this.list = [];
+    //   this.page=1;
+    //   this.getProductList("");
+    // }
 
   //加载更多
   doLoadMore(infiniteScroll){

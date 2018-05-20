@@ -150,18 +150,22 @@ export class OnlinepaymentPage {
 
 
   //获取选中的数量
-  getcheckNum(){
+  getcheckNum(num){
     let sum=0;
     for(let i=0;i<this.list.length;i++){
-      if(this.list[i].checked==true){
-        sum+=1;;
+      if(i==num){
+        this.list[i].checked=!this.list[i].checked;
       }
+      if(this.list[i].checked==true){
+        sum+=1;
+      }
+     alert(sum);
     }
     return sum;
   }
   //当全选中时，全选按钮也被选中
-  changePays(){
-    if(this.getcheckNum()==this.list.length){
+  changePays(num){
+    if(this.getcheckNum(num)==this.list.length){
       this.isChencked=true;
     }else{
       this.isChencked=false;

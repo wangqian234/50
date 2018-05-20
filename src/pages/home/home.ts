@@ -33,7 +33,7 @@ import { LoadingPage } from '../loading/loading';
 
 //在线缴费
 import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
-
+import { LoadingController } from 'ionic-angular';
 //测试页面跳转到shopmallist
 import { TestPage } from '../test/test';
 
@@ -75,6 +75,7 @@ export class HomePage {
   defRoomId = "";
   public roomidlist=[];/**数组  所有房屋 */
   //跳转页面
+  public TestPage =TestPage
   public RepairaddPage = RepairaddPage;
   public BindroomPage = BindroomPage;
   public PayfeePage=PayfeePage;
@@ -89,7 +90,7 @@ export class HomePage {
   public OnlinepaymentPage=OnlinepaymentPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
-    public storage: StorageProvider, private geolocation: Geolocation) {
+    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
       this.geolocation1 = Geolocation;
   }
   ionViewWillEnter(){
@@ -191,9 +192,14 @@ export class HomePage {
   // }
 
   getNews() {
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var j = 3;
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=1&token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data => {
+      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -209,9 +215,14 @@ export class HomePage {
   }
 //获取公示公告
   getPublic() {
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var j = 3;
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=3&token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data => {
+      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
       } else if (data.errcode === 40002) {
@@ -234,9 +245,14 @@ export class HomePage {
   }
   //查询默认房屋
   getiof_def(){
+     let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
@@ -248,7 +264,7 @@ export class HomePage {
             this.config.doDefLogin();
             this.getiof_def();
           }else{
-            //alert(data.errmsg)
+            alert(data.errmsg)
           }
      })
   }
@@ -276,8 +292,7 @@ getpayment(roomid){
    var j = 3;
     var api = this.config.apiUrl + '/api/charge/list?roomId='+roomid;   //获取到绑定的房屋
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      console.log(JSON.stringify( data))
-        // this.paymentList = data.json.totalNum.model;
+         this.paymentList = data.json.totalNum.model;
     });
 
 
