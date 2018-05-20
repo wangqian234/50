@@ -17,13 +17,15 @@ import { BindroomPage } from '../bindroom/bindroom';
 })
 export class OnlinepaymentPage {
   public isChencked=false;
-  public allprice= 0 ;
+  public allprice ;
   //接收数据list
   public list =[];
   public roomidlist=[];
   public iof_defList=[];
   public defRoomId='';
   public roomid;
+  dest = [];
+  checkNum = 0;
   pay={
     roomId:'',
     idG:'',
@@ -50,17 +52,11 @@ export class OnlinepaymentPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
-  //   $("input[name='check']").each(function(){
-  //     console.log($(this))
-  //     $(this).click(function(){
-  //     for(let i=0;i<this.list.length;i++){
-  //       console.log(i+this.list[i].val())
-  //       if(this.list[i].checked==true){
-  //         alert("进来了")
-  //       }
-  //     }
-  //   });
-  // })
+  }
+
+  ionViewDidEnter() {
+    this.appearSome();
+    this.getTotal();
   }
 
   backTo(){
@@ -121,15 +117,52 @@ export class OnlinepaymentPage {
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             that.list= data.list;
-            for(var i=0;i<that.list.length;i++){
-              that.list[i].checked = false;
+
+            var map = {};
+            that.dest = [];
+            for(var i = 0; i < that.list.length; i++){
+                var ai = that.list[i];
+                if(!map[ai.date]){
+                    that.dest.push({
+                        date: ai.date,
+                        data: [ai]
+                    });
+                    map[ai.date] = ai;
+                }else{
+                    for(var j = 0; j < that.dest.length; j++){
+                        var dj = that.dest[j];
+                        if(dj.date == ai.date){
+                            dj.data.push(ai);
+                            break;
+                        }
+                    }
+                }
             }
-            console.log(this.list) 
+            
+            for(var j = 0; j < that.dest.length; j++){
+              var total = 0;
+              for(var k = 0; k < that.dest[j].data.length; k++){
+                total = total + that.dest[j].data[k].price;
+              }
+              that.dest[j].totalNum = total;
+            }
+            console.log(that.dest)
           }else{
             alert(data.errmsg);
           }
      })
-  } 
+  }
+
+  appearSome(){
+    $(".user_titlediv").click(function(){
+      console.log($(this).next('div'))
+      if($(this).next('div').css("display") == "none"){
+        $(this).next('div').css("display","block");
+      } else {
+        $(this).next('div').css("display","none");
+      }
+    })
+  }
 
   //结算账单
   gopay(){
@@ -148,48 +181,48 @@ export class OnlinepaymentPage {
      })
   }
 
+  getTotal(){
+    var that = this;
+    $("input:checkbox").change(function() {
+        if ($(this).is(':checked')) {
+          that.checkNum++;
+        } else {
+          that.checkNum--;
+        }
 
-  //获取选中的数量
-  getcheckNum(){
-    let sum=0;
-    for(let i=0;i<this.list.length;i++){
-      if(this.list[i].checked==true){
-        sum+=1;;
-      }
-    }
-    return sum;
+        if(that.checkNum == that.dest.length){
+          that.isChencked=true;
+        }else{
+          that.isChencked=false;
+        }
+        that.sumPrice();
+    });
   }
-  //当全选中时，全选按钮也被选中
-  changePays(){
-    if(this.getcheckNum()==this.list.length){
-      this.isChencked=true;
-    }else{
-      this.isChencked=false;
-    }
-    this.sumPrice();
-  }
+
   //通过全选按钮进行全选、全消
   checkAll(){
     if(this.isChencked){
-      for(let i=0; i<this.list.length;i++){
-        this.list[i].checked=false;
+      for(let i=0; i<this.dest.length;i++){
+        this.dest[i].checked=false;
       }
+      this.isChencked=false;
     }else{
-      for(let i=0;i<this.list.length;i++){
-        this.list[i].checked=true;
+      for(let i=0;i<this.dest.length;i++){
+        this.dest[i].checked=true;
       }
+      this.isChencked=true;
     }
     this.sumPrice();
   }
   //计算选中的总共多少钱
   sumPrice(){
-    var totalprice =0;
-    for(let i=0;i<this.list.length;i++){
-        if(this.list[i].checked==true){
-            totalprice+=this.list[i].price;
-        }
+    var totalprice = 0;
+    for(let i=0;i<this.dest.length;i++){
+      if(this.dest[i].checked==true){
+          totalprice += this.dest[i].totalNum;
+      }
     }
-    this.allprice=totalprice;
+    this.allprice = totalprice.toFixed(2).toString();
   }
 
 }
