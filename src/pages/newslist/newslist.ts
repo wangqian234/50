@@ -82,6 +82,7 @@ export class NewslistPage {
   }
   onSearchKeyUp(event){
     if("Enter"==event.key){
+      this.newsList=[];
       this.page=1;
      this.getNews("");
     }
