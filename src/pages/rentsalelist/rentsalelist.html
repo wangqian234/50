@@ -15,10 +15,9 @@
 
  <div id="group-content">
   <ul class="order-nav clearfix" id="test">
-      <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(1)"><a href="javascript:;">热门出售</a></li>
-      <li class={{tabTest.li01}} data-nav="receive" (click)="paymentEvent(2)"><a href="javascript:;">热门出租</a></li>
-      <li class={{tabTest.li02}} data-nav="payment" (click)="paymentEvent(3)"><a href="javascript:;">热门求购</a></li>
-      <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(4)"><a href="javascript:;">热门求租</a></li>
+      <li class="type" data-nav="all" (click)="orderBy('time')"><a href="javascript:;">时间▲</a></li>
+      <li class="type" data-nav="receive" (click)="orderBy('space')"><a href="javascript:;">面积▲</a></li>
+      <li class="type" data-nav="payment" (click)="orderBy('price')"><a href="javascript:;">售价▲</a></li>
   </ul>
 
 	<ul id="testcontent" class="shangp_lieb_k_er">
@@ -33,7 +32,12 @@
 				</div>
 		</li>
 	</ul>
-	<div class="showMore">没有更多数据了...</div>
 </div>
+
+<div class="nomore">没有更多数据了...</div>
+
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

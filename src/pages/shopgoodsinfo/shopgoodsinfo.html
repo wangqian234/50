@@ -74,18 +74,20 @@
 	</h1>
 </div>
 <!--图文-->
-<div class="tuwen" id="tuwen">
-	{{goodMlist.detail}}
-</div>
+<div class="tuwen" id="tuwen"></div>
 
 <!--评价-->
 
 <!--推荐商品-->
-	<div class="xiangq_dp_k">
-!!!！！！为您推荐！！！!!!
+<div class="rem_shangp_bt_b">
+	<div class="waik">
+		<em></em>
+		<div class="mingz"><p class="px26">为您推荐</p></div>
+		<em></em>
 	</div>
+</div>
 
-<div id="yemnr">
+<div id="yemnr" style="margin-bottom:1rem;">
 <ul class="shangp_lieb_k">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">

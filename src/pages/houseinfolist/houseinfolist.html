@@ -15,23 +15,21 @@
 
 <!--内容-->
 <div class="shouhdz_hk">
-	<div class="shouh_zk">
-		<div class="shouh_dange_beijin" (click)="getHouseInfo()">
+	<div class="shouh_zk" *ngFor="let list of houseList">
+		<div class="shouh_dange_beijin" (click)="getHouseInfo(list.id)" >
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p><em>房屋ID：&nbsp;{{houseList.Id}}</em></p>
-					<p><em>是否默认：{{houseList.Default}}</em></p>
-					<p><em>状态：&nbsp;&nbsp;{{houseList.State}}</em></p>
-					<p><em>项目名称：{{houseList.Project_Name}}</em></p>
-					<p><em>楼栋名称：{{houseList.Edifice_Name}}</em></p>
-					<p><em>房间Code：{{houseList.Code}}</em></p>
+					<p><em>项目名称：{{list.projectname}}</em></p>
+					<p><em>楼栋名称：{{list.edificename}}</em></p>
+					<p><em>房间Code：{{list.code}}</em></p>
+					<p><em>状态：&nbsp;&nbsp;{{list.state}}</em></p>
 				</div>
 			</div>
-			<div class="boanjk">
-        <!--<div *ngIf="item.default" class="def">默认房屋</div>
-        <div *ngIf="!item.default" class="def"><input type="radio" (change)="clickToDef(item.id)"/>设为默认</div>-->
-        <a style="display:inline;" (click)="deleteAddress()">删除</a>
-      </div>
+			<!--<div class="boanjk">
+        		<div *ngIf="item.default" class="def">默认房屋</div>
+        			<div *ngIf="!item.default" class="def"><input type="radio" (change)="setDefaultHouse(item.id)"/>设为默认</div>
+        		<a style="display:inline;" (click)="deleteAddress()">删除</a>
+      		</div>-->
 		</div>
 	</div>
 </div> 

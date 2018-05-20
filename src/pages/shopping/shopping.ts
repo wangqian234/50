@@ -54,7 +54,8 @@ export class ShoppingPage {
   public l=[];
   public SalePage = SalePage;
 
-
+  public wid;
+  public len=0;
   public lunboList=[];
   public tuangouList=[];
   public tubList=[];
@@ -75,7 +76,7 @@ export class ShoppingPage {
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    this.getLunbo();
+    // this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -86,9 +87,12 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
+    // alert(JSON.stringify(that.lunboList));
+
      // console.log(this.lunboList);
      that.tuangouList=data.json['data_Modules'].list; 
-     // console.log(this.tuangouList[1]);
+        that.len=that.tuangouList.length;
+       // console.log(this.tuangouList[1]);
      that.tubList=data.json['data_Sort'].list;
      console.log(that.tubList);
      that.tuijList=data.json['data_Recommend'].list;

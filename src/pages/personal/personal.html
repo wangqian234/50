@@ -3,13 +3,13 @@
 
 <ion-content style="background-color:#f5f5f5">
 
-  <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.85rem;">
+  <div class="toub_beij toub_beij_zy" style="background-color:gainsboro;height:0.85rem;">
 	<div class="zhongj_k">
     <div class="logo_k logo_k_fanh" (click)="backTo()">
         <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a>
     </div>
 		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="输入城市名查询">
+            <input id="sos_tanc" type="search" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="输入城市名查询">
             <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl">
@@ -22,30 +22,30 @@
 
 <div id="showLetter" class="showLetter"><span>A</span></div>
 <!--城市索引查询-->
-<div class="letter" style="margin-top:10%;z-index:100">
-    <ul>
-      <li><a href="javascript:;">A</a></li>
-      <li><a href="javascript:;">B</a></li>
-      <li><a href="javascript:;">C</a></li>
-      <li><a href="javascript:;">D</a></li>
-      <li><a href="javascript:;">E</a></li>
-      <li><a href="javascript:;">F</a></li>
-      <li><a href="javascript:;">G</a></li>
-      <li><a href="javascript:;">H</a></li>
-      <li><a href="javascript:;">J</a></li>
-      <li><a href="javascript:;">K</a></li>
-      <li><a href="javascript:;">L</a></li>
-      <li><a href="javascript:;">M</a></li>
-      <li><a href="javascript:;">N</a></li>
-      <li><a href="javascript:;">P</a></li>
-      <li><a href="javascript:;">Q</a></li>
-      <li><a href="javascript:;">R</a></li>
-      <li><a href="javascript:;">S</a></li>
-      <li><a href="javascript:;">T</a></li>
-      <li><a href="javascript:;">W</a></li>
-      <li><a href="javascript:;">X</a></li>
-      <li><a href="javascript:;">Y</a></li>
-      <li><a href="javascript:;">Z</a></li>
+<div class="letter" style="margin-top:10%;z-index:100;width:0.3rem">
+    <ul style="width:0.3rem">
+      <li style="width:0.3rem"><a href="javascript:;">A</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">B</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">C</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">D</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">E</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">F</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">G</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">H</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">J</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">K</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">L</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">M</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">N</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">P</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">Q</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">R</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">S</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">T</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">W</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">X</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">Y</a></li>
+      <li style="width:0.3rem"><a href="javascript:;">Z</a></li>
     </ul>
   </div>
 <!--城市列表-->
