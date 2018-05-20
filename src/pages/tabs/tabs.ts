@@ -19,7 +19,6 @@ import { CartPage } from '../cart/cart';
 import $ from 'jquery';
 import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd'
 import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund';
-
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -27,7 +26,7 @@ export class TabsPage {
   @ViewChild('mainTabs') tabRef: Tabs;
   @ViewChild('mainTabs2') tabRef2: Tabs;
 
- //tab1Root = RentsaleaddPage
+ 
   tab1Root = HomePage;
   tab2Root = RentsalePage;
   tab3Root = ShoppingPage;

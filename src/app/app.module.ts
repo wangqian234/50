@@ -149,7 +149,11 @@ import { LoadingPage }from '../pages/loading/loading';
 import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
-
+//拍照
+import { Device } from '@ionic-native/device';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer} from '@ionic-native/file-transfer';
 //房屋租售列表
 import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
 
@@ -322,7 +326,11 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     HttpServicesProvider,
     StorageProvider,
     ToolsProvider,
-    CityDataProvider
+    CityDataProvider,
+    Device,
+    Camera,
+    File,
+    FileTransfer,
   ]
 })
 export class AppModule {}
