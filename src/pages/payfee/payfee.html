@@ -43,7 +43,7 @@
 
   <div class="otherUser_title">
     <div class="user_titlediv" (click)="appearPayFee()">
-      <div class="user_title">选择要缴纳的费用</div>
+      <div class="user_title">缴费明细</div>
       <div class="appear"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
     </div>
     <div id="payFee" class="otherUser_content" style="display:none">
@@ -65,12 +65,12 @@
     </div>
     <div id="preDetail" class="otherUser_content" style="display:none">
       <ion-list>
-        <ion-item *ngFor="let list of prepayslist">
+        <ion-item (click)="goOnlinePayfee()" *ngFor="let list of prepayslist">
           <div class="fee_time">{{list.prepay_cas}}</div>
           <div class="fee_content">{{list.prepay_addate}}</div>
           <div class="fee_num">{{list.statmode}}</div>
         </ion-item>
-      </ion-list>
+      </ion-list>>
     </div>
   </div>
 

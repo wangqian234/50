@@ -39,6 +39,8 @@ import { TestPage } from '../test/test';
 
 import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
 
+import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
+
 
 
 declare var BMap;
@@ -88,6 +90,7 @@ export class HomePage {
   public LoadingPage = LoadingPage;
 
   public OnlinepaymentPage=OnlinepaymentPage;
+  public RentsaleaddPage = RentsaleaddPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
     public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {

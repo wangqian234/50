@@ -4,41 +4,47 @@
   </ion-navbar>
 </ion-header>-->
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
   <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
     <div class="zhongj_k zhongj_k_z">
       <div class="jiu_feo">
         <div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
         <div class="zhongjain_daoh">
           <ul>
-            <li><a class="px24 zyyge">我的团购</a></li>  
+            <li><a class="px24 zyyge">我的团购订单</a></li>  
           </ul>
         </div>
       </div> 
     </div>
 </div>
 
-      <!--团购订单详情--> 
-  <div id="order-content">
-        <div class="order-list">
-            <div class="order-item">
-            <li  >
-              <a href="XiangQ_Y.html" >
-                <div class="lieb_img"><img src={{list.img}}></div>
-                <div class="lieb_txt">
-                <p class="biao">{{list.title}}</p>
-                        <!--<p class="biao">{{item.buy_state}}</p>-->
-                        <!--<p class="biao">{{item.goods_list[0].goods_title}}</p>
-                        <p class="biao">{{item.goods_list[0].refundstate}}</p>-->
-                        <p class="bend">团购价格-<i>{{list.price}}</i></p>
-                        <p class="bend">商品规格名称-<i>{{list.num}}</i></p>
-                        <p class="bend">几人团-<i>{{list.num}}</i></p>
-                </div>
-              </a>
-		       </li>          
-            </div>
-        </div>
+<div class="shez_toux">
+	<div style="background-color:white;margin-top:10px" class="dd_xiangq_sp_k">
+		<dl>
+			<dd>
+				<a href="#">
+					<h1><img src="{{list.img}}"></h1>
+					<div class="wenz">
+						<p>{{list.title}}</p>
+						<span>{{list.size_name}}</span>
+					</div>
+				</a>
+				<div class="ddxq_jiaq">
+					<p>¥{{list.price}}</p>
+				</div>
+			</dd>
+		</dl>
+	</div>
 
-    </div>
+  <div style="background-color:white;margin-top:10px" class="zuizong_jies">
+		<p><em>几人团</em><span>{{list.num}}</span></p>
+		<p><em>已下单人数</em><span>{{list.tradenum}}</span></p>
+		<p><em>团购价格</em><span>{{list.price}}</span></p> 
+	</div>
+
+  <div *ngIf="list.state==0 || list.state==1" class="xiangq_liang_ann">
+		<a href="#" class="sc">申请退款</a>
+	</div>
+</div>
 
 </ion-content>

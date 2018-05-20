@@ -170,6 +170,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
 import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
 import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
+import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 
 @NgModule({
   declarations: [
@@ -207,6 +208,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     ShopbuyPage,
     CutPipe,
     CutSPipe,
+    PipeGroupPipe,
     PaymentPage,
     ChangeaddrPage,
     ShopinfoPage,

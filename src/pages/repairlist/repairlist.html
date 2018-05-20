@@ -29,7 +29,7 @@
           <option value="3">其他</option>
           </select>
         </form>
-        <input type="text" [(ngModel)]="keywords" (keyup)="onSearchKeyUp($event)" placeholder="请输入关键词" class="searchTextInit">
+        <input type="search" [(ngModel)]="keywords" (keyup)="onSearchKeyUp($event)" placeholder="请输入关键词" class="searchTextInit">
         <input type="button" value class="searchBtn">
     </div>
   </div>
