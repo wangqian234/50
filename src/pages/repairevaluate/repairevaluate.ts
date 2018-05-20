@@ -16,9 +16,9 @@ export class RepairevaluatePage {
   public listId='';
    //评价post
   public evaluate={
-  servicescore:'',
-  timelyscore:'',
-  qualityscore:'',
+  servicescore:0,
+  timelyscore:0,
+  qualityscore:0,
   listId:'',
   txtScoreMemo:'',
   }
@@ -33,7 +33,6 @@ export class RepairevaluatePage {
     }
     //添加评价
     addevaluate(){
-      this.getNum();
       this.evaluate.listId=this.listId;
       console.log(this.evaluate)
       var api = this.config.apiUrl+'/api/list/edit_Score';
@@ -51,7 +50,7 @@ export class RepairevaluatePage {
     // }
 
   ionViewDidLoad() {
-    //this.getNum();
+    this.getNum();
   }
   backToRepair(){
     this.navCtrl.pop();
@@ -75,7 +74,7 @@ export class RepairevaluatePage {
               stars.eq(i).removeClass('no');
             }
           }
-        //  _this.evaluate.servicescore = score;
+          _this.evaluate.servicescore = score;
         });
       });
 
@@ -91,7 +90,7 @@ export class RepairevaluatePage {
               stars.eq(j).removeClass('no');
             }
           }
-        //  _this.evaluate.timelyscore = score;
+          _this.evaluate.timelyscore = score;
         });
       });
 
@@ -107,7 +106,7 @@ export class RepairevaluatePage {
               stars.eq(k).removeClass('no');
             }
           }
-         // _this.evaluate.qualityscore = score;
+          _this.evaluate.qualityscore = score;
         });
       });
   }

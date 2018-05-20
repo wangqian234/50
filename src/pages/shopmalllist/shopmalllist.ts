@@ -82,4 +82,8 @@ export class ShopmalllistPage {
 		}
   }
 
+  backTo(){
+    this.navCtrl.pop();
+  }
+
 }

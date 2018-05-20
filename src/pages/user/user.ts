@@ -28,6 +28,8 @@ import { PayfeePage } from '../payfee/payfee';
 import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupbuy';
 //团购-界面
 import { TradegoodsGroupbuyingPage } from '../tradegoods-groupbuying/tradegoods-groupbuying';
+//房屋租赁发布信息
+import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
@@ -52,7 +54,7 @@ export class UserPage {
   public TradegoodsGroupbuyPage=TradegoodsGroupbuyPage;
   public TradegoodsGroupbuyingPage=TradegoodsGroupbuyingPage;
 
-
+  public RentsalemyPage = RentsalemyPage;
   public HouseinfolistPage = HouseinfolistPage
 
    //自定义的变量

@@ -1,6 +1,6 @@
 page-personal{
     .shous_k{
-    background: #ffb661;
+    background: white;
     border-radius: 0.25rem;
     width: 70%;
 }
@@ -35,4 +35,7 @@ page-personal{
     background-color: white;
     padding: 0 20px;
 }
+        .hidden{
+            display: none;
+        }
 }

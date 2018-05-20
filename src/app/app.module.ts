@@ -146,7 +146,7 @@ import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
 //敬请期待页面
 import { LoadingPage }from '../pages/loading/loading';
-
+import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
 
@@ -166,6 +166,7 @@ import { CityDataProvider } from '../providers/city-data/city-data';
 import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
 import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
+import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 
 @NgModule({
   declarations: [
@@ -203,6 +204,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     ShopbuyPage,
     CutPipe,
     CutSPipe,
+    PipeGroupPipe,
     PaymentPage,
     ChangeaddrPage,
     ShopinfoPage,
@@ -232,6 +234,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -306,6 +309,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

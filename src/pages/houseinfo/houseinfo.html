@@ -15,19 +15,19 @@
 </div>
 <div class="content">
   <div class="imgdiv"><img src="assets/imgs/house.jpg" /></div>
-  <div class="housename">这是房屋的名称</div>
+  <div class="housename">{{projectinfo.projectname}}-{{projectinfo.edificename}}|{{projectinfo.roomcode}}</div>
   <div class="content_info">
   <div class="content_info_title">
-    <p class="title">业主：</p>        
+    <p class="title">是否默认：</p>        
     <p class="title">绑定日期:</p>     
     <p class="title">与业主关系：</p>  
     <p class="title">绑定状态：</p>    
   </div>
   <div class="content_info_content">
-    <p class="title_content">{{houseInfo.name}}</p>
-     <p class="title_content">{{houseInfo.date}}</p>
-     <p class="title_content">{{houseInfo.relation}}</p>
-     <p class="title_content">{{houseInfo.state}}</p>
+    <p class="title_content">{{houseInfo.default}}</p>
+     <p class="title_content">{{houseInfo.date }}</p>
+     <p class="title_content">{{houseInfo.relation }}</p>
+     <p class="title_content">{{houseInfo.state }}</p>
   </div>
   </div>
   <div class="otherUser_title">
@@ -38,14 +38,14 @@
     <div class="otherUser_content" style="display:none">
       <div class="hrdiv"></div>
       <div class="otherUser">
-        这是一段文字；<br />
-        这是一段文字；<br />
-        这是一段文字；<br />
-        这是一段文字；<br />
+        {{houseUser.name}}<br />
+        {{houseUser.customertype}}<br />
+        {{houseUser.mobile}}<br />
+        {{houseUser.date}}；<br />
       </div>
     </div>
   </div>
-
+  
     <div class="otherUser_title">
     <div class="user_titlediv" (click)="delUserRoom()">
       <div class="user_title">解除与此房屋的绑定</div>

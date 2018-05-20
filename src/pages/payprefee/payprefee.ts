@@ -42,12 +42,16 @@ export class PayprefeePage {
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+    }
   }
 
     
     ionViewWillLoad(){
-    this.getRem();
-    this.getiof_def();   
+    this.getRem();   
   }
 
   ionViewDidLoad() {
@@ -95,25 +99,25 @@ export class PayprefeePage {
       $('#selectOther').css('display','none');
     }
   }
-  //查询默认房屋
-  getiof_def(){
-    var j=3
-    var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
-            this.iof_defList=data.model;
-            this.defRoomId=data.model.House_Room_Id;
-            console.log(this.iof_defList)
-            this.getroomId();
-          }else if (data.errcode===4002){
-            j--;
-            this.config.doDefLogin();
-            this.getiof_def();
-          }else{
-            alert(data.errmsg)
-          }
-     })
-  }
+  // //查询默认房屋
+  // getiof_def(){
+  //   var j=3
+  //   var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
+  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //         if(data.errcode===0&&data.errmsg==='OK'){
+  //           this.iof_defList=data.model;
+  //           this.defRoomId=data.model.House_Room_Id;
+  //           console.log(this.iof_defList)
+  //           this.getroomId();
+  //         }else if (data.errcode===4002){
+  //           j--;
+  //           this.config.doDefLogin();
+  //           this.getiof_def();
+  //         }else{
+  //           alert(data.errmsg)
+  //         }
+  //    })
+  // }
    //查询用户绑定的所有房屋
   getroomId(){   
     var that=this;
@@ -121,11 +125,6 @@ export class PayprefeePage {
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            for(var i=0;i<data.list.length;i++){
-              if(data.list[i].id == this.defRoomId){
-                data.list.splice(i,1)
-              }
-            }
             that.roomidlist=data.list; 
             console.log(that.roomidlist) 
           }else if (data.errcode===4002){
@@ -151,8 +150,6 @@ export class PayprefeePage {
  gopay(){
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
-   }else if(this.roomid==="defId"){
-     this.payrefeeList.roomId=this.defRoomId;
    }else{
      this.payrefeeList.roomId=this.roomid;
    }
