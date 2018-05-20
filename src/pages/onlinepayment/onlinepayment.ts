@@ -16,6 +16,7 @@ import { BindroomPage } from '../bindroom/bindroom';
   templateUrl: 'onlinepayment.html',
 })
 export class OnlinepaymentPage {
+  public saveRoomId;
   public isChencked=false;
   public allprice ;
   //接收数据list
@@ -37,11 +38,11 @@ export class OnlinepaymentPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    if(this.storage.get('roomId')){
-      this.defRoomId=this.storage.get('roomId');
+      if(this.navParams.get('item')){
+      this.defRoomId=this.navParams.get('item');
       this.roomid=this.defRoomId;
       this.getroomId();
-      this.getPayList(this.defRoomId);
+      this.getPayList();
     }
   }
 
@@ -67,11 +68,11 @@ export class OnlinepaymentPage {
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
-  changeRoom(roomid){
-    if(roomid==="add"){
+  changeRoom(){
+    if(this.roomid==="add"){
       this.navCtrl.push(BindroomPage);
     }else{
-      this.getPayList(roomid);
+      this.getPayList();
     }
   }
   // //查询默认房屋
@@ -111,9 +112,9 @@ export class OnlinepaymentPage {
      })
   }
   //获取房屋费用收取表
-  getPayList(roomid){
+  getPayList(){
     var that=this;
-    var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+roomid;
+    var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+this.roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             that.list= data.list;
@@ -168,13 +169,22 @@ export class OnlinepaymentPage {
   gopay(){
     this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
-    this.pay.idG="02645301cb,02645302cb,02645305cb,02645303cb"
-    var that=this;
+    var payMouth = []
+    for(let i=0;i<this.dest.length;i++){
+      if(this.dest[i].checked==true){
+          for(let j=0;j<this.dest[i].data.length;j++){
+            var aa = "0" + this.dest[i].data[j].id + "cd"
+            payMouth.push(aa);
+          }
+      }
+    }
+    this.pay.idG=payMouth.join(",")
     console.log(this.pay)
     var api = this.config.apiUrl+'/api/charge/edit_Save?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0 ){
             console.log(data.errmsg+"支付成功")
+            this.getPayList()
           }else{
             alert(data.errmsg+"支付失败")
           }
