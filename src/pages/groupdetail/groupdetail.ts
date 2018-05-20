@@ -160,6 +160,20 @@ ifEnough(){
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
+         //跳转前的判断
+      var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
+            this.http.get(api).map(res => res.json()).subscribe(data =>{
+              //  if(data.errcode === 0 && data.errmsg === 'OK'){
+              //    alert("可以购买!");
+        this.navCtrl.push(ShopbuyPage,{
+          wid: this.buylist.gId,
+          sid: this.buylist.gsId,
+           gnum:this.buylist.goodsNum,
+
+  });
+            })
+
+        
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -171,17 +185,7 @@ ifEnough(){
         alert(data.errmsg);
       }
      });
-     //跳转前的判断
-      var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
-            this.http.get(api).map(res => res.json()).subscribe(data =>{
-              //  if(data.errcode === 0 && data.errmsg === 'OK'){
-              //    alert("可以购买!");
-       this.navCtrl.push(ShopbuyPage);
-      // }
-      // else{
-      //   alert(data.errmsg);
-      // }
-            })
+    
      
   }
    
@@ -198,6 +202,18 @@ ifEnough(){
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
+         //跳转前的判断
+      var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
+            this.http.get(api).map(res => res.json()).subscribe(data =>{
+              //  if(data.errcode === 0 && data.errmsg === 'OK'){
+              //    alert("可以购买!");
+        this.navCtrl.push(ShopbuyPage,{
+          wid: this.buylist.gId,
+          sid: this.buylist.gsId,
+          gnum:this.buylist.goodsNum,
+
+  });
+            })
       }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -209,9 +225,7 @@ ifEnough(){
         alert(data.errmsg);
       }
      });
-      var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
-            this.http.get(api).map(res => res.json()).subscribe(data =>{})
-     this.navCtrl.push(ShopbuyPage);
+     
   }
 //推荐商品列表
  recommend(){   

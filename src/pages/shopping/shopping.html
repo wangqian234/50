@@ -19,9 +19,9 @@
 </div>
 
 <!-- 轮播图 -->
-        <ion-slides class="focus" pager  loop="true" autoplay="3000">    
-            <ion-slide *ngFor="let item of l">
-               <img class="img1" src="{{item}}" />
+        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="300" >    
+            <ion-slide *ngFor="let item of tuangouList">
+               <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
            </ion-slide>         
         </ion-slides>
 
@@ -57,9 +57,9 @@
         
 <div id="mallhome-content" style="margin-top:10px">
    <ul class="goods-list" >
-                <li class="goods-item clearfix" *ngFor="let item of shoplist" >
-                    <img src="assets/imgs/surfacepro.jpg" alt="" srcset="">
-                    <div class="information" (tap)="goGoodsInfo(item['id'])">
+                <li class="goods-item clearfix" *ngFor="let item of shoplist" (tap)="goGoodsInfo(item['id'])">
+                    <img [src]="item.img" alt="" srcset="">
+                    <div class="information" >
                         <p class="name">{{item.title}}</p>
                         <p class="tip">{{item.prename}}<span *ngIf="item.recommend==true">推荐</span></p>
                         <p class="sales-count">已售<span>{{item.soldnum}}</span>份</p>
@@ -72,11 +72,11 @@
         <div class="titleshop">
             <img src="assets/imgs/recommend.png">
             <span class="p_shop">&ensp;精品推荐</span>
-            <span class="p_shop2">更多>></span>
+            <span class="p_shop2" [navPush]="ShopsortPage">更多>></span>
         </div>
         <ul style="margin-bottom:50px">
         <li *ngFor= "let item of tuijList">
-            <a href="{{item.url}}">
+            <a [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}">
                <div><img style="width:100%" src="{{item.img}}"></div>
             </a>
         </li>

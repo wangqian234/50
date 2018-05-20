@@ -1,7 +1,7 @@
 //商品订单详情
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import $ from 'jquery';
+import $ from 'jquery';//实现列表缓存
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -27,6 +27,9 @@ import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/trade
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
 //团购订单详情
 import { TradegoodsGroupbuydetailPage } from '../tradegoods-groupbuydetail/tradegoods-groupbuydetail';
+//加载圈
+import { LoadingController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-shoppinglist',
@@ -43,14 +46,14 @@ export class ShoppinglistPage {
   public page=1; //实现列表缓存
   public receivelist=[];
   public flag:boolean = true;
-  public GoodsoderdetailPage = GoodsoderdetailPage;
+  public GoodsoderdetailPage=GoodsoderdetailPage;
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public TradegoodsEvaluatedetailPage=TradegoodsEvaluatedetailPage;
   public TradegoodsReapPage=TradegoodsReapPage;
   public TradegoodsGroupbuydetailPage=TradegoodsGroupbuydetailPage;//团购详情
   public ShopgoodsinfoPage=ShopgoodsinfoPage;//再次购买
   public offent;
-  public addressList={
+    public addressList={
     trade_Id:'',
     commentGroup:'',
     token : '',
@@ -83,25 +86,19 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
         this.SD_id=0;
         
-      }    
-  }
-  
-  ionViewDidLoad() {
-        this.getOrderList('');//实现列表缓存
-        if(this.navParams.get('id') == undefined){
-          $("#backTo").css("visibility","hidden")
-        }
+      } 
   }
 
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
+    // alert(trade_id+"王慧敏"+tradegoods_id);
   }
   //再次购买
   buyagainEvent(goods_id){
@@ -125,14 +122,21 @@ export class ShoppinglistPage {
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
+         let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+loading.present();
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
+          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("取消付款成功！");
-          this.paymentEvent(1);//刷新界面
+          this.paymentEvent(1);////刷新界面
+          // this.cd.detectChanges();//更新页面
+          //this.navCtrl.push(TradegoodsRefundPage);
         } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -142,19 +146,27 @@ export class ShoppinglistPage {
       } else {
           alert("取消付款失败！");
           this.paymentEvent(1);//刷新界面
+          // this.cd.detectChanges();//更新页面
         }
       });
    }
    //商品确认收货
    receiveEvent(trade_id){
+         let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
+          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("收货成功！");
           this.paymentEvent(3);
+          // this.cd.detectChanges(); //更新页面
+          //this.navCtrl.push(TradegoodsRefundPage);
         }else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -164,6 +176,7 @@ export class ShoppinglistPage {
       } else {
           alert("收货失败！");
           this.paymentEvent(3);
+          // this.cd.detectChanges(); //更新页面
         }
       });
    }
@@ -172,10 +185,48 @@ export class ShoppinglistPage {
 
    }
 
+
+// ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+//     this.getRem();
+//     //this.getProductList(infiniteScroll);
+//     var j=3;
+//      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+this.SD_id+'&token='+this.token;
+//      console.log("王慧敏"+api);
+//      this.http.get(api).map(res => res.json()).subscribe(data =>{
+//        if(data.errcode === 0 &&data.errmsg == 'OK'){
+         
+//          //this.goods_list=data.list.goods_list;
+//          this.list=data.list;
+//          console.log(data);
+//      } else if(data.errcode === 40002){
+//               j--;
+//               if(j>0){
+//                 this.config.doDefLogin();
+//                 this.ionViewWillLoad();
+//           }
+//       } else {
+//         alert(data.errmsg);
+//      }
+//      })
+//   }
+
+  ionViewDidLoad() {
+        this.getOrderList('');//实现列表缓存
+        if(this.navParams.get('id') == undefined){
+          $("#backTo").css("visibility","hidden")
+        }
+  }
 /**王慧敏商城 */
      //商城实现列表缓慢加载
    getOrderList(infiniteScroll){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
+    //  this.paymentEvent(this.SD_id);
+    // var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
     var j=3;
+    // alert("王慧敏慧敏19号"+this.SD_id+"商城测试页码"+this.page);
     switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -230,15 +281,21 @@ export class ShoppinglistPage {
     }
     $('.scroll-content').scrollTop('1.8rem');
     var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
+    // console.log("王慧敏来了"+api);
+    //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      loading.dismiss();
+      // alert("王慧敏"+JSON.stringify(this.list));
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
+        // alert("王慧敏数据拼接"+JSON.stringify(this.list)); 
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{
             this.page++;
         }
         if(infiniteScroll){
+          // alert("慧敏页码"+this.page);   
           infiniteScroll.complete();        //告诉ionic 请求数据完成
           if(data.list.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
@@ -256,7 +313,6 @@ export class ShoppinglistPage {
         }
     })
   }
-
     paymentEvent(trade_state){
     $('ion-infinite-scroll').css('display','block');
     switch(trade_state){
@@ -287,11 +343,40 @@ export class ShoppinglistPage {
       break;
     }
     this.getOrderList("");//实现列表缓存
+    // var j=3;
+    //  var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+trade_state+'&token='+this.token;
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //    if(data.errcode === 0 &&data.errmsg == 'OK'){
+    //      //this.goods_list=data.list.goods_list;
+    //      this.list=data.list;
+    //      //alert(JSON.stringify(data));
+    //       //alert(JSON.stringify(data.list));
+    //      //this.good_list=data.list[0].goods_list;
+    //      //alert(JSON.stringify(data.list[0].goods_list));
+    //      // alert(JSON.parse(data));
+    //      console.log(data);
+    //  }  else if(data.errcode === 40002){
+    //           j--;
+    //           if(j>0){
+    //             this.config.doDefLogin();
+    //             this.paymentEvent(trade_state);
+    //       }
+    //   }else {
+    //     alert(data.errmsg);
+    //  }
+    //  })
   }
 
 /**王慧敏团购 */
    //团购实现列表缓慢加载
    getGroupList(infiniteScroll){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
+    //  this.paymentEvent(this.SD_id);
+    // var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
+    // alert("王慧敏19号"+this.SD_id+"团购测试页码"+this.page);
     switch(this.SD_id){
       case 0:
       this.tab_test={
@@ -329,16 +414,20 @@ export class ShoppinglistPage {
      $('.scroll-content').scrollTop('1.8rem');
      var j=3;
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
-     console.log("王慧敏"+api);  
+    //  console.log("王慧敏"+api);  
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
+      //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
-        this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/   
+        this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/
+        // alert("王慧敏"+JSON.stringify(this.groupBuyList));   
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{
             this.page++;
         }
-        if(infiniteScroll){   
+        if(infiniteScroll){
+          // alert("慧敏页码"+this.page);   
           infiniteScroll.complete();        //告诉ionic 请求数据完成
           if(data.list.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
@@ -387,6 +476,7 @@ export class ShoppinglistPage {
   }
      //团购查看详情
    groupbuyEvent(groupbuyid){
+    //  alert("团购详情"+groupbuyid);
      this.navCtrl.push(TradegoodsGroupbuydetailPage,{gbId:groupbuyid});
 
    }

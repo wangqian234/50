@@ -42,9 +42,9 @@
 <!--数量-->
 <div class="goum_sl">
 	<div class="counter_box">
-		<!--<i class="jian" (tap)="decCount()">-</i>-->
-		<i class="wdh" >已选数量：</i><input type="text" readonly="readonly" [(ngModel)]="item.buynum" name="num" id="num">
-		<!--<i class="jia" (tap)="incCount()">+</i>-->
+		
+		<i class="wdh" >已选数量：{{item.buynum}}</i>
+		
 	</div>
 </div>
 						</div>
@@ -63,8 +63,8 @@
 		<div class="jies_qian">
 	
 		<p class="px26">运费: ￥{{carriagelist.postage}}元</p> 
-		<p class="px26"><input type="checkbox" 
-		 name="jf" value="Car" checked="checked" /> {{dtlist.useintegraltitle}}</p>
+		<p class="px26"><ion-checkbox color="danger" [(ngModel)]="checked" (ionChange)="discount()" >
+			 </ion-checkbox>{{dtlist.useintegraltitle}}</p>
 		</div>
 <!--第四部分-->
      
@@ -74,7 +74,7 @@
 
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
-		<div class="zhong"><p>总计：<em>￥{{dtlist.totalprice}}</em></p></div>
+		<div class="zhong"><p>总计：<em>￥{{totalPrice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
 				<a (click)=addBuy()>提交订单</a>  
