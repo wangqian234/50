@@ -501,8 +501,8 @@ display: inline-block;
 .gouwuc_ .zuo .mis h1 img{width: 100%;}
 .gouwuc_ .zuo .mis p{color: #5d5f6a;font-size: 0.22rem;}
 .gouwuc_ .you{width: 50%;float: left;}
-.gouwuc_ .you .goum{position: relative;height: 0.89rem;}
-.gouwuc_ .you .goum a{height:0.89rem;line-height:0.89rem }
+.gouwuc_ .you .goum{position: relative;height: 0.8rem;}
+.gouwuc_ .you .goum a{height:0.8rem;line-height:0.8rem }
 
 .jiss_df{
 	margin: 0.5rem 0.2rem;
@@ -620,11 +620,11 @@ display: inline-block;
 	background-repeat: no-repeat;background-size: 50%;display: block;}
 .gouwuc_yem .zuo i p{margin-top: 0.55rem;color: #929292;}
 
-.gouwuc_yem .zhong{width: 60%;height:0.89rem;float: left; text-align: right;}
-.gouwuc_yem .zhong p{line-height: 0.86rem; margin-right: 0.2rem;color: #929292;font-size:0.24rem;}
+.gouwuc_yem .zhong{width: 60%;height:0.8rem;float: left; text-align: right;}
+.gouwuc_yem .zhong p{line-height: 0.8rem; margin-right: 0.2rem;color: #929292;font-size:0.24rem;}
 .gouwuc_yem .zhong p em{font-size: 0.3rem; color: #e10601;}
 .gouwuc_yem .you{width:30%;}
-.gouwuc_yem .you .goum a{width: 100%;}
+.gouwuc_yem .you .goum a{width: 100%;font-size: 0.3rem;}
 
 
 
@@ -715,7 +715,7 @@ a.denglxil{margin-top: 0.05rem;}
 .shouh_dange_beijin .boanjk a{display: block;line-height: 0.30rem;font-size: 0.22rem; color:#535353; }
 
 .Xinz{height: 100%; background:#e10601; text-align: center;}
-.Xinz a{line-height:0.89rem;font-size: 0.26rem; color: #fff;display: block;}
+.Xinz a{line-height:0.8rem;font-size: 0.3rem; color: #fff;display: block;}
 .denglu_k_k{margin: 0.2rem 0rem;}
 
 div.dk{text-align: center;background: #e10601; margin: 0.5rem 0 0 0;}
@@ -880,7 +880,7 @@ div.dk a{color: #fff; line-height: 0.8rem; font-size: 0.26rem;}
 .peis_xz .kuaid span i{ width: 0.13rem;  height: 0.4rem; background: url(../images/web/xiaoxiao.png) center;
 	background-size: 100%;background-repeat: no-repeat;display: inline-block; margin: 0.1rem 0 0 0.1rem;float: right;}
 
-.dib_daoh_b_quer a{display: block; background: #e10601; text-align: center;line-height: 0.89rem; font-size: 0.26rem;color: #fff;}
+.dib_daoh_b_quer a{display: block; background: #e10601; text-align: center;line-height: 0.8rem; font-size: 0.32rem;color: #fff;}
 
 .peis_k{margin:0.4rem 0.2rem;}
 
@@ -1545,7 +1545,7 @@ background: #fafafa;}
 }
 .qqq_jia .you p a.color_1{
 	color: #fff;
-	background: #d59b00;
+	background: #ff971c;
 }
 .qqq_jia .you p a.color_2{
 	color: #fff;

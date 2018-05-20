@@ -75,7 +75,6 @@ export class EditorinfoPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         if(data.model.birthday){
-
         data.model.birthday = data.model.birthday.substring(0,10);
         }
       this.personInfo = data.model

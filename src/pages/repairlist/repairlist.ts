@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
+import { LoadingController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //工单详情页
@@ -30,7 +31,7 @@ export class RepairlistPage {
   public RepairaddPage = RepairaddPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
     if(this.navParams.get('cid')){
       this.cid=this.navParams.get('cid');
     }
@@ -58,9 +59,14 @@ export class RepairlistPage {
     
   }
     getProductList(infiniteScroll){
+      let loading = this.loadingCtrl.create({
+	      showBackdrop: true,
+      });
+      loading.present();
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
+          loading.dismiss();
           if(data.errcode===0 && data.errmsg==="OK"){
           this.list=this.list.concat(data.list); /*数据拼接*/
           if(infiniteScroll){

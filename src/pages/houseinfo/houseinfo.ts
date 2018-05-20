@@ -14,19 +14,24 @@ export class HouseinfoPage {
 
   token = '';
   private houseInfo = [];
-  houseId = '';
+  public houseId;
   houseUser = [];
   projectinfo = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
   public storage:StorageProvider) {
+
   }
 
   ionViewWillLoad() {
     this.getRem();
-    if(this.navParams.get('item')){
-      this.houseId=this.navParams.get('item');
+    if(this.navParams.get('id')){
+      this.houseId=this.navParams.get('id');
+      console.log(this.houseId)
     }
+    this.getProjectInfo();
+    this. getUserRoom();
+    this.getRoomUser();
   }
 
   ionViewDidLoad() {
@@ -38,11 +43,12 @@ export class HouseinfoPage {
     var api = this.config.apiUrl + '/api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        for(var i=0; i< data.model.length(); i++){
-          if(data.model.mobile != this.storage.get('userName')) {
-            this.houseInfo.push(data.model);
-          }
-        }
+        // for(var i=0; i< data.model.length(); i++){
+        //   if(data.model.mobile != this.storage.get('userName')) {
+        //     this.houseInfo.push(data.model);
+        //   }
+        // }
+        this.houseInfo=data.model;
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -55,12 +61,27 @@ export class HouseinfoPage {
     });
   }
 
+  //获取用户楼栋信息
+  getProjectInfo(){
+    var api = this.config.apiUrl + '/api/VUserRoom/info?roomId=' + this.houseId;
+    console.log(api)
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.projectinfo=data.model;
+      } else {
+        console.log(data.errmsg);
+          }
+      })
+  }
+
   //根据房屋获取绑定的用户列表
   getRoomUser(){
     var j = 3;
-    var api = this.config.apiUrl + '/api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    var api = this.config.apiUrl +'/api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
+    console.log(api);
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log(data);
         this.houseUser = data.list;
       } else if(data.errcode === 40002){
           j--;
@@ -69,18 +90,17 @@ export class HouseinfoPage {
             this.getUserRoom();
           }
       } else {
-        alert("data.errmsg")
+        alert(data.errmsg)
       }
     });
   }
 
   //解除用户自己的绑定
-  delUserRoom(houseId){
+  delUserRoom(){
     var data = {
-      'token':token,
+      'token':this.storage.get('token'),
       'roomId':this.houseId,
     };
-    var token = this.storage.get('token');
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
@@ -91,7 +111,7 @@ export class HouseinfoPage {
           j--;
           if(j>0){
             this.config.doDefLogin();
-            this.delUserRoom(houseId);
+            this.delUserRoom();
           }
       } else {
         alert("data.errmsg")
@@ -119,16 +139,15 @@ export class HouseinfoPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
 
-    //设置默认房屋
+  //设置默认房屋
   setDefaultHouse(){
     var data ={
-      'token': token,
+      'token': this.storage.get('token'),
       'roomId':this.houseId,
     };
-    var token = this.storage.get('token');
     var j = 3;
-    var api = this.config.apiUrl + '/api/crm/srq/userroom/edit_Default?';
-    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+    var api = this.config.apiUrl + '/api/userroom/edit_Default?';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("成功设置默认房屋");
       } else if(data.errcode === 40002){
@@ -145,11 +164,10 @@ export class HouseinfoPage {
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
   delOtherUser(){
     var data = {
-      'token': token,
+      'token': this.storage.get('token'),
       'roomId':this.houseId,
     };
     var j = 3;
-    var token = this.storage.get('token');
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -164,19 +182,6 @@ export class HouseinfoPage {
         alert(data.errmsg)
       }
     });
-  }
-
-  //获取用户楼栋信息
-  getProjectInfo(){
-    var api = this.config.apiUrl + '/api/VUserRoom/info?roomId=' + this.houseId;
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-        this.projectinfo=data.model;
-        console.log(data.model);
-      } else {
-        console.log(data.msg);
-          }
-      })
   }
 
 }

@@ -146,7 +146,7 @@ import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
 //敬请期待页面
 import { LoadingPage }from '../pages/loading/loading';
-
+import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
 
@@ -234,6 +234,7 @@ import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   imports: [
     BrowserModule,
@@ -308,6 +309,7 @@ import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
     RentsaleaddPage,
     RentsalemyPage,
     RentsalelistPage,
+    AddressinfoPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,

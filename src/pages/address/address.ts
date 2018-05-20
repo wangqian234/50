@@ -12,6 +12,8 @@ import { AddaddressPage } from '../addaddress/addaddress';
 //跳入登录页面
 import { LoginPage } from '../login/login';
 
+//引入地址详情页面
+import { AddressinfoPage } from '../addressinfo/addressinfo'
 
 @Component({
   selector: 'page-address',
@@ -23,10 +25,14 @@ export class AddressPage {
   public token = "";
   //获取数据
   public addresslist=[];
-  public addressId = "";
+  public addressId :any;
   //跳转页面
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
+  public AddressinfoPage = AddressinfoPage;
+
+  //引入地址详情页面
+  public addressInfo=[];
 
   public data = {
       'addressId' : '',
@@ -39,6 +45,9 @@ export class AddressPage {
 
   ionViewWillEnter(){
     this.getRem();
+    this.getAddressList();
+  }
+  ionViewDidEnter(){
     this.getAddressList();
   }
   //获取当前用户的收货地址列表
@@ -61,28 +70,32 @@ export class AddressPage {
     var headers = new Headers({ 'Content-Type': 'application/json' });
     var options = new RequestOptions({ headers: headers });
     var data = {
-      addressId : '',
-      token:''
+      addressId : id,
+      token: this.storage.get('token')
     };
-    data.addressId = id;
-    data.token = this.storage.get('token');
     var api = this.config.apiUrl + '/api/Address/edit_default';
-    this.http.post(api,JSON.stringify(data),options).map(res => res.json()).subscribe(data =>{
+    this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
+      console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("设置成功！");
-        this.cd.detectChanges(); //更新页面
+        this.ionViewDidEnter(); //更新页面
+      } else {
+        alert(data.errmsg);
       }
     });
   }
   //删除地址
   deleteAddress(id){
-    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    var options = new RequestOptions({ headers: headers });
+    var data = {
+      token : this.storage.get('token'),
+      addressId : id,
+    }
     var api = this.config.apiUrl + '/api/Address/del';
-    this.http.post(api,this.data,options).map(res => res.json()).subscribe(data =>{
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      console.log("6"+JSON.stringify(data))
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("删除成功！");
-        this.cd.detectChanges(); //更新页面
+        this.ionViewDidEnter(); //更新页面
       } else {
         console.log(data.errmsg);
       }
@@ -92,7 +105,7 @@ export class AddressPage {
   //编辑、新加地址页面
   editAddress(item){
     this.navCtrl.push(AddaddressPage,{
-      item:item
+      "item":item
     })
   }
 

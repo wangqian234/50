@@ -33,7 +33,6 @@ export class RepairevaluatePage {
     }
     //添加评价
     addevaluate(){
-      this.getNum();
       this.evaluate.listId=this.listId;
       console.log(this.evaluate)
       var api = this.config.apiUrl+'/api/list/edit_Score';

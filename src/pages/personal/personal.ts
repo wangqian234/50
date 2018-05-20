@@ -65,7 +65,6 @@ export class PersonalPage {
   }
 
   onSearchKeyUp(e){
-
       var val = this.keywords;
       if(!val || val.trim().length === 0){
           $('.city-list p[data-id]').removeClass('hidden');
@@ -79,7 +78,7 @@ export class PersonalPage {
               $cityItem.removeClass('hidden');
           }
       });
-
     }
+
 
 }
