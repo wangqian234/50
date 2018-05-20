@@ -18,7 +18,7 @@ export class CartPage {
   public ShopbuyPage=ShopbuyPage;
   pageSize = 10;
   pageIndex = 1;
-  checked =false
+  checked =false;
   public list=[];
 
   public allPrice=0;  /*总价*/
@@ -141,7 +141,7 @@ export class CartPage {
       var tempAllPrice=0;
       for(let i=0;i<this.list.length;i++){
         if(this.list[i].checked==true){
-          tempAllPrice+=this.list[i].num*this.list[i].price;
+          tempAllPrice+=this.list[i].num*this.list[i].preprice;
         }
       }
       this.allPrice=tempAllPrice;
@@ -206,7 +206,7 @@ buy(){
     if(this.list[i].checked == true){
       gidGroup.push(this.list[i].good_id);
      gsIdGroup.push(this.list[i].size_id);
-     numGroup.push(this.list[i].num);
+     numGroup.push(parseInt(this.list[i].num));
   //console.log(this.list[i].num)
     }
   }
@@ -227,7 +227,12 @@ buy(){
             this.http.get(api).map(res => res.json()).subscribe(data =>{
                //if(data.errcode === 0 && data.errmsg === 'OK'){
                   //alert("可以购买!");
-       this.navCtrl.push(ShopbuyPage);
+       this.navCtrl.push(ShopbuyPage,{
+          wid: this.list[0].good_id,
+          sid: this.list[0].size_id,
+          gnum:this.list[0].num,
+
+  });
       // }else{
       //   alert(data.errmsg);
       // }
