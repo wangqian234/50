@@ -117,6 +117,21 @@ export class ShoppingPage {
     //   $('#searchInput').show();
     // })
   }
+
+  ionViewDidEnter(){
+    $("#sos_tanc").focus(function(){
+      $(".remen_sos").css("display","block")
+      $(".caid_img").css("display","none")
+      $(".fanhui").css("display","block")
+    })
+    this.shopKeyList = this.storage.get("shopKewWords");
+  }
+
+  fanhui(){
+      $(".remen_sos").css("display","none")
+      $(".caid_img").css("display","block")
+      $(".fanhui").css("display","none")
+  }
   doSomeThing(){
    
   }
@@ -201,7 +216,6 @@ export class ShoppingPage {
           that.currentPlace = params.changePlace;
           that.currentPlaceCode = params.changePlaceCode;
       }else{
-
           reject(Error('error'))
       }
             

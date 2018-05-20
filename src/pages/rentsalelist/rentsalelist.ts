@@ -51,10 +51,10 @@ export class RentsalelistPage {
 	    showBackdrop: true,
     });
     loading.present();
-
-    if(this.item){
+    if(this.item  != undefined){
       var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" 
           + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType + "&horder=" + this.item;
+          console.log(api);
     } else {
       var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" 
         + this.curCityCode + "&type=" + this.houseType;
@@ -83,7 +83,7 @@ export class RentsalelistPage {
 	    showBackdrop: true,
     });
     loading.present();
-    if(this.item){
+    if(this.item != undefined){
       var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" 
           + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType + "&nature=" + this.nature + "&horder=" + this.item;
     } else {
