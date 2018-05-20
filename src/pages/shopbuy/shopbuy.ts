@@ -29,14 +29,13 @@ export class ShopbuyPage {
   public shoplist = [];
   public carriagelist = [];
   public creditslist = [];
-  public totalPrice = 0;  /*总价*/
-  public buynum = 1;
-  public test = 123;
-  public te = 123;
-
+  public totalPrice = 0;
+  public wtotalPrice = 0;  /*总价*/
+  public buynum=1; 
   public addListList;
 
-
+  public jfen;
+  checked =false;
   public goodSize;
   public addID;
   public trade_Memo = "";
@@ -48,15 +47,7 @@ export class ShopbuyPage {
     gbId: 0,
     token: "",
   }
-  public showList={
-    shopName:"",
-    goodImg:"",
-    goodTitle:"",
-    goodName:"",
-    goodPrice:"",
-    buyNUM:"",
-    memo:"",
-  }
+  
 
   //定义congfig中公共链接的变量aa
   public wdh = this.config.apiUrl;
@@ -84,6 +75,10 @@ loading.present();
 
       console.log(data);
       that.dtlist = data.json.dt.model;
+      that.jfen=data.json.dt.model.useintegralpricemax;//获得积分抵扣额度
+      
+      that.totalPrice=data.json.dt.model.totalprice;
+      this.wtotalPrice=data.json.dt.model.totalprice;
       //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
       //alert(JSON.stringify(that.dtlist));
       that.buynum = data.json.dt.model.buynum;
@@ -141,7 +136,7 @@ loading.present();
       console.log(data3);
     })
 
-    //积分抵扣pricemax
+    //积分抵扣pricemax,没用！
     var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;
     loading.dismiss();
     this.http.get(api4).map(res => res.json()).subscribe(data4 => {
@@ -152,7 +147,7 @@ loading.present();
     })
 
     //this.sumPrice();
-
+    
   }
 
   //修改收货地址
@@ -177,7 +172,18 @@ loading.present();
    });
  }
 
-
+//积分抵扣
+discount(){
+  
+  var t=this.totalPrice;
+  if(this.checked==true){  
+      this.totalPrice=parseInt(t.toString())-parseFloat(this.jfen.toString());
+    
+  }
+  else if(this.checked==false){ 
+  this.totalPrice=this.wtotalPrice;}
+  
+}
 
   //提交订单
   addBuy() {

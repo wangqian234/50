@@ -18,7 +18,7 @@ export class CartPage {
   public ShopbuyPage=ShopbuyPage;
   pageSize = 10;
   pageIndex = 1;
-  checked =false
+  checked =false;
   public list=[];
 
   public allPrice=0;  /*总价*/

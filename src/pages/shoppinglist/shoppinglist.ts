@@ -7,7 +7,7 @@ import $ from 'jquery';//实现列表缓存
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ChangeDetectorRef } from '@angular/core'; //更新页面
-
+import { LoadingController } from 'ionic-angular';
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
@@ -83,7 +83,9 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
+  public http:Http, public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider,
+  /*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
         this.SD_id=navParams.get('id');
         // alert(this.SD_id);
   }
@@ -256,7 +258,13 @@ export class ShoppinglistPage {
       break;
     }
     $('.scroll-content').scrollTop('1.8rem');
+    //加载
+     let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
+    loading.dismiss();
     console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
