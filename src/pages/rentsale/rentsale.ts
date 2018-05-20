@@ -23,10 +23,10 @@ import { RentsalelistPage } from '../rentsalelist/rentsalelist';
 })
 export class RentsalePage {
 
-  focusList = ['assets/imgs/slide01.png',
-      'assets/imgs/slide02.png',
-      'assets/imgs/slide03.jpg',
-      'assets/imgs/rent1.png'];
+  focusList = [
+      'assets/imgs/rent1.jpg',
+      'assets/imgs/rent2.jpg',
+      'assets/imgs/rent3.jpg'];
   curCityCode = "";
   houseInfo;
   showMore = false;

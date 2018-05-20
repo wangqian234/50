@@ -16,31 +16,42 @@
 <div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
       <ion-label>请选择房屋</ion-label>
-        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+        <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
         <!--<ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
         <ion-option  *ngFor="let item of roomidlist" value={{item.id}}>{{item.name}}</ion-option>
+        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
    </div>
 
-  <div class="otherUser_content" style="margin:10px 0 1rem 0">
-    <ion-list >
-        <ion-item *ngFor="let item of list;let i =index">
-          <!--<div class="fee_time"  (tap)="changePays()">
-          <dt>
-				    	<ion-checkbox color="danger" [(ngModel)]="list.checked" (ionChange)="changePays()"></ion-checkbox>
-			   	</dt> 
-          </div>-->
-          <div class="fee_time"  (tap)="changePays(i)">
-          
-          <input  style="width: 20px;" type=checkbox  color="danger" [(ngModel)]="item.checked" (ionChange)="changePays(i)">
+  <div class="otherUser_content">
+
+  <div class="otherUser_title" style="margin-bottom:10px" *ngFor="let item of dest;let i of index">
+    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked">
+    <div class="user_titlediv">
+      <div class="user_title">&nbsp;&nbsp;{{item.date}}</div>
+      <div class="appear">￥{{item.totalNum}}&nbsp;&nbsp;></div>
+    </div>
+    <div class="otherUser_content" style="display:none">
+      <ion-list>
+        <ion-item *ngFor="let list of item.data">
+          <div class="fee_time">{{list.name}}</div>
+          <div class="fee_content">￥{{list.price}}<span *ngIf="list.wyj != 0">(包含违约金{{list.wyj}}元)</span></div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+    <!--<ion-list >
+        <ion-item *ngFor="let item of list">
+          <div class="fee_time"  (tap)="changePays()">
+          <input  style="width: 20px;" type=checkbox  color="danger" [(ngModel)]="item.checked" (ionChange)="changePays()">
           </div>
           <div class="fee_content">{{item.date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             {{item.name}}</div>
           <div class="fee_num">￥{{item.price}}</div>
         </ion-item>
-      </ion-list>
+      </ion-list>-->
   </div>
 
   <div class="dib_daoh_b">
@@ -50,7 +61,7 @@
 				<ion-checkbox style="padding:0.25rem"  disabled="true" color="danger" [(ngModel)]='isChencked'></ion-checkbox>
 			</i>
 		</div>
-		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allPrice}}</em></p></div>
+		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allprice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
 				<a style="background-color:#488aff" (tap)="gopay(allPrice)">去结算</a>  

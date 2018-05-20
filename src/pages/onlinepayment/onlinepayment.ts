@@ -16,14 +16,17 @@ import { BindroomPage } from '../bindroom/bindroom';
   templateUrl: 'onlinepayment.html',
 })
 export class OnlinepaymentPage {
+  public saveRoomId;
   public isChencked=false;
-  public allprice= 0 ;
+  public allprice ;
   //接收数据list
   public list =[];
   public roomidlist=[];
   public iof_defList=[];
   public defRoomId='';
   public roomid;
+  dest = [];
+  checkNum = 0;
   pay={
     roomId:'',
     idG:'',
@@ -35,11 +38,11 @@ export class OnlinepaymentPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    if(this.storage.get('roomId')){
-      this.defRoomId=this.storage.get('roomId');
+      if(this.navParams.get('item')){
+      this.defRoomId=this.navParams.get('item');
       this.roomid=this.defRoomId;
       this.getroomId();
-      this.getPayList(this.defRoomId);
+      this.getPayList();
     }
   }
 
@@ -50,17 +53,11 @@ export class OnlinepaymentPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
-  //   $("input[name='check']").each(function(){
-  //     console.log($(this))
-  //     $(this).click(function(){
-  //     for(let i=0;i<this.list.length;i++){
-  //       console.log(i+this.list[i].val())
-  //       if(this.list[i].checked==true){
-  //         alert("进来了")
-  //       }
-  //     }
-  //   });
-  // })
+  }
+
+  ionViewDidEnter() {
+    this.appearSome();
+    this.getTotal();
   }
 
   backTo(){
@@ -71,11 +68,11 @@ export class OnlinepaymentPage {
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
-  changeRoom(roomid){
-    if(roomid==="add"){
+  changeRoom(){
+    if(this.roomid==="add"){
       this.navCtrl.push(BindroomPage);
     }else{
-      this.getPayList(roomid);
+      this.getPayList();
     }
   }
   // //查询默认房屋
@@ -115,85 +112,127 @@ export class OnlinepaymentPage {
      })
   }
   //获取房屋费用收取表
-  getPayList(roomid){
+  getPayList(){
     var that=this;
-    var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+roomid;
+    var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+this.roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             that.list= data.list;
-            for(var i=0;i<that.list.length;i++){
-              that.list[i].checked = false;
+
+            var map = {};
+            that.dest = [];
+            for(var i = 0; i < that.list.length; i++){
+                var ai = that.list[i];
+                if(!map[ai.date]){
+                    that.dest.push({
+                        date: ai.date,
+                        data: [ai]
+                    });
+                    map[ai.date] = ai;
+                }else{
+                    for(var j = 0; j < that.dest.length; j++){
+                        var dj = that.dest[j];
+                        if(dj.date == ai.date){
+                            dj.data.push(ai);
+                            break;
+                        }
+                    }
+                }
             }
-            console.log(this.list) 
+            
+            for(var j = 0; j < that.dest.length; j++){
+              var total = 0;
+              for(var k = 0; k < that.dest[j].data.length; k++){
+                total = total + that.dest[j].data[k].price;
+              }
+              that.dest[j].totalNum = total;
+            }
+            console.log(that.dest)
           }else{
             alert(data.errmsg);
           }
      })
-  } 
+  }
+
+  appearSome(){
+    $(".user_titlediv").click(function(){
+      console.log($(this).next('div'))
+      if($(this).next('div').css("display") == "none"){
+        $(this).next('div').css("display","block");
+      } else {
+        $(this).next('div').css("display","none");
+      }
+    })
+  }
 
   //结算账单
   gopay(){
     this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
-    this.pay.idG="02645301cb,02645302cb,02645305cb,02645303cb"
-    var that=this;
+    var payMouth = []
+    for(let i=0;i<this.dest.length;i++){
+      if(this.dest[i].checked==true){
+          for(let j=0;j<this.dest[i].data.length;j++){
+            var aa = "0" + this.dest[i].data[j].id + "cd"
+            payMouth.push(aa);
+          }
+      }
+    }
+    this.pay.idG=payMouth.join(",")
     console.log(this.pay)
     var api = this.config.apiUrl+'/api/charge/edit_Save?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0 ){
             console.log(data.errmsg+"支付成功")
+            this.getPayList()
           }else{
             alert(data.errmsg+"支付失败")
           }
      })
   }
 
+  getTotal(){
+    var that = this;
+    $("input:checkbox").change(function() {
+        if ($(this).is(':checked')) {
+          that.checkNum++;
+        } else {
+          that.checkNum--;
+        }
 
-  //获取选中的数量
-  getcheckNum(num){
-    let sum=0;
-    for(let i=0;i<this.list.length;i++){
-      if(i==num){
-        this.list[i].checked=!this.list[i].checked;
-      }
-      if(this.list[i].checked==true){
-        sum+=1;
-      }
-     alert(sum);
-    }
-    return sum;
+        if(that.checkNum == that.dest.length){
+          that.isChencked=true;
+        }else{
+          that.isChencked=false;
+        }
+        that.sumPrice();
+    });
   }
-  //当全选中时，全选按钮也被选中
-  changePays(num){
-    if(this.getcheckNum(num)==this.list.length){
-      this.isChencked=true;
-    }else{
-      this.isChencked=false;
-    }
-    this.sumPrice();
-  }
+
   //通过全选按钮进行全选、全消
   checkAll(){
     if(this.isChencked){
-      for(let i=0; i<this.list.length;i++){
-        this.list[i].checked=false;
+      for(let i=0; i<this.dest.length;i++){
+        this.dest[i].checked=false;
       }
+      this.isChencked=false;
     }else{
-      for(let i=0;i<this.list.length;i++){
-        this.list[i].checked=true;
+      for(let i=0;i<this.dest.length;i++){
+        this.dest[i].checked=true;
       }
+      this.isChencked=true;
     }
     this.sumPrice();
   }
   //计算选中的总共多少钱
   sumPrice(){
-    var totalprice =0;
-    for(let i=0;i<this.list.length;i++){
-        if(this.list[i].checked==true){
-            totalprice+=this.list[i].price;
-        }
+    var totalprice = 0;
+    for(let i=0;i<this.dest.length;i++){
+      if(this.dest[i].checked==true){
+          totalprice += this.dest[i].totalNum;
+      }
     }
-    this.allprice=totalprice;
+    this.allprice = totalprice.toFixed(2).toString();
   }
 
 }

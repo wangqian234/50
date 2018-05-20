@@ -105,7 +105,7 @@ export class RepairlistPage {
   }
     onSearchKeyUp(event){
     if("Enter"==event.key){
-      this.list=[];
+      this.list= [];
       this.page=1;
      this.getProductList("");
     }

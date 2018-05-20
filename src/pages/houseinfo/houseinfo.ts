@@ -48,7 +48,8 @@ export class HouseinfoPage {
         //     this.houseInfo.push(data.model);
         //   }
         // }
-        this.houseInfo=data.model;
+        data.model.date = data.model.date.replace("T"," ")
+        this.houseInfo=data.model; 
       } else if(data.errcode === 40002){
           j--;
           if(j>0){

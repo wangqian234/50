@@ -22,6 +22,7 @@ import { OnlinepaymentPage } from '../onlinepayment/onlinepayment';
 export class PayfeePage {
  public defRoomId:'';
  public roomid;
+ public saveRoomId;
    
   //获取费用明细
   public roomId={
@@ -43,7 +44,7 @@ export class PayfeePage {
       this.defRoomId=this.storage.get('roomId');
       this.roomid =this.defRoomId;
       this.getroomId();
-      this.getallpaylist(this.defRoomId);   
+      this.getallpaylist();   
     }
   }
 
@@ -54,6 +55,9 @@ export class PayfeePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PayfeePage');
+  }
+  ionViewDidEnter(){
+    this.getallpaylist();
   }
 
   appearPayFee(){
@@ -92,27 +96,27 @@ export class PayfeePage {
 
   goOnlinePayfee(){
      this.navCtrl.push(OnlinepaymentPage,{
-      //item: this.room;
+      item: this.roomid
     })
   }
   
   goPrefee(){
     this.navCtrl.push(PayprefeePage,{
-      //item: this.room;
+      item: this.roomid
     })
   }
-    changeRoom(roomid){
-    if(roomid === "add"){
+    changeRoom(){
+    if(this.roomid === "add"){
       this.navCtrl.push(BindroomPage);
     }else{
-      this.getallpaylist(roomid);
+      this.getallpaylist();
     }
   }
 
   //查询物业总费用列表
-  getallpaylist(roomid){
-    var that=this;
-    var api = this.config.apiUrl+'/api/charge/list?roomId='+roomid;//获取前台界面上显示的房屋id
+  getallpaylist(){
+    var that =this;
+    var api = this.config.apiUrl+'/api/charge/list?roomId='+this.roomid;//获取前台界面上显示的房屋id
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.json.totalNum.errcode == 0){
           //总计金额
