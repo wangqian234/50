@@ -48,11 +48,8 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list[0];
+         data.model.trade_time = data.model.trade_time.replace("T"," ").substring(0,19);
          this.model=data.model;
-         //alert(JSON.stringify(data));
-         //this.good_list=data.list[0].goods_list;
-         //alert(JSON.stringify(data.list[0].goods_list));
-         // alert(JSON.parse(data));
          console.log(data);
      } else if(data.errcode === 40002){
               j--;

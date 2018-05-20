@@ -167,6 +167,7 @@ import { CutPipe } from '../pipes/cut/cut';
 import { CutSPipe } from '../pipes/cut-s/cut-s';
 import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
+import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 
 @NgModule({
   declarations: [
@@ -200,6 +201,7 @@ import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
     GroupbuylistPage,
     PipeTimePipe,
     PipeMoneyPipe,
+    PipeRelationPipe,
     GroupdetailPage,
     ShopbuyPage,
     CutPipe,

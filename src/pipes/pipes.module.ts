@@ -6,13 +6,15 @@ import { PipeTimePipe } from './pipe-time/pipe-time';
 import { PipeMoneyPipe } from './pipe-money/pipe-money';
 import {TypePipe}from './type/type';
 import { PipeGroupPipe } from './pipe-group/pipe-group';
+import { PipeRelationPipe } from './pipe-relation/pipe-relation';
 @NgModule({
 	declarations: [PipeMultiplePipe,
     CutPipe,
     CutSPipe,
     PipeMoneyPipe,
     TypePipe,
-    PipeGroupPipe ],
+    PipeGroupPipe,
+    PipeRelationPipe ],
 	imports: [],
 	exports: [PipeMultiplePipe,
     CutPipe,
@@ -20,7 +22,8 @@ import { PipeGroupPipe } from './pipe-group/pipe-group';
     PipeTimePipe,
     PipeMoneyPipe,
     TypePipe,
-    PipeGroupPipe, ]
+    PipeGroupPipe,
+    PipeRelationPipe, ]
 })
 export class PipesModule {
 	
