@@ -32,8 +32,6 @@ export class ShopinfoPage {
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
     // alert("商品id:"+this.wid);
-    
-
 }
 
   ionViewDidLoad() {

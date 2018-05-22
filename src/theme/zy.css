@@ -205,12 +205,12 @@ line-height: 0.73rem;
 	height: 1.34rem;
 
 }
-.shangp_lieb_k_er li .lieb_img{float: left;width: 2.02rem; height: 1.34rem;overflow: hidden;}
+.shangp_lieb_k_er li .lieb_img{float: left;width: 35%; height: 1.34rem;overflow: hidden;}
 .shangp_lieb_k_er li .lieb_img img{width: 100%; }
 
 .shangp_lieb_k_er li .lieb_txt{
 	float: right;
-	width: 3.70rem; 
+	width: 65%; 
 }
 .shangp_lieb_k_er li .lieb_txt p{color:#555; font-size: 0.22rem; line-height: 0.35rem; text-align: justify;}
 .shangp_lieb_k_er li .lieb_txt p.biao{overflow: hidden;} 

@@ -1,6 +1,6 @@
 //高海乐
-
-import { Component } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
@@ -34,11 +34,17 @@ import { PersonalPage } from '../personal/personal';
 
 
 
+declare var BMap;
 @Component({
   selector: 'page-shopping',
   templateUrl: 'shopping.html',
 })
 export class ShoppingPage {
+
+   @ViewChild('map') map_container: ElementRef;
+  map: any;//地图对象
+  marker: any;//标记
+  geolocation1: any;
 
   public ShoppingdetailPage = ShoppingdetailPage;
   public CartPage = CartPage;
@@ -75,7 +81,8 @@ export class ShoppingPage {
   public token=this.storage.get('token');
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation) {
+      this.geolocation1 = Geolocation;
     // this.getLunbo();
   } 
   //主页面加载函数 
@@ -115,6 +122,7 @@ export class ShoppingPage {
     }
   //自带函数
   ionViewDidLoad() {
+     //this.getPosition();
     //给第一个商品分类hr
     $('.facediv li:nth-of-type(1)').attr("class","active");
     //  $("#sos_tanc").focus(function(){
@@ -139,6 +147,20 @@ export class ShoppingPage {
   doSomeThing(){
    
   }
+
+    getPosition() {
+    var that = this;
+     this.geolocation.getCurrentPosition().then((resp) => {
+      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+      var gc = new BMap.Geocoder();
+      gc.getLocation(point, function (rs) {
+        var addComp = rs.addressComponents;
+        console.log(addComp.city)
+        that.storage.set("currentPlace",addComp.city);
+      });
+       });
+}
+
   /**轮播图 */
   getLunbo(){
    var that=this;  

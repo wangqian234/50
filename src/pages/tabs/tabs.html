@@ -1,23 +1,13 @@
-<ion-tabs class="mytabs"  #mainTabs>
+<ion-tabs class="mytabs" selectedIndex="3">
   <ion-tab [root]="tab1Root" tabTitle="物业首页" tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="租售中心" tabIcon="megaphone"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="在线商城" tabIcon="briefcase" (ionSelect)="getShopTab()"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="个人中心" tabIcon="contacts"></ion-tab>
 </ion-tabs>
-<ion-tabs class="mytabs2"  #mainTabs2>
+<ion-tabs class="mytabs2">
   <ion-tab [root]="tab5Root" tabTitle="商城首页" tabIcon="briefcase"></ion-tab>
   <ion-tab [root]="tab6Root" tabTitle="我的订单" tabIcon="document"></ion-tab>
   <ion-tab [root]="tab7Root" tabTitle="购物车" tabIcon="ios-cart"></ion-tab>
   <ion-tab [root]="tab8Root" tabTitle="个人中心" tabIcon="contacts" (ionSelect)="getTeneTab()"></ion-tab>
 </ion-tabs>
-
-<!--底部导航-->
-<!--<div class="dib_daoh_b">
-	<ul>
-		<li [navPush]="ShopcarPage"><a href="index.html"><div class="fup"><img src="images/web/d2-2.png"></div><p class="dh_dq">首 页</p></a></li>
-		<li [navPush]="RepairlistPage"><a href="wangid_ShangP_FenL.html"><div class="fup"><img src="images/web/d1.png"></div><p>分 类</p></a></li>
-		<li [navPush]="ShoppingPage"><a href="wanagid_GouWuChe.html"><div class="fup"><img src="images/web/d3.png"></div><p>购物车</p></a></li>
-		<li [navPush]="UserPage"><a href="GeRenZhongXin.html"><div class="fup"><img src="images/web/d4.png"></div><p>我</p></a></li>
-	</ul>
-</div>-->
 

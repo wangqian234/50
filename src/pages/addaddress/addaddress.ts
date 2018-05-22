@@ -57,6 +57,7 @@ export class AddaddressPage {
     this.getProvinces();
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
+      console.log(JSON.stringify(this.navParams.get('item')))
       var ss = this.addressList.address.split("〡");
       this.addressList.province = ss[0];
       this.addressList.city = ss[1];
@@ -93,15 +94,22 @@ export class AddaddressPage {
       'mobile' : this.addressList.mobile,
       'cbdefault' : this.addressList.cbdefault
     }
+    var j = 3;
     console.log(data)
       var api = this.config.apiUrl + '/api/Address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加成功！");
-        console.log(data)
+        console.log("添加成功！");
+        console.log(JSON.stringify(data))
         this.navCtrl.pop();
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.addAddress();
+        }
       } else {
-        alert("添加失败！");
+        console.log("添加失败！");
       }
     });
   } else {
@@ -120,12 +128,12 @@ export class AddaddressPage {
       'addressId' :this.addressList.id
     }
       var api = this.config.apiUrl + '/api/Address/edit';
-      console.log(JSON.stringify(data)+'000')
+      console.log(JSON.stringify(data))
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.navCtrl.pop();
       } else {
-        alert("编辑失败！"+data.errmsg+JSON.stringify(data));
+        console.log("编辑失败！");
       }
     });
     }
@@ -138,12 +146,19 @@ export class AddaddressPage {
 
     //获取省份信息
   getProvinces(){
+    var j = 3;
     var api = this.config.apiUrl + '/api/Address/dw_Province?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.provinces = data.list;
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.addAddress();
+      }
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(data.list);
     });
@@ -156,7 +171,7 @@ export class AddaddressPage {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.cities = data.list;
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(data.list);
     });
@@ -168,9 +183,8 @@ export class AddaddressPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.districts = data.list;
-        alert(data.list);
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(data.list);
     });

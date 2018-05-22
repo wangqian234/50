@@ -34,6 +34,7 @@ export class AddressinfoPage {
 
   //获取地址信息（地址详情）
   getAddressInfo(){
+    var j = 3;
     if(this.navParams.get('item')){
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token')+'&addressId='
     + this.navParams.get('item');
@@ -43,11 +44,16 @@ export class AddressinfoPage {
       if (data.errcode === 0 && data.errmsg === 'OK') {
          this.addressInfo = data.model;
          console.log("成功获取!");
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          // this.getHouseList();
+        } 
       } else {
         console.log(data.errmsg);
       }
-      console.log(data.moedel);
-    })
+    });
   }
 
 }
