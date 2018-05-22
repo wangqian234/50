@@ -51,6 +51,9 @@ export class NewslistPage {
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
+          if(data.list.length<10){
+           $('.nomore').css('display','block');
+          }
         this.newsList=this.newsList.concat(data.list);
          console.log(this.newsList)
           console.log(this.page)

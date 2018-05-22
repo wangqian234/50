@@ -35,15 +35,16 @@ export class BindroomPage {
     this.bindRoom.token = this.storage.get('token');
   }
 
-  editBindInfo(){
+  //新添加要绑定的房屋
+  addBindInfo(){
     console.log(JSON.stringify(this.bindRoom))
      var api = this.config.apiUrl + '/api/UserRoom/add';
-    this.http.post(api,(this.bindRoom)).map(res => res.json()).subscribe(data =>{
+      this.http.post(api,(this.bindRoom)).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加房屋成功");
+        console.log("成功绑定房屋");
         this.navCtrl.pop();
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
     });
 
@@ -56,12 +57,12 @@ export class BindroomPage {
         this.project = data.list;
         console.log(data.list);
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(this.project);
     });
   }
-
+  //根据projectId获取楼栋下拉列表
   getEdifice(){
     var api = this.config.apiUrl + '/api/House/dw_Edifice?projectId=' + this.bindRoom.projectId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -69,12 +70,12 @@ export class BindroomPage {
         this.edifice = data.list;
         console.log(data.list);
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(this.edifice);
     });
   }
-
+  //根据edificeId获取房间下拉列表
   getRoom(){
     var api = this.config.apiUrl + '/api/House/dw_Room?edificeId=' + this.bindRoom.edificeId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -82,7 +83,7 @@ export class BindroomPage {
         this.room = data.list;
         console.log(data.list);
       } else {
-        alert(data.errmsg);
+        console.log(data.errmsg);
       }
       console.log(this.room);
     });

@@ -47,7 +47,6 @@ export class RepairdetailsPage {
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
     }
-    this. getrepairdetails();
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
     $(".arrow-current .arrow-pre").css('border-left', '15px solid #00a2ca');
@@ -80,6 +79,8 @@ export class RepairdetailsPage {
       loading.dismiss();
       if(data.errcode===0&&data.errmsg==='OK'){
         var listStr;
+        if(data.list[0].time)
+        data.list[0].time = data.list[0].time.toString().replace("T"," ").substring(0,19);
         this.repairdetaillist=data.list[0];
         if(data.list[0].disposememo){
           listStr = data.list[0].disposememo;

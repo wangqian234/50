@@ -58,7 +58,7 @@
     </div>
   </div>
 
-    <div class="otherUser_title">
+    <div class="otherUser_title" *ngIf="prepayslist.length != 0">
     <div class="user_titlediv" (click)="appearPreDetail()">
       <div class="user_title">预存款剩余明细</div>
       <div class="appear"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
@@ -74,7 +74,14 @@
     </div>
   </div>
 
-  <div class="otherUser_title" (click)="appearFeeList()" style="margin-bottom:50px">
+   <div class="otherUser_title" *ngIf="prepayslist.length == 0">
+    <div class="user_titlediv">
+      <div class="user_title">暂无预存款明细</div>
+      <div class="appear"></div>
+    </div>
+  </div>
+
+  <div class="otherUser_title" (click)="appearFeeList()" *ngIf="fundloglist.length != 0" style="margin-bottom:50px">
     <div class="user_titlediv">
       <div class="user_title">近半年缴费记录</div>
       <div class="appear"><img id="feeListimg" src="assets/imgs/appear.png"></div>
@@ -87,6 +94,13 @@
           <div class="fee_num">{{list.modename}}</div>
         </ion-item>
       </ion-list>
+    </div>
+  </div>
+
+    <div class="otherUser_title" *ngIf="fundloglist.length == 0" style="margin-bottom:50px">
+    <div class="user_titlediv">
+      <div class="user_title">暂无缴费记录</div>
+      <div class="appear"></div>
     </div>
   </div>
   <div class="bottom_button">

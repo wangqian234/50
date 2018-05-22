@@ -57,7 +57,7 @@ export class HouseinfoPage {
             this.getUserRoom();
           }
       } else {
-        alert("data.errmsg")
+        console.log(data.errmsg);
       }
     });
   }
@@ -91,7 +91,7 @@ export class HouseinfoPage {
             this.getUserRoom();
           }
       } else {
-        alert(data.errmsg)
+        console.log(data.errmsg)
       }
     });
   }
@@ -106,7 +106,7 @@ export class HouseinfoPage {
     var api = this.config.apiUrl + '/api/UserRoom/del?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert('解除绑定成功');
+        console.log("成功解绑")
         this.navCtrl.pop();
       } else if(data.errcode === 40002){
           j--;
@@ -115,7 +115,7 @@ export class HouseinfoPage {
             this.delUserRoom();
           }
       } else {
-        alert("data.errmsg")
+        console.log(data.errmsg)
       }
     });
   }
@@ -150,7 +150,7 @@ export class HouseinfoPage {
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("成功设置默认房屋");
+        console.log("成功设置默认房屋");
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -158,7 +158,7 @@ export class HouseinfoPage {
             this.getUserRoom();
           }
       } else {
-        alert(data.errmsg)
+        console.log(data.errmsg)
       }
     });
   }
@@ -167,12 +167,13 @@ export class HouseinfoPage {
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
+      'delUserId': '',
     };
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("成功解除其他用户的绑定");
+        console.log("成功解除其他用户的绑定");
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -180,7 +181,7 @@ export class HouseinfoPage {
             this.getUserRoom();
           }
       } else {
-        alert(data.errmsg)
+        console.log(data.errmsg)
       }
     });
   }

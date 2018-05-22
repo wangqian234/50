@@ -52,14 +52,21 @@ export class AddressPage {
   }
   //获取当前用户的收货地址列表
   getAddressList(){
+    var j = 3;
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
         console.log(this.addresslist);
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0) {
+          this.config.doDefLogin();
+          this.getAddressList();
+        }
       } else {
-        alert(data.errmsg)
+        console.log(data.errmsg)
       }
     });
 
@@ -67,6 +74,7 @@ export class AddressPage {
 
   //设置默认收货地址
   clickToDef(id){
+    var j = 3;
     var headers = new Headers({ 'Content-Type': 'application/json' });
     var options = new RequestOptions({ headers: headers });
     var data = {
@@ -77,10 +85,16 @@ export class AddressPage {
     this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
       console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("设置成功！");
+        console.log("设置成功！");
         this.ionViewDidEnter(); //更新页面
-      } else {
-        alert(data.errmsg);
+      } else if (data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.getAddressList();
+        }
+      }  else {
+        console.log(data.errmsg);
       }
     });
   }
@@ -90,13 +104,21 @@ export class AddressPage {
       token : this.storage.get('token'),
       addressId : id,
     }
+    var j = 3;
+    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      console.log("6"+JSON.stringify(data))
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("删除成功！");
+        console.log("删除成功！");
         this.ionViewDidEnter(); //更新页面
-      } else {
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.getAddressList();
+      }
+      }  else {
         console.log(data.errmsg);
       }
     });

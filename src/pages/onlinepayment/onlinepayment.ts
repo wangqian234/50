@@ -43,6 +43,13 @@ export class OnlinepaymentPage {
       this.roomid=this.defRoomId;
       this.getroomId();
       this.getPayList();
+    }else {
+      if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+     this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }
     }
   }
 
@@ -145,7 +152,7 @@ export class OnlinepaymentPage {
               for(var k = 0; k < that.dest[j].data.length; k++){
                 total = total + that.dest[j].data[k].price;
               }
-              that.dest[j].totalNum = total;
+              that.dest[j].totalNum = total.toFixed(2);
             }
             console.log(that.dest)
           }else{

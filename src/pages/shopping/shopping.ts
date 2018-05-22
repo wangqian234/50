@@ -1,6 +1,6 @@
 //高海乐
-
-import { Component } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
@@ -34,11 +34,17 @@ import { PersonalPage } from '../personal/personal';
 
 
 
+declare var BMap;
 @Component({
   selector: 'page-shopping',
   templateUrl: 'shopping.html',
 })
 export class ShoppingPage {
+
+   @ViewChild('map') map_container: ElementRef;
+  map: any;//地图对象
+  marker: any;//标记
+  geolocation1: any;
 
   public ShoppingdetailPage = ShoppingdetailPage;
   public CartPage = CartPage;
@@ -54,7 +60,8 @@ export class ShoppingPage {
   public l=[];
   public SalePage = SalePage;
 
-
+  public wid;
+  public len=0;
   public lunboList=[];
   public tuangouList=[];
   public tubList=[];
@@ -74,8 +81,10 @@ export class ShoppingPage {
   public token=this.storage.get('token');
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    this.getLunbo();
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation) {
+      this.geolocation1 = Geolocation;
+      this.storage.set("currentPlace","深圳市")
+    // this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -86,9 +95,12 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
+    // alert(JSON.stringify(that.lunboList));
+
      // console.log(this.lunboList);
      that.tuangouList=data.json['data_Modules'].list; 
-     // console.log(this.tuangouList[1]);
+        that.len=that.tuangouList.length;
+       // console.log(this.tuangouList[1]);
      that.tubList=data.json['data_Sort'].list;
      console.log(that.tubList);
      that.tuijList=data.json['data_Recommend'].list;
@@ -96,7 +108,7 @@ export class ShoppingPage {
      })
 
       //初始显示旅游服务的商品列表
-     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=1';
+     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg ==="OK"){
           that.shoplist=data.list; 
@@ -111,15 +123,45 @@ export class ShoppingPage {
     }
   //自带函数
   ionViewDidLoad() {
+     this.getPosition();
     //给第一个商品分类hr
-    $('.facediv li:nth-of-type(1)').attr("class","active");
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
     //  $("#sos_tanc").focus(function(){
     //   $('#searchInput').show();
     // })
   }
+
+  ionViewDidEnter(){
+    $("#sos_tanc").focus(function(){
+      $(".remen_sos").css("display","block")
+      $(".caid_img").css("display","none")
+      $(".fanhui").css("display","block")
+    })
+    this.shopKeyList = this.storage.get("shopKewWords");
+  }
+
+  fanhui(){
+      $(".remen_sos").css("display","none")
+      $(".caid_img").css("display","block")
+      $(".fanhui").css("display","none")
+  }
   doSomeThing(){
    
   }
+
+    getPosition() {
+    var that = this;
+     this.geolocation.getCurrentPosition().then((resp) => {
+      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+      var gc = new BMap.Geocoder();
+      gc.getLocation(point, function (rs) {
+        var addComp = rs.addressComponents;
+        console.log(addComp.city)
+        that.storage.set("currentPlace",addComp.city);
+      });
+       });
+}
+
   /**轮播图 */
   getLunbo(){
    var that=this;  
@@ -201,7 +243,6 @@ export class ShoppingPage {
           that.currentPlace = params.changePlace;
           that.currentPlaceCode = params.changePlaceCode;
       }else{
-
           reject(Error('error'))
       }
             

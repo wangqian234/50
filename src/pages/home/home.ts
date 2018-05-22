@@ -14,7 +14,6 @@ import { LoginPage } from '../login/login';
 
 //新闻详情页面
 import { NewinfoPage } from '../newinfo/newinfo';
-
 //费用明细页面
 import { PayfeePage } from '../payfee/payfee';
 //费用预存页面
@@ -259,6 +258,7 @@ export class HomePage {
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
+            this.roomid = this.defRoomId;
             this.storage.set('roomId',this.defRoomId)
             this.getpayment(data.model.House_Room_Id);
             this.getroomId();

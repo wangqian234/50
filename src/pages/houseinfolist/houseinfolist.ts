@@ -6,7 +6,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
-//?????
+//新添加房屋
 import { BindroomPage } from '../bindroom/bindroom';
 
 /**
@@ -44,14 +44,21 @@ export class HouseinfolistPage {
     console.log('ionViewWillEnter HouseinfolistPage');
     this.getHouseList();
   }
-
-  //??????
+ 
+  //获取房屋列表
   getHouseList(){
+    var j = 3;
     console.log(this.storage.get('token'));
     var api = this.config.apiUrl + '/api/VUserRoom/list_User?token='+ this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.getHouseList();
+        }
       } else {
         console.log(data.errmsg);
       }

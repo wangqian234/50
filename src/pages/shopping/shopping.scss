@@ -553,6 +553,7 @@ ion-slides{
     margin: 0;
     padding: 0.2rem;
     height: 100%;
+    width:100%;
     position: absolute;
     top: 0;
     z-index: 100;
@@ -570,5 +571,11 @@ ion-slides{
 }
 .remen_sos .history ul li{
     padding-right: 0.1rem;
+}
+.fanhui{
+        color: white;
+    font-size: 0.28rem;
+    text-align: center;
+    margin-top: 0.2rem;
 }
 }
