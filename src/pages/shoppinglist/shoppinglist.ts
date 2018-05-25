@@ -96,7 +96,8 @@ export class ShoppinglistPage {
   }
 
   //商品添加评价
-  evaluationEvent(trade_id,tradegoods_id){
+  evaluationEvent(trade_id,tradegoods_id,wu){
+    alert("五爷"+wu);
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
     // alert(trade_id+"王慧敏"+tradegoods_id);
   }

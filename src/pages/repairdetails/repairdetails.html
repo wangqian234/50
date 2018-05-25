@@ -6,7 +6,7 @@
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToRepair()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">房屋基本信息</a></li>  
+					<li><a class="px24 zyyge">工单详情</a></li>  
 				</ul>
 			</div>
 		</div> 
@@ -14,7 +14,7 @@
 </div>
 
 <div>
-  <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time }}</p>
+  <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time}}</p>
   <p class="repair-state">{{repairdetaillist.statename}}</p>
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
   <div>
@@ -34,10 +34,10 @@
       <p>服务态度：{{repairdetaillist.servicescore}}</p>
       <p>处理及时：{{repairdetaillist.timelyscore}}</p>
       <p>处理质量：{{repairdetaillist.qualityscore}}</p>
-      <!--<p>评价内容：{{}}</p>-->
+      <p>评价内容：{{repairdetaillist.ScoreMemo}}</p>
 </div>
-<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">终止工单</button>
-<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">完成</button> 
+<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
 <button id="evaluate"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
     <div id="background" class="back">  
@@ -66,4 +66,30 @@
         </div>  
     </div>  
     
+        <!-- 弹窗内容开始 -->  
+    <div id="finishRepaired" class="back">  
+        <div id="div1" class="content1">  
+            <div id="close" class="closs1">  
+                <span id="close-button" class="closs1-button" (click)="closeFinishPopup()">×</span>  
+                <h2>完成工单</h2>  
+            </div>  
+            <div id="div2" class="div2">   
+            <ion-item>
+              <ion-label>请选择取消原因</ion-label>
+              <ion-select name="type" [(ngModel)]="editcloselist.stopType" cancelText="取消" okText="确认">
+                 <ion-option selected value="-1">请选择原因</ion-option>
+                <ion-option value="1">我已自己解决</ion-option>
+                <ion-option value="2">太慢了，等不及</ion-option>
+                <ion-option value="3">一直没有人联系我</ion-option>
+                 <ion-option value="4">提交填写错误</ion-option>
+                <ion-option value="0">其他原因（填写说明）</ion-option>
+              </ion-select> 
+            </ion-item>
+            <ion-item>
+              <textarea class="add-some" [(ngModel)]="editcloselist.memo" placeholder="有没有什么补充说明的？"></textarea>
+              </ion-item>
+            </div>  
+            <h3 id="foot" class="foot" (click)="enSureFinish()">确认终止工单</h3>  
+        </div>  
+    </div> 
 </ion-content>

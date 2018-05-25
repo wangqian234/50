@@ -19,6 +19,7 @@ export class SalePage {
 public ShopgoodsinfoPage=ShopgoodsinfoPage;
 public list = [];
 public mode = 0 ;
+public page = 2;
  public tabTest={
     li00:"type current",
     li01:"type",
@@ -32,6 +33,7 @@ public wdh=this.config.apiUrl;
   }
 //抢购时间判断
 ifontime(mode){
+  this.list = [];
   this.mode = mode;
     $("#typediv ul li").removeAttr("class");
     var span = "#typediv ul li:nth-of-type(" + ++mode +")"
@@ -46,6 +48,27 @@ ifontime(mode){
        if(data.errmsg == 'OK'){
          this.list = data.list;
          console.log(data);
+     } else {
+        alert(data.errmsg);
+     }
+     })
+}
+
+ifontime2(infiniteScroll){
+    var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg == 'OK'){
+        this.list=this.list.concat(data.list); /*数据拼接*/
+         console.log(data);
+          if(infiniteScroll){
+            //告诉ionic 请求数据完成
+              this.page++;
+            infiniteScroll.complete();
+            if(data.list.length<10){  /*没有数据停止上拉更新*/
+              infiniteScroll.enable(false);
+              $('.nomore').css('display','block');
+            }
+          }
      } else {
         alert(data.errmsg);
      }
@@ -103,6 +126,10 @@ ifontime(mode){
 //   } 
 //   return i; 
 // } 
+
+doLoadMore(infiniteScroll){
+  this.ifontime2(infiniteScroll);
+}
 
 
 

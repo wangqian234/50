@@ -59,8 +59,8 @@ public history='';
     loading.present();
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
+        loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {  
-          loading.dismiss();
           this.storage.set('userName',this.userinfo.userName);
           this.storage.set('password',this.userinfo.userPwd);
           this.storage.set('token',data.model.token);

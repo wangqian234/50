@@ -4,11 +4,11 @@ page-payfee {
         background-color: white;
         padding: 0.25rem;
         font-size: 0.28rem;
-        box-shadow: 0 0 2px 2px #ece7e7;
     }
     .user_title{
         display: inline;
-        font-size: 0.28rem;
+        font-size: 0.29rem;
+        color: #818181;
     }
     .appear{
         float: right;
@@ -46,35 +46,87 @@ page-payfee {
     .loginBtn {
         left:0.05%;
         background-color: #488aff;
-        width: 49.9%; 
+        width: 50%; 
         float:left;
         height:0.8rem;
         font-size:0.3rem;
         border-radius: 0.05rem;
-        box-shadow: inset 0 0 4px 4px #4697d7;
         color:white
     }
     .registerBtn { 
         right:0.05%;
         background-color: #488aff;
-        width: 49.9%; 
+        width: 50%; 
         position: absolute;
         height:0.8rem;
         font-size:0.3rem;
         border-radius: 0.05rem;
-        box-shadow: inset 0 0 4px 4px #4697d7;
         color:white
     }
     .fee_time{
         float:left;
         width:30%;
-        font-size: 0.23rem;
+        font-size: 0.22rem;
+        color: #818181;
+        margin-left: 0.51rem;
     }
     .fee_content{
         float:left;
-        width:50%;
+        width:40%;
+        font-size: 0.22rem;
+        line-height: 0.23rem;
+        color: #818181;
+    }
+    .fee_num{
+        font-size: 0.22rem;
+        color: #818181; 
+    }
+
+    .list-ios > .item-block:first-child{
+        border-top: none;
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom: 0.55px solid #F5F5F5;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border-bottom: none;
+    }
+
+    .toub_beij_zy{
+    border-bottom: solid 1px #2979FF !important;
+    }
+    .item-ios.item-block .item-inner{
+        border-bottom: 0.55px solid #2979FF;
+    }
+    .feelistcon.item-ios.item-block .item-inner{
+        border-bottom: 0.55px solid #F5F5F5 !important;
+    }
+    .select-item{
+        background-color:#2979FF;
+        color:#F5F5F5;
+        height: 0.5rem;
+        margin-top: 0.08rem;
+    }
+    .shous_div{
+        background-color:#2979FF;
+        width:72%
+    }
+    .shous_k{
+        height:0.6rem !important;
+    }
+    .logo_k_fanh{
+        margin-top: 0.05rem;
+    }
+    .select-text{
         font-size: 0.23rem;
     }
+    .label-ios{
+        margin: 11px 0 11px 0;
+    }
+    .logo_k_fanh .fanh_ann{
+        margin: 0.15rem 0 0 0.3rem;
+    }
+
 }
 .toub_beij_zy{
     position: sticky;

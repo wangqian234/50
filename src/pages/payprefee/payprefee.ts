@@ -42,10 +42,16 @@ export class PayprefeePage {
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    if(this.storage.get('roomId')){
+    if(this.navParams.get('item')){
+      this.defRoomId=this.navParams.get('item');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+    }else{
+      if(this.storage.get('roomId')){
       this.defRoomId=this.storage.get('roomId');
       this.roomid=this.defRoomId;
       this.getroomId();
+    }
     }
   }
 
@@ -163,9 +169,11 @@ export class PayprefeePage {
     var api = this.config.apiUrl+'/api/charge/add?';
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
-            console.log("支付成功")
+            alert("支付成功")
+            this.navCtrl.pop();
           }else{
             alert(data.errmsg)
+            this.navCtrl.pop();
           }
      })
  }

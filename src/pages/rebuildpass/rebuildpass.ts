@@ -6,6 +6,9 @@ import { Http } from '@angular/http';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 
+//引入UserPage
+import { UserPage } from '../user/user';
+
 /**
  * Generated class for the RebuildpassPage page.
  *
@@ -18,6 +21,8 @@ import { StorageProvider } from '../../providers/storage/storage';
   templateUrl: 'rebuildpass.html',
 })
 export class RebuildpassPage {
+
+  public UserPage = UserPage;
 
   // verifyCode: any;
 
@@ -40,6 +45,10 @@ export class RebuildpassPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RebuildpassPage');
   }
+
+  // ionViewDidEnter(){
+  //   this.navCtrl.push(UserPage);
+  // }
 
 //显示倒计时间
   ownRegist() {
@@ -102,14 +111,14 @@ export class RebuildpassPage {
       'pwd':this.modifyInfo.pwd,
       'code':this.modifyInfo.code,
     }
-    console.log(modifyInfo)
     var api = this.config.apiUrl + '/api/User/edit_Pwd';
     console.log(modifyInfo);
     this.http.post(api,modifyInfo).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("成功修改密码!");
+      this.navCtrl.pop(UserPage);
       } else {
-        console.log(data.errmsg + JSON.stringify(this.modifyInfo) );
+        console.log(data.errmsg);
       }
     });
   }

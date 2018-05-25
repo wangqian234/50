@@ -6,6 +6,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class RepairevaluatePage {
   txtScoreMemo:'',
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
     ionViewWillLoad() {
     this.getRem();
@@ -33,12 +34,19 @@ export class RepairevaluatePage {
     }
     //添加评价
     addevaluate(){
+      let loading = this.loadingCtrl.create({
+	      showBackdrop: true,
+      });
+      loading.present();
       this.evaluate.listId=this.listId;
       console.log(this.evaluate)
       var api = this.config.apiUrl+'/api/list/edit_Score';
       this.http.post(api,this.evaluate).map(res => res.json()).subscribe(data =>{
+        loading.dismiss();
+        console.log(data)
         if(data.errcode===0&&data.errmsg==='OK'){
             alert("评价成功")
+            this.navCtrl.pop();
         }else{
           alert(data.errmsg)
         }

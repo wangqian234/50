@@ -8,6 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 import {RepairevaluatePage} from '../repairevaluate/repairevaluate'
 import{RepairlistPage}from '../repairlist/repairlist'
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-repairdetails',
   templateUrl: 'repairdetails.html',
@@ -36,8 +37,9 @@ export class RepairdetailsPage {
   public finish:any;
   public evaluateContent:any;
   public app:any;
+  public finishRepaired:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
 
   ionViewWillLoad() {
@@ -45,7 +47,6 @@ export class RepairdetailsPage {
     if(this.navParams.get('item')){
       this.repairDetial=this.navParams.get('item');
     }
-    this. getrepairdetails();
     console.log($(".arrow-past .arrow-next"));
     $(".arrow-past .arrow-next").css({'border-top': '15px solid #00a2ca', 'border-bottom': '15px solid #00a2ca'});
     $(".arrow-current .arrow-pre").css('border-left', '15px solid #00a2ca');
@@ -61,18 +62,26 @@ export class RepairdetailsPage {
       this.finish =document.getElementById('finish');
       this.evaluateContent =document.getElementById('evaluateContent')
       this.app=document.getElementById('app')
+      this.finishRepaired=document.getElementById('finishRepaired')
   }
-  
+  ionViewDidEnter(){
+    this.getrepairdetails();
+  }
   //获取工单详情信息
   getrepairdetails(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var that = this;
     var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial+'&token='+this.storage.get('token');
-    console.log(api)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
+      loading.dismiss();
       if(data.errcode===0&&data.errmsg==='OK'){
         var listStr;
+        if(data.list[0].time)
+        data.list[0].time = data.list[0].time.toString().replace("T"," ").substring(0,19);
         this.repairdetaillist=data.list[0];
-        console.log(this.repairdetaillist)
         if(data.list[0].disposememo){
           listStr = data.list[0].disposememo;
           this.disposememo = listStr.split("<br />");
@@ -88,6 +97,10 @@ export class RepairdetailsPage {
   }
 //终止工单
  enSureStop(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
    this.editcloselist.listId=this.repairDetial;
    this.editcloselist.token=this.storage.get('token');
    this.editcloselist.act="close";
@@ -95,19 +108,55 @@ export class RepairdetailsPage {
     var that = this;
     var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
+      loading.dismiss();
+      if(data.errcode===0&&data.errmsg==='OK'){
+        this.closePopup();
+        this.getrepairdetails(); 
+      }else{
+        alert(data.errmsg)
+      }
+    }) 
+ }
+//完成工单
+ enSureFinish(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
+   this.editcloselist.listId=this.repairDetial;
+   this.editcloselist.token=this.storage.get('token');
+   this.editcloselist.act="finish";
+   if(this.editcloselist.stopType=="0"){
+    this.editcloselist.memo=this.editcloselist.memo;
+   }else{
+     this.editcloselist.memo=" ";
+   }
+   console.log(this.editcloselist)
+    var that = this;
+    var api = this.config.apiUrl+'/api/list/edit_close';
+    this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
+      loading.dismiss();
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)
-        this.closePopup();
-        //this.cd.detectChanges();
-        this.navCtrl.push("RepairlistPage");
+        this.closeFinishPopup();
+        this.getrepairdetails();
       }else{
         alert(data.errmsg)
       }
     }) 
  }
  //工单处理
+ showFinishPopup(){
+  this.finishRepaired.style.display = "block"
+ }
+ closeFinishPopup(){
+    this.finishRepaired.style.display = "none"
+ }
  showPopup(){
   this.div.style.display = "block"; 
+ }
+  closePopup(){
+   this.div.style.display = "none";
  }
  //工单处理应该显示的状态                   
  repairdState(){
@@ -115,25 +164,45 @@ export class RepairdetailsPage {
     {
       case "待派工":
       this.stop.style.display = "block";
+      this.finish.style.display = "none";
+       this.evaluate.style.display = "none";
+        this.evaluateContent.style.display = "none";
+         this.app.style.display = "none";
       break;
       case "待接单":
       this.stop.style.display = "block";
+      this.finish.style.display = "none";
+       this.evaluate.style.display = "none";
+        this.evaluateContent.style.display = "none";
+         this.app.style.display = "none";
       break;
       case "处理中":
       this.stop.style.display = "block";
       this.finish.style.display = "block";
       this.app.style.display = "block";
+      this.evaluate.style.display = "none";
+      this.evaluateContent.style.display = "none";
       break;
       case "待评价":
+      this.stop.style.display = "none";
+      this.finish.style.display = "none";
       this.app.style.display = "block";
       this.evaluate.style.display = "block";
+      this.evaluateContent.style.display = "none";
       break;
       case "已完成":
       this.app.style.display = "block";
       this.evaluateContent.style.display = "block";
+      this.stop.style.display = "none";
+      this.finish.style.display = "none";
+       this.evaluate.style.display = "none";
       break;
       case "已终止":
       this.app.style.display = "block";
+      this.stop.style.display = "none";
+      this.finish.style.display = "none";
+       this.evaluate.style.display = "none";
+        this.evaluateContent.style.display = "none";
       break;
       default:
     }
@@ -143,32 +212,6 @@ export class RepairdetailsPage {
  showevaluate(){
   this.navCtrl.push(RepairevaluatePage,{id:this.repairDetial})
  }
- closePopup(){
-   this.div.style.display = "none";
- }
- 
-  // enSureStop(){
-
-  //   // let json={
-  //   //   uid:userinfo._id,   /*注意用户id   _id*/
-  //   //   salt:userinfo.salt
-  //   // }
-  //   // let sign=this.tools.sign(json);
-  //   // var api='api/addressList?uid='+userinfo._id+'&sign='+sign;
-
-  //   //请求数据
-  //     var api='api/pcate'
-  //     this.httpService.requestData(api,(data)=>{
-  //     // if(data.success){
-  //     //   this.list=data.result;
-  //     //   console.log(this.list)
-  //     // }else{
-  //     //   alert(data.message);
-  //     // }
-   
-  //     })
-  // }
-
   backToRepair(){
     this.navCtrl.pop();
   }

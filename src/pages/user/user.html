@@ -5,10 +5,14 @@
     <div class="iondiv" [navPush]="EditorinfoPage"> <ion-icon name="create-outline"></ion-icon></div>
 	<h1 class="grzx_toub_beij"></h1>
 	<div class="grzx_toux_fus">
-		<div class="of"><h2><img src="assets/imgs/user.png"></h2><p *ngIf="enSureLogin">您好，{{userLoginName}}</p></div>
+		<div class="of"><h2><img src="assets/imgs/user.png"></h2>
+            <p *ngIf="enSureLogin">您好，{{userLoginName}}</p>
+        </div>
 	</div>
 </div>
 <div class="jifen"><img src="assets/imgs/jifen.png"><p>剩余积分</p><span>0</span></div>
+
+<button style="height:0.8rem;width:98%;font-size:0.3rem" ion-button block color="#f53d3d" *ngIf="!enSureLogin" [navPush]="LoginPage">登录</button>
 
 
   <ion-list inset class="user_list">

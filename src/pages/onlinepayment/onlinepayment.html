@@ -1,29 +1,32 @@
-<ion-content style="background-color:#E3E3E3">
-<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
-	<div class="zhongj_k zhongj_k_z">
-		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh" (click)="backTo()">
-        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
-			<div class="zhongjain_daoh">
-				<ul>
-					<li><a class="px24">物业缴费</a></li>  
-				</ul>
-			</div>
-		</div> 
-	</div>
-</div>
+<ion-content style="background-color:#f5f5f5">
 
-<div class="select" style="background-color:white;margin-top:10px;">
+	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF;height:0.96rem;">
+		<div class="zhongj_k">
+      <div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a>
+        </div>
+			<div class="shous_k  shous_div">
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom()" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<ion-option *ngFor="let item of roomidlist" value="{{item.id}}">{{item.name}}</ion-option>
+						<ion-option value="add">--添加房屋--</ion-option>
+					</ion-select>
+				</ion-item>
+			</div>
+		</div>
+	</div>
+
+
+<!--<div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
       <ion-label>请选择房屋</ion-label>
-        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <!--<ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+        <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
         <ion-option  *ngFor="let item of roomidlist" value={{item.id}}>{{item.name}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--添加房屋--</ion-option>
         </ion-select>
     </ion-item>
-   </div>
+   </div>-->
 
   <div class="otherUser_content">
 

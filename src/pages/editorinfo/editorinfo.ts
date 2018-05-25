@@ -69,43 +69,58 @@ export class EditorinfoPage {
     $("#more").css("display","block");
   }
 
-    //获取用户信息
+    //获取用户信息(pg goes everywhere)
     getUserInfo(){
-    var api = this.config.apiUrl + '/api/User/info?token=' +  this.storage.get('token');
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-        if(data.model.birthday){
-        data.model.birthday = data.model.birthday.substring(0,10);
+      var j = 3;
+      var api = this.config.apiUrl + '/api/User/info?token=' +  this.storage.get('token');
+      this.http.get(api).map(res => res.json()).subscribe(data =>{
+        if (data.errcode === 0 && data.errmsg === 'OK') {
+          if(data.model.birthday){
+          data.model.birthday = data.model.birthday.substring(0,10);
+          this.personInfo = data.model
+            console.log(data.model);
+        } else if(data.errcode === 40002){
+          j--;
+          if(j<0){
+            this.config.doDefLogin();
+            this.getUserInfo();
+          } else {
+
+          }
         }
-      this.personInfo = data.model
-      console.log(data.model);
-      }
-    });
-  }
+        }
+      });
+    }
 
     //修改用户基本信息，点击提交时生效
     editBasicInfo(){
+      var j = 3;
       var data = {
         "token": this.storage.get('token'),
         "name": this.personInfo.name,
         "birthday":this.personInfo.birthday,
         "sex":this.personInfo.sex,
       }
-      console.log(JSON.stringify(data))
-    var api = this.config.apiUrl + '/api/User/edit_Basic';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-      console.log("修改成功！");
-      alert("修改成功");
-      this.navCtrl.pop();
+      var api = this.config.apiUrl + '/api/User/edit_Basic';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+       if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log("修改成功！");
+        this.navCtrl.pop();
+      } else if(data.errcode === 40002) {
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.editBasicInfo();
+        }
       } else {
-        console.log("pg" + data.errmsg);
-      }
+          console.log(data.errmsg);
+        }       
     });
   }
 
     //修改用户更多信息，点击提交时生效
     editMoreInfo(){
+      var j =3;
       var data = {
         "token":this.storage.get('token'),
         "education":this.personInfo.education,
@@ -115,15 +130,19 @@ export class EditorinfoPage {
         "maritalStatus":this.personInfo.maritalstatus,
         "industryInfo":this.personInfo.industryinfo,
       }
-      console.log(JSON.stringify(data))
-    var api = this.config.apiUrl + '/api/User/edit_More';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-      console.log("修改成功!");
-      alert("修改成功");
-      this.navCtrl.pop();
+      var api = this.config.apiUrl + '/api/User/edit_More';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+        if (data.errcode === 0 && data.errmsg === 'OK') {
+          console.log("修改成功!");
+          this.navCtrl.pop();
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.editMoreInfo();
+        }
       } else {
-        console.log("pg" + data.errmsg);
+        console.log(data.errmsg);
       }
     });
   }

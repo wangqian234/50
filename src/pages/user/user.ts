@@ -70,8 +70,6 @@ export class UserPage {
       if(this.storage.get('token')){
         this.enSureLogin = true;
         this.userLoginName = this.storage.get('username1')
-      } else {
-        this.navCtrl.push(LoginPage);
       }
       var w = document.documentElement.clientWidth || document.body.clientWidth;
       document.documentElement.style.fontSize = (w / 750 * 115) + 'px';

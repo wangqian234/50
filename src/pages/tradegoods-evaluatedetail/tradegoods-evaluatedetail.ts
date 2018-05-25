@@ -18,6 +18,7 @@ export class TradegoodsEvaluatedetailPage {
       public list=[];
       //public tradegoods_id;//商品订单编号
       public SD_id;
+      public goods_id;//商品ID
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -26,6 +27,7 @@ export class TradegoodsEvaluatedetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         //this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
           this.SD_id=navParams.get('tradeId');
+          this.goods_id=navParams.get('goodsId');
   
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -38,7 +40,8 @@ export class TradegoodsEvaluatedetailPage {
   }
   getdetaillist(){
     var j=3;
-     var api = this.aa+'/api/tradegoods/info?trade_Id='+this.SD_id+'&token='+this.token;
+    //  var api = this.aa+'/api/tradegoods/info?trade_Id='+this.goods_id+'&token='+this.token;
+     var api = this.aa+'/api/tradegoods/info?trade_Id=28814915651816948&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;

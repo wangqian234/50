@@ -17,10 +17,10 @@
 
 <div class="shez_toux">
 
-	<div class="dd_xiangq_sp_k">
+	<div class="dd_xiangq_sp_k" style="margin-top:10px">
 		<dl>
 			<dd>
-				<a href="#">
+				<a href="javascript:void(0)">
 					<h1><img src="{{list.img}}"></h1>
 					<div class="wenz">
 						<p>{{list.goods_title}}</p>
@@ -48,9 +48,9 @@
       <a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
 		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>
 
-      <a *ngIf="model.tradestate==2" (click)="refundEvent(item.goods_list[0].tradegoods_id)" href="javascript:;" class="sc">退款</a>
+      <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id)" href="javascript:;" class="sc">退款</a>
 
-      <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认收货</a>
+      <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#ff971c">确认收货</a>
 
       <a *ngIf="model.tradestate==4" (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id)">去评价</a>
 		 	<a *ngIf="model.tradestate==4" (click)="buyagainEvent(item.goods_list[0].goods_id)" style="background-color:#ff971c">再次购买</a>
