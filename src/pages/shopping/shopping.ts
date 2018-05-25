@@ -83,6 +83,7 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation) {
       this.geolocation1 = Geolocation;
+      this.storage.set("currentPlace","深圳市")
     // this.getLunbo();
   } 
   //主页面加载函数 
@@ -107,7 +108,7 @@ export class ShoppingPage {
      })
 
       //初始显示旅游服务的商品列表
-     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=1';
+     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg ==="OK"){
           that.shoplist=data.list; 
@@ -124,10 +125,7 @@ export class ShoppingPage {
   ionViewDidLoad() {
      //this.getPosition();
     //给第一个商品分类hr
-    $('.facediv li:nth-of-type(1)').attr("class","active");
-    //  $("#sos_tanc").focus(function(){
-    //   $('#searchInput').show();
-    // })
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter(){
@@ -139,6 +137,7 @@ export class ShoppingPage {
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
+  //控制搜索页面的显示
   fanhui(){
       $(".remen_sos").css("display","none")
       $(".caid_img").css("display","block")
@@ -250,6 +249,7 @@ export class ShoppingPage {
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
+    console.log("w等于",w)
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 

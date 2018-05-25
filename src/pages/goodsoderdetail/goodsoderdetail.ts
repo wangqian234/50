@@ -9,6 +9,10 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+import { LoadingController } from 'ionic-angular';
+
+//添加商品退款申请
+import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
 
 @IonicPage()
 @Component({
@@ -25,9 +29,13 @@ export class GoodsoderdetailPage {
   public list=[];
   public model=[];
   public SD_id;
+  public TradegoodsReapPage=TradegoodsReapPage;
+  public tradegoodsid;//商品订单编号
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
+,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
           this.SD_id=navParams.get('id');
+          this.tradegoodsid=navParams.get('tradegoodsId');
 
   }
 
@@ -40,16 +48,24 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+loading.present();
     var j=3;
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
      //alert("王慧敏"+api);
      console.log("慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list[0];
-         data.model.trade_time = data.model.trade_time.replace("T"," ").substring(0,19);
          this.model=data.model;
+         //alert(JSON.stringify(data));
+         //this.good_list=data.list[0].goods_list;
+         //alert(JSON.stringify(data.list[0].goods_list));
+         // alert(JSON.parse(data));
          console.log(data);
      } else if(data.errcode === 40002){
               j--;
@@ -62,6 +78,11 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      }
      })
   }
+     //添加商品退款申请
+   addrefundEvent(tradegoods_id){
+    //  alert("五爷"+this.tradegoodsid);
+     this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
+   }
 
   ionViewDidLoad() {
    //this.onload2();

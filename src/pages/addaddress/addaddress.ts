@@ -57,14 +57,12 @@ export class AddaddressPage {
     this.getProvinces();
     if(this.navParams.get('item')){
       this.addressList=this.navParams.get('item');
-      console.log(JSON.stringify(this.navParams.get('item')))
       var ss = this.addressList.address.split("〡");
       this.addressList.province = ss[0];
       this.addressList.city = ss[1];
       var ss1 = ss[2].split("〢");
       this.addressList.district = ss1[0];
       this.addressList.address = ss1[1];
-      console.log(this.addressList);
     }
   }
 

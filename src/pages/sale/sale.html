@@ -36,34 +36,20 @@
           <p *ngIf="mode==3" class="bend" style="color:#979797">单价：<span>¥&nbsp;{{item.pricemin}}</span></p>
 					<p class="bend">已售：<span>{{item.whennum}}</span>份</p>
 					<p class="wp01" style="text-align:left">	团购结束时间：{{item.endtime | pipeTime}}</p>
-		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
 				</div>
-
 			</a>
-				
-		<!--</li>
-		<li *ngFor="let item of list" *ngIf="mode==3" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
-			<a>
-				<div class="lieb_img"><img src={{item.img}}></div>
-				<div class="lieb_txt">
-					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
-					<p class="bend">价格：<span>¥{{item.pricemin}}</span></p>
-          <p class="bend">已售：<span>{{item.whennum}}</span>份</p>
-					<p class="wp01" style="text-align:left">	团购结束时间：{{item.endtime | pipeTime}}</p>
-		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
-				<!--</div>
-
-			</a>
-				
-		</li>-->
-		
 	</ul>
 </div>
 </div>
+
+<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
 <ion-row>
-    <ion-col class="nodata" text-center *ngIf="!hasmore">
+    <ion-col class="nodata" text-center *ngIf="!hasmore" style="display:hidden">
       没有更多啦 ♪(^∇^*)
     </ion-col>
-  </ion-row>
+</ion-row>
 
 </ion-content>

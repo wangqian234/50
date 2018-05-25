@@ -31,8 +31,8 @@ page-shoppinglist {
 }
 
 #order-content .order-nav .type.current a{
-    color: red;
-    border-bottom: 2px solid red;
+    color: #ff971c;
+    border-bottom: 2px solid #ff971c;
 }
 
 #order-content .order-item{
@@ -130,8 +130,8 @@ page-shoppinglist {
 }
 
 #group-content .order-nav .type.current a{
-    color: red;
-    border-bottom: 2px solid red;
+    color: #ff971c;
+    border-bottom: 2px solid #ff971c;
 }
 
 #group-content .order-item{
@@ -218,13 +218,16 @@ page-shoppinglist {
     border-top-left-radius: 0.08rem;
 }
 .toub_beij_zy{
-    height:0.8rem
+    height:0.96rem
 }
 
     .nomore{
         font-size: 0.2rem;
         text-align: center;
         color: gray;
+    }
+    .gouwuc_kk_ddxq .diannao_shanp{
+        padding: 0 0.2rem 0.2rem 0.2rem;
     }
 
 }

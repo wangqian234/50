@@ -5,7 +5,7 @@
 	<div class="zhongj_k">
     <div class="logo_k" (click)="gotoPlace()"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
 		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="找房不麻烦，有我来帮忙">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="找房不麻烦，有我来帮忙">
             <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl" [navPush]="RentsalemyPage">

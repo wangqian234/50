@@ -46,6 +46,10 @@ export class RebuildpassPage {
     console.log('ionViewDidLoad RebuildpassPage');
   }
 
+  // ionViewDidEnter(){
+  //   this.navCtrl.push(UserPage);
+  // }
+
 //显示倒计时间
   ownRegist() {
     this.num = 60;

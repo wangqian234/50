@@ -66,7 +66,6 @@ export class RentsaleaddPage {
     var api = this.config.apiUrl + "/api/rental/add";
     this.http.post(api,this.RSadd).map(res => res.json()).subscribe(data => {
       loading.dismiss();
-      alert(data.errcode)
       if (data.errcode === 0 && data.errmsg === 'OK') {
        this.navCtrl.pop();
       } else if(data.errcode === 40002) {

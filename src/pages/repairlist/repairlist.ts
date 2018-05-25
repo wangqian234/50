@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import $ from 'jquery';
-import { LoadingController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //工单详情页
@@ -11,6 +10,7 @@ import { RepairaddPage } from '../repairadd/repairadd';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import {Http,Jsonp}from '@angular/http';
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-repairlist',
   templateUrl: 'repairlist.html',
@@ -20,9 +20,6 @@ export class RepairlistPage {
   public repairlist=[];
   public type="-1";
   public keywords='';
-  // public list1=[{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"},
-  //  {title:"123",price:"123"},{title:"123",price:"123"},{title:"123",price:"123"}];
 
   public cid='';/*获取分类id*/
   public page=1; /*分页*/
@@ -47,7 +44,7 @@ export class RepairlistPage {
   }
   ionViewDidEnter(){
     this.list = [];
-    this.page = 0;
+    this.page = 1;
     this.getProductList("")
   }
 
@@ -59,16 +56,18 @@ export class RepairlistPage {
     
   }
     getProductList(infiniteScroll){
-      let loading = this.loadingCtrl.create({
-	      showBackdrop: true,
-      });
-      loading.present();
+      // let loading = this.loadingCtrl.create({
+	    // showBackdrop: true,
+      //  });
+      // loading.present();
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
           if(data.errcode===0 && data.errmsg==="OK"){
           this.list=this.list.concat(data.list); /*数据拼接*/
+          console.log(this.list)
+          //console.log(this.page)
           if(infiniteScroll){
             //告诉ionic 请求数据完成
               this.page++;
@@ -80,12 +79,14 @@ export class RepairlistPage {
           }
         }else if(data.errcode === 40002){
             j--;
-          if(j>0){
+            if(j>0){
             this.config.doDefLogin();
             this.getProductList(infiniteScroll);
           }
         }else{
+          alert(data.errmsg)
         }
+        console.log(data.list)
         })
       }
 
@@ -101,6 +102,7 @@ export class RepairlistPage {
   }
     onSearchKeyUp(event){
     if("Enter"==event.key){
+      this.list= [];
       this.page=1;
      this.getProductList("");
     }

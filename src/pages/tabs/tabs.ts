@@ -36,7 +36,7 @@ export class TabsPage {
   }
 
 
-  ionViewWillEnter() {
+  ionViewWillEnter($ionicTabsDelegate) {
     $(".mytabs2").css("display","none")
   }
 

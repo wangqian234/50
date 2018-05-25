@@ -166,6 +166,12 @@ export class RentsalePage {
 
   }
 
+  onSearchKeyUp(event){
+    if("Enter"==event.key){
+     //进行关键字查找方法
+    }
+  }
+
   //跳转到租售详情页面
   goRentsaleInfo(id,type){
      this.navCtrl.push(RentsaleinfoPage,{
@@ -219,10 +225,4 @@ export class RentsalePage {
             
    });
  }
-
-   onSearchKeyUp(event){
-    if("Enter"==event.key){
-     alert("敬请期待")
-    }
-  }
 }

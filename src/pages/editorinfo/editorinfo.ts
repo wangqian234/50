@@ -77,14 +77,15 @@ export class EditorinfoPage {
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.model.birthday){
           data.model.birthday = data.model.birthday.substring(0,10);
+          this.personInfo = data.model
+            console.log(data.model);
         } else if(data.errcode === 40002){
           j--;
           if(j<0){
             this.config.doDefLogin();
             this.getUserInfo();
           } else {
-            this.personInfo = data.model
-            console.log(data.model);
+
           }
         }
         }

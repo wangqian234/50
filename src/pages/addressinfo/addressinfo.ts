@@ -48,7 +48,7 @@ export class AddressinfoPage {
         j--;
         if(j>0){
           this.config.doDefLogin();
-          // this.getHouseList();
+          this.getAddressInfo();
         } 
       } else {
         console.log(data.errmsg);
