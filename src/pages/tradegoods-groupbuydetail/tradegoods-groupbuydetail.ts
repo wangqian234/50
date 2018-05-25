@@ -8,6 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -23,7 +24,7 @@ export class TradegoodsGroupbuydetailPage {
     public list=[];
     public groupbuyid;
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         //this.trade_id=navParams.get('tradeId');
         this.groupbuyid=navParams.get('gbId');
         //this.getProductList('');//实现列表缓存
@@ -38,9 +39,14 @@ export class TradegoodsGroupbuydetailPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
      getdetaillist(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
      var api = this.aa+'/api/groupgoods/info?gbId='+this.groupbuyid+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.model;

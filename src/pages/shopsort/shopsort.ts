@@ -23,47 +23,44 @@ export class ShopsortPage {
   public fenllist=[];
   public wdh=this.config.apiUrl;
   public rightCate=[];  /*右侧分类数据*/
+  pid = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, 
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.getLeftCateData();/*获取左侧分类*/
   }
-ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-  //$('#cate_left li:nth-of-type(1)').attr("class","active");
+
+  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';}
- ionViewDidLoad() {
-       
-    }
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+  ionViewDidEnter() {
+    var aa = this.pid+1;
+    $('.cate_left ul li:nth-of-type(' + aa +')').attr("class","activety");
+  }
 
 
 //左侧分类的方法
 
   getLeftCateData(){
 
-       var api=this.wdh+'/api/goods_sort/list';
-      
-        this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg == 'OK'){
-         this.list = data.list;
-        //  alert(JSON.stringify(this.list));
-         console.log(data);
-     } else {
+    var api=this.wdh+'/api/goods_sort/list';
+    
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if(data.errmsg == 'OK'){
+        this.list = data.list;
+      } else {
         alert(data.errmsg);
-     }
-     })
-
-      // this.httpService.requestData(api,(data)=>{
-      //     console.log(data);
-      //     this.leftCate=data.result;
-
-      //  右侧内容的初始显示
-           this.getRightCateData(21,0);        
-      // })
+      }
+    })
+    //  右侧内容的初始显示
+    this.getRightCateData(21,0);
+    $('.cate_left ul li:nth-of-type(1)').attr("class","activety");
   }
 
 
   getRightCateData(pid,i){
+    this.pid = i;
      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
@@ -71,13 +68,11 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      $("#cate_left li").removeAttr("class");
     var span = "#cate_left li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-    //alert(pid);
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
-    loading.dismiss();
-         this.http.get(api).map(res => res.json()).subscribe(data =>{
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;
-         //alert(JSON.stringify(this.fenllist));
          console.log(data);
      } else {
         alert(data.errmsg);
@@ -89,19 +84,8 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   backTo(){
     this.navCtrl.pop();
   }
-  
 
 }
-
-
-  // getRightCateData(pid){
-  //   var api='api/pcate?pid='+pid;
-  //   this.httpService.requestData(api,(data)=>{
-  //     console.log(data);
-  //     this.rightCate=data.result;
-      
-  //   })
-  // }
   
 
 

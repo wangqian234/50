@@ -46,6 +46,12 @@ export class PayprefeePage {
       this.defRoomId=this.navParams.get('item');
       this.roomid=this.defRoomId;
       this.getroomId();
+    }else{
+      if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+    }
     }
   }
 

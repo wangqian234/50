@@ -4,15 +4,16 @@
 
 
 
-<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.8rem;">
+<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
 	<div class="zhongj_k">
 		<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>
 		<div class="shous_k">
             <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img (click)="doSomething()" src="assets/imgs/sos.png">
         </div>
-		<div class="dengl" (click)="gotoPlace()">
-			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
+		<div class="dengl">
+			<div class="caid_img"  (click)="gotoPlace()" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
+            <div class="fanhui" style="display:none" (click)="fanhui()" id="fanhui">返回</div>
 		</div>
 	</div>
 </div>
@@ -74,15 +75,15 @@
             <span class="p_shop2" [navPush]="ShopsortPage">更多>></span>
         </div>
         <ul style="margin-bottom:50px">
-        <li *ngFor= "let item of tuijList">
+        <li *ngFor= "let item of tuijList" style="height:3.19rem;">
             <a [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}">
-               <div><img style="width:100%" src="{{item.img}}"></div>
+               <div><img style="width:100%;height: 3.19rem;" src="{{item.img}}"></div>
             </a>
         </li>
     </ul>
 
     <div id="searchInput" class="remen_sos">
-        <div class="history" *ngIf="shopKeyList.toString().length != 0">
+        <div class="history" *ngIf="shopKeyList">
 		<p>历史搜索：</p><ion-icon (click)="clearShopKey()" name="trash"></ion-icon>
 			<ul>
 				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
@@ -92,12 +93,10 @@
         <div class="remen">
 		<p>热门搜索：</p>
 			<ul>
-				<li><a href="#">笔记本</a></li>
-				<li><a href="#">游戏本</a></li>
-				<li><a href="#">工作站笔记本</a></li>
-				<li><a href="#">平板电脑</a></li>
-				<li><a href="#">台式机</a></li>
-				<li><a href="#">一体机服务器</a></li>
+				<li><a href="#">旅游</a></li>
+				<li><a href="#">家政服务</a></li>
+				<li><a href="#">汇超市</a></li>
+				<li><a href="#">保洁</a></li>
 			</ul>
         </div>
 	</div>

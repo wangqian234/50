@@ -2,11 +2,6 @@ page-onlinepayment {
 .otherUser_content .item-ios{
         padding-left: 0;
     }
-    .fee_content{
-        float:left;
-        width:30%;
-        font-size: 0.26rem;
-    }
     .fee_num{
         margin-right: 4px;
         float: right;
@@ -17,31 +12,67 @@ page-onlinepayment {
         background-color: white;
         padding: 0.25rem;
         font-size: 0.28rem;
-        box-shadow: 0 0 2px 2px #ece7e7;
     }
     .fee_time{
         float:left;
-        width:70%;
+        width:60%;
         font-size: 0.23rem;
         padding-left: 15%;
+        margin-left: 0.51rem;
     }
     .fee_content{
         float:left;
-        width:30%;
+        width:40%;
         font-size: 0.23rem;
+        line-height: 0.24rem;
     }
     .user_title{
         display: inline;
-        font-size: 0.28rem;
+        color:#818181;
+        font-size: 0.22rem;
     }
     .appear{
         float: right;
         margin-right: 0.5rem;
+        color:#818181;
+        font-size: 0.22rem;
     }
     .list-ios{
         margin:0;
     }
     ion-list{
         margin-top: 0.2rem;
+    }
+
+        .toub_beij_zy{
+    border-bottom: solid 1px #2979FF !important;
+    }
+    .item-ios.item-block .item-inner{
+        border-bottom: 0.55px solid #2979FF !important;
+    }
+    .select-item{
+        background-color:#2979FF;
+        color:#F5F5F5;
+        height: 0.5rem;
+        margin-top: 0.08rem;
+    }
+    .shous_div{
+        background-color:#2979FF;
+        width:72%
+    }
+    .shous_k{
+        height:0.6rem !important;
+    }
+    .logo_k_fanh{
+        margin-top: 0.05rem;
+    }
+    .select-text{
+        font-size: 0.23rem;
+    }
+    .label-ios{
+        margin: 11px 0 11px 0;
+    }
+    .logo_k_fanh .fanh_ann{
+        margin: 0.15rem 0 0 0.3rem;
     }
 }

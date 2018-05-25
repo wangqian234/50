@@ -18,7 +18,7 @@ import { BindroomPage } from '../bindroom/bindroom';
 export class OnlinepaymentPage {
   public saveRoomId;
   public isChencked=false;
-  public allprice ;
+  public allprice = 0.0 ;
   //接收数据list
   public list =[];
   public roomidlist=[];
@@ -43,6 +43,13 @@ export class OnlinepaymentPage {
       this.roomid=this.defRoomId;
       this.getroomId();
       this.getPayList();
+    }else {
+      if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+     this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }
     }
   }
 
@@ -145,7 +152,7 @@ export class OnlinepaymentPage {
               for(var k = 0; k < that.dest[j].data.length; k++){
                 total = total + that.dest[j].data[k].price;
               }
-              that.dest[j].totalNum = total;
+              that.dest[j].totalNum = total.toFixed(2);
             }
             console.log(that.dest)
           }else{
@@ -229,10 +236,10 @@ export class OnlinepaymentPage {
     var totalprice = 0;
     for(let i=0;i<this.dest.length;i++){
       if(this.dest[i].checked==true){
-          totalprice += this.dest[i].totalNum;
+          totalprice = totalprice + parseFloat(this.dest[i].totalNum);
       }
     }
-    this.allprice = totalprice.toFixed(2).toString();
+    this.allprice = parseFloat(totalprice.toFixed(2));
   }
 
 }

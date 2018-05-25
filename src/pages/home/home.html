@@ -1,6 +1,6 @@
 <ion-content style="background-color:#F5F5F5">
 
-	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:0.96rem;">
 		<div class="zhongj_k">
 			<div class="shous_k  shous_div">
 				<ion-item class="select-item">
@@ -130,8 +130,8 @@
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
 			<img src="{{config.apiUrl}}{{newList.imgurl}}">
 			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
-			<span class="line"></span>
 		</div>
+		<div class="line"></div>
 	</div>
 	</div>
 	<div style="clear:both"></div>
@@ -151,169 +151,9 @@
 		<div (click)="getNewInfo(publicget.id)" class="zixun_li">
 			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
 			<span class="content">{{publicget.topic}} <br />{{publicget.adddate | pipeTime}}</span>
-			<span class="line"></span>
 		</div>
+		<span class="line"></span>
 	</div>
 	</div>
 	<div style="clear:both"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!--<div *ngIf="!enSureLogin"  class="bangding_title" ng-if=false>
-      <p>您还没有绑定房屋&nbsp;</p>
-      <button ion-button [navPush]="BindroomPage" class="button_bangding">立即绑定</button>
-    </div>
-<div *ngIf="enSureLogin" style="background-color:white">
-    <ion-item>
-		<ion-label>请选择房屋</ion-label>
-        <ion-select (ionChange)="changeRoom()" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
-        <ion-option value="add">--添加房屋--</ion-option>
-        </ion-select>
-    </ion-item>
-</div>
-
-<div #map id="map_container"></div>
-
-   <ion-slides *ngIf="focusList.length>0" class="focus" pager  loop="true" autoplay="3000">    
-      <ion-slide *ngFor="let item of focusList">
-          <img [src]="item" />
-      </ion-slide>         
-   </ion-slides>
-
-    <div class="fee">
-        <div class="fee1"><p>￥{{paymentList.totalFee}}</p><p>欠费总计</p></div>
-        <div class="fee2"><p>￥{{paymentList.totalPrepay}}</p><p>预存款总计</p></div>
-    </div>
-
-
-
-
-
-
-<div class="daohang_bd" style="background-color:white;margin:0;">
-	<ul>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/fee.png"></h1>
-				<p>物业缴费</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/prefee.png"></h1>
-				<p>费用预存</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/repair2.png"></h1>
-				<p>在线报修</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/suggest.png"></h1>
-				<p>投诉建议</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/pushroom.png"></h1>
-				<p>房源发布</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/myorder.png"></h1>
-				<p>我的订单</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/roommanger.png"></h1>
-				<p>房屋管理</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/massage.png"></h1>
-				<p>社区资讯</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/public.png"></h1>
-				<p>公示公告</p>
-			</a>
-		</li>
-		<li>
-			<a href="#">
-				<h1><img src="assets/imgs/opendoor.png"></h1>
-				<p>一键开门</p>
-			</a>
-		</li>
-	</ul>
-</div>
-
-
-    <div class="new_zixun">
-        <div class="bangding">
-            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;最新资讯&nbsp;&nbsp;&nbsp;—————</span>
-        </div>
-        <div id="order-content">
-            <div class="order-list">
-                    <div class="order-item" *ngFor="let newList of newsList">
-                        <div (click)="getNewInfo(newList.id)" class="goods clearfix zixun">
-                            <img src="{{config.apiUrl}}{{newList.imgurl}}" alt="">
-                            <p>{{newList.topic}}{{newList.addDate}}</p>
-                        </div>
-                    </div>
-            </div>
-        </div>
-
-        <div class="bangding" (click)="getNews()">
-            <span class="p_more">查看更多</span>
-        </div>
-    </div>
-      <ion-list inset class="user_list">
-      </ion-list>
-
-    <div class="new_zixun">
-        <div class="bangding">
-            <span class="p_bangding">—————&nbsp;&nbsp;&nbsp;公示公告&nbsp;&nbsp;&nbsp;—————</span>
-        </div>
-        <div id="order-content">
-            <div class="order-list">
-                    <div class="order-item" *ngFor="let newList of newList">
-                        <div class="goods clearfix zixun">
-                            <img src="{{config.apiUrl}}" alt="">
-                            <p>{{newList.topic}}{{newList.addDate}}</p>
-                        </div>
-                    </div>
-
-            </div>
-        </div>
-
-        <div class="bangding">
-            <span class="p_more">查看更多</span>
-        </div>
-    </div>
-      <ion-list inset class="user_list">
-      </ion-list>-->
 </ion-content>

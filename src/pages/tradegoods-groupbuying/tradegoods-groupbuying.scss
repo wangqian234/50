@@ -31,8 +31,8 @@ page-tradegoods-groupbuying {
 }
 
 #order-content .order-nav .type.current a{
-    color: red;
-    border-bottom: 2px solid red;
+    color: #ff971c;
+    border-bottom: 2px solid #ff971c;
 }
 
 #order-content .order-item{
@@ -130,8 +130,8 @@ page-tradegoods-groupbuying {
 }
 
 #group-content .order-nav .type.current a{
-    color: red;
-    border-bottom: 2px solid red;
+    color: #ff971c;
+    border-bottom: 2px solid #ff971c;
 }
 
 #group-content .order-item{
@@ -225,6 +225,10 @@ page-tradegoods-groupbuying {
         font-size: 0.2rem;
         text-align: center;
         color: gray;
+    }
+
+    .gouwuc_kk_ddxq .diannao_shanp{
+        padding: 0 0.2rem 0.2rem 0.2rem;
     }
 
 }
