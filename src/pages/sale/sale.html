@@ -46,10 +46,16 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>
 
+
+
+<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
 <ion-row>
-    <ion-col class="nodata" text-center *ngIf="!hasmore" style="display:hidden">
+    <ion-col class="nodata" text-center style="display:hidden">
       没有更多啦 ♪(^∇^*)
     </ion-col>
 </ion-row>
+
 
 </ion-content>

@@ -78,7 +78,7 @@ export class ShopgoodsinfoPage {
   public loadingCtrl: LoadingController) {
 
     this.wid=this.navParams.get("id")
-    //  alert(this.wid)
+      alert(this.wid)
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
           var w = document.documentElement.clientWidth || document.body.clientWidth;

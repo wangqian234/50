@@ -33,5 +33,12 @@
 	</ul>
 
 </div>
-  <div class="nomore">没有更多数据了...</div>
+<ion-row>
+    <ion-col class="nodata" text-center>
+      没有更多啦 ♪(^∇^*)
+    </ion-col>
+</ion-row>
+<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>

@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController, NavParams } from 'ionic-angular';
-import $ from 'jquery';
+import { NavController, NavParams } from 'ionic-angular';
+import $ from 'jquery';//实现列表缓存
+//请求数据
+import {Http,Jsonp}from '@angular/http';
+import { HttpServicesProvider } from '../../providers/http-services/http-services';
+import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
-import { Http } from '@angular/http';
+//config.ts
 import { ConfigProvider } from '../../providers/config/config';
+//StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+
 //商品购买页面
 import { ShopbuyPage } from '../shopbuy/shopbuy';
+//加载圈
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-cart',
@@ -47,14 +55,16 @@ export class CartPage {
     token:'',
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-  public config:ConfigProvider,public storage:StorageProvider, public http: Http) {
+  constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
+  public storage:StorageProvider,public loadingCtrl: LoadingController) {
+        
   }
 
   ionViewWillEnter(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-    this.getCartsData('');
+     this.getCartsData('');
+
   }
   
   ionViewDidLoad() {
@@ -62,24 +72,36 @@ export class CartPage {
   }
 
   getCartsData(infiniteScroll){
+        let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
+    
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
+        loading.dismiss();
+        if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
           this.hasData = false;
         }
         this.list=this.list.concat(data.list);  /*数据拼接*/
-        console.log(this.list);
+        console.log(this.list); 
+        if(data.list.length<10){
+          $('ion-infinite-scroll').css('display','none')
+        }else{
+            this.pageIndex++;
+        }
         if(infiniteScroll){
-          //告诉ionic 请求数据完成
-          infiniteScroll.complete();
-          if(data.result.length<10){  /*没有数据停止上拉更新*/
+          
+          infiniteScroll.complete();        //告诉ionic 请求数据完成
+          if(data.list.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
+            $('.nomore').css('display','block');
           }
-      };
-        this.pageIndex++
-      } else if(data.errcode === 40002) {
+        }
+      }
+ else if(data.errcode === 40002) {
           j--;
           if(j>0){
             this.config.doDefLogin();
@@ -141,10 +163,10 @@ export class CartPage {
       var tempAllPrice=0;
       for(let i=0;i<this.list.length;i++){
         if(this.list[i].checked==true){
-          tempAllPrice+=this.list[i].num*this.list[i].preprice;
+          tempAllPrice= tempAllPrice + this.list[i].num*this.list[i].preprice;
         }
       }
-      this.allPrice=tempAllPrice;
+      this.allPrice=parseFloat(tempAllPrice.toFixed(2));
   }
 
   //全选反选
