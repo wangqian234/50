@@ -23,7 +23,7 @@
 		</ion-slides>
 	</div>
 
-  	<div class="daohang_bd" style="background-color:white;margin:0;color:#646464">
+  	<div class="daohang_bd" style="margin:0;color:#646464;background-color:white;margin-top: 10px;">
 		<ul class="titleIcon">
 			<li (click)="gotoList(1)">
 				<a href="#">
@@ -59,24 +59,16 @@
       <li class={{tabTest.li02}} data-nav="payment" (click)="paymentEvent(3)"><a href="javascript:;">热门求购</a></li>
       <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(4)"><a href="javascript:;">热门求租</a></li>
   </ul>
-  	<!--<div class="zixun_content">
-		<div class="zixun_li" *ngFor="let house of houseInfo">
-			<img src="{{house.imgurl}}">
-			<span class="content">【{{house.district}}】 &nbsp;&nbsp;{{house.title}}</span>
-
-			<span class="line"></span>
-		</div>
-	</div>-->
 
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of houseInfo"  (tap)="goRentsaleInfo(house.id,house.type)">
 				<div class="lieb_img"><img src="{{house.imgurl}}"></div>
 				<div class="lieb_txt">
 					<p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>
-					<p class="bend" style="float:left">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
-					<p class="px26" style="float:right">¥ {{house.pricemin}}~{{house.pricemax | pipeMoney}}万<span> </span></p>
+					<p class="bend">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
 					<div style="clear:both"></div>
-					<p class="bend">{{house.area}}</p>
+					<p class="bend" style="float:left">{{house.area}}</p>
+					<p class="px26" style="float:right;font-size:0.22rem;color:#2979FF">¥ {{house.pricemin}}~{{house.pricemax | pipeMoney}}万<span> </span></p>
 				</div>
 		</li>
 	</ul>

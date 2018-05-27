@@ -5,6 +5,9 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 
+//登录页面
+import { LoginPage } from '../login/login';
+
 //wq房屋信息
 @Component({
   selector: 'page-houseinfo',
@@ -17,6 +20,7 @@ export class HouseinfoPage {
   public houseId;
   houseUser = [];
   projectinfo = [];
+  public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
   public storage:StorageProvider) {
@@ -32,6 +36,13 @@ export class HouseinfoPage {
     this.getProjectInfo();
     this. getUserRoom();
     this.getRoomUser();
+
+    //确认登录状态
+    if(this.storage.get('token')){
+
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
   }
 
   ionViewDidLoad() {

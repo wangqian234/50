@@ -84,6 +84,7 @@ export class HomePage {
   public RepairlistPage = RepairlistPage;
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
+  public LoginPage = LoginPage;
 
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;

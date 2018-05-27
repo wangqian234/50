@@ -15,10 +15,17 @@
 		</div>
 	</div>
 
-	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0" style="background-color:#448AFF;height:48px;">
+	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0 && enSureLoginHome" style="background-color:#448AFF;height:48px;">
 		<div class="zhongj_k" style="text-align:center;">
 			<p class="title_p">公元物业</p>
 			<p class="bangding_p" [navPush]="BindroomPage">请绑定房屋</p>
+		</div>
+	</div>
+
+	<div class="toub_beij toub_beij_zy" *ngIf="!enSureLoginHome" style="background-color:#448AFF;height:48px;">
+		<div class="zhongj_k" style="text-align:center;">
+			<p class="title_p">公元物业</p>
+			<p class="bangding_p" [navPush]="LoginPage">点击这里登录</p>
 		</div>
 	</div>
 
@@ -108,7 +115,7 @@
 		<div class="fee2" [navPush]="PayprefeePage">
 			<div class="fee21" >
 				<img src="assets/imgs/propertyPage/prefeeNum.png" style="float:left">
-				<p class="fee21_p1">预存款总计</p>
+				<p class="fee21_p1">预存款余额</p>
 				<p class="fee21_p2">￥{{paymentList.totalPrepay}}</p>
 			</div>
 		</div>
@@ -132,9 +139,9 @@
 			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
 		</div>
 		<div class="line"></div>
+		<div style="clear:both"></div>
 	</div>
 	</div>
-	<div style="clear:both"></div>
 
 <div class="zixun">
 	<div class="zixun_div" style="margin-top:10px;">
@@ -152,8 +159,8 @@
 			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
 			<span class="content">{{publicget.topic}} <br />{{publicget.adddate | pipeTime}}</span>
 		</div>
-		<span class="line"></span>
+		<div class="line"></div>
+		<div style="clear:both"></div>
 	</div>
 	</div>
-	<div style="clear:both"></div>
 </ion-content>

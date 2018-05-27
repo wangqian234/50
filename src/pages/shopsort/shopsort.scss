@@ -75,8 +75,9 @@ page-shopsort {
   color: #808080;
 }
 .shangp_lieb_k li .lieb_txt p.px26{
-  color: #FD3525;
-  font-size:0.22rem;
+  color: #FF730F;
+  font-size:0.24rem;
+  margin-top: 0.1rem;
 }
 .shangp_lieb_k li .lieb_txt{
   margin:0.15rem;
@@ -87,4 +88,12 @@ page-shopsort {
 .shangp_lieb_k_er li .lieb_txt{
    width:64%
 }
+}
+
+.chacha{
+    float: right;
+    width: 0.3rem;
+    position: absolute;
+    right: 0.4rem;
+    top: 0.36rem;
 }

@@ -20,6 +20,7 @@ public ShopgoodsinfoPage=ShopgoodsinfoPage;
 public list = [];
 public mode = 0 ;
 public page = 2;
+public lefttime = "";
  public tabTest={
     li00:"type current",
     li01:"type",
@@ -86,9 +87,10 @@ ifontime2(infiniteScroll){
      loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errmsg == 'OK'){
-         var newDate = new Date(data.list.endtime)
          this.list = data.list;
-         console.log(data);
+         for(var i=0;i<data.list.length;i++){
+           this.list[i].lefttime = this.leftTimer(data.list[i].endtime);
+         }
      } else {
         alert(data.errmsg);
      }
@@ -102,30 +104,32 @@ ifontime2(infiniteScroll){
     this.navCtrl.pop();
   }
 
-//   leftTimer(str){ 
-//     var newDate = (new Date(str)).getTime;
-//     var now = (new Date()).getTime;
-//     var leftTime = newDate - now;
-  
+  leftTimer(str){ 
+    var newDate = new Date(str).getTime();
+    var now = new Date().getTime();
+    var leftTime:any = newDate - now;
+    if(leftTime < 0){
+      return "已结束";
+    }
 
-//   var days = parseInt(leftTime / 1000 / 60 / 60 / 24 , 10); //计算剩余的天数 
-//   var hours = parseInt(leftTime / 1000 / 60 / 60 % 24 , 10); //计算剩余的小时 
-//   var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟 
-//   var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数 
-//   days = this.checkTime(days); 
-//   hours = this.checkTime(hours); 
-//   minutes = this.checkTime(minutes); 
-//   seconds = this.checkTime(seconds); 
-//   setInterval("leftTimer(2016,11,11,11,11,11)",1000); 
-//   document.getElementById("timer").innerHTML = days+"天" + hours+"小时" + minutes+"分"+seconds+"秒";  
-// } 
-// checkTime(i){ //将0-9的数字前面加上0，例1变为01 
-//   if(i<10) 
-//   { 
-//     i = "0" + i; 
-//   } 
-//   return i; 
-// } 
+    var days = parseInt((leftTime / 1000 / 60 / 60 % 24).toString()); //计算剩余的天数 
+    var hours = parseInt((leftTime / 1000 / 60 / 60 % 24).toString()); //计算剩余的小时 
+    var minutes = parseInt((leftTime / 1000 / 60 % 60).toString());//计算剩余的分钟 
+    var seconds = parseInt((leftTime / 1000 % 60).toString());//计算剩余的秒数 
+    // days = this.checkTime(days); 
+    // hours = this.checkTime(hours); 
+    // minutes = this.checkTime(minutes); 
+    // seconds = this.checkTime(seconds); 
+    //setInterval("leftTimer(2016,11,11,11,11,11)",1000); 
+    return days+"天" + hours+"小时" + minutes+"分";  
+  } 
+checkTime(i){ //将0-9的数字前面加上0，例1变为01 
+  if(i<10) 
+  { 
+    i = "0" + i; 
+  } 
+  return i; 
+} 
 
 doLoadMore(infiniteScroll){
   this.ifontime2(infiniteScroll);

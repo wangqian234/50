@@ -9,7 +9,9 @@ import { LoadingController, Loading } from 'ionic-angular';
 //找回密码页
 import { RebuildpassPage } from '../rebuildpass/rebuildpass'
 //注册页
-import { RegisterpasswordPage } from '../registerpassword/registerpassword'
+import { RegisterpasswordPage } from '../registerpassword/registerpassword';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @IonicPage()
 @Component({
@@ -34,6 +36,7 @@ public history='';
   }
 
   public loginNum : boolean;
+  public TabsPage = TabsPage;
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
@@ -135,7 +138,7 @@ public history='';
   }
 
   backTo(){
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(TabsPage);
   }
 
 }

@@ -7,6 +7,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
+
+//登录页面
+import { LoginPage } from '../login/login';
 @IonicPage()
 @Component({
   selector: 'page-payprefee',
@@ -22,6 +25,8 @@ export class PayprefeePage {
   public roomidlist=[];   /**用户绑定的房屋列表 */
   public roomId;       /**为其他房屋交费时选择的房屋id */
   public allPrice=0;
+
+  public LoginPage = LoginPage;
 
   //post请求
   public payrefeeList={
@@ -57,7 +62,13 @@ export class PayprefeePage {
 
     
     ionViewWillLoad(){
-    this.getRem();   
+    this.getRem();
+    //确认登录状态
+    if(this.storage.get('token')){
+
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
   }
 
   ionViewDidLoad() {

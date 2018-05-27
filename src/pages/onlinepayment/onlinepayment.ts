@@ -9,6 +9,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import $ from 'jquery';
 //绑定房屋
 import { BindroomPage } from '../bindroom/bindroom';
+//登录页面
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -25,6 +27,7 @@ export class OnlinepaymentPage {
   public iof_defList=[];
   public defRoomId='';
   public roomid;
+  public LoginPage = LoginPage;
   dest = [];
   checkNum = 0;
   pay={
@@ -56,6 +59,12 @@ export class OnlinepaymentPage {
   //主页面加载函数 
   ionViewWillLoad(){
     this.getRem();
+    //确认登录状态
+if(this.storage.get('token')){
+
+} else {
+this.navCtrl.push(LoginPage);
+}
   }
 
   ionViewDidLoad() {
