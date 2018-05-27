@@ -1,6 +1,6 @@
 //商品订单详情
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 
 //请求数据
@@ -29,6 +29,10 @@ import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
 import { TradegoodsGroupbuydetailPage } from '../tradegoods-groupbuydetail/tradegoods-groupbuydetail';
 //加载圈
 import { LoadingController } from 'ionic-angular';
+//登录页面
+import { LoginPage } from '../login/login';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 
 @Component({
@@ -52,6 +56,8 @@ export class ShoppinglistPage {
   public TradegoodsReapPage=TradegoodsReapPage;
   public TradegoodsGroupbuydetailPage=TradegoodsGroupbuydetailPage;//团购详情
   public ShopgoodsinfoPage=ShopgoodsinfoPage;//再次购买
+  public LoginPage = LoginPage;
+  public TabsPage = TabsPage;
   public offent;
     public addressList={
     trade_Id:'',
@@ -86,7 +92,8 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
+  ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
@@ -97,7 +104,6 @@ export class ShoppinglistPage {
 
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu){
-    alert("五爷"+wu);
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
     // alert(trade_id+"王慧敏"+tradegoods_id);
   }
@@ -184,6 +190,15 @@ loading.present();
    //修改地址
    modifyaddress(trade_id){
 
+   }
+
+   ionViewWillLoad(){
+     //确认登录状态
+    if(this.storage.get('token')){
+
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
    }
 
 
@@ -519,5 +534,8 @@ loading.present();
     this.navCtrl.pop();
   }
 
+  backToHere(){
+     this.app.getRootNav().push(TabsPage);
+  }
 
 }

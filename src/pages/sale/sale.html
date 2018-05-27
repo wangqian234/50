@@ -19,10 +19,10 @@
 <div class="shangp_lieb_beij">
 	<div class="sp_daoh" id="typediv">
 		<ul>
-			<li class="activety" data-nav="all" (click)="ifontime(0)"><a href="javascript:;">全部</a></li>
-      <li data-nav="payment" (click)="ifontime(1)"><a href="javascript:;">进行中</a></li>
-      <li data-nav="receive" (click)="ifontime(2)"><a href="javascript:;">即将开始</a></li>
-      <li data-nav="done" (click)="ifontime(3)"><a href="javascript:;">已结束</a></li>
+			<li class="activety" data-nav="all" (click)="ifontime(0)"><a class="titlea" href="javascript:;">全部</a></li>
+      <li data-nav="payment" (click)="ifontime(1)"><a class="titlea" href="javascript:;">进行中</a></li>
+      <li data-nav="receive" (click)="ifontime(2)"><a class="titlea" href="javascript:;">即将开始</a></li>
+      <li data-nav="done" (click)="ifontime(3)"><a class="titlea" href="javascript:;">已结束</a></li>
 			
 		</ul>
 	</div>
@@ -31,11 +31,13 @@
 			<a>
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
-					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
-					<p *ngIf="mode!=3" class="bend">抢购价：<span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;">¥{{item.pricemin}}</span></p>
-          <p *ngIf="mode==3" class="bend" style="color:#979797">单价：<span>¥&nbsp;{{item.pricemin}}</span></p>
-					<p class="bend">已售：<span>{{item.whennum}}</span>份</p>
-					<p class="wp01" style="text-align:left">	团购结束时间：{{item.endtime | pipeTime}}</p>
+					<p class="biao" style="height:0.7rem;">{{item.title}}</p>
+					<p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>
+					<div class="progress"><div class="enprogress"></div>已抢{{item.whennum}}份</div>
+					<div style="clear:both"></div>
+          			<p *ngIf="mode==3" class="bend" style="color:#979797">单价：<span>¥&nbsp;{{item.pricemin}}</span></p>
+					<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>
+					<span class="salespan">马上抢</span>
 				</div>
 			</a>
 	</ul>
@@ -46,16 +48,7 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>
 
-
-
-<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-</ion-infinite-scroll>
-<ion-row>
-    <ion-col class="nodata" text-center style="display:hidden">
-      没有更多啦 ♪(^∇^*)
-    </ion-col>
-</ion-row>
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
 
 
 </ion-content>

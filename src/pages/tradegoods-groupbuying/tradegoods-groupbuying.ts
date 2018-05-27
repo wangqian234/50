@@ -1,6 +1,6 @@
 //商品订单详情
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 
 //请求数据
@@ -25,6 +25,8 @@ import { TradegoodsEvaluatedetailPage } from '../tradegoods-evaluatedetail/trade
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
 //团购订单详情
 import { TradegoodsGroupbuydetailPage } from '../tradegoods-groupbuydetail/tradegoods-groupbuydetail';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-tradegoods-groupbuying',
@@ -80,7 +82,7 @@ export class TradegoodsGroupbuyingPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,  public app: App,
    public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
    public loadingCtrl: LoadingController) {
         this.SD_id=navParams.get('id');
@@ -426,6 +428,10 @@ export class TradegoodsGroupbuyingPage {
   }
   backTo(){
     this.navCtrl.pop();
+  }
+
+      backToHere(){
+     this.app.getRootNav().push(TabsPage);
   }
 
 }

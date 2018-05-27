@@ -1,7 +1,7 @@
 
 
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
 		  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -22,22 +22,21 @@
 	<ul class="shangp_lieb_k_er">
 		<li *ngFor="let item of list" [navPush]='GroupdetailPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">
-				<div class="lieb_img"><img src={{item.img}}></div>
+				<div class="topimg"><img src={{item.img}}></div>
 				<div class="lieb_txt">
-					<p class="biao" style="white-space:nowrap">{{item.title}}</p>
-          			<p class="bend"><span>{{item.num}}人团</span>   已售出：{{item.soldnum}}件</p>
-					<p class="px23">团购惊喜价：<span style="color:#e10601">¥{{item.price}}</span></p>
-		  <!--<p class="px26">{{item.recommend | pipeMultiple}}</p>-->
+					<p class="biao"><span>【{{item.num}}人团】</span>&nbsp;&nbsp;{{item.title}}</p>
+          			<div style="clear:both"></div>
+					<p class="px23"><span>¥{{item.price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;已拼{{item.soldnum}}份</p>
+					<span class="salespan">马上抢</span>
 				</div>
 			</a>
 		</li>
 	</ul>
 </div>
- 	<ion-row>
-    <ion-col class="nodata" text-center >
-      没有更多啦 ♪(^∇^*)
-    </ion-col>
-  </ion-row>
+
+
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
+
 	  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
   	  </ion-infinite-scroll>

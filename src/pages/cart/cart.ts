@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import $ from 'jquery';//实现列表缓存
+import { IonicPage,NavController, NavParams, App } from 'ionic-angular';
+import $ from 'jquery';
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ChangeDetectorRef } from '@angular/core'; //更新页面
+
 
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
@@ -13,6 +14,10 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 //商品购买页面
 import { ShopbuyPage } from '../shopbuy/shopbuy';
+
+//返回首页
+import { TabsPage } from '../tabs/tabs'
+
 //加载圈
 import { LoadingController } from 'ionic-angular';
 
@@ -24,6 +29,7 @@ export class CartPage {
 
   //跳转页面
   public ShopbuyPage=ShopbuyPage;
+  public TabsPage = TabsPage;
   pageSize = 10;
   pageIndex = 1;
   checked =false;
@@ -56,8 +62,8 @@ export class CartPage {
   }
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
-  public storage:StorageProvider,public loadingCtrl: LoadingController) {
-        
+  public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
+
   }
 
   ionViewWillEnter(){
@@ -274,6 +280,10 @@ buy(){
   //加载更多
   doLoadMore(infiniteScroll){
     this.getCartsData(infiniteScroll);
+  }
+
+    backToHome(){
+     this.app.getRootNav().push(TabsPage);   
   }
    
 
