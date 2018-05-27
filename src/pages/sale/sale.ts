@@ -19,84 +19,65 @@ export class SalePage {
 public ShopgoodsinfoPage=ShopgoodsinfoPage;
 public list = [];
 public mode = 0 ;
-public page = 2;
-public lefttime = "";
- public tabTest={
-    li00:"type current",
-    li01:"type",
-    li02:"type",
-    li03:"type",
-   
-  };
+
+public page = 1;
+
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController) {
   }
 //抢购时间判断
 ifontime(mode){
+  $('ion-infinite-scroll').css('display','block');
+  
   this.list = [];
+  this.page=1;
   this.mode = mode;
-    $("#typediv ul li").removeAttr("class");
+     $("#typediv ul li").removeAttr("class");
     var span = "#typediv ul li:nth-of-type(" + ++mode +")"
     $(span).attr("class","activety");
-  let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-   loading.present();
-    var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode='+ --mode +'&curCityCode=4403';
-     loading.dismiss(); 
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg == 'OK'){
-         this.list = data.list;
-         console.log(data);
-     } else {
-        alert(data.errmsg);
-     }
-     })
+    this.ifontime2("");
+
+
 }
 
 ifontime2(infiniteScroll){
-    var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg == 'OK'){
-        this.list=this.list.concat(data.list); /*数据拼接*/
-         console.log(data);
-          if(infiniteScroll){
-            //告诉ionic 请求数据完成
-              this.page++;
-            infiniteScroll.complete();
-            if(data.list.length<10){  /*没有数据停止上拉更新*/
-              infiniteScroll.enable(false);
-              $('.nomore').css('display','block');
-            }
-          }
-     } else {
-        alert(data.errmsg);
-     }
-     })
-}
- ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-
    let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
    loading.present();
-     var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&mode=0&curCityCode=4403';
-     loading.dismiss();
+   var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
+
+   loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg == 'OK'){
-         this.list = data.list;
-         for(var i=0;i<data.list.length;i++){
-           this.list[i].lefttime = this.leftTimer(data.list[i].endtime);
-         }
-     } else {
+            if(data.errcode===0 && data.errmsg==="OK"){
+
+        this.list=this.list.concat(data.list);  /*数据拼接*/
+        
+        if(data.list.length<10){
+          $('ion-infinite-scroll').css('display','none')
+        }else{
+            this.page++;
+        }
+        if(infiniteScroll){         
+          infiniteScroll.complete();        //告诉ionic 请求数据完成
+          if(data.list.length<10){  /*没有数据停止上拉更新*/
+            // infiniteScroll.enable(false);
+            $('ion-infinite-scroll').css('display','none')
+            $('.nomore').css('display','block');
+          }
+        }
+      } else {
         alert(data.errmsg);
      }
      })
-  }
+}
+//  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+//   }
   ionViewDidLoad() {
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    this.ifontime2("");
    
   }
 

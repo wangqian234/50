@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 
 //请求数据
@@ -12,6 +12,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 //团购订单详情
 import { TradegoodsGroupbuydetailPage } from '../tradegoods-groupbuydetail/tradegoods-groupbuydetail';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -39,8 +41,10 @@ export class TradegoodsGroupbuyPage {
   };
 
   public TradegoodsGroupbuydetailPage=TradegoodsGroupbuydetailPage;
+  public TabsPage = TabsPage;
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
+  public app: App,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         //this.trade_id=navParams.get('tradeId');
         this.SD_id=navParams.get('id');
         this.getProductList('');//实现列表缓存
@@ -198,5 +202,9 @@ export class TradegoodsGroupbuyPage {
 
   backTo(){
     this.navCtrl.pop();
+  }
+
+    backToHere(){
+     this.app.getRootNav().push(TabsPage);
   }
 }

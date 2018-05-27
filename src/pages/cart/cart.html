@@ -46,9 +46,14 @@
  					</div>
  				</div>
  			</div>
-  </li>
+  		</li>
 	</ul>
-		 </div>
+</div>
+
+	  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  	  </ion-infinite-scroll>
+	
 </ion-content>
 	
 <div class="dib_daoh_b">
@@ -67,6 +72,8 @@
 			</div>
 		</div>
 	</div>
+
+
 </div>
 
 

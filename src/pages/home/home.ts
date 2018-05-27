@@ -34,7 +34,7 @@ import { LoadingPage } from '../loading/loading';
 import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 import { LoadingController } from 'ionic-angular';
 //测试页面跳转到shopmallist
-import { TestPage } from '../test/test';
+// import { TestPage } from '../test/test';
 
 import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
 
@@ -76,7 +76,7 @@ export class HomePage {
   defRoomId = "";
   public roomidlist=[];/**数组  所有房屋 */
   //跳转页面
-  public TestPage =TestPage
+  // public TestPage =TestPage
   public RepairaddPage = RepairaddPage;
   public BindroomPage = BindroomPage;
   public PayfeePage=PayfeePage;
