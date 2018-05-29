@@ -4,23 +4,31 @@ page-shopsort {
     min-height: 3rem;
   }
   .cate_content{
+    padding-top: 10px;
     overflow-y: hidden;
     position: relative;
     height:100%;
+    width:100%;
+    background-color: #f5f5f5;
+    padding-right: 10px;
   }
   .cate_left{
     width: 25%;
-    background-color: #f5f5f5;
     position: absolute;
     overflow-y: auto;
     height: -webkit-fill-available;
     margin-bottom: 30px;
+    margin-right: 10px;
     ul{
+      margin-right: 10px;
       li{
-        line-height: 0.7rem;
-        font-size: 0.28rem;
+        line-height: 0.69rem;
+        font-size: 0.24rem;
         vertical-align: middle;
         text-align: center;
+        color: #808080;
+        background-color: white;
+        margin-bottom: 5px;
       }
     }
   }
@@ -39,13 +47,40 @@ page-shopsort {
   background-color:#f5f5f5
 }
 .cate_right{
-  margin-left:  25%;
   height: -webkit-fill-available;
   margin-left: 25%;
   overflow-y: auto;
 }
 .activety {
-background-color: white;
+  border-left: 4px solid #FF971C;
+  color:#FF971C !important;
+}
+.shangp_lieb_k li .lieb_img{
+  height:1.46rem;
+  width:100%;
+  padding-left: 0;
+}
+.shangp_lieb_k li{
+  padding:0;
+  margin-left: 0;
+  width:48%;
+  background-color: white;
+  margin: 0 1%;
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 3px;
+}
+.shangp_lieb_k li .lieb_txt p{
+  font-size: 0.18rem;
+  color: #808080;
+}
+.shangp_lieb_k li .lieb_txt p.px26{
+  color: #FF730F;
+  font-size:0.24rem;
+  margin-top: 0.1rem;
+}
+.shangp_lieb_k li .lieb_txt{
+  margin:0.15rem;
 }
 .shangp_lieb_k_er li .lieb_img{
   width:35%
@@ -53,4 +88,12 @@ background-color: white;
 .shangp_lieb_k_er li .lieb_txt{
    width:64%
 }
+}
+
+.chacha{
+    float: right;
+    width: 0.3rem;
+    position: absolute;
+    right: 0.4rem;
+    top: 0.36rem;
 }

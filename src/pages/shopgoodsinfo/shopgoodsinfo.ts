@@ -60,7 +60,6 @@ export class ShopgoodsinfoPage {
     gId:"",
     gsId:"",
     goodsNum:1,
-
   }
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -78,22 +77,24 @@ export class ShopgoodsinfoPage {
   public loadingCtrl: LoadingController) {
 
     this.wid=this.navParams.get("id")
+      alert(this.wid)
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-          var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-       let loading = this.loadingCtrl.create({
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
 loading.present();
       //显示商品详情页面
       this.goodsInfo();
       this.recommend();
-loading.dismiss();
+      loading.dismiss();
   }
   //显示商品详情页面
   goodsInfo(){
     var that =this;
+    var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
@@ -148,7 +149,8 @@ enterShop(wid,sid){
 //   alert("id"+this.wid);
   this.navCtrl.push(ShopinfoPage,{
     wid: this.wid,
-    sid: this.sid
+    sid: this.sid,
+    
 
   });
 }
@@ -192,7 +194,7 @@ fenge(str){
  //购买
    buygoods(){ 
     this.buylist.token=this.token;
-    this.buylist.gId=this.navParams.get("id");
+    this.buylist.gId=this.navParams.get('id');
     this.buylist.type="detail";
     this.buylist.gsId=this.goodSize;
         var j=3;
@@ -208,10 +210,13 @@ fenge(str){
             this.http.get(api).map(res => res.json()).subscribe(data =>{
                //if(data.errcode === 0 && data.errmsg === 'OK'){
                   //alert("可以购买!");
-       this.navCtrl.push(ShopbuyPage);
-      // }else{
-      //   alert(data.errmsg);
-      // }
+        this.navCtrl.push(ShopbuyPage,{
+          wid: this.buylist.gId,
+          sid: this.buylist.gsId,
+          gnum:this.buylist.goodsNum,
+
+  });
+      
             })
       }else if(data.errcode === 40002){
               j--;
@@ -224,7 +229,7 @@ fenge(str){
         alert(data.errmsg);
       }
      });
-    
+   
      
   }
   ionViewDidLoad() {

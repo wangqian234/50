@@ -59,7 +59,7 @@ body{background-color: #fff;min-height: 100%; }
 
 .zhongj_k{
 	padding: 0.1rem;
-	height: 0.68rem;
+	height: 0.96rem;
 }
 
 .logo_k{width: 26%;float: left;height: 0.68rem;}
@@ -519,7 +519,7 @@ left: 0;}
 .logo_k_fanh .fanh_ann{
 	width: 0.20rem;
     height: 0.38rem;
-    margin: 0.15rem 0 0 0.3rem;}
+    margin: 0.1rem 0 0 0.3rem;}
 .zhongj_k_tanc{border-bottom: solid 1px #e2e2e2;}
 .shous_k_ganc{width: 75%;}
 .shous_k .sous_ann_k{    width: 0.5rem;display: block; float: right;height: 0.48rem;}

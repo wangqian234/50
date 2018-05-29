@@ -10,6 +10,7 @@
 					<li><a class="px24 zyyge">购物车</a></li>  
 				</ul>
 			</div>
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div> 
 	</div>
 </div>
@@ -23,10 +24,10 @@
  				<i class="i1 i1-i" (tap)="changeCarts()">
 					<dt>
 					<ion-checkbox color="danger" [(ngModel)]="item.checked" (ionChange)="changeCarts()"></ion-checkbox>
-					<img [src]=" "/>
+					<img [src]=""/>
 					</dt> 
 				 </i>
- 				<h1><img src="assets/imgs/001.jpg"></h1>
+ 				<h1><img [src]="item.img"></h1>
  				<div class="you">
  					<p class="px24 bt">{{item.title}}</p>
  					<p class="xh">{{item.size_name}}</p>  <!--删除--> <ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
@@ -34,7 +35,7 @@
 						 
 						 <!--<button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  -->
 						<div class="goum_sl">
-							<p class="px26 jiaq">￥{{item.price}}</p>
+							<p class="px26 jiaq">￥{{item.preprice}}</p>
 							<div class="counter_box">
 								<!--数量-->
 								<i class="jian" (tap)="decCount(item)">-</i>
@@ -45,9 +46,14 @@
  					</div>
  				</div>
  			</div>
-  </li>
+  		</li>
 	</ul>
-		 </div>
+</div>
+
+	  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  	  </ion-infinite-scroll>
+	
 </ion-content>
 	
 <div class="dib_daoh_b">
@@ -66,6 +72,8 @@
 			</div>
 		</div>
 	</div>
+
+
 </div>
 
 

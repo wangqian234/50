@@ -7,16 +7,25 @@ page-sale {
     pointer-events: auto;
 }
 .shangp_lieb_k_er li {
-    margin: 0.2rem 0;
-    padding-bottom: 0.2rem;
-    border-bottom: solid 1px #dedede;
+    margin: 10px 0;
+    padding: 0.13rem 0.24rem;
     overflow: hidden;
-    height: 1.7rem;
+    height: 1.9rem;
+    background-color: white;
+}
+
+.shangp_lieb_k_er li .lieb_txt{
+    padding-left: 0.2rem;
+}
+
+.shangp_lieb_k_er li .lieb_img img{
+    height:1.6rem;
+    width:2.07rem;
 }
 
 .shangp_lieb_k_er li .lieb_txt p {
-    color: #555;
-    font-size: 0.28rem;
+    font-size: 0.22rem;
+    color: #333333;
     line-height: 0.35rem;
     text-align: justify;
 }
@@ -40,16 +49,77 @@ page-sale {
 .shangp_lieb_k_er li .lieb_txt p.bend {
     color: #979797;
     font-size: 0.24rem;
+    margin-top: 0.12rem;
+    float:left;
 }
 .shangp_lieb_k_er li .lieb_txt p.bend span{
-    color: #e10601;
-   font-size: 0.26rem;
+    font-size: 0.24rem;
+    color: rgba(255,115,15,1);
 }
 .wp01{
    color: #e10601 !important;
    font-size: 0.23rem !important;
 }
+.shangp_lieb_beij .sp_daoh{
+    height: 0.73rem;
+    background-color: white;
+    border-bottom: none;
+}
 .activety {
-border-bottom: 3px solid #FF971C;
+    border-bottom: 3px solid #FF971C;
+    a{
+    color:#FF971C;
+    }
+}
+.titlea{
+    font-size:0.22rem;
+    font-family:MicrosoftYaHei;
+    color:rgba(51,51,51,1);
+    line-height:0rem;
+}
+.shangp_lieb_k_er{
+    margin:0;
+}
+.shangp_lieb_k_er li .lieb_img{
+    width: 2.07rem;
+    height: 1.6rem; 
+}
+.leftspan{
+    float: left;
+    font-size: 0.18rem !important;
+    margin-top: 0.05rem;
+    margin-left: 0.05rem;
+}
+.progress{
+    height: 0.3rem;
+    width: 45%;
+    background: #FFD7D3;
+    float: right;
+    margin-top: 0.1rem;
+    border-radius: 0.1rem;
+    font-size: 0.14rem;
+    color: #FE867C;
+    line-height: 0.3rem;
+    text-align: center;
+}
+.enprogress{
+    background: #FE867C;
+    border-radius: 0.1rem;
+    //height:0.3rem;
+}
+.salespan{
+    float: right;
+    background-color: #FF730F;
+    width: 0.9rem;
+    height: 0.37rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.2rem;
+    color: #FEFEFE;
+    border-radius: 0.05rem;
+    line-height: 0.37rem;
+    margin-top: 0.07rem;
 }
 }
+
+

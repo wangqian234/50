@@ -52,23 +52,24 @@ page-shopping {
 #mallhome-content .goods-list .goods-item{
     padding: 3px 1.3px;
     border-bottom: 1px solid #EFEDED;
+    padding: 10px 15px;
 }
 
 #mallhome-content .goods-list .goods-item img{
-    width: 30%;
-    height: 1.6rem;
+    width: 35%;
+    height: 1.67rem;
     float: left;
     border-radius: 2px;
 }
 
 #mallhome-content .goods-list .goods-item .information{
-    margin-left: 32%;
-    width: 68%;
+    margin-left: 38%;
+    width: 60%;
     word-break:break-all; 
 }
 
 #mallhome-content .goods-list .goods-item .information .name{
-    font-size: 0.28rem;
+    font-size: 0.25rem;
     color: #FF971C;
     white-space: nowrap;
     text-overflow:ellipsis;
@@ -85,25 +86,25 @@ page-shopping {
     overflow:hidden;
     font-size:0.2rem;
     color:rgba(158,158,158,1);
-    line-height:0.37rem;
+    line-height:0.4rem;
     font-family:MicrosoftYaHei;
     span{
         float:right;
         color:white;
         background: #FF971C;
-        border-radius: 0.05rem;
+        border-radius: 0.5rem;
+        font-size: 0.15rem;
         position: absolute;
         margin-right: 5%;
-        margin-top: 0.15rem;
-        padding: 0.06rem;
+        padding: 0.08rem 0.1rem;
         right: 0;
     }
 }
 
 #mallhome-content .goods-list .goods-item .information .price{
     font-size: 0.28rem;
-    color: rgba(253,53,37,1);
-    line-height: 0.3rem
+    color: #FD3525;
+    margin-top: 0.1rem;
 }
 
 #mallhome-content .goods-list .goods-item .information .price span{
@@ -114,7 +115,7 @@ page-shopping {
    font-family:MicrosoftYaHei;
     font-size: 0.2rem;
     color: rgba(158,158,158,1);
-    line-height:0.37rem;
+    line-height:0.4rem;
 }
 
 #mallhome-content .main-nav{
@@ -351,23 +352,26 @@ page-shopping {
     float:left;
     height:3.5rem;
     background-color: white;
-    padding:7px;
+    padding:7px 0;
 }
 .tupian-div img:nth-child(1){
-    width: 45%;
-    float:left;
-    height:100%;
+    width: 43%;
+    float: left;
+    height: 100%;
+    margin-right: 2%;
 }
 .tupian-div2 {
     height:100%;
 }
 .tupian-div2 img:nth-child(1){
     width: 55%;
-    height: 50%;
+    height: 49%;
+    margin-right: 0;
+    margin-bottom: 1%;
 }
 .tupian-div2 img:nth-child(2){
     width: 55%;
-    height: 50%;
+    height: 49%;
 }
 .facediv{
     background-color: white;
@@ -396,7 +400,7 @@ page-shopping {
     }
 }
 .activety {
-border-bottom: 3px solid #FF971C;
+border-bottom: 4px solid #FF971C;
 }
 .facediv img{
     width:0.8rem;
@@ -410,18 +414,18 @@ border-bottom: 3px solid #FF971C;
 .titleshop{
     margin-top: 10px;
     background-color: white;
-    border-bottom: 1px solid #efeded;
+    border-bottom: 4px solid #efeded;
     padding: 0.22rem 0.2rem 0 0.2rem;
     height:0.76rem;
     img{
         float: left;
-        margin-top: -0.1rem;
+        margin-top: -0.05rem;
         width: 0.35rem;
-        height: 0.5rem;
+        height: 0.4rem;
     }
 }
 .p_shop{
-    font-size: 0.32rem;
+    font-size: 0.3rem;
     font-family: MicrosoftYaHei-Bold;
     font-weight: Bold;
     color: #FF971C;
@@ -489,31 +493,35 @@ border-bottom: 3px solid #FF971C;
 }
 .shous_k{
     background: #ffb661;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     width: 64%;
+    height:0.57rem;
+    margin-top: 0.05rem;
 }
 .logo_k{
-    width:18%;
+    width:16.5%;
 }
 .logo_k img{
-    height:0.48rem;
-    width:0.48rem;
+    height:0.34rem;
+    width:0.4rem;
     float:left;
-    margin-right: 0.03rem;
+    margin-right: 0.07rem;
+    margin-top: 0.16rem;
 }
 .logo_k p{
     color: #ffffff;
     font-size: 0.23rem;
-    margin-top: 0.24rem;
-    margin-left: 0.1rem;
+    line-height: 0.24rem;
+    margin-top: 0.22rem;
 }
 .dengl{
     width:18%;
 }
 .dengl .caid_img img{
-    height:0.37rem;
-    width:0.37rem;
-    margin-top: 0.16rem;
+    height:0.31rem;
+    width:0.23rem;
+    margin-top: 0.17rem;
+    margin-right: 0.07rem;
     float:left;
 }
 .dengl .caid_img{
@@ -523,7 +531,8 @@ border-bottom: 3px solid #FF971C;
 .caid_img p{
     color: #ffffff;
     font-size: 0.23rem;
-    margin-top: 0.24rem;
+    line-height: 0.24rem;
+    margin-top: 0.21rem;
     white-space:nowrap;
     word-break: keep-all;
     overflow: hidden;
@@ -531,15 +540,15 @@ border-bottom: 3px solid #FF971C;
 }
 .shous_k img{
     float: right;
-    height:0.4rem;
-    width:0.4rem;
-    margin-top:0.04rem;
-    margin-right:0.04rem;
+    height: 0.3rem;
+    width: 0.3rem;
+    margin-top: 0.12rem;
+    margin-right: 0.1rem;
 }
 .shous_k input{
     width: 80%;
-    height:0.45rem;
-    margin-left: 3%;
+    height:0.57rem;
+    margin-left: 5%;
 }
 ion-slides{
      height: 3rem;;

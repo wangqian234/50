@@ -5,7 +5,8 @@ page-user{
 .user_list span{
     position: absolute;
     left: 0.6rem;
-    font-size: 0.25rem
+    font-size: 0.25rem;
+    color:#646464;
 }
 .user_bg{
   position:absolute;
@@ -70,7 +71,7 @@ ion-item-divider{
     min-height: 0;
 }
 .input-wrapper{
-    border-bottom: 1px solid gainsboro;
+    border-bottom: 1px solid #F5F5F5;
 }
 .list-ios[inset] .item {
      border-bottom: none; 
@@ -90,6 +91,7 @@ ion-item-divider{
     height:0.7rem;
     background-color: white;
     padding: 0.2rem 0.4rem;
+    color:#646464;
     img{
         width:0.4rem;
         height:0.3rem;
@@ -132,7 +134,7 @@ ion-item-divider{
 }
 
 .buttondiv{
-background-color: #008CBA; /* Green */
+    background-color: #008CBA;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -140,5 +142,5 @@ background-color: #008CBA; /* Green */
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-}    
+}
 }

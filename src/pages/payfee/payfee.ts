@@ -14,6 +14,8 @@ import { PayprefeePage } from '../payprefee/payprefee';
 import { BindroomPage } from '../bindroom/bindroom';
 //在线缴费
 import { OnlinepaymentPage } from '../onlinepayment/onlinepayment';
+//登录页面
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-payfee',
@@ -37,6 +39,7 @@ export class PayfeePage {
   public iof_defList=[];
   
   public PayprefeePage = PayprefeePage;
+  public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
@@ -51,6 +54,12 @@ export class PayfeePage {
   //主页面加载函数 
   ionViewWillLoad(){
     this.getRem();
+      //确认登录状态
+      if(this.storage.get('token')){
+
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
   }
 
   ionViewDidLoad() {

@@ -4,9 +4,10 @@
 
 
 
-<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.8rem;">
+<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
 	<div class="zhongj_k">
-		<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>
+		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
+        <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
 		<div class="shous_k">
             <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img (click)="doSomething()" src="assets/imgs/sos.png">
@@ -41,7 +42,7 @@
             <div class="titleshop">
                 <img src="assets/imgs/recommend.png">
                 <span class="p_shop">&ensp;推荐分类</span>
-                <span class="p_shop2" [navPush]="ShopsortPage">更多>></span>
+                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
             </div>               
         <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
@@ -72,12 +73,12 @@
         <div class="titleshop">
             <img src="assets/imgs/recommend.png">
             <span class="p_shop">&ensp;精品推荐</span>
-            <span class="p_shop2" [navPush]="ShopsortPage">更多>></span>
+            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
         </div>
         <ul style="margin-bottom:50px">
-        <li *ngFor= "let item of tuijList">
+        <li *ngFor= "let item of tuijList" style="height:3.19rem;">
             <a [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}">
-               <div><img style="width:100%" src="{{item.img}}"></div>
+               <div><img style="width:100%;height: 3.19rem;" src="{{item.img}}"></div>
             </a>
         </li>
     </ul>

@@ -10,6 +10,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+import { LoadingController } from 'ionic-angular';
+
 //商品退款详情
 import {TradegoodsRefundPage}from '../tradegoods-refund/tradegoods-refund';
 //商品订单列表
@@ -49,7 +51,8 @@ export class TradegoodsReapPage {
     //定义token
   public token=this.storage.get('token');
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
+,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
             this.tradegoods_id=navParams.get('tradegoodsId');
             this.reapList.tgId=this.tradegoods_id;
   }
@@ -71,19 +74,21 @@ export class TradegoodsReapPage {
   }
   //添加商品退款申请
   addRefundApplicationEvent(){
-      //alert("评价添加");
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true,
+      });
+      loading.present();
       var j=3;
       var api = this.aa+'/api/tradegoods_refund/add';
-      this.reapList.token = this.token;
       //this.reapList.mode=this.refundList.refund_mode;
       //this.reapList.type=this.refundList.refund_type;
       //this.reapList.price=this.refundList.refund_price;
       this.reapList.act="add";
       this.reapList.token=this.token;
       //var date = this.evaluateList;
-      alert("王慧敏"+JSON.stringify(this.reapList));
+      // console.log("五爷"+JSON.stringify(this.reapList));
       this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
-        alert(JSON.stringify(data));
+        loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("添加成功！");
           this.navCtrl.push(ShoppinglistPage,{id:2});

@@ -2,7 +2,7 @@ page-home{
     margin: 0px;
     padding:0px;
     .daohang_bd ul li p{ 
-     font-size: 0.23rem;
+        font-size: 0.18rem;
     }
 .zixun{
     background-color: white;
@@ -13,6 +13,7 @@ page-home{
 .select-item{
     background-color:#2979FF;
     color:#F5F5F5;
+    margin-top: 0.11rem;
 }
 .shous_div{
     margin-left:10% !important;
@@ -37,77 +38,79 @@ page-home{
  }
 
 .zixun_div{
-width:100%;
-height:1rem;
-background-color:rgba(255,255,255,1);
+    width:100%;
+    height:1rem;
+    background-color:rgba(255,255,255,1);
 }
 .zixun_div .zixun_title{
-float:left;
-margin-left:0.22rem;
-height:100%;width:100%;
+    float:left;
+    margin-left:0.22rem;
+    height:100%;width:100%;
 }
 .zixun_div .zixun_title img{
-float:left;
-margin-top:0.2rem
+    float:left;
+    margin-top:0.2rem
 }
 
 .zixun_div .zixun_title .p_title{
-float:left;
-font-size:0.32rem;
-color:rgba(100,100,100,1);
-font-family:MicrosoftYaHei;
-margin-left:0.2rem;
-margin-top:0.22rem;
-font-weight: bold;
+    float:left;
+    font-size:0.32rem;
+    color:rgba(100,100,100,1);
+    font-family:MicrosoftYaHei;
+    margin-left:0.2rem;
+    margin-top:0.22rem;
+    font-weight: bold;
 }
 .zixun_div .zixun_title .zixun_more{
-margin-right:0.5rem;
-float:right;height:100%;
+    margin-right:0.5rem;
+    float:right;height:100%;
 }
 
 .zixun_div .zixun_title .zixun_more img{
-float:right;
-margin-top:0.24rem
+    float:right;
+    margin-top:0.24rem
 }
 .zixun_div .zixun_title .zixun_more .p_more{
-float:right;
-font-size:0.22rem;
-color:rgba(100,100,100,1);
-font-family:MicrosoftYaHei;
-margin-right:0.1rem;margin-top:0.24rem
+    float:right;
+    font-size:0.22rem;
+    color:rgba(100,100,100,1);
+    font-family:MicrosoftYaHei;
+    margin-right:0.1rem;
+    margin-top:0.24rem
 }
 
- .zixun_content{
-width:100%;
-height:auto;
-background-color:rgba(255,255,255,1);
+.zixun_content{
+    width:100%;
+    height:auto;
+    background-color:rgba(255,255,255,1);
 }
- .zixun_content .zixun_li{
-padding:0rem 0.2rem 0.1rem 0.35rem;
-height:1.5rem;
+.zixun_content .zixun_li{
+    padding:0rem 0.2rem 0 0.35rem;
+    height:1.3rem;
 }
  .zixun_content .zixun_li img{
-float:left;
-margin-top:0.15rem;
-height:1.2rem;
-width:1.2rem;
+    float:left;
+    margin-top:0.15rem;
+    // height:1.2rem;
+    width:18%;
+    border-radius: 0.6rem;
 }
  .zixun_content .zixun_li .content{
-float:left;
-margin-top:0.15rem;
-color:#646464;
-font-size:0.28rem;
-line-height:0.38rem;
-width:70%;
-margin-left:0.23rem;
+    float:left;
+    margin-top:0.15rem;
+    color:#646464;
+    font-size:0.22rem;
+    line-height:0.38rem;
+    width:75%;
+    margin-left:0.23rem;
+    height: 1.3rem;
 }
-.zixun_content .zixun_li .line{
-float:left;
-margin-top:0.15rem;
-width:95%;
-margin-left:2.5%;
-margin-right:2.5%;
-border-bottom:1px ridge rgba(245,245,245,1);
+.zixun_content .line{
+    float: left;
+    margin: 0.15rem 0;
+    width: 98%;
+    border-bottom: 1px solid #F5F5F5;
+    margin-left: 1%;
 }
 .title_p{
     font-family:MicrosoftYaHei;
@@ -121,6 +124,13 @@ border-bottom:1px ridge rgba(245,245,245,1);
     margin-top: -20px;
     font-size: 13px;
     color: white;
+}
+.shous_k{
+    height:0.6rem !important;
+}
+.select-text{
+    font-size: 0.23rem;
+    line-height: 0.24rem;
 }
 }
 
@@ -177,47 +187,47 @@ h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;font-family: Microsoft YaHei
     margin-right: 12px;
 }
 .fee11{
-width:100%;
-height:1rem;
-margin-top:0.28rem;
-margin-left:0.35rem;
-font-size:0.28rem;
-color:#646464
+    width:100%;
+    height:1rem;
+    margin-top:0.28rem;
+    margin-left:0.35rem;
+    font-size:0.28rem;
+    color:#646464
 }
 .fee11 img{
-float:left;
+    float:left;
 }
 .fee11 .fee11_p1{
-float:left;
-margin-left:0.1rem;
-margin-top:0.04rem;
-font-size: 0.23rem;
+    float:left;
+    margin-left:0.1rem;
+    margin-top:0.04rem;
+    font-size: 0.23rem;
 }
 .fee11 .fee11_p2{
-float:left;
-margin-left:0.1rem;
-margin-top:0.04rem;
-font-size: 0.23rem;
+    float:left;
+    margin-left:0.1rem;
+    margin-top:0.04rem;
+    font-size: 0.23rem;
 }
 .fee21{
-width:100%;
-height:1rem;
-margin-top:0.28rem;
-margin-left:0.35rem;
-font-size:0.28rem;
-color:#646464
+    width:100%;
+    height:1rem;
+    margin-top:0.28rem;
+    margin-left:0.35rem;
+    font-size:0.28rem;
+    color:#646464
 }
 .fee21 .fee21_p1{
-float:left;
-margin-left:0.1rem;
-margin-top:0.02rem;
-font-size: 0.23rem;
+    float:left;
+    margin-left:0.1rem;
+    margin-top:0.02rem;
+    font-size: 0.23rem;
 }
 .fee21 .fee21_p2{
-float:left;
-margin-left:0.1rem;
-margin-top:0.02rem;
-font-size: 0.23rem;
+    float:left;
+    margin-left:0.1rem;
+    margin-top:0.02rem;
+    font-size: 0.23rem;
 }
 .fee{
     height: 1rem;

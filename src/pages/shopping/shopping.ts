@@ -1,7 +1,7 @@
 //高海乐
 import { Geolocation } from '@ionic-native/geolocation';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,App } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -31,6 +31,11 @@ import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 import { StorageProvider } from '../../providers/storage/storage';
 //地区选择页
 import { PersonalPage } from '../personal/personal';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
+
+//返回首页
+import { HomePage } from '../home/home';
 
 
 
@@ -72,6 +77,7 @@ export class ShoppingPage {
   public currentPlaceCode = "";
   public changePlace = "";
   public shopKeyList = [];
+   HomePage = HomePage;
 
 
   //定义congfig中公共链接的变量aa
@@ -79,9 +85,11 @@ export class ShoppingPage {
 
     //定义token
   public token=this.storage.get('token');
+    public TabsPage = TabsPage;
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
+  public app: App) {
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
     // this.getLunbo();
@@ -106,7 +114,6 @@ export class ShoppingPage {
      that.tuijList=data.json['data_Recommend'].list;
      // console.log(this.tuijList);
      })
-
       //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -123,12 +130,9 @@ export class ShoppingPage {
     }
   //自带函数
   ionViewDidLoad() {
-     this.getPosition();
+     //this.getPosition();
     //给第一个商品分类hr
     $('.facediv li:nth-of-type(1)').attr("class","activety");
-    //  $("#sos_tanc").focus(function(){
-    //   $('#searchInput').show();
-    // })
   }
 
   ionViewDidEnter(){
@@ -140,6 +144,7 @@ export class ShoppingPage {
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
+  //控制搜索页面的显示
   fanhui(){
       $(".remen_sos").css("display","none")
       $(".caid_img").css("display","block")
@@ -184,7 +189,6 @@ export class ShoppingPage {
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -214,7 +218,7 @@ export class ShoppingPage {
     }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
-    })  
+    })
   }
 
   onSearchKeyUp(event){
@@ -251,7 +255,12 @@ export class ShoppingPage {
 
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
+    console.log("w等于",w)
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+
+  backToHere(){
+     this.app.getRootNav().push(TabsPage);
   }
 
 }

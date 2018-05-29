@@ -18,12 +18,16 @@ page-rentsalelist {
 }
 
 #group-content .order-nav .type a{
-    height:0.7rem;
     padding: 0.3rem 0;
     display: inline-block;
     vertical-align: middle;
     color: #000;
     font-size: 0.28rem;
+}
+#group-content .order-nav .type img{
+    height:0.6rem;
+    float: right;
+    padding-top: 0.25rem;
 }
 #group-content .order-nav .type.current a{
     color: #2979FF;
@@ -78,8 +82,10 @@ page-rentsalelist {
 }
 
     .nomore{
+        display:none;
         font-size: 0.2rem;
         text-align: center;
         color: gray;
     }
+
 }

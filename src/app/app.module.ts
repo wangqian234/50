@@ -72,7 +72,7 @@ import {ShoppingevaluatePage}from '../pages/shoppingevaluate/shoppingevaluate';
 //支付
 
 //新建测试界面
-import{TestPage} from '../pages/test/test';
+// import{TestPage} from '../pages/test/test';
 //新建限时抢购
 import {SalePage}from '../pages/sale/sale';
 //新建热销
@@ -150,10 +150,10 @@ import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
 //拍照
-import { Device } from '@ionic-native/device';
-import { Camera } from '@ionic-native/camera';
-import { File } from '@ionic-native/file';
-import { FileTransfer} from '@ionic-native/file-transfer';
+// import { Device } from '@ionic-native/device';
+// import { Camera } from '@ionic-native/camera';
+// import { File } from '@ionic-native/file';
+// import { FileTransfer} from '@ionic-native/file-transfer';
 //房屋租售列表
 import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
 
@@ -197,7 +197,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RebuildpassPage,
     ShoppingdetailPage,
     ShopmalllistPage,
-    TestPage,
+    // TestPage,
     SalePage,
     BigsalePage,  
     PipeMultiplePipe,
@@ -282,7 +282,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     SalePage,
     BigsalePage,
     GroupbuylistPage,
-    TestPage,
+    // TestPage,
     ShopgoodsinfoPage,
     GroupdetailPage,
     ShopbuyPage,
@@ -327,10 +327,10 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     StorageProvider,
     ToolsProvider,
     CityDataProvider,
-    Device,
-    Camera,
-    File,
-    FileTransfer,
+    // Device,
+    // Camera,
+    // File,
+    // FileTransfer,
   ]
 })
 export class AppModule {}
