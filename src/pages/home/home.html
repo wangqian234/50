@@ -31,7 +31,7 @@
 
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
-			<ion-slide *ngFor="let item of focusList">
+			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
 				<img [src]="item" />
 			</ion-slide>
 		</ion-slides>
@@ -89,14 +89,14 @@
 					<p>一键开门</p>
 				</a>
 			</li>
-		<li [navPush]="NewslistPage" [navParams]="{type:1}">
+		<li [navPush]="NewslistPage" [navParams]="{'act':'zx'}">
 			<a>
 				<h1><img src="assets/imgs/complain.png"></h1>
 				<p>社区资讯</p>
 			</a>
 		</li>
 
-		<li [navPush]="NewslistPage" [navParams]="{type:3}">
+		<li [navPush]="NewslistPage" [navParams]="{act:'gs'}">
 			<a>
 				<h1><img src="assets/imgs/massage.png"></h1>
 				<p>公示公告</p>
@@ -126,7 +126,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/zixun.png">
 			<span class="p_title">最新资讯</span>
-			<div class="zixun_more" (click)="getNewsList(1)">
+			<div class="zixun_more" (click)="clickme()">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 
@@ -148,7 +148,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/public.png">
 			<span class="p_title">公示公告</span>
-			<div class="zixun_more" (click)="getNewsList(3)">
+			<div class="zixun_more" (click)="getNewsList('gs')">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 			</div>

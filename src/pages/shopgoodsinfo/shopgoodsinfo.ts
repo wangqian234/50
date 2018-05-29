@@ -60,7 +60,6 @@ export class ShopgoodsinfoPage {
     gId:"",
     gsId:"",
     goodsNum:1,
-
   }
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -81,16 +80,16 @@ export class ShopgoodsinfoPage {
       alert(this.wid)
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-          var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-       let loading = this.loadingCtrl.create({
+    var w = document.documentElement.clientWidth || document.body.clientWidth;
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
 loading.present();
       //显示商品详情页面
       this.goodsInfo();
       this.recommend();
-loading.dismiss();
+      loading.dismiss();
   }
   //显示商品详情页面
   goodsInfo(){

@@ -114,7 +114,6 @@ export class ShoppingPage {
      that.tuijList=data.json['data_Recommend'].list;
      // console.log(this.tuijList);
      })
-
       //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -190,7 +189,6 @@ export class ShoppingPage {
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -220,7 +218,7 @@ export class ShoppingPage {
     }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
-    })  
+    })
   }
 
   onSearchKeyUp(event){

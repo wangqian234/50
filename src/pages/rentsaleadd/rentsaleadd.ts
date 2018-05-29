@@ -4,6 +4,7 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -32,6 +33,13 @@ export class RentsaleaddPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage :StorageProvider,public config:ConfigProvider,
   public http:Http,public loadingCtrl: LoadingController) {
+  }
+  ionViewWillEnter(){
+    if(this.storage.get('token')){
+
+} else {
+this.navCtrl.push(LoginPage);
+}
   }
 
   ionViewDidLoad() {

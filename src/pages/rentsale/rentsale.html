@@ -17,7 +17,7 @@
 <!--房屋租售轮播图-->
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
-			<ion-slide *ngFor="let item of focusList">
+			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
 				<img [src]="item" />
 			</ion-slide>
 		</ion-slides>
