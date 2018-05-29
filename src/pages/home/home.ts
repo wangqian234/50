@@ -153,14 +153,14 @@ export class HomePage {
   }
 
   getNews() {
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
     var j = 3;
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=1&token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
+      //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -176,14 +176,14 @@ export class HomePage {
   }
 //获取公示公告
   getPublic() {
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
     var j = 3;
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=3&token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
+      //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
       } else if (data.errcode === 40002) {
@@ -206,14 +206,14 @@ export class HomePage {
   }
   //查询默认房屋
   getiof_def(){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+       //loading.dismiss();
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;

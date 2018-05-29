@@ -586,7 +586,7 @@ display: inline-block;
 .gouwuc_kk .dianpmc_gw em{width: 15%; height: 0.65rem;float: left; background: url(../images/web/xiaoxiao.png) center;
 	background-repeat: no-repeat;background-size: 20%;display: block;
 	}
-.gouwuc_kk .diannao_shanp{border-bottom:solid 1px #ddd; padding:0.2rem 0;overflow: hidden;}
+.gouwuc_kk .diannao_shanp{padding:0.2rem 0;overflow: hidden;}
 .gouwuc_kk .diannao_shanp i.i1{width: 10%; height: 1.26rem;float: left; background: url(../images/web/gouwu_yuan1.png) center;
 	background-repeat: no-repeat;background-size: 50%;display: block;
 }
@@ -596,7 +596,8 @@ display: inline-block;
 .gouwuc_kk .diannao_shanp h1 img{width: 1.7rem; height: 1.26rem;}
 .gouwuc_kk .diannao_shanp .you{width: 60%;float: left; overflow: hidden;}
 
-.gouwuc_kk .diannao_shanp .you .bt{color: #626262;line-height: 0.35rem;}
+/*.gouwuc_kk .diannao_shanp .you .bt{color: #626262;line-height: 0.35rem;height:0.7rem}*/
+.gouwuc_kk .diannao_shanp .you .bt{color: #333333;line-height: 0.35rem;height:0.7rem}
 
 .gouwuc_kk .diannao_shanp .you .xh{color: #9a9a9a;line-height: 0.4rem;}
 
@@ -1798,7 +1799,7 @@ span.sqsh_zuix_text{
 .daohang_bd ul li h1 img{
 	width: 100%;
 }
-.daohang_bd ul li p{line-height: 0.5rem; color: #535353;font-size: 0.2rem;}
+.daohang_bd ul li p{line-height: 0.5rem; color: #818181;font-size: 0.2rem;}
 
 .bdsh_neir_k .bdsh_bt{border-bottom:solid 1px #ededed; margin:0 0.2rem; height: 0.6rem; line-height: 0.6rem; color: #535353;font-size:0.26rem;}
 .bdsh_neir_k ul li{

@@ -20,7 +20,7 @@
 </div>
 
 <!-- 轮播图 -->
-        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="300" >    
+        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
             <ion-slide *ngFor="let item of tuangouList">
                <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
            </ion-slide>         
@@ -42,7 +42,7 @@
             <div class="titleshop">
                 <img src="assets/imgs/recommend.png">
                 <span class="p_shop">&ensp;推荐分类</span>
-                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
+                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
             </div>               
         <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
@@ -65,6 +65,7 @@
                         <p class="tip">{{item.prename}}<span *ngIf="item.recommend==true">推荐</span></p>
                         <p class="sales-count">已售<span>{{item.soldnum}}</span>份</p>
                         <p class="price">￥<span>{{item.price}}</span></p>
+                        <div class="cartdiv"><img class="cartimg" src="assets/imgs/cart.png"></div>
                     </div>
                 </li>
         </ul>
@@ -73,7 +74,7 @@
         <div class="titleshop">
             <img src="assets/imgs/recommend.png">
             <span class="p_shop">&ensp;精品推荐</span>
-            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
+            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
         </div>
         <ul style="margin-bottom:50px">
         <li *ngFor= "let item of tuijList" style="height:3.19rem;">

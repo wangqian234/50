@@ -32,8 +32,8 @@
 	 				<a href="javascript:;"><h1><img src="{{item.img}}"></h1></a>
 	 				<div class="you">
 	 					<a href="javascript:;"><p class="px24 bt">{{item.title}}</p></a>
-	 					<p class="xh">{{item.size_name}}</p>
-	 					<div class="youjfy">
+	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{item.size_name}}</p>
+	 					<div class="youjfy" style="float: right;">
 							<div class="goum_sl"> 
 								<div class="counter_box">
 									<span>x{{item.goods_num}}</span>
@@ -44,8 +44,8 @@
 	 			</div>
 	 			<div class="qqq_jia">
 	 				<div class="zuo">
-	 					<p>状  态：<em>{{item.buy_state | pipeGroup}}</em></p>
-	 					<p>总  价：<em class="qq">{{item.totalprice}}</em></p>
+	 					<p>状  态：<em style="color:#FF730F">{{item.buy_state | pipeGroup}}</em></p>
+	 					<p>总  价：<em style="color:#FF730F">{{item.totalprice}}</em></p>
 	 				</div>
 	 				<div class="you">
 	 					<p *ngIf="item.buy_state==0">
@@ -87,8 +87,8 @@
 	 				<a href="javascript:void(0)"><h1><img src="{{item.goods_list[0].img}}"></h1></a>
 	 				<div class="you">
 	 					<a href="javascript:void(0)"><p class="px24 bt">{{item.goods_list[0].goods_title}}</p></a>
-	 					<p class="xh">{{item.goods_list[0].size_name}}</p>
-	 					<div class="youjfy">
+	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{item.goods_list[0].size_name}}</p>
+	 					<div class="youjfy" style="float:right">
 							<div class="goum_sl"> 
 								<div class="counter_box">
 									<span>x{{item.goods_list[0].goods_num}}</span>
@@ -99,8 +99,8 @@
 	 			</div>
 	 			<div class="qqq_jia">
 	 				<div class="zuo">
-	 					<p>状  态：<em>{{item.statename}}</em></p>
-	 					<p>总  价：<em class="qq">￥{{item.goods_list[0].preprice}}</em></p>
+	 					<p>状  态：<em style="color:#FF730F">{{item.statename}}</em></p>
+	 					<p>总  价：<em style="color:#FF730F">￥{{item.goods_list[0].preprice}}</em></p>
 	 				</div>
 	 				<div class="you">
 
@@ -130,7 +130,8 @@
 
     </div>
 
-	<div class="nomore">没有更多数据了...</div>
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
+
   <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

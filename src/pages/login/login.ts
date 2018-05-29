@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
@@ -38,7 +38,7 @@ public history='';
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
-  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,
+  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
       this.getRem();
       this.history=this.navParams.get('history');
@@ -138,7 +138,7 @@ public history='';
   }
 
   backTo(){
-    this.navCtrl.setRoot(TabsPage);
+    this.app.getRootNav().push(TabsPage); 
   }
 
 }

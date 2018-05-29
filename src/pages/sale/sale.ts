@@ -53,6 +53,10 @@ ifontime2(infiniteScroll){
             if(data.errcode===0 && data.errmsg==="OK"){
 
         this.list=this.list.concat(data.list);  /*数据拼接*/
+        console.log(this.list)
+        for(var i=0;i<this.list.length;i++){
+          this.list[i].lefttime = this.leftTimer(this.list[i].endtime);
+        }
         
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')

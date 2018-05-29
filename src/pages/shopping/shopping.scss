@@ -105,6 +105,7 @@ page-shopping {
     font-size: 0.28rem;
     color: #FD3525;
     margin-top: 0.1rem;
+    float: left;
 }
 
 #mallhome-content .goods-list .goods-item .information .price span{
@@ -183,6 +184,14 @@ page-shopping {
     margin-top: 0.6666666666666666rem;
     font-size: 2rem;
     color: red;
+}
+
+.cartimg{
+    width:0.4rem !important;
+    height: 0.4rem !important;
+    float: right !important;
+    margin-top: -0.2rem;
+    margin-right: 0.2rem;
 }
 
 #goods-content .information .o-price{
@@ -587,4 +596,10 @@ ion-slides{
     text-align: center;
     margin-top: 0.2rem;
 }
+.moreimg{
+    float: right !important;
+    height: 0.2rem !important;
+    width: 0.2rem !important;
+    margin-top: 0.05rem !important;
+}    
 }

@@ -1,4 +1,5 @@
 page-cart{
+    font-family: Microsoft YaHei;
     .dib_daoh_b{
     margin-bottom: 0.8rem;
     }
@@ -16,10 +17,43 @@ page-cart{
     margin-top: -0.4rem;
     }
     .goum a{
-        background:#ff971c
+        background:#FF730F
     }
     .checkbox-ios-danger .checkbox-checked {
         border-color: #ff971c;
         background-color: #ff971c;
+    }
+    .gouwuc_kk ul li{
+        background-color:white;
+        margin-bottom: 10px;
+    }
+    .xh{
+        font-size: 0.2rem;
+    }
+    .goum_sl .counter_box{
+        float: right;
+        margin-right: 0.3rem;
+    }
+    .goum_sl .counter_box i{
+        height: 0.25rem;
+        line-height: 0.25rem;
+        margin-top: 0.1rem;
+        background-color: #DCDCDD;
+    }
+    .goum_sl .counter_box input{
+        border:none;
+        color: #FF730F;
+    }
+    .gouwuc_kk .diannao_shanp .you .youjfy .jiaq{
+        color: #FF730F;
+    }
+    .gouwuc_kk .diannao_shanp .you .bt{
+        padding-right: 0.2rem;
+    }
+    .gouwuc_kk{
+        margin-top: 10px;
+    }
+    .gouwuc_kk .diannao_shanp{
+        padding: 0.2rem 0 0 0;
     }
 }
