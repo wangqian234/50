@@ -78,15 +78,14 @@ export class CartPage {
   }
 
   getCartsData(infiniteScroll){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    
+        let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        // loading.dismiss();
+        loading.dismiss();
         if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
           this.hasData = false;

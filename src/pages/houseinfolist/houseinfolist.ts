@@ -6,7 +6,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
-//�����ӷ���
 import { BindroomPage } from '../bindroom/bindroom';
 
 import { LoginPage } from '../login/login';
@@ -54,7 +53,7 @@ this.navCtrl.push(LoginPage);
     
   }
  
-  //��ȡ�����б�
+
   getHouseList(){
     var j = 3;
     console.log(this.storage.get('token'));
