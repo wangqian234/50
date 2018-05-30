@@ -12,7 +12,7 @@ import { LoginPage } from '../login/login';
   templateUrl: 'rentsaleadd.html',
 })
 export class RentsaleaddPage {
-  type;
+  type='0';
   title;
   space;
   room;
@@ -21,7 +21,7 @@ export class RentsaleaddPage {
   priceMin = '0';
   priceMax;
   phone;
-  nature;
+  nature='0';
   district;
   describe;
   contacts;
@@ -47,6 +47,7 @@ this.navCtrl.push(LoginPage);
   }
 
   getRSInfo(){
+    if(1){  //判断添加还是修改
     var j = 3;
      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
@@ -72,9 +73,11 @@ this.navCtrl.push(LoginPage);
     "city":this.city.toString()
   }
     var api = this.config.apiUrl + "/api/rental/add";
+    console.log(this.RSadd)
     this.http.post(api,this.RSadd).map(res => res.json()).subscribe(data => {
       loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert(data.errmsg)
        this.navCtrl.pop();
       } else if(data.errcode === 40002) {
         this.getRSInfo();
@@ -82,6 +85,46 @@ this.navCtrl.push(LoginPage);
         alert(data.errmsg);
       }
     });
+  }else{
+       var j = 3;
+     let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
+    this.RSadd = {
+    "token":this.storage.get("token").toString(),
+    "type":this.type.toString(),
+    "title":this.title.toString(),
+    "space":this.space.toString(),
+    "room":this.halls.toString(),
+    "rstroom":this.rstroom.toString(),
+    "halls":this.halls.toString(),
+    "priceMin":this.priceMin.toString(),
+    "priceMax": this.priceMax.toString(),
+    "phone":this.phone.toString(),
+    "nature":this.nature.toString(),
+    "district":this.district.toString(),
+    "describe":this.describe.toString(),
+    "contacts":this.contacts.toString(),
+    "street":this.street.toString(),
+    "region":this.region.toString(),
+    "city":this.city.toString()
+  }
+    var api = this.config.apiUrl + "/api/rental/edit";
+    console.log(this.RSadd)
+    this.http.post(api,this.RSadd).map(res => res.json()).subscribe(data => {
+      loading.dismiss();
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        alert(data.errcode)
+       this.navCtrl.pop();
+      } else if(data.errcode === 40002) {
+        this.getRSInfo();
+      } else {
+        alert(data.errmsg);
+      }
+    });
+  }
+  
   }
   
   backTo(){

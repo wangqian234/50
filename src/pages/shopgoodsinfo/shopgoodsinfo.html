@@ -33,6 +33,14 @@
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
+<!--<div *ngFor="let item of dataSlist" >
+	<div>
+	<span >{{item.name}}</span>
+	<span >{{item.price}}</span>
+	<span >{{item.preprice}}</span>
+	<span >{{item.num}}</span>
+	</div>
+</div>-->
 
 <!--数量-->
 <div class="goum_sl">
@@ -70,7 +78,7 @@
 <div class="jiss_df">
 	<h1>
 		<p><a class="d" href="javascript:;">图文详情</a></p>
-		<p><a  href="javascript:;">产品评价</a></p>
+		<p><a  href="javascript:;" (click)= "getshopinfo()">产品评价</a></p>
 	</h1>
 </div>
 <!--图文-->

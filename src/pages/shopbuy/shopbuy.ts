@@ -61,6 +61,8 @@ export class ShopbuyPage {
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
+    console.log(this.navParams.get('wid'))
+    console.log(this.sizeId)
     //alert("商品id"+this.gnum);
     
   }
@@ -157,12 +159,8 @@ export class ShopbuyPage {
     this.http.get(api4).map(res => res.json()).subscribe(data4 => {
       console.log(data4);
       that.creditslist = data4.model;
-
       console.log(data4);
-    })
-
-    
-    
+    }) 
   }
 
   //修改收货地址

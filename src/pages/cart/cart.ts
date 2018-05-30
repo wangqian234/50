@@ -232,8 +232,8 @@ buy(){
   for(var i=0;i<this.list.length;i++){
     if(this.list[i].checked == true){
       gidGroup.push(this.list[i].good_id);
-     gsIdGroup.push(this.list[i].size_id);
-     numGroup.push(parseInt(this.list[i].num));
+      gsIdGroup.push(this.list[i].size_id);
+      numGroup.push(parseInt(this.list[i].num));
   //console.log(this.list[i].num)
     }
   }
@@ -247,11 +247,15 @@ buy(){
      //alert(JSON.stringify(date));
     var api = this.config.apiUrl+'/api/usercart/add_settlement'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       console.log(data)
+       console.log("jin11")
       if(data.errcode === 0 && data.errmsg === 'OK'){
         // alert("post成功!");
          //跳转前验证
       var api=this.config.apiUrl+'/api/goods/buy_list?caId=1&token='+this.blist.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
+              console.log(data)
+              console.log("jin22")
                //if(data.errcode === 0 && data.errmsg === 'OK'){
                   //alert("可以购买!");
        this.navCtrl.push(ShopbuyPage,{

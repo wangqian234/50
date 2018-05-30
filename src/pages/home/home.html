@@ -32,7 +32,7 @@
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
 			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
-				<img [src]="item" />
+				<img src={{config.img}}{{item.imgurl}} />
 			</ion-slide>
 		</ion-slides>
 	</div>
@@ -46,7 +46,7 @@
 					<p>物业缴费</p>
 				</a>
 			</li>
-			<li [navPush]="RepairaddPage" [navParams]="{type:1}">
+			<li [navPush]="RepairaddPage" [navParams]="{type:'1'}">
 				<a>
 					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
 					<p>投诉建议</p>
@@ -58,7 +58,7 @@
 					<p>房屋管理</p>
 				</a>
 			</li>
-			<li [navPush]="RepairaddPage" [navParams]="{type:4}">
+			<li [navPush]="RepairaddPage" [navParams]="{type:'4'}">
 				<a>
 					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
 					<p>在线报修</p>

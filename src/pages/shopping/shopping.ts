@@ -98,36 +98,43 @@ export class ShoppingPage {
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
     this.currentPlace = this.storage.get("currentPlace");
-    var that=this;
+    this.getShop();
+    this.getShopGoods();
+      if(this.storage.get("shopKewWords")){
+        this.shopKeyList = this.storage.get("shopKewWords");
+      }
+    }
+    //获取商城首页
+    getShop(){
+     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
     console.log(data);
      that.lunboList=data.json["data_Banner"].list;
-    // alert(JSON.stringify(that.lunboList));
-
-     // console.log(this.lunboList);
+     console.log(that.lunboList)
      that.tuangouList=data.json['data_Modules'].list; 
-        that.len=that.tuangouList.length;
+     that.len=that.tuangouList.length;
        // console.log(this.tuangouList[1]);
      that.tubList=data.json['data_Sort'].list;
      console.log(that.tubList);
      that.tuijList=data.json['data_Recommend'].list;
      // console.log(this.tuijList);
      })
-      //初始显示旅游服务的商品列表
+    }
+    //获取商城首页分类的商品
+    getShopGoods(){
+     //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg ==="OK"){
-          that.shoplist=data.list; 
+          this.shoplist=data.list; 
           console.log(data);
         }else{
           alert(data.errmsg);
         }
       })
-      if(this.storage.get("shopKewWords")){
-        this.shopKeyList = this.storage.get("shopKewWords");
-      }
     }
+
   //自带函数
   ionViewDidLoad() {
      //this.getPosition();
@@ -167,15 +174,6 @@ export class ShoppingPage {
        });
 }
 
-  /**轮播图 */
-  getLunbo(){
-   var that=this;  
-      that.l=[
-        '../assets/imgs/hua.jpg',
-        '../assets/imgs/jiaju.jpg',
-        '../assets/imgs/hongjiu.jpg',       
-      ];   
-  }
 //出发箭头
   clickEvent(){
     var index = $(event.target).attr("index");

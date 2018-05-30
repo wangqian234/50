@@ -75,7 +75,6 @@ export class ShopgoodsinfoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
   public loadingCtrl: LoadingController) {
-
     this.wid=this.navParams.get("id")
       alert(this.wid)
 }
@@ -98,18 +97,18 @@ loading.present();
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
+        console.log(data)
         that.goodMlist = data.json['good_Model'].model;
         $("#tuwen").html(data.json['good_Model'].model.detail);
         console.log($("#tuwen"));
-        this.sid=data.json['good_Model'].model.shopid;
-        this.fenge(data.json['good_Model'].model.imgsrc_list);
+        this.sid=data.json['good_Model'].model.shopid;        //店铺Id
+        this.fenge(data.json['good_Model'].model.imgsrc_list);//轮播图
 
         that.dataGlist = data.json.data_group.list;
 
         that.dataSlist = data.json.data_Sizes.list[0]; 
         this.addcarList.gsId=data.json.data_Sizes.list[0].id; //获取商品规格id        
-        that.goodSize=data.json.data_Sizes.list[0].id;
-      
+        that.goodSize=data.json.data_Sizes.list[1].id;    
     })
   }
 //购买数量判断
@@ -127,7 +126,6 @@ ifEnough(){
         alert(data.errmsg);
       }
      })
-
 }
 
 //推荐商品列表
@@ -179,11 +177,13 @@ fenge(str){
      })
   }
   //显示商品评价列表
-  getshopinfo(id){
+  getshopinfo(){
     this.showpingj=!this.showpingj;
     var that = this;
-    var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+id;
+    var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+this.navParams.get('id');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      console.log(data)
+      console.log("评价啊")
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
       }else{
@@ -197,10 +197,10 @@ fenge(str){
     this.buylist.gId=this.navParams.get('id');
     this.buylist.type="detail";
     this.buylist.gsId=this.goodSize;
-        var j=3;
+     var j=3;
     console.log(this.token)
     var date = this.buylist;
-     //alert(JSON.stringify(date));
+    console.log(this.buylist)
     var api = this.aa+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
@@ -208,13 +208,14 @@ fenge(str){
          //跳转前验证
       var api=this.aa+'/api/goods/buy_list?caId=1&token='+this.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
+              console.log(data)
+              console.log(1)
                //if(data.errcode === 0 && data.errmsg === 'OK'){
                   //alert("可以购买!");
         this.navCtrl.push(ShopbuyPage,{
           wid: this.buylist.gId,
           sid: this.buylist.gsId,
           gnum:this.buylist.goodsNum,
-
   });
       
             })

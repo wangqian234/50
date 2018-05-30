@@ -20,7 +20,7 @@
          <form class="choose">
             <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
             <select name="type" [(ngModel)]="type" style="-webkit-appearance: none;">
-            <option  style="color:#bbbbbb" selected>请选择租售类型</option>
+            <option  style="color:#bbbbbb" selected value="0">请选择租售类型</option>
             <option value="1">房屋出售</option>
             <option value="2">房屋出租</option>
             <option value="3">房屋求购</option>
@@ -36,7 +36,7 @@
          <form class="choose">
             <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
             <select [(ngModel)]="nature"  name="type" style="-webkit-appearance: none;">
-            <option style="color:#bbbbbb" selected="selected">请选择房源性质</option>
+            <option style="color:#bbbbbb" selected value="0">请选择房源性质</option>
 
             <option *ngIf=" type == 1 || type ==3" value="1">一手房</option>
             <option *ngIf=" type == 1 || type ==3" value="2">二手房</option>
@@ -111,9 +111,10 @@
       <div class="repairList">
       <div class="repairType">预期金额：</div>
         <input [(ngModel)]="priceMin" style="width:32%" type="number" />&nbsp;~
-        <input [(ngModel)]="priceMax" style="width:32%" type="number" />&nbsp;元
+        <input [(ngModel)]="priceMax" style="width:32%" type="number" />&nbsp;万元
       </div>
     </ion-item>
+    
 
     <ion-item>
       <div class="repair">补充说明：</div>

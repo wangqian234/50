@@ -8,6 +8,7 @@ export class ConfigProvider {
 
   //api请求地址
   public apiUrl="http://test.api.gyhsh.cn";
+  public img="http://mp.gyhsh.cn";
 
   constructor(public http: Http,public storage:StorageProvider) {
     console.log('Hello ConfigProvider Provider');
