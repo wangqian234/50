@@ -17,13 +17,16 @@ import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 import { RentsalelistPage } from '../rentsalelist/rentsalelist';
 //登录页面
 import { LoginPage } from '../login/login';
-
+import {ShopinfoPage} from '../shopinfo/shopinfo';
+import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo'
 @IonicPage()
 @Component({
   selector: 'page-rentsale',
   templateUrl: 'rentsale.html',
 })
 export class RentsalePage {
+  public url;
+  public Id;
 
   focusList = [
       'assets/imgs/rent1.jpg',
@@ -73,7 +76,33 @@ export class RentsalePage {
     this.offent = $('#testcontent').offset();
     console.log("这个offent是",this.offent)
   }
-
+  //轮播图获取
+  getFocusList(){
+    var api = this.config.apiUrl + '/api/rental/list_banner?curCityCode='+this.curCityCode;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+        this.focusList= data.list
+      }else{
+        alert(data.errmsg)
+      }
+    })
+  }
+  //轮播图获取详情
+  getInfo(url){
+    this.url=url.substring(0,3);
+    this.Id = url.substring(3,)
+    if(url==="HRSHome"){
+      this.navCtrl.push(RentsalePage)
+    }else if(this.url==="gId"){
+      this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
+    }else if(this.url ==="sId"){
+      this.navCtrl.push(ShopinfoPage,{sid:this.Id})
+    }else if(this.url === "rez"){
+     // this.navCtrl.push()
+    }else if(this.url === "res"){
+     // this.navCtrl.push()
+    }
+  }
  paymentEvent(trade_state){
 
   //   let loading = this.loadingCtrl.create({
@@ -83,7 +112,7 @@ export class RentsalePage {
 
 
    this.housType = trade_state;
-   var api = this.config.apiUrl + "/api/rental/list?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
+   var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
     switch(trade_state){
       case 1:
       this.tabTest={
@@ -153,7 +182,7 @@ export class RentsalePage {
   //   });
   // loading.present();
     $(".showMore").css("display","none")
-    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
+    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {

@@ -114,7 +114,6 @@ export class ShoppingPage {
      that.tuijList=data.json['data_Recommend'].list;
      // console.log(this.tuijList);
      })
-
       //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -137,19 +136,32 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
+    // $("#sos_tanc").focus(function(){
+    //   $(".remen_sos").css("display","block")
+    //    $(".shopcontentdiv").css("display","none")
+    //   $(".caid_img").css("display","none")
+    //   $(".fanhui").css("display","block")
+    // })
+
     $("#sos_tanc").focus(function(){
-      $(".remen_sos").css("display","block")
-      $(".caid_img").css("display","none")
-      $(".fanhui").css("display","block")
+      $(".sousuo").css("display","block")
+       $(".shouye").css("display","none")
+       $(".shopcontentdiv").css("display","none")
+       $(".remen_sos").css("display","block")
     })
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
   //控制搜索页面的显示
   fanhui(){
-      $(".remen_sos").css("display","none")
-      $(".caid_img").css("display","block")
-      $(".fanhui").css("display","none")
+      // $(".remen_sos").css("display","none")
+      // $(".shopcontentdiv").css("display","block")
+      // $(".caid_img").css("display","block")
+      // $(".fanhui").css("display","none")
+        $(".sousuo").css("display","none")
+       $(".shouye").css("display","block")
+       $(".shopcontentdiv").css("display","block")
+       $(".remen_sos").css("display","none")
   }
   doSomeThing(){
    
@@ -190,7 +202,6 @@ export class ShoppingPage {
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -220,7 +231,7 @@ export class ShoppingPage {
     }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
-    })  
+    })
   }
 
   onSearchKeyUp(event){

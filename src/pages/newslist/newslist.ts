@@ -24,7 +24,9 @@ export class NewslistPage {
   //页面跳转
   public NewinfoPage = NewinfoPage;
   //接收传过来的新闻类型
-  public type='';
+  public act = '';
+  public token;
+  public type='0';
   public keywords='';
   public page=1;
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
@@ -38,18 +40,23 @@ export class NewslistPage {
   }
   //获取最新资讯全部列表
     getNews(infiniteScroll){
-      let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
-      if(this.navParams.get("type")){
-        this.type=this.navParams.get("type");
+      // let loading = this.loadingCtrl.create({
+	    // showBackdrop: true,
+      // });
+      // loading.present();
+      if(this.navParams.get("act")){
+        this.act = this.navParams.get("act");
       }
+     if(this.storage.get('token')){
+        this.token = this.storage.get('token')
+      }else{
+        this.token = '';
+       }
         var j = 3;
-        var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.storage.get('token');
+        var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -76,6 +83,12 @@ export class NewslistPage {
       }
        console.log("获取最新资讯" , data)
     });
+  }
+  //切换type时重新查找新闻列表
+  getNewsList(){
+     this.newsList=[];
+     this.page=1;
+     this.getNews("");
   }
   //跳转到资讯详情页面
     getNewInfo(id){

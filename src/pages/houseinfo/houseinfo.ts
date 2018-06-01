@@ -174,11 +174,11 @@ export class HouseinfoPage {
     });
   }
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
-  delOtherUser(){
+  delOtherUser(id){
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
-      'delUserId': '',
+      'delUserId':id,
     };
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
+import $ from 'jquery';
 //商品详情页
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 @Component({
@@ -9,7 +10,7 @@ import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
   templateUrl: 'shopmalllist.html',
 })
 export class ShopmalllistPage {
-
+  public page=1;
   public list = [];
   public tuijList=[];
   public aa =this.config.apiUrl;
@@ -21,7 +22,7 @@ export class ShopmalllistPage {
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
     //关键字搜索商品
-    this.reserchGoods();
+    this.reserchGoods('');
     //推荐商品
     this.tuijGoods();
   }
@@ -32,12 +33,26 @@ export class ShopmalllistPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   //搜索商品接口
-  reserchGoods(){
+  reserchGoods(infiniteScroll){
     //this.keywords = this.navParams.get("keyWords");
-    var api = this.aa+'/api/goods/list?pageSize=10&pageIndex=1&keyWord='+ this.navParams.get("keyWords")+'&curCityCode=4403&shop_Id=1';
+    var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
+    console.log(api)
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 && data.errmsg === 'OK'){
+         if(data.list.length<10){
+           $('.nomore').css('display','block');
+          }
+
          this.list = data.list;
+
+        if(infiniteScroll){
+          infiniteScroll.complete();
+          this.page++;
+          if(data.list.length<10){
+             infiniteScroll.enable(false);
+           $('.nomore').css('display','block');
+          }
+       }
      } else {
         alert(data.errmsg);
      }
@@ -84,6 +99,10 @@ export class ShopmalllistPage {
 
   backTo(){
     this.navCtrl.pop();
+  }
+      //加载更多
+  doLoadMore(infiniteScroll){
+    this.reserchGoods(infiniteScroll);
   }
 
 }

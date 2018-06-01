@@ -531,9 +531,12 @@ left: 0;}
 .remen_sos ul li{
 	float: left;
 	margin: 0.15rem 0.15rem 0 0;
+	    background-color: #F5F5F5;
+    border: none;
+	border-radius: 0.5rem;
 	
-	border: solid 1px #828282;
-	border-radius: 0.05rem;
+	/*border: solid 1px #828282;
+	border-radius: 0.05rem;*/
 }
 
 .remen_sos ul li a{color: #828282;line-height: 0.25rem;display: inline-block;font-size: 0.22rem;padding: 0.1rem 0.15rem;}

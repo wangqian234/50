@@ -4,7 +4,6 @@ import { ConfigProvider } from '../../providers/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
-
 //房屋报修
 import { RepairaddPage } from '../repairadd/repairadd';
 //绑定房屋
@@ -35,13 +34,12 @@ import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 import { LoadingController } from 'ionic-angular';
 //测试页面跳转到shopmallist
 // import { TestPage } from '../test/test';
-
 import { ShopmalllistPage } from '../shopmalllist/shopmalllist';
-
 import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
-
-
-
+import {RentsalePage} from '../rentsale/rentsale';
+import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo';
+import {ShopinfoPage} from '../shopinfo/shopinfo';
+import $ from 'jquery';
 declare var BMap;
 
 @Component({
@@ -58,10 +56,12 @@ export class HomePage {
   private headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   public roomid: any;
   public enSureLoginHome: boolean;
-
   //发送数据
   public token = '';
   //当前页、一页显示的个数
+  public cityCode = 4004;
+  public url ;
+  public Id ;
   public pageIndex=1;
   public pageSize=3;
   //获得数据
@@ -85,6 +85,9 @@ export class HomePage {
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
+  //轮播图的页面跳转
+
+  public RentsalePage = RentsalePage;
 
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;
@@ -92,7 +95,7 @@ export class HomePage {
   public OnlinepaymentPage=OnlinepaymentPage;
   public RentsaleaddPage = RentsaleaddPage;
 
-  constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http,
+  constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
     public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
       this.geolocation1 = Geolocation;
   }
@@ -101,15 +104,14 @@ export class HomePage {
       this.getRem();
       //获取首页轮播图
       this.getFocus();
+      //获取最新资讯
+      this.getNews();
+      //获取最新公告
+      this.getPublic();
       if(this.storage.get('token')){
           this.token = this.storage.get('token');
           this.enSureLoginHome = true;
-          
          // this.getHouseDefault();
-          //获取最新资讯
-          this.getNews();
-          //获取最新公告
-          this.getPublic();
           //获取默认房屋
           if(this.storage.get('roomId')){
             this.defRoomId=this.storage.get('roomId')
@@ -142,14 +144,43 @@ export class HomePage {
 }
 
   //轮播图
-  getFocus() {
-    var that = this;
-    that.focusList = [
-      'assets/imgs/slide01.png',
-      'assets/imgs/slide02.png',
-      'assets/imgs/slide03.jpg',
-      'assets/imgs/rent1.png'
-    ];
+  // getFocus() {
+  //   var that = this;
+  //   that.focusList = [
+  //     'assets/imgs/slide01.png',
+  //     'assets/imgs/slide02.png',
+  //     'assets/imgs/slide03.jpg',
+  //     'assets/imgs/rent1.png'
+  //   ];
+  // }
+  getFocus(){
+    var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if(data.errcode===0 && data.errmsg === 'OK'){
+        this.focusList = data.list;
+        console.log(this.focusList);
+      }else{
+
+      }
+    })
+  }
+  //轮播图详情
+  getInfo(url){
+    this.url=url.substring(0,3);
+    this.Id = url.substring(3,)
+    alert(this.url)
+    if(url==="HRSHome"){
+      this.navCtrl.push(RentsalePage)
+    }else if(this.url==="gId"){
+       this.navCtrl.push(ShopinfoPage,{sid:this.Id})
+      //this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
+    }else if(this.url ==="sId"){
+      this.navCtrl.push(ShopinfoPage,{sid:this.Id})
+    }else if(this.url === "rez"){
+     // this.navCtrl.push()
+    }else if(this.url === "res"){
+     // this.navCtrl.push()
+    }
   }
 
   getNews() {
@@ -158,9 +189,15 @@ export class HomePage {
     // });
     // loading.present();
     var j = 3;
-    var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=1&token=' + this.storage.get('token');
+    if(this.storage.get('token')){
+      this.token = this.storage.get('token');
+    }else{
+      this.token = '';
+    }
+    var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
+
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -181,7 +218,12 @@ export class HomePage {
     // });
     // loading.present();
     var j = 3;
-    var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&type=3&token=' + this.storage.get('token');
+    if(this.storage.get('token')){
+      this.token = this.storage.get('token');
+    }else {
+      this.token = '';
+    }
+    var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -256,8 +298,6 @@ getpayment(roomid){
     this.http.get(api).map(res => res.json()).subscribe(data =>{
          this.paymentList = data.json.totalNum.model;
     });
-
-
 }
 
 changeRoom(roomid) {
@@ -268,9 +308,9 @@ changeRoom(roomid) {
       this.getpayment(roomid)
     }
   }
-  getNewsList(type){
+  getNewsList(act){
     this.navCtrl.push(NewslistPage,{
-      type:type
+      act:act
     })
   }
 
@@ -278,4 +318,17 @@ changeRoom(roomid) {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
+
+      clickme(){
+          $.ajax({
+              url: 'http://freegeoip.net/json/',
+              success: function(data){
+                alert("进来了")
+                console.log(JSON.stringify(data));
+                alert(data.ip)
+              },
+              type: 'get',
+              dataType: 'JSON'
+          });
+      }
 }

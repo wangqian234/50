@@ -5,7 +5,7 @@
 
 
 <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
-	<div class="zhongj_k">
+	<div class="zhongj_k shouye">
 		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
         <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
 		<div class="shous_k">
@@ -14,10 +14,22 @@
         </div>
 		<div class="dengl">
 			<div class="caid_img"  (click)="gotoPlace()" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
-            <div class="fanhui" style="display:none" (click)="fanhui()" id="fanhui">返回</div>
+		</div>
+	</div>
+
+    <div class="zhongj_k sousuo" style="display:none">
+		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
+        <div class="logo_k logo_k_fanh"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
+		<div class="shous_k" style="width:73%">
+            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <img src="assets/imgs/sos.png">
+        </div>
+		<div class="dengl"  style="width:13%">
+			<div class="fanhui" (click)="doReserch()" id="fanhui">搜索</div>
 		</div>
 	</div>
 </div>
+<div class="shopcontentdiv">
 
 <!-- 轮播图 -->
         <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
@@ -83,10 +95,11 @@
             </a>
         </li>
     </ul>
+    </div>
 
     <div id="searchInput" class="remen_sos">
         <div class="history" *ngIf="shopKeyList">
-		<p>历史搜索：</p><ion-icon (click)="clearShopKey()" name="trash"></ion-icon>
+		<p>历史搜索：</p><img src="assets/imgs/delete.png" (click)="clearShopKey()">
 			<ul>
 				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
 			</ul>

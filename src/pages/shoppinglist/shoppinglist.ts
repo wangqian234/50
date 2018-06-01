@@ -436,7 +436,9 @@ loading.present();
       //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/
-        // alert("王慧敏"+JSON.stringify(this.groupBuyList));   
+        // alert("王慧敏"+JSON.stringify(this.groupBuyList));  
+        
+        console.log("wangqian"+JSON.stringify(this.groupBuyList)) 
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{

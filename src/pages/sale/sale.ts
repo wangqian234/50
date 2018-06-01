@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
@@ -8,6 +8,8 @@ import { LoadingController } from 'ionic-angular';
 
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @IonicPage()
 @Component({
@@ -24,7 +26,7 @@ public page = 1;
 
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController) {
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
   }
 //抢购时间判断
 ifontime(mode){
@@ -119,6 +121,10 @@ checkTime(i){ //将0-9的数字前面加上0，例1变为01
 doLoadMore(infiniteScroll){
   this.ifontime2(infiniteScroll);
 }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
+  }
 
 
 

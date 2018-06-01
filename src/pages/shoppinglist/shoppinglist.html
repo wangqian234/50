@@ -30,9 +30,9 @@
 	<div class="gouwuc_kk gouwuc_kk_ddxq">
             <ul class="offent">
 	 		<li *ngFor="let item of list">
-	 			<div class="dingd_hao"><p>{{item.trade_time}} &ensp;&ensp;&ensp;订单号：{{item.trade_id}}  </p></div>
+	 			<div class="dingd_hao"><p>{{item.trade_time}}</p><p class="ensurestate">{{item.statename}}</p></div>
 	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:item.goods_list[0]['tradegoods_id']}"> 
-	 				<a href="javascript:void(0)"><h1><img src="{{item.goods_list[0].img}}"></h1></a>
+	 				<h1><img src="{{item.goods_list[0].img}}"></h1>
 	 				<div class="you">
 	 					<a href="javascript:void(0)"><p class="px24 bt">{{item.goods_list[0].goods_title}}</p></a>
 	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{item.goods_list[0].size_name}}</p>
@@ -43,13 +43,16 @@
 								</div>
 							</div>
 	 					</div>
+						 <div style="clear:both"></div>
+						<p class="xh" style="float:left;margin:0.07rem 0 0 0;color:#FF730F;font-size:0.24rem;">￥{{item.goods_list[0].preprice}}</p>
 	 				</div>
 	 			</div>
 	 			<div class="qqq_jia">
 	 				<div class="zuo">
-	 					<p>状  态：<em style="color:#FF730F">{{item.statename}}</em></p>
-	 					<p>总&ensp;&ensp;&ensp;&ensp;价：<em style="color:#FF730F">￥{{item.goods_list[0].preprice}}</em></p>
+						<p>共计{{item.goods_list[0].goods_num}}件商品</p>
+	 					<p class="totalmoney">合计：<em style="color:#FF730F">￥{{item.pretotalprice}}</em></p>
 	 				</div>
+					 <div style="clear:both"></div>
 	 				<div class="you">
 
                         <p *ngIf="item.trade_state==3">
@@ -92,26 +95,34 @@
     <div class="gouwuc_kk gouwuc_kk_ddxq">
 	 	<ul>
 	 		<li *ngFor="let item of groupBuyList">
-	 			<div class="dingd_hao"><p>{{item.buy_state1|pipeTime}}&ensp;&ensp;&ensp;订单号：{{item.trade_id}} </p></div>
+				<div class="dingd_hao"><p>{{item.buy_state1|pipeTime}}</p><p class="ensurestate">{{item.buy_state | pipeGroup}}</p></div>
+
 	 			<div class="diannao_shanp" (click)="groupbuyEvent(item.groupbuy_Id)"> 
 	 				<a href="javascript:;"><h1><img src="{{item.img}}"></h1></a>
 	 				<div class="you">
-	 					<a href="javascript:;"><p class="px24 bt">{{item.title}}</p></a>
+	 					<p class="px24 bt">{{item.title}}</p>
 	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{item.size_name}}</p>
-	 					<div class="youjfy"  style="float: right;">
+
+						<div class="youjfy" style="float: right;">
 							<div class="goum_sl"> 
 								<div class="counter_box">
 									<span>x{{item.goods_num}}</span>
 								</div>
 							</div>
-	 					</div>
+						</div>
+						<div style="clear:both"></div>
+						<p class="xh" style="float:left;margin:0.07rem 0 0 0;color:#FF730F;font-size:0.24rem;">￥{{item.preprice}}</p>
 	 				</div>
 	 			</div>
+
 	 			<div class="qqq_jia">
+
 	 				<div class="zuo">
-	 					<p>状  态：<em style="color:#FF730F">{{item.buy_state | pipeGroup}}</em></p>
-	 					<p>总  价：<em style="color:#FF730F">{{item.totalprice}}</em></p>
+						<p>共计{{item.goods_num}}件商品</p>
+	 					<p class="totalmoney">合计：<em style="color:#FF730F">￥{{item.pretotalprice}}</em></p>
 	 				</div>
+					 <div style="clear:both"></div>
+
 	 				<div class="you">
 	 					<p *ngIf="item.buy_state==0">
 	 					</p>
