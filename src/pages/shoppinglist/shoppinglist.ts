@@ -94,6 +94,7 @@ export class ShoppinglistPage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
   ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+          $(".ios .tabs .tabbar").css("display","none");
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {

@@ -2,6 +2,11 @@ page-bindroom {
     .denglu_k{
         margin: 0.4rem 0.2rem;
     }
+    .dengl_anniu{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
     .dengl_anniu a{
         background-color: #448AFF;
         border: solid #448AFF 1px;
@@ -18,8 +23,13 @@ page-bindroom {
         text-align: center;
         padding-right: 10px;
     }
+
+    .denglu_k{
+        margin: 0;
+    }
     .denglu_k .denglk_l .mz{
         width:28%;
+        color: #333333;
     }
     .addSome{
         display: block; 
@@ -31,4 +41,27 @@ page-bindroom {
         padding: 0.18rem;
         line-height: 0.3rem;
     }
+
+    .addressdiv{
+        margin-top: 10px;
+        background-color: white;
+    }
+    .denglu_k_k{
+        margin: 0;
+    }
+    .shouh_dange_beijin{
+        background: #f5f5f5;
+        border-radius: 0rem;
+        margin-top: 0;     
+        padding: 0;
+    }
+    .denglu_k .denglk_l{
+        margin: 0;
+        height: 0.75rem;
+        width: 96%;
+        margin-left: 2%;
+        border-bottom: solid 1px #F5F5F5;
+        padding-top: 0.1rem;
+    }
+
 }

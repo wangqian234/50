@@ -86,6 +86,7 @@ export class TradegoodsGroupbuyingPage {
    public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
    public loadingCtrl: LoadingController) {
         this.SD_id=navParams.get('id');
+            $(".ios .tabs .tabbar").css("display","none");
   }
 
   //商品添加评价

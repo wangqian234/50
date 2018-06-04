@@ -1,5 +1,49 @@
 page-rebuildpass {
 .querenann a{
         background: #448AFF;
+        border-radius: 0.1rem;
+}
+
+.px26{
+        text-align: center;
+        margin: 0.55rem;
+        color: #818181;
+        font-size: 0.22rem;
+        em{
+                color: #2979FF
+        }
+}
+hr{
+        width: 90%;
+        color: #F5F5F5;
+}
+
+.xiugmim_k .yanzm_k a{
+        color: #818181;
+        float: right;
+        border-radius: 0.1rem;
+        line-height: 0.4rem;
+        height: 0.4rem;
+        font-size: 0.18rem;
+        margin-top: 0.15rem;
+        padding: 0 0.1rem;
+}
+.xiugmim_k .yanzm_k input{
+        border-bottom: solid 1px #448AFF;
+        padding-left: 0.18rem;
+        width: auto;
+}
+.xiugmim_k .yanzm_k img{
+        position: relative;
+        float: right; 
+        right: 0.1rem;
+         margin-top: -0.4rem;
+
+}
+.querenann{
+        padding-top: 0.6rem;
+}
+.xiugmim_k{
+        margin: 0.6rem 1rem 1rem 1rem;
 }
 }

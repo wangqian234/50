@@ -1,5 +1,5 @@
 
-<ion-content>
+<ion-content  style="background-color:#f5f5f5">
 <div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -14,20 +14,16 @@
 	</div>
 </div>
 
-<div class="zhuc_qieh">
-	<div (click)="getBaseInfo()" class="zhuc"><a>基本信息</a></div>
-	<div (click)="getMoreInfo()"><a>更多信息</a></div>
-</div>
-
-<div class="denglu_k" id="base">
+<div class="addressdiv">
+<div class="denglu_k">
 	<div class="denglk denglk_l">
-		<div class="mz px24">姓名：</div>
+		<div class="mz px24">姓&ensp;&ensp;&ensp;&ensp;名：</div>
 		<input type="text" [(ngModel)]="personInfo.name" placeholder="">
 	</div>
 	<div class="denglk denglk_l">
-		<div class="mz px24">性别：</div>
+		<div class="mz px24">性&ensp;&ensp;&ensp;&ensp;别：</div>
     <form class="choose">
-        <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem">
+        <img src="assets/imgs/jiantou.png" class="chooseimg">
         <select name="sex" [(ngModel)]="personInfo.sex" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="false" selected="selected">男</option>
           <option value="true">女</option>
@@ -35,18 +31,20 @@
     </form>
 	</div>
 	<div class="denglk denglk_l">
-		<div class="mz px24">出生日期：</div>
+		<div class="mz px24">日&ensp;&ensp;&ensp;&ensp;期：</div>
 		<input type="date"  [(ngModel)]="personInfo.birthday" style="-webkit-appearance:none;padding-left:0.2rem;height:30px;font-size: 14px;">
 	</div>
 
-	<div class="dengl_anniu" (click)="editBasicInfo()"><a href="#">提 交</a></div> 
+	<!--<div class="dengl_anniu" (click)="editBasicInfo()"><a href="#">提 交</a></div> -->
+</div>
 </div>
 
-<div class="denglu_k" id="more" style="display:none">
+<div class="addressdiv">
+<div class="denglu_k">
 	<div class="denglk denglk_l">
 		<div class="mz px24">婚姻状况：</div>
 		 <form class="choose">
-          <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <img src="assets/imgs/jiantou.png" class="chooseimg">
           <select name="mar" [(ngModel)]="personInfo.maritalstatus" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="1" selected="selected">已婚</option>
           <option value="2">未婚</option>
@@ -57,7 +55,7 @@
 	<div class="denglk denglk_l">
 		<div class="mz px24">证件类型：</div>
 		<form class="choose">
-          <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <img src="assets/imgs/jiantou.png" class="chooseimg">
           <select name="cardtype" [(ngModel)]="personInfo.cardtype" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="1" selected="selected">身份证</option>
           <option value="2">护照</option>
@@ -66,12 +64,12 @@
 	</div>
 	<div class="denglk denglk_l">
 		<div class="mz px24">证件号码：</div>
-		<input [(ngModel)]="personInfo.cardno" type="number" placeholder="">
+		<input style="margin-left:5%" [(ngModel)]="personInfo.cardno" type="number" placeholder="">
 	</div>
   <div class="denglk denglk_l">
-		<div class="mz px24">月收入：</div>
+		<div class="mz px24">收入情况：</div>
 				<form class="choose">
-          <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <img src="assets/imgs/jiantou.png" class="chooseimg">
           <select name="month" [(ngModel)]="personInfo.monthlyincome" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="1" selected="selected">2000元以下</option>
           <option value="2">2000-3999元</option>
@@ -84,7 +82,7 @@
   <div class="denglk denglk_l">
 		<div class="mz px24">教育程度：</div>
 		<form class="choose">
-          <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <img src="assets/imgs/jiantou.png" class="chooseimg">
           <select name="edu" [(ngModel)]="personInfo.education" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="1" selected="selected">初中</option>
           <option value="2">高中</option>
@@ -100,7 +98,7 @@
     <div class="denglk denglk_l">
 		<div class="mz px24">所在行业：</div>
 		<form class="choose">
-          <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+          <img src="assets/imgs/jiantou.png" class="chooseimg">
           <select  name="industryinfo" [(ngModel)]="personInfo.industryinfo"  style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option value="1" selected="selected">计算机硬件及网络设备</option>
           <option value="2">计算机软件</option>
@@ -151,6 +149,7 @@
           </select>
     </form>
 	</div>
+</div>
 
 	<div (click)="editMoreInfo()" class="dengl_anniu"><a href="#">提 交</a></div> 
 </div>
