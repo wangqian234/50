@@ -82,26 +82,19 @@ ionViewWillLoad() {
    let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
-loading.present();
-    
+    loading.present();
     var that=this;
     var api=this.wdh+'/api/goods/info?goods_Id='+this.wid+'&token='+this.token;
-loading.dismiss();
-        this.http.get(api).map(res => res.json()).subscribe(data =>{
+      loading.dismiss();
+       this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
-       that.dataGlist = data.json.data_group.list;//有些list为空
-       console.log(that.dataGlist);
-      
-      that.goodMlist=data.json['good_Model'].model;
-      $("#tuwen").html(data.json['good_Model'].model.detail);//图文html
-      //alert(JSON.stringify(that.goodMlist));
-      this.sid=data.json['good_Model'].model.shopid;
+       that.dataGlist = data.json.data_group.list;//有些list为空  
+       that.goodMlist=data.json['good_Model'].model;
+       $("#tuwen").html(data.json['good_Model'].model.detail);//图文html
+       this.sid=data.json['good_Model'].model.shopid;
       this.lnum=data.json['good_Model'].model.limitNum;//限购数量
       this.fenge(data.json['good_Model'].model.imgsrc_list);//分割轮播图字段
-      //alert(data.json['good_Model'].model.imgsrc_list);
-      console.log(that.goodMlist);
       that.dataSlist=data.json.data_Sizes.list;  //规格
-     
      this.recommend();
      })
      

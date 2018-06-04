@@ -45,8 +45,8 @@
 		<p><em>运费</em><span>¥0.00</span></p> 
 	</div>
 	<div class="xiangq_liang_ann">
-      <a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
-		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>
+      <!--<a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
+		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>-->
 
       <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id)" href="javascript:;" class="sc">退款</a>
 

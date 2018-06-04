@@ -155,7 +155,6 @@ enterShop(wid,sid){
 
 //轮播图
 fenge(str){ 
- 
  this.strs=str.split(","); //字符分割
 //alert(this.strs[0]);
 

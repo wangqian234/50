@@ -78,6 +78,8 @@ loading.present();
      }
      })
   }
+
+  
      //添加商品退款申请
    addrefundEvent(tradegoods_id){
     //  alert("五爷"+this.tradegoodsid);

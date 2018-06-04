@@ -35,7 +35,7 @@ import { TabsPage } from '../tabs/tabs';
 export class TradegoodsGroupbuyingPage {
        //定义token
   public token=this.storage.get('token');
-
+  goodsNum:0;
   public list=[];
   public groupBuyList=[];
   public good_list=[];
@@ -234,7 +234,13 @@ export class TradegoodsGroupbuyingPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
-        console.log("王慧敏"+JSON.stringify(this.list)); 
+        for(var i=0;i<this.list.length;i++){
+          var num = 0;
+          for(var j=0; j<this.list[i].goods_list.length;j++){
+            num = this.list[i].goods_list.goods_num;
+          }
+          this.list[i].goodsNum = num
+        }
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{

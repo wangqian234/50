@@ -29,6 +29,7 @@ export class PayprefeePage {
   public LoginPage = LoginPage;
 
   //post请求
+  public cip;
   public payrefeeList={
     management:0,
     water:0,
@@ -37,6 +38,9 @@ export class PayprefeePage {
     rubbish:0,
     roomId:'',
     token:'',
+    tags:'android',
+    createip:'',
+    act:'Prepay',
   }
 
     management:number;
@@ -44,6 +48,7 @@ export class PayprefeePage {
     electricity:number;
     parking:number;
     rubbish:number;
+    public outTradeNo;
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
@@ -116,25 +121,6 @@ export class PayprefeePage {
       $('#selectOther').css('display','none');
     }
   }
-  // //查询默认房屋
-  // getiof_def(){
-  //   var j=3
-  //   var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
-  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
-  //         if(data.errcode===0&&data.errmsg==='OK'){
-  //           this.iof_defList=data.model;
-  //           this.defRoomId=data.model.House_Room_Id;
-  //           console.log(this.iof_defList)
-  //           this.getroomId();
-  //         }else if (data.errcode===4002){
-  //           j--;
-  //           this.config.doDefLogin();
-  //           this.getiof_def();
-  //         }else{
-  //           alert(data.errmsg)
-  //         }
-  //    })
-  // }
    //查询用户绑定的所有房屋
   getroomId(){   
     var that=this;
@@ -157,11 +143,6 @@ export class PayprefeePage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
-  //计算总钱数
-  sumPrices(){
-    //  var totalPrice = this.payrefeeList.electricity+this.payrefeeList.management+this.payrefeeList.parking+this.payrefeeList.rubbish+this.payrefeeList.water;
-    //  this.allPrices=totalPrice;
-  }
 
 //结算函数 
  gopay(){
@@ -170,24 +151,50 @@ export class PayprefeePage {
    }else{
      this.payrefeeList.roomId=this.roomid;
    }
+   this.payrefeeList.createip = this.cip;
     this.payrefeeList.token=this.storage.get("token")
     this.payrefeeList.management = this.management;
     this.payrefeeList.water = this.water;
     this.payrefeeList.electricity = this.electricity;
     this.payrefeeList.parking = this.parking;
     this.payrefeeList.rubbish = this.rubbish;
+    var api = this.config.apiUrl+'/api/charge/prepay?';
     console.log(this.payrefeeList)
-    var api = this.config.apiUrl+'/api/charge/add?';
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0&&data.errmsg==='OK'){
+          if(data.errcode===0){
+            console.log(data)
+            this.outTradeNo = data.errmsg;
             alert("支付成功")
             this.navCtrl.pop();
           }else{
+            console.log(data)
             alert(data.errmsg)
             this.navCtrl.pop();
           }
      })
  }
+      //微信查询接口
+   checkPayment(){
+     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg === 'OK'){
+          alert("支付成功")
+       }
+     })
+   }
+           clickme(){
+          var that = this;
+          $.ajax({
+              url: 'http://freegeoip.net/json/',
+              success: function(data){
+                alert(data.ip)
+                that.cip = data.ip;
+                that.gopay();
+              },
+              type: 'get',
+              dataType: 'JSON'
+          });
+      }
  //项目下拉列表
  dw_Project(){
     var api = this.config.apiUrl+'/api/house/dw_Project?';
