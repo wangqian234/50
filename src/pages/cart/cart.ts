@@ -63,26 +63,26 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-
+        $(".ios .tabs .tabbar").css("display","none");
   }
 
   ionViewWillEnter(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-     this.getCartsData('');
-
+     //this.getCartsData('');
   }
   
-  ionViewDidLoad() {
-    
+  ionViewDidEnter() {
+    this.pageIndex = 1;
+    this.list = [];
+    this.getCartsData('');
   }
 
   getCartsData(infiniteScroll){
-        let loading = this.loadingCtrl.create({
+   let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
     loading.present();
-    
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -98,8 +98,7 @@ export class CartPage {
         }else{
             this.pageIndex++;
         }
-        if(infiniteScroll){
-          
+        if(infiniteScroll){       
           infiniteScroll.complete();        //告诉ionic 请求数据完成
           if(data.list.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
@@ -224,6 +223,22 @@ export class CartPage {
       }
     })
   }
+//   //购买数量判断
+// ifEnough(){
+//   this.ifList.gId=this.wid;
+//   this.ifList.gsId=this.goodSize;
+//   this.ifList.goodsNum=this.buylist.goodsNum;
+//   var date = this.ifList;
+//   var api = this.aa+'/api/goods_size/update'
+//      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+//       if(data.errcode === 0 && data.errmsg === 'OK'){
+       
+//          //alert("可以继续添加!");
+//       }else{
+//         alert(data.errmsg);
+//       }
+//      })
+// }
 //结算
 buy(){
   var gidGroup = [];
@@ -233,8 +248,8 @@ buy(){
   for(var i=0;i<this.list.length;i++){
     if(this.list[i].checked == true){
       gidGroup.push(this.list[i].good_id);
-     gsIdGroup.push(this.list[i].size_id);
-     numGroup.push(parseInt(this.list[i].num));
+      gsIdGroup.push(this.list[i].size_id);
+      numGroup.push(parseInt(this.list[i].num));
   //console.log(this.list[i].num)
     }
   }
@@ -248,11 +263,15 @@ buy(){
      //alert(JSON.stringify(date));
     var api = this.config.apiUrl+'/api/usercart/add_settlement'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       console.log(data)
+       console.log("jin11")
       if(data.errcode === 0 && data.errmsg === 'OK'){
         // alert("post成功!");
          //跳转前验证
       var api=this.config.apiUrl+'/api/goods/buy_list?caId=1&token='+this.blist.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
+              console.log(data)
+              console.log("jin22")
                //if(data.errcode === 0 && data.errmsg === 'OK'){
                   //alert("可以购买!");
        this.navCtrl.push(ShopbuyPage,{
@@ -282,8 +301,14 @@ buy(){
     this.getCartsData(infiniteScroll);
   }
 
-    backToHome(){
-     this.app.getRootNav().push(TabsPage);   
+  backTo(){
+    this.app.getRootNav().push(TabsPage,{
+      tabs:true
+    });
+  }
+
+  backToHome(){
+     this.app.getRootNav().push(TabsPage);    
   }
    
 

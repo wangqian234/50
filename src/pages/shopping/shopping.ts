@@ -92,91 +92,99 @@ export class ShoppingPage {
   public app: App) {
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
-    // this.getLunbo();
+    // // this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
     this.currentPlace = this.storage.get("currentPlace");
-    var that=this;
+    this.getShop();
+    this.getShopGoods();
+      if(this.storage.get("shopKewWords")){
+        this.shopKeyList = this.storage.get("shopKewWords");
+      }
+    }
+    //获取商城首页
+    getShop(){
     var api = this.aa+'/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-    console.log(data);
-     that.lunboList=data.json["data_Banner"].list;
-    // alert(JSON.stringify(that.lunboList));
-
-     // console.log(this.lunboList);
-     that.tuangouList=data.json['data_Modules'].list; 
-        that.len=that.tuangouList.length;
-       // console.log(this.tuangouList[1]);
-     that.tubList=data.json['data_Sort'].list;
-     console.log(that.tubList);
-     that.tuijList=data.json['data_Recommend'].list;
-     // console.log(this.tuijList);
+      console.log(data)
+     this.lunboList=data.json["data_Banner"].list;
+     this.tuangouList=data.json['data_Modules'].list; 
+     this.len=this.tuangouList.length;
+     this.tubList=data.json['data_Sort'].list;
+     this.tuijList=data.json['data_Recommend'].list;
      })
-
-      //初始显示旅游服务的商品列表
+    }
+    //获取商城首页分类的商品
+    getShopGoods(){
+     //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg ==="OK"){
-          that.shoplist=data.list; 
+          this.shoplist=data.list; 
           console.log(data);
         }else{
           alert(data.errmsg);
         }
       })
-      if(this.storage.get("shopKewWords")){
-        this.shopKeyList = this.storage.get("shopKewWords");
-      }
     }
+
   //自带函数
   ionViewDidLoad() {
-     //this.getPosition();
+    // this.getPosition();
     //给第一个商品分类hr
     $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter(){
+    // $("#sos_tanc").focus(function(){
+    //   $(".remen_sos").css("display","block")
+    //    $(".shopcontentdiv").css("display","none")
+    //   $(".caid_img").css("display","none")
+    //   $(".fanhui").css("display","block")
+    // })
+
     $("#sos_tanc").focus(function(){
-      $(".remen_sos").css("display","block")
-      $(".caid_img").css("display","none")
-      $(".fanhui").css("display","block")
+      $(".sousuo").css("display","block")
+       $(".shouye").css("display","none")
+       $(".shopcontentdiv").css("display","none")
+       $(".remen_sos").css("display","block")
+       $(".ios .tabs .tabbar").css("display","none");
     })
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
   //控制搜索页面的显示
   fanhui(){
-      $(".remen_sos").css("display","none")
-      $(".caid_img").css("display","block")
-      $(".fanhui").css("display","none")
+      // $(".remen_sos").css("display","none")
+      // $(".shopcontentdiv").css("display","block")
+      // $(".caid_img").css("display","block")
+      // $(".fanhui").css("display","none")
+        $(".sousuo").css("display","none")
+       $(".shouye").css("display","block")
+       $(".shopcontentdiv").css("display","block")
+       $(".remen_sos").css("display","none")
+       $(".ios .tabs .tabbar").css("display","flex");
   }
   doSomeThing(){
-   
+   this.doReserch();
   }
 
     getPosition() {
-    var that = this;
-     this.geolocation.getCurrentPosition().then((resp) => {
+      var that = this;
+      this.geolocation.getCurrentPosition().then((resp) => {
       var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         console.log(addComp.city)
+        alert(addComp.city)
         that.storage.set("currentPlace",addComp.city);
-      });
+      }); 
        });
 }
 
-  /**轮播图 */
-  getLunbo(){
-   var that=this;  
-      that.l=[
-        '../assets/imgs/hua.jpg',
-        '../assets/imgs/jiaju.jpg',
-        '../assets/imgs/hongjiu.jpg',       
-      ];   
-  }
 //出发箭头
   clickEvent(){
     var index = $(event.target).attr("index");
@@ -190,13 +198,11 @@ export class ShoppingPage {
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode=== 0 && data.errmsg==="OK"){
-      that.shoplist=data.list;    
-      console.log(data);
+      that.shoplist=data.list;
     }else{
       alert(data.errmsg);
     }
@@ -220,7 +226,7 @@ export class ShoppingPage {
     }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
-    })  
+    })
   }
 
   onSearchKeyUp(event){

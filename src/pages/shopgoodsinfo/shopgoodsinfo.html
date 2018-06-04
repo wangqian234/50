@@ -1,5 +1,5 @@
 
-<ion-content>
+<ion-content style="background-color:#f5f5f5">
 
 
 <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
@@ -29,17 +29,16 @@
 <div class="xiangq_shangp_m">
 	<a [navPush]='ShopbuyPage'>
 	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{dataSlist.preprice}}</p>
+	<div class="xq_jiaq"><p>￥{{guiGe.preprice}}</p>
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
-
 <!--数量-->
 <div class="goum_sl">
-	<p class="px26 jiaq">购买数量</p>
+	<p class="px22 jiaq">购买数量</p>
 	<div class="counter_box">
 		<i class="jian" (tap)="decCount()">-</i>
-		<input type="text" readonly="readonly" [(ngModel)]="addcarList.goodsNum" name="num" id="num">
+		<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
 		<i class="jia" (tap)="incCount()">+</i>
 	</div>
 </div>
@@ -48,17 +47,27 @@
 				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
 			</div>
 
+<div class="banb" id="banb">
+				<ul>
+					<li class="no" *ngFor="let item of dataSlist" (click)="changeId(item.id)">
+						<button>{{item.name}}</button>
+					</li>
+				</ul>
+</div>
+<span>{{guiGe.num}}</span>
+<span>{{guiGe.price}}</span>
+<span>{{guiGe.preprice}}</span>
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">
-		<h1><img src="goodMlist.shopimg"></h1>
+		<h1><img src="assets/imgs/shopping.png"></h1>
 		<div class="dianp_pf">
-			<p class="px24">{{goodMlist.shop_name}}</p>
-			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
+			<p class="px24" style="font-size:0.22rem;color:#333333">{{goodMlist.shop_name}}</p>
+			<p class="px22" style="font-size:0.18rem;color:#666666">近期成交：{{goodMlist.shop_salenum}}</p>
 		</div>
 	</div>
 	<div class="guangguang">
-		<a class="a1"(click)="enterShop(wid,sid)"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
+		<a class="a1"(click)="enterShop(wid,sid)"><h1><img src="assets/imgs/shopping2x.png"><div>进店逛逛</div></h1></a>
 
 	</div>
 </div>
@@ -68,9 +77,9 @@
 <!--图文&评价-->
 
 <div class="jiss_df">
-	<h1>
-		<p><a class="d" href="javascript:;">图文详情</a></p>
-		<p><a  href="javascript:;">产品评价</a></p>
+	<h1 style="width:80%">
+		<p><a style="padding: 0.1rem 0.3rem;" class="d" href="javascript:;">图文详情</a></p>
+		<p style="float:right"><a style="padding: 0.1rem 0.3rem;"  href="javascript:;">产品评价</a></p>
 	</h1>
 </div>
 <!--图文-->

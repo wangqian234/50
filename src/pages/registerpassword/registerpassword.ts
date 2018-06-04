@@ -23,6 +23,12 @@ export class RegisterpasswordPage {
     password:'',
     ckecked:false
   }
+  public registerData ={
+    mobile:'',
+    userName:'',
+    code:'',
+    userPwd:'',
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider,public storage:StorageProvider,
       public config:ConfigProvider,public http: Http) {
@@ -47,6 +53,7 @@ export class RegisterpasswordPage {
 
   enSureStop(){
     this.registerinfo.ckecked = true;
+    this.closePopup();
   }
 
   //注册信息发送
@@ -58,9 +65,12 @@ export class RegisterpasswordPage {
       }else if(this.registerinfo.ckecked == false) {
         alert('请阅读汇生活注册条款')
       }else{
-        var api = this.config.apiUrl + '/api/user/register?userName=' + this.registerinfo.userName + "&userPwd=" + this.registerinfo.password +
-        "&mobile=" + this.registerinfo.userTel + "&code=" + this.registerinfo.regist;
-        this.http.get(api).map(res => res.json()).subscribe(data =>{
+        this.registerData.mobile=this.registerinfo.userTel;
+        this.registerData.code=this.registerinfo.regist;
+        this.registerData.userName=this.registerinfo.userName;
+        this.registerData.userPwd=this.registerinfo.password;
+        var api = this.config.apiUrl + '/api/user/register';
+        this.http.post(api,this.registerData).map(res => res.json()).subscribe(data =>{
           if (data.errcode === 0 && data.errmsg === 'OK') {
             this.storage.set('userName',data.model.loginname);
             this.storage.set('password',this.registerinfo.password);
@@ -86,7 +96,7 @@ export class RegisterpasswordPage {
     }
     console.log(JSON.stringify(data))
     var api = this.config.apiUrl + '/api/vcode/register';
-    this.http.post(api,JSON.stringify(data)).map(res => res.json()).subscribe(data =>{
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.num = 60;
         this.isShowSend = false;

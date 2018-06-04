@@ -18,24 +18,28 @@
 <!--商品列表--> 
 <div class="shangp_lieb_beij">
 
-<div>
-	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of tuijList"  (tap)="goGoodsInfo(item['id'])">
-				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
-				<div class="lieb_txt">
-					<p class="biao">{{item.title}}</p>
-					<!--<p class="px26">¥{{item.pricemin}}</p>-->
-          			<p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
-				</div>
-		</li>
-	</ul>
-</div>
+
 	<ul class="shangp_lieb_k_er">
 		<li *ngFor="let item of list"  (tap)="goGoodsInfo(item['id'])">
 				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
 					<p class="px26">¥{{item.price}}</p>
+          			<p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
+				</div>
+		</li>
+	</ul>
+</div>
+
+<div>
+  <img src="assets/imgs/recommend.png">
+  <span class="p_shop">&ensp;精品推荐</span>
+	<ul class="shangp_lieb_k_er">
+		<li *ngFor="let item of tuijList"  (tap)="goGoodsInfo(item['id'])">
+				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
+				<div class="lieb_txt">
+					<p class="biao">{{item.title}}</p>
+					<!--<p class="px26">¥{{item.pricemin}}</p>-->
           			<p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
 				</div>
 		</li>
@@ -66,4 +70,10 @@
 		</div>
 	</div>
 </div>
+
+<div class="nomore" style="display: none">没有更多数据了...</div>
+ <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+ <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
 </ion-content>

@@ -9,13 +9,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 //引入UserPage
 import { UserPage } from '../user/user';
 
-/**
- * Generated class for the RebuildpassPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-rebuildpass',
   templateUrl: 'rebuildpass.html',
@@ -27,6 +20,7 @@ export class RebuildpassPage {
   // verifyCode: any;
 
   public tel='';  /*自己的电话变量*/
+  public mphone = '';
 
   public code='';  /*验证码*/
   public isShowSend=true;   /*是否显示发送验证码的按钮*/
@@ -40,6 +34,7 @@ export class RebuildpassPage {
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
   public config:ConfigProvider,public http: Http, public storage: StorageProvider,) {
     this.tel=this.storage.get('userName');
+    this.mphone = this.tel.substr(0, 3) + '****' + this.tel.substr(7);   
   }
 
   ionViewDidLoad() {

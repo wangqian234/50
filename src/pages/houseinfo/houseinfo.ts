@@ -61,6 +61,7 @@ export class HouseinfoPage {
         // }
         data.model.date = data.model.date.replace("T"," ")
         this.houseInfo=data.model; 
+        console.log(JSON.stringify(this.houseInfo)+"用户房屋信息")
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -93,13 +94,13 @@ export class HouseinfoPage {
     console.log(api);
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log(data);
+        console.log(JSON.stringify(data)+"用户列表");
         this.houseUser = data.list;
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
             this.config.doDefLogin();
-            this.getUserRoom();
+            this.getRoomUser();
           }
       } else {
         console.log(data.errmsg)
@@ -114,10 +115,11 @@ export class HouseinfoPage {
       'roomId':this.houseId,
     };
     var j = 3;
+    if(confirm("确定解除绑定吗？")){
     var api = this.config.apiUrl + '/api/UserRoom/del?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("成功解绑")
+        console.log("成功解绑"+JSON.stringify(data))
         this.navCtrl.pop();
       } else if(data.errcode === 40002){
           j--;
@@ -129,6 +131,7 @@ export class HouseinfoPage {
         console.log(data.errmsg)
       }
     });
+    }
   }
 
   appearOtherUser(){
@@ -161,7 +164,8 @@ export class HouseinfoPage {
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("成功设置默认房屋");
+        console.log("成功设置默认房屋"+JSON.stringify(data));
+        this.getUserRoom();
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
@@ -174,22 +178,23 @@ export class HouseinfoPage {
     });
   }
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
-  delOtherUser(){
+  delOtherUser(id){
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
-      'delUserId': '',
+      'delUserId':id,
     };
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("成功解除其他用户的绑定");
+        console.log("成功解除其他用户的绑定"+JSON.stringify(data));
+         this.getRoomUser();
       } else if(data.errcode === 40002){
           j--;
           if(j>0){
             this.config.doDefLogin();
-            this.getUserRoom();
+            this.delOtherUser(id);
           }
       } else {
         console.log(data.errmsg)

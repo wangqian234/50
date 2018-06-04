@@ -31,9 +31,7 @@ export class ShopinfoPage {
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
-    // alert("商品id:"+this.wid);
     
-
 }
 
   ionViewDidLoad() {
@@ -42,7 +40,7 @@ export class ShopinfoPage {
 
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
 
     
     let loading = this.loadingCtrl.create({

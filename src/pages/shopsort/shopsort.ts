@@ -10,7 +10,9 @@ import { LoadingController } from 'ionic-angular';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+//返回商城首页
+import { ShoppingPage } from '../shopping/shopping';
 
 
 @Component({
@@ -20,18 +22,19 @@ import { TabsPage } from '../tabs/tabs'
 export class ShopsortPage {
 
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
+  public ShoppingPage = ShoppingPage;
   public leftCate=[];  /*左侧分类数据*/
   public list=[];
   public fenllist=[];
   public wdh=this.config.apiUrl;
   public rightCate=[];  /*右侧分类数据*/
+  public title = '';
   pid = 0;
   public TabsPage = TabsPage;
   fanhui:boolean =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController) {
-    this.getLeftCateData();/*获取左侧分类*/
     if(this.navParams.get('type')){
       this.fanhui = true;
     }
@@ -40,6 +43,10 @@ export class ShopsortPage {
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+    $(".ios .tabs .tabbar").css("display","none");
+  }
+  ionViewDidLoad(){
+        this.getLeftCateData();/*获取左侧分类*/
   }
   ionViewDidEnter() {
     var aa = this.pid+1;
@@ -56,17 +63,20 @@ export class ShopsortPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errmsg == 'OK'){
         this.list = data.list;
+        this.title=data.list[0].name;
       } else {
         alert(data.errmsg);
       }
     })
     //  右侧内容的初始显示
-    this.getRightCateData(21,0);
+    this.getRightCateData(21,0,this.title);
     $('.cate_left ul li:nth-of-type(1)').attr("class","activety");
   }
 
 
-  getRightCateData(pid,i){
+  getRightCateData(pid,i,name){
+    console.log(name)
+    this.title=name;
     this.pid = i;
      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
@@ -80,7 +90,6 @@ export class ShopsortPage {
        loading.dismiss();
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;
-         console.log(data);
      } else {
         alert(data.errmsg);
      }
@@ -89,7 +98,9 @@ export class ShopsortPage {
 
 
   backTo(){
-    this.navCtrl.pop();
+    this.app.getRootNav().push(TabsPage,{
+      tabs:true
+    });
   }
 
   backToHome(){

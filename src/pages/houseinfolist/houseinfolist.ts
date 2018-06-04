@@ -6,8 +6,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
-//ÐÂÌí¼Ó·¿ÎÝ
 import { BindroomPage } from '../bindroom/bindroom';
+
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the HouseinfolistPage page.
@@ -42,10 +43,17 @@ export class HouseinfolistPage {
   
   ionViewWillEnter() {
     console.log('ionViewWillEnter HouseinfolistPage');
+        //ç¡®è®¤ç™»å½•çŠ¶æ€
+if(this.storage.get('token')){
+
+} else {
+this.navCtrl.push(LoginPage);
+}
     this.getHouseList();
+    
   }
  
-  //»ñÈ¡·¿ÎÝÁÐ±í
+
   getHouseList(){
     var j = 3;
     console.log(this.storage.get('token'));
@@ -53,6 +61,7 @@ export class HouseinfolistPage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
+        console.log(this.houseList)
       } else if(data.errcode === 40002){
         j--;
         if(j>0){

@@ -4,13 +4,16 @@
   	  <div style="background-color:#ff971c;height:0.96rem;" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img  *ngIf="fanhui" (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
+				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></a>
+			</div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a href="javascript:;" class="px24 zyyge">更多商品分类</a></li>  
 				</ul>
 			</div>
-			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
+			<!--<div class="chacha"><a href="javascript:;"><img *ngIf="fanhui" (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
 		</div> 
 	</div>
 </div>
@@ -18,7 +21,7 @@
   <div class="cate_content">
       <div class="cate_left">
           <ul id="cate_left">
-            <li *ngFor="let item of list;let i = index" (tap)="getRightCateData(item['id'],i)">
+            <li *ngFor="let item of list;let i = index" (tap)="getRightCateData(item['id'],i,item.name)">
               {{item.name}}</li>
           </ul>
       </div>
@@ -35,6 +38,16 @@
 	    </ul>
 		<div class="nomore">没有更多数据了...</div>-->
 <div id="yemnr">
+
+		<div class="shopnomore">
+			<img src="assets/imgs/leftbar.png">
+			<span style="font-size:0.17rem;color:#FF971C">&nbsp;
+				<img style="height: 0.18rem;margin-top: 0.03rem;position: absolute;" src="assets/imgs/recommend.png">
+				&nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;&nbsp;</span>
+			<img src="assets/imgs/rightbar.png">
+		</div>
+
+
 <!--商品列表--> 
 <ul class="shangp_lieb_k">
 		<li *ngFor="let item of fenllist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
@@ -42,14 +55,15 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title | cutPipe}}</p>
-					<p class="px26">¥ {{item.goodspricemin}}</p>
-					
+					<p class="px26">¥ {{item.goodspricemin}}</p>				
 				</div>
 			</a>
 		</li>
 	</ul>
 </div>
+<div class="nomore" style="display: block">没有更多数据了...</div>
       </div>
+	 
   </div>
   
 </ion-content>

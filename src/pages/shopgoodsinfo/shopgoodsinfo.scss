@@ -12,17 +12,21 @@ ion-slides{
     text-decoration:line-through
 }
 .xiangq_dp_k .dianpulogo h1{
-    width: 0.8rem;
+    width: 0.55rem;
+    padding-top: 0.17rem;
 }
 .dianpulogo{
     float:left;
 }
 .xiangq_dp_k{
     height:1.3rem;
+    background-color: white;
 }
 .guangguang{
    overflow: hidden;
-    text-align: center;
+   text-align: center;
+   float:right;
+   margin-top: 0.2rem;
     height: 0.5rem; 
 
 }
@@ -37,7 +41,7 @@ ion-slides{
     line-height: 0.3rem;
     font-size: 0.22rem;
     height: 0.5rem;
-    width: 80%;
+    width: 2rem;
 }
 .a1 h1{
     width: 90%;
@@ -45,8 +49,7 @@ ion-slides{
     margin-right: 0.1rem;
 }
 .guangguang a h1 img{
-    width: 0.4rem !important;
-    height:0.4rem;
+
     float:left;
 }
 .dib_daoh_b{
@@ -65,6 +68,7 @@ ion-slides{
 }
 .tuwen{
     margin-bottom: 1rem;
+    background-color: white;
 }
 
 .showMore{
@@ -143,5 +147,39 @@ ion-slides{
     font-size: 0.28rem;
     line-height: 0.35rem;
 }
+
+.xiangq_dp_k .dianp_pf .px24{
+    line-height: 0.5rem;
+}
+
+.jiss_df p a.d{
+    border: solid 2px #FF971C;
+    color: #666666;
+}
+
+.jiss_df{
+    margin: 10px 0;
+    background-color: white;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.xiangq_shangp_m{
+    background-color: white;
+}
+
+.goum_sl{
+    background-color: white;
+}
+
+.xiangq_shangp_m .xq_jiaq p {
+  float: left;
+  color: #FF730F;
+  font-size: 0.29rem;
+}
+.xiangq_shangp_m .xq_jiaq span{
+        margin-top: 0.03rem;
+}
+
 
 }

@@ -31,14 +31,14 @@
 
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
-			<ion-slide *ngFor="let item of focusList">
-				<img [src]="item" />
+			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
+				<img src={{config.img}}{{item.imgurl}} />
 			</ion-slide>
 		</ion-slides>
 	</div>
 
-
-	<div class="daohang_bd" style="background-color:white;margin:10px 0 0 0;color:#646464">
+	<div><img class="huimgdiv" src="assets/imgs/title.png" ></div>
+	<div class="daohang_bd" style="background-color:white;margin:0;color:#646464;padding-top: 10px;">
 		<ul>
 			<li [navPush]="PayfeePage">
 				<a>
@@ -46,7 +46,7 @@
 					<p>物业缴费</p>
 				</a>
 			</li>
-			<li [navPush]="RepairaddPage" [navParams]="{type:1}">
+			<li [navPush]="RepairaddPage" [navParams]="{type:'1'}">
 				<a>
 					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
 					<p>投诉建议</p>
@@ -58,7 +58,7 @@
 					<p>房屋管理</p>
 				</a>
 			</li>
-			<li [navPush]="RepairaddPage" [navParams]="{type:4}">
+			<li [navPush]="RepairaddPage" [navParams]="{type:'4'}">
 				<a>
 					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
 					<p>在线报修</p>
@@ -89,14 +89,14 @@
 					<p>一键开门</p>
 				</a>
 			</li>
-		<li [navPush]="NewslistPage" [navParams]="{type:1}">
+		<li [navPush]="NewslistPage" [navParams]="{'act':'zx'}">
 			<a>
 				<h1><img src="assets/imgs/complain.png"></h1>
 				<p>社区资讯</p>
 			</a>
 		</li>
 
-		<li [navPush]="NewslistPage" [navParams]="{type:3}">
+		<li [navPush]="NewslistPage" [navParams]="{act:'gs'}">
 			<a>
 				<h1><img src="assets/imgs/massage.png"></h1>
 				<p>公示公告</p>
@@ -126,7 +126,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/zixun.png">
 			<span class="p_title">最新资讯</span>
-			<div class="zixun_more" (click)="getNewsList(1)">
+			<div class="zixun_more" (click)="clickme()">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 
@@ -136,7 +136,8 @@
 	<div class="zixun_content" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
 			<img src="{{config.apiUrl}}{{newList.imgurl}}">
-			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
+			<span class="content contenttitle">{{newList.topic}}</span>
+			<span class="content">{{newList.adddate | pipeTime}}</span>
 		</div>
 		<div class="line"></div>
 		<div style="clear:both"></div>
@@ -148,7 +149,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/public.png">
 			<span class="p_title">公示公告</span>
-			<div class="zixun_more" (click)="getNewsList(3)">
+			<div class="zixun_more" (click)="getNewsList('gs')">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 			</div>
@@ -156,8 +157,11 @@
 	</div>
 		<div class="zixun_content" *ngFor="let publicget of publicget">
 		<div (click)="getNewInfo(publicget.id)" class="zixun_li">
+
 			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
-			<span class="content">{{publicget.topic}} <br />{{publicget.adddate | pipeTime}}</span>
+			<span class="content contenttitle">{{publicget.topic}}</span>
+			<span class="content">{{publicget.adddate | pipeTime}}</span>
+
 		</div>
 		<div class="line"></div>
 		<div style="clear:both"></div>
