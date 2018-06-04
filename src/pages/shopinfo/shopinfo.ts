@@ -31,7 +31,6 @@ export class ShopinfoPage {
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
-    // alert("商品id:"+this.wid);
     
 }
 

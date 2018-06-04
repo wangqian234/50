@@ -92,7 +92,7 @@ export class ShoppingPage {
   public app: App) {
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
-    // this.getLunbo();
+    // // this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -106,19 +106,14 @@ export class ShoppingPage {
     }
     //获取商城首页
     getShop(){
-     var that=this;
     var api = this.aa+'/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-    console.log(data);
-     that.lunboList=data.json["data_Banner"].list;
-     console.log(that.lunboList)
-     that.tuangouList=data.json['data_Modules'].list; 
-     that.len=that.tuangouList.length;
-       // console.log(this.tuangouList[1]);
-     that.tubList=data.json['data_Sort'].list;
-     console.log(that.tubList);
-     that.tuijList=data.json['data_Recommend'].list;
-     // console.log(this.tuijList);
+      console.log(data)
+     this.lunboList=data.json["data_Banner"].list;
+     this.tuangouList=data.json['data_Modules'].list; 
+     this.len=this.tuangouList.length;
+     this.tubList=data.json['data_Sort'].list;
+     this.tuijList=data.json['data_Recommend'].list;
      })
     }
     //获取商城首页分类的商品
@@ -137,7 +132,7 @@ export class ShoppingPage {
 
   //自带函数
   ionViewDidLoad() {
-     //this.getPosition();
+    // this.getPosition();
     //给第一个商品分类hr
     $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
@@ -158,19 +153,20 @@ export class ShoppingPage {
       $(".fanhui").css("display","none")
   }
   doSomeThing(){
-   
+   this.doReserch();
   }
 
     getPosition() {
-    var that = this;
-     this.geolocation.getCurrentPosition().then((resp) => {
+      var that = this;
+      this.geolocation.getCurrentPosition().then((resp) => {
       var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         console.log(addComp.city)
+        alert(addComp.city)
         that.storage.set("currentPlace",addComp.city);
-      });
+      }); 
        });
 }
 
@@ -191,8 +187,7 @@ export class ShoppingPage {
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode=== 0 && data.errmsg==="OK"){
-      that.shoplist=data.list;    
-      console.log(data);
+      that.shoplist=data.list;
     }else{
       alert(data.errmsg);
     }

@@ -37,7 +37,10 @@ export class GroupdetailPage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
  //定义需要隐藏的标志变量
     public showpingj =false;
-  
+    public guiGe={
+      preprice:'',
+      price:''
+    };
   public wid;
   public sid;
   public lnum=0;
@@ -97,14 +100,20 @@ loading.dismiss();
       this.fenge(data.json['good_Model'].model.imgsrc_list);//分割轮播图字段
       //alert(data.json['good_Model'].model.imgsrc_list);
       console.log(that.goodMlist);
-      that.dataSlist=data.json.data_Sizes.list[0];
-
-      that.goodSize=data.json.data_Sizes.list[0].id;//获得商品规格id
-      console.log(that.dataSlist);
+      that.dataSlist=data.json.data_Sizes.list;  //规格
      
      this.recommend();
      })
      
+  }
+    //切换商品规格
+  changeId(id){
+    for(var i=0;i<this.dataSlist.length;i++){
+      if(id==this.dataSlist[i].id){
+        this.guiGe = this.dataSlist[i];
+        this.goodSize= this.dataSlist[i].id;
+      }
+    }
   }
 //进入店铺
 enterShop(wid,sid){

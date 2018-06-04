@@ -304,7 +304,9 @@ loading.present();
       // alert("王慧敏"+JSON.stringify(this.list));
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
-        // alert("王慧敏数据拼接"+JSON.stringify(this.list)); 
+       // this.goodsList = this.list.goods_list;
+        console.log(this.list)
+        console.log(1)
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{

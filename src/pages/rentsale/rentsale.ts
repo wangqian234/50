@@ -180,14 +180,14 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-  //   let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  // loading.present();
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     $(".showMore").css("display","none")
     var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
+      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){

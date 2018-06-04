@@ -27,8 +27,13 @@ export class RentsaleaddPage {
   contacts;
   street;
   region;
-  city = '深圳';
-
+  city = 4403;
+  public cityName = '西安'
+  public cityCode;
+  public area;
+  public areaCode;
+  public aa;
+  public Code;
   public RSadd;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage :StorageProvider,public config:ConfigProvider,
@@ -70,7 +75,7 @@ this.navCtrl.push(LoginPage);
     "contacts":this.contacts.toString(),
     "street":this.street.toString(),
     "region":this.region.toString(),
-    "city":this.city.toString()
+    "city":this.city.toString(),
   }
     var api = this.config.apiUrl + "/api/rental/add";
     console.log(this.RSadd)
@@ -124,8 +129,48 @@ this.navCtrl.push(LoginPage);
       }
     });
   }
-  
-  }
+}
+
+//获取城市代码
+getCityCode(){
+  var api = this.config.apiUrl + '/api/rental/getCity?cityName='+this.cityName;
+  this.http.get(api).map(res => res.json()).subscribe(data => {
+    if(data.errcode == 0 && data.errmsg == 'OK'){
+        this.cityCode = data.model;
+        console.log(this.cityCode)
+        this.area = this.cityCode.code;
+        this.getAreaCode();
+    }else{
+      alert(data.errmsg);
+    }
+  })
+}
+//获取街道代码
+getAreaCode(){
+  var api = this.config.apiUrl + '/api/rental/arealist?pId='+this.area;
+  this.http.get(api).map(res => res.json()).subscribe(data => {
+    if(data.errcode == 0 && data.errmsg == 'OK'){
+        this.areaCode = data.list;
+        console.log(this.areaCode)
+        this.aa = this.areaCode[1].code 
+        this.getCode();
+    }else{
+      alert(data.errmsg);
+    }
+  })
+}
+getCode(){
+  var api = this.config.apiUrl + '/api/rental/arealist?pId='+this.aa;
+  this.http.get(api).map(res => res.json()).subscribe(data => {
+    if(data.errcode == 0 && data.errmsg == 'OK'){
+        this.Code = data.list;
+        console.log(this.Code)
+        this.aa = this.Code.code 
+    }else{
+      alert(data.errmsg);
+    }
+  })
+}
   
   backTo(){
     this.navCtrl.pop();

@@ -31,20 +31,25 @@
             <ul class="offent">
 	 		<li *ngFor="let item of list">
 	 			<div class="dingd_hao"><p>{{item.trade_time}} &ensp;&ensp;&ensp;订单号：{{item.trade_id}}  </p></div>
-	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:item.goods_list[0]['tradegoods_id']}"> 
-	 				<a href="javascript:void(0)"><h1><img src="{{item.goods_list[0].img}}"></h1></a>
+				 <ul>
+					 <li *ngFor =" let goodsList of item.goods_list">
+	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:goodsList['tradegoods_id']}"> 
+	 				<a href="javascript:void(0)"><h1><img src="{{goodsList.img}}"></h1></a>
 	 				<div class="you">
-	 					<a href="javascript:void(0)"><p class="px24 bt">{{item.goods_list[0].goods_title}}</p></a>
-	 					<p class="xh">{{item.goods_list[0].size_name}}</p>
+	 					<a href="javascript:void(0)"><p class="px24 bt">{{goodsList.goods_title}}</p></a>
+	 					<p class="xh">{{goodsList.size_name}}</p>
 	 					<div class="youjfy">
 							<div class="goum_sl"> 
 								<div class="counter_box">
-									<span>x{{item.goods_list[0].goods_num}}</span>
+									<span>x{{goodsList.goods_num}}</span>
 								</div>
 							</div>
 	 					</div>
 	 				</div>
 	 			</div>
+				 
+				 </li>
+				 </ul>
 	 			<div class="qqq_jia">
 	 				<div class="zuo">
 	 					<p>状  态：<em>{{item.statename}}</em></p>

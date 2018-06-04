@@ -42,7 +42,6 @@ export class ChangeaddrPage {
       this.callback = this.navParams.get("callback");
       this.addListList = this.navParams.get("addListList");
   }
-
   ionViewWillEnter(){
     this.getRem();
     this.getAddressList();
