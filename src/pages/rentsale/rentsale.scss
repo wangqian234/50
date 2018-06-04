@@ -1,16 +1,24 @@
 page-rentsale {
+
+    
 .shous_k{
-    background: #C3D8FB;
-    border-radius: 0.25rem;
+    background: #2979FF;
+    border-radius: 0.07rem;
     width: 68%;
+    height: 0.6rem;
+    line-height: 0.6rem;
 }
 .logo_k{
     width:20%;
+    margin-top: 0.07rem;
+}
+.dengl{
+    margin-top: 0.04rem;
 }
 .logo_k img{
     height: 0.31rem;
     width: 0.23rem;
-    margin-top: 0.2rem;
+    margin-top: 0.17rem;
     margin-right: 0.07rem;
     float: left;
 }
@@ -28,7 +36,7 @@ page-rentsale {
     float: right;
     height:0.4rem;
     width:0.4rem;
-    margin-top:0.04rem;
+    margin-top:0.1rem;
     margin-right:0.04rem;
 }
 .shous_k input{
@@ -79,7 +87,7 @@ page-rentsale {
     padding: 0.3rem 0;
     display: inline-block;
     vertical-align: middle;
-    color: #000;
+    color: #818181;
     font-size: 0.28rem;
 }
 #group-content .order-nav .type.current a{
@@ -143,7 +151,7 @@ page-rentsale {
     display:none;
 }
 ion-slides{
-        height: 3rem;
+    height: 3.25rem;
     margin-top: 10px;
 }
 .shangp_lieb_k_er li .lieb_txt p.biao{
@@ -154,4 +162,32 @@ ion-slides{
     font-size: 0.17rem;
     color: #818181;
 }
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+ /* WebKit browsers */   
+color: #F5F5F5;   
+}   
+input:-moz-placeholder, textarea:-moz-placeholder {   
+/* Mozilla Firefox 4 to 18 */   
+color: #F5F5F5;   
+}   
+input::-moz-placeholder, textarea::-moz-placeholder {   
+ /* Mozilla Firefox 19+ */   
+color: #F5F5F5;   
+}   
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {   
+ /* Internet Explorer 10+ */   
+color: #F5F5F5;   
+}
+
+input[placeholder], [placeholder], *[placeholder] {   
+color:#F5F5F5 !important;   
+}
+
+
+
+}
+
+.areatop{
+    margin-top: 0.1rem !important;
 }

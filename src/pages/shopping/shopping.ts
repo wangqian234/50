@@ -138,19 +138,34 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
+    // $("#sos_tanc").focus(function(){
+    //   $(".remen_sos").css("display","block")
+    //    $(".shopcontentdiv").css("display","none")
+    //   $(".caid_img").css("display","none")
+    //   $(".fanhui").css("display","block")
+    // })
+
     $("#sos_tanc").focus(function(){
-      $(".remen_sos").css("display","block")
-      $(".caid_img").css("display","none")
-      $(".fanhui").css("display","block")
+      $(".sousuo").css("display","block")
+       $(".shouye").css("display","none")
+       $(".shopcontentdiv").css("display","none")
+       $(".remen_sos").css("display","block")
+       $(".ios .tabs .tabbar").css("display","none");
     })
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
   //控制搜索页面的显示
   fanhui(){
-      $(".remen_sos").css("display","none")
-      $(".caid_img").css("display","block")
-      $(".fanhui").css("display","none")
+      // $(".remen_sos").css("display","none")
+      // $(".shopcontentdiv").css("display","block")
+      // $(".caid_img").css("display","block")
+      // $(".fanhui").css("display","none")
+        $(".sousuo").css("display","none")
+       $(".shouye").css("display","block")
+       $(".shopcontentdiv").css("display","block")
+       $(".remen_sos").css("display","none")
+       $(".ios .tabs .tabbar").css("display","flex");
   }
   doSomeThing(){
    this.doReserch();

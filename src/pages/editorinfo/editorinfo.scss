@@ -14,13 +14,13 @@ page-editorinfo {
         border-bottom: solid 1px #448AFF;
     }
     .denglu_k {
-        margin: 0.4rem 0.2rem;
+        margin: 0;
     }
     .choose {
         float: right;
         cursor: pointer;
         height: 32px;
-        width: 60%;
+        width: 75%;
         display: inline-block;
         position: relative;
         line-height: 32px;
@@ -28,8 +28,60 @@ page-editorinfo {
         text-align: center;
         padding-right: 10px;
     }
-    .denglu_k .denglk_l .mz{
-        width:25%;
+.denglu_k .denglk_l .mz{
+        width: 22%;
+        color: #333333;
+    }
+    div.dk{
+        background:#ff971c;
+        height: 0.8rem;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    div.dk a{
+        font-size:0.29rem;
+        line-height: 0.8rem;
+    }
+    .addressdiv{
+        margin-top: 10px;
+        background-color: white;
+    }
+    .denglu_k_k{
+        margin: 0;
+    }
+    .shouh_dange_beijin{
+        background: #f5f5f5;
+        border-radius: 0rem;
+        margin-top: 0;     
+        padding: 0;
+    }
+    .denglu_k .denglk_l{
+        margin: 0;
+        height: 0.75rem;
+        width: 96%;
+        margin-left: 2%;
+        border-bottom: solid 1px #F5F5F5;
+        padding-top: 0.1rem;
+    }
+    dt{
+        width: auto;
+        float: right;
+        margin-top: 0.07rem;
+        margin-right: 0.15rem; 
+    }
+
+    .checkbox-ios-danger .checkbox-checked{
+        border-color: #ff971c;
+        background-color: #ff971c;
+    }
+    .shouhdz_hk{
+        height: auto
+    }
+    .dengl_anniu{
+        position: absolute;
+    width: 100%;
+    bottom: 0;
     }
 
 }

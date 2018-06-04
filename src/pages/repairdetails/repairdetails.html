@@ -18,7 +18,7 @@
   <p class="repair-state">{{repairdetaillist.statename}}</p>
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
   <div>
-    <img src="assets/imgs/08.jpg" />
+    <img class="pic" src="assets/imgs/08.jpg" />
   </div>
 </div>
 <p class="detail1">处理进度如下：</p>
@@ -38,7 +38,7 @@
 </div>
 <button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
 <button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
-<button id="evaluate"  style="display: none" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
+<button ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
     <div id="background" class="back">  
         <div id="div1" class="content1">  

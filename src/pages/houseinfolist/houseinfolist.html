@@ -14,15 +14,19 @@
 </div>
 
 <!--内容-->
+	<div style="height:20px;width:100%;background-color:#448AFF;"></div>
 <div class="shouhdz_hk">
 	<div class="shouh_zk" *ngFor="let list of houseList">
 		<div class="shouh_dange_beijin" (click)="getHouseInfo(list.id)" >
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p><em>项目名称：{{list.projectname}}</em></p>
-					<p><em>楼栋名称：{{list.edificename}}</em></p>
-					<p><em>房间：{{list.code}}</em></p>
-					<p><em>状态：&nbsp;&nbsp;{{list.state | pipeRelation}}</em></p>
+					<p><em>项目名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.projectname}}</em></p>
+					<p><em>楼栋名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.edificename}}</em></p>
+					<p><em>房间号码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.code}}</em></p>
+					<!--<p><em>业主姓名：{{list.name}}</em></p>-->
+					<p><em>当前状态：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.state | pipeRelation}}</em></p>
+					
+        			<div *ngIf="!list.default" class="def"><input type="radio" (change)="setDefaultHouse(item.id)"/>&nbsp;&nbsp;&nbsp;&nbsp;设为默认房屋</div>
 				</div>
 			</div>
 			<!--<div class="boanjk">
@@ -32,7 +36,11 @@
       		</div>-->
 		</div>
 	</div>
-</div> 
+</div>
+<div style="clear:both;">
+</div>
+<div style="height:1rem;">
+</div>
 <div class="dib_daoh_b">
 	<div class="gouwuc_ Xinz" style="background-color:#488aff">
 		 <a [navPush]='BindroomPage'>新添房屋</a>

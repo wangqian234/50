@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
@@ -10,12 +10,8 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
 
 //团购详情界面
 import { GroupdetailPage } from '../groupdetail/groupdetail';
-/**
- * Generated class for the GroupbuyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @IonicPage()
 @Component({
@@ -30,7 +26,7 @@ export class GroupbuylistPage {
   public list = [];
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController) {
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
    
    
    
@@ -100,5 +96,8 @@ export class GroupbuylistPage {
     this.getGroupList(infiniteScroll);
   }
 
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
+  }
 
 }

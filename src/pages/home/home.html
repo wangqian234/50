@@ -37,8 +37,8 @@
 		</ion-slides>
 	</div>
 
-
-	<div class="daohang_bd" style="background-color:white;margin:10px 0 0 0;color:#646464">
+	<div><img class="huimgdiv" src="assets/imgs/title.png" ></div>
+	<div class="daohang_bd" style="background-color:white;margin:0;color:#646464;padding-top: 10px;">
 		<ul>
 			<li [navPush]="PayfeePage">
 				<a>
@@ -135,8 +135,9 @@
 	</div>
 	<div class="zixun_content" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
-			<img src="{{config.img}}{{newList.imgurl}}">
-			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
+			<img src="{{config.apiUrl}}{{newList.imgurl}}">
+			<span class="content contenttitle">{{newList.topic}}</span>
+			<span class="content">{{newList.adddate | pipeTime}}</span>
 		</div>
 		<div class="line"></div>
 		<div style="clear:both"></div>
@@ -156,8 +157,11 @@
 	</div>
 		<div class="zixun_content" *ngFor="let publicget of publicget">
 		<div (click)="getNewInfo(publicget.id)" class="zixun_li">
-			<img src="{{config.img}}{{publicget.imgurl}}">
-			<span class="content">{{publicget.topic}} <br />{{publicget.adddate | pipeTime}}</span>
+
+			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
+			<span class="content contenttitle">{{publicget.topic}}</span>
+			<span class="content">{{publicget.adddate | pipeTime}}</span>
+
 		</div>
 		<div class="line"></div>
 		<div style="clear:both"></div>

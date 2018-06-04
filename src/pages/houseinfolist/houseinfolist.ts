@@ -61,6 +61,7 @@ this.navCtrl.push(LoginPage);
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
+        console.log(this.houseList)
       } else if(data.errcode === 40002){
         j--;
         if(j>0){

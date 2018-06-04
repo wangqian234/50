@@ -107,6 +107,7 @@ export class ShoppinglistPage {
       } else {
         this.SD_id=0;   
       } 
+      $(".ios .tabs .tabbar").css("display","none");
   }
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu){
@@ -259,7 +260,6 @@ export class ShoppinglistPage {
 	    showBackdrop: true,
     });
     loading.present();
-    var j=3;
     switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -529,11 +529,13 @@ export class ShoppinglistPage {
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
   backTo(){
-    this.navCtrl.pop();
+    this.app.getRootNav().push(TabsPage,{
+      tabs:true
+    });
   }
 
-  backToHere(){
-     this.app.getRootNav().push(TabsPage);
+  backToHome(){
+     this.app.getRootNav().push(TabsPage);    
   }
 
 }

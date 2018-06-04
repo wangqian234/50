@@ -93,15 +93,23 @@ export class RentsalelistPage {
       }
       if($('#space').children("img").length == 1){
         $('#space').children("img").remove();
+        $('#space').prepend("<img src='assets/imgs/gray.png'>");
       }
       if($('#price').children("img").length == 1){
         $('#price').children("img").remove();
+        $('#price').prepend("<img src='assets/imgs/gray.png'>")
       }
       if($(this).children("img").length == 1){
         $(this).children("img").remove();
+        if(that.flag){
+          $(this).prepend("<img src='assets/imgs/blue.png'>")
+        } else {
+          $(this).prepend("<img src='assets/imgs/blue.png' style='transform:rotate(180deg);margin-top:0.32rem;'>")
+        }
         that.flag = !that.flag;
       }
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "time+"
       } else {
@@ -122,15 +130,24 @@ export class RentsalelistPage {
       }
       if($('#time').children("img").length == 1){
         $('#time').children("img").remove();
+        $('#time').prepend("<img src='assets/imgs/gray.png'>");
       }
       if($('#price').children("img").length == 1){
         $('#price').children("img").remove();
+        $('#price').prepend("<img src='assets/imgs/gray.png'>");
       }
       if($(this).children("img").length == 1){
         $(this).children("img").remove();
+        if(that.flag){
+          $(this).prepend("<img src='assets/imgs/blue.png'>")
+        } else {
+          $(this).prepend("<img src='assets/imgs/blue.png' style='transform:rotate(180deg);margin-top:0.32rem;'>")
+        }
         that.flag = !that.flag;
       }
+
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "space+"
       } else {
@@ -151,15 +168,24 @@ export class RentsalelistPage {
       }
       if($('#space').children("img").length == 1){
         $('#space').children("img").remove();
+        $('#space').prepend("<img src='assets/imgs/gray.png'>");
       }
       if($('#time').children("img").length == 1){
         $('#time').children("img").remove();
+        $('#time').prepend("<img src='assets/imgs/gray.png'>");
       }
       if($(this).children("img").length == 1){
         $(this).children("img").remove();
+        if(that.flag){
+          $(this).prepend("<img src='assets/imgs/blue.png'>")
+        } else {
+          $(this).prepend("<img src='assets/imgs/blue.png' style='transform:rotate(180deg);margin-top:0.32rem;'>")
+        }
         that.flag = !that.flag;
       }
+
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "price+"
       } else {
