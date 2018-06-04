@@ -276,6 +276,16 @@ page-shoppinglist {
 .gouwuc_kk .diannao_shanp .you .bt{
     height: 1rem
 }
+.logo_k_fanh{
+  width: auto;
+  position: absolute;
+}
+.zhongjain_daoh{
+  width: 100%;
+}
+.jiu_feo{
+  width: 100%;
+}
 
 }
 .totalmoney{
@@ -291,5 +301,11 @@ page-shoppinglist {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     word-break: break-all;
+}
+
+.goodsul{
+    li{
+        margin: 0 0 3px 0 !important;
+    }
 }
 

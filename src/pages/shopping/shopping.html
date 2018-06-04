@@ -19,8 +19,9 @@
 
     <div class="zhongj_k sousuo" style="display:none">
 		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
-        <div class="logo_k logo_k_fanh"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
-		<div class="shous_k" style="width:73%">
+        <div class="logo_k logo_k_fanh" style="width:auto"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png">
+        <img style="margin-right: 0.2rem;" (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></div>
+		<div class="shous_k" style="width:63%">
             <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img src="assets/imgs/sos.png">
         </div>
@@ -32,9 +33,11 @@
 <div class="shopcontentdiv">
 
 <!-- 轮播图 -->
+
         <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
             <ion-slide *ngFor="let item of tuangouList">
                <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
+
            </ion-slide>         
         </ion-slides>
 
@@ -62,7 +65,7 @@
         <ul class="facediv" >
             <li *ngFor= "let item of tubList;let i = index">   
                     <div (tap)="getshoplist(item['id'],i)">
-                    <a href="#"><img src="{{item.img}}"/></a>
+                    <a ><img src="{{item.img}}"/></a>
                     <p>{{item.name}}</p>                   
                     </div>
             </li>

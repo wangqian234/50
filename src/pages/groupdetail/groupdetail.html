@@ -27,16 +27,16 @@
 <div class="xiangq_shangp_m">
 	<a [navPush]='ShopbuyPage'>
 	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{dataSlist.preprice}}</p>
+	<div class="xq_jiaq"><p>￥{{guiGe.preprice}}</p>
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
 <!--规格-->
 <div class="banb" id="banb">
 				<ul>
-					<h1>规格</h1>
-					<li class="no">{{dataSlist.name}}</li>
-					<li>规格2</li>
+					<li class="no" *ngFor="let item of dataSlist" (click)="changeId(item.id)">
+						<button>{{item.name}}</button>
+					</li>
 				</ul>
 </div>
 <!--数量-->
@@ -52,7 +52,6 @@
 			<div class="goum_sl">
 				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
 			</div>
-
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">
@@ -137,7 +136,7 @@
 		
 		<div id="sbuy" class="you">
 			<div class="goum" >
-				<a (click)="buygoods()" >单独购买(￥{{dataSlist.preprice}})</a>  
+				<a (click)="buygoods()" >单独购买(￥{{guiGe.price}})</a>  
 			</div>
 		</div>
 		<div id="gbuy" class="you">

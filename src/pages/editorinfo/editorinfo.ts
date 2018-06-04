@@ -78,7 +78,7 @@ export class EditorinfoPage {
           if(data.model.birthday){
           data.model.birthday = data.model.birthday.substring(0,10);
           this.personInfo = data.model
-            console.log(data.model);
+            console.log(JSON.stringify(data.model));
         } else if(data.errcode === 40002){
           j--;
           if(j<0){
@@ -130,21 +130,22 @@ export class EditorinfoPage {
         "maritalStatus":this.personInfo.maritalstatus,
         "industryInfo":this.personInfo.industryinfo,
       }
-      var api = this.config.apiUrl + '/api/User/edit_More';
-      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-        if (data.errcode === 0 && data.errmsg === 'OK') {
-          console.log("修改成功!");
-          this.navCtrl.pop();
-      } else if(data.errcode === 40002){
-        j--;
-        if(j>0){
-          this.config.doDefLogin();
-          this.editMoreInfo();
-        }
-      } else {
-        console.log(data.errmsg);
-      }
-    });
+      console.log(JSON.stringify(data))
+    //   var api = this.config.apiUrl + '/api/User/edit_More';
+    //   this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+    //     if (data.errcode === 0 && data.errmsg === 'OK') {
+    //       console.log("修改成功!");
+    //       this.navCtrl.pop();
+    //   } else if(data.errcode === 40002){
+    //     j--;
+    //     if(j>0){
+    //       this.config.doDefLogin();
+    //       this.editMoreInfo();
+    //     }
+    //   } else {
+    //     console.log(data.errmsg);
+    //   }
+    // });
   }
 
 

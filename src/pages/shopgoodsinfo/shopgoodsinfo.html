@@ -29,17 +29,16 @@
 <div class="xiangq_shangp_m">
 	<a [navPush]='ShopbuyPage'>
 	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{dataSlist.preprice}}</p>
+	<div class="xq_jiaq"><p>￥{{guiGe.preprice}}</p>
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
-
 <!--数量-->
 <div class="goum_sl">
 	<p class="px22 jiaq">购买数量</p>
 	<div class="counter_box">
 		<i class="jian" (tap)="decCount()">-</i>
-		<input type="text" readonly="readonly" [(ngModel)]="addcarList.goodsNum" name="num" id="num">
+		<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
 		<i class="jia" (tap)="incCount()">+</i>
 	</div>
 </div>
@@ -48,6 +47,16 @@
 				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
 			</div>
 
+<div class="banb" id="banb">
+				<ul>
+					<li class="no" *ngFor="let item of dataSlist" (click)="changeId(item.id)">
+						<button>{{item.name}}</button>
+					</li>
+				</ul>
+</div>
+<span>{{guiGe.num}}</span>
+<span>{{guiGe.price}}</span>
+<span>{{guiGe.preprice}}</span>
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">

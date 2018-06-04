@@ -34,7 +34,7 @@ export class GroupbuylistPage {
 
  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
     this.getGroupList('');
     
   }

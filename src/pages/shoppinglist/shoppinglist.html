@@ -4,14 +4,17 @@
 <div class="toub_beij toub_beij_zy">
 	<div  style="background-color:#ff971c;height:0.96rem;" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img id="backTo" (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="#">
+								<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
+				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+				</a></div>
 			<div class="zhongjain_daoh">
 				<ul id="title">
 					<li class="qbdd no" (click)="gotoOrder()"><a class="zyyge">商城订单</a></li>
 					<li class="qbdd qbdd_you" (click)="gotoGroup()"><a class="zyyge">团购订单</a></li> 
 				</ul>
 			</div>
-			<div class="chacha"><a href="javascript:;"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
+			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
 		</div>
 	</div>
 </div>
@@ -31,25 +34,29 @@
             <ul class="offent">
 	 		<li *ngFor="let item of list">
 	 			<div class="dingd_hao"><p>{{item.trade_time}}</p><p class="ensurestate">{{item.statename}}</p></div>
-	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:item.goods_list[0]['tradegoods_id']}"> 
-	 				<h1><img src="{{item.goods_list[0].img}}"></h1>
+				 <ul class="goodsul">
+					 <li *ngFor = "let goodsList of item.goods_list">
+	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:goodsList['tradegoods_id']}"> 
+	 				<h1><img src="{{goodsList.img}}"></h1>
 	 				<div class="you">
-	 					<a href="javascript:void(0)"><p class="px24 bt">{{item.goods_list[0].goods_title}}</p></a>
-	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{item.goods_list[0].size_name}}</p>
+	 					<a href="javascript:void(0)"><p class="px24 bt">{{goodsList.goods_title}}</p></a>
+	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{goodsList.size_name}}</p>
 	 					<div class="youjfy" style="float: right;">
 							<div class="goum_sl"> 
 								<div class="counter_box">
-									<span>x{{item.goods_list[0].goods_num}}</span>
+									<span>x{{goodsList.goods_num}}</span>
 								</div>
 							</div>
 	 					</div>
 						 <div style="clear:both"></div>
-						<p class="xh" style="float:left;margin:0.07rem 0 0 0;color:#FF730F;font-size:0.24rem;">￥{{item.goods_list[0].preprice}}</p>
+						<p class="xh" style="float:left;margin:0.07rem 0 0 0;color:#FF730F;font-size:0.24rem;">￥{{goodsList.preprice}}</p>
 	 				</div>
 	 			</div>
+					 </li>
+				 </ul>
 	 			<div class="qqq_jia">
 	 				<div class="zuo">
-						<p>共计{{item.goods_list[0].goods_num}}件商品</p>
+						<p>共计{{item.goodsNum}}件商品</p>
 	 					<p class="totalmoney">合计：<em style="color:#FF730F">￥{{item.pretotalprice}}</em></p>
 	 				</div>
 					 <div style="clear:both"></div>

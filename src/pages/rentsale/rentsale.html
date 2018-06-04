@@ -18,7 +18,7 @@
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
 			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
-				<img [src]="item" />
+				<img src={{item.img}} />
 			</ion-slide>
 		</ion-slides>
 	</div>

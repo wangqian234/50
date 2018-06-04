@@ -5,6 +5,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 //商品详情页
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-shopmalllist',
   templateUrl: 'shopmalllist.html',
@@ -16,7 +17,8 @@ export class ShopmalllistPage {
   public aa =this.config.apiUrl;
   //跳转页面
   public  ShopgoodsinfoPage = ShopgoodsinfoPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config: ConfigProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController) {
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -26,25 +28,32 @@ export class ShopmalllistPage {
     //推荐商品
     this.tuijGoods();
   }
+  ionViewDidEnter(){
+    this.list = [];
+    this.page = 1;
+    this.reserchGoods("")
+  }
+
   
   // 转换单位
   getRem(){
      var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
   //搜索商品接口
   reserchGoods(infiniteScroll){
-    //this.keywords = this.navParams.get("keyWords");
-    var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
-    console.log(api)
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+       });
+      loading.present();
+      var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
+      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       loading.dismiss();
        if(data.errcode === 0 && data.errmsg === 'OK'){
          if(data.list.length<10){
            $('.nomore').css('display','block');
           }
-
-         this.list = data.list;
-
+        this.list = this.list.concat(data.list) ;
         if(infiniteScroll){
           infiniteScroll.complete();
           this.page++;
@@ -64,6 +73,8 @@ export class ShopmalllistPage {
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;
+          console.log(this.tuijList)
+          console.log(1)
         }else{
           alert(data.errmsg);
         }

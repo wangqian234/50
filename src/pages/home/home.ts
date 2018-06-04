@@ -228,6 +228,7 @@ export class HomePage {
       //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
+        console.log(this.publicget)
       } else if (data.errcode === 40002) {
         j--;
         if (j > 0) {
@@ -319,16 +320,5 @@ changeRoom(roomid) {
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
-      clickme(){
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert("进来了")
-                console.log(JSON.stringify(data));
-                alert(data.ip)
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+
 }

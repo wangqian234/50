@@ -18,7 +18,10 @@ export class RentsalemyPage {
   curCityCode = "4403"
   type;
   mylist = [];
-
+  public del ={
+    token:'',
+    ids:'',
+  }
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
@@ -37,9 +40,11 @@ export class RentsalemyPage {
     this.type = type;
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
+     console.log(api)
       this.http.get(api).map(res => res.json()).subscribe(data => {
         loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log(data)
         if(data.list.length == 0){
           $('.nomore').css("display","block")
         }
@@ -70,11 +75,21 @@ export class RentsalemyPage {
             }
           }
       } else {
-        alert(data.errmsg)
+        alert(data.errmsg+"000")
       }
     });
           
-
+  }
+  //批量删除
+  delMyPublish(){
+    var api = this.config.apiUrl +　'/api/rental/del';
+    this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
+      if(data.errcode === 0 && data.errmsg === 'OK'){
+        alert(data.errmsg+"删除成功")
+      }else{
+        alert(data.errmsg+"删除失败")
+      }
+    })
   }
 
   doLoadMore(infiniteScroll){

@@ -41,8 +41,9 @@ import { TabsPage } from '../tabs/tabs'
 })
 export class ShoppinglistPage {
      //定义token
+   goodsNum:0;
   public token=this.storage.get('token');
-
+  public outTradeNo;
   public list=[];
   public groupBuyList=[];
   public good_list=[];
@@ -72,6 +73,13 @@ export class ShoppinglistPage {
     trade_Id:'',
     token:'',
   }
+  public obligationEventList={
+    tId:'',
+    token:'',
+    tags:'android',
+    act:'emall',
+    createip:'',
+  }
   //商城
   public tabTest={
     li00:"type current",
@@ -90,23 +98,19 @@ export class ShoppinglistPage {
   }
 
   //定义congfig中公共链接的变量aa
-  public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
- 
+  public aa = this.config.apiUrl;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
   ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-          $(".ios .tabs .tabbar").css("display","none");
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
-        this.SD_id=0;
-        
+        this.SD_id=0;   
       } 
+      $(".ios .tabs .tabbar").css("display","none");
   }
-
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
-    // alert(trade_id+"王慧敏"+tradegoods_id);
   }
   //再次购买
   buyagainEvent(goods_id){
@@ -124,16 +128,38 @@ export class ShoppinglistPage {
    refundEvent(tradegoods_id){
      this.navCtrl.push(TradegoodsRefundPage,{tradegoodsId:tradegoods_id});
    }
-   //商品待付款
+   //商品确认付款
    obligationEvent(trade_id){
-
+       let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+      });
+      loading.present();
+      this.obligationEventList.tId = trade_id;
+      this.obligationEventList.token = this.storage.get('token')
+      this.obligationEventList.createip ='';
+      var api = this.aa + '/api/weixinpay/unifiedorder'
+      this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
+        loading.dismiss();
+        if(data.errcode === 0 ){
+          this.outTradeNo = data.errmsg
+        }
+      })
+   }
+   //微信查询接口
+   checkPayment(){
+     var api = this.aa + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg === 'OK'){
+          alert("支付成功")
+       }
+     })
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
          let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
-    });
-loading.present();
+      });
+      loading.present();
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
@@ -201,32 +227,6 @@ loading.present();
     this.navCtrl.push(LoginPage);
     }
    }
-
-
-// ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-//     this.getRem();
-//     //this.getProductList(infiniteScroll);
-//     var j=3;
-//      var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+this.SD_id+'&token='+this.token;
-//      console.log("王慧敏"+api);
-//      this.http.get(api).map(res => res.json()).subscribe(data =>{
-//        if(data.errcode === 0 &&data.errmsg == 'OK'){
-         
-//          //this.goods_list=data.list.goods_list;
-//          this.list=data.list;
-//          console.log(data);
-//      } else if(data.errcode === 40002){
-//               j--;
-//               if(j>0){
-//                 this.config.doDefLogin();
-//                 this.ionViewWillLoad();
-//           }
-//       } else {
-//         alert(data.errmsg);
-//      }
-//      })
-//   }
-
   ionViewDidLoad() {
         this.getOrderList('');//实现列表缓存
         if(this.navParams.get('id') == undefined){
@@ -240,10 +240,7 @@ loading.present();
 	    showBackdrop: true,
     });
     loading.present();
-    //  this.paymentEvent(this.SD_id);
-    // var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
     var j=3;
-    // alert("王慧敏慧敏19号"+this.SD_id+"商城测试页码"+this.page);
     switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -305,7 +302,13 @@ loading.present();
       // alert("王慧敏"+JSON.stringify(this.list));
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
-        // alert("王慧敏数据拼接"+JSON.stringify(this.list)); 
+        for(var i=0;i<this.list.length;i++){
+          var num = 0;
+          for(var j=0;j<this.list[i].goods_list.length;j++){
+              num +=this.list[i].goods_list[j].goods_num
+          }
+          this.list[i].goodsNum = num;
+        }
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{
@@ -360,28 +363,6 @@ loading.present();
       break;
     }
     this.getOrderList("");//实现列表缓存
-    // var j=3;
-    //  var api = this.aa+'/api/trade/list?pageSize=10&pageIndex=1&trade_State='+trade_state+'&token='+this.token;
-    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
-    //    if(data.errcode === 0 &&data.errmsg == 'OK'){
-    //      //this.goods_list=data.list.goods_list;
-    //      this.list=data.list;
-    //      //alert(JSON.stringify(data));
-    //       //alert(JSON.stringify(data.list));
-    //      //this.good_list=data.list[0].goods_list;
-    //      //alert(JSON.stringify(data.list[0].goods_list));
-    //      // alert(JSON.parse(data));
-    //      console.log(data);
-    //  }  else if(data.errcode === 40002){
-    //           j--;
-    //           if(j>0){
-    //             this.config.doDefLogin();
-    //             this.paymentEvent(trade_state);
-    //       }
-    //   }else {
-    //     alert(data.errmsg);
-    //  }
-    //  })
   }
 
 /**王慧敏团购 */
@@ -391,9 +372,6 @@ loading.present();
 	    showBackdrop: true,
     });
     loading.present();
-    //  this.paymentEvent(this.SD_id);
-    // var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
-    // alert("王慧敏19号"+this.SD_id+"团购测试页码"+this.page);
     switch(this.SD_id){
       case 0:
       this.tab_test={
@@ -437,9 +415,7 @@ loading.present();
       //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/
-        // alert("王慧敏"+JSON.stringify(this.groupBuyList));  
-        
-        console.log("wangqian"+JSON.stringify(this.groupBuyList)) 
+        // alert("王慧敏"+JSON.stringify(this.groupBuyList));   
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{
@@ -534,11 +510,13 @@ loading.present();
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
   backTo(){
-    this.navCtrl.pop();
+    this.app.getRootNav().push(TabsPage,{
+      tabs:true
+    });
   }
 
-  backToHere(){
-     this.app.getRootNav().push(TabsPage);
+  backToHome(){
+     this.app.getRootNav().push(TabsPage);    
   }
 
 }

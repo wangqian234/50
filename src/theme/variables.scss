@@ -153,6 +153,11 @@ $colors: (
   z-index: 10000;
 }
 
+.closearea{
+  width: 0.3rem !important;
+  height: 0.34rem !important;  
+}
+
 @import "index";
 @import "style";
 @import "swiper.min";

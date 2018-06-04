@@ -4,13 +4,16 @@
 	  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
+				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+			</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a href="javascript:;" class="px24 zyyge">抢购列表</a></li>  
+					<li><a href="javascript:;" class="px24 zyyge">抢购列表</a></li>
 				</ul>
 			</div>
-			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
+			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
 		</div> 
 	</div>
 </div>
@@ -33,12 +36,16 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao" style="height:0.7rem;">{{item.title}}</p>
-					<p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>
+					<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>
+					<!--<p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>-->
 					<div class="progress"><div class="enprogress"></div>已抢{{item.whennum}}份</div>
 					<div style="clear:both"></div>
           			<p *ngIf="mode==3" class="bend" style="color:#979797">单价：<span>¥&nbsp;{{item.pricemin}}</span></p>
-					<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>
-					<span class="salespan">马上抢</span>
+					  <p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>
+					<!--<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>-->
+					<span class="salespan"><img src="assets/imgs/quick.png">&nbsp;马上抢</span>
+					<!--<span class="salespan"><img src="assets/imgs/time.png">提醒我</span>-->
+					<!--<img style="float:right;margin-top: -0.3rem;" src="assets/imgs/havedone.png">-->
 				</div>
 			</a>
 	</ul>

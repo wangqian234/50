@@ -27,11 +27,12 @@ import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo'
 export class RentsalePage {
   public url;
   public Id;
+  public focusList=[];
 
-  focusList = [
-      'assets/imgs/rent1.jpg',
-      'assets/imgs/rent2.jpg',
-      'assets/imgs/rent3.jpg'];
+  // focusList = [
+  //     'assets/imgs/rent1.jpg',
+  //     'assets/imgs/rent2.jpg',
+  //     'assets/imgs/rent3.jpg'];
   curCityCode = "";
   houseInfo;
   showMore = false;
@@ -68,6 +69,7 @@ export class RentsalePage {
     // } else {
     // this.navCtrl.push(LoginPage);
     // }
+    this.getFocusList();
   }
 
   ionViewDidLoad() {
@@ -82,6 +84,7 @@ export class RentsalePage {
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
         this.focusList= data.list
+        console.log(this.focusList)
       }else{
         alert(data.errmsg)
       }
@@ -89,19 +92,19 @@ export class RentsalePage {
   }
   //轮播图获取详情
   getInfo(url){
-    this.url=url.substring(0,3);
-    this.Id = url.substring(3,)
-    if(url==="HRSHome"){
-      this.navCtrl.push(RentsalePage)
-    }else if(this.url==="gId"){
-      this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
-    }else if(this.url ==="sId"){
-      this.navCtrl.push(ShopinfoPage,{sid:this.Id})
-    }else if(this.url === "rez"){
-     // this.navCtrl.push()
-    }else if(this.url === "res"){
-     // this.navCtrl.push()
-    }
+    // this.url=url.substring(0,3);
+    // this.Id = url.substring(3,)
+    // if(url==="HRSHome"){
+    //   this.navCtrl.push(RentsalePage)
+    // }else if(this.url==="gId"){
+    //   this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
+    // }else if(this.url ==="sId"){
+    //   this.navCtrl.push(ShopinfoPage,{sid:this.Id})
+    // }else if(this.url === "rez"){
+    //  // this.navCtrl.push()
+    // }else if(this.url === "res"){
+    //  // this.navCtrl.push()
+    // }
   }
  paymentEvent(trade_state){
 
@@ -177,14 +180,14 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-  //   let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  // loading.present();
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     $(".showMore").css("display","none")
     var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
+      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
