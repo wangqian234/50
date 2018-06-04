@@ -10,6 +10,7 @@
 					<li><a href="javascript:;" class="px24 zyyge">热卖列表</a></li>  
 				</ul>
 			</div>
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div> 
 	</div>
 </div>
@@ -17,12 +18,12 @@
 <!--头部--> 
 
 <!--商品列表--> 
-<ul class="shangp_lieb_k">
+<ul class="shangp_lieb_k" style="padding:10px;">
 		<li *ngFor="let item of list"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
-					<p class="biao">{{item.title | cutPipe}}</p>
+					<p class="biao">{{item.title}}</p>
 					<p class="bend">已售数量：{{item.soldnum}}</p>
 					<p class="px26">¥ {{item.preprice}}<span>   ¥ {{item.price}}</span></p>
 					
@@ -33,11 +34,9 @@
 	</ul>
 
 </div>
-<ion-row>
-    <ion-col class="nodata" text-center>
-      没有更多啦 ♪(^∇^*)
-    </ion-col>
-</ion-row>
+
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
+
 <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
 </ion-infinite-scroll>

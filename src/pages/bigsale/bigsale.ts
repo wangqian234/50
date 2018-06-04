@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
@@ -12,6 +12,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 
 @IonicPage()
@@ -32,7 +34,7 @@ export class BigsalePage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
 
 
   }
@@ -98,6 +100,10 @@ export class BigsalePage {
 //加载更多
   doLoadMore(infiniteScroll){
     this.getbigsale(infiniteScroll);
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 

@@ -10,6 +10,7 @@
         </div>
 	</div>
 </div>
+	<div><img class="huimgdiv" src="assets/imgs/title.png" ></div>
 <div class="jifen"><img src="assets/imgs/jifen.png"><p>剩余积分</p><span>0</span></div>
 
 <button style="height:0.8rem;width:98%;font-size:0.3rem" ion-button block color="#f53d3d" *ngIf="!enSureLogin" [navPush]="LoginPage">登录</button>
@@ -17,25 +18,25 @@
 
   <ion-list inset class="user_list">
      <div class="blockdiv">
-        <p>物业管理</p>
+        <p>物业管理<ion-icon name="fangwu"></ion-icon></p>
         <ion-item [navPush]="HouseinfolistPage">
-            <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
+            <img src="assets/imgs/myhouse.png">
             <span>关联房屋信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         
         <ion-item [navPush]="PayfeePage">
-            <ion-icon style="color:#8DC43C;" name="logo-yen"></ion-icon>
+            <img src="assets/imgs/myfee.png">
             <span>费用明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item [navPush]="RepairlistPage">
-            <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
+            <img src="assets/imgs/myserve.png">
             <span>我的工单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item [navPush]="LoadingPage">
-            <ion-icon style="color:#8C44BB;" name="attach"></ion-icon>
+            <img src="assets/imgs/mynum.png">
             <span>积分收支明细</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
@@ -44,17 +45,17 @@
     <div class="blockdiv">
         <p>我的商城</p>
         <ion-item [navPush]="ShoppinglistPage" [navParams]="{id:0}">
-            <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
+            <img src="assets/imgs/myshop.png">
             <span>商城订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item [navPush]="TradegoodsGroupbuyingPage" [navParams]="{id:0}">
-             <ion-icon style="color:#CC8F33;" name="star-half"></ion-icon>
+            <img src="assets/imgs/mytuan.png">
             <span>团购订单</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item (click)="gotoAddressPage()">
-            <ion-icon  style="color:#B34B8A;" name="clipboard"></ion-icon>
+            <img src="assets/imgs/myplace.png">
             <span>收货地址管理</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
@@ -63,12 +64,12 @@
     <div class="blockdiv">
         <p>房屋租售</p>
         <ion-item [navPush]="RentsalemyPage">
-            <ion-icon style="color:#CC3333;" name="ios-paper-outline"></ion-icon>
+            <img src="assets/imgs/mypublic.png">
             <span>我的发布信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item [navPush]="LoadingPage">
-            <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
+            <img src="assets/imgs/mymanger.png">
             <span>我的预约信息</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
@@ -77,12 +78,12 @@
     <div class="blockdiv">
         <p>设置</p>
         <ion-item [navPush]="RebuildpassPage">
-            <ion-icon style="color:#BB445C;" name="ios-people-outline"></ion-icon>
+            <img src="assets/imgs/mymiss.png">
             <span>账户安全</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>
         <ion-item (click)="outLogin()">
-            <ion-icon style="color:#44BB8C;" name="build"></ion-icon>
+            <img src="assets/imgs/myout.png">
             <span>退出登录</span>
             <ion-icon class="icon-left" name="arrow-dropright"></ion-icon>
         </ion-item>

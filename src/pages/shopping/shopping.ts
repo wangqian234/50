@@ -1,7 +1,7 @@
 //高海乐
 import { Geolocation } from '@ionic-native/geolocation';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,App } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -31,6 +31,11 @@ import {ShopmalllistPage} from '../shopmalllist/shopmalllist';
 import { StorageProvider } from '../../providers/storage/storage';
 //地区选择页
 import { PersonalPage } from '../personal/personal';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
+
+//返回首页
+import { HomePage } from '../home/home';
 
 
 
@@ -72,6 +77,7 @@ export class ShoppingPage {
   public currentPlaceCode = "";
   public changePlace = "";
   public shopKeyList = [];
+   HomePage = HomePage;
 
 
   //定义congfig中公共链接的变量aa
@@ -79,9 +85,11 @@ export class ShoppingPage {
 
     //定义token
   public token=this.storage.get('token');
+    public TabsPage = TabsPage;
   //构造函数
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
+  public app: App) {
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
     // this.getLunbo();
@@ -106,7 +114,6 @@ export class ShoppingPage {
      that.tuijList=data.json['data_Recommend'].list;
      // console.log(this.tuijList);
      })
-
       //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -129,19 +136,32 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
+    // $("#sos_tanc").focus(function(){
+    //   $(".remen_sos").css("display","block")
+    //    $(".shopcontentdiv").css("display","none")
+    //   $(".caid_img").css("display","none")
+    //   $(".fanhui").css("display","block")
+    // })
+
     $("#sos_tanc").focus(function(){
-      $(".remen_sos").css("display","block")
-      $(".caid_img").css("display","none")
-      $(".fanhui").css("display","block")
+      $(".sousuo").css("display","block")
+       $(".shouye").css("display","none")
+       $(".shopcontentdiv").css("display","none")
+       $(".remen_sos").css("display","block")
     })
     this.shopKeyList = this.storage.get("shopKewWords");
   }
 
   //控制搜索页面的显示
   fanhui(){
-      $(".remen_sos").css("display","none")
-      $(".caid_img").css("display","block")
-      $(".fanhui").css("display","none")
+      // $(".remen_sos").css("display","none")
+      // $(".shopcontentdiv").css("display","block")
+      // $(".caid_img").css("display","block")
+      // $(".fanhui").css("display","none")
+        $(".sousuo").css("display","none")
+       $(".shouye").css("display","block")
+       $(".shopcontentdiv").css("display","block")
+       $(".remen_sos").css("display","none")
   }
   doSomeThing(){
    
@@ -182,7 +202,6 @@ export class ShoppingPage {
     $(".facediv li").removeAttr("class");
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-
     var that =this;
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -212,7 +231,7 @@ export class ShoppingPage {
     }
     this.navCtrl.push(ShopmalllistPage ,{
       keywords: this.keywords,
-    })  
+    })
   }
 
   onSearchKeyUp(event){
@@ -251,6 +270,10 @@ export class ShoppingPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     console.log("w等于",w)
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+
+  backToHere(){
+     this.app.getRootNav().push(TabsPage);
   }
 
 }

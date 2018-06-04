@@ -10,6 +10,10 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import $ from 'jquery';
 import{BindroomPage}from '../bindroom/bindroom'
 import { LoadingController } from 'ionic-angular';
+
+//登录页面
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-repairadd',
   templateUrl: 'repairadd.html',
@@ -41,6 +45,9 @@ export class RepairaddPage {
   public guidFile;
   //public roomid;
   public roomId
+
+  public LoginPage = LoginPage;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,public loadingCtrl: LoadingController) {
       if(this.storage.get('roomId')){
@@ -54,6 +61,12 @@ export class RepairaddPage {
       this.addlist.type=this.navParams.get("type")
       this.changeType();
     }
+      //确认登录状态
+      if(this.storage.get('token')){
+
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
     this.getRem();
   }
 

@@ -7,6 +7,7 @@ page-rentsalelist {
 }
 #group-content ul{
     padding: 0 0.2rem;
+    border-bottom: 1px solid #dedede;
 }
 #group-content .order-nav .type{
     height:0.7rem;
@@ -25,15 +26,16 @@ page-rentsalelist {
     font-size: 0.28rem;
 }
 #group-content .order-nav .type img{
-    height:0.6rem;
+    width: 0.15rem;
     float: right;
-    padding-top: 0.25rem;
+    padding-top: 0.32rem;
+    margin-right: 0.5rem;
 }
 #group-content .order-nav .type.current a{
     color: #2979FF;
 }
 #group-content .order-nav .type.current{
-    border-bottom: 2px solid #2979FF;
+    border-bottom: 1px solid #2979FF;
 }
 .zixun_content{
     width:100%;
@@ -87,5 +89,24 @@ page-rentsalelist {
         text-align: center;
         color: gray;
     }
+
+    .shangp_lieb_k_er li{
+    height:auto;
+}
+.shangp_lieb_k_er li .lieb_txt{
+    padding-left: 0.2rem;
+    width:65%;
+}
+.shangp_lieb_k_er li .lieb_img{
+    width:35%;
+}
+.shangp_lieb_k_er li .lieb_txt p.biao{
+    height:0.7rem;
+    color: #818181;
+}
+.shangp_lieb_k_er li .lieb_txt p.bend{
+    font-size: 0.17rem;
+    color: #818181;
+}
 
 }

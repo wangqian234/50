@@ -66,10 +66,13 @@ export class UserPage {
          
     }
     ionViewWillEnter(){
+
       //确认登录状态
       if(this.storage.get('token')){
         this.enSureLogin = true;
         this.userLoginName = this.storage.get('username1')
+      } else {
+        this.navCtrl.push(LoginPage);
       }
       var w = document.documentElement.clientWidth || document.body.clientWidth;
       document.documentElement.style.fontSize = (w / 750 * 115) + 'px';

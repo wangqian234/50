@@ -25,20 +25,17 @@
 
 <!--商品名称-->
 <div class="xiangq_shangp_m">
-	<a [navPush]='ShopbuyPage'>
-	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{dataSlist.preprice}}</p>
-	<span>原价:¥{{goodMlist.price}}</span></div>
+	<a>
+	<p class="px24"><span>【{{goodMlist.groupnum}}人团】</span>{{goodMlist.title}}</p>
+	<div class="xq_jiaq">
+		<p>￥{{dataSlist.preprice}}</p>
+		<span>原价:¥{{goodMlist.price}}</span>
+	</div>
+	<p class="px24">已售：</p>
 	</a>
 </div>
 <!--规格-->
-<div class="banb" id="banb">
-				<ul>
-					<h1>规格</h1>
-					<li class="no">{{dataSlist.name}}</li>
-					<li>规格2</li>
-				</ul>
-</div>
+
 <!--数量-->
 			<div class="goum_sl">
 				<p class="px22">数量<em>限购20件</em></p>
@@ -85,7 +82,7 @@
 <!--评价-->
 
 <!--推荐商品-->
-<div class="rem_shangp_bt_b">
+<!--<div class="rem_shangp_bt_b">
 	<div class="waik">
 		<em></em>
 		<div class="mingz"><p class="px26">为您推荐</p></div>
@@ -105,10 +102,29 @@
 					
 				</div>
 			</a>
-		</li>
-		
+		</li>	
 	</ul>
+</div>-->
 
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.23rem;color:#FF971C">&nbsp;&nbsp;为您推荐&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
+<br />
+
+<div id="yemnr">
+<!--头部--> 
+<!--商品列表--> 
+<ul class="shangp_lieb_k" style="padding:10px;">
+		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+			<a href="javascript:;">
+				<div class="lieb_img"><img src={{item.img}}></div>
+				<div class="lieb_txt">
+					<p class="biao">{{item.title}}</p>
+					<p class="bend">已售数量：{{item.soldnum}}</p>
+					<p class="px26">¥ {{item.preprice}}</p>
+					
+				</div>
+			</a>
+		</li>	
+	</ul>
 </div>
 
 <!--底部导航-->

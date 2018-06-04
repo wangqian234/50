@@ -15,10 +15,11 @@ page-shoppinglist {
 }
 
 #order-content .order-nav .type{
-    height:0.7rem;
     width: 20%;
     text-align: center;
     float: left;
+    margin-bottom: 0;
+    height: 0.87rem;
 }
 
 #order-content .order-nav .type a{
@@ -31,12 +32,12 @@ page-shoppinglist {
 }
 
 #order-content .order-nav .type.current a{
-    color: #ff971c;
-    border-bottom: 2px solid #ff971c;
+    color: #FF720E;
+    border-bottom: 2px solid #FF720E;
 }
 
 #order-content .order-item{
-    margin-bottom: 0.8888888888888888rem;
+    margin-bottom: 0.1rem;
     background-color: #fff;
 }
 
@@ -104,7 +105,7 @@ page-shoppinglist {
 #order-content ul li{
     margin: 0 0 10px 0;
     background-color: white;
-    padding: 5px 0 20px 0;
+    padding: 5px 0 0 0;
 }
 // 团购CSS
 #group-content .order-nav{
@@ -114,7 +115,8 @@ page-shoppinglist {
 }
 
 #group-content .order-nav .type{
-    height:0.7rem;
+    height:0.87rem;
+    margin-bottom: 0;
     width: 25%;
     text-align: center;
     float: left;
@@ -130,8 +132,8 @@ page-shoppinglist {
 }
 
 #group-content .order-nav .type.current a{
-    color: #ff971c;
-    border-bottom: 2px solid #ff971c;
+    color: #FF720E;
+    border-bottom: 2px solid #FF720E;
 }
 
 #group-content .order-item{
@@ -201,7 +203,7 @@ page-shoppinglist {
     background-color: #f5f5f5;
 }
 #group-content ul li{
-    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
     background-color: white;
     padding: 5px 0 20px 0;
 }
@@ -227,8 +229,67 @@ page-shoppinglist {
         color: gray;
     }
     .gouwuc_kk_ddxq .diannao_shanp{
-        padding: 0 0.2rem 0.2rem 0.2rem;
+        padding: 0 0.2rem 0 0.2rem;
+    }
+        .qqq_jia .you p a{
+        background: white;
+        color: #FF730F;
+        border: 1px solid #FF730F;
     }
 
+.qqq_jia .you p a.color_1 {
+    background: #FF730F;
+}
+
+.qqq_jia .you p a{
+        padding: 0.1rem 0.16rem;
+}
+.gouwuc_kk .diannao_shanp h1 img{
+    width: 100% !important;
+    height: 100%;
+}
+.gouwuc_kk .diannao_shanp h1{
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 2%;
+}
+.gouwuc_kk_ddxq .diannao_shanp .you{
+    width: auto;
+    float: none;
+    height: 1.8rem;
+}
+
+.qqq_jia .zuo p{
+    float: left;
+    margin:0;
+}
+.qqq_jia .zuo{
+    width: 100%;
+    padding: 0 0.2rem;
+}
+.qqq_jia .you{
+    width: 100%;
+}
+.qqq_jia{
+    height: auto;
+}
+.gouwuc_kk .diannao_shanp .you .bt{
+    height: 1rem
+}
+
+}
+.totalmoney{
+    float: right !important;
+}
+.ensurestate{
+    float: right;
+    color: #FF730F !important;
+}
+.gouwuc_kk .diannao_shanp .you .bt{
+        overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 

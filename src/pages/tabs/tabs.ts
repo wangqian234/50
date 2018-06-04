@@ -7,6 +7,7 @@ import { Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RentsalePage } from '../rentsale/rentsale';
 import { ShoppingPage } from '../shopping/shopping';
+import { ShopsortPage } from '../shopsort/shopsort';
 
 
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
@@ -21,6 +22,8 @@ import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('mainTabs') tabRef: Tabs;
+  @ViewChild('mainTabs2') tabRef2: Tabs;
  
   tab1Root = HomePage;
   tab2Root = RentsalePage;
@@ -28,25 +31,25 @@ export class TabsPage {
   tab4Root = UserPage;
 
   tab5Root = ShoppingPage;
-  tab6Root = ShoppinglistPage;
-  tab7Root = CartPage;
-  tab8Root = UserPage;
+  tab7Root = ShoppinglistPage;
+  tab8Root = CartPage;
+  tab6Root = ShopsortPage;
 
   constructor(public config:ConfigProvider,public http: Http,public navCtrl: NavController) {
+
   }
 
 
   ionViewWillEnter($ionicTabsDelegate) {
-    $(".mytabs2").css("display","none")
+      $(".mytabs2").css("display","none");
+      $(".mytabs").css("display","block");
   }
+
 
   getShopTab(){
     $(".mytabs").css("display","none");
     $(".mytabs2").css("display","block");
-  }
-
-  getTeneTab(){
-    this.navCtrl.setRoot(TabsPage);
+    
   }
 
 

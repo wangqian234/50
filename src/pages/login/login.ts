@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { LoadingController, Loading } from 'ionic-angular';
 
+
 //找回密码页
 import { RebuildpassPage } from '../rebuildpass/rebuildpass'
 //注册页
-import { RegisterpasswordPage } from '../registerpassword/registerpassword'
+import { RegisterpasswordPage } from '../registerpassword/registerpassword';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @IonicPage()
 @Component({
@@ -34,9 +37,12 @@ public history='';
   }
 
   public loginNum : boolean;
+  public TabsPage = TabsPage;
 
-  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,
+
+  constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
+
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
@@ -57,6 +63,7 @@ public history='';
 	    showBackdrop: true,
     });
     loading.present();
+    if(this.loginNum){
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
@@ -71,6 +78,21 @@ public history='';
           alert(data.errmsg);
         }
       });
+      }else{
+        var api = this.config.apiUrl + '/api/user/Login_Code?mobile=' + this.userinfo.userName + '&vCode='+this.userinfo.userPwd;
+        this.http.get(api).map(res => res.json()).subscribe(data => {
+            loading.dismiss();
+            if(data.errcode === 0 && data.errmsg === 'OK'){
+                this.storage.set('userName',data.model.loginname);
+                this.storage.set('token',data.model.token);
+                this.storage.set('username1',data.model.username);
+                this.navCtrl.pop();
+            }else{
+              alert(data.errmsg);
+            }
+        })
+      }
+
   }
 
   getLoginNum(){
@@ -107,7 +129,6 @@ public history='';
   }
   //发送验证码
   ownRegist(){
-    alert("123")
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
       alert('请输入正确的手机号码');
       return;
@@ -135,7 +156,7 @@ public history='';
   }
 
   backTo(){
-    this.navCtrl.pop();
+    this.app.getRootNav().push(TabsPage); 
   }
 
 }

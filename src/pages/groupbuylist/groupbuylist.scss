@@ -1,17 +1,67 @@
-page-groupbuy {
+page-groupbuylist {
 
+font-family:MicrosoftYaHei;
 
 .shangp_lieb_k_er li .lieb_txt p {
-    color: #555;
-    font-size: 0.28rem;
+    color: #666666;
     line-height: 0.35rem;
     text-align: justify;
-    padding-bottom:0;
+    padding-bottom: 0;
+    font-size: 0.17rem;
+    float: left;
+    margin-top: 0.04rem;
+    margin-left: 0.1rem;
+    span{
+        font-size: 0.24rem;
+        color: #ff730f;
+    }
 }
 
 .shangp_lieb_k_er li .lieb_txt p.px26 {
     font-size: 0.23rem;
     color: #e10601;
+}
+
+.topimg{
+    height: 2rem;
+    overflow: hidden;
+    margin-left: 20%;
+    width: 60%;
+}
+.shangp_lieb_k_er li{
+    height: auto;
+    background-color: white;
+}
+.shangp_lieb_k_er li .lieb_txt{
+    float: inherit;
+    width: auto;
+    padding: 0 0.38rem;
+}
+
+.shangp_lieb_k_er li .lieb_txt p.biao{
+    font-size: 0.22rem;
+    color: #333333;
+    margin: 0.1rem 0;
+    span{
+        color: #FF730F;
+    }
+}
+
+.salespan{
+    float: right;
+    background-color: #FF730F;
+    width: 0.9rem;
+    height: 0.37rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.2rem;
+    color: #FEFEFE;
+    border-radius: 0.05rem;
+    line-height: 0.37rem;
+}
+
+.shangp_lieb_k_er{
+    margin: 10px 0;
 }
 
 }

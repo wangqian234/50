@@ -69,6 +69,7 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
+    alert(this.wid)
   }
 
   ionViewDidLoad() {

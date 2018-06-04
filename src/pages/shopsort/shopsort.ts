@@ -1,7 +1,7 @@
 
 //wdh
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
@@ -9,6 +9,8 @@ import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 
 @Component({
@@ -24,10 +26,15 @@ export class ShopsortPage {
   public wdh=this.config.apiUrl;
   public rightCate=[];  /*右侧分类数据*/
   pid = 0;
+  public TabsPage = TabsPage;
+  fanhui:boolean =false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.getLeftCateData();/*获取左侧分类*/
+    if(this.navParams.get('type')){
+      this.fanhui = true;
+    }
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -83,6 +90,10 @@ export class ShopsortPage {
 
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome(){
+     this.app.getRootNav().push(TabsPage);    
   }
 
 }

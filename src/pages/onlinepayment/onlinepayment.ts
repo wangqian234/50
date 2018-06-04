@@ -9,6 +9,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import $ from 'jquery';
 //绑定房屋
 import { BindroomPage } from '../bindroom/bindroom';
+//登录页面
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -16,6 +18,7 @@ import { BindroomPage } from '../bindroom/bindroom';
   templateUrl: 'onlinepayment.html',
 })
 export class OnlinepaymentPage {
+  public cip;
   public saveRoomId;
   public isChencked=false;
   public allprice = 0.0 ;
@@ -25,12 +28,15 @@ export class OnlinepaymentPage {
   public iof_defList=[];
   public defRoomId='';
   public roomid;
+  public LoginPage = LoginPage;
   dest = [];
   checkNum = 0;
   pay={
     roomId:'',
     idG:'',
-    token:'',   
+    token:'', 
+    tags:'android',
+    createip:'',
   };
   onlinepaymentList={
     roomId:''
@@ -56,6 +62,12 @@ export class OnlinepaymentPage {
   //主页面加载函数 
   ionViewWillLoad(){
     this.getRem();
+    //确认登录状态
+    if(this.storage.get('token')){
+
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
   }
 
   ionViewDidLoad() {
@@ -171,7 +183,6 @@ export class OnlinepaymentPage {
       }
     })
   }
-
   //结算账单
   gopay(){
     this.pay.roomId=this.roomid;
@@ -180,16 +191,18 @@ export class OnlinepaymentPage {
     for(let i=0;i<this.dest.length;i++){
       if(this.dest[i].checked==true){
           for(let j=0;j<this.dest[i].data.length;j++){
-            var aa = "0" + this.dest[i].data[j].id + "cd"
+            var aa = this.dest[i].data[j].Sort+ this.dest[i].data[j].id 
             payMouth.push(aa);
           }
+
       }
     }
     this.pay.idG=payMouth.join(",")
     console.log(this.pay)
-    var api = this.config.apiUrl+'/api/charge/edit_Save?';
+    var api = this.config.apiUrl+'/api/charge/payment?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0 ){
+            console.log(JSON.stringify(data))
             console.log(data.errmsg+"支付成功")
             this.getPayList()
           }else{
@@ -236,10 +249,20 @@ export class OnlinepaymentPage {
     var totalprice = 0;
     for(let i=0;i<this.dest.length;i++){
       if(this.dest[i].checked==true){
-          totalprice = totalprice + parseFloat(this.dest[i].totalNum);
+        totalprice = totalprice + parseFloat(this.dest[i].totalNum);
       }
     }
-    this.allprice = parseFloat(totalprice.toFixed(2));
+      this.allprice = parseFloat(totalprice.toFixed(2));
   }
+  // //获取ip
+  // getClientIp(){
+  //   $cip = "unknown";
+  //   if($_SERVER['REMOTE_ADDR']){
+  //     $cip = $_SERVER['REMOTE_ADDR'];
+  //   }else if(getenv("REMOTE_ADDR")){
+  //     $cip = getenv("REMOTE_ADDR")
+  //   }
+  //     return $ip
+  // }
 
 }
