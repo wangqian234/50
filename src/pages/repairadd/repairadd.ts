@@ -56,7 +56,7 @@ export class RepairaddPage {
         this.getroomId();
       }
   }
-  ionViewWillLoad(){
+  ionViewDidLoad(){
     if(this.navParams.get("type")){
       this.addlist.type=this.navParams.get("type")
       this.changeType();
@@ -116,7 +116,7 @@ export class RepairaddPage {
     } 
   }
   changeType(){
-        if(this.addlist.type==="4"){
+   if(this.addlist.type == "4"){
         $('#aa').css('display','block');
        this.getproject();
     }else{

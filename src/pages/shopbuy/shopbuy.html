@@ -18,7 +18,7 @@
 
     <!--收货信息-->
 		<div class="jie_diz">
-				<a (click)="changeAdd()">
+				<a (click)="changeAdd()" >
 					<p>收货人:{{addlist.address_name}} &nbsp; {{addlist.address_mobile}}</p>
 					<p class="p">地址：{{addlist.Address}}<i></i></p>
 				</a>
@@ -32,13 +32,17 @@
  			<div class="diannao_shanp"> 
 				 <p class="px26 bt">{{item.shopname}}</p>
 
- 				<a href="javascript:;"><h1><img src="goodSlist.img"></h1></a>
+ 				<a href="javascript:;"><h1><img src={{item.img}}></h1></a>
  				<div class="you">
  					<a href="javascript:;"><p class="px24 bt">{{item.title}}</p></a>
  					<p class="xh">{{item.name}}</p>
  					<div class="youjfy">
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{item.preprice}}</p>
+									<div class="gei_shangj_ly">
+			<h1>给商家留言：</h1>
+			<input type="text" [(ngModel)]="item.trade_Memo" name="trade_Memo" placeholder="请您留言">
+		</div>
 <!--数量-->
 <div class="goum_sl">
 	<div class="counter_box">
@@ -56,10 +60,7 @@
 </div>
 
     <!--第三部分-->
-		<div class="gei_shangj_ly">
-			<h1>给商家留言：</h1>
-			<input type="text" [(ngModel)]='trade_Memo' name="trade_Memo" placeholder="请您留言">
-		</div>
+
 		<div class="jies_qian">
 	
 		<p class="px26">运费: ￥{{carriagelist.postage}}元</p> 
