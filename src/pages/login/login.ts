@@ -39,7 +39,6 @@ public history='';
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
-
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
 
@@ -157,6 +156,7 @@ public history='';
 
   backTo(){
     this.app.getRootNav().push(TabsPage); 
+
   }
 
 }

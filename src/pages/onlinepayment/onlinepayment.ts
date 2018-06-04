@@ -63,11 +63,11 @@ export class OnlinepaymentPage {
   ionViewWillLoad(){
     this.getRem();
     //确认登录状态
-    if(this.storage.get('token')){
+if(this.storage.get('token')){
 
-    } else {
-    this.navCtrl.push(LoginPage);
-    }
+} else {
+this.navCtrl.push(LoginPage);
+}
   }
 
   ionViewDidLoad() {

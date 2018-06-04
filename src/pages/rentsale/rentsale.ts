@@ -17,8 +17,10 @@ import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 import { RentsalelistPage } from '../rentsalelist/rentsalelist';
 //登录页面
 import { LoginPage } from '../login/login';
+
 import {ShopinfoPage} from '../shopinfo/shopinfo';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo'
+
 @IonicPage()
 @Component({
   selector: 'page-rentsale',

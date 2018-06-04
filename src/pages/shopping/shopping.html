@@ -5,7 +5,7 @@
 
 
 <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
-	<div class="zhongj_k shouye">
+	<div class="zhongj_k">
 		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
         <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
 		<div class="shous_k">
@@ -54,7 +54,7 @@
             <div class="titleshop">
                 <img src="assets/imgs/recommend.png">
                 <span class="p_shop">&ensp;推荐分类</span>
-                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
+                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
             </div>               
         <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
@@ -86,7 +86,7 @@
         <div class="titleshop">
             <img src="assets/imgs/recommend.png">
             <span class="p_shop">&ensp;精品推荐</span>
-            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
+            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多>></span>
         </div>
         <ul style="margin-bottom:50px">
         <li *ngFor= "let item of tuijList" style="height:3.19rem;">

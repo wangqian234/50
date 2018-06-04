@@ -30,7 +30,7 @@
 	<a>
 	<p class="px24">{{goodMlist.title}}</p>
 	<div class="xq_jiaq"><p>￥{{goodMlist.maxpreprice}}</p>
-	<div class="xq_jiaq" *ngif><p>￥{{goodMlist.maxpreprice}}</p>
+	<!--<div class="xq_jiaq" *ngif=><p>￥{{goodMlist.maxpreprice}}</p>-->
 	<span>原价:¥{{goodMlist.price}}</span></div>
 	</a>
 </div>
@@ -97,7 +97,7 @@
 <br />
 
 <div id="yemnr">
-<!--头部--> 
+
 <!--商品列表--> 
 <ul class="shangp_lieb_k" style="padding:10px;">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
@@ -114,23 +114,6 @@
 	</ul>
 </div>
 <div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
-<!--<div id="yemnr" style="margin-bottom:1rem;">
-<ul class="shangp_lieb_k">
-		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
-			<a href="javascript:;">
-				<div class="lieb_img"><img src={{item.img}}></div>
-				<div class="lieb_txt">
-					<p class="biao">{{item.title | cutPipe}}</p>
-					<p class="bend">已售数量：{{item.soldnum}}</p>
-					<p class="px26">¥ {{item.pricemin}}</p>
-					
-				</div>
-			</a>
-		</li>
-		
-	</ul>
-
-</div>-->
 
 
 <!--底部导航-->

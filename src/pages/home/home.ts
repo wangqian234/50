@@ -85,9 +85,10 @@ export class HomePage {
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
-  //轮播图的页面跳转
 
+  //轮播图的页面跳转
   public RentsalePage = RentsalePage;
+
 
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;
