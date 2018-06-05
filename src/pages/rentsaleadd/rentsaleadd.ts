@@ -5,7 +5,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-
+import $ from 'jquery'
 @IonicPage()
 @Component({
   selector: 'page-rentsaleadd',
@@ -44,14 +44,26 @@ export class RentsaleaddPage {
     if(this.storage.get('token')){
     } else {
     this.navCtrl.push(LoginPage);
-      }
+  }
+  this.ifontime(1);
       if(this.navParams.get('item')){
-
       }
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RentsaleaddPage');
+  }
+  ifontime(type){
+    $("#typediv ul li").removeAttr("class");
+    var span = "#typediv ul li:nth-of-type(" + type + ")"
+    $(span).attr("class", "activety");
+
+    if(type==1 || type==3){
+     $('.fang').css('display','block');
+     $('.zu').css('display','none');
+    }else if(type == 2 || type == 4){
+      $('.zu').css('display','block');
+      $('.fang').css('display','none');
+    }
   }
 
   getRSInfo(){
@@ -136,10 +148,11 @@ export class RentsaleaddPage {
 
 //获取城市代码
 getCityCode(){
-  var api = this.config.apiUrl + '/api/rental/getCity?cityName='+this.cityName;
+  var api = this.config.apiUrl + '/api/rental/getCity?cityName='+this.RSadd.city;
   this.http.get(api).map(res => res.json()).subscribe(data => {
     if(data.errcode == 0 && data.errmsg == 'OK'){
         this.cityCode = data.model;
+        this.RSadd.city = this.cityCode;
         console.log(this.cityCode)
         this.area = this.cityCode.code;
         this.getAreaCode();
@@ -155,7 +168,6 @@ getAreaCode(){
     if(data.errcode == 0 && data.errmsg == 'OK'){
         this.areaCode = data.list;
         console.log(this.areaCode)
-        this.aa = this.areaCode[1].code 
         this.getCode();
     }else{
       alert(data.errmsg);

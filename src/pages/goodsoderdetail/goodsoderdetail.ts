@@ -13,7 +13,7 @@ import { LoadingController } from 'ionic-angular';
 
 //添加商品退款申请
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
-
+import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund'
 @IonicPage()
 @Component({
   selector: 'page-goodsoderdetail',
@@ -24,8 +24,8 @@ export class GoodsoderdetailPage {
   public token=this.storage.get('token');
  //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/trade/list?pageSize=10&pageIndex=1&trade_State=0&token=111
-
-
+  public refundInfoList=[];
+  public tradeRefundInfo=false;
   public list=[];
   public model={
     tel:'',
@@ -92,9 +92,10 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.tradegoodsid+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+
        if(data.errcode === 0 && data.errmsg === 'OK'){
-         this.list=data.model ;
-         console.log(JSON.stringify(data))
+         this.tradeRefundInfo = true;
+         this.refundInfoList = data.model;
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -102,14 +103,17 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
                 this.getDetail();
           }
       } else if(data.errcode === -1) {
-        alert("未申请退款")
-
+        this.tradeRefundInfo = false;
      }
      })
   }
      //添加商品退款申请
    addrefundEvent(tradegoods_id,pretotalprice){
      this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id,pretotalprice:pretotalprice});
+   }
+   //跳转到商品详情
+   refundInfoEvent(refundInfoList){
+     this.navCtrl.push(TradegoodsRefundPage,{item:refundInfoList})
    }
 
   ionViewDidLoad() {
