@@ -32,7 +32,7 @@ export class TradegoodsReapPage {
     tgId:'',
     memo:'',
     act:'',
-    token : ''
+    token:''
   }
   public refundList={
     refund_mode:'',
@@ -45,7 +45,7 @@ export class TradegoodsReapPage {
   public TradegoodsRefundPage=TradegoodsRefundPage;
   public ShoppinglistPage=ShoppinglistPage;
   public tradegoods_id;
-
+  public pretotalprice;
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
     //定义token
@@ -53,21 +53,21 @@ export class TradegoodsReapPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
 ,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+            this.pretotalprice = this.navParams.get('pretotalprice')
             this.tradegoods_id=navParams.get('tradegoodsId');
-            this.reapList.tgId=this.tradegoods_id;
+            this.reapList.tgId=this.tradegoods_id;      
   }
 
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
       this.getRem();
       this.getdetaillist();
-
     // if(this.navParams.get('item')){
     //   this.refundList=this.navParams.get('item');
     // } 
   }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
   getdetaillist(){
 
@@ -79,17 +79,14 @@ export class TradegoodsReapPage {
       });
       loading.present();
       var j=3;
-      var api = this.aa+'/api/tradegoods_refund/add';
-      //this.reapList.mode=this.refundList.refund_mode;
-      //this.reapList.type=this.refundList.refund_type;
-      //this.reapList.price=this.refundList.refund_price;
-      this.reapList.act="add";
+      if(this.reapList.price<=this.pretotalprice){
+      var api = this.aa+'/api/tradegoods_refund/add'
+      this.reapList.act='add';
       this.reapList.token=this.token;
-      //var date = this.evaluateList;
-      // console.log("五爷"+JSON.stringify(this.reapList));
+      console.log(JSON.stringify(this.reapList) )
       this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
-      if (data.errcode === 0 && data.errmsg === 'OK') {
+      if (data.errcode === 0 && data.errmsg === 'OK'){
           alert("添加成功！");
           this.navCtrl.push(ShoppinglistPage,{id:2});
       }else if(data.errcode === 40002){
@@ -99,10 +96,13 @@ export class TradegoodsReapPage {
                 this.addRefundApplicationEvent();
           }
       } else {
-          alert("添加失败！");
+          alert("添加失败！"); 
           this.navCtrl.push(ShoppinglistPage,{id:2});
         }
       });
+      }else{
+        alert("退款金额不能大于付款金额")
+      }
   }
   //修改商品退款申请
   modifyRefundApplicationEvent(){
@@ -121,7 +121,7 @@ export class TradegoodsReapPage {
               j--;
               if(j>0){
                 this.config.doDefLogin();
-                this.addRefundApplicationEvent();
+                this.modifyRefundApplicationEvent();
           }
       } else {
           alert("修改失败！");

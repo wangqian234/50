@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
-
+import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
 @IonicPage()
 @Component({
   selector: 'page-rentsaleinfo',
@@ -20,15 +20,14 @@ export class RentsaleinfoPage {
   }
 
   ionViewWillLoad(){
-    if(this.navParams.get('rental_id') && this.navParams.get('type')){
-      this.rental_id = this.navParams.get('rental_id');
-      this.type = this.navParams.get('type');
-      if(this.navParams.get('00')){   //传过来一个标志位判断是我的发布房屋详情还是列表房屋
+    if(this.navParams.get('houseId') && this.navParams.get('houseType')){
+      this.rental_id = this.navParams.get('houseId');
+      this.type = this.navParams.get('houseType');
+      if(this.navParams.get('quFen')==1){  
         this.getRentSaleInfo();
-      }else{
+      }else if(this.navParams.get('quFen')==0){
         this.myPublishInfo();
-      }
-      
+      }    
     }
   }
   ionViewDidLoad() {
@@ -41,11 +40,10 @@ export class RentsaleinfoPage {
       this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.rentsale = data.model;
-        console.log(this.rentsale)
+        console.log(data)
         this.rentsaleDetail = data.list;
-        console.log(JSON.stringify(data));
       } else {
-        alert(data.errmsg+"00")
+        alert(data.errmsg)
       }
     });
   }
@@ -57,13 +55,16 @@ export class RentsaleinfoPage {
       this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.rentsale = data.model;
-        console.log(this.rentsale)
+        console.log(data)
         this.rentsaleDetail = data.list;
-        console.log(JSON.stringify(data));
       } else {
-        alert(data.errmsg+"00")
+        alert(data.errmsg)
       }
     });
+  }
+  //跳转到房屋修改
+  goEditPage(rentsaleDetail){
+      this.navCtrl.push(RentsaleaddPage,{item:rentsaleDetail})
   }
 
   backTo(){

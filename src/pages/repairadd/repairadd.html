@@ -5,25 +5,50 @@
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToList()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
-				<ul>
-					<li><a class="px24 zyyge">新增工单</a></li>  
-				</ul>
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<ion-option value="add">--添加房屋--</ion-option>
+					</ion-select>
+				</ion-item>
 			</div>
 		</div>
 	</div>
   </div>
 
-  <div class="select" style="background-color:white;margin-top:10px;">
+<!--<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:0.96rem;">
+		<div class="zhongj_k">
+			<div class="shous_k  shous_div">
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<!--<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+						<!--<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<ion-option value="add">--添加房屋--</ion-option>
+					</ion-select>
+				</ion-item>
+			</div>
+		</div>
+	</div>-->
+
+
+
+
+
+
+
+  <!--<div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select  style="max-width:74%;" [(ngModel)]='roomId' cancelText="取消" okText="确认">
-        <!--<ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+        <ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>
         <ion-option *ngFor ="let list of roomidlist" value={{list.id}}>{{list.name}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
-        <ion-option value="add">--添加房屋--</ion-option>
+        <ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>
+        <ion-option value="add">添加房屋</ion-option>
         </ion-select>
     </ion-item>
-  </div>
+  </div>-->
 
 <ion-list style="background-color:white;margin:10px 0 0 0;">
     <ion-item>

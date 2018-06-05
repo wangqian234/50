@@ -5,7 +5,7 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
-
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
 @IonicPage()
 @Component({
   selector: 'page-rentsalelist',
@@ -22,7 +22,6 @@ export class RentsalelistPage {
   flag=true;
   horder = "";
   search = "";
-
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
@@ -192,6 +191,14 @@ export class RentsalelistPage {
         that.horder = "price-"
       }
       that.getSaleInfo("");
+    })
+  }
+    //跳转到详情
+  goRentsaleInfo(id,type){
+    this.navCtrl.push(RentsaleinfoPage,{
+      houseId:id,
+      houseType:type,
+      quFen:1,
     })
   }
 
