@@ -244,4 +244,45 @@ ion-slides{
         border-bottom: none;
     }
 
+    .logo_k_fanh{
+  width: auto;
+  position: absolute;
+}
+.zhongjain_daoh{
+  width: 100%;
+}
+.jiu_feo{
+  width: 100%;
+}
+.font{
+        display: inline;
+    line-height: 0.55rem;
+    margin-left: 0.6rem;
+}
+.font2{
+float: right;
+line-height: 0.2rem;
+margin-right: 1.2rem;
+em{
+    font-size: 0.14rem !important;
+    line-height: 0.18rem;
+}
+}
+
+.salespan{
+    float: right;
+    background-color: #FF730F;
+    width: 0.9rem;
+    height: 0.37rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.2rem;
+    color: #FEFEFE;
+    border-radius: 0.05rem;
+    line-height: 0.37rem;
+    position: absolute;
+    right: 0.2rem;
+        padding: 0.03rem 0;
+}
+
 }

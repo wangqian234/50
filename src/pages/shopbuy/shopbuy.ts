@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 //StorageProvider
@@ -10,6 +10,9 @@ import { Http, Jsonp, Headers, RequestOptions } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //收货地址页面
 import { ChangeaddrPage } from '../changeaddr/changeaddr';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
+
 import $ from 'jquery'
 @IonicPage()
 @Component({
@@ -19,6 +22,7 @@ import $ from 'jquery'
 export class ShopbuyPage {
   
   public ChangeaddrPage = ChangeaddrPage;
+  public TabsPage = TabsPage;
   public caId;
   public addressList=[];
   public wid;//商品ID
@@ -65,7 +69,7 @@ export class ShopbuyPage {
   public token = this.storage.get('token');
 
   constructor(public storage: StorageProvider, public navCtrl: NavController, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController) {
+    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
@@ -298,7 +302,7 @@ discount(){
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addressList = data.list;
         for(let i=0; i<this.addressList.length; i++){
-          if(this.addressList[i].cbdefaul == true){
+          if(this.addressList[i].cbdefault == true){
             this.caId = this.addressList[i].id;
             this.goodBuyList();
           }
@@ -315,6 +319,10 @@ discount(){
       }
     });
 
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }

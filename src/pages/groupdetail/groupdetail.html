@@ -3,7 +3,10 @@
  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
+				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+				</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a href="javascript:;" class="px24 zyyge">商品详情</a></li>  
@@ -35,6 +38,18 @@
 	<span>¥{{prejiage}}</span></div>
 	</a>
 </div>
+
+<div class="banb" style="height:0.87rem" *ngIf="dataGlist.length>0">
+	<ul *ngFor="let itemg of dataGlist">
+		<img style="height:0.45rem;position: absolute;left: 0.2rem;" src="assets/imgs/groupperson.png">		
+		<p class="font"><em class="guige" style="font-size:0.24rem">{{itemg.usermobile}}</em></p>
+		<p class="font2">
+			<em class="guige" style="font-size:0.24rem">还差{{itemg.left_num}}人成团</em><br />
+			<em class="guige" style="font-size:0.24rem">剩余{{itemg.distime}}</em></p>
+			<span class="salespan">去拼团</span>
+	</ul>
+</div>
+
 <!--规格-->
 <div class="banb" id="banb">
 	<ul>					
@@ -180,9 +195,9 @@
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
 		
-		<div id="sbuy" class="you">
+		<div style="background-color: white;" id="sbuy" class="you">
 			<div class="goum" >
-				<a (click)="buygoods()" >单独购买(￥{{jiage}})</a>  
+				<a style="color:#FF971C" (click)="buygoods()" >单独购买(￥{{jiage}})</a>  
 			</div>
 		</div>
 		<div id="gbuy" class="you">
