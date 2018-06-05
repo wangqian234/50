@@ -37,9 +37,15 @@ export class GroupdetailPage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
  //定义需要隐藏的标志变量
     public showpingj =false;
-  
+    public guiGe={
+      preprice:'',
+      price:''
+    };
   public wid;
   public sid;
+  public mode;
+  public jiage;
+  public prejiage;
   public lnum=0;
   public list=[];
   public dataGlist=[];
@@ -69,11 +75,12 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
-    alert(this.wid)
+    // alert(this.wid)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupdetailPage');
+    this.switch(0);
   }
 ionViewWillLoad() {
 
@@ -96,17 +103,50 @@ loading.dismiss();
       this.sid=data.json['good_Model'].model.shopid;
       this.lnum=data.json['good_Model'].model.limitNum;//限购数量
       this.fenge(data.json['good_Model'].model.imgsrc_list);//分割轮播图字段
+      that.jiage=data.json['good_Model'].model.maxpreprice;
+      that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
       //alert(data.json['good_Model'].model.imgsrc_list);
       console.log(that.goodMlist);
-      that.dataSlist=data.json.data_Sizes.list[0];
-
-      that.goodSize=data.json.data_Sizes.list[0].id;//获得商品规格id
-      console.log(that.dataSlist);
+      that.dataSlist=data.json.data_Sizes.list;  //规格
      
      this.recommend();
      })
      
   }
+    //切换商品规格
+  changeId(id){
+    for(var i=0;i<this.dataSlist.length;i++){
+      if(id==this.dataSlist[i].id){
+        this.guiGe = this.dataSlist[i];
+        this.goodSize= this.dataSlist[i].id;
+        this.jiage=this.dataSlist[i].preprice;
+        this.prejiage=this.dataSlist[i].price;
+      }
+    }
+    
+  }
+  ifontime(mode) {
+    $("#banb ul li").removeAttr("class");
+    var span = "#banb ul li:nth-of-type(" + ++mode + ")"
+    $(span).attr("class", "no");
+  }
+//切换评价与详情
+switch(key){
+  $("#swdh ul li").removeAttr("class");
+    var span = "#swdh ul li:nth-of-type(" + ++key + ")"
+    $(span).attr("class", "d");
+        --key;
+        
+    if(key==0){     
+      $("#pinglun").css("display","none");
+      $("#tuwen").css("display","block");
+    }else{
+      $("#tuwen").css("display","none");
+      $("#pinglun").css("display","block");
+    }
+
+}
+
 //进入店铺
 enterShop(wid,sid){
 //  alert("店铺id"+this.sid);
@@ -149,6 +189,9 @@ ifEnough(){
   }
    //购买
    buygoods(){ 
+     if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
     this.buylist.token=this.token;
     this.buylist.gId=this.navParams.get("id");
     this.buylist.type="detail";
@@ -189,9 +232,13 @@ ifEnough(){
     
      
   }
+}
    
    //团购
    gbuygoods(){ 
+     if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
     this.buylist.token=this.token;
     this.buylist.gId=this.navParams.get("id");
     this.buylist.type="groupBuy";
@@ -226,7 +273,7 @@ ifEnough(){
         alert(data.errmsg);
       }
      });
-     
+     }
   }
 //推荐商品列表
  recommend(){   
@@ -251,6 +298,9 @@ fenge(str){
 
 
 incCount(){  
+  if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
   if(this.lnum==0){  
     ++this.buylist.goodsNum;
     //console.log("更新！");
@@ -264,12 +314,17 @@ incCount(){
     else
     ++this.buylist.goodsNum;
   }
+}
   //数量变化  双向数据绑定
   decCount(){
+    if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
     if(this.buylist.goodsNum>1){
       --this.buylist.goodsNum;
     }
   }
+}
 
   backTo(){
     this.navCtrl.pop();

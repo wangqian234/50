@@ -27,38 +27,35 @@
 
 <!--商品名称-->
 <div class="xiangq_shangp_m">
-	<a>
+	<a href="javascript:;" >
 	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{goodMlist.maxpreprice}}</p>
-	<!--<div class="xq_jiaq" *ngif=><p>￥{{goodMlist.maxpreprice}}</p>-->
-	<span>原价:¥{{goodMlist.price}}</span></div>
+	<div class="xq_jiaq"><p>￥{{jiage}}</p>
+	<span>原价:¥{{prejiage}}</span></div>
 	</a>
 </div>
-<!--配送-->
-			<div class="goum_sl">
-				<p class="px22">配送至：<em>&nbsp;&nbsp;{{goodMlist.uaddName}}（支持配送）</em></p>
-			</div>
+
 <!--规格-->
 <div class="banb" id="banb">
 				<ul>					
-					<p>规格：
-					<li *ngFor="let sitem of dataSlist"> {{sitem.name}}</li>
+					<p><em class="guige" style="font-size:0.24rem">商品规格：</em>
+					<li *ngFor="let sitem of dataSlist;let i = index" (click)="changeId(sitem.id)" (click)="ifontime(i)"> {{sitem.name}}</li>
 					</p>
 				</ul>
 </div>
 
-
 <!--数量-->
 <div class="goum_sl">
-	<p class="px24 jiaq">购买数量</p>
+	<p class="px24 jiaq">购买数量：</p>
 	<div class="counter_box">
 		<i class="jian" style="font-size:0.35rem" (tap)="decCount()">-</i>
 		<input type="text" readonly="readonly" [(ngModel)]="addcarList.goodsNum" name="num" id="num">
-		<i class="jia"style="font-size:0.3rem" (tap)="incCount()">+</i>
+		<i class="jia" style="font-size:0.3rem" (tap)="incCount()">+</i>
 	</div>
+
+<!--配送-->
+		
+	<p class="px24">配 送 至：<em>&nbsp;&nbsp;{{goodMlist.uaddName}}（支持配送）</em></p>
 </div>
-
-
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">
@@ -69,7 +66,7 @@
 		</div>
 	</div>
 	<div class="guangguang">
-		<a class="a1"(click)="enterShop(wid,sid)"><h1><img src="assets/imgs/shopping2x.png"><div>进店逛逛</div></h1></a>
+		<a class="a1" (click)="enterShop(wid,sid)"><h1><img src="assets/imgs/shopping2x.png"><div>进店逛逛</div></h1></a>
 
 	</div>
 </div>
@@ -78,17 +75,62 @@
 
 <!--图文&评价-->
 
-<div class="jiss_df">
-	<h1 style="width:80%">
-		<p><a style="padding: 0.1rem 0.3rem;" class="d" href="javascript:;">图文详情</a></p>
-		<p style="float:right"><a style="padding: 0.1rem 0.3rem;"  href="javascript:;">产品评价</a></p>
+<div class="jiss_df" id="swdh">
+	<h1><ul>
+		<li  class="d" (click)="switch(0)">图文详情</li>
+		<li (click)="switch(1)">产品评价</li>
+		</ul>
 	</h1>
 </div>
 <!--图文-->
-<div class="tuwen" id="tuwen"></div>
+<div  class="tuwen" id="tuwen"  ></div>
 
 <!--评价-->
 
+
+<div class="pengl_k" id="pinglun">
+	<ul>
+		<li>
+			<div class="pj_k"><h1>评价列表： </h1>
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<div class="pjtp_img">
+					<p><img src="assets/imgs/21465.jpg"></p>
+				</div>
+				<p class="px22">123收到后用了几天才来评价，机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。五分</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+		<li>
+			<div class="pj_k"> 
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<p class="px22">222收到后用了几天才来评价，联想的机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+		<li>
+			<div class="pj_k"> 
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<div class="pjtp_img">
+					<p><img src="assets/imgs/21465.jpg"></p>
+					<p><img src="assets/imgs/21465.jpg"></p>
+					
+				</div>
+				<p class="px22">收到后用了几天才来评价，联想的机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。五分</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+
+	</ul>
+</div>
 
 <!--推荐商品-->
 

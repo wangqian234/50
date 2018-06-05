@@ -85,10 +85,12 @@ export class HomePage {
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
-
   //轮播图的页面跳转
+
   public RentsalePage = RentsalePage;
 
+  //轮播图的页面跳转
+  //public RentsalePage = RentsalePage;
 
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;
@@ -197,8 +199,7 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
-
+      // loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -226,9 +227,10 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
+      // loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
+        console.log(this.publicget)
       } else if (data.errcode === 40002) {
         j--;
         if (j > 0) {
@@ -256,7 +258,7 @@ export class HomePage {
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       //loading.dismiss();
+      //  loading.dismiss();
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
@@ -320,16 +322,4 @@ changeRoom(roomid) {
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
 
-      clickme(){
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert("进来了")
-                console.log(JSON.stringify(data));
-                alert(data.ip)
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
 }

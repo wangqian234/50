@@ -38,6 +38,10 @@ export class ShopgoodsinfoPage {
 
     public sid;
     public wid;
+    public mode;
+    public key ;
+    public jiage;
+    public prejiage;
     //定义需要隐藏的标志变量
     public showpingj =false;
     //接收数据的 list
@@ -62,6 +66,7 @@ export class ShopgoodsinfoPage {
     goodsNum:1,
   }
   //定义congfig中公共链接的变量aa
+  public guiGe={};
   public aa = this.config.apiUrl;
     //定义token
   public token=this.storage.get('token');
@@ -75,43 +80,61 @@ export class ShopgoodsinfoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
   public loadingCtrl: LoadingController) {
-
     this.wid=this.navParams.get("id")
-       alert(this.wid)
+      //  alert(this.wid)
+    
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
-      let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-loading.present();
       //显示商品详情页面
       this.goodsInfo();
       this.recommend();
-      loading.dismiss();
+     
+  }
+  ionViewDidEnter() {
+ this.switch(0);
   }
   //显示商品详情页面
   goodsInfo(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var that =this;
     var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
+        loading.dismiss();
+        console.log(data)
         that.goodMlist = data.json['good_Model'].model;
+        that.jiage=data.json['good_Model'].model.maxpreprice;
+        that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
         $("#tuwen").html(data.json['good_Model'].model.detail);
         console.log($("#tuwen"));
-        this.sid=data.json['good_Model'].model.shopid;
-        this.fenge(data.json['good_Model'].model.imgsrc_list);
-
+        this.sid=data.json['good_Model'].model.shopid;        //店铺Id
+        this.fenge(data.json['good_Model'].model.imgsrc_list);//轮播图
         that.dataGlist = data.json.data_group.list;
-
-        that.dataSlist = data.json.data_Sizes.list;
-
-        this.addcarList.gsId=data.json.data_Sizes.list[0].id; //获取商品规格id        
-        that.goodSize=data.json.data_Sizes.list[0].id;
-      
+        that.dataSlist = data.json.data_Sizes.list;   
     })
+  }
+  //切换商品规格
+  changeId(id){
+    for(var i=0;i<this.dataSlist.length;i++){
+      if(id==this.dataSlist[i].id){
+        this.guiGe = this.dataSlist[i];
+        this.goodSize= this.dataSlist[i].id;
+        this.jiage=this.dataSlist[i].preprice;
+        this.prejiage=this.dataSlist[i].price;
+      }
+    }
+    
+  }
+  ifontime(mode) {
+    $("#banb ul li").removeAttr("class");
+    var span = "#banb ul li:nth-of-type(" + ++mode + ")"
+    $(span).attr("class", "no");
   }
 //购买数量判断
 ifEnough(){
@@ -128,13 +151,11 @@ ifEnough(){
         alert(data.errmsg);
       }
      })
-
 }
 
 //推荐商品列表
  recommend(){   
     var api2 = this.aa+'/api/goods/list?curCityCode=4403';
-     
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
        if(data2.errmsg == 'OK'){
          this.rlist = data2.list;
@@ -165,10 +186,14 @@ fenge(str){
 }
   //加入购物车函数
    addcart(){ 
+     if(!this.goodSize){
+       alert("请选择商品规格")
+     }else{
+    this.ifEnough();
     this.addcarList.token=this.token;
     this.addcarList.gId=this.navParams.get("id");
-        
-    console.log(this.token)
+    this.addcarList.gsId = this.goodSize;
+    this.addcarList.goodsNum=this.buylist.goodsNum;
     var date = this.addcarList;
     var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
@@ -179,29 +204,51 @@ fenge(str){
       }
      })
   }
+ }
   //显示商品评价列表
-  getshopinfo(id){
-    this.showpingj=!this.showpingj;
-    var that = this;
-    var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+id;
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
-      if(data.errcode === 0 && data.errmsg === 'OK'){
-         this.list= data.list;
-      }else{
-        alert(data.errmsg);
-      }
-    })
-  }
+  // getshopinfo(){
+  //   this.showpingj=!this.showpingj;
+  //   var that = this;
+  //   var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+this.navParams.get('id');
+  //   this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //     console.log(data)
+  //     console.log("评价啊")
+  //     if(data.errcode === 0 && data.errmsg === 'OK'){
+  //        this.list= data.list;
+  //     }else{
+  //       alert(data.errmsg);
+  //     }
+  //   })
+  // }
+switch(key){
+  $("#swdh ul li").removeAttr("class");
+    var span = "#swdh ul li:nth-of-type(" + ++key + ")"
+    $(span).attr("class", "d");
+        --key;
+        
+    if(key==0){     
+      $("#pinglun").css("display","none");
+      $("#tuwen").css("display","block");
+    }else{
+      $("#tuwen").css("display","none");
+      $("#pinglun").css("display","block");
+    }
+
+}
+
  //购买
    buygoods(){ 
+     if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
+    this.ifEnough();
     this.buylist.token=this.token;
     this.buylist.gId=this.navParams.get('id');
     this.buylist.type="detail";
     this.buylist.gsId=this.goodSize;
-        var j=3;
-    console.log(this.token)
+    this.buylist.goodsNum = this.buylist.goodsNum;
+     var j=3;
     var date = this.buylist;
-     //alert(JSON.stringify(date));
     var api = this.aa+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
@@ -215,8 +262,7 @@ fenge(str){
           wid: this.buylist.gId,
           sid: this.buylist.gsId,
           gnum:this.buylist.goodsNum,
-
-  });
+  }); 
       
             })
       }else if(data.errcode === 40002){
@@ -230,27 +276,35 @@ fenge(str){
         alert(data.errmsg);
       }
      });
-   
-     
+     } 
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopgoodsinfoPage');
   }
 
-  incCount(){    
+  incCount(){ 
+    if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{   
     ++this.addcarList.goodsNum;
     ++this.buylist.goodsNum;
     this.ifEnough();
+    
+  }
   }
 
   //数量变化  双向数据绑定
   decCount(){
+    if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
     if(this.addcarList.goodsNum>1){
       --this.addcarList.goodsNum;
       --this.buylist.goodsNum;
 
     }
   }
+}
 
   backTo(){
     this.navCtrl.pop();

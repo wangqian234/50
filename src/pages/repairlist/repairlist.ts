@@ -56,15 +56,18 @@ export class RepairlistPage {
     
   }
     getProductList(infiniteScroll){
-      // let loading = this.loadingCtrl.create({
-	    // showBackdrop: true,
-      //  });
-      // loading.present();
+      let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+       });
+      loading.present();
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          // loading.dismiss();
+          loading.dismiss();
           if(data.errcode===0 && data.errmsg==="OK"){
+          if(data.list.length<10){
+           $('.nomore').css('display','block');
+          }
           this.list=this.list.concat(data.list); /*数据拼接*/
           console.log(this.list)
           //console.log(this.page)

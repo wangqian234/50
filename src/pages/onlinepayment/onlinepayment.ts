@@ -63,11 +63,11 @@ export class OnlinepaymentPage {
   ionViewWillLoad(){
     this.getRem();
     //确认登录状态
-if(this.storage.get('token')){
+    if(this.storage.get('token')){
 
-} else {
-this.navCtrl.push(LoginPage);
-}
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
   }
 
   ionViewDidLoad() {
@@ -172,7 +172,6 @@ this.navCtrl.push(LoginPage);
           }
      })
   }
-
   appearSome(){
     $(".user_titlediv").click(function(){
       console.log($(this).next('div'))
@@ -185,13 +184,17 @@ this.navCtrl.push(LoginPage);
   }
   //结算账单
   gopay(){
+    //alert(this.cip)
+    //this.pay.createip=this.cip;
     this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
     var payMouth = []
     for(let i=0;i<this.dest.length;i++){
       if(this.dest[i].checked==true){
           for(let j=0;j<this.dest[i].data.length;j++){
-            var aa = this.dest[i].data[j].Sort+ this.dest[i].data[j].id 
+            var a =  this.dest[i].data[j].Sort.toString();
+            var bb =  this.dest[i].data[j].id.toString();
+            var aa = a+bb;
             payMouth.push(aa);
           }
 
@@ -210,6 +213,20 @@ this.navCtrl.push(LoginPage);
           }
      })
   }
+        clickme(){
+          var that = this;
+          $.ajax({
+              url: 'http://freegeoip.net/json/',
+              success: function(data){
+                alert("进来了")
+                alert(data.ip)
+                that.cip = data.ip;
+                that.gopay();
+              },
+              type: 'get',
+              dataType: 'JSON'
+          });
+      }
 
   getTotal(){
     var that = this;

@@ -56,7 +56,7 @@ export class RentsalelistPage {
 
   getSaleInfo(infiniteScroll){
     var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType + 
-        "&pricemin&pricemax&room&spacemin&spacemax&nature=" + this.nature + "&search=" + this.search + "&horder=" + this.horder;
+        '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -72,7 +72,7 @@ export class RentsalelistPage {
             }
           }
       } else {
-        alert("data.errmsg")
+        alert(data.errmsg)
       }
     }); 
   }
@@ -108,11 +108,14 @@ export class RentsalelistPage {
         }
         that.flag = !that.flag;
       }
+      // $(this).append('<img src="assets/imgs/order.png">');
       if(that.flag){
         that.horder = "time+"
       } else {
         that.horder = "time-"
       }
+      this.houseInfo=[];
+      this.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -141,11 +144,14 @@ export class RentsalelistPage {
         }
         that.flag = !that.flag;
       }
+      // $(this).append('<img src="assets/imgs/order.png">');
       if(that.flag){
         that.horder = "space+"
       } else {
         that.horder = "space-"
       }
+      this.houseInfo=[];
+      this.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -174,6 +180,7 @@ export class RentsalelistPage {
         }
         that.flag = !that.flag;
       }
+      // $(this).append('<img src="assets/imgs/order.png">');
       if(that.flag){
         that.horder = "price+"
       } else {

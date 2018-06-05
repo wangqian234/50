@@ -16,9 +16,10 @@ import { ChangeaddrPage } from '../changeaddr/changeaddr';
   templateUrl: 'shopbuy.html',
 })
 export class ShopbuyPage {
-
+  
   public ChangeaddrPage = ChangeaddrPage;
-
+  public caId;
+  public addressList=[];
   public wid;//商品ID
   public sizeId;//规格id
   public gnum=1;//商品数量
@@ -27,8 +28,10 @@ export class ShopbuyPage {
   public list = [];
   public dtlist = [];
   public goodSlist = [];
-  public addlist = [];
-
+  public addlist = {
+    dddress_id:''
+  };
+  public addressId;
   public shoplist = [];
   public carriagelist = [];
   public creditslist = [];
@@ -49,6 +52,7 @@ export class ShopbuyPage {
     gbId: 0,
     token: "",
   }
+
   
 
   //定义congfig中公共链接的变量aa
@@ -61,14 +65,21 @@ export class ShopbuyPage {
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
+    console.log(this.navParams.get('wid'));
+    console.log(this.sizeId)
     //alert("商品id"+this.gnum);
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopbuyPage');
+    
   }
   ionViewWillLoad() {
+    this.getAddressList();
+  }
+  //购买页面显示的内容
+  goodBuyList(){
     let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
@@ -76,94 +87,64 @@ export class ShopbuyPage {
     //商品内容
     var that = this;
     var j = 3;
-    var api = this.wdh + '/api/goods/buy_list?caId=1&token=' + this.token;
+    var api = this.wdh + '/api/goods/buy_list?caId='+this.caId+'&token=' + this.token;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-     
-      console.log(data);
+      loading.dismiss();
+      if(data.json.dt.errcode === 0 && data.json.dt.errmsg === 'OK'){
+        console.log(data)
       that.dtlist = data.json.dt.model;
-       
       that.jfen=data.json.dt.model.useintegralpricemax;//获得积分抵扣额度
-      
       that.totalPrice=data.json.dt.model.totalprice;
       this.wtotalPrice=data.json.dt.model.totalprice;
       //购买数量限制goodslimitnum、库存数量goodsnum、积分、价格totalprice
       // alert(JSON.stringify(that.dtlist));
-      console.log(that.dtlist);
       that.addlist=data.json.address_List.list[0];//（默认）收获地址相关
+      this.addressId = data.json.address_List.list[0].dddress_id;
+      this.postFee();
       that.addListList = data.json.address_List.list;
       //alert(JSON.stringify(that.addlist));
-      that.addID = data.json.address_List.list[0].dddress_id;
-      console.log(that.addlist);
       that.goodSlist = data.json.dt_GoodsSize.list;//多商品列表
+      // if(this.goodSlist.length == 1){
+      //   this.gnum = this.gnum;
+      // }else if(this.goodSlist.length>1){
+      //   this.gnum = 0;
+      // }
       //商品内容（名称title、图片img、购买数量buynum）
       //alert(JSON.stringify(that.goodSlist));
-      
-      that.goodSize = data.json.dt_GoodsSize.list[0].id;//获得商品id
-      this.gnum = data.json.dt_GoodsSize.list[0].buynum;
-      //this.test=that.goodSlist[0].buynum;
-
-      //this.te = data.json.dt.model.totalprice;
-      //alert(this.test);
-      //this.totalPrice = this.test * this.te;
-//获取showList内容
-// //店铺信息
-//  for(var i=0;i< that.goodSlist.length;i++){
-    
-// //       that.showList.goodImg.push(data.json.dt_GoodsSize.list[i].img);
-      
-//       this.sid = that.goodSlist[i].shop_id;
-//       //alert(this.sid);
-//       var api2 = this.wdh + '/api/shop/info?sId='+this.sid;
-//       this.http.get(api2).map(res => res.json()).subscribe(data2 => {
-
-//       console.log(data2);
-//       // that.shoplist = data2.model;
-//       // alert(that.shoplist);
-//       //that.goodSlist[i]["shopname"] = data2.model.name;
-
-//       // console.log(data2);
-//     })
-// //      numGroup.push(this.list[i].num);
-// //   //console.log(this.list[i].num)
-    
-// //   }
-// // 
-//  }
-//  if (data.errcode === 0 && data.errmsg === 'OK') {
-//     } else if (data.errcode === 40002) {
-//       j--;
-//         if (j > 0) {
-//       this.config.doDefLogin();
-     
-//         }
-//       }
-//       else { 
-//       alert(data.errmsg);
-//       }
-    })
-      //运费postage
-     var api3=this.wdh+'/api/trade/info?addressId=1&gId=1&gsId=1&goodsNum=1&token='+this.token;
-            this.http.get(api3).map(res => res.json()).subscribe(data3 =>{
-            console.log(data3);
-            
-      that.carriagelist = data3.model;
-      console.log(data3);
-       })
-    
-
-    //积分抵扣pricemax,没用！
-    var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;
-    loading.dismiss();
-    this.http.get(api4).map(res => res.json()).subscribe(data4 => {
-      console.log(data4);
-      that.creditslist = data4.model;
-
-      console.log(data4);
-    })
-
-    
-    
+      }
+    }) 
   }
+   //运费postage
+  //  postage(){
+  //     let loading = this.loadingCtrl.create({
+	//     showBackdrop: true,
+  //   });
+  //     loading.present();
+  //     var that = this;
+  //    var api3=this.wdh+'/api/trade/info?addressId=1&gId=1&gsId=1&goodsNum=1&token='+this.token;
+  //           this.http.get(api3).map(res => res.json()).subscribe(data3 =>{
+  //             loading.dismiss();
+  //         if(data3.errcode === 0 && data3.errmsg === 'OK'){
+  //          that.carriagelist = data3.model;
+  //         }
+  //      }) 
+  //  }
+
+   //积分抵扣pricemax,没用！
+   integral(){
+     let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+      loading.present();
+     var that = this;
+    var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;  
+  this.http.get(api4).map(res => res.json()).subscribe(data4 => {
+    loading.dismiss();
+    if(data4.errcode === 0 && data4.errmsg === 'OK'){
+      that.creditslist = data4.model;
+    }
+    }) 
+   }
 
   //修改收货地址
   changeAdd(){
@@ -171,22 +152,20 @@ export class ShopbuyPage {
         callback: this.myCallbackFunction,
         addListList : this.addListList
     });
-    this.postFee();
   }
 //根据地址获得运费
 postFee(){
   //运费postage
+
   var j = 3;
-    var api3 = this.wdh + '/api/trade/info?addressId='+this.addID+'&gId='+this.wid+'&gsId='+this.sizeId+'&goodsNum='+this.gnum+'&token=' + this.token;
+    var api3 = this.wdh + '/api/trade/info?addressId='+this.addressId+'&gId='+this.wid+'&gsId='+this.sizeId+'&goodsNum='+this.gnum+'&token=' + this.token;
+    console.log(api3)   
     this.http.get(api3).map(res => res.json()).subscribe(data3 => {
+     
       if (data3.errcode === 0 && data3.errmsg === 'OK') {
-      //alert("运费改变！");
-       //alert(this.addID+'&gId='+this.wid+'&gsId='+this.sizeId+'&goodsNum='+this.gnum+'&token=' + this.token);
-      console.log(data3);
       this.carriagelist = data3.model;
       this.fee=data3.model.postage;
-      //alert(JSON.stringify(this.carriagelist));
-      console.log(data3);
+    
       } else if (data3.errcode === 40002) {
         j--;
           if (j > 0) {
@@ -194,7 +173,7 @@ postFee(){
           this.postFee();
           }
         }
-        else { 
+        else{ 
         alert(data3.errmsg);
           }
     })
@@ -204,8 +183,9 @@ postFee(){
      return new Promise((resolve, reject) => {
       if(typeof(params)!='undefined'){
           resolve('ok');
-          console.log(params)
           that.addlist = params;
+          this.addressId = that.addlist.dddress_id;
+          this.postFee();
       }else{
           reject(Error('error'))
       }
@@ -219,11 +199,9 @@ discount(){
   var t=this.totalPrice;
   if(this.checked==true){  
       this.totalPrice=parseInt(t.toString())-parseFloat(this.jfen.toString())+this.fee;
-    
   }
   else if(this.checked==false){ 
   this.totalPrice=this.wtotalPrice+this.fee;}
-  
 }
 
   //提交订单
@@ -233,20 +211,21 @@ discount(){
     // headers.append('Accept', 'application/json');
     //  headers.append('Accept-Charset', 'utf-8');
     // let options = new RequestOptions(JSON.stringify({ headers: headers }));
-    this.addBuylist.gbId = this.goodSize;
-    this.addBuylist.c_UserAddress_Id = this.addID;
+    var goodsTradeMemo = [];
+    for(let i=0; i<this.goodSlist.length;i++){
+     goodsTradeMemo.push(this.goodSlist[i].trade_Memo); 
+    }
+
+    this.addBuylist.c_UserAddress_Id = this.addressId;
     this.addBuylist.token = this.token;
-    this.addBuylist.trade_Memo = this.trade_Memo;
+    this.addBuylist.trade_Memo =goodsTradeMemo.join("|")
+    console.log(this.addBuylist.trade_Memo)
     this.addBuylist.isUseIntegral= this.checked
     this.addBuylist.buyNum =this.gnum;
-
     var j = 3;
-    console.log(this.token)
     var date = this.addBuylist;
-    console.log(date);
     var api =this.wdh + '/api/trade/add  ';
     this.http.post(api, date).map(res => res.json()).subscribe(data => {
-//alert(JSON.stringify(date));
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("成功!");
       } else if (data.errcode === 40002) {
@@ -293,5 +272,32 @@ discount(){
   //       }
   //     this.totalPrice=tempAllPrice;
   //  }
+
+    getAddressList(){
+      // alert(1)
+    var j = 3;
+    var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
+    this.http.get(api).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.addressList = data.list;
+        for(let i=0; i<this.addressList.length; i++){
+          if(this.addressList[i].cbdefaul == true){
+            this.caId = this.addressList[i].id;
+            this.goodBuyList();
+          }
+        }
+        
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0) {
+          this.config.doDefLogin();
+          this.getAddressList();
+        }
+      } else {
+        console.log(data.errmsg)
+      }
+    });
+
+  }
 
 }
