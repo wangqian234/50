@@ -40,4 +40,24 @@ page-rentsalemy {
         text-align: center;
         color: gray;
     }
+
+    .clearfix{
+            border-bottom: solid 1px #dedede;
+    }
+
+    .biao{
+        font-size:0.22rem !important;
+        height:0.7rem;
+    }
+    .shangp_lieb_k_er li{
+        padding-bottom:0rem !important;
+        height:1.6rem !important;
+    }
+    .shangp_lieb_k_er{
+        padding:0 !important;
+    }
+
+    .shangp_lieb_k_er li .lieb_img img {
+        height:2.5rem;
+    }
 }

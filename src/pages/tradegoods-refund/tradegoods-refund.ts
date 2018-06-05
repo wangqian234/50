@@ -36,7 +36,11 @@ export class TradegoodsRefundPage {
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
-    this.getdetaillist();
+    if(this.navParams.get('item')){
+      this.list = this.navParams.get('item')
+    }
+    console.log(this.list)
+    // this.getdetaillist();
   }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -66,29 +70,7 @@ export class TradegoodsRefundPage {
   refundApplicationEvent(item,trade_id){
         //this.navCtrl.push(TradegoodsReapPage,{item:item,tradeId:this.trade_id});
   }
-
-  ionViewDidLoad() {
-   //this.onload2();
-  }
-// onload2 = function(){
-//     var Sos=document.getElementById('sos_tanc');
-// 		var ShouYe=document.getElementById('yemnr');
-// 		var SosYe=document.getElementById('shous_yem');
-// 		var SosFanHui=document.getElementById('sous_fanh_sy');
-// 		Sos.onclick=function()
-// 		{
-// 			ShouYe.style.display=('none');
-// 			SosYe.style.display=('block');
-// 		}
-// 		SosFanHui.onclick=function()
-// 		{
-// 			ShouYe.style.display=('block');
-// 			SosYe.style.display=('none');
-// 		}
-//   }
-
-
-
+ 
   backTo(){
     this.navCtrl.pop();
   }

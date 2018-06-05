@@ -13,26 +13,23 @@ page-rentsaleinfo {
         position: relative;
     }
 .imgdiv{
-    margin-top: 10px;
+    // margin-top: 10px;
 }
 .detail{
-    margin-top: 10px;
+    margin-top: 0.2rem;
     background-color: white;
-    padding:0.2rem;
-    p{
-        font-size: 0.3rem;
-        text-align: center;
-        line-height: 0.2rem;
-    }
+    padding:0.1rem;
+    min-height:1.2rem;
+   
 }
 .hrdiv{
         background: radial-gradient(black -30%, white 100%);
         height: 1px;
     }
 .title{
-    padding:0.2rem;
-    width: 90%;
-    margin-left: 5%;
+    padding:0.2rem 0.2rem 0.1rem 0.2rem;
+    width: 94%;
+    margin-left: 3%;
     margin-top: -20px;
     background-color: white;
     border-radius: 3px;
@@ -42,9 +39,102 @@ page-rentsaleinfo {
     font-size: 0.27rem;
 }
 .title .biao{
-    font-size: 0.3rem;
+    font-size: 0.22rem;
     line-height: 0.4rem;
     font-family:Roboto;
-    color: rgba(16, 16, 16, 1);
+    color: #818181;
+    height:0.7rem;
+}
+.bend{
+    float:left;
+    margin-left:0.3rem;
+    font-size:0.18rem;
+    color:#818181;
+}
+.price{
+    float:right;
+    margin-right:0.3rem;
+    color:#2979FF;
+    font-size:0.28rem;
+}
+.roomType{
+     width:50%;
+    text-align:center;
+    float:left;
+    border-right:solid 1px #F5F5F5;
+}
+.detail .title{
+   
+font-size:0.18rem;
+color:#818181;
+}
+.detail .content{
+    font-size:0.28rem;
+    color:#2979FF;
+}
+.roomSize{
+     width:50%;
+    float:right;
+     text-align:center;
+}
+
+.detail_info{
+    margin-top: 0.03rem;
+    background-color: white;
+    padding:0.1rem;
+    min-height:0.5rem;
+   
+}
+.detail_info img{
+    margin-left:0.5rem;
+}
+.detail_info .content{
+    color:#818181;
+    font-size:0.18rem;
+    margin:0 0 0.5rem 0.25rem;
+}
+
+.room_info{
+    margin-top: 0.2rem;
+    background-color: white;
+    padding:0.2rem;
+    min-height:0.5rem;
+   
+}
+.room_info .title{
+    margin-left: 6%;
+    margin-top:0rem;
+    text-align:center;
+    width:88%;
+    color:#818181;
+    border-bottom:solid 2px #F5F5F5;
+}
+.room_info .title span{
+font-size:0.28rem;
+}
+.room_info .content{
+    margin-top:0.1rem;
+    margin-left: 6%;
+     width:88%;
+     line-height:0.28rem;
+    font-size:0.18rem;
+    color:#818181;
+}
+.tel_info{
+   margin-top:0.2rem;
+    background-color: #2979FF;
+    padding:0.35rem;
+    min-height:0.8rem;
+   
+}
+.tel_info img{
+    float:right;
+    
+}
+.tel_info span{
+    float:left;
+   
+    color:white;
+    font-size:0.22rem;
 }
 }
