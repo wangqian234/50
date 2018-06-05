@@ -50,7 +50,7 @@ export class ShopbuyPage {
     c_UserAddress_Id: 0,
     trade_Memo: "",
     isUseIntegral: false,
-    gbId: 0,
+    gbId:'',
     token: "",
     tags:'android',
     createip:'',

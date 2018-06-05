@@ -39,8 +39,6 @@ ifontime(mode){
     var span = "#typediv ul li:nth-of-type(" + ++mode +")"
     $(span).attr("class","activety");
     this.ifontime2("");
-
-
 }
 
 ifontime2(infiniteScroll){
@@ -84,9 +82,7 @@ ifontime2(infiniteScroll){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
     this.ifontime2("");
-   
   }
-
   backTo(){
     this.navCtrl.pop();
   }

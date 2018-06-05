@@ -48,7 +48,7 @@
       <!--<a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
 		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>-->
 
-      <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id)" href="javascript:;" class="sc">退款</a>
+      <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id,model.pretotalprice)" href="javascript:;" class="sc">退款</a>
 
       <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#ff971c">确认收货</a>
 

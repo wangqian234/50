@@ -101,11 +101,14 @@ export class EditorinfoPage {
         "birthday":this.personInfo.birthday,
         "sex":this.personInfo.sex,
       }
+      console.log(data)
+      if(this.personInfo.birthday&&this.personInfo.name){
       var api = this.config.apiUrl + '/api/User/edit_Basic';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
        if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("修改成功！");
-        this.navCtrl.pop();
+        this.storage.set('username1',this.personInfo.name)
+        this.editMoreInfo();
       } else if(data.errcode === 40002) {
         j--;
         if(j>0){
@@ -116,6 +119,11 @@ export class EditorinfoPage {
           console.log(data.errmsg);
         }       
     });
+      }else{
+        alert("姓名，出生日期，不能为空")
+      }
+
+
   }
 
     //修改用户更多信息，点击提交时生效
@@ -131,21 +139,21 @@ export class EditorinfoPage {
         "industryInfo":this.personInfo.industryinfo,
       }
       console.log(JSON.stringify(data))
-    //   var api = this.config.apiUrl + '/api/User/edit_More';
-    //   this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-    //     if (data.errcode === 0 && data.errmsg === 'OK') {
-    //       console.log("修改成功!");
-    //       this.navCtrl.pop();
-    //   } else if(data.errcode === 40002){
-    //     j--;
-    //     if(j>0){
-    //       this.config.doDefLogin();
-    //       this.editMoreInfo();
-    //     }
-    //   } else {
-    //     console.log(data.errmsg);
-    //   }
-    // });
+      var api = this.config.apiUrl + '/api/User/edit_More';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+        if (data.errcode === 0 && data.errmsg === 'OK') {
+          console.log("修改成功!");
+          this.navCtrl.pop();
+      } else if(data.errcode === 40002){
+        j--;
+        if(j>0){
+          this.config.doDefLogin();
+          this.editMoreInfo();
+        }
+      } else {
+        console.log(data.errmsg);
+      }
+    });
   }
 
 

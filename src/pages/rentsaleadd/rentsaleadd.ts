@@ -12,39 +12,42 @@ import { LoginPage } from '../login/login';
   templateUrl: 'rentsaleadd.html',
 })
 export class RentsaleaddPage {
-  type='0';
-  title;
-  space;
-  room;
-  rstroom;
-  halls;
-  priceMin = '0';
-  priceMax;
-  phone;
-  nature='0';
-  district;
-  describe;
-  contacts;
-  street;
-  region;
-  city = 4403;
+
   public cityName = '西安'
   public cityCode;
   public area;
   public areaCode;
   public aa;
   public Code;
-  public RSadd;
-
+  public RSadd={
+  type:'0',
+  title:'',
+  space:'',
+  room:'',
+  restroom:'',
+  halls:'',
+  priceMin:'0',
+  priceMax:'',
+  phone:'',
+  nature:'0',
+  district:'',
+  describe:'',
+  contacts:'',
+  street:'',
+  region:'',
+  city:'',
+  }
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage :StorageProvider,public config:ConfigProvider,
   public http:Http,public loadingCtrl: LoadingController) {
   }
   ionViewWillEnter(){
     if(this.storage.get('token')){
+    } else {
+    this.navCtrl.push(LoginPage);
+      }
+      if(this.navParams.get('item')){
 
-} else {
-this.navCtrl.push(LoginPage);
-}
+      }
   }
 
   ionViewDidLoad() {
@@ -52,31 +55,31 @@ this.navCtrl.push(LoginPage);
   }
 
   getRSInfo(){
-    if(1){  //判断添加还是修改
+    if(!this.navParams.get('item')){  //判断添加还是修改
     var j = 3;
      let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
     loading.present();
-    this.RSadd = {
+     var RSadd = {
     "token":this.storage.get("token").toString(),
-    "type":this.type.toString(),
-    "title":this.title.toString(),
-    "space":this.space.toString(),
-    "room":this.halls.toString(),
-    "rstroom":this.rstroom.toString(),
-    "halls":this.halls.toString(),
-    "priceMin":this.priceMin.toString(),
-    "priceMax": this.priceMax.toString(),
-    "phone":this.phone.toString(),
-    "nature":this.nature.toString(),
-    "district":this.district.toString(),
-    "describe":this.describe.toString(),
-    "contacts":this.contacts.toString(),
-    "street":this.street.toString(),
-    "region":this.region.toString(),
-    "city":this.city.toString(),
-  }
+    "type":this.RSadd.type.toString(),
+    "title":this.RSadd.title.toString(),
+    "space":this.RSadd.space.toString(),
+    "room":this.RSadd.halls.toString(),
+    "restroom":this.RSadd.restroom.toString(),
+    "halls":this.RSadd.halls.toString(),
+    "priceMin":this.RSadd.priceMin.toString(),
+    "priceMax": this.RSadd.priceMax.toString(),
+    "phone":this.RSadd.phone.toString(),
+    "nature":this.RSadd.nature.toString(),
+    "district":this.RSadd.district.toString(),
+    "describe":this.RSadd.describe.toString(),
+    "contacts":this.RSadd.contacts.toString(),
+    "street":this.RSadd.street.toString(),
+    "region":this.RSadd.region.toString(),
+    "city":this.RSadd.city.toString(),
+    }
     var api = this.config.apiUrl + "/api/rental/add";
     console.log(this.RSadd)
     this.http.post(api,this.RSadd).map(res => res.json()).subscribe(data => {
@@ -96,25 +99,25 @@ this.navCtrl.push(LoginPage);
 	    showBackdrop: true,
     });
     loading.present();
-    this.RSadd = {
+     var RSadd = {
     "token":this.storage.get("token").toString(),
-    "type":this.type.toString(),
-    "title":this.title.toString(),
-    "space":this.space.toString(),
-    "room":this.halls.toString(),
-    "rstroom":this.rstroom.toString(),
-    "halls":this.halls.toString(),
-    "priceMin":this.priceMin.toString(),
-    "priceMax": this.priceMax.toString(),
-    "phone":this.phone.toString(),
-    "nature":this.nature.toString(),
-    "district":this.district.toString(),
-    "describe":this.describe.toString(),
-    "contacts":this.contacts.toString(),
-    "street":this.street.toString(),
-    "region":this.region.toString(),
-    "city":this.city.toString()
-  }
+    "type":this.RSadd.type.toString(),
+    "title":this.RSadd.title.toString(),
+    "space":this.RSadd.space.toString(),
+    "room":this.RSadd.halls.toString(),
+    "restroom":this.RSadd.restroom.toString(),
+    "halls":this.RSadd.halls.toString(),
+    "priceMin":this.RSadd.priceMin.toString(),
+    "priceMax": this.RSadd.priceMax.toString(),
+    "phone":this.RSadd.phone.toString(),
+    "nature":this.RSadd.nature.toString(),
+    "district":this.RSadd.district.toString(),
+    "describe":this.RSadd.describe.toString(),
+    "contacts":this.RSadd.contacts.toString(),
+    "street":this.RSadd.street.toString(),
+    "region":this.RSadd.region.toString(),
+    "city":this.RSadd.city.toString(),
+    }
     var api = this.config.apiUrl + "/api/rental/edit";
     console.log(this.RSadd)
     this.http.post(api,this.RSadd).map(res => res.json()).subscribe(data => {
