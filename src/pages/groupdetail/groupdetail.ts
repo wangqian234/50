@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
 //请求数据
@@ -19,6 +19,8 @@ import { ShopinfoPage } from '../shopinfo/shopinfo';
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //购物车
 import { CartPage } from '../cart/cart';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the GroupdetailPage page.
@@ -38,6 +40,7 @@ export class GroupdetailPage {
   public ShopinfoPage=ShopinfoPage;
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
   public CartPage = CartPage;
+  public TabsPage = TabsPage;
  //定义需要隐藏的标志变量
     public showpingj =false;
     public guiGe={
@@ -76,7 +79,7 @@ export class GroupdetailPage {
   public wdh = this.config.apiUrl;
   //定义token
   public token=this.storage.get('token');
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public app: App,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
     //  alert(this.wid)
@@ -97,7 +100,13 @@ ionViewWillLoad() {
       loading.dismiss();
        this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
-       that.dataGlist = data.json.data_group.list;//有些list为空  
+       for(var i =0;i<data.json.data_group.list.length;i++){
+         data.json.data_group.list[i].left_num = data.json.data_group.list[i].num - data.json.data_group.list[i].groupbuy_num;
+         var tel=data.json.data_group.list[i].usermobile;
+         tel = tel.substr(0, 3) + '****' + tel.substr(7);
+         data.json.data_group.list[i].usermobile = tel;
+       }
+       that.dataGlist = data.json.data_group.list;//有些list为空
        that.goodMlist=data.json['good_Model'].model;
        $("#tuwen").html(data.json['good_Model'].model.detail);//图文html
        this.sid=data.json['good_Model'].model.shopid;
@@ -328,6 +337,10 @@ incCount(){
 
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }

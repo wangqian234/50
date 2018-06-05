@@ -436,7 +436,7 @@ export class TradegoodsGroupbuyingPage {
     this.navCtrl.pop();
   }
 
-      backToHere(){
+      backToHome(){
      this.app.getRootNav().push(TabsPage);
   }
 
