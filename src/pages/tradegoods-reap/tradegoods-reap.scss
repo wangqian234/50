@@ -7,4 +7,44 @@ page-tradegoods-reap {
     pointer-events: auto;
 }
 
+    .choose {
+        float: right;
+        cursor: pointer;
+        height: 32px;
+        width: 65%;
+        display: inline-block;
+        position: relative;
+        line-height: 32px;
+        font-size: 18px;
+        text-align: center;
+        padding-right: 10px;
+    }
+    .mz{
+        width: 22% !important;
+        text-align:right !important;
+        color: #333333 !important;
+    }
+        .addSome{
+        display: block; 
+        float: left;
+    }
+    .denglu_k .denglk_l input{
+        width: 60%;
+    }
+    .denglu_k .denglk_l{
+        margin-bottom: 0;
+        padding: 0.1rem 0;
+    }
+    textarea{
+            width: 90%;
+    margin-left: 5%;
+    height: 2rem;
+    border: 1px solid #e5e5e5;
+    margin-top: 0.2rem;
+    padding: 0.1rem;
+    }
+    .denglu_k{
+        margin: 10px 0 0 0;
+        background-color: white;
+    }
 }

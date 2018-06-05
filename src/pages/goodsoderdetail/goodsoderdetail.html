@@ -1,5 +1,5 @@
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
    
 
 <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
@@ -27,33 +27,46 @@
 						<span>{{list.size_name}}</span>
 					</div>
 				</a>
-				<div class="ddxq_jiaq">
+				<div class="price">
 					<p>¥{{list.preprice}}</p>
 					<span>x{{list.goods_num}}</span>
 				</div>
+				
 			</dd>
 		</dl>
 	</div>
+
 	<div class="min_xi">
-		<p><em>收货信息：</em>{{model.tradeaddress}}</p>
-		<p><em>订单时间：</em>{{model.trade_time}}</p>
-		<p><em>订单状态：</em>{{model.consignmodename}}</p>
+		<img class="dingwei" src="assets/imgs/dingwei1.png">
+		<p class="tel">收货人：{{model.tel}}</p>
+		<p class="mob">{{model.mob}}</p>
+		<div style="clear:both"></div>
+		<p class="addre">{{model.address}}</p>
+		<div style="clear:both"></div>
+	</div>
+
+	<div class="min_xi">
+		<div><em class="dingdan">订单编号：</em><p class="dingdanp">{{model.trade_id}}</p></div>
+		<div><em class="dingdan">订单时间：</em><p class="dingdanp">{{model.trade_time}}</p></div>
+		<div><em class="dingdan">订单状态：</em><p class="dingdanp" style="color:#FF730F">{{model.consignmodename}}</p></div>
 	</div>
 	<div class="zuizong_jies">
-		<p><em>商品总额</em><span>¥{{model.pretotalprice}}</span></p>
-		<p><em>积分抵扣</em><span>¥0.00</span></p>
-		<p><em>运费</em><span>¥0.00</span></p> 
+		<p><em>商品总额：</em><span>¥{{model.pretotalprice}}</span></p>
+		<p><em>积分抵扣：</em><span>¥0.00</span></p>
+		<p><em>运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</em><span>¥0.00</span></p> 
+	</div>
+	<div class="zuizong_jies">
+		<p><em>实&nbsp;&nbsp;付&nbsp;&nbsp;款：</em><span style="color:#FF730F">¥{{model.pretotalprice}}</span></p> 
 	</div>
 	<div class="xiangq_liang_ann">
-      <a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
-		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>
+		<a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#FF730F">确认付款</a>
+     	<a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;" style="background-color:#FF730F">取消付款</a>
+      <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id)" href="javascript:;" style="background-color:#FF730F" class="sc">退款</a>
 
-      <a *ngIf="model.tradestate==2" (click)="addrefundEvent(list.tradegoods_id)" href="javascript:;" class="sc">退款</a>
+      <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#FF730F">确认收货</a>
 
-      <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#ff971c">确认收货</a>
-
-      <a *ngIf="model.tradestate==4" (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id)">去评价</a>
-		 	<a *ngIf="model.tradestate==4" (click)="buyagainEvent(item.goods_list[0].goods_id)" style="background-color:#ff971c">再次购买</a>
+      <a *ngIf="model.tradestate==4" (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id,item)" style="background-color:#FF730F">去评价</a>
+		 	<a *ngIf="model.tradestate==4" (click)="buyagainEvent(item.goods_list[0].goods_id)" style="background-color:#FF730F">再次购买</a>
 	</div>
 </div>
 

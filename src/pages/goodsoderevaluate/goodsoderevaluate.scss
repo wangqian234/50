@@ -1,15 +1,12 @@
 page-goodsoderevaluate {
-//         .toolbar-title-ios {
-//     text-align: center;
-//     font-size: 0.5rem;
-//     font-weight: 600;
-//     color: #000;
-//     pointer-events: auto;
-// }
+
 
 div.dk{
-    background: #ff971c;
+    background: #FF730F;
     height:0.8rem;
+        position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 div.dk a{
     font-size:0.3rem;
@@ -17,5 +14,36 @@ div.dk a{
 }
 .shouh_dange_beijin{
     padding:0;
+}
+.gouwuc_kk .diannao_shanp h1 img{
+    height: 1.7rem;
+}
+.gouwuc_kk .diannao_shanp .you .bt{
+    height: 0.9rem;
+}
+.gouwuc_kk_ddxq{
+    background-color: white
+}
+.gouwuc_kk_pjsd{
+    margin-top: 10px;
+    background-color: white;
+    width: 100%;
+}
+.gouwuc_kk_jies .diannao_shanp .you{
+    width: 100%;
+}
+.pjnr_txt{
+        background-color: white;
+    border: 1px solid #E5E5E5;
+    width: 90%;
+    margin-left: 5%;
+
+}
+.textarea{
+    background-color: white;
+    padding-bottom: 20px;
+}
+.pjnr_txt{
+    padding: 0;
 }
 }

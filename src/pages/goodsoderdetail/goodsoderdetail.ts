@@ -27,7 +27,12 @@ export class GoodsoderdetailPage {
 
 
   public list=[];
-  public model=[];
+  public model={
+    tel:'',
+    mob:'',
+    address:'',
+    trade_time:''
+  };
   public SD_id;
   public TradegoodsReapPage=TradegoodsReapPage;
   public tradegoodsid;//商品订单编号
@@ -59,13 +64,14 @@ loading.present();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        loading.dismiss();
        if(data.errcode === 0 &&data.errmsg == 'OK'){
-         //this.goods_list=data.list.goods_list;
          this.list=data.list[0];
          this.model=data.model;
-         //alert(JSON.stringify(data));
-         //this.good_list=data.list[0].goods_list;
-         //alert(JSON.stringify(data.list[0].goods_list));
-         // alert(JSON.parse(data));
+         var arr = data.model.tradeaddress.split(",");
+         this.model.tel = arr[0];
+         this.model.mob = arr[1];
+         this.model.address = arr[2];
+         this.model.trade_time = data.model.trade_time.replace("T", " ").substring(0,19);
+         console.log(this.model)
          console.log(data);
      } else if(data.errcode === 40002){
               j--;
@@ -80,7 +86,6 @@ loading.present();
   }
      //添加商品退款申请
    addrefundEvent(tradegoods_id){
-    //  alert("五爷"+this.tradegoodsid);
      this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
    }
 
