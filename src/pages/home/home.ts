@@ -89,6 +89,9 @@ export class HomePage {
 
   public RentsalePage = RentsalePage;
 
+  //轮播图的页面跳转
+  //public RentsalePage = RentsalePage;
+
   public HouseinfolistPage = HouseinfolistPage;
   public LoadingPage = LoadingPage;
 
@@ -319,6 +322,5 @@ changeRoom(roomid) {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
-
 
 }

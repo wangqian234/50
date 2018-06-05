@@ -27,7 +27,12 @@ export class GoodsoderdetailPage {
 
 
   public list=[];
-  public model=[];
+  public model={
+    tel:'',
+    mob:'',
+    address:'',
+    trade_time:''
+  };
   public SD_id;
   public TradegoodsReapPage=TradegoodsReapPage;
   public tradegoodsid;//商品订单编号
@@ -62,6 +67,12 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          this.list=data.list[0];
          this.model=data.model;
+         var arr = data.model.tradeaddress.split(",");
+         this.model.tel = arr[0];
+         this.model.mob = arr[1];
+         this.model.address = arr[2];
+         this.model.trade_time = data.model.trade_time.replace("T", " ").substring(0,19);
+         console.log(this.model)
          console.log(data);
      } else if(data.errcode === 40002){
               j--;

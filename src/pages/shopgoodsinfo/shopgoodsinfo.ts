@@ -38,6 +38,10 @@ export class ShopgoodsinfoPage {
 
     public sid;
     public wid;
+    public mode;
+    public key ;
+    public jiage;
+    public prejiage;
     //定义需要隐藏的标志变量
     public showpingj =false;
     //接收数据的 list
@@ -77,7 +81,8 @@ export class ShopgoodsinfoPage {
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
   public loadingCtrl: LoadingController) {
     this.wid=this.navParams.get("id")
-      alert(this.wid)
+      //  alert(this.wid)
+    
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -85,16 +90,27 @@ export class ShopgoodsinfoPage {
       //显示商品详情页面
       this.goodsInfo();
       this.recommend();
+     
+  }
+  ionViewDidEnter() {
+ this.switch(0);
   }
   //显示商品详情页面
   goodsInfo(){
+    let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+    });
+    loading.present();
     var that =this;
     var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
+        loading.dismiss();
         console.log(data)
         that.goodMlist = data.json['good_Model'].model;
+        that.jiage=data.json['good_Model'].model.maxpreprice;
+        that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
         $("#tuwen").html(data.json['good_Model'].model.detail);
         console.log($("#tuwen"));
         this.sid=data.json['good_Model'].model.shopid;        //店铺Id
@@ -109,8 +125,16 @@ export class ShopgoodsinfoPage {
       if(id==this.dataSlist[i].id){
         this.guiGe = this.dataSlist[i];
         this.goodSize= this.dataSlist[i].id;
+        this.jiage=this.dataSlist[i].preprice;
+        this.prejiage=this.dataSlist[i].price;
       }
     }
+    
+  }
+  ifontime(mode) {
+    $("#banb ul li").removeAttr("class");
+    var span = "#banb ul li:nth-of-type(" + ++mode + ")"
+    $(span).attr("class", "no");
   }
 //购买数量判断
 ifEnough(){
@@ -181,20 +205,36 @@ fenge(str){
   }
  }
   //显示商品评价列表
-  getshopinfo(){
-    this.showpingj=!this.showpingj;
-    var that = this;
-    var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+this.navParams.get('id');
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
-      console.log(data)
-      console.log("评价啊")
-      if(data.errcode === 0 && data.errmsg === 'OK'){
-         this.list= data.list;
-      }else{
-        alert(data.errmsg);
-      }
-    })
-  }
+  // getshopinfo(){
+  //   this.showpingj=!this.showpingj;
+  //   var that = this;
+  //   var api = this.aa +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+this.navParams.get('id');
+  //   this.http.get(api).map(res => res.json()).subscribe(data =>{
+  //     console.log(data)
+  //     console.log("评价啊")
+  //     if(data.errcode === 0 && data.errmsg === 'OK'){
+  //        this.list= data.list;
+  //     }else{
+  //       alert(data.errmsg);
+  //     }
+  //   })
+  // }
+switch(key){
+  $("#swdh ul li").removeAttr("class");
+    var span = "#swdh ul li:nth-of-type(" + ++key + ")"
+    $(span).attr("class", "d");
+        --key;
+        
+    if(key==0){     
+      $("#pinglun").css("display","none");
+      $("#tuwen").css("display","block");
+    }else{
+      $("#tuwen").css("display","none");
+      $("#pinglun").css("display","block");
+    }
+
+}
+
  //购买
    buygoods(){ 
      if(!this.goodSize){
@@ -241,21 +281,29 @@ fenge(str){
     console.log('ionViewDidLoad ShopgoodsinfoPage');
   }
 
-  incCount(){    
+  incCount(){ 
+    if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{   
     ++this.addcarList.goodsNum;
     ++this.buylist.goodsNum;
     this.ifEnough();
     
   }
+  }
 
   //数量变化  双向数据绑定
   decCount(){
+    if(!this.goodSize){
+      alert("请选择商品规格")
+     }else{
     if(this.addcarList.goodsNum>1){
       --this.addcarList.goodsNum;
       --this.buylist.goodsNum;
 
     }
   }
+}
 
   backTo(){
     this.navCtrl.pop();

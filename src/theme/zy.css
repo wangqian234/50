@@ -510,9 +510,9 @@ display: inline-block;
 	text-align: center;
 }
 .jiss_df h1{display: inline-block;}
-.jiss_df p{float: left; margin: 0 0.2rem;}
-.jiss_df p a{padding: 0.2rem 0.3rem; display: inline-block; border-radius:0.06rem; border:solid 1px #e2e2e2; font-size: 0.22rem;color: #6d6d6d;}
-.jiss_df p a.d{ border:solid 1px #e10601;  color: #e10601;}
+.jiss_df ul{float: left; margin: 0 0.2rem;}
+.jiss_df ul li{padding: 0.2rem 0.3rem; display: inline-block; border-radius:0.06rem; border:solid 1px #e2e2e2; font-size: 0.22rem;color: #6d6d6d;}
+.jiss_df ul li.d{ border:solid 1.2px #e10601;  color: #e10601;}
 
 .shangpneir{margin: 0.2rem;}
 .shangpneir img{width: 100%;}
@@ -1360,7 +1360,7 @@ line-height: 0.54rem;
 .xiangq_liang_ann{
 	text-align: center;
 }
-.xiangq_liang_ann a{display: block;height: 0.68rem;line-height: 0.68rem;color: #5c5b5b;background: #f3f3f3; margin: 0.1rem 0 0 0;}
+.xiangq_liang_ann a{display: block;height: 0.8rem;line-height: 0.8rem;color: white;background: #f3f3f3; margin: 0.1rem 0 0 0;}
 .xiangq_liang_ann a.sc{background: #d2d2d2; margin-bottom: 0.3rem;}
 
 .jiu_feo_jifsc{width: 100%;}
@@ -1410,11 +1410,11 @@ background: #fafafa;}
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx{overflow: hidden;margin: 0.2rem;}
 
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx p{width:0.32rem; height: 0.32rem;float:left;
- background:no-repeat center url(../assets/imgs/xx_ingj_2.png);
+ background:no-repeat center url(../assets/imgs/ebad.png);
  background-size: 100%;margin: 0.1rem;
 }
 .gouwuc_kk_pjsd .diannao_shanp .you .pj_xx p.no{
-	background:no-repeat center url(../assets/imgs/xx_ingj_1.png);
+	background:no-repeat center url(../assets/imgs/egood.png);
  background-size: 100%;margin: 0.1rem;
 }
 

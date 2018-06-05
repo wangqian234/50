@@ -1,5 +1,5 @@
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
 
  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
@@ -17,65 +17,53 @@
 
 
     <!--收货信息-->
-		<div class="jie_diz">
-				<a (click)="changeAdd()" >
-					<p>收货人:{{addlist.address_name}} &nbsp; {{addlist.address_mobile}}</p>
-					<p class="p">地址：{{addlist.Address}}<i></i></p>
-				</a>
-		</div>
+
+	<div class="min_xi">
+		<img class="dingwei" src="assets/imgs/dingwei1.png">
+		<p class="tel">收货人：{{addlist.address_name}}</p>
+		<p class="mob">{{addlist.address_mobile}}</p>
+		<div style="clear:both"></div>
+		<p class="addre">{{addlist.Address}}</p>
+		<div style="clear:both"></div>
+	</div>
    
     <!--商品信息-->
-<div class="caix"></div>
-<div class="gouwuc_kk gouwuc_kk_jies">
- 	<ul>
- 		<li *ngFor="let item of goodSlist"> 
- 			<div class="diannao_shanp"> 
-				 <p class="px26 bt">{{item.shopname}}</p>
-
- 				<a href="javascript:;"><h1><img src={{item.img}}></h1></a>
- 				<div class="you">
- 					<a href="javascript:;"><p class="px24 bt">{{item.title}}</p></a>
- 					<p class="xh">{{item.name}}</p>
- 					<div class="youjfy">
-						<div class="goum_sl">
-							<p class="px26 jiaq">￥{{item.preprice}}</p>
-									<div class="gei_shangj_ly">
+		<div class="dd_xiangq_sp_k" style="margin-top:10px" *ngFor="let item of goodSlist">
+		<dl>
+			<dd>
+				<a href="javascript:void(0)">
+					<h1><img src={{item.img}}></h1>
+					<div class="wenz">
+						<p style="height:auto;">{{item.title}}</p>
+						<span style="font-size: 0.18rem;">{{item.name}}</span>
+					<p style="height:auto;position: absolute;bottom: 0;font-size: 0.18rem;">¥{{item.preprice}}</p>
+					<span style="position: absolute;bottom: 0;right: 0;line-height: 0.22rem;font-size: 0.18rem;">x{{item.buynum}}</span>
+					</div>
+				</a>
+			</dd>
+		</dl>
+		<div class="addsomething">
 			<h1>给商家留言：</h1>
-			<input type="text" [(ngModel)]="item.trade_Memo" name="trade_Memo" placeholder="请您留言">
+			<input type="text" [(ngModel)]="item.trade_Memo" name="trade_Memo" placeholder="选填&nbsp;&nbsp;备注内容">
 		</div>
-<!--数量-->
-<div class="goum_sl">
-	<div class="counter_box">
-		
-		<i class="wdh" >已选数量：{{item.buynum}}</i>
-		
 	</div>
-</div>
-						</div>
- 					</div> 
- 				</div>
- 			</div> 
- 		</li>
- 	</ul>
-</div>
 
-    <!--第三部分-->
+	<div class="addsome">
+		<h1>运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：</h1>
+		<p class="yunfee">￥{{carriagelist.postage}}元</p>
+	</div>
 
-		<div class="jies_qian">
-	
-		<p class="px26">运费: ￥{{carriagelist.postage}}元</p> 
-		<p class="px26"><ion-checkbox color="danger" [(ngModel)]="checked" (ionChange)="discount()" >
-			 </ion-checkbox>{{dtlist.useintegraltitle}}</p>
-		</div>
-<!--第四部分-->
-     
-			
+	<div class="addsomething">
+		<h1>{{dtlist.useintegraltitle}}</h1>
+		<ion-checkbox color="danger" [(ngModel)]="checked" (ionChange)="discount()" ></ion-checkbox>
+	</div>
+     		
 		
 <!--底部导航-->
 
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
-		<div class="zhong"><p>总计：<em>￥{{totalPrice}}</em></p></div>
+		<div class="zhong"><p>合计：<em>￥{{totalPrice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
 				<a (click)=clickme()>提交订单</a>  

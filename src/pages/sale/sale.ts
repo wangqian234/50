@@ -54,7 +54,15 @@ ifontime2(infiniteScroll){
 
         this.list=this.list.concat(data.list);  /*数据拼接*/
         console.log(this.list)
+        var now = new Date().getTime();
         for(var i=0;i<this.list.length;i++){
+          if(new Date(this.list[i].starttime).getTime()>now){
+              this.list[i].mode1 = 2;
+          } else if(new Date(this.list[i].endtime).getTime()<now) {
+              this.list[i].mode1 = 3;
+          } else {
+              this.list[i].mode1 = 1;
+          }
           this.list[i].lefttime = this.leftTimer(this.list[i].endtime);
         }
         

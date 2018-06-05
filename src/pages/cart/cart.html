@@ -33,12 +33,12 @@
  				<h1><img [src]="item.img"></h1>
  				<div class="you">
  					<p class="px22 bt">{{item.title}}</p>
- 					<p class="xh">{{item.size_name}}</p>  <!--删除--> <ion-icon class="icondiv" name="trash" (tap)="delCartsData(item)"></ion-icon>
- 					<div class="youjfy">
-						 
-						 <!--<button  style="margin-left: 3rem" (tap)="delCartsData(item)">删除</button>  -->
-						<div class="goum_sl">
-							<p class="px26 jiaq">￥{{item.preprice}}</p>
+					 <p class="px22" style="padding: 0.07rem 0 0 0;color:#FF730F;float: right;margin-right: 0.2rem;">￥{{item.preprice}}</p>
+					 <div style="clear:both"></div>
+					 <p class="cxh">{{item.size_name}}</p>
+ 					<!--<p class="xh">{{item.size_name}}</p>-->
+					 <!--<img class="sizetra" src="assets/imgs/jiantou.png">-->
+					 	<div class="goum_sl">
 							<div class="counter_box">
 								<!--数量-->
 								<i class="jian" (tap)="decCount(item)">-</i>
@@ -46,6 +46,8 @@
 								<i class="jia" (tap)="incCount(item)">+</i>
 							</div>
 						</div>
+					 <img (tap)="delCartsData(item)" src="assets/imgs/delete.png">
+ 					<div class="youjfy">
  					</div>
  				</div>
  			</div>

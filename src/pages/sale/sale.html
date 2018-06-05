@@ -10,10 +10,12 @@
 			</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a href="javascript:;" class="px24 zyyge">抢购列表</a></li>
+					<li><a href="javascript:;" class="px24 zyyge">限时抢购</a></li>
 				</ul>
 			</div>
+
 			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
+
 		</div> 
 	</div>
 </div>
@@ -23,11 +25,10 @@
 <div class="shangp_lieb_beij">
 	<div class="sp_daoh" id="typediv">
 		<ul>
-			<li class="activety" data-nav="all" (click)="ifontime(0)"><a class="titlea" href="javascript:;">全部</a></li>
+	  <li class="activety" data-nav="all" (click)="ifontime(0)"><a class="titlea" href="javascript:;">全部</a></li>
       <li data-nav="payment" (click)="ifontime(1)"><a class="titlea" href="javascript:;">进行中</a></li>
       <li data-nav="receive" (click)="ifontime(2)"><a class="titlea" href="javascript:;">即将开始</a></li>
-      <li data-nav="done" (click)="ifontime(3)"><a class="titlea" href="javascript:;">已结束</a></li>
-			
+      <li data-nav="done" (click)="ifontime(3)"><a class="titlea" href="javascript:;">已结束</a></li>			
 		</ul>
 	</div>
 	<ul class="shangp_lieb_k_er">
@@ -36,16 +37,18 @@
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao" style="height:0.7rem;">{{item.title}}</p>
-					<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>
+					<p class="bend" *ngIf="item.mode1==1"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>
+					<p class="bend" *ngIf="item.mode1==2"><span class="leftspan">{{item.starttime | pipeTime}}开始</span></p>
 					<!--<p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>-->
-					<div class="progress"><div class="enprogress"></div>已抢{{item.whennum}}份</div>
+					<div *ngIf="item.mode1==1" class="progress"><div class="enprogress"></div>已抢{{item.whennum}}份</div>
+					<div *ngIf="item.mode1==3" class="progress" style="background-color:white"></div>
 					<div style="clear:both"></div>
-          			<p *ngIf="mode==3" class="bend" style="color:#979797">单价：<span>¥&nbsp;{{item.pricemin}}</span></p>
-					  <p *ngIf="mode!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>
+          			<p *ngIf="mode==3||item.mode1==3" class="bend" style="color:#979797"><span>¥&nbsp;{{item.pricemin}}</span></p>
+					  <p *ngIf="mode!=3&&item.mode1!=3" class="bend"><span>¥&nbsp;{{item.pricewhen}}</span>&nbsp;&nbsp;<span style="text-decoration:line-through;color:#979797;font-size: 0.14rem;">¥{{item.pricemin}}</span></p>
 					<!--<p class="bend"><img style="float:left" src="assets/imgs/countdown.png"><span class="leftspan">{{item.lefttime}}</span></p>-->
-					<span class="salespan"><img src="assets/imgs/quick.png">&nbsp;马上抢</span>
-					<!--<span class="salespan"><img src="assets/imgs/time.png">提醒我</span>-->
-					<!--<img style="float:right;margin-top: -0.3rem;" src="assets/imgs/havedone.png">-->
+					<span class="salespan" *ngIf="item.mode1==1"><img src="assets/imgs/quick.png">&nbsp;马上抢</span>
+					<span class="salespan" *ngIf="item.mode1==2"><img src="assets/imgs/time.png">&nbsp;提醒我</span>
+					<img  *ngIf="item.mode1==3" style="float:right;margin-top: -0.3rem;" src="assets/imgs/havedone.png">
 				</div>
 			</a>
 	</ul>
@@ -57,6 +60,5 @@
 </ion-infinite-scroll>
 
 <div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
-
 
 </ion-content>
