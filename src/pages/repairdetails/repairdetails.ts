@@ -77,6 +77,7 @@ public background:boolean;
         if(data.list[0].disposememo){
           listStr = data.list[0].disposememo;
           this.disposememo = listStr.split("<br />");
+          console.log(this.disposememo)
         }
          this.stateName=data.list[0].statename;
         this.stateRepaird();

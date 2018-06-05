@@ -16,12 +16,18 @@
   <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time}}</p>
   <p class="repair-state">{{repairdetaillist.statename}}</p>
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
-  <div>
+  <!--图片遍历-->
+  <!--<div>
     <img class="pic" src="assets/imgs/08.jpg" />
-  </div>
+  </div>-->
 </div>
+<<<<<<< HEAD
 <p class="detail1">处理进度如下：</p>
 <div id="app" *ngIf = "app" >
+=======
+<div id="app" style="display: none">
+<p class="detail1">处理进度如下：</p>
+>>>>>>> dcc30ec00b97664572534073c20525d2554ca6a4
     <ul>
         <li *ngFor="let item of disposememo">
           {{item}}

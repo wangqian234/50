@@ -19,6 +19,7 @@ import { TabsPage } from '../tabs/tabs'
 export class SalePage {
 
 public ShopgoodsinfoPage=ShopgoodsinfoPage;
+public TabsPage = TabsPage;
 public list = [];
 public mode = 0 ;
 

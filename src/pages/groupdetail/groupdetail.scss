@@ -4,41 +4,31 @@ ion-slides{
      margin-top: 10px;
      background-color: white;
 }
-li.d{
-    border: solid 2px #FF971C !important;
-    color: #666666;
-    
+
+.goum_sl {
+    background-color: white;
+    padding-top: 0rem;
 }
- #swdh ul li {
-    float: left;
-    padding: 0.15rem;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    border: solid 0.8px #666666;
+.xiangq_shangp_m .px24{
+    height: initial;
+    margin-bottom: 0.2rem;
+    font-size: 0.22rem;
+     color: #333333;
 }
 
-h1 {
-    font-size: 0.28rem;
-    font-weight: normal;
-    font-family: Microsoft YaHei;
-}
-.jiss_df{
-    margin: 3px 0;
-    background-color: white;
-    padding: 20px 0;
-    width: 100%;
-}
-.xiangq_shangp_m .xq_jiaq p {
-  float: left;
-  color: #FF730F;
-  font-size: 0.29rem;
-}
 .xiangq_shangp_m .xq_jiaq span{
-        margin-top: 0.03rem;
+    text-decoration:line-through
 }
-.xiangq_shangp_m .xq_jiaq {
-    overflow: hidden;
-    padding-top: 0.2rem;
+.xiangq_dp_k .dianpulogo h1{
+    width: 0.55rem;
+    padding-top: 0.17rem;
+}
+.dianpulogo{
+    float:left;
+}
+.xiangq_dp_k{
+    height:1.3rem;
+    background-color: white;
 }
 .guangguang{
    overflow: hidden;
@@ -48,61 +38,18 @@ h1 {
     height: 0.5rem; 
 
 }
-
-.goum_sl {
-    background-color: white;
-    padding-top: 0rem;
-}
-///////////////////////////////////
-.goum_sl{
-    background-color: white;
-}
-.goum_sl .counter_box {
-    overflow: hidden;
-    text-align: center;
-    float: right;
-    margin-left: 0.3rem;
-}
-.goum_sl .counter_box input {
-    width: 1rem;
-    height: 0.45rem;
-    border: solid 1px #f5f5f5;
-    border-left: none;
-    border-right: none;
-    float: left;
-    text-align: center;
-    color: #ff971c;
-    font-size: 0.26rem;
-}
-.xiangq_shangp_m .px24{
-    height: initial;
-    margin-bottom: 0.2rem;
-}
-.xiangq_shangp_m .xq_jiaq span{
-    text-decoration:line-through
-}
-.xiangq_dp_k{
-    height: 1.3rem; 
-}
-.xiangq_dp_k .dianpulogo{
-    float:left;
-}
-.xiangq_dp_k .dianpulogo h1{
-    width: 0.8rem;
-}
-
 .guangguang a{
     overflow: hidden;
     display: inline-block;
     padding: 0.1rem 0.2rem 0.1rem 0.2rem;
-    margin: 0 0.4rem;
+    margin: 0 0.2rem;
     border: solid 1px #e2e2e2;
     border-radius: 0.05rem;
     color: #a1a1a1;
     line-height: 0.3rem;
     font-size: 0.22rem;
     height: 0.5rem;
-    width: 90%;
+    width: 2rem;
 }
 .a1 h1{
     width: 90%;
@@ -110,15 +57,14 @@ h1 {
     margin-right: 0.1rem;
 }
 .guangguang a h1 img{
-    width: 0.4rem !important;
-    height:0.4rem;
+
     float:left;
 }
 .dib_daoh_b{
         height: 0.8rem;
 }
 .gouwuc_ .you .goum a{
-    height: 0.8rem;
+    height: 0.3rem;
     line-height: 0.8rem;
 }
 .gouwuc_yem .you{
@@ -130,6 +76,7 @@ h1 {
 }
 .tuwen{
     margin-bottom: 1rem;
+    background-color: white;
 }
 
 .showMore{
@@ -208,4 +155,134 @@ h1 {
     font-size: 0.28rem;
     line-height: 0.35rem;
 }
+
+.xiangq_dp_k .dianp_pf .px24{
+    line-height: 0.5rem;
+}
+
+// li.d{
+//     border: solid 2px #FF971C !important;
+//     color: #666666;
+    
+// }
+ #swdh ul li {
+    float: left;
+    padding: 0.15rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    
+}
+// h1 {
+//     font-size: 0.28rem;
+//     font-weight: normal;
+//     font-family: Microsoft YaHei;
+// }
+.jiss_df{
+    margin: 3px 0;
+    background-color: white;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.xiangq_shangp_m{
+    background-color: white;
+}
+
+.goum_sl{
+    background-color: white;
+}
+.goum_sl .counter_box {
+    overflow: hidden;
+    text-align: center;
+    float: right;
+    margin-left: 0.3rem;
+}
+.goum_sl .counter_box input {
+    width: 1rem;
+    height: 0.45rem;
+    border: solid 1px #f5f5f5;
+    border-left: none;
+    border-right: none;
+    float: left;
+    text-align: center;
+    color: #ff971c;
+    font-size: 0.26rem;
+}
+.xiangq_shangp_m .xq_jiaq p {
+  float: left;
+  color: #FF730F;
+  font-size: 0.29rem;
+}
+.xiangq_shangp_m .xq_jiaq span{
+        margin-top: 0.03rem;
+}
+.banb{
+    padding: 0.2rem;
+    margin: 4px 0;
+    background-color: white;
+    height: 0.63rem;
+}
+    .goum_sl .counter_box{
+        float: right;
+        margin-right: 0rem;
+        margin-left: 0;
+            margin-top: -0.1rem;
+    }
+    .goum_sl .counter_box i{
+        height: 0.25rem;
+        line-height: 0.25rem;
+        margin-top: 0.1rem;
+        background-color: #DCDCDD;
+    }
+    .goum_sl .counter_box input{
+        border:none;
+        color: #FF730F;
+    }
+        .goum_sl{
+        float: right;
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .logo_k_fanh{
+  width: auto;
+  position: absolute;
+}
+.zhongjain_daoh{
+  width: 100%;
+}
+.jiu_feo{
+  width: 100%;
+}
+.font{
+        display: inline;
+    line-height: 0.55rem;
+    margin-left: 0.6rem;
+}
+.font2{
+float: right;
+line-height: 0.2rem;
+margin-right: 1.2rem;
+em{
+    font-size: 0.14rem !important;
+    line-height: 0.18rem;
+}
+}
+
+.salespan{
+    float: right;
+    background-color: #FF730F;
+    width: 0.9rem;
+    height: 0.37rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.2rem;
+    color: #FEFEFE;
+    border-radius: 0.05rem;
+    line-height: 0.37rem;
+    position: absolute;
+    right: 0.2rem;
+        padding: 0.03rem 0;
+}
+
 }

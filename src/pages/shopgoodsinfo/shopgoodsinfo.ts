@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
@@ -16,6 +16,8 @@ import { CartPage} from '../cart/cart'
 import { ShopbuyPage } from '../shopbuy/shopbuy';
 //店铺详情页面
 import { ShopinfoPage } from '../shopinfo/shopinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 /**
  * Generated class for the ShopgoodsinfoPage page.
  *
@@ -35,6 +37,7 @@ export class ShopgoodsinfoPage {
     public ShopbuyPage=ShopbuyPage;
     public ShopinfoPage=ShopinfoPage;
     public ShopgoodsinfoPage=ShopgoodsinfoPage;
+    public TabsPage = TabsPage;
 
     public sid;
     public wid;
@@ -68,6 +71,7 @@ export class ShopgoodsinfoPage {
   //定义congfig中公共链接的变量aa
   public guiGe={};
   public aa = this.config.apiUrl;
+  public guigeId = "pre1"
     //定义token
   public token=this.storage.get('token');
     //post方法添加购物车时传的数据
@@ -79,7 +83,7 @@ export class ShopgoodsinfoPage {
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
-  public loadingCtrl: LoadingController) {
+  public loadingCtrl: LoadingController,public app: App) {
     this.wid=this.navParams.get("id")
       //  alert(this.wid)
     
@@ -120,7 +124,8 @@ export class ShopgoodsinfoPage {
     })
   }
   //切换商品规格
-  changeId(id){
+  changeId(){
+    var id = this.guigeId;
     for(var i=0;i<this.dataSlist.length;i++){
       if(id==this.dataSlist[i].id){
         this.guiGe = this.dataSlist[i];
@@ -307,5 +312,8 @@ switch(key){
 
   backTo(){
     this.navCtrl.pop();
+  }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 }

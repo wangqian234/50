@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content style="background-color:#f5f5f5">
 
 <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
@@ -6,7 +6,7 @@
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backToRepair()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">工单列表</a></li>  
+					<li><a class="px24 zyyge">我的工单</a></li>  
 				</ul>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
   <div class="searchdiv">
     <div class="searchTool">
         <form class="choose">
-           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.23rem;right:5px;width:0.17rem;height:0.15rem;margin-right: 0.08rem;">
           <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;" [(ngModel)]="type"  (ngModelChange)="getProduct()">
           <option  selected  value="-1"> 全部</option>
           <option value="4">公共报修</option>
@@ -37,13 +37,20 @@
 
   <ion-list>
     <ion-item [navPush]="RepairdetailsPage" *ngFor="let item of list" (tap)="repairDetails(item['id'])">     
-      <a class="title_a"> {{item.typename}}&nbsp;&nbsp;>>&nbsp;&nbsp;{{item.statename}}</a>
+      <a class="title_a"> {{item.typename}}</a>
       <h4 class="right">{{item.time | pipeTime}}</h4>
+      <div style="clear: both"></div>
       <h4>{{item.roominfostr}} </h4>
-      <p>{{item.mome}}</p>
-      <button ion-button clear item-end icon-only>
+      <p>说明：{{item.mome}}</p>
+      <img *ngIf="item.statename=='待派单'" src="assets/imgs/Statusicon_01.png">
+      <img *ngIf="item.statename=='待评价'" src="assets/imgs/Statusicon_02.png">
+      <img *ngIf="item.statename=='待派工'" src="assets/imgs/Statusicon_03.png">
+      <img *ngIf="item.statename=='已终止'" src="assets/imgs/Statusicon_04.png">
+      <img *ngIf="item.statename=='已完成'" src="assets/imgs/Statusicon_05.png">
+      <img *ngIf="item.statename=='处理中'" src="assets/imgs/Statusicon_06.png">
+      <!--<button ion-button clear item-end icon-only>
         <ion-icon style="font-size:0.3rem" name="arrow-dropright"></ion-icon>
-      </button>           
+      </button>           -->
     </ion-item>
   </ion-list>
 
