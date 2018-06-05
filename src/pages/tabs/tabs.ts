@@ -35,14 +35,19 @@ export class TabsPage {
   tab8Root = CartPage;
   tab6Root = ShopsortPage;
 
-  constructor(public config:ConfigProvider,public http: Http,public navCtrl: NavController) {
-
+  constructor(public navParams: NavParams,public config:ConfigProvider,public http: Http,public navCtrl: NavController) {
+   
   }
 
 
   ionViewWillEnter($ionicTabsDelegate) {
       $(".mytabs2").css("display","none");
       $(".mytabs").css("display","block");
+      if(this.navParams.get('tabs')){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
+        $(".mytabs2").select(0)
+      }
   }
 
 

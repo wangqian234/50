@@ -150,6 +150,7 @@ export class ShoppingPage {
        $(".shouye").css("display","none")
        $(".shopcontentdiv").css("display","none")
        $(".remen_sos").css("display","block")
+       $(".ios .tabs .tabbar").css("display","none");
     })
     this.shopKeyList = this.storage.get("shopKewWords");
   }
@@ -164,6 +165,7 @@ export class ShoppingPage {
        $(".shouye").css("display","block")
        $(".shopcontentdiv").css("display","block")
        $(".remen_sos").css("display","none")
+       $(".ios .tabs .tabbar").css("display","flex");
   }
   doSomeThing(){
    this.doReserch();

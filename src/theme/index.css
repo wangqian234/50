@@ -498,7 +498,7 @@ height: 0.72rem;
 
 /*底部导航*/
 
-.dib_daoh_b{height: 0.89rem;width: 100%;border-top: solid 1px #cfcfcf; background: #fbfbfb;position: fixed;bottom: 0;z-index: 100; /*top:0;*/ 
+.dib_daoh_b{height: 0.89rem;width: 100%;border-top: solid 1px #cfcfcf; background: #fbfbfb;position: fixed;bottom: 0;z-index: 500; /*top:0;*/ 
 left: 0;}
 .dib_daoh_b ul{overflow: hidden;}
 .dib_daoh_b ul li{width: 25%;float: left;height: 0.89rem; text-align: center;}

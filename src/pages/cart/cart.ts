@@ -63,7 +63,7 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-
+        $(".ios .tabs .tabbar").css("display","none");
   }
 
   ionViewWillEnter(){
@@ -301,8 +301,14 @@ buy(){
     this.getCartsData(infiniteScroll);
   }
 
-    backToHome(){
-     this.app.getRootNav().push(TabsPage);   
+  backTo(){
+    this.app.getRootNav().push(TabsPage,{
+      tabs:true
+    });
+  }
+
+  backToHome(){
+     this.app.getRootNav().push(TabsPage);    
   }
    
 

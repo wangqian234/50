@@ -199,7 +199,8 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      // loading.dismiss();
+      //loading.dismiss();
+
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -227,7 +228,7 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      // loading.dismiss();
+      //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
         console.log(this.publicget)
@@ -258,7 +259,7 @@ export class HomePage {
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-      //  loading.dismiss();
+       //loading.dismiss();
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;

@@ -109,6 +109,7 @@ export class RentsalelistPage {
         that.flag = !that.flag;
       }
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "time+"
       } else {
@@ -144,7 +145,9 @@ export class RentsalelistPage {
         }
         that.flag = !that.flag;
       }
+
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "space+"
       } else {
@@ -180,7 +183,9 @@ export class RentsalelistPage {
         }
         that.flag = !that.flag;
       }
+
       // $(this).append('<img src="assets/imgs/order.png">');
+
       if(that.flag){
         that.horder = "price+"
       } else {

@@ -1,3 +1,40 @@
 page-houseinfolist {
+    .shouhdz_hk>:first-child{
+        border: 1px solid #F5F5F5;
+        box-shadow: 5px 5px 5px 0px #F5F5F5;
+        border-radius: 0.1rem;
+    }
+    .shouh_zk{
+        width: 84%;
+        margin-left: 8%;
+        border-bottom: 1px solid #F5F5F5;
+        // padding-left: 15%;
+        background-color: white;
+        padding: 0.2rem 0 0.2rem 15%;
+        position: relative;
+    z-index: 200;
+    }
+    .shouhdz_hk{
+        background-color: white;
+        height: auto;
+    }
+    .shouh_dange_beijin .shang .mz p{
+        color: #818181;
+        line-height: 0.4rem;
+    }
+    .shouh_dange_beijin .shang .mz em{
+        font-size: 0.24rem;
+        color: #818181;
+    }
+    .def{
+        color: #818181;
+        line-height: 0.4rem;
+        font-size: 0.24rem;
+    }
+    input[type="radio"]{
+        display: block;
+        float: left;
+        margin-top: 0.1rem;
+    }
 
 }
