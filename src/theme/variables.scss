@@ -129,7 +129,7 @@ $colors: (
 .shopnomore{
     position: absolute;
     left: 50%;
-    margin-left: -12.5%;
+    margin-left: -16.5%;
     img{
       margin-bottom: 0.05rem;
     }
@@ -156,6 +156,11 @@ $colors: (
 .closearea{
   width: 0.3rem !important;
   height: 0.34rem !important;  
+}
+
+.select-ios .select-icon .select-icon-inner{
+  color: white !important;
+  margin-top: -3px !important;
 }
 
 @import "index";

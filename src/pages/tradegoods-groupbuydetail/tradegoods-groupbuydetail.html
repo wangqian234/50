@@ -11,7 +11,7 @@
         <div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
         <div class="zhongjain_daoh">
           <ul>
-            <li><a class="px24 zyyge">我的团购订单</a></li>  
+            <li><a class="px24 zyyge">团购订单详情</a></li>  
           </ul>
         </div>
       </div> 
@@ -22,28 +22,30 @@
 	<div style="background-color:white;margin-top:10px" class="dd_xiangq_sp_k">
 		<dl>
 			<dd>
-				<a href="#">
 					<h1><img src="{{list.img}}"></h1>
 					<div class="wenz">
 						<p>{{list.title}}</p>
 						<span>{{list.size_name}}</span>
+					<p style="position: absolute;bottom: 0;color:#FF730F">¥{{list.price}}</p>
 					</div>
-				</a>
-				<div class="ddxq_jiaq">
-					<p>¥{{list.price}}</p>
-				</div>
+				
 			</dd>
 		</dl>
 	</div>
 
   <div style="background-color:white;margin-top:10px" class="zuizong_jies">
-		<p><em>几人团</em><span>{{list.num}}</span></p>
-		<p><em>已下单人数</em><span>{{list.tradenum}}</span></p>
-		<p><em>团购价格</em><span>{{list.price}}</span></p> 
+		<p><em>团购时间：</em><span>{{list.date}}</span></p>
+		<p><em>团购人数：</em><span>【<em>{{list.tradenum}}</em>/{{list.num}}人团】</span></p>
+		<p><em>团购状态：</em><span><em>{{list.statename}}</em></span></p> 
+		<p><em>未付款人数：</em><span><em>{{list.buynum}}</em>人未付款</span></p> 
+	</div>
+
+	<div style="background-color:white;margin-top:10px" class="zuizong_jies">
+		<p><em>团购价格：</em><span><em>￥{{list.price}}</em></span></p>
 	</div>
 
   <div *ngIf="list.state==0 || list.state==1" class="xiangq_liang_ann">
-		<a href="#" class="sc">申请退款</a>
+		<a href="#" class="sc" style="width:100%;height:0.9rem;font-size: 0.3rem;background-color:#FF730F ">申请退款</a>
 	</div>
 </div>
 
