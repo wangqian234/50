@@ -19,7 +19,7 @@
     <!--收货信息-->
 		<div class="jie_diz">
 				<a (click)="changeAdd()" >
-					<p>收货人:{{addlist.address_name}} &nbsp; {{addlist.address_mobile}}</p>
+					<p>收货人:{{addlist.address_name}} <em > {{addlist.address_mobile}}</em></p>
 					<p class="p">地址：{{addlist.Address}}<i></i></p>
 				</a>
 		</div>
@@ -39,22 +39,25 @@
  					<div class="youjfy">
 						<div class="goum_sl">
 							<p class="px26 jiaq">￥{{item.preprice}}</p>
-									<div class="gei_shangj_ly">
-			<h1>给商家留言：</h1>
-			<input type="text" [(ngModel)]="item.trade_Memo" name="trade_Memo" placeholder="请您留言">
-		</div>
-<!--数量-->
-<div class="goum_sl">
-	<div class="counter_box">
+									
+						<!--数量-->
+								<div class="goum_sl">
+									<div class="counter_box">
 		
-		<i class="wdh" >已选数量：{{item.buynum}}</i>
+										<i class="wdh" >已选数量：{{item.buynum}}</i>
 		
-	</div>
-</div>
+									</div>
+								</div>
 						</div>
  					</div> 
  				</div>
  			</div> 
+		<div class="gei_shangj_ly">
+			
+			<p>给商家留言：
+			<input type="text" [(ngModel)]="item.trade_Memo" name="trade_Memo" placeholder="请您留言">
+			</p>
+		</div>
  		</li>
  	</ul>
 </div>

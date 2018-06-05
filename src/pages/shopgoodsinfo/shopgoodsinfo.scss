@@ -4,10 +4,18 @@ ion-slides{
      margin-top: 10px;
      background-color: white;
 }
+
+.goum_sl {
+    background-color: white;
+    padding-top: 0rem;
+}
 .xiangq_shangp_m .px24{
     height: initial;
     margin-bottom: 0.2rem;
+    font-size: 0.3rem;
+     color: #222;
 }
+
 .xiangq_shangp_m .xq_jiaq span{
     text-decoration:line-through
 }
@@ -152,13 +160,25 @@ ion-slides{
     line-height: 0.5rem;
 }
 
-.jiss_df p a.d{
-    border: solid 2px #FF971C;
-    color: #666666;
+// li.d{
+//     border: solid 2px #FF971C !important;
+//     color: #666666;
+    
+// }
+ #swdh ul li {
+    float: left;
+    padding: 0.15rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    
 }
-
+// h1 {
+//     font-size: 0.28rem;
+//     font-weight: normal;
+//     font-family: Microsoft YaHei;
+// }
 .jiss_df{
-    margin: 10px 0;
+    margin: 3px 0;
     background-color: white;
     padding: 20px 0;
     width: 100%;
@@ -171,7 +191,23 @@ ion-slides{
 .goum_sl{
     background-color: white;
 }
-
+.goum_sl .counter_box {
+    overflow: hidden;
+    text-align: center;
+    float: right;
+    margin-left: 0.3rem;
+}
+.goum_sl .counter_box input {
+    width: 1rem;
+    height: 0.45rem;
+    border: solid 1px #f5f5f5;
+    border-left: none;
+    border-right: none;
+    float: left;
+    text-align: center;
+    color: #ff971c;
+    font-size: 0.26rem;
+}
 .xiangq_shangp_m .xq_jiaq p {
   float: left;
   color: #FF730F;
