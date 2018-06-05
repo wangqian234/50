@@ -66,7 +66,7 @@
 		 					<a (click)="receiveEvent(item.trade_id)" class="color_1">确认收货</a>
 	 					</p>
 	 					<p *ngIf="item.trade_state==4">
-		 					<a (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id,item.goods_list[0].goods_id)">去评价</a>
+		 					<a (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id,item.goods_list[0].goods_id,item)">去评价</a>
 		 					<a (click)="buyagainEvent(item.goods_list[0].goods_id)" class="color_1">再次购买</a>
 	 					</p>
 

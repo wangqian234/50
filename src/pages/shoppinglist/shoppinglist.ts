@@ -109,8 +109,8 @@ export class ShoppinglistPage {
       $(".ios .tabs .tabbar").css("display","none");
   }
   //商品添加评价
-  evaluationEvent(trade_id,tradegoods_id,wu){
-    this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
+  evaluationEvent(trade_id,tradegoods_id,wu,item){
+    this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id,item:item});
   }
   //再次购买
   buyagainEvent(goods_id){

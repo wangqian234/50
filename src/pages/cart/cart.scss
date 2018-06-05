@@ -32,7 +32,8 @@ page-cart{
     }
     .goum_sl .counter_box{
         float: right;
-        margin-right: 0.3rem;
+        margin-right: 0rem;
+        margin-left: 0;
     }
     .goum_sl .counter_box i{
         height: 0.25rem;
@@ -49,12 +50,15 @@ page-cart{
     }
     .gouwuc_kk .diannao_shanp .you .bt{
         padding-right: 0.2rem;
+        width: 75%;
+        float: left;
+
     }
     .gouwuc_kk{
         margin-top: 10px;
     }
     .gouwuc_kk .diannao_shanp{
-        padding: 0.2rem 0 0 0;
+        padding: 0.2rem 0 0.2rem 0;
     }
     .logo_k_fanh{
         width: auto;
@@ -66,5 +70,50 @@ page-cart{
     .jiu_feo{
         width: 100%;
     }
+    .gouwuc_kk .diannao_shanp h1 img{
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+    .goum_sl{
+        float: left;
+        padding: 0;
+        border-bottom: none;
+    }
+    .you img{
+       float: right; 
+       margin-right: 0.2rem;
+       height: 0.31rem;
+       margin-top: 0.05rem;
+    }
+    .gouwuc_kk .diannao_shanp .you .xh{
+        color: #666666;
+        background-color: #F5F5F5;
+        margin-top: 0.1rem;
+        margin-bottom: 0.2rem;
+        height: 0.4rem;
+        width: 95%;
+        line-height: 0.4rem;
+    }
+    .gouwuc_kk .diannao_shanp .you .cxh{
+        color: #666666;
+        margin-top: 0.1rem;
+        margin-bottom: 0.2rem;
+        height: 0.4rem;
+        width: 95%;
+        line-height: 0.4rem;
+    }
+    .sizetra{
+        margin-top: -0.45rem !important;
+        margin-right: 0.35rem !important;
+        height: 0.13rem !important;
+    }
+    // .heji{
+    //     float: right;
+    //     margin-right: 0.2rem;
+    //     margin-top: 0.22rem;
+    //     line-height: 0.4rem;
+    //     font-size: 0.22rem;
+    //     color: #666666;
+    // }
 
 }

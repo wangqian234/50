@@ -1,8 +1,97 @@
 page-goodsoderdetail {
 .dd_xiangq_sp_k dl dd{
-    padding:0
+    padding:0;
+    position: relative;
+}
+.dd_xiangq_sp_k dl dd a{
+    width: 100%
 }
 .dd_xiangq_sp_k dl dd .wenz p{
     height:inherit;
+    color: #333333;
 }
+.dd_xiangq_sp_k dl dd h1{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.dd_xiangq_sp_k dl dd h1 img{
+    width: 100%;
+    height: 100%;
+}
+.dd_xiangq_sp_k dl dd .wenz span{
+    line-height: 0.5rem;
+    color: #666666;
+}
+.price{
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #333333;
+    margin-bottom: 0.15rem;
+    line-height: 0.35rem;
+    
+}
+.min_xi{
+    border: none;
+    background-color: white;
+    margin-top: 10px;
+}
+.dd_xiangq_sp_k{
+    background-color: white;
+}
+.zuizong_jies{
+    background-color: white;
+    margin-top: 10px;
+}
+.min_xi em{
+    color: #333333;
+}
+.dingdan{
+    float: left;
+    line-height: 0.55rem;
+}
+.dingdanp{
+    text-align: right;
+    color: #999999 !important;
+}
+.zuizong_jies p span{
+    color: #999999;
+}
+.zuizong_jies p{
+    line-height: 0.35rem;
+}
+.zuizong_jies{
+    em{
+        color: #333333;
+    }
+}
+.min_xi p{
+    line-height: 0.55rem;
+    color: #333333;
+}
+
+}
+
+.tel{
+    float: left;
+    color: #333333;
+    font-size: 0.22rem;
+    margin-left: 0.5rem;
+}
+.mob{
+    color: #333333;
+    float: right;
+    margin-right: 0.5rem;
+}
+.addre{
+    color: #333333;
+    margin-left: 0.5rem;
+    line-height: 0.5rem;
+    margin-right: 0.5rem;
+}
+.dingwei{
+    position: absolute;
+    margin-top: 0.68rem;
+    margin-left: 0.18rem;
 }
