@@ -12,8 +12,8 @@ ion-slides{
 .xiangq_shangp_m .px24{
     height: initial;
     margin-bottom: 0.2rem;
-    font-size: 0.3rem;
-     color: #222;
+    font-size: 0.22rem;
+     color: #333333;
 }
 
 .xiangq_shangp_m .xq_jiaq span{
@@ -180,7 +180,7 @@ ion-slides{
 .jiss_df{
     margin: 3px 0;
     background-color: white;
-    padding: 20px 0;
+    padding: 10px 0;
     width: 100%;
 }
 
@@ -216,6 +216,32 @@ ion-slides{
 .xiangq_shangp_m .xq_jiaq span{
         margin-top: 0.03rem;
 }
-
+.banb{
+    padding: 0.2rem;
+    margin: 4px 0;
+    background-color: white;
+    height: 0.63rem;
+}
+    .goum_sl .counter_box{
+        float: right;
+        margin-right: 0rem;
+        margin-left: 0;
+            margin-top: -0.1rem;
+    }
+    .goum_sl .counter_box i{
+        height: 0.25rem;
+        line-height: 0.25rem;
+        margin-top: 0.1rem;
+        background-color: #DCDCDD;
+    }
+    .goum_sl .counter_box input{
+        border:none;
+        color: #FF730F;
+    }
+        .goum_sl{
+        float: right;
+        padding: 0;
+        border-bottom: none;
+    }
 
 }

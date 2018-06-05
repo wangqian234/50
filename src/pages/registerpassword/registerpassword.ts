@@ -121,6 +121,11 @@ export class RegisterpasswordPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
+
+    backTo(){
+    this.navCtrl.pop();
+  }
+
 }
 
 
