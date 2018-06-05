@@ -25,95 +25,120 @@
 
 <!--商品名称-->
 <div class="xiangq_shangp_m">
-	<a [navPush]='ShopbuyPage'>
-	<p class="px24">{{goodMlist.title}}</p>
-	<div class="xq_jiaq"><p>￥{{guiGe.preprice}}</p>
-	<span>原价:¥{{goodMlist.price}}</span></div>
+	<a href="javascript:;">
+	<p class="px30" style="font-size:0.28rem ;color:#222">
+		<span style="font-size:0.28rem ;color:#ff971c">
+		【{{goodMlist.groupnum}}人团】</span>{{goodMlist.title}}</p>
+	
+	<div class="xq_jiaq"><p>￥{{jiage}}</p>
+	<span>原价:¥{{prejiage}}</span></div>
 	</a>
 </div>
 <!--规格-->
 <div class="banb" id="banb">
-				<ul>
-					<li class="no" *ngFor="let item of dataSlist" (click)="changeId(item.id)">
-						<button>{{item.name}}</button>
-					</li>
+				<ul>					
+					<p><em class="guige" style="font-size:0.24rem">商品规格：</em>
+					<li *ngFor="let sitem of dataSlist;let i = index" (click)="changeId(sitem.id)" (click)="ifontime(i)"> {{sitem.name}}</li>
+					</p>
 				</ul>
 </div>
+
 <!--数量-->
 			<div class="goum_sl">
-				<p class="px22">数量<em>限购20件</em></p>
+				<p class="px24 jiaq">购买数量：</p>
 				<div class="counter_box">
-					<i class="jian" (tap)="decCount()">-</i>
+					<i class="jian" (tap)="decCount()" style="font-size:0.35rem">-</i>
 					<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
-					<i class="jia" (tap)="incCount()">+</i>
+					<i class="jia" style="font-size:0.3rem" (tap)="incCount()">+</i>
 				</div>
 			</div>
 <!--配送-->
 			<div class="goum_sl">
-				<p class="px22">配送至：{{goodMlist.uaddName}}<em>支持配送</em></p>
+				<p class="px24">配 送 至：<em>&nbsp;&nbsp;{{goodMlist.uaddName}}（支持配送）</em></p>
 			</div>
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">
-		<h1><img src="goodMlist.shopimg"></h1>
+		<h1><img src="assets/imgs/shopping.png"></h1>
 		<div class="dianp_pf">
-			<p class="px24">{{goodMlist.shop_name}}</p>
-			<p class="px22">近期成交：{{goodMlist.shop_salenum}}</p>
+			<p class="px24" style="font-size:0.22rem;color:#333333">{{goodMlist.shop_name}}</p>
+			<p class="px22" style="font-size:0.18rem;color:#666666">近期成交：{{goodMlist.shop_salenum}}</p>
 		</div>
 	</div>
 	<div class="guangguang">
-		<a class="a1" (click)="enterShop(wid,sid)"><h1><img src="assets/imgs/dainp01.png"><div>进店逛逛</div></h1></a>
+		<a class="a1" (click)="enterShop(wid,sid)"><h1><img src="assets/imgs/shopping2x.png"><div>进店逛逛</div></h1></a>
 
 	</div>
-	
 </div>
 
 <!--图文&评价-->
 
-<div class="jiss_df">
-	<h1>
-		<p><a class="d" href="javascript:;">图文详情</a></p>
-		<p><a  href="javascript:;">产品评价</a></p>
+<div class="jiss_df" id="swdh">
+	<h1><ul>
+		<li  class="d" (click)="switch(0)">图文详情</li>
+		<li (click)="switch(1)">产品评价</li>
+		</ul>
 	</h1>
 </div>
 <!--图文-->
 <div class="tuwen" id="tuwen">
-	{{goodMlist.detail}}
+	<!--{{goodMlist.detail}}-->
 </div>
 
 <!--评价-->
-
-<!--推荐商品-->
-<!--<div class="rem_shangp_bt_b">
-	<div class="waik">
-		<em></em>
-		<div class="mingz"><p class="px26">为您推荐</p></div>
-		<em></em>
-	</div>
-</div>
-
-<div id="yemnr">
-<ul class="shangp_lieb_k">
-		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
-			<a href="javascript:;">
-				<div class="lieb_img"><img src={{item.img}}></div>
-				<div class="lieb_txt">
-					<p class="biao">{{item.title | cutPipe}}</p>
-					<p class="bend">已售数量：{{item.soldnum}}</p>
-					<p class="px26">¥ {{item.pricemin}}</p>
+<div class="pengl_k" id="pinglun">
+	<ul>
+		<li>
+			<div class="pj_k"><h1>评价列表： </h1>
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<div class="pjtp_img">
+					<p><img src="assets/imgs/21465.jpg"></p>
+				</div>
+				<p class="px22">123收到后用了几天才来评价，机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。五分</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+		<li>
+			<div class="pj_k"> 
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<p class="px22">222收到后用了几天才来评价，联想的机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+		<li>
+			<div class="pj_k"> 
+				<div class="toux_k"><h1><img src="assets/imgs/6565.jpg"></h1>
+					<span>Aa***hg</span>
+					<div class="sd"><p></p><p></p><p></p><p></p></div>
+				</div>
+				<div class="pjtp_img">
+					<p><img src="assets/imgs/21465.jpg"></p>
+					<p><img src="assets/imgs/21465.jpg"></p>
 					
 				</div>
-			</a>
-		</li>	
+				<p class="px22">收到后用了几天才来评价，联想的机子确实不错，秒开机，没噪音，外观也漂亮，完美的一次购物。五分</p>
+				<p class="guig px22">规格：玫瑰金 I5/8G 256G固态</p>
+			</div>
+		</li>
+
 	</ul>
-</div>-->
-
-<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.23rem;color:#FF971C">&nbsp;&nbsp;为您推荐&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
-<br />
-
+</div>
+<!--推荐商品-->
+<div class="shopnomore"><img src="assets/imgs/leftbar.png">
+	<span style="font-size:0.23rem;color:#FF971C">&nbsp;&nbsp;为您推荐&nbsp;&nbsp;</span>
+		<img src="assets/imgs/rightbar.png">
+</div>
 <div id="yemnr">
-<!--头部--> 
 <!--商品列表--> 
+
+
+<br />
 <ul class="shangp_lieb_k" style="padding:10px;">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">
@@ -121,12 +146,17 @@
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
 					<p class="bend">已售数量：{{item.soldnum}}</p>
-					<p class="px26">¥ {{item.preprice}}</p>
+					<p class="px26">¥ {{item.preprice}}<span>   ¥ {{item.price}}</span></p>
 					
 				</div>
 			</a>
 		</li>	
 	</ul>
+</div>
+<div class="shopnomore">
+	<img src="assets/imgs/leftbar.png">
+	<span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span>
+	<img src="assets/imgs/rightbar.png">
 </div>
 
 <!--底部导航-->
