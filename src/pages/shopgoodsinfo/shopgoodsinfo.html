@@ -42,9 +42,9 @@
 		</p>
 	<form class="choose">
           <!--<img src="assets/imgs/jiantou.png" class="chooseimg">-->
-          <select name="mar" style="-webkit-appearance:none;padding: 0 2%;;width:auto;float:right;font-size: 0.24rem;line-height: 0.28rem;">
-          <option selected="selected">请选择商品规格</option>
-          <option *ngFor="let sitem of dataSlist" value="sitem.id">{{sitem.name}}</option>
+          <select id="guige" name="mar" [(ngModel)]="guigeId" (ngModelChange)="changeId()" style="-webkit-appearance:none;padding: 0 2%;;width:auto;float:right;font-size: 0.24rem;line-height: 0.28rem;" >
+          <option value="pre1" selected="selected">请选择商品规格</option>
+          <option *ngFor="let sitem of dataSlist" value={{sitem.id}}>{{sitem.name}}</option>
           </select>
     </form>
 	</ul>
