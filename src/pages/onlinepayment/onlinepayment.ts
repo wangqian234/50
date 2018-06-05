@@ -157,11 +157,12 @@ export class OnlinepaymentPage {
   }
   appearSome(){
     $(".user_titlediv").click(function(){
-      console.log($(this).next('div'))
       if($(this).next('div').css("display") == "none"){
+        $(this).find("img").css("transform","rotate(0deg)");
         $(this).next('div').css("display","block");
       } else {
         $(this).next('div').css("display","none");
+        $(this).find("img").css("transform","rotate(270deg)")
       }
     })
   }
