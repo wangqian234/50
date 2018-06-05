@@ -17,6 +17,8 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
 import { ShopinfoPage } from '../shopinfo/shopinfo';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//购物车
+import { CartPage } from '../cart/cart';
 
 /**
  * Generated class for the GroupdetailPage page.
@@ -35,6 +37,7 @@ export class GroupdetailPage {
   public ShopbuyPage=ShopbuyPage;
   public ShopinfoPage=ShopinfoPage;
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
+  public CartPage = CartPage;
  //定义需要隐藏的标志变量
     public showpingj =false;
     public guiGe={

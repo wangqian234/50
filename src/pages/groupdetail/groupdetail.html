@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content style="background-color:#f5f5f5">
 
  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
@@ -9,6 +9,7 @@
 					<li><a href="javascript:;" class="px24 zyyge">商品详情</a></li>  
 				</ul>
 			</div>
+			<div class="chacha" [navPush]="CartPage"><img class="fanh_ann" src="assets/imgs/gouwuche.png"></div>
 		</div> 
 	</div>
 </div>
@@ -26,12 +27,12 @@
 <!--商品名称-->
 <div class="xiangq_shangp_m">
 	<a href="javascript:;">
-	<p class="px30" style="font-size:0.28rem ;color:#222">
-		<span style="font-size:0.28rem ;color:#ff971c">
+	<p class="px30" style="font-size:0.28rem ;color:#222;margin-bottom:0.3rem;">
+		<span style="font-size:0.28rem ;color:#ff971c;">
 		【{{goodMlist.groupnum}}人团】</span>{{goodMlist.title}}</p>
 	
 	<div class="xq_jiaq"><p>￥{{jiage}}</p>
-	<span>原价:¥{{prejiage}}</span></div>
+	<span>¥{{prejiage}}</span></div>
 	</a>
 </div>
 <!--规格-->
@@ -47,19 +48,29 @@
 	</ul>
 </div>
 
-<!--数量-->
-			<div class="goum_sl">
-				<p class="px24 jiaq">购买数量：</p>
-				<div class="counter_box">
-					<i class="jian" (tap)="decCount()" style="font-size:0.35rem">-</i>
-					<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
-					<i class="jia" style="font-size:0.3rem" (tap)="incCount()">+</i>
-				</div>
+
+<div class="banb">
+	<ul>					
+		<p style="float:left"><em class="guige" style="font-size:0.24rem">购买数量：</em></p>
+		<div class="goum_sl">
+			<div class="counter_box">
+				<!--数量-->
+				<i class="jian" (tap)="decCount(item)">-</i>
+				<input type="text" readonly="readonly" [(ngModel)]="buylist.goodsNum" name="num" id="num">
+				<i class="jia" (tap)="incCount(item)">+</i>
 			</div>
+		</div>
+	</ul>
+</div>
+
 <!--配送-->
-			<div class="goum_sl">
-				<p class="px24">配 送 至：<em>&nbsp;&nbsp;{{goodMlist.uaddName}}（支持配送）</em></p>
-			</div>
+<div class="banb">
+	<ul>					
+		<p style="float:left"><em class="guige" style="font-size:0.24rem">配&nbsp;送&nbsp;至：</em></p>
+		<p style="float:right"><em class="guige" style="font-size:0.24rem">{{goodMlist.uaddName}}（支持配送）</em></p>
+	</ul>
+</div>
+
 <!--店铺-->
 <div class="xiangq_dp_k">
 	<div class="dianpulogo">
@@ -87,6 +98,7 @@
 <!--图文-->
 <div class="tuwen" id="tuwen">
 	<!--{{goodMlist.detail}}-->
+	<div style="clear:both"></div>
 </div>
 
 <!--评价-->
