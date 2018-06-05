@@ -47,6 +47,7 @@ export class GoodsoderdetailPage {
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   this.getRem();
   this.getdetaillist();
+  this.getDetail();
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -56,7 +57,7 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });
-loading.present();
+  loading.present();
     var j=3;
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
      //alert("王慧敏"+api);
@@ -84,9 +85,31 @@ loading.present();
      }
      })
   }
+
+  //获取商品退款详情
+ getDetail(){
+     var j=3;
+     var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.tradegoodsid+'&token='+this.token;
+     console.log("王慧敏"+api);
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errcode === 0 && data.errmsg === 'OK'){
+         this.list=data.model ;
+         console.log(JSON.stringify(data))
+     } else if(data.errcode === 40002){
+              j--;
+              if(j>0){
+                this.config.doDefLogin();
+                this.getDetail();
+          }
+      } else if(data.errcode === -1) {
+        alert("未申请退款")
+
+     }
+     })
+  }
      //添加商品退款申请
-   addrefundEvent(tradegoods_id){
-     this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id});
+   addrefundEvent(tradegoods_id,pretotalprice){
+     this.navCtrl.push(TradegoodsReapPage,{tradegoodsId:tradegoods_id,pretotalprice:pretotalprice});
    }
 
   ionViewDidLoad() {

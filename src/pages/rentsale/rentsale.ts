@@ -215,14 +215,14 @@ export class RentsalePage {
     }
   }
 
-  //跳转到租售详情页面
+  //跳转到详情
   goRentsaleInfo(id,type){
-     this.navCtrl.push(RentsaleinfoPage,{
-        rental_id:id,
-        type:type
-    });
+    this.navCtrl.push(RentsaleinfoPage,{
+      houseId:id,
+      houseType:type,
+      quFen:1,
+    })
   }
-
   doLoadMore(infiniteScrolle){
     this.getHouseInfo(infiniteScrolle);
   }

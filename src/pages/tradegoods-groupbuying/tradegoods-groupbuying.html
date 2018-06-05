@@ -94,6 +94,7 @@
 	 		<li *ngFor="let item of list">
 	 			<div class="dingd_hao"><p>{{item.trade_time}}</p><p class="ensurestate">{{item.statename}}</p></div>
 				 <ul  class="goodsul">
+
 					 <li *ngFor ="let goodsList of item.goods_list">
 	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:goodsList['tradegoods_id']}"> 
 	 				<h1><img src="{{goodsList.img}}"></h1>

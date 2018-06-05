@@ -80,6 +80,7 @@ export class ShoppinglistPage {
     act:'emall',
     createip:'',
   }
+  public cip;
   //商城
   public tabTest={
     li00:"type current",
@@ -130,21 +131,40 @@ export class ShoppinglistPage {
    }
    //商品确认付款
    obligationEvent(trade_id){
-       let loading = this.loadingCtrl.create({
+     this.obligationEventList.tId = trade_id;
+     this.clickme();
+   }
+   payMent(){
+     let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
       });
       loading.present();
-      this.obligationEventList.tId = trade_id;
       this.obligationEventList.token = this.storage.get('token')
-      this.obligationEventList.createip ='';
+      this.obligationEventList.createip =this.cip;
       var api = this.aa + '/api/weixinpay/unifiedorder'
       this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
-        loading.dismiss();
+         loading.dismiss();
         if(data.errcode === 0 ){
+          console.log(data)
           this.outTradeNo = data.errmsg
+        }else{
+          console.log(data)
         }
       })
    }
+           clickme(){
+          var that = this;
+          $.ajax({
+              url: 'http://freegeoip.net/json/',
+              success: function(data){
+                alert(data.ip)
+                that.cip = data.ip;
+                that.payMent();
+              },
+              type: 'get',
+              dataType: 'JSON'
+          });
+      }
    //微信查询接口
    checkPayment(){
      var api = this.aa + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
@@ -240,7 +260,6 @@ export class ShoppinglistPage {
 	    showBackdrop: true,
     });
     loading.present();
-    var j=3;
     switch(this.SD_id){
       case 0:
       this.tabTest={
