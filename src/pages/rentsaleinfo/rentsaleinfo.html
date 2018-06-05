@@ -6,7 +6,7 @@
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">详细信息</a></li>  
+					<li><a class="px24 zyyge">房源详情</a></li>  
 				</ul>
 			</div>
 		</div>
@@ -16,11 +16,12 @@
   <div class="content">
           <div class="imgdiv"><img src="assets/imgs/house.jpg" /></div>
 <div class="title">
-          <p class="biao">【小区名称】 &nbsp;这可能是一个长长长的标题</p>
-					<p class="bend" style="float:left">3室1厅&nbsp;&nbsp;100㎡</p>
-					<p class="px26" style="float:right">¥ 0~100万<span> </span></p>
+          <p class="biao">【小区名称】 &nbsp;&nbsp;&nbsp;&nbsp;这可能是一个长长长的标题可能是一个长长长的标题</p>
+					<!--<p class="bend" style="float:left">3室1厅&nbsp;&nbsp;100㎡</p>
+					<p class="px26" style="float:right">¥ 0~100万<span> </span></p>-->
 					<div style="clear:both"></div>
-					<p class="bend">这是一个地区的地址啊啊啊啊啊啊啊</p>
+					<div style="height:0.5rem;padding:0.1rem;margin-top: 0.2rem">
+					<span class="bend">时间：2018-5-30</span>	<span class="price">3000万</span></div>
 </div>
 
           <!--<p class="biao">【{{rentsaleinfo.district}}】 &nbsp;{{rentsaleinfo.title}}</p>
@@ -30,7 +31,18 @@
 					<p class="bend">{{rentsaleinfo.area}}</p>-->
   </div>
   <div class="detail">
-      <p>商品详情</p>
-      <div class="hrdiv"></div>
+      
+      <div class="roomType"><span class="title">户型</span><br/><span  class="content">3室2厅1卫</span></div>
+			 <div class="roomSize"><span class="title">面积</span><br/><span  class="content">500&nbsp;&nbsp;㎡</span></div>
   </div>
+	  <div class="detail_info">
+      <div ><img src="assets/imgs/position.png"/><span class="content">这里是具体位置的描述，路口之类</span></div>
+  </div>
+		<div class="room_info">
+      <div class="title"><span >房屋详情</span></div>
+			 <div class="content"><span >以下是关于房屋的详细介绍，拟定分别部分、详细位置部分等，具体按后台数据进行分区，若存在分区状况，用卡片分隔开即可。</span></div>
+  </div>
+			<div class="tel_info">
+      <span>15771788888 (李小姐)</span><img src="assets/imgs/tel.png"/>
+			</div>
 </ion-content>

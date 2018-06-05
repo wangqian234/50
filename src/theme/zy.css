@@ -512,7 +512,7 @@ display: inline-block;
 .jiss_df h1{display: inline-block;}
 .jiss_df ul{float: left; margin: 0 0.2rem;}
 .jiss_df ul li{padding: 0.2rem 0.3rem; display: inline-block; border-radius:0.06rem; border:solid 1px #e2e2e2; font-size: 0.22rem;color: #6d6d6d;}
-.jiss_df ul li.d{ border:solid 1.2px #e10601;  color: #e10601;}
+.jiss_df ul li.d{ border:solid 1.2px #FF971C;}
 
 .shangpneir{margin: 0.2rem;}
 .shangpneir img{width: 100%;}

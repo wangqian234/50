@@ -6,13 +6,13 @@ page-repairadd {
         height: 8rem;
     }
     .repairType{
-        margin-top: 0.11rem;
+        margin-top: 0.15rem;
         float: left;
-        font-size: 0.28rem;
+        font-size: 0.25rem;
         width:25%;
     }
     .repair{
-        font-size: 0.28rem;
+        font-size: 0.25rem;
         width:25%;
     }
     .choose{
@@ -38,11 +38,11 @@ page-repairadd {
     }
     textarea{
         width: 100%;
-        height: 100px;
+        height: 150px;
         border: 1px solid #bbbbbb;
         margin-top: 10px;
         border-radius: 1px;
-        font-size: 0.26rem;
+        font-size: 0.25rem;
         padding: 10px;
     }
 
@@ -69,5 +69,14 @@ page-repairadd {
     .button-inner{
         font-size: 0.3rem;
     }
+    .select-item{
+        background-color:#2979FF;
+        color:#F5F5F5;
+        // margin-top: 0.11rem;
+    }
+    .select-goal{
+        max-width:80%;
+    }
+
 }
 

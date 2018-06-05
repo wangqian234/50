@@ -2,9 +2,9 @@ page-repairlist {
     .searchdiv{ 
         height:50px;
         padding:8px 0 0 0;
-        background:#448aff;
-        border-top:1px solid #3e3e3e;
-        border-bottom:1px solid #3e3e3e;
+        background:#fff;
+        // border-top:1px solid #3e3e3e;
+         border-bottom:1px solid #f5f5f5;
         text-align:center;
         position: sticky;
         top: 0.78rem;
@@ -37,13 +37,14 @@ page-repairlist {
         height: 30px;
         width:100%;
         background-color: #fff;
+        color: #aaaaaa;
     }
 
     .searchTextInit{
         height:32px;
         line-height:30px;
         border-radius:0;
-        border-left:1px solid #448aff;
+        border-left:2px solid #f5f5f5;
         padding:0 8px;
         font-size:12px;
         color:#333;
@@ -114,6 +115,25 @@ page-repairlist {
         margin: 0.2rem 0 0.2rem 0.3rem;
         line-height: 0.5rem; 
     }
+    .searchicon{
+    font-size: 0.45rem;
+    position: absolute;
+    right: 0.2rem;
+    margin-top: 0.05rem;
+    }
+    .right{
+        position: absolute;
+        top: 0.5rem;
+        right: 0rem;
+        width: 190px;
+    }
+    .list-ios{
+        margin-top: 10px;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: none;
+    }
+
 }
     .nomore{
         font-size: 0.2rem;

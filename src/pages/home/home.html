@@ -126,7 +126,7 @@
 		<div class="zixun_title">
 			<img src="assets/imgs/propertyPage/zixun.png">
 			<span class="p_title">最新资讯</span>
-			<div class="zixun_more" (click)="clickme()">
+			<div class="zixun_more" (click)="getNewsList('zx')">
 				<img src="assets/imgs/propertyPage/more.png">
 				<span class="p_more">查看更多</span>
 
@@ -135,7 +135,7 @@
 	</div>
 	<div class="zixun_content" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
-			<img src="{{config.apiUrl}}{{newList.imgurl}}">
+			<img src="{{config.img}}{{newList.imgurl}}">
 			<span class="content contenttitle">{{newList.topic}}</span>
 			<span class="content">{{newList.adddate | pipeTime}}</span>
 		</div>
@@ -158,7 +158,7 @@
 		<div class="zixun_content" *ngFor="let publicget of publicget">
 		<div (click)="getNewInfo(publicget.id)" class="zixun_li">
 
-			<img src="{{config.apiUrl}}{{publicget.imgurl}}">
+			<img src="{{config.img}}{{publicget.imgurl}}">
 			<span class="content contenttitle">{{publicget.topic}}</span>
 			<span class="content">{{publicget.adddate | pipeTime}}</span>
 

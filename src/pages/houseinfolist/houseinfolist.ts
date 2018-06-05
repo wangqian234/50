@@ -23,6 +23,10 @@ import { LoginPage } from '../login/login';
   templateUrl: 'houseinfolist.html',
 })
 export class HouseinfolistPage {
+  public data = {
+    token:'',
+    roomId:''
+  }
   houseId = '';
   public houseList = [];
 
@@ -70,6 +74,29 @@ this.navCtrl.push(LoginPage);
         }
       } else {
         console.log(data.errmsg);
+      }
+    });
+  }
+    //设置默认房屋
+  setDefaultHouse(id){
+    var data ={
+      'token': this.storage.get('token'),
+      'roomId':id,
+    };
+    var j = 3;
+    var api = this.config.apiUrl + '/api/userroom/edit_Default?';
+    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      if (data.errcode === 0 && data.errmsg === 'OK') {
+        console.log("成功设置默认房屋"+JSON.stringify(data));
+        this.getHouseList();
+      } else if(data.errcode === 40002){
+          j--;
+          if(j>0){
+            this.config.doDefLogin();
+            this.setDefaultHouse(id);
+          }
+      } else {
+        console.log(data.errmsg)
       }
     });
   }

@@ -1,4 +1,4 @@
-<ion-content>
+<!--<ion-content>
     <div class="toub_beij toub_beij_zy"  style="background-color:rgba(1,1,1,0)">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -14,12 +14,11 @@
 </div>
 
 <div class="wrapper">
-    <!--背景图片-->
-    <div id="web_bg" style="background-color:#338fc2;"></div>
+    <div id="web_bg"><img src="assets/imgs/background.png"></div>
 </div>
 
 <div class="input_box">
-<div class="login_title">GYHSH</div>
+<img class="logo" src="assets/imgs/logo.png">
 <div class="content">
   <ion-item>
     <ion-label color="rgba(0,0,0,0)" floating>请输入用户名</ion-label>
@@ -40,14 +39,6 @@
   <span *ngIf="!isShowSend" class="getregister" style="color:gray">{{num}}秒后重新发送</span>
 </div>
 </div>
-  <!--<div *ngIf="!loginNum" class="login_box">
-    <ion-icon name="unlock-outline"></ion-icon>
-    <form class="search_form">
-      <input [(ngModel)]='regist' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" style="width:40%"/>
-      <button *ngIf="isShowSend" (click)="ownRegist()">获取验证码</button>
-      <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
-    </form>
-  </div>-->
 
   <div class="div_a_pass" *ngIf="loginNum" (click)="getLoginNum()">验证码登录</div>
   <div class="div_a_pass" *ngIf="!loginNum" (click)="getLoginNum()">密码登录</div>
@@ -61,19 +52,43 @@
     <div class="footer register" [navPush]="RegisterpasswordPage">没有账号？点击这里注册></div>
     <div class="footer">Copyright©2018深圳市汇生活科技技术有限公司</div>
   </div>
-</ion-content>
+</ion-content>-->
 
-<!--
+<ion-content>
+ <div class="toub_beij toub_beij_zy"  style="background-color:rgba(1,1,1,0)">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh" (click)="backTo()">
+        <a href="#"><img style="float:left" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24"></a></li>  
+				</ul>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="wrapper">
+    <div id="web_bg"><img src="assets/imgs/background.png"></div>
+</div>
+
+<div class="input_box">
+<img class="logo" src="assets/imgs/logo.png">
+</div>
+
+
+<div class="login_box">
   <ion-icon name="person-outline"></ion-icon>
   <form class="search_form">
     <input [(ngModel)]='userinfo.userName' name='userName' type="text"  placeholder="请输入手机号码" class="swap_value" />
   </form>
-</div>-->
+</div>
 
-<!--<div *ngIf="!loginNum" class="login_box">
+<div *ngIf="!loginNum" class="login_box">
   <ion-icon name="unlock-outline"></ion-icon>
   <form class="search_form">
-    <input [(ngModel)]='regist' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" style="width:40%"/>
+    <input [(ngModel)]='regist' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" style="width:60%"/>
     <button *ngIf="isShowSend" (click)="ownRegist()">获取验证码</button>
     <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
   </form>
@@ -84,18 +99,14 @@
     <input [(ngModel)]='userinfo.userPwd' name='userPwd' type="password" placeholder="请输入密码" class="swap_value" />
   </form>
 </div>
+<div class="div_a_build">
+  <div class="div_a_pass" *ngIf="!loginNum" (click)="getLoginNum()">密码登录</div> 
+  <div class="div_a_pass" *ngIf="loginNum" (click)="getLoginNum()">验证码登录</div>
+  <div class="div_a" [navPush]="RebuildpassPage">忘记密码？</div>
+</div>
 
   <button (click)="doLogin()" class="ensure_button" ion-button block>登&nbsp;录</button>
-  <div class="div_a_pass" *ngIf="!loginNum" (click)="getLoginNum()">密码登录</div> 
-  <div style="clear:both"></div>
-  <div class="div_a_pass" *ngIf="loginNum" (click)="getLoginNum()">验证码登录</div>
-  <div class="div_a" [navPush]="RegisterpasswordPage">没有账号？点击这里注册></div>-->
-  <!--<div class="div_a">
-    <div>
-      <a *ngIf="loginNum" (click)="getLoginNum()">验证码登录</a>
-      <a [navPush]="RegisterpasswordPage">注册</a>
-      <a *ngIf="!loginNum" (click)="getLoginNum()">密码登录</a> 
-    </div>
-    <div [navPush]="RebuildpassPage"><a>找回登录密码</a></div>
-  </div>-->
+  <button style="margin-top:0;" [navPush]="RegisterpasswordPage" class="ensure_button" ion-button block>注&nbsp;册</button>
+<div class="footer">—&nbsp;&nbsp;深圳市汇生活科技技术有限公司&nbsp;&nbsp;—</div>
+  </ion-content>
 
