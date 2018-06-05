@@ -1,5 +1,5 @@
 <!--王慧敏-->
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
  <div style="margin-bottom:10px;background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -11,23 +11,44 @@
 			</div>
 		</div> 
 	</div>
-</div>   
- <!--<ion-list class="login_list">        
-    <ion-item>
-      <ion-label>订单号:{{evaluateList.trade_Id}}</ion-label>
-    </ion-item>        
-	<ion-item>
-        <ion-label fixed>商品满意程度:</ion-label>
-        <ion-input type="text" placeholder="商品满意程度"  [(ngModel)]='shopgrade.goods_satisfactionlevel'></ion-input>
-    </ion-item>
-  </ion-list>-->
+</div>
+
+
+	<div class="gouwuc_kk gouwuc_kk_ddxq">
+    <ul class="offent">
+	 		<li>
+				 <ul class="goodsul">
+					 <li *ngFor = "let goodsList of item.goods_list">
+	 			<div class="diannao_shanp" [navPush]="GoodsoderdetailPage" [navParams]="{id:item['trade_id'],tradegoodsId:goodsList['tradegoods_id']}"> 
+	 				<h1><img src="{{goodsList.img}}"></h1>
+	 				<div class="you">
+	 					<a href="javascript:void(0)"><p class="px24 bt">{{goodsList.goods_title}}</p></a>
+	 					<p class="xh" style="float:left;margin:0.07rem 0;">{{goodsList.size_name}}</p>
+	 					<div class="youjfy" style="float: right;">
+							<div class="goum_sl"> 
+								<div class="counter_box">
+									<span style="color:#333333">x{{goodsList.goods_num}}</span>
+								</div>
+							</div>
+	 					</div>
+						 <div style="clear:both"></div>
+						<p class="xh" style="float:right;margin:0.07rem 0 0 0;color:#333333;font-size:0.24rem;">￥{{goodsList.preprice}}</p>
+	 				</div>
+	 			</div>
+					 </li>
+				 </ul>
+	 		</li>
+    </ul>
+	</div>
+
+
 <div class="gouwuc_kk gouwuc_kk_jies gouwuc_kk_pjsd">
  	<ul>
  		<li> 
  			<div class="diannao_shanp"> 
  				<div class="you" id="serlevel">
  					<p class="text_bt" style="float:left">商品满意程度:</p>
- 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;width: 80%;">
+ 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;">
 					<p data-score="1"></p>
 					<p data-score="2"></p>
 					<p data-score="3"></p>
@@ -37,7 +58,7 @@
  				</div>
 				<div class="you" id="serattitude">
  					<p class="text_bt" style="float:left">卖家服务态度:</p>
- 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;width: 80%;">
+ 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;">
 					<p data-score="1"></p>
 					<p data-score="2"></p>
 					<p data-score="3"></p>
@@ -47,7 +68,7 @@
  				</div>
 				<div class="you" id="serspeed">
  					<p class="text_bt" style="float:left">卖家发货速度:</p>
- 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;width: 80%;">
+ 					<div class="pj_xx" style="margin: 0.06rem 0.2rem 0.2rem 0.2rem;">
                     <p data-score="1"></p>
                     <p data-score="2"></p>
                     <p data-score="3"></p>
@@ -59,12 +80,14 @@
  		</li>
  	</ul>
 </div>
+<div class="textarea">
   <div class="pjnr_txt">
-	<textarea  placeholder="输入评价内容" [(ngModel)]="shopgrade.commentgroup"></textarea>
-	<span>最多可以填写500个字符</span>
+	<textarea  placeholder="收到商品了吧，商品符合您的要求吗？说说您的使用心得，分享给想买的他们吧" [(ngModel)]="shopgrade.commentgroup"></textarea>
+	<!--<span>最多可以填写500个字符</span>-->
   </div>
-  <div class="zuihann" (click)="addEvaluate()">
-	<div class="shouh_dange_beijin dk"><a href="#">确 认</a></div>
-  </div>
+</div>
+
+	<div class="shouh_dange_beijin dk" (click)="addEvaluate()"><a href="#">发布评价</a></div>
+  
     <!--<button ion-button block color="#488aff" style="width:40px;height:40px" (click)="addEvaluate()">提交</button>-->
 </ion-content>

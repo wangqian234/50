@@ -30,6 +30,7 @@ export class GoodsoderevaluatePage {
 
     public SD_id;//订单编号
     public tradegoods_id;//商品订单编号
+    public item;
     public evaluateList={
     trade_Id:'',
     commentGroup:'',
@@ -51,6 +52,8 @@ export class GoodsoderevaluatePage {
 ,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
+        this.item=navParams.get('item');//商品
+
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();

@@ -1,5 +1,5 @@
 <ion-content>
-<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
+<div class="toub_beij toub_beij_zy" style="background-color:#448AFF;z-index: 10000;">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -14,7 +14,7 @@
 </div>
 
 <!--内容-->
-	<div style="height:20px;width:100%;background-color:#448AFF;"></div>
+	<div style="height:20px;width:100%;background-color:#448AFF;position: absolute;"></div>
 <div class="shouhdz_hk">
 	<div class="shouh_zk" *ngFor="let list of houseList">
 		<div class="shouh_dange_beijin" (click)="getHouseInfo(list.id)" >

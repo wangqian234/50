@@ -1,5 +1,5 @@
 
-<ion-content >
+<ion-content style="background-color:#f5f5f5">
 
  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
@@ -14,33 +14,48 @@
 	</div>
 </div>
 
-	<ion-list class="login_list">        
-    <ion-item>
-      <ion-label>商品订单编号:{{reapList.tgId}}</ion-label>
-    </ion-item>        
-    <ion-item>
-        <ion-label fixed>退款模式:</ion-label>
-        <ion-select  type="text" placeholder="退款模式"  [(ngModel)]='reapList.mode'>
-          <ion-option value="1">仅退款</ion-option>
-          <ion-option value="2">退货退款</ion-option>
-          <ion-option value="3">售后退款</ion-option>
-          <ion-option value="4">售后退货</ion-option>
-        </ion-select>
-        <!--<ion-input type="text" placeholder="退款原因"  [(ngModel)]='reapList.type'></ion-input>-->
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>退款原因:</ion-label>
-        <ion-input type="text" placeholder="退款原因"  [(ngModel)]='reapList.type'></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>退款金额:</ion-label>
-        <ion-input type="text" placeholder="退款金额"  [(ngModel)]='reapList.price'></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label fixed>商品退款说明:</ion-label>
-        <ion-input type="text" placeholder="商品退款说明"  [(ngModel)]='reapList.memo'></ion-input>
-    </ion-item>
-  </ion-list>
+<div class="denglu_k">
+
+	<div class="denglk denglk_l">
+		<div class="mz px22">退款类型：</div>
+        <form class="choose">
+            <img src="assets/imgs/jiantou.png" class="chooseimg">
+            <select name="sex" [(ngModel)]="reapList.mode" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+            <option value="1" selected="selected">仅退款</option>
+            <option value="2">退货退款</option>
+            <option value="3">售后退款</option>
+            <option value="4">售后退货</option>
+            </select>
+        </form>
+	</div>
+
+    <div class="denglk denglk_l">
+		<div class="mz px22">退款原因：</div>
+		<input type="text" placeholder="退款原因"  [(ngModel)]='reapList.type'>
+	</div>
+
+    <div class="denglk denglk_l">
+		<div class="mz px22">退款金额：</div>
+		<input type="text" placeholder="退款金额"  [(ngModel)]='reapList.price'>
+	</div>
+
+    <div class="denglk denglk_l" style="height:auto">
+		<div class="mz px22 addSome">退款说明：</div>
+        <br />
+		<textarea placeholder="请您详细填写退款说明(最多200个字)"  [(ngModel)]='reapList.memo'></textarea>
+	</div>
+
+</div>
+
+<!--<div class="denglu_k">
+
+    <div class="denglk denglk_l" style="height:auto">
+		<div class="mz px22 addSome">上传凭证：</div>
+        <br />
+		<img src="assets/imgs/addImg.png">
+	</div>
+
+</div>-->
     
 	<button ion-button block color="#488aff" style="width:100%;height:0.8rem;font-size: 0.3rem;background-color:#ff971c " (click)="addRefundApplicationEvent()">添加提交</button>
 	<!--<button ion-button block color="#488aff" style="width:100%;height:0.8rem;font-size: 0.3rem;background-color:#ff971c" (click)="modifyRefundApplicationEvent()">修改提交</button>-->
