@@ -41,6 +41,7 @@ export class GroupdetailPage {
       preprice:'',
       price:''
     };
+    public guigeId = "pre1"
   public wid;
   public sid;
   public mode;
@@ -75,7 +76,7 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
-     alert(this.wid)
+    //  alert(this.wid)
   }
 
   ionViewDidLoad() {
@@ -109,7 +110,8 @@ ionViewWillLoad() {
      
   }
     //切换商品规格
-  changeId(id){
+  changeId(){
+    var id = this.guigeId;
     for(var i=0;i<this.dataSlist.length;i++){
       if(id==this.dataSlist[i].id){
         this.guiGe = this.dataSlist[i];

@@ -68,6 +68,7 @@ export class ShopgoodsinfoPage {
   //定义congfig中公共链接的变量aa
   public guiGe={};
   public aa = this.config.apiUrl;
+  public guigeId = "pre1"
     //定义token
   public token=this.storage.get('token');
     //post方法添加购物车时传的数据
@@ -120,7 +121,8 @@ export class ShopgoodsinfoPage {
     })
   }
   //切换商品规格
-  changeId(id){
+  changeId(){
+    var id = this.guigeId;
     for(var i=0;i<this.dataSlist.length;i++){
       if(id==this.dataSlist[i].id){
         this.guiGe = this.dataSlist[i];
