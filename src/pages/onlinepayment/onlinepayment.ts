@@ -37,10 +37,12 @@ export class OnlinepaymentPage {
     token:'', 
     tags:'android',
     createip:'',
+    act:'House',
   };
   onlinepaymentList={
     roomId:''
   }
+  public outTradeNo;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
@@ -94,25 +96,6 @@ export class OnlinepaymentPage {
       this.getPayList();
     }
   }
-  // //查询默认房屋
-  // getiof_def(){
-  //   var j=3
-  //   var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
-  //    this.http.get(api).map(res => res.json()).subscribe(data =>{
-  //         if(data.errcode===0&&data.errmsg==='OK'){
-  //           this.iof_defList=data.model;
-  //           this.defRoomId=data.model.House_Room_Id;
-  //           this.getPayList(data.model.House_Room_Id);
-  //           this.getroomId();
-  //         }else if (data.errcode===4002){
-  //           j--;
-  //           this.config.doDefLogin();
-  //           this.getiof_def();
-  //         }else{
-  //           alert(data.errmsg)
-  //         }
-  //    })
-  // }
    //查询用户绑定的所有房屋
   getroomId(){   
     var that=this;
@@ -184,8 +167,7 @@ export class OnlinepaymentPage {
   }
   //结算账单
   gopay(){
-    //alert(this.cip)
-    //this.pay.createip=this.cip;
+    this.pay.createip=this.cip;
     this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
     var payMouth = []
@@ -205,20 +187,31 @@ export class OnlinepaymentPage {
     var api = this.config.apiUrl+'/api/charge/payment?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0 ){
-            console.log(JSON.stringify(data))
-            console.log(data.errmsg+"支付成功")
+            this.outTradeNo = data.errmsg;
+            console.log(data)
+           // this.checkPayment()
             this.getPayList()
           }else{
             alert(data.errmsg+"支付失败")
           }
      })
   }
+     //微信查询接口
+   checkPayment(){
+     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg === 'OK'){
+          alert("支付成功")
+       }else{
+         alert(data.errmsg)
+       }
+     })
+   }
         clickme(){
           var that = this;
           $.ajax({
               url: 'http://freegeoip.net/json/',
               success: function(data){
-                alert("进来了")
                 alert(data.ip)
                 that.cip = data.ip;
                 that.gopay();

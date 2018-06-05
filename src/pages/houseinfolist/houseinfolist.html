@@ -17,16 +17,16 @@
 	<div style="height:20px;width:100%;background-color:#448AFF;position: absolute;"></div>
 <div class="shouhdz_hk">
 	<div class="shouh_zk" *ngFor="let list of houseList">
-		<div class="shouh_dange_beijin" (click)="getHouseInfo(list.id)" >
+		<div class="shouh_dange_beijin"  >
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p><em>项目名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.projectname}}</em></p>
-					<p><em>楼栋名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.edificename}}</em></p>
-					<p><em>房间号码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.code}}</em></p>
+					<p (click)="getHouseInfo(list.id)"><em>项目名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.projectname}}</em></p>
+					<p (click)="getHouseInfo(list.id)"><em>楼栋名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.edificename}}</em></p>
+					<p (click)="getHouseInfo(list.id)"><em>房间号码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.code}}</em></p>
 					<!--<p><em>业主姓名：{{list.name}}</em></p>-->
-					<p><em>当前状态：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.state | pipeRelation}}</em></p>
+					<p (click)="getHouseInfo(list.id)"><em>当前状态：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.state | pipeRelation}}</em></p>
 					
-        			<div *ngIf="!list.default" class="def"><input type="radio" (change)="setDefaultHouse(item.id)"/>&nbsp;&nbsp;&nbsp;&nbsp;设为默认房屋</div>
+        			<div *ngIf="!list.default" class="def"><input type="radio" (change)="setDefaultHouse(list.id)"/>&nbsp;&nbsp;&nbsp;&nbsp;设为默认房屋</div>
 				</div>
 			</div>
 			<!--<div class="boanjk">

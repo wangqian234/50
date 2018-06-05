@@ -5,13 +5,14 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
-
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
 @IonicPage()
 @Component({
   selector: 'page-rentsalemy',
   templateUrl: 'rentsalemy.html',
 })
 export class RentsalemyPage {
+
 
   pageSize = 10;
   pageIndex = 1;
@@ -44,6 +45,7 @@ export class RentsalemyPage {
       this.http.get(api).map(res => res.json()).subscribe(data => {
         loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        this.mylist = data.list;
         console.log(data)
         if(data.list.length == 0){
           $('.nomore').css("display","block")
@@ -79,6 +81,14 @@ export class RentsalemyPage {
       }
     });
           
+  }
+  //跳转到详情
+  goRentsaleInfo(id,type){
+    this.navCtrl.push(RentsaleinfoPage,{
+      houseId:id,
+      houseType:type,
+      quFen:0,
+    })
   }
   //批量删除
   delMyPublish(){
