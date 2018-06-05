@@ -70,6 +70,7 @@ page-repairdetails {
     display: inline;
     color:#488aff;
     font-size: 0.25rem;
+    line-height: 0.5rem;
 }
 .detail{
     padding:0.1rem 0.3rem;
@@ -94,6 +95,7 @@ page-repairdetails {
     margin-right: 0.3rem;
     color:#488aff;
     font-size: 0.25rem;
+    line-height: 0.5rem;
 }
 .repair-type{
     margin-right: 0.3rem;
@@ -156,12 +158,12 @@ img{
 
     #app p{font-size: 0.28rem; line-height: 0.4rem;}
     #app li{list-style: none;padding: 0 20px 10px 20px;border-left: 2px solid #999;position: relative;}
-    #app li:before{content: "";width: 10px;height: 10px;display: block;background: lightblue;position: absolute;left: 0;top: 0;margin-left: -6px;border-radius: 50%;}
+    #app li:before{content: "";width: 10px;height: 10px;display: block;background: #257cff;position: absolute;left: 0;top: 0;margin-left: -6px;border-radius: 50%;}
     #app ul{width: 80%;margin: 0 auto;}
 
-    .button-inner{
-        font-size: 0.32rem;
-    }
+    // .button-inner{
+    //     font-size: 0.32rem;
+    // }
     .button-ios{
         height:0.8rem;
     }

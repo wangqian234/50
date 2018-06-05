@@ -39,14 +39,15 @@
     <ion-item [navPush]="RepairdetailsPage" *ngFor="let item of list" (tap)="repairDetails(item['id'])">     
       <a class="title_a"> {{item.typename}}</a>
       <h4 class="right">{{item.time | pipeTime}}</h4>
+      <div style="clear: both"></div>
       <h4>{{item.roominfostr}} </h4>
-      <p>{{item.mome}}</p>
-      <img *ngIf="item.type == 1" src="assets/imgs/Statusicon_01.png">
-      <img *ngIf="item.type == 2" src="assets/imgs/Statusicon_01.png">
-      <img *ngIf="item.type == 3" src="assets/imgs/Statusicon_01.png">
-      <img *ngIf="item.type == 4" src="assets/imgs/Statusicon_01.png">
-      <img *ngIf="item.type == 5" src="assets/imgs/Statusicon_01.png">
-      <img *ngIf="item.type == 6" src="assets/imgs/Statusicon_01.png">
+      <p>说明：{{item.mome}}</p>
+      <img *ngIf="item.statename=='待派单'" src="assets/imgs/Statusicon_01.png">
+      <img *ngIf="item.statename=='待评价'" src="assets/imgs/Statusicon_02.png">
+      <img *ngIf="item.statename=='待派工'" src="assets/imgs/Statusicon_03.png">
+      <img *ngIf="item.statename=='已终止'" src="assets/imgs/Statusicon_04.png">
+      <img *ngIf="item.statename=='已完成'" src="assets/imgs/Statusicon_05.png">
+      <img *ngIf="item.statename=='处理中'" src="assets/imgs/Statusicon_06.png">
       <!--<button ion-button clear item-end icon-only>
         <ion-icon style="font-size:0.3rem" name="arrow-dropright"></ion-icon>
       </button>           -->

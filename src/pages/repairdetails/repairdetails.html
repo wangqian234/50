@@ -17,12 +17,13 @@
   <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time}}</p>
   <p class="repair-state">{{repairdetaillist.statename}}</p>
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
-  <div>
+  <!--图片遍历-->
+  <!--<div>
     <img class="pic" src="assets/imgs/08.jpg" />
-  </div>
+  </div>-->
 </div>
-<p class="detail1">处理进度如下：</p>
 <div id="app" style="display: none">
+<p class="detail1">处理进度如下：</p>
     <ul>
         <li *ngFor="let item of disposememo">
           {{item}}
@@ -37,7 +38,7 @@
       <p>评价内容：{{repairdetaillist.ScoreMemo}}</p>
 </div>
 <button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
-<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
+<button id="finish"  style="display: none;margin-top:0" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
 <button ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
     <div id="background" class="back">  
