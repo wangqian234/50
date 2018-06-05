@@ -4,6 +4,7 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
+import $ from 'jquery'
 @IonicPage()
 @Component({
   selector: 'page-rentsaleinfo',
@@ -13,8 +14,8 @@ export class RentsaleinfoPage {
 
   rental_id = '';
   type='';
-  rentsale;
-  rentsaleDetail;
+  rentsale={};
+  rentsaleDetail={};
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http) {
   }
@@ -23,9 +24,11 @@ export class RentsaleinfoPage {
     if(this.navParams.get('houseId') && this.navParams.get('houseType')){
       this.rental_id = this.navParams.get('houseId');
       this.type = this.navParams.get('houseType');
-      if(this.navParams.get('quFen')==1){  
+      if(this.navParams.get('quFen')==1){
+        $('.iondiv').css('display','none');  
         this.getRentSaleInfo();
       }else if(this.navParams.get('quFen')==0){
+        $('.iondiv').css('display','block');  
         this.myPublishInfo();
       }    
     }
@@ -47,8 +50,7 @@ export class RentsaleinfoPage {
       }
     });
   }
-
-    //我的发布房屋详情
+  //我的发布房屋详情
    myPublishInfo(){
       console.log(this.rental_id,this.type)
     var api = this.config.apiUrl + "/api/rental/info_user?type=" + this.type + "&rental_id=" + this.rental_id + "&token=" + this.storage.get("token");
@@ -57,14 +59,14 @@ export class RentsaleinfoPage {
         this.rentsale = data.model;
         console.log(data)
         this.rentsaleDetail = data.list;
-      } else {
+      }else {
         alert(data.errmsg)
       }
     });
   }
   //跳转到房屋修改
-  goEditPage(rentsaleDetail){
-      this.navCtrl.push(RentsaleaddPage,{item:rentsaleDetail})
+  goEditPage(rentsale){
+      this.navCtrl.push(RentsaleaddPage,{item:rentsale})
   }
 
   backTo(){

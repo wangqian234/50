@@ -40,10 +40,10 @@ export class NewslistPage {
   }
   //获取最新资讯全部列表
     getNews(infiniteScroll){
-      // let loading = this.loadingCtrl.create({
-	    // showBackdrop: true,
-      // });
-      // loading.present();
+      let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+      });
+      loading.present();
       if(this.navParams.get("act")){
         this.act = this.navParams.get("act");
       }
@@ -56,7 +56,7 @@ export class NewslistPage {
         var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          // loading.dismiss();
+          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.list.length<10){
            $('.nomore').css('display','block');

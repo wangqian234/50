@@ -31,13 +31,14 @@ export class RepairdetailsPage {
   public btn:any;  
   public div :any;  
   public close :any;  
-  public stop :any;
-  public evaluate : any;
+  public stop :boolean;
+  public evaluate : boolean;
   public stateName;
-  public finish:any;
-  public evaluateContent:any;
-  public app:any;
-  public finishRepaired:any;
+  public finish:boolean;
+  public evaluateContent:boolean;
+  public app:boolean;
+  public finishRepaired:boolean;
+public background:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
   }
@@ -54,15 +55,6 @@ export class RepairdetailsPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepairdetailsPage');
-      this.btn = document.getElementById('open_btn');  
-      this.div = document.getElementById('background');
-      this.close = document.getElementById('close-button'); 
-      this.stop = document.getElementById('stop');
-      this.evaluate=document.getElementById('evaluate');
-      this.finish =document.getElementById('finish');
-      this.evaluateContent =document.getElementById('evaluateContent')
-      this.app=document.getElementById('app')
-      this.finishRepaired=document.getElementById('finishRepaired')
   }
   ionViewDidEnter(){
     this.getrepairdetails();
@@ -87,13 +79,60 @@ export class RepairdetailsPage {
           this.disposememo = listStr.split("<br />");
         }
          this.stateName=data.list[0].statename;
-         this.repairdState();
+        this.stateRepaird();
       }else{
         alert(data.errmsg)
       }
-
     })
-    
+  }
+  //确认工单状态
+  stateRepaird(){
+        switch(this.stateName)
+    {
+      case "待派工":
+      this.stop = true;
+      this.finish = false;
+       this.evaluate = false;
+       this.evaluateContent = false;
+      this.app = false;
+      break;
+      case "待接单":
+       this.stop = true;
+      this.finish = false;
+       this.evaluate = false;
+       this.evaluateContent = false;
+      this.app = false;
+      break;
+      case "处理中":
+       this.stop = true;
+      this.finish = true;
+       this.evaluate = false;
+       this.evaluateContent = false;
+      this.app = true;
+      break;
+      case "待评价":
+       this.stop = false;
+      this.finish = false;
+       this.evaluate = true;
+       this.evaluateContent = false;
+      this.app = true;
+      break;
+      case "已完成":
+       this.stop = true;
+      this.finish = false;
+       this.evaluate = false;
+       this.evaluateContent = true;
+      this.app = true;
+      break;
+      case "已终止":
+       this.stop = false;
+       this.finish = false;
+       this.evaluate = false;
+       this.evaluateContent = false;
+       this.app = true;
+      break;
+      default:
+    }
   }
 //终止工单
  enSureStop(){
@@ -147,67 +186,17 @@ export class RepairdetailsPage {
  }
  //工单处理
  showFinishPopup(){
-  this.finishRepaired.style.display = "block"
+  //this.finishRepaired.style.display = "block"
  }
  closeFinishPopup(){
-    this.finishRepaired.style.display = "none"
+    //this.finishRepaired.style.display = "none"
  }
  showPopup(){
-  this.div.style.display = "block"; 
+  //this.div.style.display = "block"; 
  }
   closePopup(){
-   this.div.style.display = "none";
+   //this.div.style.display = "none";
  }
- //工单处理应该显示的状态                   
- repairdState(){
-    switch(this.stateName)
-    {
-      case "待派工":
-      this.stop.style.display = "block";
-      this.finish.style.display = "none";
-       this.evaluate.style.display = "none";
-        this.evaluateContent.style.display = "none";
-         this.app.style.display = "none";
-      break;
-      case "待接单":
-      this.stop.style.display = "block";
-      this.finish.style.display = "none";
-       this.evaluate.style.display = "none";
-        this.evaluateContent.style.display = "none";
-         this.app.style.display = "none";
-      break;
-      case "处理中":
-      this.stop.style.display = "block";
-      this.finish.style.display = "block";
-      this.app.style.display = "block";
-      this.evaluate.style.display = "none";
-      this.evaluateContent.style.display = "none";
-      break;
-      case "待评价":
-      this.stop.style.display = "none";
-      this.finish.style.display = "none";
-      this.app.style.display = "block";
-      this.evaluate.style.display = "block";
-      this.evaluateContent.style.display = "none";
-      break;
-      case "已完成":
-      this.app.style.display = "block";
-      this.evaluateContent.style.display = "block";
-      this.stop.style.display = "none";
-      this.finish.style.display = "none";
-       this.evaluate.style.display = "none";
-      break;
-      case "已终止":
-      this.app.style.display = "block";
-      this.stop.style.display = "none";
-      this.finish.style.display = "none";
-       this.evaluate.style.display = "none";
-        this.evaluateContent.style.display = "none";
-      break;
-      default:
-    }
- }
- //
  //跳转到
  showevaluate(){
   this.navCtrl.push(RepairevaluatePage,{id:this.repairDetial})

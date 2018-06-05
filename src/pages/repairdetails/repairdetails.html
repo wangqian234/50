@@ -1,5 +1,4 @@
 <ion-content>
-
   <div style="margin-bottom:10px;background-color:#448AFF" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -22,25 +21,26 @@
   </div>
 </div>
 <p class="detail1">处理进度如下：</p>
-<div id="app" style="display: none">
+<div id="app" *ngIf = "app" >
     <ul>
         <li *ngFor="let item of disposememo">
           {{item}}
         </li>
+
     </ul>
 </div>  
 
-<div id="evaluateContent" style="display: none">
+<div id="evaluateContent"  *ngIf = "evaluateContent">
       <p>服务态度：{{repairdetaillist.servicescore}}</p>
       <p>处理及时：{{repairdetaillist.timelyscore}}</p>
       <p>处理质量：{{repairdetaillist.qualityscore}}</p>
       <p>评价内容：{{repairdetaillist.ScoreMemo}}</p>
 </div>
-<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
-<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
-<button ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
+<button  *ngIf = "stop"  id="stop"   ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+<button  *ngIf = "finish" id="finish"  ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
+<button   *ngIf = "evaluate" id="evaluate" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
-    <div id="background" class="back">  
+    <div id="background" *ngIf = "background" class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closePopup()">×</span>  
@@ -67,7 +67,7 @@
     </div>  
     
         <!-- 弹窗内容开始 -->  
-    <div id="finishRepaired" class="back">  
+    <div id="finishRepaired"  *ngIf = "finishRepaired" class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closeFinishPopup()">×</span>  
