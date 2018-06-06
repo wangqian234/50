@@ -20,7 +20,7 @@
       <li class="type" data-nav="payment" (click)="myPublish(3)"><a href="javascript:;">我的求购</a></li>
       <li class="type" data-nav="done" (click)="myPublish(4)"><a href="javascript:;">我的求租</a></li>
   </ul>
- <img (tap)="delMyPublish()" src="assets/imgs/delete.png">
+ <!--<img (tap)="delMyPublish()" src="assets/imgs/delete.png">-->
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of mylist" >
 				<ion-checkbox  [(ngModel)]="house.checked" style="float:left;margin:0.6rem  0.2rem 0 0;"></ion-checkbox>

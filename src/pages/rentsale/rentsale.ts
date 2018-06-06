@@ -217,11 +217,31 @@ export class RentsalePage {
 
   //跳转到详情
   goRentsaleInfo(id,type){
-    this.navCtrl.push(RentsaleinfoPage,{
+    if(this.storage.get('token')){
+      this.navCtrl.push(RentsaleinfoPage,{
       houseId:id,
       houseType:type,
       quFen:1,
     })
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
+  }
+  //我的发布信息跳转页面
+  goRentsaleadd(){
+      if(this.storage.get('token')){
+      this.navCtrl.push(RentsaleaddPage)
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
+  }
+  //跳转到我的发布列表
+  goRentsalemy(){
+   if(this.storage.get('token')){
+      this.navCtrl.push(RentsalemyPage)
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
   }
   doLoadMore(infiniteScrolle){
     this.getHouseInfo(infiniteScrolle);
