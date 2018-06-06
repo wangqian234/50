@@ -82,7 +82,6 @@ export class GroupdetailPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public app: App,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
     this.wid=navParams.get('id');
-    //  alert(this.wid)
   }
 
   ionViewDidLoad() {
@@ -114,7 +113,6 @@ ionViewWillLoad() {
       this.fenge(data.json['good_Model'].model.imgsrc_list);//分割轮播图字段
       that.jiage=data.json['good_Model'].model.maxpreprice;
       that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
-      //alert(data.json['good_Model'].model.imgsrc_list);
       console.log(that.goodMlist);
       that.dataSlist=data.json.data_Sizes.list;  //规格
      this.recommend();
@@ -158,8 +156,6 @@ switch(key){
 
 //进入店铺
 enterShop(wid,sid){
-//  alert("店铺id"+this.sid);
-//   alert("id"+this.wid);
   this.navCtrl.push(ShopinfoPage,{
     wid: this.wid,
     sid: this.sid
@@ -178,7 +174,8 @@ ifEnough(){
        
          //alert("可以继续添加!");
       }else{
-        alert(data.errmsg);
+        alert("库存不足！")
+        console.log(data.errmsg);
       }
      })
 

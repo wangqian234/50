@@ -6,18 +6,34 @@
         <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li *ngIf="act==zx"><a class="px24">最新资讯</a></li> 
-					<li *ngIf="act==gs"><a class="px24">公示公告</a></li>   
+					<li *ngIf="act=='zx'"><a class="px24">最新资讯</a></li> 
+					<li *ngIf="act=='gs'"><a class="px24">公示公告</a></li>   
 				</ul>
 			</div>
 		</div> 
 	</div>
 </div>
 
-		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="请输入关键字进行搜索">
-            <img (click)="doReserch(type)" src="assets/imgs/sos.png">
-        </div>
+
+  <div class="searchdiv">
+    <div class="searchTool">
+        <form class="choose">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.23rem;right:5px;width:0.17rem;height:0.15rem;margin-right: 0.08rem;">
+          <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;" [(ngModel)]="type" (ngModelChange)="getNewsList()" >
+          <option  selected  value="0"> 全部</option>
+          <option class = "11" value="1">通知</option>
+          <option class = "22" value="2">温馨提示</option>
+          <option class = "33"value="3" >公摊公式</option>
+          <option  class = "44"value="4">社区资讯</option>
+          <option class = "55"value="5">生活资讯</option>
+          </select>
+        </form>
+        <input type="search" [(ngModel)]="keywords" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
+        <input type="button" value class="searchBtn">
+        <ion-icon (click)="getNewsList()" class="searchicon" name="ios-search-outline"></ion-icon>
+    </div>
+  </div>
+
 		 <!--<div class="searchdiv">
     <div class="searchTool">
         <form class="choose">
@@ -36,14 +52,31 @@
     </div>
   </div>-->
 
-<div>
-  <div class="zixun_content" *ngFor="let newList of newsList">
+
+<div *ngIf="act=='zx'">
+
+    <div class="zixun_content2" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
-			<img src="{{config.apiUrl}}{{newList.imgurl}}">
-			<span class="content">{{newList.topic}} <br />{{newList.adddate | pipeTime}}</span>
-			<span class="line"></span>
+		
+	<img  style="width:6rem !important;height:2rem;" src="{{config.img}}{{newList.imgurl}}"/>
+  <div style="width:100%;height:0.48rem;float:left;background-color: #818181;color:white;padding-top:0.1rem"><span style="margin:0 0 0 0.2rem">{{newList.topic}}</span></div>
 		</div>
 	</div>
+
+  </div>
+
+
+<div *ngIf="act=='gs'">
+    <div class="zixun_content" *ngFor="let newList of newsList">
+		<div (click)="getNewInfo(newList.id)" class="zixun_li">
+		
+		<div class="content">	<span>{{newList.topic}}</span></div>
+     <div  class="remark"> <span class="time">时间：{{newList.adddate | pipeTime}}</span><span class="apartment">通知部门：物业管理局</span></div>
+		<br/>
+    	<span class="line"  style="clear:both"></span>
+		</div>
+</div>
+
   </div>
 	<div style="clear:both"></div>
 	<div class="nomore" style="display: none">没有更多数据了...</div>

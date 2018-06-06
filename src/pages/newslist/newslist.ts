@@ -40,12 +40,25 @@ export class NewslistPage {
   }
   //获取最新资讯全部列表
     getNews(infiniteScroll){
-      // let loading = this.loadingCtrl.create({
-	    // showBackdrop: true,
-      // });
-      // loading.present();
+      let loading = this.loadingCtrl.create({
+	    showBackdrop: true,
+      });
+      loading.present();
       if(this.navParams.get("act")){
         this.act = this.navParams.get("act");
+        if(this.act=='gs'){
+          $('.11').css('display','block')
+          $('.22').css('display','block')
+          $('.33').css('display','block')
+          $('.44').css('display','none')
+          $('.55').css('display','none')
+        }else if(this.act == 'zx'){
+          $('.11').css('display','none')
+          $('.22').css('display','none')
+          $('.33').css('display','none')
+          $('.44').css('display','block')
+          $('.55').css('display','block')
+        }
       }
      if(this.storage.get('token')){
         this.token = this.storage.get('token')
@@ -56,7 +69,7 @@ export class NewslistPage {
         var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          // loading.dismiss();
+          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -76,6 +89,8 @@ export class NewslistPage {
           j--;
           if(j>0){
             this.config.doDefLogin();
+            this.newsList=[];
+            this.page = 1;
             this.getNews(infiniteScroll);
           }
       } else {

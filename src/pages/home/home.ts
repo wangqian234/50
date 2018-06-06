@@ -39,6 +39,7 @@ import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
 import {RentsalePage} from '../rentsale/rentsale';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
 import $ from 'jquery';
 declare var BMap;
 
@@ -86,9 +87,7 @@ export class HomePage {
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
   //轮播图的页面跳转
-
   public RentsalePage = RentsalePage;
-
   //轮播图的页面跳转
   //public RentsalePage = RentsalePage;
 
@@ -171,18 +170,16 @@ export class HomePage {
   getInfo(url){
     this.url=url.substring(0,3);
     this.Id = url.substring(3,)
-    alert(this.url)
     if(url==="HRSHome"){
       this.navCtrl.push(RentsalePage)
     }else if(this.url==="gId"){
        this.navCtrl.push(ShopinfoPage,{sid:this.Id})
-      //this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
     }else if(this.url ==="sId"){
       this.navCtrl.push(ShopinfoPage,{sid:this.Id})
     }else if(this.url === "rez"){
-     // this.navCtrl.push()
+     this.navCtrl.push(RentsaleinfoPage,{ houseId:this.Id,houseType:2,quFen:1})
     }else if(this.url === "res"){
-     // this.navCtrl.push()
+      this.navCtrl.push(RentsaleinfoPage,{ houseId:this.Id,houseType:1,quFen:1})
     }
   }
 
@@ -321,6 +318,69 @@ changeRoom(roomid) {
   getRem() {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+  //跳转页面
+  goPayfee(){
+      //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(PayfeePage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      } 
+  }
+  goRepairadd(type){
+          //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(RepairaddPage,{type:type});
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goHouseinfolist(){
+      //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(HouseinfolistPage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goPayrefee(){
+          //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(PayprefeePage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goShoppinglist(id){
+      //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(ShoppinglistPage,{id:id});
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goRentsaleadd(){
+              //确认登录状态
+      if(this.storage.get('token')){
+        this.navCtrl.push(RentsaleaddPage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goNewslist(act){
+        if(this.storage.get('token')){
+        this.navCtrl.push(NewslistPage,{act:act});
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
+  }
+  goOnlinepayment(){
+        if(this.storage.get('token')){
+        this.navCtrl.push(OnlinepaymentPage);
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
   }
 
 }
