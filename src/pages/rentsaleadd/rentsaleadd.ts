@@ -125,7 +125,8 @@ export class RentsaleaddPage {
         "city": this.RSadd.city,
       }
       var api = this.config.apiUrl + "/api/rental/add";
-      console.log(this.RSadd)
+      console.log(data)
+      console.log(this.storage.get('token'))
       this.http.post(api, data).map(res => res.json()).subscribe(data => {
         loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
