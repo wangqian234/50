@@ -47,8 +47,6 @@ export class RentsalelistPage {
 
     }
   }
-
-
   ionViewDidLoad() {
     this.clickCSSTitle();
   }
