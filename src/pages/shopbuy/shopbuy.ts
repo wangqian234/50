@@ -256,7 +256,6 @@ discount(){
           $.ajax({
               url: 'http://freegeoip.net/json/',
               success: function(data){
-                alert(data.ip)
                 that.cip = data.ip;
                 that.addBuy();
               },

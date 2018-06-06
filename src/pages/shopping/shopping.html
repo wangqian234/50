@@ -34,8 +34,8 @@
 
 <!-- 轮播图 -->
 
-        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
-            <ion-slide *ngFor="let item of tuangouList">
+        <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
+            <ion-slide *ngFor="let item of lunboList">
                <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
 
            </ion-slide>         
@@ -80,7 +80,7 @@
                         <p class="tip">{{item.prename}}<span *ngIf="item.recommend==true">推荐</span></p>
                         <p class="sales-count">已售<span>{{item.soldnum}}</span>份</p>
                         <p class="price">￥<span>{{item.price}}</span></p>
-                        <div class="cartdiv"><img class="cartimg" src="assets/imgs/cart.png"></div>
+                        <div  [navPush]="CartPage" class="cartdiv"><img class="cartimg" src="assets/imgs/cart.png"></div>
                     </div>
                 </li>
         </ul>

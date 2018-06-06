@@ -68,7 +68,7 @@ export class CartPage {
 
   ionViewWillEnter(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
      //this.getCartsData('');
   }
   
@@ -219,7 +219,8 @@ export class CartPage {
       if(data.errcode ===0&&data.errmsg==='OK'){
         console.log("修改成功")
       }else{
-        alert(data.errmsg)
+        alert("修改数量失败！")
+        console.log(data.errmsg)
       }
     })
   }
@@ -260,20 +261,17 @@ buy(){
   //接口
   var j=3;
    var date = this.blist;
-     //alert(JSON.stringify(date));
     var api = this.config.apiUrl+'/api/usercart/add_settlement'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
        console.log(data)
        console.log("jin11")
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        // alert("post成功!");
          //跳转前验证
       var api=this.config.apiUrl+'/api/goods/buy_list?caId=1&token='+this.blist.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
               console.log(data)
               console.log("jin22")
                //if(data.errcode === 0 && data.errmsg === 'OK'){
-                  //alert("可以购买!");
        this.navCtrl.push(ShopbuyPage,{
           wid: this.list[0].good_id,
           sid: this.list[0].size_id,

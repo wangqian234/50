@@ -44,15 +44,11 @@ export class TradegoodsAddrefundPage {
   getdetaillist(){
   }
   addEvaluate(){
-    alert("添加退款申请");
       var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.token = this.token;
-       alert(JSON.stringify(this.evaluateList));
       //var date = this.evaluateList;
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
-        alert("高海乐视察");
-        alert(JSON.stringify(data));
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
         //this.navCtrl.push(ShoppinglistPage);

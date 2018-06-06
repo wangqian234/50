@@ -14,8 +14,7 @@
       </div>
     </div>
   </div>
-
-
+  
   <div class="shangp_lieb_beij">
     <div class="sp_daoh" id="typediv">
       <ul>
@@ -23,19 +22,16 @@
         <li (click)="ifontime(2)"><a class="titlea" href="javascript:;">房屋出租</a></li>
         <li (click)="ifontime(3)"><a class="titlea" href="javascript:;">房屋求购</a></li>
         <li (click)="ifontime(4)"><a class="titlea" href="javascript:;">房屋求租</a></li>
-
       </ul>
     </div>
   </div>
 
   <div class="takePhoto">
-
-      <ul  class="photosList">
-        <li  class="publishPhoto"  *ngFor="let imgItem of imgList"><img class="photo" [src]="imgItem"/></li>
-        <li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="showPicActionSheet()"/></li>
-           <!--<li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="doUpload()"/></li>-->
-      </ul>
-        
+    <ul class="photosList">
+      <li class="publishPhoto" *ngFor="let imgItem of imgList"><img class="photo" [src]="imgItem" /></li>
+      <li class="publishPhoto"><img class="photo" src="assets/imgs/addImg.png" (click)="showPicActionSheet()" /></li>
+      <!--<li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="doUpload()"/></li>-->
+    </ul>
   </div>
 
   <ion-list style="background-color:white;margin:0 0 1rem 0;">
@@ -52,10 +48,10 @@
         <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" vaule="2" /><span>二手房</span></div>
       </div>
     </ion-item>
-      <ion-item class = "zu">
+    <ion-item class="zu">
       <div class="repairList">
         <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="1"/><span>整租</span></div>
+        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
         <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
       </div>
     </ion-item>
@@ -64,17 +60,27 @@
       <div class="repairList">
         <div class="repairType">所在位置：</div>
         <!--<input [(ngModel)]="city" style="width:15%" type="text" />&nbsp;省&nbsp;-->
-        <input [(ngModel)]="RSadd.city" (onchange)="getCityCode()" style="width:27%" type="text" />&nbsp;市&nbsp;
+        <input [(ngModel)]="city" (change)="getCityCode()" style="width:27%;float:left" type="text" />&nbsp;市&nbsp;
         <!--<input [(ngModel)]="RSadd.region" style="width:27%" type="text" />&nbsp;区&nbsp;-->
-        <ion-select class="select-goal" (ionChange)="changeRoom()" [(ngModel)]='RSadd.region' cancelText="取消" okText="确认"> &nbsp;区&nbsp;
+        <select class="address_select"  [(ngModel)]='RSadd.region' cancelText="取消" okText="确认" (change)="getCode()">
+        <option *ngFor="let item of areaCode" value="{{item.code}}" >{{item.name}}</option>
+        </select>&nbsp;区&nbsp;
+       
+
+
+        <!--<ion-select style="float:left" (ionChange)="changeRoom()" [(ngModel)]='RSadd.region' cancelText="取消" okText="确认"> &nbsp;区&nbsp;
           <ion-option *ngFor="let item of areaCode" value="{{item.code}}">{{item.name}}</ion-option>
-        	</ion-select>
+        	</ion-select>-->
       </div>
     </ion-item>
+
     <ion-item>
       <div class="repairList">
         <div class="repairType">所在街道：</div>
-        <input [(ngModel)]="RSadd.street" type="text" />
+           <select class="jiedao_select" [(ngModel)]="RSadd.street" cancelText="取消" okText="确认">
+            <option *ngFor="let item of Code" value="{{item.code}}" >{{item.name}}</option>
+           </select>
+      
       </div>
     </ion-item>
     <ion-item>
@@ -88,7 +94,7 @@
         <div class="repairType">户&ensp;&ensp;&ensp;&ensp;型：</div>
         <input [(ngModel)]="RSadd.room" style="width:15%" type="text" />&nbsp;室&nbsp;
         <input [(ngModel)]="RSadd.halls" style="width:15%" type="text" />&nbsp;厅&nbsp;
-        <input [(ngModel)]="RSadd.restroom" style="width:15%" type="text" />&nbsp;卫&nbsp; 
+        <input [(ngModel)]="RSadd.restroom" style="width:15%" type="text" />&nbsp;卫&nbsp;
       </div>
     </ion-item>
     <ion-item>
@@ -97,14 +103,14 @@
         <input [(ngModel)]="RSadd.space" style="width:60%" type="number" />&nbsp;平米
       </div>
     </ion-item>
-    <ion-item class = "fang">
+    <ion-item class="fang">
       <div class="repairList">
         <div class="repairType">价&ensp;&ensp;&ensp;&ensp;格：</div>
         <input [(ngModel)]="RSadd.priceMax" style="width:60%" type="number" />&nbsp;万元
       </div>
     </ion-item>
 
-    <ion-item class = "zu">
+    <ion-item class="zu">
       <div class="repairList">
         <div class="repairType">价&ensp;&ensp;&ensp;&ensp;格：</div>
         <input [(ngModel)]="RSadd.priceMax" style="width:60%" type="number" />&nbsp;万/月
@@ -244,6 +250,5 @@
 
   </ion-list>
 
-  <button ion-button block color="#f53d3d" (click)="getRSInfo()">提交信息</button>
-
+  <button   ion-button block color="#f53d3d" (click)="getRSInfo()">提交信息</button>
 </ion-content>

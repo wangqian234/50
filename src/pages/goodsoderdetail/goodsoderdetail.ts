@@ -60,7 +60,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
   loading.present();
     var j=3;
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
-     //alert("王慧敏"+api);
      console.log("慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        loading.dismiss();

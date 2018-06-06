@@ -38,7 +38,6 @@ import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 
 
-
 declare var BMap;
 @Component({
   selector: 'page-shopping',
@@ -60,7 +59,6 @@ export class ShoppingPage {
   public BigsalePage = BigsalePage;
   public GroupbuylistPage = GroupbuylistPage;
   public PersonalPage = PersonalPage;
-
    //定义接收数据的list
   public l=[];
   public SalePage = SalePage;
@@ -179,7 +177,6 @@ export class ShoppingPage {
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         console.log(addComp.city)
-        alert(addComp.city)
         that.storage.set("currentPlace",addComp.city);
       }); 
        });
@@ -269,6 +266,9 @@ export class ShoppingPage {
 
   backToHere(){
      this.app.getRootNav().push(TabsPage);
+  }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }
