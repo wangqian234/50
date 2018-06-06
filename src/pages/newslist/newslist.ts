@@ -64,9 +64,9 @@ export class NewslistPage {
         this.newsList=this.newsList.concat(data.list);
          console.log(this.newsList)
           console.log(this.page)
+          this.page++;
         if(infiniteScroll){
           infiniteScroll.complete();
-          this.page++;
           if(data.list.length<10){
              infiniteScroll.enable(false);
            $('.nomore').css('display','block');
