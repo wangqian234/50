@@ -5,26 +5,40 @@ page-newslist {
     li a{
         color:white !important;
     }
+    .zixun_content{
+    height:1.4rem;
+    }
+       .zixun_content2{
+    height:2.6rem;
+    }
+     .zixun_content2 .zixun_li img{
+        float:left;
+    }
+      .zixun_content .zixun_li {
+          height:1.4rem;
+      }
      .zixun_content .zixun_li img{
         float:left;
         width: 1rem;
         height: 1rem;
-        margin-left: 0.2rem;
+        margin-left: 0.26rem;
     }
     .zixun_content .zixun_li .content{
         float:left;
         color:#646464;
         font-size:0.28rem;
         line-height:0.38rem;
-        width:70%;
+        width:94%;
         margin-left:0.23rem;
+        min-height:1rem;
+        padding-top:0.1rem;
     }
     .zixun_content .zixun_li .line{
         float:left;
-        margin:0.15rem 0;
+        margin:0.1rem 0 0 0;
         width:95%;
-        margin-left:2.5%;
-        margin-right:2.5%;
+        margin-left:3%;
+        margin-right:3%;
         border-bottom:1px ridge rgba(245,245,245,1);
     }
     .shous_k{
@@ -40,4 +54,159 @@ page-newslist {
         text-align: center;
         color: gray;
     }
+
+     .searchdiv{ 
+        height:50px;
+        padding:8px 0 0 0;
+        background:#fff;
+        // border-top:1px solid #3e3e3e;
+         border-bottom:1px solid #f5f5f5;
+        text-align:center;
+        position: sticky;
+        top: 0.78rem;
+        z-index: 100;
+    }
+    /*.footerSearch .searchBar{margin:0 auto;}*/
+    .searchTool{ 
+        width:95%;
+        height:32px;
+        line-height:32px;
+        margin:0px auto 0 auto; 
+        text-align:left; 
+        background:#fff;
+        border-radius: 5px;
+    }
+    .choose{
+        float:left;
+        cursor:pointer;
+        height:32px;
+        width:29%; 
+        display:inline-block;
+        position:relative;
+        line-height:32px;
+        font-size:18px; 
+        text-align:center;
+        padding-right:10px;
+    }
+
+    .choose select{
+        height: 30px;
+        width:100%;
+        background-color: #fff;
+        color: #aaaaaa;
+    }
+
+    .searchTextInit{
+        height:32px;
+        line-height:30px;
+        border-radius:0;
+        border-left:2px solid #f5f5f5;
+        padding:0 8px;
+        font-size:12px;
+        color:#333;
+        color:gray;
+        width:60%; 
+        background:#fff;
+        float:left
+    }
+    .searchTextInput{
+        height:32px;
+        line-height:32px;
+        border:0;
+        border-left:1px solid #448aff;
+        padding:0 8px; /*上 右 下 左*/
+        font-size:18px;
+        color:black;
+        width:250px; 
+        background:#fff;
+        float:left
+    }
+    .searchBtn{
+        float:left;
+        height:24px;
+        width:24px; 
+        background:#fff 
+        url(assets/imgs/fee.png) no-repeat center 0px;
+        cursor:pointer;
+        border:0;
+        margin:4px 0 0 4px;
+    }
+    .searchBtn:hover{
+        background:#fff url(assets/imgs/fee.png) 
+        no-repeat center -24px;
+    }
+    .choose ul{
+        border-bottom:1px solid #448aff;
+        list-style:none;
+        width:100%;
+        z-index: 100;
+        position: absolute;
+        background-color: #fff ;
+    }
+    .choose ul li{
+        padding: 5px 0;
+    }
+
+    .item-ios h4{
+        font-size:0.23rem;
+        line-height: 0.3rem;
+        margin-left: 0.3rem;
+    }
+    .item-ios p{
+        font-size:0.23rem;
+        line-height: 0.35rem;
+        margin-left: 0.3rem;
+    }
+    .item-ios{
+        padding:0
+    }
+    .button[icon-only]{
+        min-width:0;
+    }
+    .dengl .caid_img{
+        width: 80%;
+    }
+    .title_a{
+        font-size: 0.3rem;
+        margin: 0.1rem 0 0.1rem 0.3rem;
+        line-height: 0.5rem;
+        float: left;
+    }
+    .searchicon{
+    font-size: 0.45rem;
+    position: absolute;
+    right: 0.2rem;
+    margin-top: 0.05rem;
+    }
+    .right{
+        position: absolute;
+        right: 0.5rem;
+        line-height: 0.65rem !important;
+    }
+    .list-ios{
+        margin-top: 10px;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: none;
+    }
+    ion-label img{
+            position: absolute;
+    right: 0.5rem;
+    top: 0.75rem;
+    height: 0.8rem;
+    }
+.remark{
+    float:left;
+    height:0.3rem;
+    color:#646464;
+    font-size:0.18rem;
+    width:94%;
+}
+.remark .time{
+    margin:0 0.5rem 0 0.3rem;
+}
+.remark .apartment{
+   float:right;
+}
+
 }

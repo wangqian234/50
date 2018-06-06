@@ -61,7 +61,6 @@ export class GoodsoderevaluatePage {
         //this.getNum();
   }
     ionViewWillEnter() {//钩子函数，将要进入页面的时候触发
-      //alert("进来了");
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -81,11 +80,10 @@ export class GoodsoderevaluatePage {
       this.evaluateList.trade_Id=this.SD_id;
       this.evaluateList.token = this.token;
       var date = this.evaluateList;
-      console.log("五爷"+JSON.stringify(this.evaluateList));
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
       loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加成功！");
+        alert("添加评论成功！");
         this.navCtrl.setRoot(ShoppinglistPage,{id:4});
       }else if(data.errcode === 40002){
               j--;

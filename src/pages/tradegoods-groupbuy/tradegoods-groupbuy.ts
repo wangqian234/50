@@ -78,7 +78,6 @@ export class TradegoodsGroupbuyPage {
   }
      //实现列表缓慢加载
    getProductList(infiniteScroll){
-    alert("慧敏19号"+this.SD_id+"团测试页码"+this.page);
      switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -118,20 +117,16 @@ export class TradegoodsGroupbuyPage {
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
      console.log("王慧敏"+api);   
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       alert("王慧敏"+JSON.stringify(this.list));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
-        alert("王慧敏"+JSON.stringify(this.list));   
         if(data.list.length<10){
           $('ion-infinite-scroll').css('display','none')
         }else{
             this.page++;
         }
-        if(infiniteScroll){
-          alert("慧敏页码"+this.page);   
+        if(infiniteScroll){  
           infiniteScroll.complete();        //告诉ionic 请求数据完成
           if(data.list.length<10){  /*没有数据停止上拉更新*/
-            alert("王慧敏05-19");
             infiniteScroll.enable(false);
             $('.nomore').css('display','block');
           }
@@ -150,7 +145,6 @@ export class TradegoodsGroupbuyPage {
   }
      //查看详情
    groupbuyEvent(groupbuyid){
-     alert("团购详情"+groupbuyid);
      this.navCtrl.push(TradegoodsGroupbuydetailPage,{gbId:groupbuyid});
    }
 
@@ -164,10 +158,7 @@ export class TradegoodsGroupbuyPage {
   }
     getdetaillist(infiniteScroll){
      var j=3;
-     alert(this.SD_id);
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
-     console.log("王慧敏"+api);
-     alert("测试页码"+this.page);   
      this.http.get(api).map(res => res.json()).subscribe(data =>{
      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/

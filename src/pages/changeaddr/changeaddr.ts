@@ -62,7 +62,8 @@ export class ChangeaddrPage {
         this.addresslist = data.list;
         console.log(this.addresslist);
       } else {
-        alert(data.errmsg)
+        alert("获取地址列表失败！")
+        console.log(data.errmsg)
       }
     });
 
