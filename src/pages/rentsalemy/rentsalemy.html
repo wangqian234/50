@@ -9,6 +9,8 @@
 					<li><a class="px24 zyyge">我的租赁信息</a></li>  
 				</ul>
 			</div>
+			<div id="delete" class="chacha">批量删除</div>
+			<div id="over" style="display:none" class="chacha">完成</div>
 		</div>
 	</div>
  </div>
@@ -23,7 +25,7 @@
  <!--<img (tap)="delMyPublish()" src="assets/imgs/delete.png">-->
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of mylist" >
-				<ion-checkbox  [(ngModel)]="house.checked" style="float:left;margin:0.6rem  0.2rem 0 0;"></ion-checkbox>
+				<ion-checkbox class="ioncheck" [(ngModel)]="house.checked" style="float:left;margin:0.6rem  0.2rem 0 0;display:none"></ion-checkbox>
 				<div style="float:left;width:90%;"  (tap)="goRentsaleInfo(house.id,house.type)">
 				<div class="lieb_img" style="width:30%"><img src="{{house.imgurl}}"></div>
 				<div class="lieb_txt">
@@ -44,5 +46,21 @@
   <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+    <div class="dib_daoh_b" id="deletebutton" style="display:none">
+	<div class="gouwuc_ gouwuc_yem">
+		<div class="zuo" >
+			<i class="i1" (tap)="checkAll()">
+				<ion-checkbox style="padding:0.25rem"  disabled="true" color="danger" [(ngModel)]='isChencked'></ion-checkbox>
+			</i>
+		</div>
+		<div class="zhong"><p style="float:left;margin-left:2px">全选</p></div>
+		<div class="you">
+			<div class="goum">
+				<a style="background-color:#488aff" (tap)="clickme()">立即删除</a>  
+			</div>
+		</div>
+	</div>
+</div>
   
 </ion-content>

@@ -1,37 +1,27 @@
 <ion-content style="background-color:#f5f5f5">
-<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+  <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh" (click)="backTo()">
-        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
-				<ul>
-					<li><a class="px24">费用预存</a></li>  
-				</ul>
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<ion-option value="add">--为其他房屋缴费--</ion-option>
+					</ion-select>
+				</ion-item>
 			</div>
-		</div> 
+		</div>
 	</div>
-</div>
-
-<div class="select" style="background-color:white;margin-top:10px">
-    <ion-item>
-      <ion-label>请选择房屋</ion-label>
-        <ion-select (ionChange)="changeRoom(roomid)" style="max-width:74%;" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-        <!--<ion-option selected value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
-        <ion-option  *ngFor="let roomidlist of roomidlist" value={{roomidlist.id}}>{{roomidlist.name}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
-        <ion-option value="add">--为其他房屋缴费--</ion-option>
-        </ion-select>
-    </ion-item>
-</div>
+  </div>
 
 <div id="selectOther" style="margin-top:10px;display:none">
-      <ion-item>
+      <!--<ion-item>
       <ion-label>请选择房屋</ion-label>
         <ion-select [(ngModel)]="projectId" (ngModelChange)="getEdifice(projectId)"  style="max-width:74%;" cancelText="取消" okText="确认">
         <ion-option selected >请选择小区</ion-option>
         <ion-option *ngFor="let list of projectlist" value={{list.id}}>{{list.name}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
     </ion-item>
@@ -41,8 +31,6 @@
         <ion-select  [(ngModel)]="edificeId" (ngModelChange)="getRoom(edificeId)" style="max-width:74%;" cancelText="取消" okText="确认">
         <ion-option selected value="qxz">请选择楼栋</ion-option>
         <ion-option *ngFor="let edificelist of edificelist" value={{edificelist.id}}>{{edificelist.name}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
-        <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
     </ion-item>
           <ion-item>
@@ -51,10 +39,40 @@
         <ion-select   [(ngModel)]="roomId"  style="max-width:74%;" cancelText="取消" okText="确认">
         <ion-option selected >请选择房屋</ion-option>
         <ion-option *ngFor="let item of roomlist"  value={{item.id}}> {{item.code}}</ion-option>
-        <!--<ion-option *ngFor="let room of roomname" value="{{room.Id}}" >{{room.Project_Name}}-{{room.Edifice_Name}}-{{Code}}</ion-option>-->
         <ion-option value="add">--为其他房屋缴费--</ion-option>
         </ion-select>
-    </ion-item>
+    </ion-item>-->
+<div class="addressdiv">
+  <div class="denglu_k" id="base">
+    	<div class="denglk denglk_l">
+		<div class="mz px24">请选择小区：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" class="chooseimg">
+        <select name="project" [(ngModel)]="projectId" (ngModelChange)="getEdifice(projectId)" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let list of projectlist" value={{list.id}}>{{list.name}}</option>
+        </select>
+    </form>
+	</div>
+  	<div class="denglk denglk_l">
+		<div class="mz px24">请选择楼栋：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" class="chooseimg">
+        <select name="edifice" [(ngModel)]="edificeId" (ngModelChange)="getRoom(edificeId)" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let edificelist of edificelist" value={{edificelist.id}}>{{edificelist.name}}</option>
+        </select>
+    </form>
+	</div>
+  	<div class="denglk denglk_l">
+		<div class="mz px24">请选择房间：</div>
+    <form class="choose">
+        <img src="assets/imgs/jiantou.png" class="chooseimg">
+        <select name="room" [(ngModel)]="roomId" (ngModelChange)="getEdifice()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+          <option *ngFor="let item of roomlist"  value={{item.id}}> {{item.code}}</option>
+        </select>
+    </form>
+	</div>
+</div>
+</div>
 </div>
 
 <div class="otherUser_title">
@@ -94,7 +112,7 @@
 
   <div class="otherUser_title">
     <div class="user_titlediv">
-      <div class="user_bigo">提示：您可以根据往月费用，往不同账户中存入预存金额，系统每月会根据实际消费金额定向扣除（水电费抄表到户除外）</div>
+      <div class="user_bigo">提示：您可根据往月费用，向不同账户预存一定金额，系统会根据您的具体消费金额定向扣除。</div>
     </div>
   </div>
 

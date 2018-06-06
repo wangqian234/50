@@ -30,6 +30,22 @@ export class RentsalemyPage {
   ionViewDidLoad() {
     this.clickCSS();
     this.myPublish(1);
+    this.getDelete();
+  }
+
+  getDelete(){
+    $("#delete").click(function(){
+      $("#delete").css("display","none");
+      $("#over").css("display","block");
+      $(".ioncheck").css("display","block");
+      $("#deletebutton").css("display","block");
+    });
+    $("#over").click(function(){
+      $("#delete").css("display","block");
+      $("#over").css("display","none");
+      $(".ioncheck").css("display","none");
+      $("#deletebutton").css("display","none");
+    })
   }
 
   myPublish(type){
