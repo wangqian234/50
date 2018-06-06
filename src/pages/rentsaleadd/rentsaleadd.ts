@@ -21,7 +21,7 @@ export class RentsaleaddPage {
   public aa;
   public Code;
   public RSadd = {
-    type: '0',
+    type: '1',
     title: '',
     space: '',
     room: '',
@@ -81,6 +81,7 @@ export class RentsaleaddPage {
     console.log('ionViewDidLoad RentsaleaddPage');
   }
   ifontime(type) {
+    this.RSadd.type = type;
     $("#typediv ul li").removeAttr("class");
     var span = "#typediv ul li:nth-of-type(" + type + ")"
     $(span).attr("class", "activety");
