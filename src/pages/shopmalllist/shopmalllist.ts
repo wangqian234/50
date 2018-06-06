@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 //商品详情页
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 import { LoadingController } from 'ionic-angular';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'page-shopmalllist',
   templateUrl: 'shopmalllist.html',
@@ -17,7 +19,8 @@ export class ShopmalllistPage {
   public aa =this.config.apiUrl;
   //跳转页面
   public  ShopgoodsinfoPage = ShopgoodsinfoPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  public TabsPage = TabsPage;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
   public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController) {
   }
 
@@ -114,6 +117,10 @@ export class ShopmalllistPage {
       //加载更多
   doLoadMore(infiniteScroll){
     this.reserchGoods(infiniteScroll);
+  }
+
+    backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }
