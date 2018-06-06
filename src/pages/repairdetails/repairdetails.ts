@@ -37,7 +37,7 @@ export class RepairdetailsPage {
   public finish:boolean;
   public evaluateContent:boolean;
   public app:boolean;
-  public finishRepaired:boolean;
+  public finishRepaired:any;
 public background:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
@@ -55,6 +55,8 @@ public background:boolean;
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepairdetailsPage');
+    this.div = document.getElementById('background');
+    this.finishRepaired=document.getElementById('finishRepaired')
   }
   ionViewDidEnter(){
     this.getrepairdetails();
@@ -187,16 +189,16 @@ public background:boolean;
  }
  //工单处理
  showFinishPopup(){
-  //this.finishRepaired.style.display = "block"
+  this.finishRepaired.style.display = "block"
  }
  closeFinishPopup(){
-    //this.finishRepaired.style.display = "none"
+    this.finishRepaired.style.display = "none"
  }
  showPopup(){
-  //this.div.style.display = "block"; 
+  this.div.style.display = "block"; 
  }
   closePopup(){
-   //this.div.style.display = "none";
+   this.div.style.display = "none";
  }
  //跳转到
  showevaluate(){

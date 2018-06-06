@@ -19,18 +19,18 @@
     <div class="searchTool">
         <form class="choose">
            <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.23rem;right:5px;width:0.17rem;height:0.15rem;margin-right: 0.08rem;">
-          <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;" [(ngModel)]="type"  >
-          <option  selected  value="-1"> 全部</option>
-          <option value="4">公共报修</option>
-          <option value="0">业主维修</option>
-          <option value="1" >投诉</option>
-          <option value="2">建议</option>
-          <option value="3">其他</option>
+          <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;" [(ngModel)]="type" (ngModelChange)="getNewsList()" >
+          <option  selected  value="0"> 全部</option>
+          <option class = "11" value="1">通知</option>
+          <option class = "22" value="2">温馨提示</option>
+          <option class = "33"value="3" >公摊公式</option>
+          <option  class = "44"value="4">社区资讯</option>
+          <option class = "55"value="5">生活资讯</option>
           </select>
         </form>
         <input type="search" [(ngModel)]="keywords" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
         <input type="button" value class="searchBtn">
-        <ion-icon class="searchicon" name="ios-search-outline"></ion-icon>
+        <ion-icon (click)="getNewsList()" class="searchicon" name="ios-search-outline"></ion-icon>
     </div>
   </div>
 

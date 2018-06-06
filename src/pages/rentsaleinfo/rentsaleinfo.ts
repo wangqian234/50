@@ -11,7 +11,7 @@ import $ from 'jquery'
   templateUrl: 'rentsaleinfo.html',
 })
 export class RentsaleinfoPage {
-
+  bianji:boolean;
   rental_id = '';
   type='';
   rentsale={};
@@ -25,10 +25,10 @@ export class RentsaleinfoPage {
       this.rental_id = this.navParams.get('houseId');
       this.type = this.navParams.get('houseType');
       if(this.navParams.get('quFen')==1){
-        $('.iondiv').css('display','none');  
+        this.bianji = false
         this.getRentSaleInfo();
       }else if(this.navParams.get('quFen')==0){
-        $('.iondiv').css('display','block');  
+        this.bianji = true;
         this.myPublishInfo();
       }    
     }

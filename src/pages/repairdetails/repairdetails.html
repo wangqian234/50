@@ -21,13 +21,8 @@
     <img class="pic" src="assets/imgs/08.jpg" />
   </div>-->
 </div>
-<<<<<<< HEAD
 <p class="detail1">处理进度如下：</p>
 <div id="app" *ngIf = "app" >
-=======
-<div id="app" style="display: none">
-<p class="detail1">处理进度如下：</p>
->>>>>>> dcc30ec00b97664572534073c20525d2554ca6a4
     <ul>
         <li *ngFor="let item of disposememo">
           {{item}}
@@ -46,7 +41,7 @@
 <button  *ngIf = "finish" id="finish"  ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
 <button   *ngIf = "evaluate" id="evaluate" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
-    <div id="background" *ngIf = "background" class="back">  
+    <div id="background"  class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closePopup()">×</span>  
@@ -73,7 +68,7 @@
     </div>  
     
         <!-- 弹窗内容开始 -->  
-    <div id="finishRepaired"  *ngIf = "finishRepaired" class="back">  
+    <div id="finishRepaired"   class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closeFinishPopup()">×</span>  

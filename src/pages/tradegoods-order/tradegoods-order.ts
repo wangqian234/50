@@ -36,7 +36,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          this.list=data.list;
-         alert(data);
          console.log(data);
      } else {
         alert(data.errmsg);

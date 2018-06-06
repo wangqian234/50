@@ -13,7 +13,7 @@ import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
 })
 export class RentsalemyPage {
 
-
+  checked:false;
   pageSize = 10;
   pageIndex = 1;
   curCityCode = "4403"
@@ -77,7 +77,7 @@ export class RentsalemyPage {
             }
           }
       } else {
-        alert(data.errmsg+"000")
+        alert(data.errmsg)
       }
     });
           
@@ -92,12 +92,23 @@ export class RentsalemyPage {
   }
   //批量删除
   delMyPublish(){
+    var myId=[];
+    for(var i=0;i<this.mylist.length;i++){
+      if(this.mylist[i].checked==true){
+        var aa = this.mylist[i].id
+        myId.push(aa);
+      }
+    }
+    this.del.ids=myId.join(',');
+    console.log(this.del.ids)
+    this.del.token = this.storage.get('token')
     var api = this.config.apiUrl +　'/api/rental/del';
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        alert(data.errmsg+"删除成功")
+        this.myPublish('')
+        alert("删除成功")
       }else{
-        alert(data.errmsg+"删除失败")
+        alert("删除失败")
       }
     })
   }

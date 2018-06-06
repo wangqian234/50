@@ -106,7 +106,6 @@ export class TradegoodsReapPage {
   }
   //修改商品退款申请
   modifyRefundApplicationEvent(){
-      alert("评价修改");
       var j=3;
       var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;

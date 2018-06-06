@@ -39,7 +39,6 @@ export class TradegoodsRefundPage {
     if(this.navParams.get('item')){
       this.list = this.navParams.get('item')
     }
-    console.log(this.list)
     // this.getdetaillist();
   }
     getRem(){
@@ -54,7 +53,6 @@ export class TradegoodsRefundPage {
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list=data.model ;
          console.log(JSON.stringify(data))
-         //alert("王慧敏"+JSON.stringify(this.list) );
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -62,7 +60,6 @@ export class TradegoodsRefundPage {
                 this.getdetaillist();
           }
       } else {
-        alert(data.errmsg);
         alert("请求失败");
      }
      })

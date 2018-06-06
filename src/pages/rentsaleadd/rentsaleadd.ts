@@ -30,14 +30,13 @@ export class RentsaleaddPage {
     priceMin: '0',
     priceMax: '',
     phone: '',
-    nature: '0',
+    nature: '1',
     district: '',
     describe: '',
     contacts: '',
     street: '',
     region: '',
     city: '',
-    area:'',
   }
   citys = ["北京", "天津", "石家庄", "唐山", "秦皇岛", "邯郸", "邢台", "保定", "张家口", "承德", "衡水", "廊坊", "沧州", "太原", "大同", "阳泉", "长治", "晋城", "朔州", "晋中", "运城", "忻州",
     "临汾", "吕梁", "呼和浩特", "包头", "乌海", "赤峰", "通辽", "鄂尔多斯", "呼伦贝尔", "巴彦淖尔", "乌兰察布", "兴安盟", "锡林郭勒盟", "阿拉善盟", "沈阳", "大连", "鞍山", "抚顺", "本溪", "丹东",
@@ -69,14 +68,13 @@ export class RentsaleaddPage {
     } else {
       this.navCtrl.push(LoginPage);
     }
-    this.ifontime(1);
     if (this.navParams.get('item')) {
       this.RSadd = this.navParams.get('item')
-      var address = this.RSadd.area.split('|')
-      this.RSadd.city = address[0];
-      this.RSadd.region = address[1];
-      this.RSadd.street = address[2];
-      console.log(address)
+      this.ifontime(this.RSadd.type)
+      this.RSadd.nature = this.RSadd.nature
+      this.RSadd.priceMin = "0"
+    }else{
+      this.ifontime(1);
     }
   }
   ionViewDidLoad() {
@@ -97,40 +95,47 @@ export class RentsaleaddPage {
   }
 
   getRSInfo() {
+   if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
+      alert('请输入正确的手机号码');
+      return;
+    }
     if (!this.navParams.get('item')) {  //判断添加还是修改
       var j = 3;
       let loading = this.loadingCtrl.create({
         showBackdrop: true,
       });
       loading.present();
-      var RSadd = {
-        "token": this.storage.get("token").toString(),
-        "type": this.RSadd.type.toString(),
-        "title": this.RSadd.title.toString(),
-        "space": this.RSadd.space.toString(),
-        "room": this.RSadd.room.toString(),
-        "restroom": this.RSadd.restroom.toString(),
-        "halls": this.RSadd.halls.toString(),
-        "priceMin": this.RSadd.priceMin.toString(),
-        "priceMax": this.RSadd.priceMax.toString(),
-        "phone": this.RSadd.phone.toString(),
-        "nature": this.RSadd.nature.toString(),
-        "district": this.RSadd.district.toString(),
-        "describe": this.RSadd.describe.toString(),
-        "contacts": this.RSadd.contacts.toString(),
-        "street": this.RSadd.street.toString(),
-        "region": this.RSadd.region.toString(),
-        "city": this.RSadd.city.toString(),
+      var data = {
+        "token": this.storage.get("token"),
+        "type": this.RSadd.type,
+        "title": this.RSadd.title,
+        "space": this.RSadd.space,
+        "room": this.RSadd.room,
+        "restroom": this.RSadd.restroom,
+        "halls": this.RSadd.halls,
+        "priceMin": this.RSadd.priceMin,
+        "priceMax": this.RSadd.priceMax,
+        "phone": this.RSadd.phone,
+        "nature": this.RSadd.nature,
+        "district": this.RSadd.district,
+        "describe": this.RSadd.describe,
+        "contacts": this.RSadd.contacts,
+        "street": this.RSadd.street,
+        "region": this.RSadd.region,
+        "city": this.RSadd.city,
       }
       var api = this.config.apiUrl + "/api/rental/add";
       console.log(this.RSadd)
-      this.http.post(api, this.RSadd).map(res => res.json()).subscribe(data => {
+      this.http.post(api, data).map(res => res.json()).subscribe(data => {
         loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert(data.errmsg)
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
-          this.getRSInfo();
+          j--
+          if(j>0){
+            this.config.doDefLogin();
+            this.getRSInfo();
+          }          
         } else {
           alert(data.errmsg);
         }
@@ -141,31 +146,31 @@ export class RentsaleaddPage {
         showBackdrop: true,
       });
       loading.present();
-      var RSadd = {
-        "token": this.storage.get("token").toString(),
-        "type": this.RSadd.type.toString(),
-        "title": this.RSadd.title.toString(),
-        "space": this.RSadd.space.toString(),
-        "room": this.RSadd.room.toString(),
-        "restroom": this.RSadd.restroom.toString(),
-        "halls": this.RSadd.halls.toString(),
-        "priceMin": this.RSadd.priceMin.toString(),
-        "priceMax": this.RSadd.priceMax.toString(),
-        "phone": this.RSadd.phone.toString(),
-        "nature": this.RSadd.nature.toString(),
-        "district": this.RSadd.district.toString(),
-        "describe": this.RSadd.describe.toString(),
-        "contacts": this.RSadd.contacts.toString(),
-        "street": this.RSadd.street.toString(),
-        "region": this.RSadd.region.toString(),
-        "city": this.RSadd.city.toString(),
+      var data = {
+        "token": this.storage.get("token"),
+        "type": this.RSadd.type,
+        "title": this.RSadd.title,
+        "space": this.RSadd.space,
+        "room": this.RSadd.room,
+        "restroom": this.RSadd.restroom,
+        "halls": this.RSadd.halls,
+        "priceMin": this.RSadd.priceMin,
+        "priceMax": this.RSadd.priceMax,
+        "phone": this.RSadd.phone,
+        "nature": this.RSadd.nature,
+        "district": this.RSadd.district,
+        "describe": this.RSadd.describe,
+        "contacts": this.RSadd.contacts,
+        "street": this.RSadd.street,
+        "region": this.RSadd.region,
+        "city": this.RSadd.city,
       }
       var api = this.config.apiUrl + "/api/rental/edit";
-      console.log(this.RSadd)
-      this.http.post(api, this.RSadd).map(res => res.json()).subscribe(data => {
+      console.log(data)
+      console.log("ghl")
+      this.http.post(api, data).map(res => res.json()).subscribe(data => {
         loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert(data.errcode)
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
           this.getRSInfo();
