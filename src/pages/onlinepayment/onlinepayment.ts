@@ -190,8 +190,9 @@ export class OnlinepaymentPage {
           if(data.errcode===0 ){
             this.outTradeNo = data.errmsg;
             console.log(data)
+            location.href = data.model.mweb_url;
            // this.checkPayment()
-            this.getPayList()
+           // this.getPayList()
           }else{
             alert(data.errmsg+"支付失败")
           }

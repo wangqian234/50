@@ -122,6 +122,11 @@ export class RentsalemyPage {
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("删除成功")
+      this.myPublish(this.type);
+      $("#delete").css("display","block");
+      $("#over").css("display","none");
+      $(".ioncheck").css("display","none");
+      $("#deletebutton").css("display","none");
       }else{
         alert("删除失败")
       }

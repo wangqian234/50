@@ -30,18 +30,16 @@
 		</div>
 	</div>
 </div>
+
 <div class="shopcontentdiv">
-
 <!-- 轮播图 -->
-
-        <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
-            <ion-slide *ngFor="let item of lunboList">
-               <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
-
+        <div class="lunbo_item">
+        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
+            <ion-slide *ngFor="let item of tuangouList" (click)="goGoodsInfo(item['url'])">
+               <img class="img1" src="{{item.img}}"  />
            </ion-slide>         
         </ion-slides>
-
-  
+        </div>
    <!-- 团购图标-->
   <div class="tupian-div">
         <img [navPush]="SalePage" src="assets/imgs/qianggou.png">
