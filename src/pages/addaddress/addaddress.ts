@@ -33,9 +33,9 @@ export class AddaddressPage {
 
   public addressList={
     name : '',
-    provinceVal:'',
-    cityVal:'',
-    districtVal:'',
+    provinceVal:'pre',
+    cityVal:'pre',
+    districtVal:'pre',
     province:'',
     city:'',
     district:'',

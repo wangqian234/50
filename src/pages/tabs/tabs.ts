@@ -22,7 +22,7 @@ import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  @ViewChild('mainTabs') tabRef: Tabs;
+  @ViewChild('mainTabs') tabs: Tabs;
   @ViewChild('mainTabs2') tabRef2: Tabs;
  
   tab1Root = HomePage;

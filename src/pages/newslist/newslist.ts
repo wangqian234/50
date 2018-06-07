@@ -40,10 +40,13 @@ export class NewslistPage {
   }
   //获取最新资讯全部列表
     getNews(infiniteScroll){
-      let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
+      // let loading = this.loadingCtrl.create({
+	    // showBackdrop: true,
+      // enableBackdropDismiss: true,
+      // });
+      // loading.present();
+        $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
       if(this.navParams.get("act")){
         this.act = this.navParams.get("act");
         if(this.act=='gs'){
@@ -69,7 +72,9 @@ export class NewslistPage {
         var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -133,6 +138,10 @@ export class NewslistPage {
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+  }
+
+  doRefresh(){
+    
   }
 
 }

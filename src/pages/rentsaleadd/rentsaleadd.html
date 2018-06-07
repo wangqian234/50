@@ -35,7 +35,7 @@
   </div>
 
   <ion-list style="background-color:white;margin:0 0 1rem 0;">
-    <ion-item>
+    <ion-item style="margin-bottom: -0.13rem">
       <div class="repairList">
         <div class="repairType">标&ensp;&ensp;&ensp;&ensp;题：</div>
         <input [(ngModel)]="RSadd.title" type="text" />
@@ -44,15 +44,15 @@
     <ion-item class="fang">
       <div class="repairList">
         <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>一手房</span></div>
-        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" vaule="2" /><span>二手房</span></div>
+        <div style="width:1rem;float:left;margin: 0.15rem 0.15rem 0 0"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span class="spanin">一手房</span></div>
+        <div style="width:1rem;float:right;margin: 0.15rem 0.85rem 0 0rem"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" vaule="2" /><span class="spanin">二手房</span></div>
       </div>
     </ion-item>
     <ion-item class="zu">
       <div class="repairList">
         <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
-        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
+        <div style="width:1rem;float:left;margin: 0.15rem 0.15rem 0 0"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span class="spanin">整租</span></div>
+        <div style="width:1rem;float:right;margin: 0.15rem 0.85rem 0 0rem"><input name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span class="spanin">合租</span></div>
       </div>
     </ion-item>
 

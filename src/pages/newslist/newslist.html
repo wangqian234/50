@@ -1,5 +1,4 @@
-<ion-content>
-  <div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
+<div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -13,6 +12,35 @@
 		</div> 
 	</div>
 </div>
+
+<ion-content>
+
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+
+<ion-refresher (ionRefresh)="doRefresh()">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="下拉刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新中"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 
   <div class="searchdiv">
@@ -58,7 +86,7 @@
     <div class="zixun_content2" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
 		
-	<img  style="width:100%;height:2.5rem;" src="{{config.img}}{{newList.imgurl}}"/>
+	<img  style="width:100%;height:3rem;" src="{{config.img}}{{newList.imgurl}}"/>
   <div style="width:100%;height:0.48rem;float:left;background-color: rgba(129,129,129,0.8);color:white;padding-top:0.1rem;margin-top: -0.48rem;"><span style="margin:0 0 0 0.2rem">{{newList.topic}}</span></div>
 		</div>
 	</div>

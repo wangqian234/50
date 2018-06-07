@@ -30,17 +30,23 @@
 		</div>
 	</div>
 </div>
-<div class="shopcontentdiv">
+
 
 <!-- 轮播图 -->
-
-        <ion-slides *ngIf="lunboList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
+	<div class="lunbo_item">
+        <ion-slides *ngIf="lunboList.length>0" pager loop="true" autoplay="3000">
             <ion-slide *ngFor="let item of lunboList">
-               <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
+               <img src={{item.img}} />
+          </ion-slide>
+		</ion-slides>
+        </div>
 
-           </ion-slide>         
-        </ion-slides>
-
+		<!--<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
+			<ion-slide *ngFor="let item of focusList" (click)="getInfo(item.url)">
+				<img src={{config.img}}{{item.imgurl}} />
+			</ion-slide>
+		</ion-slides>-->
+<div class="shopcontentdiv">
   
    <!-- 团购图标-->
   <div class="tupian-div">
@@ -64,7 +70,7 @@
               <!--图标遍历-->          
         <ul class="facediv" >
             <li *ngFor= "let item of tubList;let i = index">   
-                    <div (tap)="getshoplist(item['id'],i)">
+                    <div (click)="getshoplist(item['id'],i)">
                     <a ><img src="{{item.img}}"/></a>
                     <p>{{item.name}}</p>                   
                     </div>
