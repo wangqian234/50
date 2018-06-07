@@ -8,7 +8,7 @@
             <input id="sos_tanc" type="search" action="javascript:return true;" (focus)="searchBoxFn()" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="找房不麻烦，有我来帮忙">
             <img (click)="doReserch()" src="assets/imgs/sos.png">
         </div>
-		<div class="dengl" [navPush]="RentsalemyPage">
+		<div class="dengl" (click)="goRentsalemy()">
 			<div class="caid_img" id="zhu_caid"><img src="assets/imgs/person.png"></div>
 		</div>
   </div>
@@ -44,7 +44,7 @@
 					<p>新房</p>
 				</a>
 			</li>
-			<li [navPush]="RentsaleaddPage">
+			<li (click)="goRentsaleadd()">
 				<a href="javascript:;">
 					<h1><img src="assets/imgs/public.png"></h1>
 					<p>发布信息</p>

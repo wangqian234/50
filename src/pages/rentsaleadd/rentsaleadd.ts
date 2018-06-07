@@ -70,8 +70,13 @@ export class RentsaleaddPage {
     }
     if (this.navParams.get('item')) {
       this.RSadd = this.navParams.get('item')
+      console.log(this.navParams.get('item'))
       this.ifontime(this.RSadd.type)
-      this.RSadd.nature = this.RSadd.nature
+      // if(this.RSadd.nature == '1'){
+      //  $("input[name='radiofang']").eq(0).attr("checked","checked");
+      //   }else if(this.RSadd.nature=='2'){
+      //  $("input[name='radiofang']").eq(1).attr("checked","checked");
+      //  }
       this.RSadd.priceMin = "0"
     }else{
       this.ifontime(1);
@@ -126,8 +131,6 @@ export class RentsaleaddPage {
         "city": this.RSadd.city,
       }
       var api = this.config.apiUrl + "/api/rental/add";
-      console.log(data)
-      console.log(this.storage.get('token'))
       this.http.post(api, data).map(res => res.json()).subscribe(data => {
         loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
