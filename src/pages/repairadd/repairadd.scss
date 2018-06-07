@@ -10,10 +10,13 @@ page-repairadd {
         float: left;
         font-size: 0.25rem;
         width:25%;
+        color: #6d6d6d;
     }
     .repair{
         font-size: 0.25rem;
         width:25%;
+        line-height: 0.3rem;
+        color: #979797;
     }
     .choose{
         width:75%; 
@@ -85,6 +88,22 @@ page-repairadd {
     .item-ios.item-block .item-inner{
         border: none;
     }
+    textarea::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+ /* WebKit browsers */   
+color: #bbbbbb;   
+}   
+input:-moz-placeholder, textarea:-moz-placeholder {   
+/* Mozilla Firefox 4 to 18 */   
+color: #bbbbbb;   
+}   
+input::-moz-placeholder, textarea::-moz-placeholder {   
+ /* Mozilla Firefox 19+ */   
+color: #bbbbbb;   
+}   
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {   
+ /* Internet Explorer 10+ */   
+color: #bbbbbb;   
+}
 
 }
 

@@ -71,6 +71,7 @@ page-rentsaleadd {
     }
     .label-ios {
         margin: 7px 8px 7px 0;
+        color: #818181;
     }
     .button-ios{
         height:0.8rem;
@@ -84,7 +85,7 @@ page-rentsaleadd {
     }
 
     .activety {
-    border-bottom: 2px solid #2979FF;
+    border-bottom: 1px solid #2979FF;
     a{
     color:#2979FF;
     }
@@ -144,6 +145,7 @@ color:#818181;
 }
 
 
+
 .item-ios .radio-ios{
     border: solid 1px red;
     border-radius: 50%;
@@ -151,6 +153,14 @@ color:#818181;
   height:18px;
   padding-bottom:0.2rem;
 }
+
+ .spanin{
+     display: block;
+    position: absolute;
+    margin-top: -0.23rem;
+    margin-left: 0.6rem;
+ }
+
 }
 
 

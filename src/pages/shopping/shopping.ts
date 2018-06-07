@@ -76,6 +76,7 @@ export class ShoppingPage {
   public changePlace = "";
   public shopKeyList = [];
    HomePage = HomePage;
+   tuiList;
 
 
   //定义congfig中公共链接的变量aa
@@ -101,6 +102,15 @@ export class ShoppingPage {
       if(this.storage.get("shopKewWords")){
         this.shopKeyList = this.storage.get("shopKewWords");
       }
+    }
+    ionViewWillEnter(){
+             this.tuiList = [
+     {"imgurl":"assets/imgs/08.jpg"},
+     {"imgurl":"assets/imgs/back.png"},
+     {"imgurl":"assets/imgs/fee.png"},
+     {"imgurl":"assets/imgs/fanh.png"},
+     {"imgurl":"assets/imgs/gongyi.png"},
+   ]
     }
     //获取商城首页
     getShop(){
@@ -278,6 +288,12 @@ export class ShoppingPage {
   }
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
+  }
+
+  gotoShopGood(id){
+  this.navCtrl.push('ShopgoodsinfoPage',{
+    id:id
+  })
   }
 
 }

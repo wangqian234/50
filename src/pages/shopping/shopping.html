@@ -62,7 +62,7 @@
               <!--图标遍历-->          
         <ul class="facediv" >
             <li *ngFor= "let item of tubList;let i = index">   
-                    <div (tap)="getshoplist(item['id'],i)">
+                    <div (click)="getshoplist(item['id'],i)">
                     <a ><img src="{{item.img}}"/></a>
                     <p>{{item.name}}</p>                   
                     </div>

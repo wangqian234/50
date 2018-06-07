@@ -38,6 +38,7 @@
 						<form class="choose">
 								<img src="assets/imgs/jiantou.png" class="chooseimg">
 								<select name="provinces" [(ngModel)]="addressList.provinceVal" (ngModelChange)="getCities()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+									<option  value="pre">请选择您所在的省份</option>
 									<option *ngFor="let provs of provinces"  value={{provs.code}}>{{provs.name}}</option>
 								</select>
 						</form>
@@ -47,6 +48,7 @@
 						<form class="choose">
 								<img src="assets/imgs/jiantou.png" class="chooseimg">
 								<select name="cities" [(ngModel)]="addressList.cityVal"  (ngModelChange)="getDistricts()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+									<option  value="pre">请选择您所在的城市</option>
 									<option *ngFor="let city of cities" value={{city.code}}>{{city.name}}</option>
 								</select>
 						</form>
@@ -56,6 +58,7 @@
 						<form class="choose">
 								<img src="assets/imgs/jiantou.png" class="chooseimg">
 								<select name="districts"  [(ngModel)]="addressList.districtVal" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+									<option  value="pre">请选择您所在的县区</option>
 									<option *ngFor="let dis of districts" value={{dis.code}}>{{dis.name}}</option>
 								</select>
 						</form>
@@ -65,7 +68,7 @@
 						<input type="text" [(ngModel)]='addressList.address'>
 					</div> 
 					<div class="denglk denglk_l">
-						<div class="mz px22">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编：</div>
+						<div class="mz px22">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编：</div>
 						<input type="text" [(ngModel)]='addressList.code'>
 					</div>
 				</div>

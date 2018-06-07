@@ -21,7 +21,7 @@
 <!--头部--> 
 
 <!--商品列表--> 
-<ul class="shangp_lieb_k" style="padding:10px;">
+<ul class="shangp_lieb_k" style="padding-top:10px;">
 		<li *ngFor="let item of list"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>

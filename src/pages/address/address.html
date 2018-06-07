@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="boanjk">
-        <div *ngIf="item.cbdefault" class="def">默认地址</div>
+        <div *ngIf="item.cbdefault" class="def" style="margin-left:0.05rem;">默认地址</div>
         <div *ngIf="!item.cbdefault" class="def"><input type="radio" (change)="clickToDef(item.id)"/>设为默认地址</div>
                 <a style="display:inline;"  (click)="editAddress(item)" href="#">编辑&nbsp;<ion-icon style="color:#999999" name="create-outline"></ion-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;
         <a style="display:inline;" (click)="deleteAddress(item.id)">删除&nbsp;<ion-icon style="color:#999999" name="ios-trash"></ion-icon></a>
