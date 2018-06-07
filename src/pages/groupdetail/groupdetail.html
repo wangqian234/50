@@ -39,7 +39,8 @@
 	</a>
 </div>
 
-<div class="banb" style="height:0.87rem" *ngIf="dataGlist.length>0">
+<div style="height:auto" class="banb" *ngIf="dataGlist.length>0">
+	<div class="gtitle">可直接参与拼团</div>
 	<ul *ngFor="let itemg of dataGlist">
 		<img style="height:0.45rem;position: absolute;left: 0.2rem;" src="assets/imgs/groupperson.png">		
 		<p class="font"><em class="guige" style="font-size:0.24rem">{{itemg.usermobile}}</em></p>

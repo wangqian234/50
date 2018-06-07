@@ -50,9 +50,16 @@ page-onlinepayment {
     ion-list{
         margin-top: 0.2rem;
     }
+    .gouwuc_yem .zhong p em{
+        color: #2979FF;
+    }
 
         .toub_beij_zy{
     border-bottom: solid 1px #2979FF !important;
+    }
+    .checkbox-ios-danger .checkbox-checked{
+        border-color: #2979FF !important;
+    background-color: #2979FF !important;
     }
     // .item-ios.item-block .item-inner{
     //     border-bottom: 0.55px solid #2979FF !important;
@@ -100,5 +107,8 @@ page-onlinepayment {
     }
     .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
         border-bottom: 0.55px solid #f5f5f5;
+    }
+    .otherUser_content{
+            margin-top: 0.1rem;
     }
 }

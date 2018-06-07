@@ -22,10 +22,9 @@
       <li class="type" data-nav="payment" (click)="myPublish(3)"><a href="javascript:;">我的求购</a></li>
       <li class="type" data-nav="done" (click)="myPublish(4)"><a href="javascript:;">我的求租</a></li>
   </ul>
- <!--<img (tap)="delMyPublish()" src="assets/imgs/delete.png">-->
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of mylist" >
-				<ion-checkbox class="ioncheck" [(ngModel)]="house.checked" style="float:left;margin:0.6rem  0.2rem 0 0;display:none"></ion-checkbox>
+				<ion-checkbox class="ioncheck" [(ngModel)]="house.checked" (ionChange)="changeChecked()"style="float:left;margin:0.6rem  0.2rem 0 0;display:none"></ion-checkbox>
 				<div style="float:left;width:90%;"  (tap)="goRentsaleInfo(house.id,house.type)">
 				<div class="lieb_img" style="width:30%"><img src="{{house.imgurl}}"></div>
 				<div class="lieb_txt">
@@ -57,7 +56,7 @@
 		<div class="zhong"><p style="float:left;margin-left:2px">全选</p></div>
 		<div class="you">
 			<div class="goum">
-				<a style="background-color:#488aff" (tap)="clickme()">立即删除</a>  
+				<a style="background-color:#488aff" (tap)="delMyPublish()">立即删除</a>  
 			</div>
 		</div>
 	</div>

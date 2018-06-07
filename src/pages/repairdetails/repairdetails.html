@@ -14,7 +14,15 @@
 
 <div>
   <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time}}</p>
-  <p class="repair-state">{{repairdetaillist.statename}}</p>
+  <!--<p class="repair-state">{{repairdetaillist.statename}}</p>-->
+
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待派单'" src="assets/imgs/Statusicon_01.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待评价'" src="assets/imgs/Statusicon_02.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待派工'" src="assets/imgs/Statusicon_03.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='已终止'" src="assets/imgs/Statusicon_04.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='已完成'" src="assets/imgs/Statusicon_05.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='处理中'" src="assets/imgs/Statusicon_06.png">
+
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
   <!--图片遍历-->
   <!--<div>

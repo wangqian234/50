@@ -13,6 +13,7 @@ import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
 })
 export class RentsalemyPage {
 
+  isChencked:boolean;
   checked:false;
   pageSize = 10;
   pageIndex = 1;
@@ -116,12 +117,10 @@ export class RentsalemyPage {
       }
     }
     this.del.ids=myId.join(',');
-    console.log(this.del.ids)
     this.del.token = this.storage.get('token')
     var api = this.config.apiUrl +　'/api/rental/del';
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        this.myPublish('')
         alert("删除成功")
       }else{
         alert("删除失败")
@@ -145,5 +144,36 @@ export class RentsalemyPage {
   backTo(){
     this.navCtrl.pop();
   }
-
+  //选中
+  changeChecked(){
+    if(this.checkNum()==this.mylist.length){
+      this.isChencked = true;
+    }else{
+      this.isChencked = false;
+    }
+  }
+  //选择的数量
+  checkNum(){
+    let num=0;
+    for(var i=0;i<this.mylist.length;i++){
+      if(this.mylist[i].checked==true){
+        num+=1;
+      }
+    }
+    return num;
+  }
+  //全选按钮进行反选
+  checkAll(){
+    if(this.isChencked){
+      for(var i=0;i<this.mylist.length;i++){
+        this.mylist[i].checked = false;
+    }
+    this.isChencked = false;
+   }else{
+    for(var i=0;i<this.mylist.length;i++){
+      this.mylist[i].checked = true;
+    }
+     this.isChencked = true;
+  }
+  }
 }

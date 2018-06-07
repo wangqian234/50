@@ -38,7 +38,6 @@ export class ShopgoodsinfoPage {
     public ShopinfoPage=ShopinfoPage;
     public ShopgoodsinfoPage=ShopgoodsinfoPage;
     public TabsPage = TabsPage;
-
     public sid;
     public wid;
     public mode;

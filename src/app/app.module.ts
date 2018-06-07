@@ -18,8 +18,6 @@ import { LoginPage } from '../pages/login/login';
 //注册
 import { RegisterpasswordPage } from '../pages/registerpassword/registerpassword';
 
-//商品列表
-import { ProductlistPage } from '../pages/productlist/productlist';
 
 //商品详情
 import { PcontentPage } from '../pages/pcontent/pcontent';
@@ -182,7 +180,6 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     TabsPage,
     LoginPage,
     RegisterpasswordPage,
-    ProductlistPage,
     PcontentPage,
     PersonalPage,
     AddressPage,
@@ -264,7 +261,6 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     TabsPage,
     LoginPage,
     RegisterpasswordPage,
-    ProductlistPage,
     PcontentPage,
     PersonalPage,
     AddressPage,

@@ -41,16 +41,27 @@ page-bigsale {
 }
 
 .shangp_lieb_k li .lieb_img{
-  height:2rem;
   width:100%;
   padding-left: 0;
 }
-.shangp_lieb_k li{
+
+.shangp_lieb_k li:nth-child(odd){
   padding:0;
   margin-left: 0;
-  width:48%;
+  width:48.5%;
   background-color: white;
-  margin: 0 1%;
+  margin: 0 1.5% 0 0;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.shangp_lieb_k li:nth-child(even){
+  padding:0;
+  margin-left: 0;
+  width:48.5%;
+  background-color: white;
+  margin: 0 0 0 1.5%;
   margin-bottom: 10px;
   border: none;
   border-radius: 3px;
