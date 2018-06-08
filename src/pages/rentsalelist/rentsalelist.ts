@@ -203,20 +203,20 @@ export class RentsalelistPage {
   backTo(){
     this.navCtrl.pop();
   }
-//    //下拉刷新
-//  doRefresh(refresher) {
-//     console.log('刷新开始', refresher);
-//       setTimeout(() => { 
-//       this.houseInfo=[];
-//       this.pageIndex=1;
-//       this.getSaleInfo("");
-//       //   this.items = [];
-//       //   for (var i = 0; i < 30; i++) {
-//       //    this.items.push( this.items.length );
-//       //  }
-//        console.log('刷新结束');
-//        refresher.complete();
-//      }, 2000);
-//  }
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+      this.houseInfo=[];
+      this.pageIndex=1;
+      this.getSaleInfo("");
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }
