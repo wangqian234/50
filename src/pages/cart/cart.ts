@@ -20,7 +20,7 @@ import { TabsPage } from '../tabs/tabs'
 
 //加载圈
 import { LoadingController } from 'ionic-angular';
-
+import {LoginPage} from '../login/login'
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
@@ -63,19 +63,27 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
+
         $(".ios .tabs .tabbar").css("display","none");
   }
 
   ionViewWillEnter(){
+    
+  
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
      //this.getCartsData('');
   }
   
   ionViewDidEnter() {
-    this.pageIndex = 1;
-    this.list = [];
-    this.getCartsData('');
+      //确认登录状态
+      if(this.storage.get('token')){
+         this.pageIndex = 1;
+         this.list = [];
+         this.getCartsData(''); 
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
   }
 
   getCartsData(infiniteScroll){
@@ -308,6 +316,22 @@ buy(){
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }
+
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.pageIndex = 1;
+         this.list = [];
+         this.getCartsData(''); 
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
    
 
 }

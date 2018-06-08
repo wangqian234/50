@@ -33,17 +33,16 @@
     <div class="bar12"></div>
 </div>
 
-<ion-refresher (ionRefresh)="doRefresh()">
+<ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
         pullingText="下拉刷新"
         refreshingSpinner="circles"
-        refreshingText="正在更新中"
+        refreshingText="正在更新"
         top="1rem;"
         >
       </ion-refresher-content>
   </ion-refresher>
-
 
   <div class="searchdiv">
     <div class="searchTool">

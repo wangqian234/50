@@ -239,26 +239,29 @@ export class ShoppinglistPage {
    }
 
    ionViewWillLoad(){
-     //确认登录状态
-    if(this.storage.get('token')){
 
+   }
+  ionViewDidLoad() {
+         //确认登录状态
+    if(this.storage.get('token')){
+      this.getOrderList('');//实现列表缓存
     } else {
     this.navCtrl.push(LoginPage);
     }
-   }
-  ionViewDidLoad() {
-        this.getOrderList('');//实现列表缓存
-        if(this.navParams.get('id') == undefined){
+        
+   if(this.navParams.get('id') == undefined){
           $("#backTo").css("visibility","hidden")
         }
   }
 /**王慧敏商城 */
      //商城实现列表缓慢加载
    getOrderList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -316,7 +319,9 @@ export class ShoppinglistPage {
     // console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       // alert("王慧敏"+JSON.stringify(this.list));
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
@@ -347,7 +352,7 @@ export class ShoppinglistPage {
             this.getOrderList(infiniteScroll);
           }
         }else{
-          alert(data.errmsg);
+          console.log(data.errmsg);
         }
     })
   }
@@ -538,5 +543,19 @@ export class ShoppinglistPage {
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }
+
+//   //下拉刷新
+//  doRefresh(refresher) {
+//     console.log('刷新开始', refresher);
+//       setTimeout(() => { 
+//         this.getOrderList('');
+//       //   this.items = [];
+//       //   for (var i = 0; i < 30; i++) {
+//       //    this.items.push( this.items.length );
+//       //  }
+//        console.log('刷新结束');
+//        refresher.complete();
+//      }, 2000);
+//  }
 
 }

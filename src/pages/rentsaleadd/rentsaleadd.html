@@ -42,17 +42,28 @@
       </div>
     </ion-item>
     <ion-item class="fang">
-      <div class="repairList">
+      <!--<div class="repairList">
         <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.15rem 0.15rem 0 0"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span class="spanin">一手房</span></div>
-        <div style="width:1rem;float:right;margin: 0.15rem 0.85rem 0 0rem"><input name="radiofang" [(ngModel)]="RSadd.nature" type="radio" vaule="2" /><span class="spanin">二手房</span></div>
-      </div>
+        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><ion-radio  name="radiofang" (click)="getValue('1')"[(ngModel)]="RSadd.nature" type="radio" value="1" ></ion-radio> <span>一手房</span></div>
+        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><ion-radio  name="radiofang" (click)="getValue('2')"[(ngModel)]="RSadd.nature" type="radio" vaule="2" ></ion-radio> <span>二手房</span></div>
+      </div>-->
+      <div class="repairType">房源性质：</div>
+     <ion-list radio-group [(ngModel)]="RSadd.nature" >
+    <ion-item  style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0;color: red">
+        <ion-radio value="1"></ion-radio>
+    </ion-item>
+    <span>一手房</span>
+    <ion-item  style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0;color: red">
+        <ion-radio value="2"></ion-radio> 
+    </ion-item>
+    <span>二手房</span>
+     </ion-list>
     </ion-item>
     <ion-item class="zu">
       <div class="repairList">
         <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input  name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
-        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input  name="radiozu" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
+        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input  name="radiozu"(click)="getValue('1')" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
+        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input  name="radiozu"(click)="getValue('2')" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
       </div>
     </ion-item>
 
@@ -110,12 +121,12 @@
       </div>
     </ion-item>
 
-    <ion-item class="zu">
+    <!--<ion-item class="zu">
       <div class="repairList">
         <div class="repairType">价&ensp;&ensp;&ensp;&ensp;格：</div>
-        <input [(ngModel)]="RSadd.priceMax" style="width:60%" type="number" />&nbsp;万/月
+        <input [(ngModel)]="vb.aa" style="width:60%" type="number" />&nbsp;万/月
       </div>
-    </ion-item>
+    </ion-item>-->
 
     <ion-item>
       <div class="repairList">

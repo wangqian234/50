@@ -143,12 +143,24 @@ color:#818181;
     border-radius:4px;
     border:solid 1px #bbbbbb
 }
+
+
+
+.item-ios .radio-ios{
+    border: solid 1px red;
+    border-radius: 50%;
+    width:18px;
+  height:18px;
+  padding-bottom:0.2rem;
+}
+
  .spanin{
      display: block;
     position: absolute;
     margin-top: -0.23rem;
     margin-left: 0.6rem;
  }
+
 }
 
 
