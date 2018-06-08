@@ -27,16 +27,20 @@ export class RentsaleaddPage {
     room: '',
     restroom: '',
     halls: '',
-    priceMin: '0',
+    priceMin:'0',
     priceMax: '',
     phone: '',
-    nature: '1',
+    nature: '',
     district: '',
     describe: '',
     contacts: '',
     street: '',
     region: '',
     city: '',
+    id:'',
+  }
+  public vb ={
+    type:'',
   }
   citys = ["北京", "天津", "石家庄", "唐山", "秦皇岛", "邯郸", "邢台", "保定", "张家口", "承德", "衡水", "廊坊", "沧州", "太原", "大同", "阳泉", "长治", "晋城", "朔州", "晋中", "运城", "忻州",
     "临汾", "吕梁", "呼和浩特", "包头", "乌海", "赤峰", "通辽", "鄂尔多斯", "呼伦贝尔", "巴彦淖尔", "乌兰察布", "兴安盟", "锡林郭勒盟", "阿拉善盟", "沈阳", "大连", "鞍山", "抚顺", "本溪", "丹东",
@@ -69,15 +73,20 @@ export class RentsaleaddPage {
       this.navCtrl.push(LoginPage);
     }
     if (this.navParams.get('item')) {
+      this.vb = this.navParams.get('item')
+       alert(this.vb.type)
+      this.ifontime(this.vb.type)
       this.RSadd = this.navParams.get('item')
+      if(this.RSadd.nature.toString() == '1' ){
+        this.RSadd.nature='1';
+      }else if(this.RSadd.nature.toString()=='2'){
+        this.RSadd.nature='2';
+      }else{
+        this.RSadd.nature='1';
+      }
+      console.log(this.RSadd)
       console.log(this.navParams.get('item'))
-      this.ifontime(this.RSadd.type)
-      // if(this.RSadd.nature == '1'){
-      //  $("input[name='radiofang']").eq(0).attr("checked","checked");
-      //   }else if(this.RSadd.nature=='2'){
-      //  $("input[name='radiofang']").eq(1).attr("checked","checked");
-      //  }
-      this.RSadd.priceMin = "0"
+      this.RSadd.priceMin = '0';
     }else{
       this.ifontime(1);
     }
@@ -151,7 +160,7 @@ export class RentsaleaddPage {
         showBackdrop: true,
       });
       loading.present();
-      var data = {
+      var xiugai = {
         "token": this.storage.get("token"),
         "type": this.RSadd.type,
         "title": this.RSadd.title,
@@ -169,11 +178,12 @@ export class RentsaleaddPage {
         "street": this.RSadd.street,
         "region": this.RSadd.region,
         "city": this.RSadd.city,
+         "Id":this.RSadd.id,
       }
       var api = this.config.apiUrl + "/api/rental/edit";
-      console.log(data)
+      console.log(xiugai)
       console.log("ghl")
-      this.http.post(api, data).map(res => res.json()).subscribe(data => {
+      this.http.post(api, xiugai).map(res => res.json()).subscribe(data => {
         loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           this.navCtrl.pop();
@@ -186,6 +196,11 @@ export class RentsaleaddPage {
     }
   }
 
+//获取value值
+getValue(value){
+  // this.RSadd.nature = value;
+  // alert(this.RSadd.nature)
+}
   //获取城代码
   getCityCode() {
     var index = $.inArray(this.city, this.citys);

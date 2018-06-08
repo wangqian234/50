@@ -112,7 +112,8 @@ export class RentsalePage {
 	//     showBackdrop: true,
   //   });
   // loading.present();
-
+ $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
 
    this.housType = trade_state;
    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
@@ -168,6 +169,8 @@ export class RentsalePage {
     $('.scroll-content').scrollTop(this.offent.top);
   this.http.get(api).map(res => res.json()).subscribe(data => {
     //loading.dismiss();
+     $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -180,14 +183,18 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     $(".showMore").css("display","none")
     var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
+      // loading.dismiss();
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){

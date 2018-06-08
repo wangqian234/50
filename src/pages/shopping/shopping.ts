@@ -114,16 +114,35 @@ export class ShoppingPage {
     }
     //获取商城首页
     getShop(){
+      $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var api = this.aa+'/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
+      if(data.json['data_Banner'].errcode == 0 &&data.json['data_Banner'].errmsg == 'OK'){
       console.log(data)
-     this.lunboList=data.json["data_Banner"].list;
+     //this.lunboList=data.json["data_Banner"].list;
      this.tuangouList=data.json['data_Modules'].list; 
      this.len=this.tuangouList.length;
      this.tubList=data.json['data_Sort'].list;
      this.tuijList=data.json['data_Recommend'].list;
-     })
+      }else{
+        alert(data.errmsg)
+      }
+    })
+    
     }
+  //     //轮播图
+  // getFocus() {
+  //   var that = this;
+  //   that.lunboList = [
+  //     'assets/imgs/renmai.png',
+  //     'assets/imgs/slide02.png',
+  //     'assets/imgs/slide03.jpg',
+  //     'assets/imgs/rent1.png'
+  //   ];
+  // }
     //获取商城首页分类的商品
     getShopGoods(){
      //初始显示旅游服务的商品列表
@@ -267,7 +286,6 @@ export class ShoppingPage {
             
    });
  }
-
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     console.log("w等于",w)
