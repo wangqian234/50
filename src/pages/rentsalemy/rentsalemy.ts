@@ -180,5 +180,18 @@ export class RentsalemyPage {
     }
      this.isChencked = true;
   }
-  }
+}
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.myPublish(this.type);
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 }
