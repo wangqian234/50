@@ -188,19 +188,19 @@ export class PayfeePage {
   //    })
   // }
 
-//   //下拉刷新
-//  doRefresh(refresher) {
-//     console.log('刷新开始', refresher);
-//       setTimeout(() => { 
-//         this.ionViewDidEnter();
-//       //   this.items = [];
-//       //   for (var i = 0; i < 30; i++) {
-//       //    this.items.push( this.items.length );
-//       //  }
-//        console.log('刷新结束');
-//        refresher.complete();
-//      }, 2000);
-//  }
+  //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.getallpaylist();
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
  }
 

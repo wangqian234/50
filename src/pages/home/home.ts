@@ -401,5 +401,36 @@ changeRoom(roomid) {
         this.navCtrl.push(LoginPage);
       }
   }
+    //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        //获取最新资讯
+      this.getNews();
+      //获取最新公告
+      this.getPublic();
+      if(this.storage.get('token')){
+          this.token = this.storage.get('token');
+          this.enSureLoginHome = true;
+         // this.getHouseDefault();
+          //获取默认房屋
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.getroomId();
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
+      } else {
+          this.enSureLoginHome = false;
+      }
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }
