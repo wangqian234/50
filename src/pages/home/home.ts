@@ -156,8 +156,12 @@ export class HomePage {
   //   ];
   // }
   getFocus(){
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if(data.errcode===0 && data.errmsg === 'OK'){
         this.focusList = data.list;
         console.log(this.focusList);
@@ -188,6 +192,8 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -197,7 +203,8 @@ export class HomePage {
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
-
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -217,6 +224,8 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -226,6 +235,8 @@ export class HomePage {
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
         console.log(this.publicget)
@@ -253,10 +264,14 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        //loading.dismiss();
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
@@ -275,10 +290,14 @@ export class HomePage {
   }
   //查询用户绑定的所有房屋
   getroomId(){
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){ 
             that.roomidlist=data.list;
             console.log(that.roomidlist)
