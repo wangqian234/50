@@ -167,6 +167,14 @@ $colors: (
   font-size: 0.1rem;
 }
 
+$toast-width: 70%;
+.toast-ios{
+  margin-left: 15%;
+}
+.toast-message{
+       display:flex;
+        justify-content:center;
+        }
 $toast-font-size: 0.25rem;
 $toast-ios-title-font-size:0.25rem;
 $toast-md-title-font-size:0.25rem;
@@ -183,6 +191,9 @@ $toast-md-title-padding-bottom:	0.3rem;
 $toast-wp-title-padding-top:	0.3rem;	
 $toast-wp-title-padding-bottom:	0.3rem;
 
+$refresher-icon-color : #999999;
+$refresher-text-color : #999999;
+$refresher-icon-font-size : 0.4rem;
 .dib_daoh_b{
   height: 0.8rem;
 }

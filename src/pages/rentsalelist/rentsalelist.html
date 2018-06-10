@@ -51,10 +51,10 @@
 	</ul>
 </div>
 
-<ion-refresher (ionRefresh)="doRefresh($event)">
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
-        pullingText="下拉刷新"
+        pullingText="释放刷新"
         refreshingSpinner="circles"
         refreshingText="正在更新"
         top="1rem;"

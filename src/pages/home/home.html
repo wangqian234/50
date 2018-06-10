@@ -1,4 +1,34 @@
-<ion-content style="background-color:#F5F5F5">
+<ion-header>
+		<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:0.96rem;">
+		<div class="zhongj_k">
+			<div class="shous_k  shous_div">
+				<ion-item class="select-item">
+					<ion-label>请选择房屋</ion-label>
+					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
+						<!--<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
+						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
+						<ion-option value="add">--添加房屋--</ion-option>
+					</ion-select>
+				</ion-item>
+			</div>
+		</div>
+	</div>
+	
+	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0 && enSureLoginHome" style="background-color:#448AFF;height:48px;">
+		<div class="zhongj_k" style="text-align:center;">
+			<p class="title_p">公元物业</p>
+			<p class="bangding_p" [navPush]="BindroomPage">请绑定房屋</p>
+		</div>
+	</div>
+	
+	<div class="toub_beij toub_beij_zy" *ngIf="!enSureLoginHome" style="background-color:#448AFF;height:48px;">
+		<div class="zhongj_k" style="text-align:center;">
+			<p class="title_p">公元物业</p>
+			<p class="bangding_p" [navPush]="LoginPage">点击这里登录</p>
+		</div>
+	</div>
+</ion-header>
+<ion-content style="background-color:#F5F5F5;">
 
 <div class="spinnerbox"></div>
 <div class="spinner">
@@ -16,34 +46,17 @@
     <div class="bar12"></div>
 </div>
 
-	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:0.96rem;">
-		<div class="zhongj_k">
-			<div class="shous_k  shous_div">
-				<ion-item class="select-item">
-					<ion-label>请选择房屋</ion-label>
-					<ion-select class="select-goal" (ionChange)="changeRoom(roomid)" [(ngModel)]='roomid' cancelText="取消" okText="确认">
-						<!--<ion-option selected  value="defId">{{iof_defList.House_Room_Name}}</ion-option>-->
-						<ion-option [selected]="room.id==defRoomId"*ngFor="let room of roomidlist" value="{{room.id}}">{{room.name}}</ion-option>
-						<ion-option value="add">--添加房屋--</ion-option>
-					</ion-select>
-				</ion-item>
-			</div>
-		</div>
-	</div>
-
-	<div class="toub_beij toub_beij_zy" *ngIf="iof_defList.length ==0 && roomidlist.length ==0 && enSureLoginHome" style="background-color:#448AFF;height:48px;">
-		<div class="zhongj_k" style="text-align:center;">
-			<p class="title_p">公元物业</p>
-			<p class="bangding_p" [navPush]="BindroomPage">请绑定房屋</p>
-		</div>
-	</div>
-
-	<div class="toub_beij toub_beij_zy" *ngIf="!enSureLoginHome" style="background-color:#448AFF;height:48px;">
-		<div class="zhongj_k" style="text-align:center;">
-			<p class="title_p">公元物业</p>
-			<p class="bangding_p" [navPush]="LoginPage">点击这里登录</p>
-		</div>
-	</div>
+	<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=200 closeDuration=3000>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top=1rem
+		closeDuration=2000
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 	<div class="lunbo_item">
 		<ion-slides *ngIf="focusList.length>0" pager loop="true" autoplay="3000">
@@ -58,50 +71,50 @@
 		<ul>
 			<li (click)="goPayfee()">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/fee.png"></h1>
+					<h1><img src="assets/imgs/fee.png"></h1>
 					<p>物业缴费</p>
 				</a>
 			</li>
 			<li (click)="goRepairadd(1)">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/suggest.png"></h1>
+					<h1><img src="assets/imgs/suggest.png"></h1>
 					<p>投诉建议</p>
 				</a>
 			</li>
 			<li (click)="goHouseinfolist()">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/roommanger.png"></h1>
+					<h1><img src="assets/imgs/roommanger.png"></h1>
 					<p>房屋管理</p>
 				</a>
 			</li>
 			<li  (click)="goRepairadd(4)">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/repair2.png"></h1>
+					<h1><img src="assets/imgs/repair2.png"></h1>
 					<p>在线报修</p>
 				</a>
 			</li>
 			<li (click)="goPayrefee()">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/prefee.png"></h1>
+					<h1><img src="assets/imgs/prefee.png"></h1>
 					<p>费用预存</p>
 				</a>
 			</li>
 			<li  (click)="goShoppinglist('0')">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/shop.png"></h1>
+					<h1><img src="assets/imgs/shoporder.png"></h1>
 					<p>我的订单</p>
 				</a>
 			</li>
 
 			<li (click)="goRentsaleadd()">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/pushroom.png"></h1>
+					<h1><img src="assets/imgs/pushroom.png"></h1>
 					<p>房源发布</p>
 				</a>
 			</li>
 			<li [navPush]="LoadingPage">
 				<a>
-					<h1><img src="assets/imgs/propertyPage/opendoor.png"></h1>
+					<h1><img src="assets/imgs/opendoor.png"></h1>
 					<p>一键开门</p>
 				</a>
 			</li>

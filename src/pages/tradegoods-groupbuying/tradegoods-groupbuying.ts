@@ -162,7 +162,7 @@ export class TradegoodsGroupbuyingPage {
    }
 
   ionViewDidLoad() {
-        this.getGroupList("");//实现列表缓存
+  this.getGroupList("");//实现列表缓存
   }
 /**王慧敏商城 */
      //商城实现列表缓慢加载
@@ -436,8 +436,26 @@ export class TradegoodsGroupbuyingPage {
     this.navCtrl.pop();
   }
 
-      backToHome(){
+  backToHome(){
      this.app.getRootNav().push(TabsPage);
   }
+
+       //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+      if(this.flag){
+      this.getOrderList('');
+      }else{
+      this.getGroupList('');
+      }
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }
