@@ -548,7 +548,11 @@ export class ShoppinglistPage {
  doRefresh(refresher) {
     console.log('刷新开始', refresher);
       setTimeout(() => { 
-        this.getOrderList('');
+       if(this.flag){
+      this.getOrderList('');
+     }else{
+      this.getGroupList('');
+     }
       //   this.items = [];
       //   for (var i = 0; i < 30; i++) {
       //    this.items.push( this.items.length );
