@@ -1,7 +1,7 @@
 //高海乐
 import { Geolocation } from '@ionic-native/geolocation';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams,App } from 'ionic-angular';
+import { NavController, NavParams,App, Slides  } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -45,6 +45,7 @@ declare var BMap;
 })
 export class ShoppingPage {
 
+@ViewChild("shopslides") slides: Slides;
    @ViewChild('map') map_container: ElementRef;
   map: any;//地图对象
   marker: any;//标记
@@ -76,7 +77,7 @@ export class ShoppingPage {
   public changePlace = "";
   public shopKeyList = [];
    HomePage = HomePage;
-   tuiList;
+   tuiList = [];
 
 
   //定义congfig中公共链接的变量aa
@@ -104,26 +105,49 @@ export class ShoppingPage {
       }
     }
     ionViewWillEnter(){
+      //this.slides.startAutoplay();
              this.tuiList = [
-     {"imgurl":"assets/imgs/08.jpg"},
-     {"imgurl":"assets/imgs/back.png"},
-     {"imgurl":"assets/imgs/fee.png"},
-     {"imgurl":"assets/imgs/fanh.png"},
-     {"imgurl":"assets/imgs/gongyi.png"},
+     "assets/imgs/08.jpg",
+     "assets/imgs/back.png",
+     "assets/imgs/fee.png",
+     "assets/imgs/fanh.png",
+     "assets/imgs/gongyi.png",
    ]
     }
+//     ionViewWillLeave(){
+//   this.slides.stopAutoplay();
+// }
     //获取商城首页
     getShop(){
+      $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var api = this.aa+'/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
+      if(data.json['data_Banner'].errcode == 0 &&data.json['data_Banner'].errmsg == 'OK'){
       console.log(data)
-     this.lunboList=data.json["data_Banner"].list;
+     //this.lunboList=data.json["data_Banner"].list;
      this.tuangouList=data.json['data_Modules'].list; 
      this.len=this.tuangouList.length;
      this.tubList=data.json['data_Sort'].list;
      this.tuijList=data.json['data_Recommend'].list;
-     })
+      }else{
+        alert(data.errmsg)
+      }
+    })
+    
     }
+  //     //轮播图
+  // getFocus() {
+  //   var that = this;
+  //   that.lunboList = [
+  //     'assets/imgs/renmai.png',
+  //     'assets/imgs/slide02.png',
+  //     'assets/imgs/slide03.jpg',
+  //     'assets/imgs/rent1.png'
+  //   ];
+  // }
     //获取商城首页分类的商品
     getShopGoods(){
      //初始显示旅游服务的商品列表
@@ -146,13 +170,14 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
+    
+      //this.slides.autoplayDisableOnInteraction = false;
     // $("#sos_tanc").focus(function(){
     //   $(".remen_sos").css("display","block")
     //    $(".shopcontentdiv").css("display","none")
     //   $(".caid_img").css("display","none")
     //   $(".fanhui").css("display","block")
     // })
-
     $("#sos_tanc").focus(function(){
       $(".sousuo").css("display","block")
        $(".shouye").css("display","none")
@@ -267,7 +292,6 @@ export class ShoppingPage {
             
    });
  }
-
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     console.log("w等于",w)

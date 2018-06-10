@@ -17,6 +17,7 @@ export class PersonalPage {
   public token = "";
   public personInfo = {};
   public currentPlace = "";
+  public currentPlaceCode = "";
   public keywords = "";
   public callback;
 
@@ -30,6 +31,7 @@ export class PersonalPage {
 
   ionViewDidLoad() {
     this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode =  this.storage.get("currentPlaceCode");
     this.gotoHere();
   }
 
@@ -46,6 +48,17 @@ export class PersonalPage {
             that.navCtrl.pop();
           });
       });
+
+      $('#current').on('click', function () {
+          let change = {
+            changePlace : that.currentPlace,
+            changePlaceCode : that.currentPlaceCode
+          }
+         that.callback(change).then(()=>{
+            that.navCtrl.pop();
+          });
+      });
+
       //点击索引查询城市
       $('ion-content').on('click', '.letter a', function () {
         $('.scroll-content').scrollTop(0);

@@ -4,6 +4,8 @@ import { ConfigProvider } from '../../providers/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Network } from '@ionic-native/network';
+import { ToastController } from 'ionic-angular';
 //房屋报修
 import { RepairaddPage } from '../repairadd/repairadd';
 //绑定房屋
@@ -98,9 +100,12 @@ export class HomePage {
   public RentsaleaddPage = RentsaleaddPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
+    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController,private network: Network,
+    private toastCtrl: ToastController) {
       this.geolocation1 = Geolocation;
+      this.storage.set('tabs','true');
   }
+
   ionViewWillEnter(){
       //将PX转换为REM
       this.getRem();
@@ -128,9 +133,35 @@ export class HomePage {
       
   }
 
+networktype;
    ionViewDidEnter() {
       //this.getPosition();
+      let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+        console.log('network was disconnected :-(');
+      });
+      //disconnectSubscription.unsubscribe();
+      let connectSubscription = this.network.onConnect().subscribe(() => {
+        alert("进入网络连接监测")
+        alert(this.network.type)
+      });
+      this.networktype = this.network.type
+      this.presentToast();
+      //connectSubscription.unsubscribe();
    }
+
+presentToast() {
+  let toast = this.toastCtrl.create({
+    message: '当前为'+ this.networktype +'网络',
+    duration: 3000,
+    position: 'top'
+  });
+
+  toast.onDidDismiss(() => {
+    console.log('Dismissed toast');
+  });
+
+  toast.present();
+}
 
   getPosition() {
     var that = this;
@@ -156,8 +187,12 @@ export class HomePage {
   //   ];
   // }
   getFocus(){
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if(data.errcode===0 && data.errmsg === 'OK'){
         this.focusList = data.list;
         console.log(this.focusList);
@@ -188,6 +223,8 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -197,7 +234,8 @@ export class HomePage {
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
-
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -217,6 +255,8 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -226,6 +266,8 @@ export class HomePage {
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
       //loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
         console.log(this.publicget)
@@ -253,10 +295,14 @@ export class HomePage {
 	  //   showBackdrop: true,
     // });
     // loading.present();
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        //loading.dismiss();
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
@@ -275,10 +321,14 @@ export class HomePage {
   }
   //查询用户绑定的所有房屋
   getroomId(){
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){ 
             that.roomidlist=data.list;
             console.log(that.roomidlist)
@@ -382,5 +432,36 @@ changeRoom(roomid) {
         this.navCtrl.push(LoginPage);
       }
   }
+    //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        //获取最新资讯
+      this.getNews();
+      //获取最新公告
+      this.getPublic();
+      if(this.storage.get('token')){
+          this.token = this.storage.get('token');
+          this.enSureLoginHome = true;
+         // this.getHouseDefault();
+          //获取默认房屋
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.getroomId();
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
+      } else {
+          this.enSureLoginHome = false;
+      }
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }

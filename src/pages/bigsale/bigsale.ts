@@ -106,5 +106,21 @@ export class BigsalePage {
     this.app.getRootNav().push(TabsPage);    
   }
 
+  //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.pageIndex =1;
+        this.list = [];
+        this.getbigsale('');
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
+
 
 }

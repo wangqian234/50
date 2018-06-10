@@ -1,7 +1,6 @@
 
-<ion-content style="background-color:#f5f5f5">
-
-	  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+<ion-header>
+	<div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="javascript:;">
@@ -19,6 +18,19 @@
 		</div> 
 	</div>
 </div>
+</ion-header>
+<ion-content style="background-color:#f5f5f5">
+
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 <div id="yemnr">
 <!--商品列表--> 

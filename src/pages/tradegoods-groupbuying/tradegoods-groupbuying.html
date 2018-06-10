@@ -1,7 +1,6 @@
 <!--王慧敏-->
-<ion-content style="background-color:#f5f5f5">
-
-<div class="toub_beij toub_beij_zy">
+<ion-header>
+	<div class="toub_beij toub_beij_zy">
 	<div  style="background-color:#ff971c;height:0.96rem" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#">
@@ -18,6 +17,19 @@
 		</div>
 	</div>
 </div>
+</ion-header>
+<ion-content style="background-color:#f5f5f5">
+
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 	    <!--团购列表--> 
   <div id="group-content" >
         <ul class="order-nav clearfix" id="test2">

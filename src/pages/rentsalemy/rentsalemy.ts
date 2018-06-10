@@ -122,6 +122,11 @@ export class RentsalemyPage {
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("删除成功")
+      this.myPublish(this.type);
+      $("#delete").css("display","block");
+      $("#over").css("display","none");
+      $(".ioncheck").css("display","none");
+      $("#deletebutton").css("display","none");
       }else{
         alert("删除失败")
       }
@@ -175,5 +180,18 @@ export class RentsalemyPage {
     }
      this.isChencked = true;
   }
-  }
+}
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.myPublish(this.type);
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 }

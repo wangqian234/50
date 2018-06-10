@@ -57,10 +57,13 @@ export class ShopsortPage {
 //左侧分类的方法
 
   getLeftCateData(){
-
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     var api=this.wdh+'/api/goods_sort/list';
     
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if(data.errmsg == 'OK'){
         this.list = data.list;
         this.title=data.list[0].name;
@@ -78,16 +81,20 @@ export class ShopsortPage {
     console.log(name)
     this.title=name;
     this.pid = i;
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
      $("#cate_left li").removeAttr("class");
     var span = "#cate_left li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
     var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+      //  loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
        if(data.errmsg == 'OK'){
          this.fenllist = data.list;
      } else {
