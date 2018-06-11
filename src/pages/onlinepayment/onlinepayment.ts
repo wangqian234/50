@@ -46,6 +46,7 @@ export class OnlinepaymentPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    this.storage.set('tabs','false');
       if(this.navParams.get('item')){
       this.defRoomId=this.navParams.get('item');
       this.roomid=this.defRoomId;
@@ -190,7 +191,7 @@ export class OnlinepaymentPage {
           if(data.errcode===0 ){
             this.outTradeNo = data.errmsg;
             console.log(data)
-            location.href = data.model.mweb_url;
+            //location.href = data.model.mweb_url;
            // this.checkPayment()
            // this.getPayList()
           }else{
@@ -198,6 +199,27 @@ export class OnlinepaymentPage {
           }
      })
   }
+
+//   webview.setWebViewClient(new WebViewClient() {
+//     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//         if (url.startsWith("weixin://wap/pay?")) {
+//             Intent intent = new Intent();
+//             intent.setAction(Intent.ACTION_VIEW);
+//             intent.setData(Uri.parse(url));
+//             startActivity(intent);
+//             return true;
+//         }else if (url.startsWith("tel:")) {//H5打开电话
+//             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//             WebActivity.this.startActivity(intent);
+//         } else {
+//             //H5微信支付要用，不然说"商家参数格式有误"
+//             Map<String, String> extraHeaders = new HashMap<String, String>();
+//             extraHeaders.put("Referer", "商户申请H5时提交的授权域名");
+//             view.loadUrl(url, extraHeaders);
+//         }
+//         return true;
+//     }
+// });
      //微信查询接口
    checkPayment(){
      var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;

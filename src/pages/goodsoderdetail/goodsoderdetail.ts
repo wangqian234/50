@@ -39,6 +39,7 @@ export class GoodsoderdetailPage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
 ,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+          this.storage.set('tabs','false');
           this.SD_id=navParams.get('id');
           this.tradegoodsid=navParams.get('tradegoodsId');
 

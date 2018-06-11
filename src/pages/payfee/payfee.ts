@@ -43,6 +43,7 @@ export class PayfeePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    this.storage.set('tabs','false');
     if(this.storage.get('roomId')){
       this.defRoomId=this.storage.get('roomId');
       this.roomid =this.defRoomId;

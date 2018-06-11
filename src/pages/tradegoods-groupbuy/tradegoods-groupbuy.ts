@@ -45,6 +45,7 @@ export class TradegoodsGroupbuyPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
   public app: App,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+     this.storage.set('tabs','false');
         //this.trade_id=navParams.get('tradeId');
         this.SD_id=navParams.get('id');
         this.getProductList('');//实现列表缓存

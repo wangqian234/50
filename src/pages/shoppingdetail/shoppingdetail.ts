@@ -37,6 +37,7 @@ export class ShoppingdetailPage {
   public dataSlist=[];
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
   public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+    this.storage.set('tabs','false');
 
   }
       //主页面加载函数

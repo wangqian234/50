@@ -39,6 +39,7 @@ export class ChangeaddrPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
     ,public storage:StorageProvider,public httpService:HttpServicesProvider,public navParams: NavParams,) {
+      this.storage.set('tabs','false');
       this.callback = this.navParams.get("callback");
       this.addListList = this.navParams.get("addListList");
   }

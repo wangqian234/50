@@ -33,6 +33,7 @@ export class RebuildpassPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
   public config:ConfigProvider,public http: Http, public storage: StorageProvider,) {
+    this.storage.set('tabs','false');
     this.tel=this.storage.get('userName');
     this.mphone = this.tel.substr(0, 3) + '****' + this.tel.substr(7);   
   }

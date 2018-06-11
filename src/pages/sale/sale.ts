@@ -5,7 +5,8 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //返回首页
@@ -27,7 +28,8 @@ public page = 1;
 
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage: StorageProvider,) {
+    this.storage.set('tabs','false');
   }
 //抢购时间判断
 ifontime(mode){

@@ -24,6 +24,7 @@ export class RentsalelistPage {
   search = "";
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+    this.storage.set('tabs','false');
   }
 
   ionViewWillLoad() {

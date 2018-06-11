@@ -83,6 +83,7 @@ export class ShopgoodsinfoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
   public loadingCtrl: LoadingController,public app: App) {
+    this.storage.set('tabs','false');
     this.wid=this.navParams.get("id")
       //  alert(this.wid)
     

@@ -35,7 +35,8 @@ export class HouseinfolistPage {
   public HouseinfoPage = HouseinfoPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, ) {
-  }
+    this.storage.set('tabs','false');
+}
 
   getHouseInfo(id){
     this.navCtrl.push(HouseinfoPage,{id:id});

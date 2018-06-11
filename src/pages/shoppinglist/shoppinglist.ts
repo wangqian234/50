@@ -102,6 +102,7 @@ export class ShoppinglistPage {
   public aa = this.config.apiUrl;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
   ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+     this.storage.set('tabs','false');
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
@@ -547,7 +548,7 @@ export class ShoppinglistPage {
   //下拉刷新
  doRefresh(refresher) {
 
-     this.outTradeNo;
+  this.outTradeNo;
   this.list=[];
   this.groupBuyList=[];
   this.good_list=[];
@@ -577,7 +578,7 @@ export class ShoppinglistPage {
 
     console.log('刷新开始', refresher);
       setTimeout(() => { 
-        if(this.flag){
+       if(this.flag){
       this.getOrderList('');
      }else{
       this.getGroupList('');

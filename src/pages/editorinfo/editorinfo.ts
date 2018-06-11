@@ -47,7 +47,9 @@ export class EditorinfoPage {
   user = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider, public http:Http, public storage:StorageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,
+   public http:Http, public storage:StorageProvider) {
+     this.storage.set('tabs','false');
   }
 
   ionViewDidLoad() {
