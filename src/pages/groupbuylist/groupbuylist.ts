@@ -7,7 +7,8 @@ import { LoadingController } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 //商品购买页面
 import { ShopbuyPage } from '../shopbuy/shopbuy';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 //团购详情界面
 import { GroupdetailPage } from '../groupdetail/groupdetail';
 //返回首页
@@ -26,8 +27,8 @@ export class GroupbuylistPage {
   public list = [];
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
-   
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage:StorageProvider,) {
+   this.storage.set('tabs','false');
    
    
   }

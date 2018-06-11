@@ -85,6 +85,7 @@ export class TradegoodsGroupbuyingPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,  public app: App,
    public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
    public loadingCtrl: LoadingController) {
+      this.storage.set('tabs','false');
         this.SD_id=navParams.get('id');
   }
 
@@ -398,7 +399,6 @@ export class TradegoodsGroupbuyingPage {
    groupbuyEvent(groupbuyid){
     //  alert("团购详情"+groupbuyid);
      this.navCtrl.push(TradegoodsGroupbuydetailPage,{gbId:groupbuyid});
-
    }
  
   //加载更多

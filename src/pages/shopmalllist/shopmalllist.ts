@@ -6,6 +6,7 @@ import $ from 'jquery';
 //商品详情页
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 import { LoadingController } from 'ionic-angular';
+import { StorageProvider } from '../../providers/storage/storage';
 //返回首页
 import { TabsPage } from '../tabs/tabs';
 @Component({
@@ -21,7 +22,8 @@ export class ShopmalllistPage {
   public  ShopgoodsinfoPage = ShopgoodsinfoPage;
   public TabsPage = TabsPage;
   constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
-  public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController) {
+  public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider,) {
+    this.storage.set('tabs','false');
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发

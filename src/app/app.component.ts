@@ -58,7 +58,7 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
     if (this.storage.get('tabs') == "true") {
       //如果是根目则按照需求1处理
       this.showExit();
-    } else {
+    }else{
       //非根目录返回上一级页面
       this.app.goBack();
     }

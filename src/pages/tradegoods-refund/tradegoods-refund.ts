@@ -30,6 +30,7 @@ export class TradegoodsRefundPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+         this.storage.set('tabs','false');
         this.tradegoods_id=this.navParams.get('tradegoodsId');
         //alert(this.tradegoods_id);
   }
