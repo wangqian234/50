@@ -102,6 +102,7 @@ export class ShoppinglistPage {
   public aa = this.config.apiUrl;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
   ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+     this.storage.set('tabs','false');
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
@@ -517,8 +518,8 @@ export class ShoppinglistPage {
     gotoGroup(){
     this.flag = false;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block");
+    $(".order-content").css("display", "none");
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
     this.SD_id = 0;
@@ -529,8 +530,8 @@ export class ShoppinglistPage {
     gotoOrder(){
     this.flag = true;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none");
+    $(".order-content").css("display", "block");
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
@@ -547,7 +548,7 @@ export class ShoppinglistPage {
   //下拉刷新
  doRefresh(refresher) {
 
-     this.outTradeNo;
+  this.outTradeNo;
   this.list=[];
   this.groupBuyList=[];
   this.good_list=[];
@@ -577,7 +578,7 @@ export class ShoppinglistPage {
 
     console.log('刷新开始', refresher);
       setTimeout(() => { 
-        if(this.flag){
+       if(this.flag){
       this.getOrderList('');
      }else{
       this.getGroupList('');

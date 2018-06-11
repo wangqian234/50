@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 /**
  * Generated class for the ShoppingevaluatePage page.
  *
@@ -21,7 +23,8 @@ export class ShoppingevaluatePage {
   public aa = this.config.apiUrl;
   public list = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config: ConfigProvider,public http : Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config: ConfigProvider,public http : Http,public storage:StorageProvider,) {
+    this.storage.set('tabs','false');
   }
   
   ionViewWillLoad(){//钩子函数，将要进入页面的时候触发

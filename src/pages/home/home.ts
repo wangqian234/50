@@ -4,8 +4,6 @@ import { ConfigProvider } from '../../providers/config/config';
 import { NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Network } from '@ionic-native/network';
-import { ToastController } from 'ionic-angular';
 //房屋报修
 import { RepairaddPage } from '../repairadd/repairadd';
 //绑定房屋
@@ -100,8 +98,7 @@ export class HomePage {
   public RentsaleaddPage = RentsaleaddPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController,private network: Network,
-    private toastCtrl: ToastController) {
+    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
       this.geolocation1 = Geolocation;
       this.storage.set('tabs','true');
   }
@@ -133,35 +130,9 @@ export class HomePage {
       
   }
 
-networktype;
    ionViewDidEnter() {
       //this.getPosition();
-      let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-        console.log('network was disconnected :-(');
-      });
-      //disconnectSubscription.unsubscribe();
-      let connectSubscription = this.network.onConnect().subscribe(() => {
-        alert("进入网络连接监测")
-        alert(this.network.type)
-      });
-      this.networktype = this.network.type
-      this.presentToast();
-      //connectSubscription.unsubscribe();
    }
-
-presentToast() {
-  let toast = this.toastCtrl.create({
-    message: '当前为'+ this.networktype +'网络',
-    duration: 3000,
-    position: 'top'
-  });
-
-  toast.onDidDismiss(() => {
-    console.log('Dismissed toast');
-  });
-
-  toast.present();
-}
 
   getPosition() {
     var that = this;

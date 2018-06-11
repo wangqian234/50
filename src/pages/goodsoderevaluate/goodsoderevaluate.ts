@@ -50,6 +50,7 @@ export class GoodsoderevaluatePage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController
 ,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  this.storage.set('tabs','false');
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品

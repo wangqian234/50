@@ -24,7 +24,9 @@ export class TradegoodsEvaluatedetailPage {
   public aa = this.config.apiUrl;
   //定义token
   public token=this.storage.get('token');
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp 
+  ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+     this.storage.set('tabs','false');
         //this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
           this.SD_id=navParams.get('tradeId');
           this.goods_id=navParams.get('goodsId');

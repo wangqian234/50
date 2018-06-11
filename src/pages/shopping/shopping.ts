@@ -90,6 +90,7 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
+    this.storage.set('tabs','true');
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
     // // this.getLunbo();
@@ -166,11 +167,11 @@ export class ShoppingPage {
   ionViewDidLoad() {
     // this.getPosition();
     //给第一个商品分类hr
-    $('.facediv li:nth-of-type(1)').attr("class","activety");
+    
   }
 
   ionViewDidEnter(){
-    
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
       //this.slides.autoplayDisableOnInteraction = false;
     // $("#sos_tanc").focus(function(){
     //   $(".remen_sos").css("display","block")

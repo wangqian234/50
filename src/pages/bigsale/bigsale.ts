@@ -35,7 +35,7 @@ export class BigsalePage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
-
+    this.storage.set('tabs','false');
 
   }
 

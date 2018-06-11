@@ -41,6 +41,7 @@ export class RepairdetailsPage {
 public background:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+    this.storage.set('tabs','false');
   }
 
   ionViewWillLoad() {

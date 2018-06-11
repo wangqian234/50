@@ -37,7 +37,7 @@ export class PcontentPage {
   public carts_num=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public httpService:HttpServicesProvider,public storage:StorageProvider) {
-
+    this.storage.set('tabs','false');
    
     // console.log(this.navParams.data.id);
     this.requestData(this.navParams.data.id);

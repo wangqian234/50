@@ -52,6 +52,7 @@ export class PayprefeePage {
 
  constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+    this.storage.set('tabs','false');
     if(this.navParams.get('item')){
       this.defRoomId=this.navParams.get('item');
       this.roomid=this.defRoomId;

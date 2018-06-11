@@ -39,9 +39,12 @@ public history='';
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
+  public remeberNum;
+
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
+    this.storage.set('tabs','true');
 
       this.getRem();
       this.history=this.navParams.get('history');
@@ -49,6 +52,7 @@ public history='';
   }
 //登录触发的函数
   doLogin(){
+    alert(this.remeberNum);
     console.log(this.userinfo.userName)
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
       alert('请输入正确的手机号码');
@@ -92,7 +96,6 @@ public history='';
             }
         })
       }
-
   }
 
   getLoginNum(){

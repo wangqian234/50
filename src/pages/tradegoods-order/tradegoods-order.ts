@@ -23,7 +23,9 @@ export class TradegoodsOrderPage {
     //定义token
   public token=this.storage.get('token');
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp
+   ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+      this.storage.set('tabs','false');
 
   }
 
