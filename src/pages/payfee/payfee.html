@@ -1,9 +1,9 @@
+
 <ion-header>
-  
-	<div class="toub_beij toub_beij_zy"  *ngIf="iof_defList.length !=0 || roomidlist.length !=0" style="background-color:#448AFF;height:0.96rem;">
+    <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF;height:0.96rem;">
 		<div class="zhongj_k">
       <div class="logo_k logo_k_fanh" (click)="backTo()">
-        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a>
+        <a><img class="fanh_ann" src="assets/imgs/fanh.png"></a>
         </div>
 			<div class="shous_k  shous_div">
 				<ion-item class="select-item">
@@ -17,12 +17,13 @@
 		</div>
 	</div>
 </ion-header>
+
 <ion-content style="background-color:#f5f5f5">
 
-	<ion-refresher (ionRefresh)="doRefresh($event)">
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
-        pullingText="下拉刷新"
+        pullingText="释放刷新"
         refreshingSpinner="circles"
         refreshingText="正在更新"
         top="1rem;"
@@ -30,6 +31,7 @@
       </ion-refresher-content>
   </ion-refresher>
 
+<div>
     <div class="fee">
 		<div class="fee1">
 			<div class="fee11">
@@ -113,5 +115,5 @@
     <button class="loginBtn" (click)="goOnlinePayfee()">在线缴费</button>
     <button class="registerBtn" (click)="goPrefee()">费用预存</button>
   </div>
-
+</div>
 </ion-content>

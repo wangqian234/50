@@ -41,6 +41,7 @@ export class AddressPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
     ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
+      this.storage.set('tabs','false');
   }
 
   ionViewWillEnter(){

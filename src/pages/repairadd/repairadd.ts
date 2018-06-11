@@ -50,6 +50,8 @@ export class RepairaddPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,public loadingCtrl: LoadingController) {
+    this.storage.set('tabs','false');
+    this.storage.set('tabs','false');
       if(this.storage.get('roomId')){
         this.defRoomId=this.storage.get('roomId')
         this.roomId= this.defRoomId;

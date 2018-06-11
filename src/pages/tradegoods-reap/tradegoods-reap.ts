@@ -53,6 +53,7 @@ export class TradegoodsReapPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
 ,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+   this.storage.set('tabs','false');
             this.pretotalprice = this.navParams.get('pretotalprice')
             this.tradegoods_id=navParams.get('tradegoodsId');
             this.reapList.tgId=this.tradegoods_id;      

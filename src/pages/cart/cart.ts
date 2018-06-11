@@ -63,7 +63,7 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-
+        this.storage.set('tabs','false');
         $(".ios .tabs .tabbar").css("display","none");
   }
 

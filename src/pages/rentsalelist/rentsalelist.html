@@ -1,5 +1,5 @@
 
-<!--<ion-header>
+<ion-header>
 	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -12,10 +12,10 @@
 		</div>
 	</div>
  </div>
-</ion-header>-->
+</ion-header>
 
 <ion-content style="background-color:#f5f5f5">
-	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<!--<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
- </div>
+ </div>-->
  <div id="group-content" style="background-color:white">
   <ul class="order-nav clearfix" id="test">
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
@@ -51,16 +51,16 @@
 	</ul>
 </div>
 
-<!--<ion-refresher (ionRefresh)="doRefresh($event)">
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
-        pullingText="下拉刷新"
+        pullingText="释放刷新"
         refreshingSpinner="circles"
         refreshingText="正在更新"
         top="1rem;"
         >
       </ion-refresher-content>
-  </ion-refresher>-->
+  </ion-refresher>
 
 <div class="nomore">没有更多数据了...</div>
 

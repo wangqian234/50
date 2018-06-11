@@ -50,6 +50,7 @@ export class AddaddressPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
     public storage:StorageProvider) {
+      this.storage.set('tabs','false');
   }
 
   ionViewWillEnter(){

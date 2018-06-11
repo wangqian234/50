@@ -152,6 +152,7 @@ import { Device } from '@ionic-native/device';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer} from '@ionic-native/file-transfer';
+import { Network } from '@ionic-native/network';
 //房屋租售列表
 import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
 
@@ -327,6 +328,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     Camera,
     File,
     FileTransfer,
+    Network,
   ]
 })
 export class AppModule {}

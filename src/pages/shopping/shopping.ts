@@ -1,7 +1,7 @@
 //高海乐
 import { Geolocation } from '@ionic-native/geolocation';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams,App } from 'ionic-angular';
+import { NavController, NavParams,App, Slides  } from 'ionic-angular';
 import $ from 'jquery';
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -45,6 +45,7 @@ declare var BMap;
 })
 export class ShoppingPage {
 
+@ViewChild("shopslides") slides: Slides;
    @ViewChild('map') map_container: ElementRef;
   map: any;//地图对象
   marker: any;//标记
@@ -76,7 +77,7 @@ export class ShoppingPage {
   public changePlace = "";
   public shopKeyList = [];
    HomePage = HomePage;
-   tuiList;
+   tuiList = [];
 
 
   //定义congfig中公共链接的变量aa
@@ -89,6 +90,7 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
+    this.storage.set('tabs','true');
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
     // // this.getLunbo();
@@ -104,14 +106,18 @@ export class ShoppingPage {
       }
     }
     ionViewWillEnter(){
+      //this.slides.startAutoplay();
              this.tuiList = [
-     {"imgurl":"assets/imgs/08.jpg"},
-     {"imgurl":"assets/imgs/back.png"},
-     {"imgurl":"assets/imgs/fee.png"},
-     {"imgurl":"assets/imgs/fanh.png"},
-     {"imgurl":"assets/imgs/gongyi.png"},
+     "assets/imgs/08.jpg",
+     "assets/imgs/back.png",
+     "assets/imgs/fee.png",
+     "assets/imgs/fanh.png",
+     "assets/imgs/gongyi.png",
    ]
     }
+//     ionViewWillLeave(){
+//   this.slides.stopAutoplay();
+// }
     //获取商城首页
     getShop(){
       $(".spinnerbox").fadeIn(200);
@@ -165,13 +171,14 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
+    
+      //this.slides.autoplayDisableOnInteraction = false;
     // $("#sos_tanc").focus(function(){
     //   $(".remen_sos").css("display","block")
     //    $(".shopcontentdiv").css("display","none")
     //   $(".caid_img").css("display","none")
     //   $(".fanhui").css("display","block")
     // })
-
     $("#sos_tanc").focus(function(){
       $(".sousuo").css("display","block")
        $(".shouye").css("display","none")

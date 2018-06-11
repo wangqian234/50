@@ -32,6 +32,7 @@ export class RegisterpasswordPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider,public storage:StorageProvider,
       public config:ConfigProvider,public http: Http) {
+        this.storage.set('tabs','false');
 
   }
 

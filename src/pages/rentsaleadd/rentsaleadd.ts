@@ -66,6 +66,7 @@ export class RentsaleaddPage {
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
     public http: Http, public loadingCtrl: LoadingController) {
+      this.storage.set('tabs','false');
   }
   ionViewWillEnter() {
     if (this.storage.get('token')) {

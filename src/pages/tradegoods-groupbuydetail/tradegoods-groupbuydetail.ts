@@ -24,7 +24,9 @@ export class TradegoodsGroupbuydetailPage {
     public list=[];
     public groupbuyid;
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
+  public loadingCtrl: LoadingController,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+     this.storage.set('tabs','false');
         //this.trade_id=navParams.get('tradeId');
         this.groupbuyid=navParams.get('gbId');
         //this.getProductList('');//实现列表缓存

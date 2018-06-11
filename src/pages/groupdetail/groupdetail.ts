@@ -81,6 +81,7 @@ export class GroupdetailPage {
   public token=this.storage.get('token');
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public app: App,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
+    this.storage.set('tabs','false');
     this.wid=navParams.get('id');
   }
 

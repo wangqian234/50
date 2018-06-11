@@ -13,7 +13,8 @@ import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 import { TabsPage } from '../tabs/tabs';
 //返回商城首页
 import { ShoppingPage } from '../shopping/shopping';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 
 @Component({
   selector: 'page-shopsort',
@@ -34,7 +35,8 @@ export class ShopsortPage {
   fanhui:boolean =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
-  public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController) {
+  public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider) {
+    this.storage.set('tabs','false');
     if(this.navParams.get('type')){
       this.fanhui = true;
     }
