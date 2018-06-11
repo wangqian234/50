@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StorageProvider } from '../providers/storage/storage';
 import { TabsPage } from '../pages/tabs/tabs';
+import { Network } from '@ionic-native/network';
 import $ from 'jquery';
 
 import { HomePage } from '../pages/home/home';
@@ -26,7 +27,12 @@ backButtonPressed: boolean = false;  //用于判断返回键是否触发
 @ViewChild('myNav') nav: Nav;
 
 constructor(private app: App,public platform: Platform, statusBar: StatusBar, public storage: StorageProvider,
- splashScreen: SplashScreen, public keyBoard: Keyboard,public toastCtrl: ToastController,public ionicApp: IonicApp) {
+ splashScreen: SplashScreen, public keyBoard: Keyboard,public toastCtrl: ToastController,public ionicApp: IonicApp,private network: Network) {
+
+  this.app.viewDidLoad.subscribe(() => {
+      this.getNetWork();
+	});
+
     platform.ready().then(() => { 
     // Okay, so the platform is ready and our plugins are available.   
     // Here you can do any higher level native things you might need.  
@@ -75,5 +81,27 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
       setTimeout(() => this.backButtonPressed = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false 
     }
   }
+
+     getNetWork(){
+      let disconnectSubscription = this.network.onDisconnect();
+      let connectSubscription = this.network.onConnect();
+      if(this.network.type == 'none'){
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
+          this.presentToast();
+      }
+   }
+
+    presentToast() {
+      let toast = this.toastCtrl.create({
+        message: '当前无网络，请检查网络连接',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
+    }
 
 }

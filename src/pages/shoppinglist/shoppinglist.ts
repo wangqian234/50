@@ -517,8 +517,8 @@ export class ShoppinglistPage {
     gotoGroup(){
     this.flag = false;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block");
+    $(".order-content").css("display", "none");
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
     this.SD_id = 0;
@@ -529,8 +529,8 @@ export class ShoppinglistPage {
     gotoOrder(){
     this.flag = true;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none");
+    $(".order-content").css("display", "block");
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }

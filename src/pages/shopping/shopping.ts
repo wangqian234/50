@@ -166,11 +166,11 @@ export class ShoppingPage {
   ionViewDidLoad() {
     // this.getPosition();
     //给第一个商品分类hr
-    $('.facediv li:nth-of-type(1)').attr("class","activety");
+    
   }
 
   ionViewDidEnter(){
-    
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
       //this.slides.autoplayDisableOnInteraction = false;
     // $("#sos_tanc").focus(function(){
     //   $(".remen_sos").css("display","block")
