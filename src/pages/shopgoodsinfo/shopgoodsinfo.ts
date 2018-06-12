@@ -8,8 +8,6 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { StorageProvider } from '../../providers/storage/storage';
 //config.ts
 import { ConfigProvider } from '../../providers/config/config';
-//商品详情页
-import {ShoppingevaluatePage} from '../shoppingevaluate/shoppingevaluate'
 //购物车
 import { CartPage} from '../cart/cart'
 //商品购买页面
@@ -17,7 +15,8 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
 //店铺详情页面
 import { ShopinfoPage } from '../shopinfo/shopinfo';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the ShopgoodsinfoPage page.
  *
@@ -25,19 +24,18 @@ import { TabsPage } from '../tabs/tabs'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-shopgoodsinfo',
   templateUrl: 'shopgoodsinfo.html',
 })
 export class ShopgoodsinfoPage {
   //跳转页面
-    public ShoppingevaluatePage=ShoppingevaluatePage;
     public CartPage = CartPage;
     public ShopbuyPage=ShopbuyPage;
     public ShopinfoPage=ShopinfoPage;
     public ShopgoodsinfoPage=ShopgoodsinfoPage;
     public TabsPage = TabsPage;
+    public LoginPage = LoginPage;
     public sid;
     public wid;
     public mode;
@@ -89,38 +87,48 @@ export class ShopgoodsinfoPage {
     
 }
     ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-    var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
-      //显示商品详情页面
-      this.goodsInfo();
-      this.recommend();
-     
-  }
+      var w = document.documentElement.clientWidth || document.body.clientWidth;
+      document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+    }
   ionViewDidEnter() {
+      if(this.storage.get('token')){
+        //显示商品详情页面
+        this.goodsInfo();
+        this.recommend();
+      } else {
+        this.navCtrl.push(LoginPage);
+        return;
+      }
  this.switch(0);
+
   }
   //显示商品详情页面
   goodsInfo(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    var j = 3;
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that =this;
     var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
-    console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-        loading.dismiss();
+      
+        // loading.dismiss();
+         $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         console.log(data)
         that.goodMlist = data.json['good_Model'].model;
         that.jiage=data.json['good_Model'].model.maxpreprice;
         that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
         $("#tuwen").html(data.json['good_Model'].model.detail);
-        console.log($("#tuwen"));
         this.sid=data.json['good_Model'].model.shopid;        //店铺Id
         this.fenge(data.json['good_Model'].model.imgsrc_list);//轮播图
         that.dataGlist = data.json.data_group.list;
-        that.dataSlist = data.json.data_Sizes.list;   
+        that.dataSlist = data.json.data_Sizes.list;
+
     })
   }
   //切换商品规格
@@ -153,7 +161,8 @@ ifEnough(){
        
          //alert("可以继续添加!");
       }else{
-        alert(data.errmsg);
+        alert(data.errmsg+"，添加购买失败");
+        return false;
       }
      })
 }
@@ -193,7 +202,9 @@ fenge(str){
      if(!this.goodSize){
        alert("请选择商品规格")
      }else{
-    this.ifEnough();
+    if(!this.ifEnough()){
+      return;
+    }
     this.addcarList.token=this.token;
     this.addcarList.gId=this.navParams.get("id");
     this.addcarList.gsId = this.goodSize;
@@ -245,7 +256,9 @@ switch(key){
      if(!this.goodSize){
       alert("请选择商品规格")
      }else{
-    this.ifEnough();
+      if(!this.ifEnough()){
+      return;
+    }
     this.buylist.token=this.token;
     this.buylist.gId=this.navParams.get('id');
     this.buylist.type="detail";

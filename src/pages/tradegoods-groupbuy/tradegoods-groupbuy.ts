@@ -15,7 +15,6 @@ import { TradegoodsGroupbuydetailPage } from '../tradegoods-groupbuydetail/trade
 //返回首页
 import { TabsPage } from '../tabs/tabs';
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-groupbuy',
   templateUrl: 'tradegoods-groupbuy.html',

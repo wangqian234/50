@@ -11,7 +11,6 @@ import { StorageProvider } from '../../providers/storage/storage';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-addressinfo',
   templateUrl: 'addressinfo.html',
@@ -25,12 +24,15 @@ export class AddressinfoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,public config:ConfigProvider,
     public storage:StorageProvider, ) {
-      this.storage.set('tabs','false');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddressinfoPage');
     this.getAddressInfo();
+  }
+
+  ionViewDidEnter(){
+          this.storage.set('tabs','false');
   }
 
   //获取地址信息（地址详情）

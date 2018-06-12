@@ -18,7 +18,6 @@ import {TradegoodsRefundPage}from '../tradegoods-refund/tradegoods-refund';
 import {ShoppinglistPage}from '../shoppinglist/shoppinglist';
 
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-reap',
   templateUrl: 'tradegoods-reap.html',

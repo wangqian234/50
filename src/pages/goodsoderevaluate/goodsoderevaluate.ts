@@ -16,7 +16,7 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 // import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-goodsoderevaluate',
   templateUrl: 'goodsoderevaluate.html',
@@ -54,7 +54,7 @@ export class GoodsoderevaluatePage {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品
-
+        console.log(this.item.goods_list)
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();

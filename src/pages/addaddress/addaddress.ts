@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
@@ -7,6 +7,8 @@ import { StorageProvider } from '../../providers/storage/storage';
 
 //收货地址列表
 import { AddressPage } from '../address/address';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @Component({
   selector: 'page-addaddress',
@@ -47,10 +49,11 @@ export class AddaddressPage {
     token : '',
     id :'',
   };
+    TabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public storage:StorageProvider) {
-      this.storage.set('tabs','false');
+    public storage:StorageProvider,public app: App) {
+
   }
 
   ionViewWillEnter(){
@@ -67,12 +70,15 @@ export class AddaddressPage {
     }
   }
 
-  backToAddress(){
+  backTo(){
     this.navCtrl.pop();
+  }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
   ionViewDidEnter(){
-    
+     this.storage.set('tabs','false');
   }
 
   //添加收货地址（添加或编辑）

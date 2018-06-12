@@ -13,16 +13,18 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-bigsale',
   templateUrl: 'bigsale.html',
 })
 export class BigsalePage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
+  public LoginPage = LoginPage;
   public pageSize = 10;
   public pageIndex = 1;
   public hasData=true;   /*是否有数据*/
@@ -35,7 +37,7 @@ export class BigsalePage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
-    this.storage.set('tabs','false');
+
 
   }
 
@@ -92,7 +94,9 @@ export class BigsalePage {
    
   }
 
-
+ionViewDidEnter(){
+    this.storage.set('tabs','false');
+}
 
   backTo(){
     this.navCtrl.pop();
@@ -104,6 +108,17 @@ export class BigsalePage {
 
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
+  }
+  
+  gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(ShopgoodsinfoPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
   }
 
   //下拉刷新

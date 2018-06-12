@@ -19,7 +19,7 @@ import { RentsalelistPage } from '../rentsalelist/rentsalelist';
 import { LoginPage } from '../login/login';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo'
-@IonicPage()
+
 @Component({
   selector: 'page-rentsale',
   templateUrl: 'rentsale.html',
@@ -59,7 +59,7 @@ export class RentsalePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','true');
+
      this.curCityCode = "4403";
   }
   
@@ -73,11 +73,14 @@ export class RentsalePage {
     this.getFocusList();
   }
 
+  ionViewDidEnter(){
+    this.storage.set('tabs','true');
+  }
+
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
     this.offent = $('#testcontent').offset();
-    console.log("这个offent是",this.offent)
   }
   //轮播图获取
   getFocusList(){

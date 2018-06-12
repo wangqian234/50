@@ -10,7 +10,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 
 //登录页面
 import { LoginPage } from '../login/login';
-@IonicPage()
+
 @Component({
   selector: 'page-payprefee',
   templateUrl: 'payprefee.html',
@@ -183,6 +183,17 @@ export class PayprefeePage {
        }
      })
    }
+
+    clickmeToOut(){
+      if(this.allPrice == 0){
+        alert("缴费金额不能为0")
+        return;
+      }
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
            clickme(){
           var that = this;
           $.ajax({

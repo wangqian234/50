@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -9,8 +9,9 @@ import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import { LoadingController } from 'ionic-angular';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-groupbuydetail',
   templateUrl: 'tradegoods-groupbuydetail.html',
@@ -23,8 +24,9 @@ export class TradegoodsGroupbuydetailPage {
 
     public list=[];
     public groupbuyid;
+    public TabsPage = TabsPage;
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public app: App,
   public loadingCtrl: LoadingController,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
      this.storage.set('tabs','false');
         //this.trade_id=navParams.get('tradeId');
@@ -64,8 +66,13 @@ export class TradegoodsGroupbuydetailPage {
   ionViewDidLoad() {
     //console.log('ionViewDidLoad TradegoodsGroupbuydetailPage');
   }
-    backTo(){
+
+  backTo(){
     this.navCtrl.pop();
   }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
+  }
+
 
 }

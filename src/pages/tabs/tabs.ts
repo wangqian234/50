@@ -54,6 +54,4 @@ export class TabsPage {
     $(".mytabs").css("display","none");
     $(".mytabs2").css("display","block");
   }
-
-
 }

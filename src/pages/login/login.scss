@@ -209,19 +209,16 @@ a{
     }
 
     input[type="checkbox"]{
-        position: absolute;
-        clip: rect(0, 0, 0, 0);
-    }
-    input[type="checkbox"]+span {
-        display: inline-block;
+        -webkit-appearance: none;
         background: url(../assets/imgs/selectun.png) no-repeat;
-        position: relative;
+        vertical-align: middle;
         height: 0.3rem;
         width: 0.3rem;
         background-size: cover;
         float: left;
     }
-    input[type="checkbox"]:checked + span:after {
+
+    input[type="checkbox"]:checked {
         background: url(../assets/imgs/selected.png) no-repeat;
         background-size: cover;
         float: left;
@@ -229,6 +226,7 @@ a{
     .div_a_pass p{
         float: left;
         padding-top: 0.04rem;
+        font-size: 0.25rem;
     }
         
 }

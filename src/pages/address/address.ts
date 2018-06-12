@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App  } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
@@ -13,7 +13,9 @@ import { AddaddressPage } from '../addaddress/addaddress';
 import { LoginPage } from '../login/login';
 
 //引入地址详情页面
-import { AddressinfoPage } from '../addressinfo/addressinfo'
+import { AddressinfoPage } from '../addressinfo/addressinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @Component({
   selector: 'page-address',
@@ -30,6 +32,7 @@ export class AddressPage {
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
   public AddressinfoPage = AddressinfoPage;
+    TabsPage = TabsPage;
 
   //引入地址详情页面
   public addressInfo=[];
@@ -40,8 +43,8 @@ export class AddressPage {
     }
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
-    ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
-      this.storage.set('tabs','false');
+    ,public storage:StorageProvider,public httpService:HttpServicesProvider,public app: App) {
+
   }
 
   ionViewWillEnter(){
@@ -49,6 +52,7 @@ export class AddressPage {
     this.getAddressList();
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.getAddressList();
   }
   //获取当前用户的收货地址列表
@@ -135,6 +139,9 @@ export class AddressPage {
   //回退页面
   backTo(){
     this.navCtrl.pop();
+  }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 

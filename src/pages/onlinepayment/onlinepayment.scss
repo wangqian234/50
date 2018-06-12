@@ -39,7 +39,7 @@ page-onlinepayment {
         color:#818181;
         font-size: 0.22rem;
     }
-    .appear{
+    .enappear{
         float: right;
         color:#818181;
         font-size: 0.22rem;
@@ -110,5 +110,14 @@ page-onlinepayment {
     }
     .otherUser_content{
             margin-top: 0.1rem;
+    }
+    .dib_daoh_b{
+        z-index: 0;
+    }
+    .button-block-ios{
+        margin: 0;
+        height: 0.8rem;
+        bottom: 0;
+        position: absolute;
     }
 }

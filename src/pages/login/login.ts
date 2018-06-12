@@ -14,7 +14,7 @@ import { RegisterpasswordPage } from '../registerpassword/registerpassword';
 //返回首页
 import { TabsPage } from '../tabs/tabs'
 
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -39,7 +39,7 @@ public history='';
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
-  public remeberNum;
+  public remeberNum = false;
 
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
@@ -49,10 +49,18 @@ public history='';
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
+      try{
+        if(this.storage.get("remeberNum")){
+          this.userinfo.userName = this.storage.get('userName');
+          this.userinfo.userPwd = this.storage.get('password');
+          this.remeberNum = this.storage.get("remeberNum");
+        }
+      } catch (e){
+
+      }
   }
 //登录触发的函数
   doLogin(){
-    alert(this.remeberNum);
     console.log(this.userinfo.userName)
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
       alert('请输入正确的手机号码');
@@ -67,13 +75,14 @@ public history='';
 	    showBackdrop: true,
     });
     loading.present();
+    this.storage.set("remeberNum",this.remeberNum)
     if(this.loginNum){
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
-        if (data.errcode === 0 && data.errmsg === 'OK') {  
-          this.storage.set('userName',this.userinfo.userName);
+        if (data.errcode === 0 && data.errmsg === 'OK') {
           this.storage.set('password',this.userinfo.userPwd);
+          this.storage.set('userName',this.userinfo.userName);
           this.storage.set('token',data.model.token);
           this.storage.set('username1',data.model.username);
           console.log(data.model);

@@ -12,8 +12,6 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
-
-@IonicPage()
 @Component({
   selector: 'page-shopinfo',
   templateUrl: 'shopinfo.html',

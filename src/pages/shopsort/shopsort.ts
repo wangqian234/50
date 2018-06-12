@@ -15,6 +15,7 @@ import { TabsPage } from '../tabs/tabs';
 import { ShoppingPage } from '../shopping/shopping';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-shopsort',
@@ -36,6 +37,7 @@ export class ShopsortPage {
   public pid = 0;
   public scroll = 1;
   public TabsPage = TabsPage;
+  public LoginPage = LoginPage;
   public scrollconfig = {
     isEnd : false,
     isAjax : false
@@ -44,7 +46,7 @@ export class ShopsortPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider) {
-    this.storage.set('tabs','false');
+    
     if(this.navParams.get('type')){
       this.fanhui = true;
     }
@@ -59,7 +61,8 @@ export class ShopsortPage {
 this.openScroll()
   }
   ionViewDidEnter() {
-        this.getLeftCateData();/*获取左侧分类*/
+    this.storage.set('tabs','333');
+    this.getLeftCateData();/*获取左侧分类*/
   }
 
 
@@ -125,8 +128,20 @@ this.openScroll()
      })
   }
 
+  gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(ShopgoodsinfoPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
+  }
+
 
   backTo(){
+    $(".ios .tabs .tabbar").css("display","-webkit-flex");
     this.app.getRootNav().push(TabsPage,{
       tabs:true
     });

@@ -8,7 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 
-@IonicPage()
+
 @Component({
   selector: 'page-repairevaluate',
   templateUrl: 'repairevaluate.html',

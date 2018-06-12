@@ -33,6 +33,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { PersonalPage } from '../personal/personal';
 //返回首页
 import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 
 //返回首页
 import { HomePage } from '../home/home';
@@ -45,7 +46,7 @@ declare var BMap;
 })
 export class ShoppingPage {
 
-@ViewChild("shopslides") slides: Slides;
+@ViewChild("shopslide") slides: Slides;
    @ViewChild('map') map_container: ElementRef;
   map: any;//地图对象
   marker: any;//标记
@@ -60,6 +61,7 @@ export class ShoppingPage {
   public BigsalePage = BigsalePage;
   public GroupbuylistPage = GroupbuylistPage;
   public PersonalPage = PersonalPage;
+  public LoginPage = LoginPage;
    //定义接收数据的list
   public l=[];
   public SalePage = SalePage;
@@ -90,15 +92,12 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
-    this.storage.set('tabs','true');
-      this.geolocation1 = Geolocation;
-      this.storage.set("currentPlace","深圳市")
+
     // // this.getLunbo();
   } 
   //主页面加载函数 
    ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
-    this.currentPlace = this.storage.get("currentPlace");
     this.getShop();
     this.getShopGoods();
       if(this.storage.get("shopKewWords")){
@@ -106,7 +105,7 @@ export class ShoppingPage {
       }
     }
     ionViewWillEnter(){
-      //this.slides.startAutoplay();
+      this.slides.startAutoplay();
              this.tuiList = [
      "assets/imgs/08.jpg",
      "assets/imgs/back.png",
@@ -167,26 +166,24 @@ export class ShoppingPage {
   ionViewDidLoad() {
     // this.getPosition();
     //给第一个商品分类hr
-    
+      this.currentPlace = this.storage.get("currentPlace");
+          $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter(){
-    $('.facediv li:nth-of-type(1)').attr("class","activety");
-      //this.slides.autoplayDisableOnInteraction = false;
-    // $("#sos_tanc").focus(function(){
-    //   $(".remen_sos").css("display","block")
-    //    $(".shopcontentdiv").css("display","none")
-    //   $(".caid_img").css("display","none")
-    //   $(".fanhui").css("display","block")
-    // })
-    $("#sos_tanc").focus(function(){
+    this.storage.set('tabs','444');
+    this.clickFun();
+    this.shopKeyList = this.storage.get("shopKewWords");
+  }
+
+  clickFun(){
+    $(".sos_tanc").click(function(){
       $(".sousuo").css("display","block")
        $(".shouye").css("display","none")
        $(".shopcontentdiv").css("display","none")
        $(".remen_sos").css("display","block")
        $(".ios .tabs .tabbar").css("display","none");
     })
-    this.shopKeyList = this.storage.get("shopKewWords");
   }
 
   //控制搜索页面的显示
@@ -204,19 +201,6 @@ export class ShoppingPage {
   doSomeThing(){
    this.doReserch();
   }
-
-    getPosition() {
-      var that = this;
-      this.geolocation.getCurrentPosition().then((resp) => {
-      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
-      var gc = new BMap.Geocoder();
-      gc.getLocation(point, function (rs) {
-        var addComp = rs.addressComponents;
-        console.log(addComp.city)
-        that.storage.set("currentPlace",addComp.city);
-      }); 
-       });
-}
 
 //出发箭头
   clickEvent(){
@@ -262,6 +246,12 @@ export class ShoppingPage {
     })
   }
 
+  searchFromKey(key){
+    this.navCtrl.push(ShopmalllistPage ,{
+      keywords: key,
+    })
+  }
+
   onSearchKeyUp(event){
     if("Enter"==event.key){
      this.doReserch();
@@ -270,7 +260,12 @@ export class ShoppingPage {
 
   //跳转到商品详情页面
   goGoodsInfo(id){
-     this.navCtrl.push(ShopgoodsinfoPage,{id:id});
+    if(this.storage.get('token')){
+      this.navCtrl.push(ShopgoodsinfoPage,{id:id});
+      } else {
+        this.navCtrl.push(LoginPage);
+        return;
+      }
   }
 
   gotoPlace(){

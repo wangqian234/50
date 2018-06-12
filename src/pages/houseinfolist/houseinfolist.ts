@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
+import $ from 'jquery';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
@@ -17,7 +18,7 @@ import { LoginPage } from '../login/login';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-houseinfolist',
   templateUrl: 'houseinfolist.html',
@@ -49,13 +50,24 @@ export class HouseinfolistPage {
   ionViewWillEnter() {
     console.log('ionViewWillEnter HouseinfolistPage');
         //确认登录状态
-if(this.storage.get('token')){
+    if(this.storage.get('token')){
 
-} else {
-this.navCtrl.push(LoginPage);
-}
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
     this.getHouseList();
-    
+  }
+
+  ionViewDidEnter(){
+    $('.curstate').each(function(){
+      var $item = $(this);
+      if($item.html() === '未通过审核'){
+        $item.addClass('unchecked');
+      }else if($item.html() === '审核通过'){
+        $item.addClass('checked');
+      }
+    });
+
   }
  
 

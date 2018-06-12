@@ -37,7 +37,7 @@
 
 	
 	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of list" [navPush]='GroupdetailPage' [navParams]="{id:item['id']}">
+		<li *ngFor="let item of list" (click)="gotoGood(item['id'])">
 			<a href="javascript:;">
 				<div class="topimg"><img src={{item.img}}></div>
 				<div class="lieb_txt">

@@ -24,7 +24,7 @@ export class BindroomPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
-    this.storage.set('tabs','false');
+
 }
 
   ionViewWillLoad() {
@@ -36,6 +36,9 @@ export class BindroomPage {
     this.bindRoom.token = this.storage.get('token');
   }
 
+ionViewDidEnter(){
+      this.storage.set('tabs','false');
+}
   //新添加要绑定的房屋
   addBindInfo(){
     console.log(JSON.stringify(this.bindRoom))
