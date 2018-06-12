@@ -63,7 +63,7 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-        this.storage.set('tabs','false');
+        
         $(".ios .tabs .tabbar").css("display","none");
   }
 
@@ -76,6 +76,7 @@ export class CartPage {
   }
   
   ionViewDidEnter() {
+    this.storage.set('tabs','false');
       //确认登录状态
       if(this.storage.get('token')){
          this.pageIndex = 1;
@@ -87,14 +88,18 @@ export class CartPage {
   }
 
   getCartsData(infiniteScroll){
-   let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+  //  let loading = this.loadingCtrl.create({
+	//     showBackdrop: true,
+  //   });
+  //   loading.present();
+  $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
           this.hasData = false;
@@ -128,12 +133,16 @@ export class CartPage {
 
   //删除选中商品
   delCartsData(item){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.deleatcartList.gsId=item.size_id;
     this.deleatcartList.token=this.storage.get('token');
     var data = this.deleatcartList;
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/delete?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.pageIndex = 1;
         this.list = [];
@@ -216,6 +225,8 @@ export class CartPage {
   }
   //修改购物车数量
   updatenum(item){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.updateList.gsId=item.size_id;
     this.updateList.goodsNum=item.num;
     this.updateList.token=this.storage.get('token');
@@ -224,6 +235,8 @@ export class CartPage {
     var that = this;
     var api = this.config.apiUrl+'/api/usercart/update';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if(data.errcode ===0&&data.errmsg==='OK'){
         console.log("修改成功")
       }else{
@@ -250,6 +263,8 @@ export class CartPage {
 // }
 //结算
 buy(){
+  $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
   var gidGroup = [];
   var gsIdGroup = [];
   var numGroup = [];
@@ -271,6 +286,8 @@ buy(){
    var date = this.blist;
     var api = this.config.apiUrl+'/api/usercart/add_settlement'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        console.log(data)
        console.log("jin11")
       if(data.errcode === 0 && data.errmsg === 'OK'){

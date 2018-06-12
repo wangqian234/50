@@ -5,7 +5,7 @@ import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import $ from 'jquery'
 
 //增加收货地址
 import { AddaddressPage } from '../addaddress/addaddress';
@@ -39,13 +39,16 @@ export class ChangeaddrPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
     ,public storage:StorageProvider,public httpService:HttpServicesProvider,public navParams: NavParams,) {
-      this.storage.set('tabs','false');
+     
       this.callback = this.navParams.get("callback");
       this.addListList = this.navParams.get("addListList");
   }
   ionViewWillEnter(){
     this.getRem();
     this.getAddressList();
+  }
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
   }
 
   gotoBuy(item){
@@ -56,9 +59,13 @@ export class ChangeaddrPage {
 
   //获取当前用户的收货地址
   getAddressList(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
         console.log(this.addresslist);

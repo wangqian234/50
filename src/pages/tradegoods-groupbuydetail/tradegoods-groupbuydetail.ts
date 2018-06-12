@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import $ from 'jquery'
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
@@ -26,7 +26,6 @@ export class TradegoodsGroupbuydetailPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
   public loadingCtrl: LoadingController,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-     this.storage.set('tabs','false');
         //this.trade_id=navParams.get('tradeId');
         this.groupbuyid=navParams.get('gbId');
         //this.getProductList('');//实现列表缓存
@@ -36,19 +35,26 @@ export class TradegoodsGroupbuydetailPage {
     this.getRem();
     this.getdetaillist();
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
      getdetaillist(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var api = this.aa+'/api/groupgoods/info?gbId='+this.groupbuyid+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+      //  loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.model;

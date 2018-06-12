@@ -59,7 +59,7 @@ export class RentsalePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','true');
+    
      this.curCityCode = "4403";
   }
   
@@ -71,6 +71,9 @@ export class RentsalePage {
     // this.navCtrl.push(LoginPage);
     // }
     this.getFocusList();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','true');
   }
 
   ionViewDidLoad() {

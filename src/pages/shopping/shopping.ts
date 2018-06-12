@@ -90,7 +90,7 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
-    this.storage.set('tabs','true');
+    
       this.geolocation1 = Geolocation;
       this.storage.set("currentPlace","深圳市")
     // // this.getLunbo();
@@ -151,9 +151,13 @@ export class ShoppingPage {
   // }
     //获取商城首页分类的商品
     getShopGoods(){
+       $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
      //初始显示旅游服务的商品列表
      var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
         this.http.get(api).map(res => res.json()).subscribe(data =>{
+           $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
           if(data.errcode === 0 && data.errmsg ==="OK"){
           this.shoplist=data.list; 
           console.log(data);
@@ -171,7 +175,7 @@ export class ShoppingPage {
   }
 
   ionViewDidEnter(){
-    
+    this.storage.set('tabs','true');
       //this.slides.autoplayDisableOnInteraction = false;
     // $("#sos_tanc").focus(function(){
     //   $(".remen_sos").css("display","block")
@@ -209,6 +213,7 @@ export class ShoppingPage {
       var that = this;
       this.geolocation.getCurrentPosition().then((resp) => {
       var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+      console.log(point)
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;

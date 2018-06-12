@@ -12,7 +12,6 @@ import { RepairaddPage } from '../repairadd/repairadd';
 import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
-
 //新闻详情页面
 import { NewinfoPage } from '../newinfo/newinfo';
 //费用明细页面
@@ -30,7 +29,6 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 //loading
 import { LoadingPage } from '../loading/loading';
-
 //在线缴费
 import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 import { LoadingController } from 'ionic-angular';
@@ -103,7 +101,7 @@ export class HomePage {
     public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController,private network: Network,
     private toastCtrl: ToastController) {
       this.geolocation1 = Geolocation;
-      this.storage.set('tabs','true');
+      
   }
 
   ionViewWillEnter(){
@@ -135,6 +133,7 @@ export class HomePage {
 
 networktype;
    ionViewDidEnter() {
+     this.storage.set('tabs','true');
       //this.getPosition();
       let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
         console.log('network was disconnected :-(');
@@ -188,7 +187,7 @@ presentToast() {
   // }
   getFocus(){
     $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
         $(".spinnerbox").fadeOut(200);

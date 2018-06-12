@@ -8,7 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 @IonicPage()
 @Component({
   selector: 'page-tradegoods-evaluatedetail',
@@ -26,7 +26,6 @@ export class TradegoodsEvaluatedetailPage {
   public token=this.storage.get('token');
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp 
   ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-     this.storage.set('tabs','false');
         //this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
           this.SD_id=navParams.get('tradeId');
           this.goods_id=navParams.get('goodsId');
@@ -36,15 +35,22 @@ export class TradegoodsEvaluatedetailPage {
         this.getRem();
         this.getdetaillist();
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j=3;
     //  var api = this.aa+'/api/tradegoods/info?trade_Id='+this.goods_id+'&token='+this.token;
      var api = this.aa+'/api/tradegoods/info?trade_Id=28814915651816948&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeIn(200);
+       $(".spinner").fadeIn(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;

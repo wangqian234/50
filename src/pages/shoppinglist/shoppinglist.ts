@@ -102,13 +102,16 @@ export class ShoppinglistPage {
   public aa = this.config.apiUrl;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
   ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-     this.storage.set('tabs','false');
+     
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
         this.SD_id=0;   
       } 
       $(".ios .tabs .tabbar").css("display","none");
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu,item){
@@ -136,15 +139,19 @@ export class ShoppinglistPage {
      this.clickme();
    }
    payMent(){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    //   });
+    //   loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       this.obligationEventList.token = this.storage.get('token')
       this.obligationEventList.createip =this.cip;
       var api = this.aa + '/api/weixinpay/unifiedorder'
       this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
-         loading.dismiss();
+        //  loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         if(data.errcode === 0 ){
           console.log(data)
           this.outTradeNo = data.errmsg
@@ -153,18 +160,18 @@ export class ShoppinglistPage {
         }
       })
    }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                that.cip = data.ip;
-                that.payMent();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+      clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          that.cip = data.ip;
+          that.payMent();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+}
    //微信查询接口
    checkPayment(){
      var api = this.aa + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
@@ -176,16 +183,20 @@ export class ShoppinglistPage {
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
-         let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
+      //    let loading = this.loadingCtrl.create({
+	    // showBackdrop: true,
+      // });
+      // loading.present();
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("取消付款成功！");
           this.paymentEvent(1);////刷新界面
@@ -206,16 +217,20 @@ export class ShoppinglistPage {
    }
    //商品确认收货
    receiveEvent(trade_id){
-         let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    //      let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("收货成功！");
           this.paymentEvent(3);
@@ -392,10 +407,12 @@ export class ShoppinglistPage {
 /**王慧敏团购 */
    //团购实现列表缓慢加载
    getGroupList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     switch(this.SD_id){
       case 0:
       this.tab_test={
@@ -435,7 +452,9 @@ export class ShoppinglistPage {
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
     //  console.log("王慧敏"+api);  
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+      //  loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/

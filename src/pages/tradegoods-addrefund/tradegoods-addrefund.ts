@@ -8,7 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
 @IonicPage()
@@ -31,13 +31,16 @@ export class TradegoodsAddrefundPage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,
   public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-     this.storage.set('tabs','false');
+     
         this.SD_id=navParams.get('tradeId');
       
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();
         this.getdetaillist();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -46,11 +49,15 @@ export class TradegoodsAddrefundPage {
   getdetaillist(){
   }
   addEvaluate(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.token = this.token;
       //var date = this.evaluateList;
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加成功！");
         //this.navCtrl.push(ShoppinglistPage);

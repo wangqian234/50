@@ -14,6 +14,7 @@ import { LoadingController } from 'ionic-angular';
 //添加商品退款申请
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
 import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund'
+import $ from 'jquery'
 @IonicPage()
 @Component({
   selector: 'page-goodsoderdetail',
@@ -38,32 +39,37 @@ export class GoodsoderdetailPage {
   public tradegoodsid;//商品订单编号
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
-,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-          this.storage.set('tabs','false');
+,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {        
           this.SD_id=navParams.get('id');
           this.tradegoodsid=navParams.get('tradegoodsId');
-
   }
 
-ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
-  this.getRem();
-  this.getdetaillist();
-  this.getDetail();
+  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+    this.getRem();
+    this.getdetaillist();
+    this.getDetail();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-  loading.present();
+  //   let loading = this.loadingCtrl.create({
+	//     showBackdrop: true,
+  //   });
+  // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j=3;
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
      console.log("慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+      //  loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          this.list=data.list[0];
          this.model=data.model;
@@ -88,11 +94,14 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 
   //获取商品退款详情
  getDetail(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var j=3;
      var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.tradegoodsid+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.tradeRefundInfo = true;
          this.refundInfoList = data.model;

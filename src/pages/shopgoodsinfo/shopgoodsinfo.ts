@@ -83,7 +83,6 @@ export class ShopgoodsinfoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
   public loadingCtrl: LoadingController,public app: App) {
-    this.storage.set('tabs','false');
     this.wid=this.navParams.get("id")
       //  alert(this.wid)
     
@@ -97,20 +96,25 @@ export class ShopgoodsinfoPage {
      
   }
   ionViewDidEnter() {
- this.switch(0);
+    this.storage.set('tabs','false');
+    this.switch(0);
   }
   //显示商品详情页面
   goodsInfo(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that =this;
     var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     console.log(this.token)
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         console.log(data)
         that.goodMlist = data.json['good_Model'].model;
         that.jiage=data.json['good_Model'].model.maxpreprice;
@@ -143,12 +147,16 @@ export class ShopgoodsinfoPage {
   }
 //购买数量判断
 ifEnough(){
+   $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
   this.ifList.gId=this.wid;
   this.ifList.gsId=this.goodSize;
   this.ifList.goodsNum=this.buylist.goodsNum;
   var date = this.ifList;
   var api = this.aa+'/api/goods_size/update'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
        
          //alert("可以继续添加!");
@@ -160,8 +168,12 @@ ifEnough(){
 
 //推荐商品列表
  recommend(){   
+   $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api2 = this.aa+'/api/goods/list?curCityCode=4403';
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        if(data2.errmsg == 'OK'){
          this.rlist = data2.list;
          console.log(data2);
@@ -190,6 +202,8 @@ fenge(str){
 }
   //加入购物车函数
    addcart(){ 
+     $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      if(!this.goodSize){
        alert("请选择商品规格")
      }else{
@@ -201,6 +215,8 @@ fenge(str){
     var date = this.addcarList;
     var api = this.aa+'/api/usercart/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
          alert("成功加入购物车");
       }else{
@@ -242,6 +258,8 @@ switch(key){
 
  //购买
    buygoods(){ 
+     $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      if(!this.goodSize){
       alert("请选择商品规格")
      }else{
@@ -255,6 +273,8 @@ switch(key){
     var date = this.buylist;
     var api = this.aa+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
         //alert("post成功!");
          //跳转前验证

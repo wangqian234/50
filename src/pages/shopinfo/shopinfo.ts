@@ -8,7 +8,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 //请求数据
 import {Http,Jsonp}from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import $ from 'jquery'
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
@@ -29,12 +29,14 @@ export class ShopinfoPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+   
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
     
 }
-
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopinfoPage');
   }
@@ -44,10 +46,12 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
 
     
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-loading.present();
+//     let loading = this.loadingCtrl.create({
+// 	    showBackdrop: true,
+//     });
+// loading.present();
+$(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
 
     //店铺信息
 
@@ -64,8 +68,10 @@ loading.present();
     //商品列表
     // alert("店id:"+this.sid);  
     var api2 = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&curCityCode=4403&keyWord=111&shop_Id='+this.sid;
-     loading.dismiss();
+    //  loading.dismiss();
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        if(data2.errmsg == 'OK'){
          this.list = data2.list;
          console.log(data2);

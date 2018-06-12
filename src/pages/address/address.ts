@@ -5,7 +5,7 @@ import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import $ from 'jquery'
 
 //增加收货地址
 import { AddaddressPage } from '../addaddress/addaddress';
@@ -41,7 +41,7 @@ export class AddressPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
     ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
-      this.storage.set('tabs','false');
+      
   }
 
   ionViewWillEnter(){
@@ -49,14 +49,19 @@ export class AddressPage {
     this.getAddressList();
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.getAddressList();
   }
   //获取当前用户的收货地址列表
   getAddressList(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
         console.log(this.addresslist);
@@ -75,6 +80,8 @@ export class AddressPage {
 
   //设置默认收货地址
   clickToDef(id){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var headers = new Headers({ 'Content-Type': 'application/json' });
     var options = new RequestOptions({ headers: headers });
@@ -84,6 +91,8 @@ export class AddressPage {
     };
     var api = this.config.apiUrl + '/api/Address/edit_default';
     this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("设置成功！");
@@ -101,6 +110,8 @@ export class AddressPage {
   }
   //删除地址
   deleteAddress(id){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var data = {
       token : this.storage.get('token'),
       addressId : id,
@@ -110,6 +121,8 @@ export class AddressPage {
     var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("删除成功！");
         this.ionViewDidEnter(); //更新页面
@@ -145,8 +158,12 @@ export class AddressPage {
 
   //获取地址详情（页面没写）
   getAddressDet(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + "&addressId=" + this.addressId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log(data.model);
       } else {

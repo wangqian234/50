@@ -45,13 +45,14 @@ export class TradegoodsGroupbuyPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,
   public app: App,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-     this.storage.set('tabs','false');
         //this.trade_id=navParams.get('tradeId');
         this.SD_id=navParams.get('id');
         this.getProductList('');//实现列表缓存
         //alert(this.SD_id);
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   groupEvent(groupBuy_State){
     switch(groupBuy_State){
       case 0:
@@ -113,11 +114,15 @@ export class TradegoodsGroupbuyPage {
       };
       break;
     }
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var j=3;
      $('.scroll-content').scrollTop('1.8rem');
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
      console.log("王慧敏"+api);   
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         if(data.list.length<10){
@@ -158,9 +163,13 @@ export class TradegoodsGroupbuyPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
     getdetaillist(infiniteScroll){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var j=3;
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         if(infiniteScroll){

@@ -42,11 +42,12 @@ public history='';
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','true');
-
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','true');
   }
 //登录触发的函数
   doLogin(){

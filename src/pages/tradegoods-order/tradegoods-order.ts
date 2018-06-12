@@ -9,7 +9,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 @IonicPage()
 @Component({
   selector: 'page-tradegoods-order',
@@ -25,17 +25,18 @@ export class TradegoodsOrderPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp
    ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-      this.storage.set('tabs','false');
-
   }
 
 ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      //var api = this.aa+'/api/trade/list?'+'trade_Id=1'+this.token;
      var api = this.aa+'/api/trade/list?'+'pageSize=10&pageIndex=1&trade_State=0&token=111';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeIn(200);
+       $(".spinner").fadeIn(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          this.list=data.list;
          console.log(data);
@@ -43,6 +44,9 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         alert(data.errmsg);
      }
      })
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   ionViewDidLoad() {
    this.onload2();

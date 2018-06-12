@@ -36,7 +36,7 @@ export class ShopsortPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider) {
-    this.storage.set('tabs','false');
+    
     if(this.navParams.get('type')){
       this.fanhui = true;
     }
@@ -51,6 +51,7 @@ export class ShopsortPage {
         this.getLeftCateData();/*获取左侧分类*/
   }
   ionViewDidEnter() {
+    this.storage.set('tabs','false');
     var aa = this.pid+1;
     $('.cate_left ul li:nth-of-type(' + aa +')').attr("class","activety");
   }

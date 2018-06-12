@@ -50,8 +50,6 @@ export class RepairaddPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
-    this.storage.set('tabs','false');
       if(this.storage.get('roomId')){
         this.defRoomId=this.storage.get('roomId')
         this.roomId= this.defRoomId;
@@ -71,6 +69,9 @@ export class RepairaddPage {
       }
     this.getRem();
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
 
   httptest(){
     console.log(this.repairLimit.sort1);
@@ -83,10 +84,14 @@ export class RepairaddPage {
   }
   //查询用户绑定的所有房屋
   getroomId(){   
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.roomidlist=data.list; 
             console.log(that.roomidlist) 
@@ -101,9 +106,13 @@ export class RepairaddPage {
   }
   //查询所有小区
   getproject(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var api = this.config.apiUrl+'/api/project/dw';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.projectlist=data.list;
             console.log(this.projectlist)
@@ -128,9 +137,13 @@ export class RepairaddPage {
   }
   //根据工单类型查询类别
   getcategory(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var api = this.config.apiUrl+'/api/category/dw?type='+this.addlist.type;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.stypelist=data.list;
             console.log(this.stypelist)
@@ -141,10 +154,12 @@ export class RepairaddPage {
   }
   //添加工单
   showPopup(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     if(this.addlist.type==="4"){
       this.addlist.roomId="0"
     }else{
@@ -155,7 +170,9 @@ export class RepairaddPage {
     console.log(this.addlist)
     var api = this.config.apiUrl+'/api/list/add?';
      this.http.post(api,this.addlist).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
+          // loading.dismiss();
+          $(".spinnerbox").fadeOut(200);
+           $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){ 
               console.log(data)
               this.guidFile=data.model;
