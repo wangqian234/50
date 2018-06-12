@@ -58,9 +58,15 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
     if (this.storage.get('tabs') == "true") {
       //如果是根目则按照需求1处理
       this.showExit();
-    }else{
+    }else if(this.storage.get('tabs') == "false"){
       //非根目录返回上一级页面
       this.app.goBack();
+    }else if(this.storage.get('tabs') == "333"){
+          this.app.getRootNav().push(TabsPage,{
+            tabs:true
+          });
+    } else if(this.storage.get('tabs') == "444"){
+      this.app.getRootNav().push(TabsPage);  
     }
   }, 1);
   }

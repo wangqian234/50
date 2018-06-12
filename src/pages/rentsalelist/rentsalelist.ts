@@ -5,14 +5,15 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
-import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
-@IonicPage()
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo';
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-rentsalelist',
   templateUrl: 'rentsalelist.html',
 })
 export class RentsalelistPage {
-
+public LoginPage = LoginPage;
   houseInfo = [];
   houseType = "";
   nature = "";
@@ -194,11 +195,15 @@ export class RentsalelistPage {
   }
     //跳转到详情
   goRentsaleInfo(id,type){
+    if(this.storage.get('token')){
     this.navCtrl.push(RentsaleinfoPage,{
       houseId:id,
       houseType:type,
       quFen:1,
-    })
+    })}else{
+this.navCtrl.push(LoginPage);
+}
+ 
   }
 
   backTo(){

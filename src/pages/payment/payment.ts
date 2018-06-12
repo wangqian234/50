@@ -13,7 +13,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-payment',
   templateUrl: 'payment.html',

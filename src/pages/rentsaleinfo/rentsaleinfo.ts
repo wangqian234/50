@@ -5,7 +5,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
 import $ from 'jquery'
-@IonicPage()
+
 @Component({
   selector: 'page-rentsaleinfo',
   templateUrl: 'rentsaleinfo.html',

@@ -47,24 +47,35 @@
         <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><ion-radio  name="radiofang" (click)="getValue('1')"[(ngModel)]="RSadd.nature" type="radio" value="1" ></ion-radio> <span>一手房</span></div>
         <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><ion-radio  name="radiofang" (click)="getValue('2')"[(ngModel)]="RSadd.nature" type="radio" vaule="2" ></ion-radio> <span>二手房</span></div>
       </div>-->
-      <div class="repairType">房源性质：</div>
+     <div class="repairType">房源性质：</div>
      <ion-list radio-group [(ngModel)]="RSadd.nature" >
-    <ion-item  style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0;color: red">
-        <ion-radio value="1"></ion-radio>
-    </ion-item>
-    <span>一手房</span>
-    <ion-item  style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0;color: red">
-        <ion-radio value="2"></ion-radio> 
-    </ion-item>
-    <span>二手房</span>
+        <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
+            <ion-radio value="1"></ion-radio>
+        </ion-item>
+        <div style="float:left;margin-top: 0.11rem;">一手房</div>
+        <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
+            <ion-radio value="2"></ion-radio> 
+        </ion-item>
+        <div style="float:left;margin-top: 0.11rem;">二手房</div>
      </ion-list>
     </ion-item>
     <ion-item class="zu">
-      <div class="repairList">
+      <!--<div class="repairList">
         <div class="repairType">房源性质：</div>
         <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input  name="radiozu"(click)="getValue('1')" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
         <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input  name="radiozu"(click)="getValue('2')" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
-      </div>
+      </div>-->
+      <div class="repairType">房源性质：</div>
+      <ion-list radio-group [(ngModel)]="RSadd.nature" >
+        <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
+            <ion-radio value="1"></ion-radio>
+        </ion-item>
+        <div style="float:left;margin-top: 0.11rem;">整租</div>
+        <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
+            <ion-radio value="2"></ion-radio> 
+        </ion-item>
+        <div style="float:left;margin-top: 0.11rem;">合租</div>
+     </ion-list>
     </ion-item>
 
     <ion-item>

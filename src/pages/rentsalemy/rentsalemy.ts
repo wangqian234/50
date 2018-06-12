@@ -6,7 +6,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
-@IonicPage()
+
 @Component({
   selector: 'page-rentsalemy',
   templateUrl: 'rentsalemy.html',

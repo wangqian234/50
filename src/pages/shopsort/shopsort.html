@@ -56,7 +56,7 @@
 			<img src="assets/imgs/rightbar.png">
 		</div>
 
-		<li *ngFor="let item of item.fenllist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+		<li *ngFor="let item of item.fenllist"  (click)="gotoGood(item['id'])">
 			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">

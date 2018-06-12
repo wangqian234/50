@@ -12,7 +12,7 @@ import { BindroomPage } from '../bindroom/bindroom';
 //登录页面
 import { LoginPage } from '../login/login';
 
-@IonicPage()
+
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
@@ -163,7 +163,7 @@ export class OnlinepaymentPage {
         $(this).next('div').css("display","block");
       } else {
         $(this).next('div').css("display","none");
-        $(this).find("img").css("transform","rotate(270deg)")
+        $(this).find("img").css("transform","rotate(90deg)")
       }
     })
   }
@@ -231,6 +231,16 @@ export class OnlinepaymentPage {
        }
      })
    }
+    clickmeToOut(){
+      if(this.allprice == 0){
+        alert("请选择缴费选项")
+        return;
+      }
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
         clickme(){
           var that = this;
           $.ajax({

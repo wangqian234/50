@@ -47,6 +47,9 @@ export class ChangeaddrPage {
     this.getRem();
     this.getAddressList();
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
 
   gotoBuy(item){
       this.callback(item).then(()=>{

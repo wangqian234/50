@@ -9,8 +9,6 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-//ShoppingevaluatePage商品评价
-import {ShoppingevaluatePage}from '../shoppingevaluate/shoppingevaluate';
 //购物车
 import { CartPage } from '../cart/cart';
 

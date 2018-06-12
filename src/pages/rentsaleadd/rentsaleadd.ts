@@ -6,7 +6,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import $ from 'jquery'
-@IonicPage()
+
 @Component({
   selector: 'page-rentsaleadd',
   templateUrl: 'rentsaleadd.html',

@@ -147,18 +147,34 @@ color:#818181;
 
 
 .item-ios .radio-ios{
-    border: solid 1px red;
-    border-radius: 50%;
-    width:18px;
-  height:18px;
-  padding-bottom:0.2rem;
+//     border: solid 1px red;
+//     border-radius: 50%;
+//     width:18px;
+//   height:18px;
+//   padding-bottom:0.2rem;
 }
 
+ion-radio{
+        -webkit-appearance: none;
+        background: url(../assets/imgs/selectb.png) no-repeat;
+        vertical-align: middle;
+        height: 0.3rem;
+        width: 0.3rem;
+        background-size: cover;
+        float: left;
+}
+.radio-ios .radio-checked .radio-inner{
+    top:2px;
+    border-color: #818181;
+}
  .spanin{
      display: block;
     position: absolute;
     margin-top: -0.23rem;
     margin-left: 0.6rem;
+ }
+ .list-ios{
+     margin: 0;
  }
 
 }

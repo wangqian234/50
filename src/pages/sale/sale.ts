@@ -10,9 +10,9 @@ import { StorageProvider } from '../../providers/storage/storage';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 
-@IonicPage()
 @Component({
   selector: 'page-sale',
   templateUrl: 'sale.html',
@@ -21,6 +21,7 @@ export class SalePage {
 
 public ShopgoodsinfoPage=ShopgoodsinfoPage;
 public TabsPage = TabsPage;
+public LoginPage = LoginPage;
 public list = [];
 public mode = 0 ;
 
@@ -96,6 +97,17 @@ ifontime2(infiniteScroll){
   }
   backTo(){
     this.navCtrl.pop();
+  }
+
+  gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(ShopgoodsinfoPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
   }
 
   leftTimer(str){ 

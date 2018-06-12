@@ -5,7 +5,10 @@
 <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
+				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+				</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a class="px24 zyyge">订单详情</a></li>  
@@ -49,6 +52,8 @@
 		<div><em class="dingdan">订单编号：</em><p class="dingdanp">{{model.trade_id}}</p></div>
 		<div><em class="dingdan">订单时间：</em><p class="dingdanp">{{model.trade_time}}</p></div>
 		<div><em class="dingdan">订单状态：</em><p class="dingdanp" style="color:#FF730F">{{model.consignmodename}}</p></div>
+		<!--<div *ngIf="model.tradestate==2&&tradeRefundInfo"><em class="dingdan">退款状态：</em><p class="dingdanp" style="color:#FF730F">{{model.tradeRefundInfo}}</p></div>-->
+		
 	</div>
 	<div class="zuizong_jies">
 		<p><em>商品总额：</em><span>¥{{model.pretotalprice}}</span></p>
@@ -62,13 +67,13 @@
       <!--<a *ngIf="model.tradestate==1" (click)="cancelpaymentEvent(item.trade_id)" href="javascript:;">取消付款</a>
 		  <a *ngIf="model.tradestate==1" (click)="obligationEvent(item.trade_id)" href="javascript:;" style="background-color:#ff971c">确认付款</a>-->
 
-      <a *ngIf="model.tradestate==2&&!tradeRefundInfo" (click)="addrefundEvent(list.tradegoods_id,model.pretotalprice)" href="javascript:;" class="sc">退款</a>
+      	<a *ngIf="model.tradestate==2&&!tradeRefundInfo" (click)="addrefundEvent(list.tradegoods_id,model.pretotalprice)" href="javascript:;" class="sc">退款</a>
 
-	  <a *ngIf="model.tradestate==2&&tradeRefundInfo" (click)="refundInfoEvent(refundInfoList)" href="javascript:;" style="background-color:#FF730F" class="sc">退款详情</a>
-      <a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#FF730F">确认收货</a>
+	  	<a *ngIf="model.tradestate==2&&tradeRefundInfo" (click)="refundInfoEvent(refundInfoList)" href="javascript:;" style="background-color:#FF730F" class="sc">退款详情</a>
+      	<a *ngIf="model.tradestate==3" (click)="receiveEvent(item.trade_id)" href="javascript:; " style="background-color:#FF730F">确认收货</a>
 
-      <a *ngIf="model.tradestate==4" (click)="evaluationEvent(item.trade_id,item.goods_list[0].tradegoods_id,item)" style="background-color:#FF730F">去评价</a>
-		 	<a *ngIf="model.tradestate==4" (click)="buyagainEvent(item.goods_list[0].goods_id)" style="background-color:#FF730F">再次购买</a>
+      	<a *ngIf="model.tradestate==4" (click)="evaluationEvent(model.trade_id,list.tradegoods_id,list)" style="background-color:#FF730F">去评价</a>
+		<!--<a *ngIf="model.tradestate==4" (click)="buyagainEvent(list.goods_id)" style="background-color:#FF730F">再次购买</a>-->
 	</div>
 </div>
 

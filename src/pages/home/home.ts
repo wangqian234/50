@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Http, Jsonp, Headers, RequestOptions } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,Slides } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 //房屋报修
@@ -49,6 +49,7 @@ declare var BMap;
 })
 export class HomePage {
 
+@ViewChild(Slides) slides: Slides;
   @ViewChild('map') map_container: ElementRef;
   map: any;//地图对象
   marker: any;//标记
@@ -100,7 +101,6 @@ export class HomePage {
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
     public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
       this.geolocation1 = Geolocation;
-      this.storage.set('tabs','true');
   }
 
   ionViewWillEnter(){
@@ -131,7 +131,8 @@ export class HomePage {
   }
 
    ionViewDidEnter() {
-      //this.getPosition();
+      this.storage.set('tabs','true');
+      this.getPosition();
    }
 
   getPosition() {

@@ -12,7 +12,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 import {TradegoodsReapPage}from '../tradegoods-reap/tradegoods-reap';
 
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-refund',
   templateUrl: 'tradegoods-refund.html',

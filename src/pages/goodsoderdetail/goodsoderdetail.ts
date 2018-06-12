@@ -1,6 +1,6 @@
 //商品订单详情
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -13,8 +13,11 @@ import { LoadingController } from 'ionic-angular';
 
 //添加商品退款申请
 import { TradegoodsReapPage } from '../tradegoods-reap/tradegoods-reap';
-import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund'
-@IonicPage()
+import {TradegoodsRefundPage} from '../tradegoods-refund/tradegoods-refund';
+import {GoodsoderevaluatePage} from '../goodsoderevaluate/goodsoderevaluate';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
+
 @Component({
   selector: 'page-goodsoderdetail',
   templateUrl: 'goodsoderdetail.html',
@@ -35,10 +38,12 @@ export class GoodsoderdetailPage {
   };
   public SD_id;
   public TradegoodsReapPage=TradegoodsReapPage;
+  public GoodsoderevaluatePage = GoodsoderevaluatePage;
+  TabsPage = TabsPage;
   public tradegoodsid;//商品订单编号
  
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
-,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public app: App) {
           this.storage.set('tabs','false');
           this.SD_id=navParams.get('id');
           this.tradegoodsid=navParams.get('tradegoodsId');
@@ -116,11 +121,21 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      this.navCtrl.push(TradegoodsRefundPage,{item:refundInfoList})
    }
 
+  //商品添加评价
+  evaluationEvent(trade_id,tradegoods_id,item){
+    item.goods_list = [];
+    item.goods_list.push(item);
+    this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id,item:item});
+  }
+
   ionViewDidLoad() {
    //this.onload2();
   }
 
   backTo(){
     this.navCtrl.pop();
+  }
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 }

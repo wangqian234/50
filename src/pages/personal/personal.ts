@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import { ShoppingPage } from '../shopping/shopping';
 
-@IonicPage()
+
 @Component({
   selector: 'page-personal',
   templateUrl: 'personal.html',
