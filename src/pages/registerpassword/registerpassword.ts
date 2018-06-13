@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
-
+import $ from 'jquery'
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
 @Component({
@@ -31,14 +31,14 @@ export class RegisterpasswordPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public httpService:HttpServicesProvider,public storage:StorageProvider,
       public config:ConfigProvider,public http: Http) {
-        this.storage.set('tabs','false');
-
   }
 
   ionViewWillLoad() {
     this.getRem();
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterpasswordPage');
   }
@@ -58,6 +58,8 @@ export class RegisterpasswordPage {
 
   //注册信息发送
   doRegister(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       if(this.registerinfo.password!=this.registerinfo.rpassword){
         alert('确认密码和密码不一样');
       }else if(this.registerinfo.password.length<6){
@@ -71,6 +73,8 @@ export class RegisterpasswordPage {
         this.registerData.userPwd=this.registerinfo.password;
         var api = this.config.apiUrl + '/api/user/register';
         this.http.post(api,this.registerData).map(res => res.json()).subscribe(data =>{
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
           if (data.errcode === 0 && data.errmsg === 'OK') {
             this.storage.set('userName',data.model.loginname);
             this.storage.set('password',this.registerinfo.password);
@@ -86,6 +90,8 @@ export class RegisterpasswordPage {
 
   //发送验证码
   ownRegist(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.registerinfo.userTel))){
       alert('请输入正确的手机号码');
       return;
@@ -97,6 +103,8 @@ export class RegisterpasswordPage {
     console.log(JSON.stringify(data))
     var api = this.config.apiUrl + '/api/vcode/register';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.num = 60;
         this.isShowSend = false;

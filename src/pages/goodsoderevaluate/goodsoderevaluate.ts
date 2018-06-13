@@ -50,7 +50,6 @@ export class GoodsoderevaluatePage {
  
   constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController
 ,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-  this.storage.set('tabs','false');
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品
@@ -61,7 +60,8 @@ export class GoodsoderevaluatePage {
         this.getdetaillist();
         //this.getNum();
   }
-    ionViewWillEnter() {//钩子函数，将要进入页面的时候触发
+    ionViewDidEnter() {//钩子函数，将要进入页面的时候触发
+      this.storage.set('tabs','false');
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -70,10 +70,12 @@ export class GoodsoderevaluatePage {
   getdetaillist(){
   }
   addEvaluate(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.commentGroup="〢"+this.tradegoods_id+"〡"+this.shopgrade.goods_satisfactionlevel+"〡"+
@@ -82,7 +84,9 @@ export class GoodsoderevaluatePage {
       this.evaluateList.token = this.token;
       var date = this.evaluateList;
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         alert("添加评论成功！");
         this.navCtrl.setRoot(ShoppinglistPage,{id:4});

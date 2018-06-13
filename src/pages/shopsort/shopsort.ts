@@ -61,6 +61,8 @@ export class ShopsortPage {
 this.openScroll()
   }
   ionViewDidEnter() {
+    var aa = this.pid+1;
+    $('.cate_left ul li:nth-of-type(' + aa +')').attr("class","activety");
     this.storage.set('tabs','333');
     this.getLeftCateData();/*获取左侧分类*/
   }

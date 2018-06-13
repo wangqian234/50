@@ -105,14 +105,14 @@ export class ShoppingPage {
       }
     }
     ionViewWillEnter(){
-      this.slides.startAutoplay();
-             this.tuiList = [
-     "assets/imgs/08.jpg",
-     "assets/imgs/back.png",
-     "assets/imgs/fee.png",
-     "assets/imgs/fanh.png",
-     "assets/imgs/gongyi.png",
-   ]
+  //     this.slides.startAutoplay();
+  //            this.tuiList = [
+  //    "assets/imgs/08.jpg",
+  //    "assets/imgs/back.png",
+  //    "assets/imgs/fee.png",
+  //    "assets/imgs/fanh.png",
+  //    "assets/imgs/gongyi.png",
+  //  ]
     }
 //     ionViewWillLeave(){
 //   this.slides.stopAutoplay();

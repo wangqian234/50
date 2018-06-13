@@ -49,14 +49,16 @@ export class EditorinfoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,
    public http:Http, public storage:StorageProvider) {
-     this.storage.set('tabs','false');
+     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditorinfoPage');
     this.getUserInfo();
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getBaseInfo(){
     $(".zhuc_qieh div:nth-of-type(1)").attr("class","zhuc");
     $(".zhuc_qieh div:nth-of-type(2)").removeAttr("class","zhuc")
@@ -73,9 +75,13 @@ export class EditorinfoPage {
 
     //获取用户信息(pg goes everywhere)
     getUserInfo(){
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var j = 3;
       var api = this.config.apiUrl + '/api/User/info?token=' +  this.storage.get('token');
       this.http.get(api).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           if(data.model.birthday){
           data.model.birthday = data.model.birthday.substring(0,10);
@@ -96,6 +102,8 @@ export class EditorinfoPage {
 
     //修改用户基本信息，点击提交时生效
     editBasicInfo(){
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var j = 3;
       var data = {
         "token": this.storage.get('token'),
@@ -107,6 +115,8 @@ export class EditorinfoPage {
       if(this.personInfo.birthday&&this.personInfo.name){
       var api = this.config.apiUrl + '/api/User/edit_Basic';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
        if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("修改成功！");
         this.storage.set('username1',this.personInfo.name)
@@ -130,6 +140,8 @@ export class EditorinfoPage {
 
     //修改用户更多信息，点击提交时生效
     editMoreInfo(){
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var j =3;
       var data = {
         "token":this.storage.get('token'),
@@ -143,6 +155,8 @@ export class EditorinfoPage {
       console.log(JSON.stringify(data))
       var api = this.config.apiUrl + '/api/User/edit_More';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           console.log("修改成功!");
           this.navCtrl.pop();

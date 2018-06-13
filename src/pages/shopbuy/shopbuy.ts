@@ -71,7 +71,6 @@ export class ShopbuyPage {
 
   constructor(public storage: StorageProvider, public navCtrl: NavController, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
     public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
-    this.storage.set('tabs','false');
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
@@ -85,21 +84,28 @@ export class ShopbuyPage {
     console.log('ionViewDidLoad ShopbuyPage');
     
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewWillLoad() {
     this.getAddressList();
   }
   //购买页面显示的内容
   goodBuyList(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-      loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    //   loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     //商品内容
     var that = this;
     var j = 3;
     var api = this.wdh + '/api/goods/buy_list?caId='+this.caId+'&token=' + this.token;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.json.dt.errcode === 0 && data.json.dt.errmsg === 'OK'){
         console.log(data)
       that.dtlist = data.json.dt.model;
@@ -147,14 +153,18 @@ export class ShopbuyPage {
 
    //积分抵扣pricemax,没用！
    integral(){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-      loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    //   loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var that = this;
     var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;  
   this.http.get(api4).map(res => res.json()).subscribe(data4 => {
-    loading.dismiss();
+    // loading.dismiss();
+    $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
     if(data4.errcode === 0 && data4.errmsg === 'OK'){
       that.creditslist = data4.model;
     }
@@ -171,15 +181,17 @@ export class ShopbuyPage {
 //根据地址获得运费
 postFee(){
   //运费postage
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var api3 = this.wdh + '/api/trade/info?addressId='+this.addressId+'&gId='+this.wid+'&gsId='+this.sizeId+'&goodsNum='+this.gnum+'&token=' + this.token;
     console.log(api3)   
     this.http.get(api3).map(res => res.json()).subscribe(data3 => {
-     
+     $(".spinnerbox").fadeOut(200);
+     $(".spinner").fadeOut(200);
       if (data3.errcode === 0 && data3.errmsg === 'OK') {
       this.carriagelist = data3.model;
       this.fee=data3.model.postage;
-    
       } else if (data3.errcode === 40002) {
         j--;
           if (j > 0) {
@@ -219,6 +231,8 @@ discount(){
 
   //提交订单
   addBuy() {
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var headers = new Headers();
     var goodsTradeMemo = [];
     for(let i=0; i<this.goodSlist.length;i++){
@@ -235,6 +249,8 @@ discount(){
     var j=3;
     var api =this.wdh + '/api/trade/add  ';
     this.http.post(api, date).map(res => res.json()).subscribe(data => {
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 ) {
         this.outTradeNo = data.errmsg;
       } else if (data.errcode === 40002) {
@@ -251,8 +267,12 @@ discount(){
   }
   //微信查询接口
    checkPayment(){
+     $(".spinnerbox").fadeIn(200);
+     $(".spinner").fadeIn(200);
      var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        if(data.errmsg === 'OK'){
           alert("支付成功")
        }
@@ -309,9 +329,13 @@ discount(){
   //     this.totalPrice=tempAllPrice;
   //  }
   getAddressList(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addressList = data.list;
         for(let i=0; i<this.addressList.length; i++){

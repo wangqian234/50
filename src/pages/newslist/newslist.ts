@@ -31,13 +31,16 @@ export class NewslistPage {
   public page=1;
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewWillEnter(){
     this.getRem();
     this.getNews('');
 
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   //获取最新资讯全部列表
     getNews(infiniteScroll){

@@ -25,7 +25,7 @@ export class PersonalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
         public storage:StorageProvider,public config:ConfigProvider) {
-          this.storage.set('tabs','false');
+         
     this.callback = this.navParams.get("callback");
   }
   
@@ -35,7 +35,9 @@ export class PersonalPage {
     this.currentPlaceCode =  this.storage.get("currentPlaceCode");
     this.gotoHere();
   }
-
+ ionViewDidEnter(){
+    this.storage.set('tabs','false');
+ }
   gotoHere(){
     var that = this;
       $('.container').show();

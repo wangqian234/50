@@ -10,7 +10,6 @@ import { RepairaddPage } from '../repairadd/repairadd';
 import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
-
 //新闻详情页面
 import { NewinfoPage } from '../newinfo/newinfo';
 //费用明细页面
@@ -28,7 +27,6 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 //loading
 import { LoadingPage } from '../loading/loading';
-
 //在线缴费
 import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 import { LoadingController } from 'ionic-angular';
@@ -131,8 +129,34 @@ export class HomePage {
   }
 
    ionViewDidEnter() {
-      this.storage.set('tabs','true');
-      this.getPosition();
+    if(this.storage.get('token')){
+          this.token = this.storage.get('token');
+          this.enSureLoginHome = true;
+         // this.getHouseDefault();
+          //获取默认房屋
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.roomid = this.defRoomId;
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
+      } else {
+          this.enSureLoginHome = false;
+      }
+    //  this.storage.set('tabs','true');
+    //   //this.getPosition();
+    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    //     console.log('network was disconnected :-(');
+    //   });
+    //   //disconnectSubscription.unsubscribe();
+    //   let connectSubscription = this.network.onConnect().subscribe(() => {
+    //     alert("进入网络连接监测")
+    //     alert(this.network.type)
+    //   });
+    //   this.networktype = this.network.type
+    //   this.presentToast();
+    //   //connectSubscription.unsubscribe();
    }
 
   getPosition() {
@@ -160,7 +184,7 @@ export class HomePage {
   // }
   getFocus(){
     $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
         $(".spinnerbox").fadeOut(200);

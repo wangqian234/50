@@ -5,7 +5,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 //引入UserPage
 import { UserPage } from '../user/user';
 
@@ -33,7 +33,7 @@ export class RebuildpassPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
   public config:ConfigProvider,public http: Http, public storage: StorageProvider,) {
-    this.storage.set('tabs','false');
+   
     this.tel=this.storage.get('userName');
     this.mphone = this.tel.substr(0, 3) + '****' + this.tel.substr(7);   
   }
@@ -42,9 +42,10 @@ export class RebuildpassPage {
     console.log('ionViewDidLoad RebuildpassPage');
   }
 
-  // ionViewDidEnter(){
-  //   this.navCtrl.push(UserPage);
-  // }
+  ionViewDidEnter(){
+    //this.navCtrl.push(UserPage);
+     this.storage.set('tabs','false');
+  }
 
 //显示倒计时间
   ownRegist() {
@@ -67,11 +68,15 @@ export class RebuildpassPage {
   }
   //发送验证码
   getCode(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
    var data = {
      "mobile": this.tel
    }; 
     var api = this.config.apiUrl + '/api/vcode/register';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.num = 60;
         this.isShowSend = false;
@@ -102,6 +107,8 @@ export class RebuildpassPage {
 
   //修改密码(点击修改按钮时生效)
   modifyPwd(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var modifyInfo = {
       'mobile':this.tel,
       'pwd':this.modifyInfo.pwd,
@@ -110,6 +117,8 @@ export class RebuildpassPage {
     var api = this.config.apiUrl + '/api/User/edit_Pwd';
     console.log(modifyInfo);
     this.http.post(api,modifyInfo).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("成功修改密码!");
       this.navCtrl.pop(UserPage);

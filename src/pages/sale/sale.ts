@@ -30,6 +30,9 @@ public page = 1;
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage: StorageProvider,) {
+    
+  }
+  ionViewDidEnter(){
     this.storage.set('tabs','false');
   }
 //抢购时间判断
@@ -46,16 +49,19 @@ ifontime(mode){
 }
 
 ifontime2(infiniteScroll){
-   let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-   loading.present();
+  //  let loading = this.loadingCtrl.create({
+	//     showBackdrop: true,
+  //   });
+  //  loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
    var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
 
-   loading.dismiss();
+  //  loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-            if(data.errcode===0 && data.errmsg==="OK"){
-
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
+      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         console.log(this.list)
         var now = new Date().getTime();

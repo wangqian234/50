@@ -25,7 +25,7 @@ public LoginPage = LoginPage;
   search = "";
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewWillLoad() {
@@ -49,15 +49,22 @@ public LoginPage = LoginPage;
 
     }
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     this.clickCSSTitle();
   }
 
   getSaleInfo(infiniteScroll){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType + 
         '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = this.houseInfo.concat(data.list);
         console.log(this.houseInfo);
