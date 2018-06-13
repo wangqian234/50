@@ -107,15 +107,37 @@ ion-slides{
   width:100%;
   padding-left: 0;
 }
-.shangp_lieb_k li{
-  padding:0;
-  margin-left: 0;
-  width:48%;
-  background-color: white;
-  margin: 0 1%;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 3px;
+// .shangp_lieb_k li{
+//   padding:0;
+//   margin-left: 0;
+//   width:48%;
+//   background-color: white;
+//   margin: 0 1%;
+//   margin-bottom: 10px;
+//   border: none;
+//   border-radius: 3px;
+// }
+
+.shangp_lieb_k li:nth-child(odd){
+padding:0.15rem;
+margin-left: 0;
+width:49%;
+background-color: white;
+margin: 0 1% 0 0;
+margin-bottom: 10px;
+border: none;
+border-radius: 3px;
+}
+
+.shangp_lieb_k li:nth-child(even){
+padding:0.15rem;
+margin-left: 0;
+width:49%;
+background-color: white;
+margin: 0 0 0 1%;
+margin-bottom: 10px;
+border: none;
+border-radius: 3px;
 }
 .shangp_lieb_k li .lieb_txt p{
   font-size: 0.18rem;
@@ -250,5 +272,8 @@ ion-slides{
 }
 .jiu_feo{
   width: 100%;
+}
+.shopnomore{
+        margin-bottom: 1rem;
 }
 }

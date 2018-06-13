@@ -147,6 +147,10 @@ this.openScroll()
     });
   }
 
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
+
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }

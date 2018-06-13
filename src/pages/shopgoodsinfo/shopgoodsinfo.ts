@@ -99,8 +99,7 @@ export class ShopgoodsinfoPage {
         this.navCtrl.push(LoginPage);
         return;
       }
- this.switch(0);
-
+      this.switch(0);
   }
   //显示商品详情页面
   goodsInfo(){

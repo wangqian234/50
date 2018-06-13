@@ -54,18 +54,20 @@ page-rentsalemy {
     .shangp_lieb_k_er{
         padding:0 !important;
     }
-
+    .shangp_lieb_k_er li .lieb_img{
+        height:1.45rem;        
+    }
     .shangp_lieb_k_er li .lieb_img img {
-        height:1.34rem;
+        height:1.45rem;
     }
     .chacha{
         float: right;
         position: absolute;
         right: 0.2rem;
-        font-size: 0.2rem;
+        font-size: 0.22rem;
         color: white;
         line-height: 0.4rem;
-        height: 0.68rem;
+        margin-top: 0.1rem;
         width: auto;
     }
 }

@@ -325,6 +325,10 @@ buy(){
     });
   }
 
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
+
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }

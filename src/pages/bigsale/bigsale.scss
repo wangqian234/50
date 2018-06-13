@@ -46,22 +46,22 @@ page-bigsale {
 }
 
 .shangp_lieb_k li:nth-child(odd){
-  padding:0;
+  padding:0.15rem;
   margin-left: 0;
-  width:48.5%;
+  width:49%;
   background-color: white;
-  margin: 0 1.5% 0 0;
+  margin: 0 1% 0 0;
   margin-bottom: 10px;
   border: none;
   border-radius: 3px;
 }
 
 .shangp_lieb_k li:nth-child(even){
-  padding:0;
+  padding:0.15rem;
   margin-left: 0;
-  width:48.5%;
+  width:49%;
   background-color: white;
-  margin: 0 0 0 1.5%;
+  margin: 0 0 0 1%;
   margin-bottom: 10px;
   border: none;
   border-radius: 3px;
@@ -76,7 +76,7 @@ page-bigsale {
   margin-top: 0.1rem;
 }
 .shangp_lieb_k li .lieb_txt{
-  margin:0.15rem;
+  margin:0.1rem 0;
 }
 .shangp_lieb_k_er li .lieb_img{
   width:35%

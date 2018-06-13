@@ -105,6 +105,11 @@ export class AddressPage {
   }
   //删除地址
   deleteAddress(id){
+    var r= confirm("确认删除收货地址")
+        if (r!=true)
+        {
+          return;
+        }
     var data = {
       token : this.storage.get('token'),
       addressId : id,

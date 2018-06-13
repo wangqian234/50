@@ -162,6 +162,10 @@ public background:boolean;
  }
 //完成工单
  enSureFinish(){
+   if(this.editcloselist.stopType = "-1"){
+     alert("请选择工单终止原因");
+     return;
+   }
     let loading = this.loadingCtrl.create({
 	    showBackdrop: true,
     });

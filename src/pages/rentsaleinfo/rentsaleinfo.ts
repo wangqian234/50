@@ -18,6 +18,7 @@ export class RentsaleinfoPage {
   rentsaleDetail={};
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http) {
+    this.storage.set('tabs','false');
   }
 
   ionViewWillLoad(){
@@ -42,6 +43,7 @@ export class RentsaleinfoPage {
     var api = this.config.apiUrl + "/api/rental/info?type=" + this.type + "&rental_id=" + this.rental_id + "&token=" + this.storage.get("token");
       this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        data.model.date = data.model.date.replace("T"," ")
         this.rentsale = data.model;
         console.log(data)
         this.rentsaleDetail = data.list;

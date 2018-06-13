@@ -31,7 +31,7 @@
         </form>
         <input type="search" [(ngModel)]="keywords" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
         <input type="button" value class="searchBtn">
-        <ion-icon class="searchicon" name="ios-search-outline"></ion-icon>
+        <ion-icon class="searchicon" name="ios-search-outline" (click)="getProductList('')"></ion-icon>
     </div>
   </div>
 

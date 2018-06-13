@@ -110,7 +110,7 @@ export class ShoppinglistPage {
       } else {
         this.SD_id=0;   
       } 
-      //$(".ios .tabs .tabbar").css("display","none");
+      $(".ios .tabs .tabbar").css("display","none");
   }
   ionViewDidEnter(){
      if(this.navParams.get('id') != undefined){
@@ -562,6 +562,10 @@ $(".ios .tabs .tabbar").css("display","-webkit-flex");
     });
     }
   }
+
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    

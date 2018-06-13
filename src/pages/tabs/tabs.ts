@@ -39,6 +39,16 @@ export class TabsPage {
    
   }
 
+  // gotoSort(){
+  //   this.navCtrl.push(ShopsortPage)
+  // }
+  // gotoOrder(){
+  //   this.navCtrl.push(ShoppinglistPage)
+  // }
+  // gotoCart(){
+  //   this.navCtrl.push(CartPage)
+  // }
+
 
   ionViewWillEnter($ionicTabsDelegate) {
       $(".mytabs2").css("display","none");
@@ -46,7 +56,6 @@ export class TabsPage {
       if(this.navParams.get('tabs')){
         $(".mytabs").css("display","none");
         $(".mytabs2").css("display","block");
-        $(".mytabs2").select(0)
       }
   }
 

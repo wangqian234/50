@@ -180,6 +180,10 @@ export class HouseinfoPage {
   }
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
   delOtherUser(id){
+      var r= confirm("确认删除该成员与此房屋的绑定")
+      if (r!=true) {
+          return;
+      }
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
@@ -198,7 +202,7 @@ export class HouseinfoPage {
             this.delOtherUser(id);
           }
       } else {
-        console.log(data.errmsg)
+        alert(data.errmsg)
       }
     });
   }
