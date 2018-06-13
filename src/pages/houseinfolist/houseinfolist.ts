@@ -3,13 +3,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
+import $ from 'jquery';
 
 
 import { HouseinfoPage } from '../houseinfo/houseinfo';
 import { BindroomPage } from '../bindroom/bindroom';
 
 import { LoginPage } from '../login/login';
-import $ from 'jquery'
 /**
  * Generated class for the HouseinfolistPage page.
  *
@@ -17,7 +17,7 @@ import $ from 'jquery'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-houseinfolist',
   templateUrl: 'houseinfolist.html',
@@ -37,9 +37,7 @@ export class HouseinfolistPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, ) {
     
 }
-  ionViewDidEnter(){
-    this.storage.set('tabs','false');
-  }
+  
   getHouseInfo(id){
     this.navCtrl.push(HouseinfoPage,{id:id});
   }
@@ -51,13 +49,25 @@ export class HouseinfolistPage {
   ionViewWillEnter() {
     console.log('ionViewWillEnter HouseinfolistPage');
         //确认登录状态
-if(this.storage.get('token')){
+    if(this.storage.get('token')){
 
-} else {
-this.navCtrl.push(LoginPage);
-}
+    } else {
+    this.navCtrl.push(LoginPage);
+    }
     this.getHouseList();
-    
+  }
+
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+    $('.curstate').each(function(){
+      var $item = $(this);
+      if($item.html() === '未通过审核'){
+        $item.addClass('unchecked');
+      }else if($item.html() === '审核通过'){
+        $item.addClass('checked');
+      }
+    });
+
   }
  
 

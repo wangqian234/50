@@ -10,7 +10,6 @@ import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import $ from 'jquery'
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-order',
   templateUrl: 'tradegoods-order.html',

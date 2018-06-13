@@ -81,7 +81,7 @@
 		<div class="mz px24">请选择房间：</div>
     <form class="choose">
         <img src="assets/imgs/jiantou.png" class="chooseimg">
-        <select name="room" [(ngModel)]="roomId" (ngModelChange)="getEdifice()" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
+        <select name="room" [(ngModel)]="roomId"  style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;width: 100%;">
           <option *ngFor="let item of roomlist"  value={{item.id}}> {{item.code}}</option>
         </select>
     </form>
@@ -98,7 +98,7 @@
       <ion-list>
         <ion-item>
           <div class="fee_list"><span>管理费：</span></div>
-          <input class="fee_input" type="number" [(ngModel)]="management" />
+          <input class="fee_input" type="number" [(ngModel)]="management"  />
           <div class="fee_num">元</div>
         </ion-item>
         <ion-item>
@@ -136,10 +136,32 @@
 		<div class="zhong"><p>总计：<em>{{allPrice}}</em>&nbsp;元</p></div>
 		<div class="you" style="position:absolute;right:0;">
 			<div class="goum">
-				<a style="background-color:#488aff" (click)="clickme()">去结算</a>
+				<a style="background-color:#488aff" (click)="clickmeToOut()">去结算</a>
 			</div>
 		</div>
 	</div>
 </div>
+
+  <!--确认付款开始-->
+<div id="enSureMon" style="display:none">
+<div class="mengban"></div>
+<div class="enSureMon">
+	<div class="enSureMon_title"></div>
+	<div class="enSureMon_content">
+		<div class="enSureMon_con_ti">
+			<img (click)="clickmeToIn()" src="../assets/imgs/closeMon.png">
+			<div>确认付款</div>
+			<img src="../assets/imgs/closewuask.png">
+		</div>
+		<div class="enSureMon_con_co">
+			<div>￥{{allPrice}}</div>
+			<div>商品名称<span>物业欠费缴费</span></div>
+			<div>付款方式<span>微信支付</span></div>
+		</div>
+	</div>
+	  <button ion-button block (click)=clickme() color="#488aff">立即付款</button>
+</div>
+</div>
+<!--确认付款结束-->
 
 </ion-content>

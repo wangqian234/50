@@ -12,7 +12,6 @@ import { BindroomPage } from '../bindroom/bindroom';
 //登录页面
 import { LoginPage } from '../login/login';
 import {PaymentPage} from '../payment/payment'
-@IonicPage()
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
@@ -44,23 +43,23 @@ export class OnlinepaymentPage {
     roomId:''
   }
   public outTradeNo;
-  
+  public tongtong;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
     
-      if(this.navParams.get('item')){
-      this.defRoomId=this.navParams.get('item');
-      this.roomid=this.defRoomId;
-      this.getroomId();
-      this.getPayList();
-    }else {
-      if(this.storage.get('roomId')){
-      this.defRoomId=this.storage.get('roomId');
-     this.roomid=this.defRoomId;
-      this.getroomId();
-      this.getPayList();
-    }
-    }
+    //   if(this.navParams.get('item')){
+    //   this.defRoomId=this.navParams.get('item');
+    //   this.roomid=this.defRoomId;
+    //   this.getroomId();
+    //   this.getPayList();
+    // }else {
+    //   if(this.storage.get('roomId')){
+    //   this.defRoomId=this.storage.get('roomId');
+    //   this.roomid=this.defRoomId;
+    //   this.getroomId();
+    //   this.getPayList();
+    // }
+    // }
   }
 
   //主页面加载函数 
@@ -79,6 +78,19 @@ export class OnlinepaymentPage {
   }
 
   ionViewDidEnter() {
+    if(this.navParams.get('item')){
+      this.defRoomId=this.navParams.get('item');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }else {
+      if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }
+    }
     this.storage.set('tabs','false');
     this.appearSome();
     this.getTotal();
@@ -173,7 +185,7 @@ export class OnlinepaymentPage {
         $(this).next('div').css("display","block");
       } else {
         $(this).next('div').css("display","none");
-        $(this).find("img").css("transform","rotate(270deg)")
+        $(this).find("img").css("transform","rotate(90deg)")
       }
     })
   }
@@ -204,18 +216,28 @@ export class OnlinepaymentPage {
        $(".spinner").fadeOut(200);
           if(data.errcode===0 ){
             this.outTradeNo = data.errmsg;
-            this.model = data.model;
+            this.model = data.model.mweb_url;
             console.log(data)
-            this.gopayMent(this.outTradeNo,this.model,this.allprice,this.roomid);
+           this.goWeixiPay();
           }else{
             alert(data.errmsg+"支付失败")
           }
      })
   }
+
+    //跳转到微信支付页面
+  goWeixiPay(){
+    //console.log(this.payMentModel.mweb_url)
+    this.tongtong = this.model + "&referer="+"gyhsh.cn"
+    window.location.assign(this.tongtong)
+   // location.href = this.payMentModel.mweb_url;
+  }
   //跳转支付页面
   gopayMent(outTradeNo,model,allprice,roomid){
     this.navCtrl.push(PaymentPage,{outTradeNo:outTradeNo,model:model,allprice:allprice,roomid:roomid})
   }
+
+
 
 //   webview.setWebViewClient(new WebViewClient() {
 //     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -231,13 +253,34 @@ export class OnlinepaymentPage {
 //         } else {
 //             //H5微信支付要用，不然说"商家参数格式有误"
 //             Map<String, String> extraHeaders = new HashMap<String, String>();
-//             extraHeaders.put("Referer", "商户申请H5时提交的授权域名");
+//             extraHeaders.put("Referer", "");//商户申请H5时提交的授权域名
 //             view.loadUrl(url, extraHeaders);
 //         }
 //         return true;
 //     }
 // });
 
+     //微信查询接口
+   checkPayment(){
+     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+     this.http.get(api).map(res => res.json()).subscribe(data =>{
+       if(data.errmsg === 'OK'){
+          alert("支付成功")
+       }else{
+         alert(data.errmsg)
+       }
+     })
+   }
+    clickmeToOut(){
+      if(this.allprice == 0){
+        alert("请选择缴费选项")
+        return;
+      }
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
         clickme(){
           var that = this;
           $.ajax({

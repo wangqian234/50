@@ -18,7 +18,7 @@
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
-        <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+        <a href="javascript:;"><img class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a class="px24">选择收货地址</a></li>  
@@ -34,15 +34,15 @@
 		<div class="shouh_dange_beijin">
 			<div class="shang">
 				<div class="mz" style="width:98%" (click)="change()">
-          
-					<p><em>{{item.address_name}}</em>&nbsp;<em>{{item.address_mobile}}</em></p>
-					<p>{{item.Address}}</p>
+          			<p style="margin-top:0.2rem;font-family: SimHei;"><em>{{item.address_name}}</em>&nbsp;&nbsp;&nbsp;<em>{{item.address_mobile}}</em></p>
+					<p style="margin:0.1rem 0;">{{item.Address}}</p>
 				</div>
 			</div>
 			
 		</div>
 	</div>
 </div> 
+
 <div class="dib_daoh_b">
 	<div class="gouwuc_ Xinz">
 		 <a [navPush]='AddaddressPage'>新添收货地址</a>

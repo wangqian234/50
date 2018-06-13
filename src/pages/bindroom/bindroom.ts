@@ -24,7 +24,7 @@ export class BindroomPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
-    
+
 }
 
   ionViewWillLoad() {
@@ -52,7 +52,7 @@ export class BindroomPage {
         console.log("成功绑定房屋");
         this.navCtrl.pop();
       } else {
-        console.log(data.errmsg);
+        alert(data.errmsg);
       }
     });
 

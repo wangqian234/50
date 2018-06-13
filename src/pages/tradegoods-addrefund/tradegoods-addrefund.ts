@@ -11,7 +11,7 @@ import { StorageProvider } from '../../providers/storage/storage';
 import $ from 'jquery'
 import { ChangeDetectorRef } from '@angular/core'; //更新页面
 
-@IonicPage()
+
 @Component({
   selector: 'page-tradegoods-addrefund',
   templateUrl: 'tradegoods-addrefund.html',

@@ -13,14 +13,16 @@ import { StorageProvider } from '../../providers/storage/storage';
 import { GroupdetailPage } from '../groupdetail/groupdetail';
 //返回首页
 import { TabsPage } from '../tabs/tabs'
+import { LoginPage } from '../login/login';
 
-@IonicPage()
+
 @Component({
   selector: 'page-groupbuylist',
   templateUrl: 'groupbuylist.html',
 })
 export class GroupbuylistPage {
   public GroupdetailPage=GroupdetailPage;
+  public LoginPage = LoginPage;
   public pageSize = 10;
   public pageIndex = 1;
   public hasData=true;   /*是否有数据*/
@@ -93,6 +95,16 @@ export class GroupbuylistPage {
    
   }
 
+    gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(GroupdetailPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
+  }
     backTo(){
     this.navCtrl.pop();
   }

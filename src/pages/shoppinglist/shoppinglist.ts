@@ -32,7 +32,8 @@ import { LoadingController } from 'ionic-angular';
 //登录页面
 import { LoginPage } from '../login/login';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { GroupdetailPage } from '../groupdetail/groupdetail';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class ShoppinglistPage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;//再次购买
   public LoginPage = LoginPage;
   public TabsPage = TabsPage;
+  public GroupdetailPage = GroupdetailPage;
   public offent;
     public addressList={
     trade_Id:'',
@@ -108,17 +110,27 @@ export class ShoppinglistPage {
       } else {
         this.SD_id=0;   
       } 
-      $(".ios .tabs .tabbar").css("display","none");
+      //$(".ios .tabs .tabbar").css("display","none");
   }
   ionViewDidEnter(){
-    this.storage.set('tabs','false');
+     if(this.navParams.get('id') != undefined){
+      this.storage.set('tabs','false');
+     } else {
+       this.storage.set('tabs','333');
+     }
+     $(".ios .tabs .tabbar").css("display","none");
   }
+
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu,item){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id,item:item});
   }
   //再次购买
-  buyagainEvent(goods_id){
+  buyagainEvent(goods_id,id){
+    if(id){
+      this.navCtrl.push(GroupdetailPage,{id:goods_id});
+      return;
+    }
     this.navCtrl.push(ShopgoodsinfoPage,{id:goods_id});
   }
   //商品评价详情
@@ -537,8 +549,8 @@ export class ShoppinglistPage {
     gotoGroup(){
     this.flag = false;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block");
+    $(".order-content").css("display", "none");
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
     this.SD_id = 0;
@@ -549,15 +561,23 @@ export class ShoppinglistPage {
     gotoOrder(){
     this.flag = true;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none");
+    $(".order-content").css("display", "block");
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
+  ionViewDidLeave(){
+$(".ios .tabs .tabbar").css("display","-webkit-flex");
+  }
   backTo(){
+  
+    if(this.navParams.get('id') != undefined){
+      this.navCtrl.pop();
+    } else{
     this.app.getRootNav().push(TabsPage,{
       tabs:true
     });
+    }
   }
 
   backToHome(){

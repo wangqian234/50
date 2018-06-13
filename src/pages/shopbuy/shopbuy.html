@@ -35,7 +35,7 @@
 
     <!--收货信息-->
 
-	<div class="min_xi">
+	<div class="min_xi" (click)="changeAdd()">
 		<img class="dingwei" src="assets/imgs/dingwei1.png">
 		<p class="tel">收货人：{{addlist.address_name}}</p>
 		<p class="mob">{{addlist.address_mobile}}</p>
@@ -74,18 +74,40 @@
 		<h1>{{dtlist.useintegraltitle}}</h1>
 		<ion-checkbox color="danger" [(ngModel)]="checked" (ionChange)="discount()" ></ion-checkbox>
 	</div>
-     		
-		
-<!--底部导航-->
 
-<div class="dib_daoh_b">
-	<div class="gouwuc_ gouwuc_yem jiesy"> 
-		<div class="zhong"><p>合计：<em>￥{{totalPrice}}</em></p></div>
-		<div class="you">
-			<div class="goum">
-				<a (click)=clickme()>提交订单</a>  
+	<!--底部导航-->
+
+	<div class="dib_daoh_b">
+		<div class="gouwuc_ gouwuc_yem jiesy"> 
+			<div class="zhong"><p>合计：<em>￥{{totalPrice}}</em></p></div>
+			<div class="you">
+				<div class="goum">
+					<a (click)=clickmeToOut()>提交订单</a>  
+				</div>
 			</div>
 		</div>
 	</div>
+
+<!--确认付款开始-->
+<div id="enSureMon" style="display:none">
+<div class="mengban"></div>
+<div class="enSureMon">
+	<div class="enSureMon_title"></div>
+	<div class="enSureMon_content">
+		<div class="enSureMon_con_ti">
+			<img (click)="clickmeToIn()" src="../assets/imgs/closeMon.png">
+			<div>确认付款</div>
+			<img src="../assets/imgs/closeask.png">
+		</div>
+		<div class="enSureMon_con_co">
+			<div>￥{{totalPrice}}</div>
+			<div>商品名称<span>{{nametitle}}</span></div>
+			<div>付款方式<span>微信支付</span></div>
+		</div>
+	</div>
+	  <button ion-button block (click)=clickme() color="#FF730F">立即付款</button>
 </div>
+</div>
+<!--确认付款结束-->
+
 </ion-content>

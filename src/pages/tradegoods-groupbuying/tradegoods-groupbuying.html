@@ -44,7 +44,7 @@
       </ion-refresher-content>
   </ion-refresher>
 	    <!--团购列表--> 
-  <div id="group-content" >
+  <div id="group-content" class="group-content">
         <ul class="order-nav clearfix" id="test2">
             <li class={{tab_test.li00}} data-nav="waitGroup" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
             <li class={{tab_test.li01}} data-nav="groupIng" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
@@ -104,7 +104,7 @@
     </div>
 
     <!--商品订单列表--> 
-  <div id="order-content" style="display:none">
+  <div id="order-content" class="order-content" style="display:none">
         <ul class="order-nav clearfix" id="test">
             <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:void(0);">全部</a></li>
             <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)" ><a href="javascript:void(0);">待付款</a></li>

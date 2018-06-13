@@ -5,7 +5,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Http,Jsonp }from '@angular/http';
 
-@IonicPage()
+
 @Component({
   selector: 'page-editorinfo',
   templateUrl: 'editorinfo.html',

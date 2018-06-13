@@ -13,7 +13,7 @@ ion-slides{
     height: initial;
     margin-bottom: 0.2rem;
     font-size: 0.22rem;
-     color: #333333;
+     color: black;
 }
 
 .xiangq_shangp_m .xq_jiaq span{
@@ -34,31 +34,29 @@ ion-slides{
    overflow: hidden;
    text-align: center;
    float:right;
-   margin-top: 0.2rem;
+   margin-top: 0.25rem;
     height: 0.5rem; 
 
 }
 .guangguang a{
     overflow: hidden;
     display: inline-block;
-    padding: 0.1rem 0.2rem 0.1rem 0.2rem;
-    margin: 0 0.2rem;
+    padding: 0.05rem 0.1rem;
     border: solid 1px #e2e2e2;
     border-radius: 0.05rem;
     color: #a1a1a1;
     line-height: 0.3rem;
     font-size: 0.22rem;
-    height: 0.5rem;
-    width: 2rem;
+    height: 0.35rem;
+    width: 1.5rem;
 }
-.a1 h1{
-    width: 90%;
-    height:0.4rem;
-    margin-right: 0.1rem;
-}
-.guangguang a h1 img{
 
+.guangguang a h1 img{
     float:left;
+    
+}
+.guangguang a h1 div{
+    
 }
 .dib_daoh_b{
         height: 0.8rem;
@@ -229,7 +227,7 @@ ion-slides{
             margin-top: -0.1rem;
     }
     .goum_sl .counter_box i{
-        height: 0.25rem;
+        height: 0.28rem;
         line-height: 0.25rem;
         margin-top: 0.1rem;
         background-color: #DCDCDD;

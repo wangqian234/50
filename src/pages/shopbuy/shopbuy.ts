@@ -14,7 +14,7 @@ import { ChangeaddrPage } from '../changeaddr/changeaddr';
 import { TabsPage } from '../tabs/tabs';
 
 import $ from 'jquery'
-@IonicPage()
+
 @Component({
   selector: 'page-shopbuy',
   templateUrl: 'shopbuy.html',
@@ -61,6 +61,7 @@ export class ShopbuyPage {
   }
   public outTradeNo;
   public cip;
+  public nametitle = "";
   
 
   //定义congfig中公共链接的变量aa
@@ -119,6 +120,11 @@ export class ShopbuyPage {
       that.addListList = data.json.address_List.list;
       //alert(JSON.stringify(that.addlist));
       that.goodSlist = data.json.dt_GoodsSize.list;//多商品列表
+      for(var i=0;i<data.json.dt_GoodsSize.list.length;i++){
+        that.nametitle += data.json.dt_GoodsSize.list[i].title;
+        that.nametitle += "、"
+      }
+      that.nametitle = that.nametitle.substring(0,that.nametitle.length-1)
       // if(this.goodSlist.length == 1){
       //   this.gnum = this.gnum;
       // }else if(this.goodSlist.length>1){
@@ -272,18 +278,25 @@ discount(){
        }
      })
    }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                that.cip = data.ip;
-                that.addBuy();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+
+    clickmeToOut(){
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
+    clickme(){
+        var that = this;
+        $.ajax({
+            url: 'http://freegeoip.net/json/',
+            success: function(data){
+              that.cip = data.ip;
+              that.addBuy();
+            },
+            type: 'get',
+            dataType: 'JSON'
+        });
+    }
 
   backTo() {
     this.navCtrl.pop();

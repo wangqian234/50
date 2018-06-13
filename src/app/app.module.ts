@@ -64,9 +64,6 @@ import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
 
-//商品评价列表界面
-import {ShoppingevaluatePage}from '../pages/shoppingevaluate/shoppingevaluate';
-
 //支付
 
 //新建测试界面

@@ -50,12 +50,8 @@ export class TabsPage {
       }
   }
 
-
   getShopTab(){
     $(".mytabs").css("display","none");
     $(".mytabs2").css("display","block");
-    
   }
-
-
 }

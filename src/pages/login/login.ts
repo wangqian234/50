@@ -14,7 +14,7 @@ import { RegisterpasswordPage } from '../registerpassword/registerpassword';
 //返回首页
 import { TabsPage } from '../tabs/tabs'
 
-@IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -39,12 +39,23 @@ public history='';
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
+  public remeberNum = false;
+
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
+      try{
+        if(this.storage.get("remeberNum")){
+          this.userinfo.userName = this.storage.get('userName');
+          this.userinfo.userPwd = this.storage.get('password');
+          this.remeberNum = this.storage.get("remeberNum");
+        }
+      } catch (e){
+
+      }
   }
   ionViewDidEnter(){
     this.storage.set('tabs','true');
@@ -65,13 +76,14 @@ public history='';
 	    showBackdrop: true,
     });
     loading.present();
+    this.storage.set("remeberNum",this.remeberNum)
     if(this.loginNum){
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
-        if (data.errcode === 0 && data.errmsg === 'OK') {  
-          this.storage.set('userName',this.userinfo.userName);
+        if (data.errcode === 0 && data.errmsg === 'OK') {
           this.storage.set('password',this.userinfo.userPwd);
+          this.storage.set('userName',this.userinfo.userName);
           this.storage.set('token',data.model.token);
           this.storage.set('username1',data.model.username);
           console.log(data.model);

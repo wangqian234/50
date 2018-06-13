@@ -433,15 +433,15 @@ export class TradegoodsGroupbuyingPage {
   }
     gotoGroup(){
     this.flag = false;
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block") ;
+    $(".order-content").css("display", "none") ;
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
   }
     gotoOrder(){
     this.flag = true;
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none") ;
+    $(".order-content").css("display", "block") ;
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
     this.SD_id = 0;

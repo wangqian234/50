@@ -11,7 +11,6 @@ import $ from 'jquery'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-addressinfo',
   templateUrl: 'addressinfo.html',

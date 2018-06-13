@@ -15,12 +15,13 @@ import { TabsPage } from '../tabs/tabs'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-payment',
   templateUrl: 'payment.html',
 })
 export class PaymentPage {
+  public tongtong:any ;
    public outTradeNo ;
    public allprice;
    public roomid ;
@@ -89,8 +90,10 @@ export class PaymentPage {
   }
   //跳转到微信支付页面
   goWeixiPay(){
-
-    location.href = this.payMentModel.mweb_url;
+    //console.log(this.payMentModel.mweb_url)
+    this.tongtong = this.payMentModel.mweb_url + "&referer="+"gyhsh.cn"
+    window.location.assign(this.tongtong)
+   // location.href = this.payMentModel.mweb_url;
   }
 
 //   webview.setWebViewClient(new WebViewClient() {

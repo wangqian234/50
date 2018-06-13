@@ -62,7 +62,7 @@
     <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked">
     <div class="user_titlediv">
       <div class="user_title">&nbsp;&nbsp;{{item.date}}</div>
-      <div class="appear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little" src="assets/imgs/littlejiantou.png"></div>
+      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little" src="assets/imgs/littlejiantou.png"></div>
     </div>
     <div class="otherUser_content" style="display:none">
       <ion-list>
@@ -95,10 +95,33 @@
 		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allprice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
-				<a style="background-color:#488aff" (tap)="clickme()">去结算</a>  
+				<a style="background-color:#488aff" (click)="clickmeToOut()">去结算</a>  
 			</div>
 		</div>
 	</div>
 </div>
 	<div class="nomore" style="display: none">没有更多数据了...</div>
+
+  <!--确认付款开始-->
+<div id="enSureMon" style="display:none">
+<div class="mengban"></div>
+<div class="enSureMon">
+	<div class="enSureMon_title"></div>
+	<div class="enSureMon_content">
+		<div class="enSureMon_con_ti">
+			<img (click)="clickmeToIn()" src="../assets/imgs/closeMon.png">
+			<div>确认付款</div>
+			<img src="../assets/imgs/closewuask.png">
+		</div>
+		<div class="enSureMon_con_co">
+			<div>￥{{allprice}}</div>
+			<div>商品名称<span>物业欠费缴费</span></div>
+			<div>付款方式<span>微信支付</span></div>
+		</div>
+	</div>
+	  <button ion-button block (click)=clickme() color="#488aff">立即付款</button>
+</div>
+</div>
+<!--确认付款结束-->
+
 </ion-content>

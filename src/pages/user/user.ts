@@ -60,12 +60,10 @@ export class UserPage {
    //自定义的变量
     public userinfo='';
     constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) { 
+
     }
     ionViewDidLoad(){
          
-    }
-    ionViewDidEnter(){
-      this.storage.set('tabs','true');
     }
     ionViewWillEnter(){
 
@@ -100,7 +98,8 @@ export class UserPage {
         }
     }
 
-    // ionViewDidEnter(){
+    ionViewDidEnter(){
+             this.storage.set('tabs','true');
     //    console.log("3.0 ionViewDidEnter 当进入页面时触发");
     // }
     // ionViewWillLeave(){
@@ -117,6 +116,6 @@ export class UserPage {
     // }
     // ionViewCanLeave(){
     //      console.log("ionViewCanLeave");
-    // }
+    }
 
 }

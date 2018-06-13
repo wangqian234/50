@@ -43,13 +43,7 @@ export class PayfeePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    
-    if(this.storage.get('roomId')){
-      this.defRoomId=this.storage.get('roomId');
-      this.roomid =this.defRoomId;
-      this.getroomId();
-      this.getallpaylist();   
-    }
+
   }
 
   //主页面加载函数 
@@ -68,36 +62,41 @@ export class PayfeePage {
   }
   ionViewDidEnter(){
     this.storage.set('tabs','false');
+    if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid =this.defRoomId;
+      this.getroomId();
+    }
     this.getallpaylist();
   }
 
   appearPayFee(){
-    if($('#payFee').css('display') == 'block'){
-      $('#payFee').css('display','none');
-      $('#payFeeimg').css('transform', 'rotate(180deg)')
+    if($('.payFee').css('display') == 'block'){
+      $('.payFee').css('display','none');
+      $('#payFeeimg').css('transform', 'rotate(0)')
     } else {
-      $('#payFee').css('display','block');
-      $('#payFeeimg').css('transform', 'rotate(270deg)')
+      $('.payFee').css('display','block');
+      $('#payFeeimg').css('transform', 'rotate(90deg)')
     }
   }
 
   appearPreDetail(){
-    if($('#preDetail').css('display') == 'block'){
-      $('#preDetail').css('display','none');
-      $('#preDetailimg').css('transform', 'rotate(180deg)')
+    if($('.preDetail').css('display') == 'block'){
+      $('.preDetail').css('display','none');
+      $('#preDetailimg').css('transform', 'rotate(0)')
     } else {
-      $('#preDetail').css('display','block');
-      $('#preDetailimg').css('transform', 'rotate(270deg)')
+      $('.preDetail').css('display','block');
+      $('#preDetailimg').css('transform', 'rotate(90deg)')
     }
   }
 
   appearFeeList(){
-    if($('#feeList').css('display') == 'block'){
-      $('#feeList').css('display','none');
-      $('#feeListimg').css('transform', 'rotate(180deg)')
+    if($('.feeList').css('display') == 'block'){
+      $('.feeList').css('display','none');
+      $('#feeListimg').css('transform', 'rotate(0)')
     } else {
-      $('#feeList').css('display','block');
-      $('#feeListimg').css('transform', 'rotate(270deg)')
+      $('.feeList').css('display','block');
+      $('#feeListimg').css('transform', 'rotate(90deg)')
     }
   }
 
@@ -139,6 +138,9 @@ export class PayfeePage {
           //代缴
           that.expenselist=data.json.expense.list;
           //预交剩余
+          for(var i=0;i<data.json.prepays.list.length;i++){
+            data.json.prepays.list[i].prepay_addDate = data.json.prepays.list[i].prepay_addDate.substring(0,10);
+          }
           that.prepayslist=data.json.prepays.list;
           //半年缴费记录
           that.fundloglist=data.json.fundLog.list;   

@@ -58,7 +58,7 @@
 		</ul>
 	</div>
 	<ul class="shangp_lieb_k_er">
-		<li   *ngFor="let item of list"   [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+		<li   *ngFor="let item of list" (click)="gotoGood(item['id'])">
 			<a>
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">

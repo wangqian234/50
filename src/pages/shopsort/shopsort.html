@@ -37,36 +37,26 @@
   <div class="cate_content">
       <div class="cate_left">
           <ul id="cate_left">
-            <li *ngFor="let item of list;let i = index" (tap)="getRightCateData(item['id'],i,item.name)">
+			<li class="activety" (tap)="getRightCateData(list1['id'],1,list1.name)">
+              {{list1.name}}</li>
+            <li *ngFor="let item of list2;let i = index" (tap)="getRightCateData(item['id'],i+1,item.name)">
               {{item.name}}</li>
           </ul>
       </div>
 
       <div class="cate_right">
-          <!--<ul class="shangp_lieb_k_er">
-            <li *ngFor="let item of fenllist" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
-                <div class="lieb_img"><img src={{item.img}}></div>
-				<div class="lieb_txt">
-					<p class="biao">{{item.title | cutSPipe}}</p>
-					<p class="px26">￥{{item.goodspricemin}}</p>
-                </div>
-	        </li>
-	    </ul>
-		<div class="nomore">没有更多数据了...</div>-->
-<div id="yemnr">
-
+<div id="yemnr" class="scroll">
+<!--商品列表--> 
+<ul class="shangp_lieb_k" *ngFor="let item of listTotal">
 		<div class="shopnomore">
 			<img src="assets/imgs/leftbar.png">
 			<span style="font-size:0.17rem;color:#FF971C">&nbsp;
 				<img style="height: 0.18rem;margin-top: 0.03rem;position: absolute;" src="assets/imgs/recommend.png">
-				&nbsp;&nbsp;&nbsp;&nbsp;{{title}}&nbsp;&nbsp;</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;{{item.name}}&nbsp;&nbsp;</span>
 			<img src="assets/imgs/rightbar.png">
 		</div>
 
-
-<!--商品列表--> 
-<ul class="shangp_lieb_k">
-		<li *ngFor="let item of fenllist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
+		<li *ngFor="let item of item.fenllist"  (click)="gotoGood(item['id'])">
 			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
@@ -75,9 +65,11 @@
 				</div>
 			</a>
 		</li>
+
 	</ul>
+
 </div>
-<div class="nomore" style="display: block">没有更多数据了...</div>
+<!--<div class="nomore" style="display: block">没有更多数据了...</div>-->
       </div>
 	 
   </div>

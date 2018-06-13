@@ -63,7 +63,6 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-        
         $(".ios .tabs .tabbar").css("display","none");
   }
 
@@ -76,7 +75,7 @@ export class CartPage {
   }
   
   ionViewDidEnter() {
-    this.storage.set('tabs','false');
+   this.storage.set('tabs','333');
       //确认登录状态
       if(this.storage.get('token')){
          this.pageIndex = 1;
@@ -265,6 +264,16 @@ export class CartPage {
 buy(){
   $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
+  var buysome = 0
+   for(let i=0;i<this.list.length;i++){
+        if(this.list[i].checked==true){
+          buysome++;
+        }
+      }
+      if(buysome == 0){
+        alert("请先选中商品");
+        return;
+      }
   var gidGroup = [];
   var gsIdGroup = [];
   var numGroup = [];

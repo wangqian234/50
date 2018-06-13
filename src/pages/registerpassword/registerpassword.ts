@@ -6,7 +6,6 @@ import { Http } from '@angular/http';
 import $ from 'jquery'
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 
-@IonicPage()
 @Component({
   selector: 'page-registerpassword',
   templateUrl: 'registerpassword.html',

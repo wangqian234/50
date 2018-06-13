@@ -23,7 +23,7 @@
 		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
         <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
 		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <input id="sos_tanc" class="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img (click)="doSomething()" src="assets/imgs/sos.png">
         </div>
 		<div class="dengl">
@@ -36,7 +36,7 @@
         <div class="logo_k logo_k_fanh" style="width:auto"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png">
         <img style="margin-right: 0.2rem;" (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></div>
 		<div class="shous_k" style="width:63%">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
+            <input class="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
             <img src="assets/imgs/sos.png">
         </div>
 		<div class="dengl"  style="width:13%">
@@ -48,7 +48,7 @@
 <div class="shopcontentdiv">
 <!-- 轮播图 -->
         <div class="lunbo_item">
-        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
+        <ion-slides *ngIf="tuangouList.length>0" #shopslide class="focus" pager  loop="true" autoplay="3000" >    
             <ion-slide *ngFor="let item of tuangouList" (click)="goGoodsInfo(item['url'])">
                <img class="img1" src="{{item.img}}"  />
            </ion-slide>         
@@ -116,7 +116,7 @@
         <div class="history" *ngIf="shopKeyList">
 		<p>历史搜索：</p><img src="assets/imgs/delete.png" (click)="clearShopKey()">
 			<ul>
-				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
+				<li *ngFor="let ketword of shopKeyList" (click)="searchFromKey(ketword)"><a href="#">{{ketword}}</a></li>
 			</ul>
         </div>
 
