@@ -19,7 +19,21 @@
 </ion-header>
 
 <ion-content style="background-color:#f5f5f5">
-
+  <div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
 <ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
@@ -52,7 +66,8 @@
   <div class="otherUser_title">
     <div class="user_titlediv" (click)="appearPayFee()">
       <div class="user_title">需缴纳的费用</div>
-      <div class="appear"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="payFeeimg"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!payFeeimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="payFee" class="otherUser_content payFee" style="display:none">
      
@@ -69,11 +84,12 @@
     <div class="otherUser_title" *ngIf="prepayslist.length != 0">
     <div class="user_titlediv" (click)="appearPreDetail()">
       <div class="user_title">预存款剩余明细</div>
-      <div class="appear"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="preDetailimg"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!preDetailimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="preDetail" class="otherUser_content preDetail" style="display:none">
       <ion-list>
-        <ion-item (click)="goOnlinePayfee()" *ngFor="let list of prepayslist">
+        <ion-item  *ngFor="let list of prepayslist">
           <div class="fee_time">{{list.prepay_addDate | pipeTime}}</div>
           <div class="fee_content">{{list.statmode}}</div>
           <div class="fee_num">￥{{list.prepay_cas}}</div>
@@ -92,7 +108,8 @@
   <div class="otherUser_title" (click)="appearFeeList()" *ngIf="fundloglist.length != 0" style="margin-bottom:50px">
     <div class="user_titlediv">
       <div class="user_title">近半年缴费记录</div>
-      <div class="appear"><img id="feeListimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="feeListimg"><img id="feeListimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!feeListimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="feeList" class="otherUser_content feeList" style="display:none">
       <ion-list>

@@ -27,7 +27,7 @@ export class RentsalemyPage {
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewDidLoad() {
@@ -35,7 +35,9 @@ export class RentsalemyPage {
     this.myPublish(1);
     this.getDelete();
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getDelete(){
     var that = this;
     $("#delete").click(function(){
@@ -55,17 +57,21 @@ export class RentsalemyPage {
   }
 
   myPublish(type){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.pageIndex = 1;
     this.type = type;
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
      console.log(api)
       this.http.get(api).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.mylist = data.list;
         console.log(data)
@@ -82,14 +88,18 @@ export class RentsalemyPage {
   }
 
   myPublishList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
     this.http.get(api).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
           this.mylist = this.mylist.concat(data.list);
           if(infiniteScroll) {
@@ -117,6 +127,8 @@ export class RentsalemyPage {
   }
   //批量删除
   delMyPublish(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var myId=[];
     for(var i=0;i<this.mylist.length;i++){
       if(this.mylist[i].checked==true){
@@ -128,6 +140,8 @@ export class RentsalemyPage {
     this.del.token = this.storage.get('token')
     var api = this.config.apiUrl +　'/api/rental/del';
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("删除成功")
       this.myPublish(this.type);

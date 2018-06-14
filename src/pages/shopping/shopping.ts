@@ -92,6 +92,7 @@ export class ShoppingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
+
   } 
   //主页面加载函数 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -115,7 +116,8 @@ export class ShoppingPage {
     this.clickFun();
     this.shopKeyList = this.storage.get("shopKewWords");
   }
-    
+
+
     //获取商城首页
     getShop(){
       // $(".spinnerbox").fadeIn(200);

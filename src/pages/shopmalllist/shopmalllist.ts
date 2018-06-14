@@ -23,7 +23,7 @@ export class ShopmalllistPage {
   public TabsPage = TabsPage;
   constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
   public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider,) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -34,6 +34,7 @@ export class ShopmalllistPage {
     this.tuijGoods();
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.list = [];
     this.page = 1;
     this.reserchGoods("")
@@ -47,13 +48,17 @@ export class ShopmalllistPage {
   }
   //搜索商品接口
   reserchGoods(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-      loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    //    });
+    //   loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
+      //  loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
        if(data.errcode === 0 && data.errmsg === 'OK'){
          if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -74,8 +79,12 @@ export class ShopmalllistPage {
   }
   //推荐商品搜索
     tuijGoods(){
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var api = this.aa +'/api/goods/list?curCityCode=4403';
       this.http.get(api).map(res => res.json()).subscribe(data =>{
+         $(".spinnerbox").fadeIn(200);
+         $(".spinner").fadeIn(200);
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;
           console.log(this.tuijList)

@@ -81,7 +81,6 @@ export class GroupdetailPage {
   public token=this.storage.get('token');
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public app: App,
   public httpService:HttpServicesProvider ,public cd: ChangeDetectorRef,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
     this.wid=navParams.get('id');
   }
 
@@ -89,15 +88,22 @@ export class GroupdetailPage {
     console.log('ionViewDidLoad GroupdetailPage');
     this.switch(0);
   }
-ionViewWillLoad() {
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
+  ionViewWillLoad() {
 
-   let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+  //  let loading = this.loadingCtrl.create({
+	//     showBackdrop: true,
+  //   });
+  //   loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var api=this.wdh+'/api/goods/info?goods_Id='+this.wid+'&token='+this.token;
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
        this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
        for(var i =0;i<data.json.data_group.list.length;i++){
@@ -165,12 +171,16 @@ enterShop(wid,sid){
 }
 //购买数量判断
 ifEnough(){
+  $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
   this.ifList.gId=this.wid;
   this.ifList.gsId=this.goodSize;
   this.ifList.goodsNum=this.buylist.goodsNum;
   var date = this.ifList;
   var api = this.wdh+'/api/goods_size/update'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
        
          //alert("可以继续添加!");
@@ -183,10 +193,14 @@ ifEnough(){
 }
     //显示商品评价列表
   getshopinfo(id){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.showpingj=!this.showpingj;
     var that = this;
     var api = this.wdh +'/api/tradegoods/list?pageSize=10&pageIndex=1&goodsId='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list= data.list;
       }else{
@@ -196,6 +210,8 @@ ifEnough(){
   }
    //购买
    buygoods(){ 
+     $(".spinnerbox").fadeIn(200);
+     $(".spinner").fadeIn(200);
      if(!this.goodSize){
       alert("请选择商品规格")
      }else{
@@ -210,6 +226,8 @@ ifEnough(){
     console.log(date);
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
          //跳转前的判断
       var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
@@ -243,6 +261,8 @@ ifEnough(){
    
    //团购
    gbuygoods(){ 
+     $(".spinnerbox").fadeIn(200);
+     $(".spinner").fadeIn(200);
      if(!this.goodSize){
       alert("请选择商品规格")
      }else{
@@ -256,6 +276,8 @@ ifEnough(){
     // alert(JSON.stringify(date))
     var api = this.wdh+'/api/goods_param/add'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
          //跳转前的判断
       var api=this.wdh+'/api/goods/buy_list?caId=1&token='+this.token;
@@ -284,9 +306,13 @@ ifEnough(){
   }
 //推荐商品列表
  recommend(){   
+   $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api2 = this.wdh+'/api/goods/list?curCityCode=4403';
      
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        if(data2.errmsg == 'OK'){
          this.rlist = data2.list;
          console.log(data2);

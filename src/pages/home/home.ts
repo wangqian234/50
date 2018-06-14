@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Http, Jsonp, Headers, RequestOptions } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
-import { NavController, NavParams,Slides } from 'ionic-angular';
+import { NavController, NavParams,Slides,App } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 //房屋报修
@@ -10,7 +10,6 @@ import { RepairaddPage } from '../repairadd/repairadd';
 import { BindroomPage } from '../bindroom/bindroom';
 //跳入登录页面
 import { LoginPage } from '../login/login';
-
 //新闻详情页面
 import { NewinfoPage } from '../newinfo/newinfo';
 //费用明细页面
@@ -28,7 +27,6 @@ import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 import { HouseinfolistPage } from '../houseinfolist/houseinfolist';
 //loading
 import { LoadingPage } from '../loading/loading';
-
 //在线缴费
 import{OnlinepaymentPage}from '../onlinepayment/onlinepayment';
 import { LoadingController } from 'ionic-angular';
@@ -39,7 +37,8 @@ import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
 import {RentsalePage} from '../rentsale/rentsale';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
-import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo';
+import { TabsPage } from '../tabs/tabs';
 import $ from 'jquery';
 declare var BMap;
 
@@ -87,6 +86,7 @@ export class HomePage {
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
+  public TabsPage = TabsPage;
   //轮播图的页面跳转
   public RentsalePage = RentsalePage;
   //轮播图的页面跳转
@@ -99,7 +99,7 @@ export class HomePage {
   public RentsaleaddPage = RentsaleaddPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
+    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController,public app:App) {
       this.geolocation1 = Geolocation;
   }
 
@@ -131,19 +131,45 @@ export class HomePage {
   }
 
    ionViewDidEnter() {
+    if(this.storage.get('token')){
+          this.token = this.storage.get('token');
+          this.enSureLoginHome = true;
+         // this.getHouseDefault();
+          //获取默认房屋
+          if(this.storage.get('roomId')){
+            this.defRoomId=this.storage.get('roomId')
+            this.roomid = this.defRoomId;
+            this.getpayment(this.defRoomId);
+          }else{
+               this.getiof_def();
+          }
+      } else {
+          this.enSureLoginHome = false;
+      }
       this.storage.set('tabs','true');
       this.getPosition();
+    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    //     console.log('network was disconnected :-(');
+    //   });
+    //   //disconnectSubscription.unsubscribe();
+    //   let connectSubscription = this.network.onConnect().subscribe(() => {
+    //     alert("进入网络连接监测")
+    //     alert(this.network.type)
+    //   });
+    //   this.networktype = this.network.type
+    //   this.presentToast();
+    //   //connectSubscription.unsubscribe();
    }
 
   getPosition() {
     var that = this;
-     this.geolocation.getCurrentPosition().then((resp) => {
+     that.geolocation.getCurrentPosition().then((resp) => {
       var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
-        console.log(addComp.city)
         that.storage.set("currentPlace",addComp.city);
+        
       });
        });
 }
@@ -160,7 +186,7 @@ export class HomePage {
   // }
   getFocus(){
     $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
         $(".spinnerbox").fadeOut(200);
@@ -178,7 +204,10 @@ export class HomePage {
     this.url=url.substring(0,3);
     this.Id = url.substring(3,)
     if(url==="HRSHome"){
-      this.navCtrl.push(RentsalePage)
+      //this.navCtrl.push(RentsalePage)
+      this.app.getRootNav().push(TabsPage,{
+        goto : "rent"
+      });
     }else if(this.url==="gId"){
        this.navCtrl.push(ShopinfoPage,{sid:this.Id})
     }else if(this.url ==="sId"){
@@ -257,6 +286,7 @@ export class HomePage {
   }
 
  getNewInfo(nid) {
+       alert(this.storage.get('tabs'))
     this.navCtrl.push(NewinfoPage, {
       id: nid
     });

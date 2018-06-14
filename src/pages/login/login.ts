@@ -44,8 +44,6 @@ public history='';
 
   constructor(public httpService:HttpServicesProvider,public navCtrl: NavController, public navParams:NavParams ,public app: App,
   public config:ConfigProvider,public http: Http,public storage:StorageProvider,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','true');
-
       this.getRem();
       this.history=this.navParams.get('history');
       this.loginNum = true;
@@ -59,15 +57,14 @@ public history='';
 
       }
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','true');
+  }
 //登录触发的函数
   doLogin(){
     console.log(this.userinfo.userName)
     if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.userinfo.userName))){
       alert('请输入正确的手机号码');
-      return;
-    }
-    if(this.userinfo.userPwd === ""){
-      alert('密码不能为空');
       return;
     }
     let loading = this.loadingCtrl.create({
@@ -91,19 +88,6 @@ public history='';
           alert(data.errmsg);
         }
       });
-      }else{
-        var api = this.config.apiUrl + '/api/user/Login_Code?mobile=' + this.userinfo.userName + '&vCode='+this.userinfo.userPwd;
-        this.http.get(api).map(res => res.json()).subscribe(data => {
-            loading.dismiss();
-            if(data.errcode === 0 && data.errmsg === 'OK'){
-                this.storage.set('userName',data.model.loginname);
-                this.storage.set('token',data.model.token);
-                this.storage.set('username1',data.model.username);
-                this.navCtrl.pop();
-            }else{
-              alert(data.errmsg);
-            }
-        })
       }
   }
 
@@ -113,20 +97,22 @@ public history='';
   }
 
   goRegisterpasswordPage(){
-    // //验证验证码是否成功
-    // var api='api/validateCode';
-    // this.httpService.doPost(api,{"tel":this.tel,"code":this.code},(result)=>{
-    //     console.log(result);  /*发送到手机的验证码返回方便我们验证*/
-    //     if(result.success){
-    //       //保存验证码
-    //       this.storage.set('reg_code',this.code);
-
-    //       //跳转到下一个页面
-    //      // this.navCtrl.push(RegisterpasswordPage);
-    //     }else{
-    //       alert('验证码输入错误');
-    //     }
-    // })
+    //验证验证码是否成功
+    let loading = this.loadingCtrl.create({
+      content: '请稍等...',
+	    showBackdrop: true,
+    });
+    loading.present();
+    var api=this.config.apiUrl + '/api/user/Login_Code?mobile=' + this.userinfo.userName + '&vCode='+this.code;
+    this.http.get(api).map(res => res.json()).subscribe(data => {
+            loading.dismiss();
+            if(data.errcode === 0 && data.errmsg === 'OK'){
+                this.storage.set('userName',data.model.loginname);
+                this.storage.set('token',data.model.token);
+                this.storage.set('username1',data.model.username);
+                this.navCtrl.pop();
+        }
+    })
 
   }
   //倒计时的方法

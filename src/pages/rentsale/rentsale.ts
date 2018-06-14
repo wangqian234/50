@@ -59,20 +59,12 @@ export class RentsalePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-
      this.curCityCode = "4403";
   }
   
   ionViewWillLoad(){
-    // //确认登录状态
-    // if(this.storage.get('token')){
-
-    // } else {
-    // this.navCtrl.push(LoginPage);
-    // }
     this.getFocusList();
   }
-
   ionViewDidEnter(){
     this.storage.set('tabs','true');
   }
@@ -80,7 +72,7 @@ export class RentsalePage {
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
-    this.offent = $('#testcontent').offset();
+    this.offent = $('#group-content').offset();
   }
   //轮播图获取
   getFocusList(){

@@ -30,8 +30,6 @@ export class GroupbuylistPage {
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage:StorageProvider,) {
-   this.storage.set('tabs','false');
-   
    
   }
 
@@ -39,19 +37,25 @@ export class GroupbuylistPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
     this.getGroupList('');
-    
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 
   getGroupList(infiniteScroll)
   {
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    //    });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+     $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/group_list?pageSize=' + this.pageSize 
      + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
-     loading.dismiss();
+    //  loading.dismiss();
+     $(".spinnerbox").fadeOut(200);
+     $(".spinner").fadeOut(200);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){

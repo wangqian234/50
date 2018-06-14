@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 import { StorageProvider } from '../../providers/storage/storage';
-
+import { LoadingController } from 'ionic-angular';
 //收货地址列表
 import { AddressPage } from '../address/address';
 //返回首页
@@ -52,8 +52,7 @@ export class AddaddressPage {
     TabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public storage:StorageProvider,public app: App) {
-
+    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
   }
 
   ionViewWillEnter(){
@@ -73,13 +72,13 @@ export class AddaddressPage {
   backTo(){
     this.navCtrl.pop();
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
   }
 
-  ionViewDidEnter(){
-     this.storage.set('tabs','false');
-  }
 
   //添加收货地址（添加或编辑）
   addAddress(){
@@ -129,6 +128,10 @@ export class AddaddressPage {
         this.addressList.district = this.districts[i].name;
       }
     }
+
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
+
     var data = {}; //定义空对象
     if(!this.navParams.get('item')){  //新加还是修改判断
       data = {
@@ -148,6 +151,8 @@ export class AddaddressPage {
       var j = 3;
       var api = this.config.apiUrl + '/api/Address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.navCtrl.pop();
       } else if(data.errcode === 40002){
@@ -176,8 +181,10 @@ export class AddaddressPage {
       'cbdefault' : this.addressList.cbdefault,
       'addressId' :this.addressList.id
     }
-    var api = this.config.apiUrl + '/api/Address/edit';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      var api = this.config.apiUrl + '/api/Address/edit';
+      this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.navCtrl.pop();
       } else {
@@ -194,9 +201,13 @@ export class AddaddressPage {
 
     //获取省份信息
   getProvinces(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl + '/api/Address/dw_Province?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.provinces = data.list;
       } else if(data.errcode === 40002){
@@ -213,8 +224,12 @@ export class AddaddressPage {
 
   //获取城市信息
   getCities(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/dw_City?provinceCode=' + this.addressList.provinceVal;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.cities = data.list;
       } else {
@@ -225,8 +240,12 @@ export class AddaddressPage {
 
   //获取街区信息
   getDistricts(){
+    $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/dw_District?cityCode=' + this.addressList.cityVal;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.districts = data.list;
       } else {
@@ -246,8 +265,12 @@ export class AddaddressPage {
   }
     //获取地址信息（地址详情）
   getAddressInfo(){
+    $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + '&addressId=' +this.addressId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
          this.addressInfo = data.model;
          console.log(data.model);

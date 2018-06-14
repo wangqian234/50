@@ -55,12 +55,14 @@ export class ShopsortPage {
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
-    $(".ios .tabs .tabbar").css("display","none");
+    //$(".ios .tabs .tabbar").css("display","none");
   }
   ionViewDidLoad(){
 this.openScroll()
   }
   ionViewDidEnter() {
+    var aa = this.pid+1;
+    $('.cate_left ul li:nth-of-type(' + aa +')').attr("class","activety");
     this.storage.set('tabs','333');
     this.getLeftCateData();/*获取左侧分类*/
   }
@@ -140,16 +142,24 @@ this.openScroll()
   }
 
 
-  backTo(){
-    $(".ios .tabs .tabbar").css("display","-webkit-flex");
-    this.app.getRootNav().push(TabsPage,{
-      tabs:true
-    });
-  }
-
   // backTo(){
-  //   this.navCtrl.pop();
+  //   $(".ios .tabs .tabbar").css("display","-webkit-flex");
+  //   this.app.getRootNav().push(TabsPage,{
+  //     tabs:true
+  //   });
   // }
+goback = false;
+  backTo(){
+    this.goback = true;
+    this.navCtrl.pop();
+  }
+  
+  ionViewDidLeave(){
+    if(this.goback){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
+    }
+  }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    

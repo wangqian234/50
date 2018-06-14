@@ -35,15 +35,18 @@ export class ShoppingdetailPage {
   public dataSlist=[];
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, 
   public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
-    this.storage.set('tabs','false');
 
   }
       //主页面加载函数
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var api = this.aa+'/api/goods/info?goods_Id= 1 &token='+this.token ;
+    $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        console.log(data);
        that.dataGlist = data.json['data_group'].list;//list为空
@@ -54,7 +57,9 @@ export class ShoppingdetailPage {
       console.log(that.dataSlist);
      })
   } 
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingdetailPage');
   }

@@ -37,13 +37,15 @@ export class PayfeePage {
   public fundloglist=[];
   public roomidlist=[];
   public iof_defList=[];
+  payFeeimg = true;
+  feeListimg = true;
+  preDetailimg = true;
   
   public PayprefeePage = PayprefeePage;
   public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-    this.storage.set('tabs','false');
 
   }
 
@@ -62,7 +64,7 @@ export class PayfeePage {
     console.log('ionViewDidLoad PayfeePage');
   }
   ionViewDidEnter(){
-
+    this.storage.set('tabs','false');
     if(this.storage.get('roomId')){
       this.defRoomId=this.storage.get('roomId');
       this.roomid =this.defRoomId;
@@ -74,30 +76,30 @@ export class PayfeePage {
   appearPayFee(){
     if($('.payFee').css('display') == 'block'){
       $('.payFee').css('display','none');
-      $('#payFeeimg').css('transform', 'rotate(0)')
+      this.payFeeimg = true;
     } else {
       $('.payFee').css('display','block');
-      $('#payFeeimg').css('transform', 'rotate(90deg)')
+      this.payFeeimg = false;
     }
   }
 
   appearPreDetail(){
     if($('.preDetail').css('display') == 'block'){
       $('.preDetail').css('display','none');
-      $('#preDetailimg').css('transform', 'rotate(0)')
+      this.preDetailimg = true;
     } else {
       $('.preDetail').css('display','block');
-      $('#preDetailimg').css('transform', 'rotate(90deg)')
+      this.preDetailimg = false;
     }
   }
 
   appearFeeList(){
     if($('.feeList').css('display') == 'block'){
       $('.feeList').css('display','none');
-      $('#feeListimg').css('transform', 'rotate(0)')
+      this.feeListimg = true;
     } else {
       $('.feeList').css('display','block');
-      $('#feeListimg').css('transform', 'rotate(90deg)')
+      this.feeListimg = false;
     }
   }
 
@@ -126,9 +128,13 @@ export class PayfeePage {
 
   //查询物业总费用列表
   getallpaylist(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that =this;
     var api = this.config.apiUrl+'/api/charge/list?roomId='+this.roomid;//获取前台界面上显示的房屋id
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
        if(data.json.totalNum.errcode == 0){
           //总计金额
           that.modellist=data.json.totalNum.model;
@@ -154,10 +160,14 @@ export class PayfeePage {
   }
   //查询用户绑定的所有房屋
   getroomId(){   
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             if(data.list.length == 0){
               that.navCtrl.pop();

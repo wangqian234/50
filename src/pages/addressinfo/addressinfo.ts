@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 /**
  * Generated class for the AddressinfoPage page.
  *
@@ -30,13 +30,14 @@ export class AddressinfoPage {
     console.log('ionViewDidLoad AddressinfoPage');
     this.getAddressInfo();
   }
-
   ionViewDidEnter(){
-          this.storage.set('tabs','false');
+    this.storage.set('tabs','false');
   }
 
   //获取地址信息（地址详情）
   getAddressInfo(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     if(this.navParams.get('item')){
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token')+'&addressId='
@@ -44,6 +45,8 @@ export class AddressinfoPage {
   }
     // console.log("房屋id为："+this.navParams.get('item')+"打印model中的内容为"+this.model)
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
          this.addressInfo = data.model;
          console.log("成功获取!");

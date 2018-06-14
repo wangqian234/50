@@ -19,6 +19,21 @@
 </ion-header>
 
 <ion-content style="background-color:#f5f5f5">
+  <div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
 
 <ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
@@ -44,12 +59,12 @@
   <div class="otherUser_content">
 
   <div class="otherUser_title" style="margin-bottom:10px" *ngFor="let item of dest;let i of index">
-    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked">
-    <div class="user_titlediv">
+    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked" (click)="getTotal()">
+    <div class="user_titlediv" (click)="appearSome()">
       <div class="user_title">&nbsp;&nbsp;{{item.date}}</div>
-      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little" src="assets/imgs/littlejiantou.png"></div>
+      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little little_img" src="assets/imgs/littlejiantou.png"></div>
     </div>
-    <div class="otherUser_content" style="display:none">
+    <div class="otherUser_content otherUser_content_con" style="display:none">
       <ion-list>
         <ion-item *ngFor="let list of item.data">
           <div class="fee_time">{{list.name}}</div>
