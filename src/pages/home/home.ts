@@ -148,17 +148,6 @@ export class HomePage {
       }
       this.storage.set('tabs','true');
       this.getPosition();
-    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-    //     console.log('network was disconnected :-(');
-    //   });
-    //   //disconnectSubscription.unsubscribe();
-    //   let connectSubscription = this.network.onConnect().subscribe(() => {
-    //     alert("进入网络连接监测")
-    //     alert(this.network.type)
-    //   });
-    //   this.networktype = this.network.type
-    //   this.presentToast();
-    //   //connectSubscription.unsubscribe();
    }
 
   getPosition() {
@@ -169,21 +158,15 @@ export class HomePage {
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
         that.storage.set("currentPlace",addComp.city);
-        
+        that.cityCodeList.forEach(function(val, index, arr){
+          if(addComp.city == arr[index].name){
+            that.storage.set("currentPlaceCode",arr[index].val);
+          }
+        })
       });
        });
 }
 
-  //轮播图
-  // getFocus() {
-  //   var that = this;
-  //   that.focusList = [
-  //     'assets/imgs/slide01.png',
-  //     'assets/imgs/slide02.png',
-  //     'assets/imgs/slide03.jpg',
-  //     'assets/imgs/rent1.png'
-  //   ];
-  // }
   getFocus(){
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
@@ -220,10 +203,6 @@ export class HomePage {
   }
 
   getNews() {
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
     var j = 3;
@@ -234,7 +213,6 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
         $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -252,10 +230,6 @@ export class HomePage {
   }
 //获取公示公告
   getPublic() {
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
     $(".spinnerbox").fadeIn(200);
         $(".spinner").fadeIn(200);
     var j = 3;
@@ -266,7 +240,6 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
       $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -293,16 +266,11 @@ export class HomePage {
   }
   //查询默认房屋
   getiof_def(){
-    //  let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
     $(".spinnerbox").fadeIn(200);
         $(".spinner").fadeIn(200);
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       //loading.dismiss();
        $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
@@ -457,13 +425,31 @@ changeRoom(roomid) {
       } else {
           this.enSureLoginHome = false;
       }
-      //   this.items = [];
-      //   for (var i = 0; i < 30; i++) {
-      //    this.items.push( this.items.length );
-      //  }
-       console.log('刷新结束');
        refresher.complete();
      }, 2000);
  }
+// getcityCodeList(cityname){
+//   var that = this;
+//   that.cityCodeList.forEach(function(val, index, arr){
+//     if(cityname == arr[index].name){
+//       that.storage.set("currentPlaceCode",arr[index].val)
+//     }
+//   })
+// }
+cityCodeList = [
+{name:"鞍山市",val:"2103"},
+{name:"阿拉善盟",val:"1529"},
+{name:"安庆市",val:"3408"},
+{name:"安阳市",val:"4105"},
+{name:"阿里地区",val:"5425"},
+{name:"安康市",val:"6109"},
+{name:"安顺市",val:"5204"},
+{name:"阿坝藏族羌族自治州",val:"5132"},
+{name:"阿拉尔市",val:"659002"},
+{name:"阿克苏地区",val:"6529"},
+{name:"澳门特别行政区",val:"8201"},
+{name:"阿勒泰地区",val:"6543"},
+{name:"西安市",val:"6101"},
+]
 
 }
