@@ -1,4 +1,6 @@
+
 import { Component } from '@angular/core';
+
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -44,6 +46,7 @@ export class OnlinepaymentPage {
   }
   public outTradeNo;
   public tongtong;
+  public tongtong1;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
     
@@ -76,6 +79,7 @@ export class OnlinepaymentPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnlinepaymentPage');
   }
+
 
   ionViewDidEnter() {
     if(this.navParams.get('item')){
@@ -227,9 +231,9 @@ export class OnlinepaymentPage {
 
     //跳转到微信支付页面
   goWeixiPay(){
-    //console.log(this.payMentModel.mweb_url)
-    this.tongtong = this.model + "&referer="+"gyhsh.cn"
-    window.location.assign(this.tongtong)
+    //this.tongtong = this.model;
+    //this.tongtong1 = "gyhsh.cn";
+    // window.open((this.tongtong, this.tongtong1)
    // location.href = this.payMentModel.mweb_url;
   }
   //跳转支付页面

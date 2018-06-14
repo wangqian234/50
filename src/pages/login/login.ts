@@ -35,7 +35,7 @@ public history='';
     userName:'',
     userPwd:''
   }
-
+  public regist;
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
@@ -67,17 +67,17 @@ public history='';
       alert('请输入正确的手机号码');
       return;
     }
-    if(this.userinfo.userPwd === ""){
-      alert('密码不能为空');
-      return;
-    }
-    let loading = this.loadingCtrl.create({
+   let loading = this.loadingCtrl.create({
       content: '请稍等...',
 	    showBackdrop: true,
     });
     loading.present();
-    this.storage.set("remeberNum",this.remeberNum)
     if(this.loginNum){
+    if(this.userinfo.userPwd === ""){
+      alert('密码不能为空');
+      return;
+    }
+    this.storage.set("remeberNum",this.remeberNum)
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
@@ -93,7 +93,7 @@ public history='';
         }
       });
       }else{
-        var api = this.config.apiUrl + '/api/user/Login_Code?mobile=' + this.userinfo.userName + '&vCode='+this.userinfo.userPwd;
+        var api = this.config.apiUrl + '/api/user/Login_Code?mobile=' + this.userinfo.userName + '&vCode='+this.regist;
         this.http.get(api).map(res => res.json()).subscribe(data => {
             loading.dismiss();
             if(data.errcode === 0 && data.errmsg === 'OK'){

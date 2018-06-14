@@ -60,6 +60,7 @@ export class HomePage {
   public token = '';
   //当前页、一页显示的个数
   public cityCode = 4004;
+  public city;
   public url ;
   public Id ;
   public pageIndex=1;
@@ -98,7 +99,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
     public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
-      this.geolocation1 = Geolocation;
+      
   }
 
   ionViewWillEnter(){
@@ -144,32 +145,37 @@ export class HomePage {
       } else {
           this.enSureLoginHome = false;
       }
-    //  this.storage.set('tabs','true');
-    //   //this.getPosition();
-    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-    //     console.log('network was disconnected :-(');
-    //   });
-    //   //disconnectSubscription.unsubscribe();
-    //   let connectSubscription = this.network.onConnect().subscribe(() => {
-    //     alert("进入网络连接监测")
-    //     alert(this.network.type)
-    //   });
-    //   this.networktype = this.network.type
-    //   this.presentToast();
-    //   //connectSubscription.unsubscribe();
+     this.storage.set('tabs','true');
+      
+      // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      //   console.log('network was disconnected :-(');
+      // });
+      // //disconnectSubscription.unsubscribe();
+      // let connectSubscription = this.network.onConnect().subscribe(() => {
+      //   alert("进入网络连接监测")
+      //   alert(this.network.type)
+      // });
+      // this.networktype = this.network.type
+      // this.presentToast();
+      // connectSubscription.unsubscribe();
    }
 
   getPosition() {
     var that = this;
-     this.geolocation.getCurrentPosition().then((resp) => {
-      var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
+     that.geolocation.getCurrentPosition().then((resp) => {
+       alert(resp.coords.longitude + "sdsds" + resp.coords.latitude);
+        var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
       var gc = new BMap.Geocoder();
       gc.getLocation(point, function (rs) {
         var addComp = rs.addressComponents;
-        console.log(addComp.city)
-        that.storage.set("currentPlace",addComp.city);
+       // alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+        //alert(JSON.stringify(addComp) )
+        this.city = addComp.city;
+        //alert(addComp.city);
+       setTimeout(this.storage.set('currentPlace','西安瘦瘦瘦'),1000) 
+     });
       });
-       });
+
 }
 
   //轮播图
@@ -285,6 +291,11 @@ export class HomePage {
       id: nid
     });
   }
+    getNewsList(act){
+    this.navCtrl.push(NewslistPage,{
+      act:act
+    })
+  }
   //查询默认房屋
   getiof_def(){
     //  let loading = this.loadingCtrl.create({
@@ -355,11 +366,7 @@ changeRoom(roomid) {
       this.getpayment(roomid)
     }
   }
-  getNewsList(act){
-    this.navCtrl.push(NewslistPage,{
-      act:act
-    })
-  }
+
 
   getRem() {
     var w = document.documentElement.clientWidth || document.body.clientWidth;

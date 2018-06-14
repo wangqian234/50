@@ -166,11 +166,17 @@ export class ShoppingPage {
   ionViewDidLoad() {
     // this.getPosition();
     //给第一个商品分类hr
-      this.currentPlace = this.storage.get("currentPlace");
+  
+     // this.currentPlace = this.storage.get("currentPlace");
           $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
+
   ionViewDidEnter(){
+    if(this.storage.get('currentPlace')){
+      alert(1+'a')
+      alert(this.storage.get('currentPlace'))
+    }
     this.storage.set('tabs','444');
     this.clickFun();
     this.shopKeyList = this.storage.get("shopKewWords");
