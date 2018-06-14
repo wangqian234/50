@@ -10,7 +10,6 @@ import { HouseinfoPage } from '../houseinfo/houseinfo';
 import { BindroomPage } from '../bindroom/bindroom';
 
 import { LoginPage } from '../login/login';
-
 /**
  * Generated class for the HouseinfolistPage page.
  *
@@ -36,9 +35,9 @@ export class HouseinfolistPage {
   public HouseinfoPage = HouseinfoPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, ) {
-    this.storage.set('tabs','false');
+    
 }
-
+  
   getHouseInfo(id){
     this.navCtrl.push(HouseinfoPage,{id:id});
   }
@@ -59,6 +58,7 @@ export class HouseinfolistPage {
   }
 
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     $('.curstate').each(function(){
       var $item = $(this);
       if($item.html() === '未通过审核'){
@@ -72,10 +72,14 @@ export class HouseinfolistPage {
  
 
   getHouseList(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     console.log(this.storage.get('token'));
     var api = this.config.apiUrl + '/api/VUserRoom/list_User?token='+ this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
         console.log(this.houseList)
@@ -92,6 +96,8 @@ export class HouseinfolistPage {
   }
     //设置默认房屋
   setDefaultHouse(id){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var data ={
       'token': this.storage.get('token'),
       'roomId':id,
@@ -99,6 +105,8 @@ export class HouseinfolistPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功设置默认房屋"+JSON.stringify(data));
         this.getHouseList();

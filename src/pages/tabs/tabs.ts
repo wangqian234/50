@@ -31,23 +31,40 @@ export class TabsPage {
   tab4Root = UserPage;
 
   tab5Root = ShoppingPage;
-  tab7Root = ShoppinglistPage;
-  tab8Root = CartPage;
-  tab6Root = ShopsortPage;
+  //tab7Root = ShoppinglistPage;
+  //tab8Root = CartPage;
+  //tab6Root = ShopsortPage;
 
   constructor(public navParams: NavParams,public config:ConfigProvider,public http: Http,public navCtrl: NavController) {
    
   }
 
-
   ionViewWillEnter($ionicTabsDelegate) {
-      $(".mytabs2").css("display","none");
-      $(".mytabs").css("display","block");
       if(this.navParams.get('tabs')){
         $(".mytabs").css("display","none");
         $(".mytabs2").css("display","block");
-        $(".mytabs2").select(0)
+      } else {
+        $(".mytabs2").css("display","none");
+        $(".mytabs").css("display","block");
       }
+      if(this.navParams.get('goto') == "rent"){
+        $(".mytabs2").css("display","none");
+        $(".mytabs").css("display","block");
+        this.tabs.select(1);
+      }
+
+  }
+
+  getsort(){
+    this.navCtrl.push(ShopsortPage)
+  }
+
+  getorder(){
+    this.navCtrl.push(ShoppinglistPage)
+  }
+
+  getcart(){
+    this.navCtrl.push(CartPage);
   }
 
   getShopTab(){

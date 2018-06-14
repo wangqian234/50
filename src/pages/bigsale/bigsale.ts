@@ -38,25 +38,31 @@ export class BigsalePage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
 
-
   }
 
  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
     this.getbigsale('');
 
   }
+  ionVieDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getbigsale(infiniteScroll){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    //    });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/list?pageSize=' + this.pageSize 
      + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
-     loading.dismiss();
+    //  loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200); 
        if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
           this.hasData = false;

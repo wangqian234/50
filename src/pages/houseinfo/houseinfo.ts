@@ -24,8 +24,6 @@ export class HouseinfoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
   public storage:StorageProvider) {
-    this.storage.set('tabs','false');
-
   }
 
   ionViewWillLoad() {
@@ -48,12 +46,19 @@ export class HouseinfoPage {
 
   ionViewDidLoad() {
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
 
   //获取用户房屋信息
   getUserRoom(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         // for(var i=0; i< data.model.length(); i++){
         //   if(data.model.mobile != this.storage.get('userName')) {
@@ -77,9 +82,13 @@ export class HouseinfoPage {
 
   //获取用户楼栋信息
   getProjectInfo(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/VUserRoom/info?roomId=' + this.houseId;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.projectinfo=data.model;
       } else {
@@ -90,10 +99,14 @@ export class HouseinfoPage {
 
   //根据房屋获取绑定的用户列表
   getRoomUser(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl +'/api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     console.log(api);
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log(JSON.stringify(data)+"用户列表");
         this.houseUser = data.list;
@@ -118,7 +131,11 @@ export class HouseinfoPage {
     var j = 3;
     if(confirm("确定解除绑定吗？")){
     var api = this.config.apiUrl + '/api/UserRoom/del?';
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功解绑"+JSON.stringify(data))
         this.navCtrl.pop();
@@ -157,6 +174,13 @@ export class HouseinfoPage {
 
   //设置默认房屋
   setDefaultHouse(){
+        var r= confirm("确认将该房屋设置为默认房屋吗？")
+        if (r!=true)
+        {
+          return;
+        }
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var data ={
       'token': this.storage.get('token'),
       'roomId':this.houseId,
@@ -164,6 +188,8 @@ export class HouseinfoPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功设置默认房屋"+JSON.stringify(data));
         this.getUserRoom();
@@ -180,6 +206,12 @@ export class HouseinfoPage {
   }
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
   delOtherUser(id){
+      var r= confirm("确认删除该成员与此房屋的绑定")
+      if (r!=true) {
+          return;
+      }
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
@@ -188,6 +220,8 @@ export class HouseinfoPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功解除其他用户的绑定"+JSON.stringify(data));
          this.getRoomUser();
@@ -198,7 +232,7 @@ export class HouseinfoPage {
             this.delOtherUser(id);
           }
       } else {
-        console.log(data.errmsg)
+        alert(data.errmsg)
       }
     });
   }

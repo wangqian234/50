@@ -85,10 +85,11 @@ export class TradegoodsGroupbuyingPage {
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,  public app: App,
    public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
    public loadingCtrl: LoadingController) {
-      this.storage.set('tabs','false');
         this.SD_id=navParams.get('id');
   }
-
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
+  }
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
@@ -111,11 +112,15 @@ export class TradegoodsGroupbuyingPage {
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
            alert("取消付款成功！");
           this.paymentEvent(1);////刷新界面
@@ -135,11 +140,15 @@ export class TradegoodsGroupbuyingPage {
    }
    //商品确认收货
    receiveEvent(trade_id){
+     $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
+          $(".spinnerbox").fadeOut(200);
+          $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("收货成功！");
           this.paymentEvent(3);
@@ -223,16 +232,20 @@ export class TradegoodsGroupbuyingPage {
     }
     $('.scroll-content').scrollTop('1.8rem');
     //加载
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
-    loading.dismiss();
+    // loading.dismiss();
     console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
 
     this.http.get(api).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         for(var i=0;i<this.list.length;i++){
@@ -335,10 +348,14 @@ export class TradegoodsGroupbuyingPage {
       break;
     }
      $('.scroll-content').scrollTop('1.8rem');
+     $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
      var j=3;
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
      console.log("王慧敏"+api);  
      this.http.get(api).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
       //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/

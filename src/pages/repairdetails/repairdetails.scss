@@ -114,7 +114,7 @@ page-repairdetails {
 }
 .content1 {  
     background:#eeeeee;  
-    width: 70%;  
+    width: 80%;  
     z-index: 1;  
     margin: 30% auto;  
     overflow: auto;
@@ -135,7 +135,7 @@ page-repairdetails {
 .div2 {  
     background:#eeeeee;  
     margin: auto;  
-    height: 200px;  
+    height: 4rem;  
     padding: 0 20px;
     margin-top: 15px;
 }
@@ -172,14 +172,18 @@ img{
     }
     textarea{
         font:menu;
-        height: 2rem;
+        height: 2.5rem;
         width: 100%;
     }
     .stateimg{
     height: 1rem;
-    width: 1rem;
+    width: auto;
     float: right;
     margin-right: 0.5rem;
+    }
+    .select-text{
+        line-height: 0.26rem;
+        font-size: 0.25rem;
     }
 }
 

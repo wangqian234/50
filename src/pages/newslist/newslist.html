@@ -15,7 +15,7 @@
 </div>
 </ion-header>
 
-<ion-content>
+<ion-content style="background-color:#f5f5f5">
 
 <div class="spinnerbox"></div>
 <div class="spinner">
@@ -82,7 +82,7 @@
   </div>-->
 
 
-<div *ngIf="act=='zx'">
+<div class="act" *ngIf="act=='zx'">
 
     <div class="zixun_content2" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
@@ -95,7 +95,7 @@
   </div>
 
 
-<div *ngIf="act=='gs'">
+<div class="act" *ngIf="act=='gs'">
     <div class="zixun_content" *ngFor="let newList of newsList">
 		<div (click)="getNewInfo(newList.id)" class="zixun_li">
 		

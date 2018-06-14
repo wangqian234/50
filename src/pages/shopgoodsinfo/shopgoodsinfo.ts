@@ -99,8 +99,7 @@ export class ShopgoodsinfoPage {
         this.navCtrl.push(LoginPage);
         return;
       }
- this.switch(0);
-
+      this.switch(0);
   }
   //显示商品详情页面
   goodsInfo(){
@@ -149,6 +148,7 @@ export class ShopgoodsinfoPage {
     var span = "#banb ul li:nth-of-type(" + ++mode + ")"
     $(span).attr("class", "no");
   }
+  enough;
 //购买数量判断
 ifEnough(){
   this.ifList.gId=this.wid;
@@ -158,11 +158,11 @@ ifEnough(){
   var api = this.aa+'/api/goods_size/update'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
-       
+       this.enough = true;
          //alert("可以继续添加!");
       }else{
         alert(data.errmsg+"，添加购买失败");
-        return false;
+        this.enough = false;
       }
      })
 }
@@ -202,22 +202,25 @@ fenge(str){
      if(!this.goodSize){
        alert("请选择商品规格")
      }else{
-    if(!this.ifEnough()){
-      return;
-    }
-    this.addcarList.token=this.token;
-    this.addcarList.gId=this.navParams.get("id");
-    this.addcarList.gsId = this.goodSize;
-    this.addcarList.goodsNum=this.buylist.goodsNum;
-    var date = this.addcarList;
-    var api = this.aa+'/api/usercart/add'
-     this.http.post(api,date).map(res => res.json()).subscribe(data =>{
-      if(data.errcode === 0 && data.errmsg === 'OK'){
-         alert("成功加入购物车");
-      }else{
-        alert(data.errmsg);
+    this.ifEnough();
+    setTimeout(() => {
+      if(this.enough){
+          this.addcarList.token=this.token;
+          this.addcarList.gId=this.navParams.get("id");
+          this.addcarList.gsId = this.goodSize;
+          this.addcarList.goodsNum=this.buylist.goodsNum;
+          var date = this.addcarList;
+          var api = this.aa+'/api/usercart/add'
+          this.http.post(api,date).map(res => res.json()).subscribe(data =>{
+          if(data.errcode === 0 && data.errmsg === 'OK'){
+            alert("成功加入购物车");
+          }else{
+            alert(data.errmsg);
+          }
+        })
       }
-     })
+
+    },0)
   }
  }
   //显示商品评价列表
@@ -256,9 +259,9 @@ switch(key){
      if(!this.goodSize){
       alert("请选择商品规格")
      }else{
-      if(!this.ifEnough()){
-      return;
-    }
+      this.ifEnough();
+    setTimeout(() => {
+      if(this.enough){
     this.buylist.token=this.token;
     this.buylist.gId=this.navParams.get('id');
     this.buylist.type="detail";
@@ -293,7 +296,7 @@ switch(key){
         alert(data.errmsg);
       }
      });
-     } 
+     } })}
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopgoodsinfoPage');

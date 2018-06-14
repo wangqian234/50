@@ -41,7 +41,7 @@ export class RepairdetailsPage {
 public background:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewWillLoad() {
@@ -60,18 +60,23 @@ public background:boolean;
     this.finishRepaired=document.getElementById('finishRepaired')
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.getrepairdetails();
   }
   //获取工单详情信息
   getrepairdetails(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var that = this;
     var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial+'&token='+this.storage.get('token');
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if(data.errcode===0&&data.errmsg==='OK'){
         var listStr;
         if(data.list[0].time)
@@ -140,10 +145,12 @@ public background:boolean;
   }
 //终止工单
  enSureStop(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
    this.editcloselist.listId=this.repairDetial;
    this.editcloselist.token=this.storage.get('token');
    this.editcloselist.act="close";
@@ -151,7 +158,9 @@ public background:boolean;
     var that = this;
     var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.errcode===0&&data.errmsg==='OK'){
         this.closePopup();
         this.getrepairdetails(); 
@@ -162,10 +171,17 @@ public background:boolean;
  }
 //完成工单
  enSureFinish(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+   if(this.editcloselist.stopType = "-1"){
+     alert("请选择工单终止原因");
+     return;
+   }
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
+
    this.editcloselist.listId=this.repairDetial;
    this.editcloselist.token=this.storage.get('token');
    this.editcloselist.act="finish";
@@ -178,7 +194,9 @@ public background:boolean;
     var that = this;
     var api = this.config.apiUrl+'/api/list/edit_close';
     this.http.post(api,this.editcloselist).map(res =>res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if(data.errcode===0&&data.errmsg==='OK'){
         alert(data.errmsg)
         this.closeFinishPopup();

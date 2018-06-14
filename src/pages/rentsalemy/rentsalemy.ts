@@ -20,13 +20,14 @@ export class RentsalemyPage {
   curCityCode = "4403"
   type;
   mylist = [];
+  blocksome = false;
   public del ={
     token:'',
     ids:'',
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-    this.storage.set('tabs','false');
+    
   }
 
   ionViewDidLoad() {
@@ -34,34 +35,43 @@ export class RentsalemyPage {
     this.myPublish(1);
     this.getDelete();
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getDelete(){
+    var that = this;
     $("#delete").click(function(){
       $("#delete").css("display","none");
       $("#over").css("display","block");
       $(".ioncheck").css("display","block");
       $("#deletebutton").css("display","block");
+      that.blocksome = true;
     });
     $("#over").click(function(){
       $("#delete").css("display","block");
       $("#over").css("display","none");
       $(".ioncheck").css("display","none");
       $("#deletebutton").css("display","none");
+      that.blocksome = false;
     })
   }
 
   myPublish(type){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.pageIndex = 1;
     this.type = type;
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
      console.log(api)
       this.http.get(api).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.mylist = data.list;
         console.log(data)
@@ -72,17 +82,24 @@ export class RentsalemyPage {
         alert(data.errmsg)
       }
     });
+      $("#delete").css("display","block");
+      $("#over").css("display","none");
+      $("#deletebutton").css("display","none");
   }
 
   myPublishList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
      "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
     this.http.get(api).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        // loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
           this.mylist = this.mylist.concat(data.list);
           if(infiniteScroll) {
@@ -110,6 +127,8 @@ export class RentsalemyPage {
   }
   //批量删除
   delMyPublish(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var myId=[];
     for(var i=0;i<this.mylist.length;i++){
       if(this.mylist[i].checked==true){
@@ -121,6 +140,8 @@ export class RentsalemyPage {
     this.del.token = this.storage.get('token')
     var api = this.config.apiUrl +　'/api/rental/del';
     this.http.post(api,this.del).map(res => res.json()).subscribe(data => {
+      $(".spinnerbox").fadeOut(200);
+    $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("删除成功")
       this.myPublish(this.type);
@@ -139,6 +160,7 @@ export class RentsalemyPage {
   }
 
   clickCSS(){
+    var that = this;
     $("#test li").click(function(){
       $("#test li").each(function(){
         $(this).attr("class","type");

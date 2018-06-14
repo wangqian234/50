@@ -66,7 +66,7 @@ export class RentsaleaddPage {
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
     public http: Http, public loadingCtrl: LoadingController) {
-      this.storage.set('tabs','false');
+      
   }
   ionViewWillEnter() {
     if (this.storage.get('token')) {
@@ -92,6 +92,9 @@ export class RentsaleaddPage {
       this.ifontime(1);
     }
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RentsaleaddPage');
   }
@@ -111,16 +114,57 @@ export class RentsaleaddPage {
   }
 
   getRSInfo() {
-   if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
+   var j = 3;
+   if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
       alert('请输入正确的手机号码');
       return;
     }
+    if(this.RSadd.title == ""){
+      alert('请输入标题');
+      return;
+    }
+    if(this.RSadd.space == ""){
+      alert('请输入房屋面积');
+      return;
+    }
+    if(this.RSadd.room == "" || this.RSadd.halls == "" || this.RSadd.halls == ""){
+      alert('请输入房屋户型');
+      return;
+    }
+    if(this.RSadd.priceMax == ""){
+      alert('请输入预期价格');
+      return;
+    }
+    if(this.RSadd.phone == ""){
+      alert('请输入您的手机号码');
+      return;
+    }
+    if(this.RSadd.contacts == ""){
+      alert('请输入您的姓名');
+      return;
+    }
+    if(this.RSadd.nature == ""){
+      alert('请选择房源性质');
+      return;
+    }
+    if(this.RSadd.district == ""){
+      alert('请输入房屋所在小区');
+      return;
+    }
+    if(this.RSadd.describe == ""){
+      alert('请对房屋做简单描述');
+      return;
+    }
+    if(this.RSadd.city == "" || this.RSadd.region == "" || this.RSadd.street == ""){
+      alert("请输入房屋位置");
+      return;
+    }
+
     if (!this.navParams.get('item')) {  //判断添加还是修改
-      var j = 3;
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true,
-      });
-      loading.present();
+      // let loading = this.loadingCtrl.create({
+      //   showBackdrop: true,
+      // });
+      // loading.present();
       var data = {
         "token": this.storage.get("token"),
         "type": this.RSadd.type,
@@ -140,9 +184,13 @@ export class RentsaleaddPage {
         "region": this.RSadd.region,
         "city": this.RSadd.city,
       }
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var api = this.config.apiUrl + "/api/rental/add";
       this.http.post(api, data).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
+        // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
@@ -157,10 +205,10 @@ export class RentsaleaddPage {
       });
     } else {
       var j = 3;
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true,
-      });
-      loading.present();
+      // let loading = this.loadingCtrl.create({
+      //   showBackdrop: true,
+      // });
+      // loading.present();
       var xiugai = {
         "token": this.storage.get("token"),
         "type": this.RSadd.type,
@@ -185,7 +233,9 @@ export class RentsaleaddPage {
       console.log(xiugai)
       console.log("ghl")
       this.http.post(api, xiugai).map(res => res.json()).subscribe(data => {
-        loading.dismiss();
+        $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
+        // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
@@ -204,6 +254,24 @@ getValue(value){
 }
   //获取城代码
   getCityCode() {
+    // var index = $.inArray(this.city, this.citys);
+    // if (index < 0) {
+    //   alert("请输入正确的城市名称");
+    //   this.city="";
+    //   return;
+    // }
+    var api = this.config.apiUrl + '/api/rental/getCity?cityName=' + this.city;
+    this.http.get(api).map(res => res.json()).subscribe(data => {
+      if (data.errcode == 0 && data.errmsg == 'OK') {
+        console.log(data)
+        this.cityCode = data.model;
+        this.RSadd.city = this.cityCode.code;
+        this.getAreaCode();
+      }
+    })
+  }
+    //获取城代码
+  getCityCodeend() {
     var index = $.inArray(this.city, this.citys);
     if (index < 0) {
       alert("请输入正确的城市名称");
@@ -218,7 +286,7 @@ getValue(value){
         this.RSadd.city = this.cityCode.code;
         this.getAreaCode();
       } else {
-        alert(data.errmsg);
+        alert("我们正在努力扩展业务城市范围，敬请期待")
       }
     })
   }
