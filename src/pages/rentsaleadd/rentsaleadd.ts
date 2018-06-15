@@ -114,14 +114,53 @@ export class RentsaleaddPage {
   }
 
   getRSInfo() {
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-   if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
+   var j = 3;
+   if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
       alert('请输入正确的手机号码');
       return;
     }
+    if(this.RSadd.title == ""){
+      alert('请输入标题');
+      return;
+    }
+    if(this.RSadd.space == ""){
+      alert('请输入房屋面积');
+      return;
+    }
+    if(this.RSadd.room == "" || this.RSadd.halls == "" || this.RSadd.halls == ""){
+      alert('请输入房屋户型');
+      return;
+    }
+    if(this.RSadd.priceMax == ""){
+      alert('请输入预期价格');
+      return;
+    }
+    if(this.RSadd.phone == ""){
+      alert('请输入您的手机号码');
+      return;
+    }
+    if(this.RSadd.contacts == ""){
+      alert('请输入您的姓名');
+      return;
+    }
+    if(this.RSadd.nature == ""){
+      alert('请选择房源性质');
+      return;
+    }
+    if(this.RSadd.district == ""){
+      alert('请输入房屋所在小区');
+      return;
+    }
+    if(this.RSadd.describe == ""){
+      alert('请对房屋做简单描述');
+      return;
+    }
+    if(this.RSadd.city == "" || this.RSadd.region == "" || this.RSadd.street == ""){
+      alert("请输入房屋位置");
+      return;
+    }
+
     if (!this.navParams.get('item')) {  //判断添加还是修改
-      var j = 3;
       // let loading = this.loadingCtrl.create({
       //   showBackdrop: true,
       // });
@@ -145,6 +184,8 @@ export class RentsaleaddPage {
         "region": this.RSadd.region,
         "city": this.RSadd.city,
       }
+      $(".spinnerbox").fadeIn(200);
+      $(".spinner").fadeIn(200);
       var api = this.config.apiUrl + "/api/rental/add";
       this.http.post(api, data).map(res => res.json()).subscribe(data => {
         $(".spinnerbox").fadeOut(200);
@@ -213,8 +254,24 @@ getValue(value){
 }
   //获取城代码
   getCityCode() {
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
+    // var index = $.inArray(this.city, this.citys);
+    // if (index < 0) {
+    //   alert("请输入正确的城市名称");
+    //   this.city="";
+    //   return;
+    // }
+    var api = this.config.apiUrl + '/api/rental/getCity?cityName=' + this.city;
+    this.http.get(api).map(res => res.json()).subscribe(data => {
+      if (data.errcode == 0 && data.errmsg == 'OK') {
+        console.log(data)
+        this.cityCode = data.model;
+        this.RSadd.city = this.cityCode.code;
+        this.getAreaCode();
+      }
+    })
+  }
+    //获取城代码
+  getCityCodeend() {
     var index = $.inArray(this.city, this.citys);
     if (index < 0) {
       alert("请输入正确的城市名称");
@@ -223,26 +280,20 @@ getValue(value){
     }
     var api = this.config.apiUrl + '/api/rental/getCity?cityName=' + this.city;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      $(".spinnerbox").fadeOut(200);
-     $(".spinner").fadeOut(200);
       if (data.errcode == 0 && data.errmsg == 'OK') {
         console.log(data)
         this.cityCode = data.model;
         this.RSadd.city = this.cityCode.code;
         this.getAreaCode();
       } else {
-        alert(data.errmsg);
+        alert("我们正在努力扩展业务城市范围，敬请期待")
       }
     })
   }
   //获取区代码
   getAreaCode() {
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/rental/arealist?pId=' + this.RSadd.city;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      $(".spinnerbox").fadeOut(200);
-     $(".spinner").fadeOut(200);
       if (data.errcode == 0 && data.errmsg == 'OK') {
         this.areaCode = data.list;
       } else {
@@ -251,12 +302,8 @@ getValue(value){
     })
   }
   getCode() {
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/rental/arealist?pId=' + this.RSadd.region;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode == 0 && data.errmsg == 'OK') {
         this.Code = data.list;
       } else {

@@ -111,6 +111,12 @@ export class EditorinfoPage {
         "birthday":this.personInfo.birthday,
         "sex":this.personInfo.sex,
       }
+      var now = new Date().getTime();
+      var birth = new Date(data.birthday).getTime();
+      if(birth - now >0){
+        alert("出生日期不能大于当前时间");
+        return;
+      }
       console.log(data)
       if(this.personInfo.birthday&&this.personInfo.name){
       var api = this.config.apiUrl + '/api/User/edit_Basic';
@@ -151,6 +157,11 @@ export class EditorinfoPage {
         "monthlyIncome":this.personInfo.monthlyincome,
         "maritalStatus":this.personInfo.maritalstatus,
         "industryInfo":this.personInfo.industryinfo,
+      }
+      if(!data.cardNo || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(data.cardNo)
+        || !/(P\d{7})|(G\d{8})/.test(data.cardNo)){
+        alert("请输入正确的证件格式");
+        return;
       }
       console.log(JSON.stringify(data))
       var api = this.config.apiUrl + '/api/User/edit_More';

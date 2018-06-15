@@ -7,6 +7,7 @@ page-newslist {
     }
     .zixun_content{
     height:1.4rem;
+        background-color: white;
     }
        .zixun_content2{
     height:3.2rem;
@@ -30,8 +31,9 @@ page-newslist {
         line-height:0.38rem;
         width:94%;
         margin-left:0.3rem;
-        min-height:1rem;
+        min-height:0.6rem;
         padding-top:0.1rem;
+        margin-bottom: 0.15rem;
     }
     .zixun_content .zixun_li .line{
         float:left;
@@ -206,6 +208,9 @@ page-newslist {
 }
 .remark .apartment{
    float:right;
+}
+.act{
+    margin-top: 10px;
 }
 
 }

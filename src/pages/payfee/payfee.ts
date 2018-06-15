@@ -37,6 +37,9 @@ export class PayfeePage {
   public fundloglist=[];
   public roomidlist=[];
   public iof_defList=[];
+  payFeeimg = true;
+  feeListimg = true;
+  preDetailimg = true;
   
   public PayprefeePage = PayprefeePage;
   public LoginPage = LoginPage;
@@ -73,30 +76,30 @@ export class PayfeePage {
   appearPayFee(){
     if($('.payFee').css('display') == 'block'){
       $('.payFee').css('display','none');
-      $('#payFeeimg').css('transform', 'rotate(0)')
+      this.payFeeimg = true;
     } else {
       $('.payFee').css('display','block');
-      $('#payFeeimg').css('transform', 'rotate(90deg)')
+      this.payFeeimg = false;
     }
   }
 
   appearPreDetail(){
     if($('.preDetail').css('display') == 'block'){
       $('.preDetail').css('display','none');
-      $('#preDetailimg').css('transform', 'rotate(0)')
+      this.preDetailimg = true;
     } else {
       $('.preDetail').css('display','block');
-      $('#preDetailimg').css('transform', 'rotate(90deg)')
+      this.preDetailimg = false;
     }
   }
 
   appearFeeList(){
     if($('.feeList').css('display') == 'block'){
       $('.feeList').css('display','none');
-      $('#feeListimg').css('transform', 'rotate(0)')
+      this.feeListimg = true;
     } else {
       $('.feeList').css('display','block');
-      $('#feeListimg').css('transform', 'rotate(90deg)')
+      this.feeListimg = false;
     }
   }
 

@@ -117,12 +117,12 @@ public LoginPage = LoginPage;
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "time+"
+        that.horder = "time"
       } else {
         that.horder = "time-"
       }
-      this.houseInfo=[];
-      this.pageIndex=1;
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -155,12 +155,12 @@ public LoginPage = LoginPage;
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "space+"
+        that.horder = "space"
       } else {
         that.horder = "space-"
       }
-      this.houseInfo=[];
-      this.pageIndex=1;
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -193,10 +193,12 @@ public LoginPage = LoginPage;
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "price+"
+        that.horder = "price"
       } else {
         that.horder = "price-"
       }
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
   }

@@ -50,16 +50,11 @@ export class BigsalePage {
     this.storage.set('tabs','false');
   }
   getbigsale(infiniteScroll){
-    //  let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    //    });
-    // loading.present();
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/list?pageSize=' + this.pageSize 
      + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
-    //  loading.dismiss();
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        $(".spinnerbox").fadeOut(200);
        $(".spinner").fadeOut(200); 
@@ -75,7 +70,6 @@ export class BigsalePage {
             this.pageIndex++;
         }
         if(infiniteScroll){
-          
           infiniteScroll.complete();        //告诉ionic 请求数据完成
           if(data.list.length<10){  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
@@ -83,7 +77,7 @@ export class BigsalePage {
           }
         }
       }
- else if(data.errcode === 40002) {
+      else if(data.errcode === 40002) {
           j--;
           if(j>0){
             this.config.doDefLogin();
@@ -134,10 +128,6 @@ ionViewDidEnter(){
         this.pageIndex =1;
         this.list = [];
         this.getbigsale('');
-      //   this.items = [];
-      //   for (var i = 0; i < 30; i++) {
-      //    this.items.push( this.items.length );
-      //  }
        console.log('刷新结束');
        refresher.complete();
      }, 2000);

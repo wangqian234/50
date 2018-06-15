@@ -202,6 +202,10 @@ $refresher-icon-font-size : 0.4rem;
   z-index: 1000;
 }
 
+select{
+  line-height: 0.3rem !important;
+}
+
 .spinnerbox{
     position: fixed;
     top: 0;

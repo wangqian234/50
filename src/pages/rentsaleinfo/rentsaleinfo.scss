@@ -33,7 +33,6 @@ page-rentsaleinfo {
     margin-top: -20px;
     background-color: white;
     border-radius: 3px;
-    z-index: 5;
     position: relative;
     line-height: 0.4rem;
     font-size: 0.27rem;
@@ -76,6 +75,7 @@ color:#818181;
 .detail .content{
     font-size:0.28rem;
     color:#2979FF;
+    line-height: 0.35rem;
 }
 .roomSize{
      width:50%;
@@ -99,7 +99,7 @@ color:#818181;
 .detail_info .content{
     color:#818181;
     font-size:0.18rem;
-    margin:0 0 0 0.25rem;
+    margin:0.02rem 0 0 0.25rem;
         position: absolute;
 }
 

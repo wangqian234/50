@@ -93,61 +93,51 @@ export class ShoppingPage {
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private geolocation: Geolocation,
   public app: App) {
 
-    // // this.getLunbo();
   } 
   //主页面加载函数 
-   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
+  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     this.getRem();
     this.getShop();
     this.getShopGoods();
-      if(this.storage.get("shopKewWords")){
+    if(this.storage.get("shopKewWords")){
         this.shopKeyList = this.storage.get("shopKewWords");
-      }
     }
-    ionViewWillEnter(){
-  //     this.slides.startAutoplay();
-  //            this.tuiList = [
-  //    "assets/imgs/08.jpg",
-  //    "assets/imgs/back.png",
-  //    "assets/imgs/fee.png",
-  //    "assets/imgs/fanh.png",
-  //    "assets/imgs/gongyi.png",
-  //  ]
-    }
-//     ionViewWillLeave(){
-//   this.slides.stopAutoplay();
-// }
+    this.listenTouch();
+  }
+  
+  //自带函数
+  ionViewDidLoad() {
+    this.currentPlace = this.storage.get("currentPlace");
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
+  }
+
+  ionViewDidEnter(){
+    this.storage.set('tabs','444');
+    this.clickFun();
+    this.shopKeyList = this.storage.get("shopKewWords");
+  }
+
+
     //获取商城首页
     getShop(){
-      $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
-    var api = this.aa+'/api/index/list?curCityCode=4403';
-    this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
+      // $(".spinnerbox").fadeIn(200);
+      // $(".spinner").fadeIn(200);(200);
+      var api = this.aa+'/api/index/list?curCityCode=4403';
+      this.http.get(api).map(res => res.json()).subscribe(data =>{
+        $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
-      if(data.json['data_Banner'].errcode == 0 &&data.json['data_Banner'].errmsg == 'OK'){
-      console.log(data)
-     //this.lunboList=data.json["data_Banner"].list;
-     this.tuangouList=data.json['data_Modules'].list; 
-     this.len=this.tuangouList.length;
-     this.tubList=data.json['data_Sort'].list;
-     this.tuijList=data.json['data_Recommend'].list;
-      }else{
-        alert(data.errmsg)
-      }
-    })
-    
+        if(data.json['data_Banner'].errcode == 0 &&data.json['data_Banner'].errmsg == 'OK'){
+          this.tuiList=data.json["data_Banner"].list;
+          this.tuangouList=data.json['data_Modules'].list; 
+          this.len=this.tuangouList.length;
+          this.tubList=data.json['data_Sort'].list;
+          this.tuijList=data.json['data_Recommend'].list;
+          this.carousel();
+        }else{
+          alert(data.errmsg)
+        }
+      })
     }
-  //     //轮播图
-  // getFocus() {
-  //   var that = this;
-  //   that.lunboList = [
-  //     'assets/imgs/renmai.png',
-  //     'assets/imgs/slide02.png',
-  //     'assets/imgs/slide03.jpg',
-  //     'assets/imgs/rent1.png'
-  //   ];
-  // }
     //获取商城首页分类的商品
     getShopGoods(){
      //初始显示旅游服务的商品列表
@@ -162,43 +152,19 @@ export class ShoppingPage {
       })
     }
 
-  //自带函数
-  ionViewDidLoad() {
-    // this.getPosition();
-    //给第一个商品分类hr
-  
-     // this.currentPlace = this.storage.get("currentPlace");
-          $('.facediv li:nth-of-type(1)').attr("class","activety");
-  }
-
-
-  ionViewDidEnter(){
-    if(this.storage.get('currentPlace')){
-      alert(1+'a')
-      alert(this.storage.get('currentPlace'))
-    }
-    this.storage.set('tabs','444');
-    this.clickFun();
-    this.shopKeyList = this.storage.get("shopKewWords");
-  }
-
   clickFun(){
     $(".sos_tanc").click(function(){
-      $(".sousuo").css("display","block")
-       $(".shouye").css("display","none")
-       $(".shopcontentdiv").css("display","none")
-       $(".remen_sos").css("display","block")
-       $(".ios .tabs .tabbar").css("display","none");
+        $(".sousuo").css("display","block")
+        $(".shouye").css("display","none")
+        $(".shopcontentdiv").css("display","none")
+        $(".remen_sos").css("display","block")
+        $(".ios .tabs .tabbar").css("display","none");
     })
   }
 
   //控制搜索页面的显示
   fanhui(){
-      // $(".remen_sos").css("display","none")
-      // $(".shopcontentdiv").css("display","block")
-      // $(".caid_img").css("display","block")
-      // $(".fanhui").css("display","none")
-        $(".sousuo").css("display","none")
+      $(".sousuo").css("display","none")
        $(".shouye").css("display","block")
        $(".shopcontentdiv").css("display","block")
        $(".remen_sos").css("display","none")
@@ -208,7 +174,7 @@ export class ShoppingPage {
    this.doReserch();
   }
 
-//出发箭头
+  //出发箭头
   clickEvent(){
     var index = $(event.target).attr("index");
     console.log(index);
@@ -266,6 +232,7 @@ export class ShoppingPage {
 
   //跳转到商品详情页面
   goGoodsInfo(id){
+    console.log(this)
     if(this.storage.get('token')){
       this.navCtrl.push(ShopgoodsinfoPage,{id:id});
       } else {
@@ -273,6 +240,16 @@ export class ShoppingPage {
         return;
       }
   }
+
+  gotoShopGood(id){
+    this.navCtrl.push(ShopgoodsinfoPage,{
+      id:id
+    })
+  }
+
+  // ionViewWillLeave(){
+  //  this.node.empty();
+  // }
 
   gotoPlace(){
     this.navCtrl.push(PersonalPage, {
@@ -307,10 +284,185 @@ export class ShoppingPage {
     this.app.getRootNav().push(TabsPage);    
   }
 
-  gotoShopGood(id){
-  this.navCtrl.push('ShopgoodsinfoPage',{
-    id:id
-  })
-  }
+    //轮播图开始
+    width = $(window).width();
+    height = 3.25;
+    scroll = null;//滚动框div
+    pagination = null;//页码容器
+    currentIndex = 1;//当前图片索引
+    timer = null;
+    wait = 3000;//轮播间隔
+    onMove = false;
+    node = $(".vo_carousel");
+    imgUrls = this.tuijList;
+    height11 = "3.25rem";
+
+    carousel(){
+        //创建DOM结构
+        this.createCarouselDom();
+        //创建右下角图片索引
+        this.createPagination();
+        //开启轮播图
+        this.start();
+    }
+
+    //创建轮播图的DOM结构
+    createCarouselDom () {
+        var len = this.tuijList.length;
+        if (len == 0) {
+            return;
+        }
+        this.scroll = $('<div class="scroll"></div>');
+        var $imgUl = $('<ul></ul>');
+        $imgUl.css({ 'width': this.width * len + 1, 'height': this.height +"rem" });
+        for (var i = 0; i < len; i++) {
+            var $li = $('<li></li>');
+            var $img = $('<img src=' + this.tuijList[i].img + ' />');
+            $img.on('click', this.gotoShopGood.bind(this,this.tuijList[i].url));
+            $img.css({ 'width': this.width+"px", 'height': this.height11 });
+            $li.css({ 'left': this.width * (i + 1) });
+            $li.append($img);
+            $imgUl.append($li);
+        }
+        var firstImg = $imgUl.children().first().clone(true);
+        var lastImg = $imgUl.children().last().clone(true);
+        lastImg.css('left', 0);
+        firstImg.css('left',parseInt(this.width) * this.currentIndex)
+        $imgUl.prepend(lastImg);
+        $imgUl.append(firstImg);
+        this.scroll.append($imgUl);
+        this.node.append(this.scroll);
+    }
+
+    //创建页码容器
+    createPagination () {
+        var $pagination = $('<div class="pagination"></div>');
+        for (var i = 0; i < this.tuijList.length; i++) {
+            var $page = $('<div class="page"></div>');
+            $page.on('click', this.handlePageClick.bind(this, i + 1));
+            $pagination.append($page);
+        }
+        this.pagination = $pagination;
+        this.node.append(this.pagination);
+        $pagination.css("margin-left",-parseInt($pagination.width())/2)
+    }
+
+    //处理点击页码事件
+    handlePageClick (i) {
+        if (this.onMove) {
+            return;
+        }
+        this.currentIndex = i;
+        this.update(false);
+    }
+
+    //点击左箭头
+    handleLeftArrowClick () {
+        if (this.onMove) {
+            return;
+        }
+
+        this.currentIndex--;
+        if (this.currentIndex == -1) {
+            this.currentIndex = this.tuijList.length - 1;
+        }
+
+        this.update(true);
+    }
+
+    //点击右箭头
+    handleRightArrowClick () {
+        if (this.onMove) {
+            return;
+        }
+
+        this.currentIndex++;
+
+        this.update(false);
+    }
+
+    update (boo) {
+      var that = this;
+      clearInterval(that.timer);
+      that.updatePagination();
+      that.onMove = true;
+      that.scroll.animate({ scrollLeft: parseInt(that.width) * that.currentIndex }, 500, function () {
+            that.onMove = false;
+            console.log('update: ', that.currentIndex);
+            if (that.currentIndex === that.tuijList.length) {
+                that.currentIndex = 0;
+                that.scroll.scrollLeft(0);
+            }
+            that.setTimer();
+        });
+    }
+
+    //更新页码
+    updatePagination () {
+        this.pagination.children().eq(this.currentIndex - 1).addClass('active').siblings().removeClass('active');
+    }
+
+    //设置定时器
+    setTimer () {
+        var that = this;
+        that.timer = setInterval(function () {
+
+            //更新当前图片索引和页码
+            that.currentIndex++;
+            if (that.currentIndex > that.tuijList.length) {
+                that.currentIndex = 1;
+            }
+            that.updatePagination();
+            that.onMove = true;
+            that.scroll.animate({ scrollLeft: parseInt(that.width) * that.currentIndex + "px" }, 500, function () {
+                that.onMove = false;
+                //如果是最后一张图片，直接跳到第0张
+                if (that.currentIndex === that.tuijList.length) {
+                    that.currentIndex = 0;
+                    that.scroll.scrollLeft(0);
+                }
+            });
+        }, 3000);
+    }
+
+    start () {
+        //开始时先显示第一张图片
+        this.scroll.scrollLeft(this.width);
+        this.updatePagination();
+        this.setTimer();
+
+    }
+
+//判断左右滑动事件
+    listenTouch(){
+      var startX;
+      var startY;
+      var moveEndX;
+      var moveEndY;
+      var that = this;
+        //给body强制定义高度
+    　　var $body = $(".vo_carousel");
+    　　$body.css("height", "3.25rem"); //重要代码
+        $body.on("touchstart", function(e) {
+    　　　　//e.preventDefault();//会使所有的触屏都失效，不能用
+    　　　　startX = e.originalEvent.changedTouches[0].pageX,
+    　　　　startY = e.originalEvent.changedTouches[0].pageY;
+    　　});
+    　　$body.on("touchmove", function(e) {
+            var X;
+            var Y;
+    　　　　//e.preventDefault();
+    　　　　moveEndX = e.originalEvent.changedTouches[0].pageX,
+    　　　　moveEndY = e.originalEvent.changedTouches[0].pageY,
+    　　　　X = moveEndX - startX,
+    　　　　Y = moveEndY - startY;
+    　　　　if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
+    　　　　　　that.handleLeftArrowClick();
+    　　　　}
+    　　　　else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {
+    　　　　　　that.handleRightArrowClick();
+    　　　　}
+    　　});
+    }
 
 }

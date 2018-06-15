@@ -124,8 +124,6 @@ export class HouseinfoPage {
 
   //解除用户自己的绑定
   delUserRoom(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var data = {
       'token':this.storage.get('token'),
       'roomId':this.houseId,
@@ -133,6 +131,8 @@ export class HouseinfoPage {
     var j = 3;
     if(confirm("确定解除绑定吗？")){
     var api = this.config.apiUrl + '/api/UserRoom/del?';
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
       $(".spinnerbox").fadeOut(200);
       $(".spinner").fadeOut(200);
@@ -174,6 +174,11 @@ export class HouseinfoPage {
 
   //设置默认房屋
   setDefaultHouse(){
+        var r= confirm("确认将该房屋设置为默认房屋吗？")
+        if (r!=true)
+        {
+          return;
+        }
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
     var data ={
@@ -201,6 +206,10 @@ export class HouseinfoPage {
   }
   //解除其他用户的绑定(要解除的用户id怎么知道)'&delUserId' +this.delUserId
   delOtherUser(id){
+      var r= confirm("确认删除该成员与此房屋的绑定")
+      if (r!=true) {
+          return;
+      }
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
     var data = {
@@ -223,7 +232,7 @@ export class HouseinfoPage {
             this.delOtherUser(id);
           }
       } else {
-        console.log(data.errmsg)
+        alert(data.errmsg)
       }
     });
   }

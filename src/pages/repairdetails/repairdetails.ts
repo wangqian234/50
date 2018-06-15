@@ -171,12 +171,17 @@ public background:boolean;
  }
 //完成工单
  enSureFinish(){
+   if(this.editcloselist.stopType = "-1"){
+     alert("请选择工单终止原因");
+     return;
+   }
     // let loading = this.loadingCtrl.create({
 	  //   showBackdrop: true,
     // });
     // loading.present();
     $(".spinnerbox").fadeIn(200);
     $(".spinner").fadeIn(200);
+
    this.editcloselist.listId=this.repairDetial;
    this.editcloselist.token=this.storage.get('token');
    this.editcloselist.act="finish";

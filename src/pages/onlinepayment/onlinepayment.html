@@ -59,12 +59,12 @@
   <div class="otherUser_content">
 
   <div class="otherUser_title" style="margin-bottom:10px" *ngFor="let item of dest;let i of index">
-    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked">
-    <div class="user_titlediv">
+    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked" (click)="getTotal()">
+    <div class="user_titlediv" (click)="appearSome()">
       <div class="user_title">&nbsp;&nbsp;{{item.date}}</div>
-      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little" src="assets/imgs/littlejiantou.png"></div>
+      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little little_img" src="assets/imgs/littlejiantou.png"></div>
     </div>
-    <div class="otherUser_content" style="display:none">
+    <div class="otherUser_content otherUser_content_con" style="display:none">
       <ion-list>
         <ion-item *ngFor="let list of item.data">
           <div class="fee_time">{{list.name}}</div>

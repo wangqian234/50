@@ -6,8 +6,8 @@
 </ion-tabs>
 <ion-tabs class="mytabs2" #mainTabs2>
   <ion-tab [root]="tab5Root" tabTitle="商城首页" tabIcon="ios-briefcase"></ion-tab>
-  <ion-tab [root]="tab6Root" tabTitle="商品分类" tabIcon="ios-pricetags-outline"></ion-tab>
-  <ion-tab [root]="tab7Root" tabTitle="我的订单" tabIcon="ios-paper-outline"></ion-tab>
-  <ion-tab [root]="tab8Root" tabTitle="购物车" tabIcon="ios-cart"></ion-tab>
+  <ion-tab [root]="tab6Root" tabTitle="商品分类" tabIcon="ios-pricetags-outline" (ionSelect)="getsort()"></ion-tab>
+  <ion-tab [root]="tab7Root" tabTitle="我的订单" tabIcon="ios-paper-outline" (ionSelect)="getorder()"></ion-tab>
+  <ion-tab [root]="tab8Root" tabTitle="购物车" tabIcon="ios-cart" (ionSelect)="getcart()"></ion-tab>
 </ion-tabs>
 

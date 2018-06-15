@@ -66,7 +66,8 @@
   <div class="otherUser_title">
     <div class="user_titlediv" (click)="appearPayFee()">
       <div class="user_title">需缴纳的费用</div>
-      <div class="appear"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="payFeeimg"><img id="payFeeimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!payFeeimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="payFee" class="otherUser_content payFee" style="display:none">
      
@@ -83,7 +84,8 @@
     <div class="otherUser_title" *ngIf="prepayslist.length != 0">
     <div class="user_titlediv" (click)="appearPreDetail()">
       <div class="user_title">预存款剩余明细</div>
-      <div class="appear"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="preDetailimg"><img id="preDetailimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!preDetailimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="preDetail" class="otherUser_content preDetail" style="display:none">
       <ion-list>
@@ -106,7 +108,8 @@
   <div class="otherUser_title" (click)="appearFeeList()" *ngIf="fundloglist.length != 0" style="margin-bottom:50px">
     <div class="user_titlediv">
       <div class="user_title">近半年缴费记录</div>
-      <div class="appear"><img id="feeListimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="feeListimg"><img id="feeListimg" src="assets/imgs/appear.png"></div>
+      <div class="appear" *ngIf="!feeListimg"><img src="assets/imgs/appearno.png"></div>
     </div>
     <div id="feeList" class="otherUser_content feeList" style="display:none">
       <ion-list>
@@ -127,6 +130,7 @@
   </div>
   <div class="bottom_button">
     <button class="loginBtn" (click)="goOnlinePayfee()">在线缴费</button>
+    <div class="hrdivblock"></div>
     <button class="registerBtn" (click)="goPrefee()">费用预存</button>
   </div>
 </div>

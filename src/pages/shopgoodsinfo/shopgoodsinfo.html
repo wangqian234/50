@@ -155,14 +155,14 @@
 <div id="yemnr">
 
 <!--商品列表--> 
-<ul class="shangp_lieb_k" style="padding:10px;">
+<ul class="shangp_lieb_k" style="padding:10px 0;">
 		<li *ngFor="let item of rlist"  [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['id']}">
 			<a href="javascript:;">
 				<div class="lieb_img"><img src={{item.img}}></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
 					<p class="bend">已售数量：{{item.soldnum}}</p>
-					<p class="px26">¥ {{item.preprice}}<span>   ¥ {{item.price}}</span></p>				
+					<p class="px26">¥ {{item.pricemin}}</p>				
 				</div>
 			</a>
 		</li>	
@@ -176,9 +176,9 @@
 <div class="dib_daoh_b">
 	<div class="gouwuc_ gouwuc_yem jiesy"> 
 		
-		<div id="cart" class="you">
+		<div id="cart" class="you" style="background-color:white">
 			<div class="goum">
-				<a (click)="addcart()">加入购物车</a>  
+				<a style="color:#FF971C" (click)="addcart()">加入购物车</a>  
 			</div>
 		</div>
 		<div id="buy" class="you">

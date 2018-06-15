@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Http, Jsonp, Headers, RequestOptions } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
-import { NavController, NavParams,Slides } from 'ionic-angular';
+import { NavController, NavParams,Slides,App } from 'ionic-angular';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 //房屋报修
@@ -37,7 +37,8 @@ import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
 import {RentsalePage} from '../rentsale/rentsale';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
-import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo';
+import { TabsPage } from '../tabs/tabs';
 import $ from 'jquery';
 declare var BMap;
 
@@ -86,6 +87,7 @@ export class HomePage {
   public PayprefeePage = PayprefeePage;
   public ShoppinglistPage = ShoppinglistPage;
   public LoginPage = LoginPage;
+  public TabsPage = TabsPage;
   //轮播图的页面跳转
   public RentsalePage = RentsalePage;
   //轮播图的页面跳转
@@ -98,8 +100,8 @@ export class HomePage {
   public RentsaleaddPage = RentsaleaddPage;
 
   constructor(public navCtrl: NavController, public config: ConfigProvider, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController) {
-      
+    public storage: StorageProvider, private geolocation: Geolocation,public loadingCtrl: LoadingController,public app:App) {
+      this.geolocation1 = Geolocation;
   }
 
   ionViewWillEnter(){
@@ -145,19 +147,19 @@ export class HomePage {
       } else {
           this.enSureLoginHome = false;
       }
-     this.storage.set('tabs','true');
-      
-      // let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      //   console.log('network was disconnected :-(');
-      // });
-      // //disconnectSubscription.unsubscribe();
-      // let connectSubscription = this.network.onConnect().subscribe(() => {
-      //   alert("进入网络连接监测")
-      //   alert(this.network.type)
-      // });
-      // this.networktype = this.network.type
-      // this.presentToast();
-      // connectSubscription.unsubscribe();
+      this.storage.set('tabs','true');
+      this.getPosition();
+    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+    //     console.log('network was disconnected :-(');
+    //   });
+    //   //disconnectSubscription.unsubscribe();
+    //   let connectSubscription = this.network.onConnect().subscribe(() => {
+    //     alert("进入网络连接监测")
+    //     alert(this.network.type)
+    //   });
+    //   this.networktype = this.network.type
+    //   this.presentToast();
+    //   //connectSubscription.unsubscribe();
    }
 
   getPosition() {
@@ -208,7 +210,10 @@ export class HomePage {
     this.url=url.substring(0,3);
     this.Id = url.substring(3,)
     if(url==="HRSHome"){
-      this.navCtrl.push(RentsalePage)
+      //this.navCtrl.push(RentsalePage)
+      this.app.getRootNav().push(TabsPage,{
+        goto : "rent"
+      });
     }else if(this.url==="gId"){
        this.navCtrl.push(ShopinfoPage,{sid:this.Id})
     }else if(this.url ==="sId"){
@@ -287,6 +292,7 @@ export class HomePage {
   }
 
  getNewInfo(nid) {
+       alert(this.storage.get('tabs'))
     this.navCtrl.push(NewinfoPage, {
       id: nid
     });

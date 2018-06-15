@@ -18,6 +18,7 @@ export class RentsaleinfoPage {
   rentsaleDetail={};
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http) {
+
   }
 
   ionViewWillLoad(){
@@ -34,7 +35,7 @@ export class RentsaleinfoPage {
     }
   }
   ionViewDidEnter(){
-    this.storage.set('tabs','true');
+    this.storage.set('tabs','false');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RentsaleinfoPage');
@@ -49,6 +50,7 @@ export class RentsaleinfoPage {
         $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        data.model.date = data.model.date.replace("T"," ")
         this.rentsale = data.model;
         console.log(data)
         this.rentsaleDetail = data.list;

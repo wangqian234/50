@@ -17,7 +17,7 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
 
 //返回首页
 import { TabsPage } from '../tabs/tabs'
-
+import {ShopgoodsinfoPage} from'../shopgoodsinfo/shopgoodsinfo'
 //加载圈
 import { LoadingController } from 'ionic-angular';
 import {LoginPage} from '../login/login'
@@ -63,7 +63,7 @@ export class CartPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
   public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-        $(".ios .tabs .tabbar").css("display","none");
+        //$(".ios .tabs .tabbar").css("display","none");
   }
 
   ionViewWillEnter(){
@@ -85,7 +85,7 @@ export class CartPage {
         this.navCtrl.push(LoginPage);
       }
   }
-
+  //获取购物车列表
   getCartsData(infiniteScroll){
   //  let loading = this.loadingCtrl.create({
 	//     showBackdrop: true,
@@ -333,11 +333,37 @@ buy(){
     this.getCartsData(infiniteScroll);
   }
 
+goback = false
   backTo(){
-    this.app.getRootNav().push(TabsPage,{
-      tabs:true
-    });
+    // this.navCtrl.setRoot(TabsPage,{
+    //   tabs:true
+    // })
+    // this.app.getRootNav().push(TabsPage,{
+    //   tabs:true
+    // });
+    // $(" .ios .tabs .tabbar").css("display","flex");
+    // this.navCtrl.push(TabsPage,
+    //   {tab: true});
+    this.goback = true;
+    this.navCtrl.pop();
   }
+  goshopInfo(id){
+    this.navCtrl.push(ShopgoodsinfoPage,{id:id})
+  }
+    goshopInfo2(id){
+    this.navCtrl.push(ShopgoodsinfoPage,{id:id})
+  }
+  
+  ionViewDidLeave(){
+    if(this.goback){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
+    }
+  }
+
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    

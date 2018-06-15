@@ -96,10 +96,12 @@ export class OnlinepaymentPage {
     }
     }
     this.storage.set('tabs','false');
-    this.appearSome();
     this.getTotal();
   }
 
+ionViewWillEnter(){
+    //this.appearSome();
+}
   backTo(){
     this.navCtrl.pop();
   }
@@ -183,16 +185,26 @@ export class OnlinepaymentPage {
      })
   }
   appearSome(){
-    $(".user_titlediv").click(function(){
-      if($(this).next('div').css("display") == "none"){
-        $(this).find("img").css("transform","rotate(0deg)");
-        $(this).next('div').css("display","block");
+    // $(".user_titlediv").click(function(){
+    //   if($(this).next('div').css("display") == "none"){
+    //     $(this).find("img").css("transform","rotate(0deg)");
+    //     $(this).next('div').css("display","block");
+    //   } else {
+    //     $(this).next('div').css("display","none");
+    //     $(this).find("img").css("transform","rotate(270deg)")
+    //   }
+    // })
+
+      if($(".otherUser_content_con").css("display") == "none"){
+        $(".little_img").css("transform","rotate(0deg)");
+        $(".otherUser_content_con").css("display","block");
       } else {
-        $(this).next('div').css("display","none");
-        $(this).find("img").css("transform","rotate(90deg)")
+        $(".otherUser_content_con").css("display","none");
+        $(".little_img").css("transform","rotate(270deg)")
       }
-    })
+
   }
+
   //结算账单
   gopay(){
     $(".spinnerbox").fadeIn(200);

@@ -94,7 +94,19 @@ export class PersonalPage {
               $cityItem.removeClass('hidden');
           }
       });
-    }
+    
+$('.city-list').each(function () {
+var $cityList = $(this);
+if ($cityList.find('#current').length > 0) {
+return;
+}
+if ($cityList.find('p[data-id]').not('.hidden').length > 0) {
+$cityList.removeClass('hidden');
+} else {
+$cityList.addClass('hidden');
+}
+});
+  }
 
 
 }

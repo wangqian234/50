@@ -59,10 +59,12 @@
     </div>
     <div class="otherUser_content" style="display:none">
       <div class="hrdiv"></div>
-      <div class="otherUser" style="margin:0.1rem 0;" *ngFor="let house of houseUser" (click)="delOtherUser(house.id)">
-        <p style="width:20%;float:left;margin-left:5%">{{house.name}}</p>
-        <p style="width:30%;float:left">{{house.customertype}}</p>
-        <p>{{house.mobile}}</p>
+      <div class="otherUser" style="margin:0.15rem 0;" *ngFor="let house of houseUser" (click)="delOtherUser(house.id)">
+        <p style="width:20%;float:left;margin-left:8%;color: #666666;">{{house.name}}</p>
+        <p style="width:25%;float:left;color: #666666;">{{house.customertype}}</p>
+        <p style="float:left;color: #666666;">{{house.mobile}}</p>
+        <ion-icon style="color:#666666;float:right;margin-right:0.5rem;margin-top:0.05rem" name="ios-trash"></ion-icon>
+        <div style="clear:both"></div>
       </div>
     </div>
   </div>
@@ -80,7 +82,7 @@
     </div>
   </div>
 
-  <div class="otherUser_title">
+  <div class="otherUser_title" *ngIf ="!houseInfo.default">
     <div class="user_titlediv" (click)="setDefaultHouse()">
       <div class="user_title">设置默认房屋</div>
     </div>

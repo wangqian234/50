@@ -63,12 +63,6 @@ export class RentsalePage {
   }
   
   ionViewWillLoad(){
-    // //确认登录状态
-    // if(this.storage.get('token')){
-
-    // } else {
-    // this.navCtrl.push(LoginPage);
-    // }
     this.getFocusList();
   }
   ionViewDidEnter(){
@@ -78,7 +72,7 @@ export class RentsalePage {
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
-    this.offent = $('#testcontent').offset();
+    this.offent = $('#group-content').offset();
   }
   //轮播图获取
   getFocusList(){

@@ -118,7 +118,7 @@ export class ShoppinglistPage {
      } else {
        this.storage.set('tabs','333');
      }
-     $(".ios .tabs .tabbar").css("display","none");
+     //$(".ios .tabs .tabbar").css("display","none");
   }
 
   //商品添加评价
@@ -567,18 +567,33 @@ export class ShoppinglistPage {
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
   ionViewDidLeave(){
-$(".ios .tabs .tabbar").css("display","-webkit-flex");
-  }
-  backTo(){
-  
-    if(this.navParams.get('id') != undefined){
-      this.navCtrl.pop();
-    } else{
-    this.app.getRootNav().push(TabsPage,{
-      tabs:true
-    });
+//$(".ios .tabs .tabbar").css("display","-webkit-flex");
+    if(this.goback){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
     }
   }
+goback = false;
+  backTo(){
+        this.goback = true;
+    this.navCtrl.pop();
+  }
+
+  
+  // backTo(){
+  
+  //   if(this.navParams.get('id') != undefined){
+  //     this.navCtrl.pop();
+  //   } else{
+  //   this.app.getRootNav().push(TabsPage,{
+  //     tabs:true
+  //   });
+  //   }
+  // }
+
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    

@@ -20,6 +20,7 @@ export class RentsalemyPage {
   curCityCode = "4403"
   type;
   mylist = [];
+  blocksome = false;
   public del ={
     token:'',
     ids:'',
@@ -38,17 +39,20 @@ export class RentsalemyPage {
     this.storage.set('tabs','false');
   }
   getDelete(){
+    var that = this;
     $("#delete").click(function(){
       $("#delete").css("display","none");
       $("#over").css("display","block");
       $(".ioncheck").css("display","block");
       $("#deletebutton").css("display","block");
+      that.blocksome = true;
     });
     $("#over").click(function(){
       $("#delete").css("display","block");
       $("#over").css("display","none");
       $(".ioncheck").css("display","none");
       $("#deletebutton").css("display","none");
+      that.blocksome = false;
     })
   }
 
@@ -78,6 +82,9 @@ export class RentsalemyPage {
         alert(data.errmsg)
       }
     });
+      $("#delete").css("display","block");
+      $("#over").css("display","none");
+      $("#deletebutton").css("display","none");
   }
 
   myPublishList(infiniteScroll){
@@ -153,6 +160,7 @@ export class RentsalemyPage {
   }
 
   clickCSS(){
+    var that = this;
     $("#test li").click(function(){
       $("#test li").each(function(){
         $(this).attr("class","type");

@@ -32,10 +32,10 @@
   	<div class="content">
    		<div class="imgdiv"><img src="assets/imgs/house.jpg" /></div>
 		<div class="title">
-			<p class="biao">【{{rentsale.district}}}】 &nbsp;&nbsp;{{rentsale.area}}。{{rentsale.title}}</p>
+			<p class="biao">【{{rentsale.district}}】 &nbsp;&nbsp;{{rentsale.area}}。{{rentsale.title}}</p>
 			<div style="clear:both"></div>
 			<div style="height:0.5rem;padding:0.1rem;margin-top: 0.2rem">
-				<span class="bend">时间：{{rentsale.date }}</span>
+				<span class="bend">时间：{{rentsale.date}}</span>
 				<span class="price">{{rentsale.pricemax}}万元</span>
 			</div>
 		</div>
@@ -59,6 +59,6 @@
 		<div class="content"><span style="line-height:0.35rem;">{{rentsale.describe}}</span></div>
   	</div>
 	<div class="tel_info">
-    	<span>{{rentsale.phone}}&nbsp;&nbsp;({{rentsale.contacts}})</span><img src="assets/imgs/tel.png"/>
+    	<a href="tel:{{rentsale.phone}}"><span>{{rentsale.phone}}&nbsp;&nbsp;({{rentsale.contacts}})</span><img src="assets/imgs/tel.png"/></a>
 	</div>
 </ion-content>
