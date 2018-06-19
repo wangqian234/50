@@ -131,6 +131,7 @@ export class HomePage {
   }
 
    ionViewDidEnter() {
+     this.storage.set('tabs','true');
     if(this.storage.get('token')){
           this.token = this.storage.get('token');
           this.enSureLoginHome = true;
@@ -146,8 +147,9 @@ export class HomePage {
       } else {
           this.enSureLoginHome = false;
       }
-      this.storage.set('tabs','true');
       this.getPosition();
+          $('.swiper-container').autoplay = 3000;
+    $('.swiper-container').autoplayDisableOnInteraction = false;
    }
 
   getPosition() {

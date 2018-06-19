@@ -3,6 +3,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 import { Tabs } from 'ionic-angular';
+import { StorageProvider } from '../../providers/storage/storage';
 
 import { HomePage } from '../home/home';
 import { RentsalePage } from '../rentsale/rentsale';
@@ -35,8 +36,7 @@ export class TabsPage {
   //tab8Root = CartPage;
   //tab6Root = ShopsortPage;
 
-  constructor(public navParams: NavParams,public config:ConfigProvider,public http: Http,public navCtrl: NavController) {
-   
+  constructor(public navParams: NavParams,public config:ConfigProvider,public http: Http,public navCtrl: NavController,public storage: StorageProvider) {
   }
 
   ionViewWillEnter($ionicTabsDelegate) {
@@ -44,6 +44,7 @@ export class TabsPage {
         $(".mytabs").css("display","none");
         $(".mytabs2").css("display","block");
       } else {
+        this.storage.set('tabs','true');
         $(".mytabs2").css("display","none");
         $(".mytabs").css("display","block");
       }

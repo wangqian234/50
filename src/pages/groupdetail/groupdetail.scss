@@ -155,23 +155,17 @@ ion-slides{
     line-height: 0.5rem;
 }
 
-// li.d{
-//     border: solid 2px #FF971C !important;
-//     color: #666666;
-    
-// }
  #swdh ul li {
     float: left;
     padding: 0.15rem;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    
 }
-// h1 {
-//     font-size: 0.28rem;
-//     font-weight: normal;
-//     font-family: Microsoft YaHei;
-// }
+ #swdh ul li:nth-of-type(1){
+     margin-right: 0.8rem;
+ }
+  #swdh ul li:nth-of-type(2){
+     margin-left: 0.8rem;
+ }
+
 .jiss_df{
     margin: 3px 0;
     background-color: white;
@@ -286,6 +280,9 @@ em{
     border-bottom: 1px solid #f5f5f5;
     font-size: 0.18rem;
 
+}
+.dib_daoh_b{
+    border: none;
 }
 
 }

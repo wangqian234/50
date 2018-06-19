@@ -67,6 +67,12 @@ export class RentsalePage {
   }
   ionViewDidEnter(){
     this.storage.set('tabs','true');
+    $('.swiper-container').autoplay = {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      };
+    $('.swiper-container').autoplayDisableOnInteraction = false;
   }
 
   ionViewDidLoad() {
