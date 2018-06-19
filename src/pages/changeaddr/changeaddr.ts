@@ -59,13 +59,9 @@ export class ChangeaddrPage {
 
   //获取当前用户的收货地址
   getAddressList(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
         console.log(this.addresslist);

@@ -48,14 +48,10 @@ export class TradegoodsRefundPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
     getdetaillist(){
-      $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
      var j=3;
      var api =this.aa+ '/api/tradegoods_refund/info?tgId='+this.tradegoods_id+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list=data.model ;
          console.log(JSON.stringify(data))

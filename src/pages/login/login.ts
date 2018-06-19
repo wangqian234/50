@@ -35,7 +35,7 @@ public history='';
     userName:'',
     userPwd:''
   }
-
+  public regist;
   public loginNum : boolean;
   public TabsPage = TabsPage;
 
@@ -67,13 +67,17 @@ public history='';
       alert('请输入正确的手机号码');
       return;
     }
+
     let loading = this.loadingCtrl.create({
       content: '请稍等...',
 	    showBackdrop: true,
     });
     loading.present();
+    if(this.userinfo.userPwd === ""){
+      alert('密码不能为空');
+      return;
+    }
     this.storage.set("remeberNum",this.remeberNum)
-    if(this.loginNum){
       var api= this.config.apiUrl + '/api/user/login?userName=' + this.userinfo.userName + '&userPwd=' + this.userinfo.userPwd;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         loading.dismiss();
@@ -88,7 +92,6 @@ public history='';
           alert(data.errmsg);
         }
       });
-      }
   }
 
   getLoginNum(){

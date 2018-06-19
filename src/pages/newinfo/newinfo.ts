@@ -30,12 +30,8 @@ export class NewinfoPage {
   }
 
   getNewInfo(id){
-     $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Nwes/info?nId=' + id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newInfo = data.model;
         $("#content").html(data.model.addDate)

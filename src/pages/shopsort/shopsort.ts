@@ -43,6 +43,7 @@ export class ShopsortPage {
     isAjax : false
   }
   fanhui:boolean =false;
+  public currentPlaceCode;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http, public app: App,
   public httpService:HttpServicesProvider,public config:ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider) {
@@ -58,9 +59,10 @@ export class ShopsortPage {
     //$(".ios .tabs .tabbar").css("display","none");
   }
   ionViewDidLoad(){
-this.openScroll()
+  this.openScroll()
   }
   ionViewDidEnter() {
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     var aa = this.pid+1;
     $('.cate_left ul li:nth-of-type(' + aa +')').attr("class","activety");
     this.storage.set('tabs','333');
@@ -72,13 +74,9 @@ this.openScroll()
 
   getLeftCateData(){
     var leftname;
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api=this.wdh+'/api/goods_sort/list';
     
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if(data.errmsg == 'OK'){
         this.list = data.list;
         leftname = data.list[0].name;
@@ -100,20 +98,11 @@ this.openScroll()
     this.pid = i;
     this.scroll = i+1;
     this.listTotal=[];
-    //  let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
      $("#cate_left li").removeAttr("class");
     var span = "#cate_left li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
-    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
+    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode='+this.currentPlaceCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      //  loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
        if(data.errmsg == 'OK'){
          var obj = {
            fenllist:'',
@@ -174,7 +163,7 @@ goback = false;
     $("#cate_left li").removeAttr("class");
     var span = "#cate_left li:nth-of-type(" + i +")"
     $(span).attr("class","activety");
-    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode=4403';
+    var api=this.wdh+'/api/goods/list?goods_Type='+pid+'&curCityCode='+this.currentPlaceCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errmsg == 'OK'){
          var obj = {

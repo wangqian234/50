@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
@@ -34,7 +34,7 @@ export class HouseinfolistPage {
 
   public HouseinfoPage = HouseinfoPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http:Http, public storage: StorageProvider, public toastCtrl:ToastController) {
     
 }
   
@@ -72,14 +72,10 @@ export class HouseinfolistPage {
  
 
   getHouseList(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     console.log(this.storage.get('token'));
     var api = this.config.apiUrl + '/api/VUserRoom/list_User?token='+ this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseList = data.list;
         console.log(this.houseList)
@@ -96,8 +92,6 @@ export class HouseinfolistPage {
   }
     //设置默认房屋
   setDefaultHouse(id){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var data ={
       'token': this.storage.get('token'),
       'roomId':id,
@@ -105,10 +99,17 @@ export class HouseinfolistPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功设置默认房屋"+JSON.stringify(data));
+        let toast = this.toastCtrl.create({
+          message: '设置默认房屋成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.getHouseList();
       } else if(data.errcode === 40002){
           j--;

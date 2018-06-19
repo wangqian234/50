@@ -61,19 +61,10 @@ export class GoodsoderdetailPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
-  //   let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j=3;
      var api = this.aa+'/api/trade/info?trade_Id='+this.SD_id+'&token='+this.token;
      console.log("慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-      //  loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          this.list=data.list[0];
          this.model=data.model;
@@ -110,10 +101,10 @@ export class GoodsoderdetailPage {
          this.tradeRefundInfo = true;
          this.refundInfoList = data.model;
      } else if(data.errcode === 40002){
-              j--;
-              if(j>0){
-                this.config.doDefLogin();
-                this.getDetail();
+            j--;
+            if(j>0){
+              this.config.doDefLogin();
+              this.getDetail();
           }
       } else if(data.errcode === -1) {
         this.tradeRefundInfo = false;

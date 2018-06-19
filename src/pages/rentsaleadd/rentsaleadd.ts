@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
@@ -65,7 +65,7 @@ export class RentsaleaddPage {
     "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "澎湖县", "台东县", "花莲县", "中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "黄大仙区", "湾仔区", "油尖旺区", "离岛区", "葵青区", "北区",
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
-    public http: Http, public loadingCtrl: LoadingController) {
+    public http: Http, public loadingCtrl: LoadingController, public toastCtrl:ToastController,) {
       
   }
   ionViewWillEnter() {
@@ -184,14 +184,19 @@ export class RentsaleaddPage {
         "region": this.RSadd.region,
         "city": this.RSadd.city,
       }
-      $(".spinnerbox").fadeIn(200);
-      $(".spinner").fadeIn(200);
       var api = this.config.apiUrl + "/api/rental/add";
       this.http.post(api, data).map(res => res.json()).subscribe(data => {
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
         // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
+          let toast = this.toastCtrl.create({
+          message: '发布房源成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
           j--
@@ -233,10 +238,17 @@ export class RentsaleaddPage {
       console.log(xiugai)
       console.log("ghl")
       this.http.post(api, xiugai).map(res => res.json()).subscribe(data => {
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
         // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
+          let toast = this.toastCtrl.create({
+          message: '修改房源成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
           this.getRSInfo();

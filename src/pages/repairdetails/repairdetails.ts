@@ -65,18 +65,9 @@ public background:boolean;
   }
   //获取工单详情信息
   getrepairdetails(){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that = this;
     var api = this.config.apiUrl+'/api/list/list_IdGroup?crmListId='+this.repairDetial+'&token='+this.storage.get('token');
     this.http.get(api).map(res =>res.json()).subscribe(data =>{
-      // loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-    $(".spinner").fadeOut(200);
       if(data.errcode===0&&data.errmsg==='OK'){
         var listStr;
         if(data.list[0].time)

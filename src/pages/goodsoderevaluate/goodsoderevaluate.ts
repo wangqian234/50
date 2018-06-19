@@ -1,5 +1,5 @@
 import { Component,ChangeDetectorRef  } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import $ from 'jquery';
 
 //请求数据
@@ -49,7 +49,7 @@ export class GoodsoderevaluatePage {
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/tradegoods/add?pageSize=10&pageIndex=1&trade_State=0&token=111
  
   constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController
-,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider, public toastCtrl:ToastController) {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品
@@ -88,7 +88,15 @@ export class GoodsoderevaluatePage {
       $(".spinnerbox").fadeOut(200);
       $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加评论成功！");
+        let toast = this.toastCtrl.create({
+          message: '评价成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.navCtrl.setRoot(ShoppinglistPage,{id:4});
       }else if(data.errcode === 40002){
               j--;

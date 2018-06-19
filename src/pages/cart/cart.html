@@ -57,12 +57,16 @@
 					<img [src]=""/>
 					</dt> 
 				 </i>
+				 <div (click)="goshopInfo2(item.good_id)">
  				<h1><img [src]="item.img"></h1>
+				 </div>
  				<div class="you">
+					 <div (click) = "goshopInfo(item.good_id)">
  					<p class="px22 bt">{{item.title}}</p>
 					 <p class="px22" style="padding: 0.07rem 0 0 0;color:#FF730F;float: right;margin-right: 0.2rem;">￥{{item.preprice}}</p>
 					 <div style="clear:both"></div>
 					 <p class="cxh">{{item.size_name}}</p>
+					 </div>
  					<!--<p class="xh">{{item.size_name}}</p>-->
 					 <!--<img class="sizetra" src="assets/imgs/jiantou.png">-->
 					 	<div class="goum_sl">
