@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import $ from 'jquery';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
@@ -23,7 +23,7 @@ export class HouseinfoPage {
   public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
-  public storage:StorageProvider) {
+  public storage:StorageProvider, public toastCtrl:ToastController) {
   }
 
   ionViewWillLoad() {
@@ -52,13 +52,9 @@ export class HouseinfoPage {
 
   //获取用户房屋信息
   getUserRoom(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         // for(var i=0; i< data.model.length(); i++){
         //   if(data.model.mobile != this.storage.get('userName')) {
@@ -82,13 +78,9 @@ export class HouseinfoPage {
 
   //获取用户楼栋信息
   getProjectInfo(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/VUserRoom/info?roomId=' + this.houseId;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.projectinfo=data.model;
       } else {
@@ -99,14 +91,10 @@ export class HouseinfoPage {
 
   //根据房屋获取绑定的用户列表
   getRoomUser(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl +'/api/VUserRoom/list?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     console.log(api);
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log(JSON.stringify(data)+"用户列表");
         this.houseUser = data.list;
@@ -131,13 +119,18 @@ export class HouseinfoPage {
     var j = 3;
     if(confirm("确定解除绑定吗？")){
     var api = this.config.apiUrl + '/api/UserRoom/del?';
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("成功解绑"+JSON.stringify(data))
+        // console.log("成功解绑"+JSON.stringify(data))
+        let toast = this.toastCtrl.create({
+          message: '解除绑定成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.navCtrl.pop();
       } else if(data.errcode === 40002){
           j--;
@@ -179,8 +172,6 @@ export class HouseinfoPage {
         {
           return;
         }
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var data ={
       'token': this.storage.get('token'),
       'roomId':this.houseId,
@@ -188,10 +179,17 @@ export class HouseinfoPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/userroom/edit_Default?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("成功设置默认房屋"+JSON.stringify(data));
+        // console.log("成功设置默认房屋"+JSON.stringify(data));
+        let toast = this.toastCtrl.create({
+          message: '设置默认房屋成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.getUserRoom();
       } else if(data.errcode === 40002){
           j--;
@@ -210,8 +208,6 @@ export class HouseinfoPage {
       if (r!=true) {
           return;
       }
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var data = {
       'token': this.storage.get('token'),
       'roomId':this.houseId,
@@ -220,10 +216,17 @@ export class HouseinfoPage {
     var j = 3;
     var api = this.config.apiUrl + '/api/UserRoom/del_User?';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log("成功解除其他用户的绑定"+JSON.stringify(data));
+        let toast = this.toastCtrl.create({
+          message: '解除其他用户成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
          this.getRoomUser();
       } else if(data.errcode === 40002){
           j--;

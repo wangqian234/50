@@ -24,7 +24,7 @@ public TabsPage = TabsPage;
 public LoginPage = LoginPage;
 public list = [];
 public mode = 0 ;
-
+public currentPlaceCode;
 public page = 1;
 
 public wdh=this.config.apiUrl;
@@ -49,18 +49,8 @@ ifontime(mode){
 }
 
 ifontime2(infiniteScroll){
-  //  let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  //  loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-   var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
-
-  //  loading.dismiss();
+   var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode='+this.currentPlaceCode;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         console.log(this.list)
@@ -97,6 +87,7 @@ ifontime2(infiniteScroll){
 //  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 //   }
   ionViewDidLoad() {
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
     this.ifontime2("");

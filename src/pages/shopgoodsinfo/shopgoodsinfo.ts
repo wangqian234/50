@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App, ToastController} from 'ionic-angular';
 import {Http,Jsonp}from '@angular/http';
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
@@ -80,7 +80,7 @@ export class ShopgoodsinfoPage {
   }
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
-  public loadingCtrl: LoadingController,public app: App) {
+  public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController, ) {
     this.storage.set('tabs','false');
     this.wid=this.navParams.get("id")
       //  alert(this.wid)
@@ -104,20 +104,10 @@ export class ShopgoodsinfoPage {
   //显示商品详情页面
   goodsInfo(){
     var j = 3;
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-     $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that =this;
     var j=3;
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
-      
-        // loading.dismiss();
-         $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
         console.log(data)
         that.goodMlist = data.json['good_Model'].model;
         that.jiage=data.json['good_Model'].model.maxpreprice;
@@ -214,6 +204,15 @@ fenge(str){
           this.http.post(api,date).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg === 'OK'){
             alert("成功加入购物车");
+            let toast = this.toastCtrl.create({
+            message: '成功加入购物车',
+            duration: 2000,
+            position: 'bottom'
+          });
+            toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
           }else{
             alert(data.errmsg);
           }

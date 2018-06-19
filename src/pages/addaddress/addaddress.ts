@@ -52,7 +52,7 @@ export class AddaddressPage {
     TabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App,public toastCtrl: ToastController) {
+    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController) {
   }
 
   ionViewWillEnter(){
@@ -222,7 +222,7 @@ export class AddaddressPage {
           this.addAddress();
       }
     } else {
-      alert("获取省份失败")
+       alert("获取省份失败")
         console.log(data.errmsg);
       }
     });

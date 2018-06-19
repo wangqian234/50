@@ -46,12 +46,8 @@ export class BindroomPage {
       alert("请选择所要绑定的房屋信息");
       return;
     }
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
      var api = this.config.apiUrl + '/api/UserRoom/add';
       this.http.post(api,(this.bindRoom)).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         let toast = this.toastCtrl.create({
           message: '成功绑定房屋',

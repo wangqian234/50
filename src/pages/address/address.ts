@@ -162,12 +162,8 @@ export class AddressPage {
 
   //获取地址详情（页面没写）
   getAddressDet(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + "&addressId=" + this.addressId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-    $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log(data.model);
       } else {

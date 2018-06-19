@@ -14,6 +14,7 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'shopmalllist.html',
 })
 export class ShopmalllistPage {
+  public currentPlaceCode;
   public page=1;
   public list = [];
   public tuijList=[];
@@ -34,6 +35,7 @@ export class ShopmalllistPage {
     this.tuijGoods();
   }
   ionViewDidEnter(){
+    this.currentPlaceCode = this.storage.get('currentPlaceCode');
     this.storage.set('tabs','false');
     this.list = [];
     this.page = 1;
@@ -48,17 +50,8 @@ export class ShopmalllistPage {
   }
   //搜索商品接口
   reserchGoods(infiniteScroll){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    //    });
-    //   loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-      var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
+      var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode='+this.currentPlaceCode+'&shop_Id=0';
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-      //  loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
        if(data.errcode === 0 && data.errmsg === 'OK'){
          if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -79,16 +72,11 @@ export class ShopmalllistPage {
   }
   //推荐商品搜索
     tuijGoods(){
-      $(".spinnerbox").fadeIn(200);
-      $(".spinner").fadeIn(200);
-      var api = this.aa +'/api/goods/list?curCityCode=4403';
+      var api = this.aa +'/api/goods/list?curCityCode='+this.currentPlaceCode;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-         $(".spinnerbox").fadeIn(200);
-         $(".spinner").fadeIn(200);
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;
           console.log(this.tuijList)
-          console.log(1)
         }else{
           alert(data.errmsg);
         }

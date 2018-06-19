@@ -148,18 +148,7 @@ export class HomePage {
           this.enSureLoginHome = false;
       }
       this.storage.set('tabs','true');
-      this.getPosition();
-    //   let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-    //     console.log('network was disconnected :-(');
-    //   });
-    //   //disconnectSubscription.unsubscribe();
-    //   let connectSubscription = this.network.onConnect().subscribe(() => {
-    //     alert("进入网络连接监测")
-    //     alert(this.network.type)
-    //   });
-    //   this.networktype = this.network.type
-    //   this.presentToast();
-    //   //connectSubscription.unsubscribe();
+     // this.getPosition();
    }
 
   getPosition() {
@@ -167,36 +156,21 @@ export class HomePage {
      that.geolocation.getCurrentPosition().then((resp) => {
        alert(resp.coords.longitude + "sdsds" + resp.coords.latitude);
         var point = new BMap.Point(resp.coords.longitude,resp.coords.latitude);
-      var gc = new BMap.Geocoder();
-      gc.getLocation(point, function (rs) {
-        var addComp = rs.addressComponents;
-       // alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
-        //alert(JSON.stringify(addComp) )
-        this.city = addComp.city;
-        //alert(addComp.city);
-       setTimeout(this.storage.set('currentPlace','西安瘦瘦瘦'),1000) 
+        var gc = new BMap.Geocoder();
+        gc.getLocation(point, function (rs) {
+         var addComp = rs.addressComponents;
+          that.storage.set("currentPlace",addComp.city);
+         that.cityCodeList.forEach(function(val, index, arr){
+            if(addComp.city == arr[index].name){
+              that.storage.set("currentPlaceCode",arr[index].val);
+            }
+          })
+        });
      });
-      });
-
 }
-
-  //轮播图
-  // getFocus() {
-  //   var that = this;
-  //   that.focusList = [
-  //     'assets/imgs/slide01.png',
-  //     'assets/imgs/slide02.png',
-  //     'assets/imgs/slide03.jpg',
-  //     'assets/imgs/rent1.png'
-  //   ];
-  // }
   getFocus(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-    var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.cityCode;
+    var api = this.config.apiUrl + '/api/Index/banner?citycode='+this.storage.get('currentPlaceCode');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if(data.errcode===0 && data.errmsg === 'OK'){
         this.focusList = data.list;
         console.log(this.focusList);
@@ -226,12 +200,6 @@ export class HomePage {
   }
 
   getNews() {
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -240,9 +208,6 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize='+this.pageSize+'&keyWord=&token=' + this.token +'&act=zx&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.newsList = data.list;
       } else if (data.errcode === 40002) {
@@ -258,12 +223,6 @@ export class HomePage {
   }
 //获取公示公告
   getPublic() {
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
     var j = 3;
     if(this.storage.get('token')){
       this.token = this.storage.get('token');
@@ -272,9 +231,6 @@ export class HomePage {
     }
     var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.pageIndex+'&pageSize=' + this.pageSize+'&keyWord=&token='+ this.token +'&act=gs&type=1';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      //loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.publicget = data.list;
         console.log(this.publicget)
@@ -304,18 +260,9 @@ export class HomePage {
   }
   //查询默认房屋
   getiof_def(){
-    //  let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
     var j=3
     var api= this.config.apiUrl +'/api/userroom/info_def?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       //loading.dismiss();
-       $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             //this.iof_defList=data.model;
             this.defRoomId = data.model.House_Room_Id;
@@ -334,14 +281,10 @@ export class HomePage {
   }
   //查询用户绑定的所有房屋
   getroomId(){
-    $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){ 
             that.roomidlist=data.list;
             console.log(that.roomidlist)
@@ -464,13 +407,56 @@ changeRoom(roomid) {
       } else {
           this.enSureLoginHome = false;
       }
-      //   this.items = [];
-      //   for (var i = 0; i < 30; i++) {
-      //    this.items.push( this.items.length );
-      //  }
-       console.log('刷新结束');
        refresher.complete();
      }, 2000);
  }
+// getcityCodeList(cityname){
+//   var that = this;
+//   that.cityCodeList.forEach(function(val, index, arr){
+//     if(cityname == arr[index].name){
+//       that.storage.set("currentPlaceCode",arr[index].val)
+//     }
+//   })
+// }
+cityCodeList = [
+{name:"鞍山市",val:"2103"},
+{name:"阿拉善盟",val:"1529"},
+{name:"安庆市",val:"3408"},
+{name:"安阳市",val:"4105"},
+{name:"阿里地区",val:"5425"},
+{name:"安康市",val:"6109"},
+{name:"安顺市",val:"5204"},
+{name:"阿坝藏族羌族自治州",val:"5132"},
+{name:"阿拉尔市",val:"659002"},
+{name:"阿克苏地区",val:"6529"},
+{name:"澳门特别行政区",val:"8201"},
+{name:"阿勒泰地区",val:"6543"},
+{name:"西安市",val:"6101"},
+
+{name:"白城市",val:"2208"},
+{name:"包头市",val:"1502"},
+{name:"巴彦淖尔市",val:"1508"},
+{name:"保定市",val:"1306"},
+{name:"本溪市",val:"2105"},
+{name:"白山市",val:"2206"},
+{name:"亳州市",val:"3416"},
+{name:"蚌埠市",val:"3403"},
+{name:"滨州市",val:"3716"},
+{name:"白银市",val:"6204"},
+{name:"宝鸡市",val:"6103"},
+{name:"保山市",val:"5305"},
+{name:"白沙黎族自治县",val:"469030"},
+{name:"清远市",val:"4418"},
+{name:"深圳市",val:"4403"},
+
+      // <p data-id="451000">百色市</p>
+      // <p data-id="522401">毕节市</p>
+      // <p data-id="450500">北海市</p>
+      // <p data-id="511900">巴中市</p>
+      // <p data-id="469035">保亭黎族苗族自治县</p>
+      // <p data-id="652800">巴音郭楞蒙古自治州</p>
+      // <p data-id="652700">博尔塔拉蒙古自治州</p>
+      // <p data-id="110100">北京市</p>
+]
 
 }

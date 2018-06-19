@@ -34,7 +34,7 @@ export class BigsalePage {
   public list = [];
   public wdh=this.config.apiUrl;
   public token=this.storage.get('token');
-
+  public currentPlaceCode;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
 
@@ -54,7 +54,7 @@ export class BigsalePage {
     $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/list?pageSize=' + this.pageSize 
-     + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
+     + '&pageIndex=' + this.pageIndex + '&curCityCode='+this.currentPlaceCode;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        $(".spinnerbox").fadeOut(200);
        $(".spinner").fadeOut(200); 
@@ -91,7 +91,7 @@ export class BigsalePage {
   }
 
   ionViewDidLoad() {
-   
+   this.currentPlaceCode = this.storage.get('currentPlaceCode')
   }
 
 ionViewDidEnter(){

@@ -108,6 +108,7 @@ export class ShoppingPage {
   //自带函数
   ionViewDidLoad() {
     this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
@@ -120,12 +121,8 @@ export class ShoppingPage {
 
     //获取商城首页
     getShop(){
-      // $(".spinnerbox").fadeIn(200);
-      // $(".spinner").fadeIn(200);(200);
-      var api = this.aa+'/api/index/list?curCityCode=4403';
+      var api = this.aa+'/api/index/list?curCityCode='+this.currentPlaceCode;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
         if(data.json['data_Banner'].errcode == 0 &&data.json['data_Banner'].errmsg == 'OK'){
           this.tuiList=data.json["data_Banner"].list;
           this.tuangouList=data.json['data_Modules'].list; 
@@ -141,7 +138,7 @@ export class ShoppingPage {
     //获取商城首页分类的商品
     getShopGoods(){
      //初始显示旅游服务的商品列表
-     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type=21';
+     var api = this.aa+'/api/goods/index_list?curCityCode='+ this.currentPlaceCode+'&goods_Type=21'; //21为旅游商品的id
         this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode === 0 && data.errmsg ==="OK"){
           this.shoplist=data.list; 
@@ -188,7 +185,7 @@ export class ShoppingPage {
     var span = ".facediv li:nth-of-type(" + ++i +")"
     $(span).attr("class","activety");
     var that =this;
-     var api = this.aa+'/api/goods/index_list?curCityCode="4403"&goods_Type='+id;
+     var api = this.aa+'/api/goods/index_list?curCityCode='+this.currentPlaceCode+'&goods_Type='+id;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode=== 0 && data.errmsg==="OK"){
       that.shoplist=data.list;

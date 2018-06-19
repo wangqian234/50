@@ -124,14 +124,10 @@ export class PayprefeePage {
   }
    //查询用户绑定的所有房屋
   getroomId(){   
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.roomidlist=data.list; 
             console.log(that.roomidlist) 
@@ -151,13 +147,14 @@ export class PayprefeePage {
 
 //结算函数 
  gopay(){
-   $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
+   
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
    }else{
      this.payrefeeList.roomId=this.roomid;
    }
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
    this.payrefeeList.createip = this.cip;
     this.payrefeeList.token=this.storage.get("token")
     this.payrefeeList.management = this.management;
@@ -217,12 +214,8 @@ export class PayprefeePage {
       }
  //项目下拉列表
  dw_Project(){
-   $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl+'/api/house/dw_Project?';
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             this.projectlist=data.list;
             console.log(this.projectlist)
@@ -234,13 +227,9 @@ export class PayprefeePage {
  }
   //楼栋下拉列表
  getEdifice(projectId){
-   $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that=this;
     var api = this.config.apiUrl+'/api/house/dw_Edifice?projectId='+projectId;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             this.edificelist=data.list;
             console.log(this.edificelist)
@@ -251,12 +240,8 @@ export class PayprefeePage {
  }
   //房屋下拉列表
  getRoom(edificeId){
-   $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl+'/api/house/dw_Room?edificeId='+edificeId;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             this.roomlist=data.list;
             console.log(this.roomlist)

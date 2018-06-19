@@ -1,5 +1,5 @@
 import { Component,ViewChild,ElementRef} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { ConfigProvider } from '../../providers/config/config';
 
@@ -36,7 +36,8 @@ export class PcontentPage {
 
   public carts_num=0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public httpService:HttpServicesProvider,public storage:StorageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,
+  public httpService:HttpServicesProvider,public storage:StorageProvider, public toastCtrl:ToastController) {
     
    
     // console.log(this.navParams.data.id);
@@ -166,6 +167,15 @@ export class PcontentPage {
         this.storage.set('carts_data',tempArr);
 
     }
+    // let toast = this.toastCtrl.create({
+    //       message: '成功修改地址',
+    //       duration: 2000,
+    //       position: 'bottom'
+    //     });
+    //       toast.onDidDismiss(() => {
+    //        console.log('Dismissed toast');
+    //     });
+    //   toast.present();
 
     this.carts_num+=json.product_count;   /*点击加入购物车改变 购物车数量*/
 

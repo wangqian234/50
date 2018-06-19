@@ -128,13 +128,9 @@ export class PayfeePage {
 
   //查询物业总费用列表
   getallpaylist(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that =this;
     var api = this.config.apiUrl+'/api/charge/list?roomId='+this.roomid;//获取前台界面上显示的房屋id
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
        if(data.json.totalNum.errcode == 0){
           //总计金额
           that.modellist=data.json.totalNum.model;
@@ -160,14 +156,10 @@ export class PayfeePage {
   }
   //查询用户绑定的所有房屋
   getroomId(){   
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             if(data.list.length == 0){
               that.navCtrl.pop();

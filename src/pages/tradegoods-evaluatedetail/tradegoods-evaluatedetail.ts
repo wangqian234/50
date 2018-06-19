@@ -42,14 +42,10 @@ export class TradegoodsEvaluatedetailPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
   getdetaillist(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j=3;
     //  var api = this.aa+'/api/tradegoods/info?trade_Id='+this.goods_id+'&token='+this.token;
      var api = this.aa+'/api/tradegoods/info?trade_Id=28814915651816948&token='+this.token;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeIn(200);
-       $(".spinner").fadeIn(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.list;

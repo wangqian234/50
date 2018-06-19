@@ -43,14 +43,6 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
 
-    
-//     let loading = this.loadingCtrl.create({
-// 	    showBackdrop: true,
-//     });
-// loading.present();
-$(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-
     //店铺信息
 
     var that=this;
@@ -66,10 +58,7 @@ $(".spinnerbox").fadeIn(200);
     //商品列表
     // alert("店id:"+this.sid);  
     var api2 = this.wdh+'/api/goods/list?pageSize=10&pageIndex=1&curCityCode=4403&keyWord=111&shop_Id='+this.sid;
-    //  loading.dismiss();
      this.http.get(api2).map(res => res.json()).subscribe(data2 =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
        if(data2.errmsg == 'OK'){
          this.list = data2.list;
          console.log(data2);

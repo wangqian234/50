@@ -14,12 +14,13 @@ import { BindroomPage } from '../bindroom/bindroom';
 //登录页面
 import { LoginPage } from '../login/login';
 import {PaymentPage} from '../payment/payment'
+
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
 })
 export class OnlinepaymentPage {
-  public model=[];
+  public paytId;
   public cip;
   public saveRoomId;
   public isChencked=false;
@@ -44,7 +45,7 @@ export class OnlinepaymentPage {
   onlinepaymentList={
     roomId:''
   }
-  public outTradeNo;
+  public payAct='';
   public tongtong;
   public tongtong1;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
@@ -119,14 +120,10 @@ ionViewWillEnter(){
   }
    //查询用户绑定的所有房屋
   getroomId(){   
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that=this;
     var j=3;
     var api = this.config.apiUrl+'/api/vuserroom/dw?token='+this.storage.get('token');
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.roomidlist=data.list;  
           }else if (data.errcode===4002){
@@ -140,13 +137,9 @@ ionViewWillEnter(){
   }
   //获取房屋费用收取表
   getPayList(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var that=this;
     var api = this.config.apiUrl+'/api/Charge/list_Table?roomId='+this.roomid;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0&&data.errmsg==='OK'){
             that.list= data.list;
 
@@ -231,8 +224,8 @@ ionViewWillEnter(){
        $(".spinnerbox").fadeOut(200);
        $(".spinner").fadeOut(200);
           if(data.errcode===0 ){
-            this.outTradeNo = data.errmsg;
-            this.model = data.model.mweb_url;
+            this.payAct = data.model.act;
+            this.paytId = data.model.tId;
             console.log(data)
            this.goWeixiPay();
           }else{
@@ -243,50 +236,29 @@ ionViewWillEnter(){
 
     //跳转到微信支付页面
   goWeixiPay(){
-    //this.tongtong = this.model;
-    //this.tongtong1 = "gyhsh.cn";
-    // window.open((this.tongtong, this.tongtong1)
-   // location.href = this.payMentModel.mweb_url;
+    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+    console.log(this.tongtong);
+    location.href = this.tongtong;
   }
+  
+
   //跳转支付页面
   gopayMent(outTradeNo,model,allprice,roomid){
     this.navCtrl.push(PaymentPage,{outTradeNo:outTradeNo,model:model,allprice:allprice,roomid:roomid})
   }
 
-
-
-//   webview.setWebViewClient(new WebViewClient() {
-//     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//         if (url.startsWith("weixin://wap/pay?")) {
-//             Intent intent = new Intent();
-//             intent.setAction(Intent.ACTION_VIEW);
-//             intent.setData(Uri.parse(url));
-//             startActivity(intent);
-//             return true;
-//         }else if (url.startsWith("tel:")) {//H5打开电话
-//             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//             WebActivity.this.startActivity(intent);
-//         } else {
-//             //H5微信支付要用，不然说"商家参数格式有误"
-//             Map<String, String> extraHeaders = new HashMap<String, String>();
-//             extraHeaders.put("Referer", "");//商户申请H5时提交的授权域名
-//             view.loadUrl(url, extraHeaders);
-//         }
-//         return true;
-//     }
-// });
-
      //微信查询接口
    checkPayment(){
-     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg === 'OK'){
-          alert("支付成功")
-       }else{
-         alert(data.errmsg)
-       }
-     })
+    //  var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //    if(data.errmsg === 'OK'){
+    //       alert("支付成功")
+    //    }else{
+    //      alert(data.errmsg)
+    //    }
+    //  })
    }
+   //显示选择微信支付的页面
     clickmeToOut(){
       if(this.allprice == 0){
         alert("请选择缴费选项")
@@ -297,19 +269,20 @@ ionViewWillEnter(){
     clickmeToIn(){
       $("#enSureMon").css("display","none")
     }
-        clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.gopay();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+//获取支付ip，调用结算账单方法
+  clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          alert(data.ip)
+          that.cip = data.ip;
+          that.gopay();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+    }
 
   getTotal(){
     var that = this;
@@ -354,29 +327,14 @@ ionViewWillEnter(){
     }
       this.allprice = parseFloat(totalprice.toFixed(2));
   }
-  // //获取ip
-  // getClientIp(){
-  //   $cip = "unknown";
-  //   if($_SERVER['REMOTE_ADDR']){
-  //     $cip = $_SERVER['REMOTE_ADDR'];
-  //   }else if(getenv("REMOTE_ADDR")){
-  //     $cip = getenv("REMOTE_ADDR")
-  //   }
-  //     return $ip
-  // }
 
   //下拉刷新
  doRefresh(refresher) {
     console.log('刷新开始', refresher);
       setTimeout(() => { 
         this.getPayList();
-      //   this.items = [];
-      //   for (var i = 0; i < 30; i++) {
-      //    this.items.push( this.items.length );
-      //  }
        console.log('刷新结束');
        refresher.complete();
      }, 2000);
  }
-
 }

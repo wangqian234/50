@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import $ from 'jquery';
 import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
@@ -17,7 +17,6 @@ export class RentsalemyPage {
   checked:false;
   pageSize = 10;
   pageIndex = 1;
-  curCityCode = "4403"
   type;
   mylist = [];
   blocksome = false;
@@ -25,12 +24,14 @@ export class RentsalemyPage {
     token:'',
     ids:'',
   }
+  public currentPlaceCode;
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
-  public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+  public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController, public toastCtrl:ToastController,) {
     
   }
 
   ionViewDidLoad() {
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.clickCSS();
     this.myPublish(1);
     this.getDelete();
@@ -57,21 +58,12 @@ export class RentsalemyPage {
   }
 
   myPublish(type){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     this.pageIndex = 1;
     this.type = type;
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
-     "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
+     "&curCityCode=" + this.currentPlaceCode + "&type=" + this.type + "&token=" + this.storage.get("token");
      console.log(api)
       this.http.get(api).map(res => res.json()).subscribe(data => {
-        // loading.dismiss();
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.mylist = data.list;
         console.log(data)
@@ -88,18 +80,9 @@ export class RentsalemyPage {
   }
 
   myPublishList(infiniteScroll){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + "/api/rental/mylist?pageSize=" + this.pageSize + "&pageIndex=" + this.pageIndex +
-     "&curCityCode=" + this.curCityCode + "&type=" + this.type + "&token=" + this.storage.get("token");
+     "&curCityCode=" +this.currentPlaceCode+ "&type=" + this.type + "&token=" + this.storage.get("token");
     this.http.get(api).map(res => res.json()).subscribe(data => {
-        // loading.dismiss();
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
           this.mylist = this.mylist.concat(data.list);
           if(infiniteScroll) {
@@ -144,6 +127,15 @@ export class RentsalemyPage {
     $(".spinner").fadeOut(200);
       if(data.errcode === 0 && data.errmsg === 'OK'){
         alert("删除成功")
+        let toast = this.toastCtrl.create({
+          message: '批量删除成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
       this.myPublish(this.type);
       $("#delete").css("display","block");
       $("#over").css("display","none");
