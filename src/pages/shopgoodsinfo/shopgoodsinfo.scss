@@ -66,7 +66,7 @@ ion-slides{
     line-height: 0.8rem;
 }
 .gouwuc_yem .you{
-    background-color: #ff971c;
+    background-color: #FF730F;
     width: 50%
 }
 .goum a{
@@ -167,7 +167,7 @@ border-radius: 3px;
     word-break: break-all;
     font-size:0.18rem;
     line-height: 0.35rem;
-    color: #333333;
+    color: #222222;
 }
 
 .shangp_lieb_k li .lieb_txt p {
@@ -179,24 +179,16 @@ border-radius: 3px;
 .xiangq_dp_k .dianp_pf .px24{
     line-height: 0.5rem;
 }
-
-// li.d{
-//     border: solid 2px #FF971C !important;
-//     color: #666666;
-    
-// }
  #swdh ul li {
     float: left;
-    padding: 0.15rem;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    
+    padding: 0.1rem 0.25rem;
 }
-// h1 {
-//     font-size: 0.28rem;
-//     font-weight: normal;
-//     font-family: Microsoft YaHei;
-// }
+ #swdh ul li:nth-of-type(1){
+     margin-right: 0.8rem;
+ }
+  #swdh ul li:nth-of-type(2){
+     margin-left: 0.8rem;
+ }
 .jiss_df{
     margin: 3px 0;
     background-color: white;
@@ -272,6 +264,9 @@ border-radius: 3px;
 }
 .jiu_feo{
   width: 100%;
+}
+.dib_daoh_b{
+    border: none;
 }
 
 }

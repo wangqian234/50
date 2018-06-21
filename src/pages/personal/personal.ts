@@ -20,7 +20,6 @@ export class PersonalPage {
   public currentPlaceCode = "";
   public keywords = "";
   public callback;
-
   public ShoppingPage = ShoppingPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,

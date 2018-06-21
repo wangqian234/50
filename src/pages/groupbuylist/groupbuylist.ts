@@ -27,6 +27,7 @@ export class GroupbuylistPage {
   public pageIndex = 1;
   public hasData=true;   /*是否有数据*/
   public list = [];
+  public currentPlaceCode;
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
   public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage:StorageProvider,) {
@@ -52,7 +53,7 @@ export class GroupbuylistPage {
      $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/group_list?pageSize=' + this.pageSize 
-     + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
+     + '&pageIndex=' + this.pageIndex + '&curCityCode='+this.currentPlaceCode;
     //  loading.dismiss();
      $(".spinnerbox").fadeOut(200);
      $(".spinner").fadeOut(200);
@@ -92,7 +93,7 @@ export class GroupbuylistPage {
   }
 
   ionViewDidLoad() {
-   
+   this.currentPlaceCode  = this.storage.get('currentPlaceCode')
   }
 
     gotoGood(id){

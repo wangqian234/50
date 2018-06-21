@@ -169,6 +169,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 
+
 @NgModule({
   declarations: [
     MyApp,

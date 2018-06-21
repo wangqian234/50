@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,App } from 'ionic-angular';
+import { NavController, NavParams,App,ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
@@ -52,7 +52,7 @@ export class AddaddressPage {
     TabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
+    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController) {
   }
 
   ionViewWillEnter(){
@@ -128,10 +128,6 @@ export class AddaddressPage {
         this.addressList.district = this.districts[i].name;
       }
     }
-
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
-
     var data = {}; //定义空对象
     if(!this.navParams.get('item')){  //新加还是修改判断
       data = {
@@ -151,9 +147,16 @@ export class AddaddressPage {
       var j = 3;
       var api = this.config.apiUrl + '/api/Address/add';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        let toast = this.toastCtrl.create({
+        message: '成功添加地址',
+        duration: 2000,
+        position: 'bottom'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
         this.navCtrl.pop();
       } else if(data.errcode === 40002){
         j--;
@@ -162,7 +165,7 @@ export class AddaddressPage {
           this.addAddress();
         }
       } else {
-        alert("添加失败！")
+        alert("添加地址失败！")
         console.log("添加失败！");
       }
     });
@@ -183,9 +186,16 @@ export class AddaddressPage {
     }
       var api = this.config.apiUrl + '/api/Address/edit';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        let toast = this.toastCtrl.create({
+          message: '成功修改地址',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.navCtrl.pop();
       } else {
         alert("编辑失败！")
@@ -198,16 +208,11 @@ export class AddaddressPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
-
-    //获取省份信息
+  //获取省份信息
   getProvinces(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     var api = this.config.apiUrl + '/api/Address/dw_Province?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.provinces = data.list;
       } else if(data.errcode === 40002){
@@ -216,7 +221,8 @@ export class AddaddressPage {
           this.config.doDefLogin();
           this.addAddress();
       }
-      } else {
+    } else {
+       alert("获取省份失败")
         console.log(data.errmsg);
       }
     });
@@ -224,15 +230,12 @@ export class AddaddressPage {
 
   //获取城市信息
   getCities(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/dw_City?provinceCode=' + this.addressList.provinceVal;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.cities = data.list;
       } else {
+        alert("获取城市失败")
         console.log(data.errmsg);
       }
     });
@@ -240,15 +243,12 @@ export class AddaddressPage {
 
   //获取街区信息
   getDistricts(){
-    $(".spinnerbox").fadeIn(200);
-      $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/dw_District?cityCode=' + this.addressList.cityVal;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.districts = data.list;
       } else {
+        alert("获取街区失败")
         console.log(data.errmsg);
       }
     });
@@ -265,12 +265,8 @@ export class AddaddressPage {
   }
     //获取地址信息（地址详情）
   getAddressInfo(){
-    $(".spinnerbox").fadeIn(200);
-      $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + '&addressId=' +this.addressId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
          this.addressInfo = data.model;
          console.log(data.model);

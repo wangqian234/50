@@ -37,7 +37,7 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
     // Okay, so the platform is ready and our plugins are available.   
     // Here you can do any higher level native things you might need.  
     statusBar.styleDefault();  
-    splashScreen.hide(); 
+    splashScreen.hide();
     this.registerBackButtonAction();//注册返回按键事件  
     });}
     //返回按键处理  
@@ -46,14 +46,14 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
     //如果想点击返回按钮隐藏toast或loading或Overlay就把下面加上   
     // this.ionicApp._toastPortal.getActive() || this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive()  
     let activePortal = this.ionicApp._modalPortal.getActive();
-    if (activePortal) { 
+    if (activePortal) {
       activePortal.dismiss().catch(() => {});
       activePortal.onDidDismiss(() => {});
       return;
     }
     let activeVC = this.nav.getActive(); 
     let tabs = activeVC.instance.tabs;
-    let activeNav = tabs.getSelected();
+    //let activeNav = tabs.getSelected();
     //return activeNav.canGoBack() ? activeNav.pop() : this.showExit();//另外两种方法在这里将this.showExit()改为其他两种的方法的逻辑就好。
     if (this.storage.get('tabs') == "true") {
       //如果是根目则按照需求1处理
@@ -62,11 +62,13 @@ constructor(private app: App,public platform: Platform, statusBar: StatusBar, pu
       //非根目录返回上一级页面
       this.app.goBack();
     }else if(this.storage.get('tabs') == "333"){
-          this.app.getRootNav().push(TabsPage,{
-            tabs:true
-          });
+      this.app.getRootNav().push(TabsPage,{
+        tabs:true
+      }); 
     } else if(this.storage.get('tabs') == "444"){
       this.app.getRootNav().push(TabsPage);  
+    } else {
+      this.app.goBack();
     }
   }, 1);
   }

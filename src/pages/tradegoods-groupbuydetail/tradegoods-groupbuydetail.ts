@@ -47,18 +47,9 @@ export class TradegoodsGroupbuydetailPage {
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
      getdetaillist(){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
      var api = this.aa+'/api/groupgoods/info?gbId='+this.groupbuyid+'&token='+this.token;
      console.log("王慧敏"+api);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-      //  loading.dismiss();
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
        if(data.errcode === 0 &&data.errmsg == 'OK'){
          //this.goods_list=data.list.goods_list;
          this.list=data.model;

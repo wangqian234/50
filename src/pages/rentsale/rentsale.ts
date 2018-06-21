@@ -33,7 +33,6 @@ export class RentsalePage {
   //     'assets/imgs/rent1.jpg',
   //     'assets/imgs/rent2.jpg',
   //     'assets/imgs/rent3.jpg'];
-  curCityCode = "";
   houseInfo;
   showMore = false;
   housType = "1";
@@ -59,24 +58,32 @@ export class RentsalePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-     this.curCityCode = "4403";
   }
   
   ionViewWillLoad(){
     this.getFocusList();
   }
   ionViewDidEnter(){
+    this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.storage.set('tabs','true');
+    $('.swiper-container').autoplay = {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      };
+    $('.swiper-container').autoplayDisableOnInteraction = false;
   }
 
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.offent = $('#group-content').offset();
   }
   //轮播图获取
   getFocusList(){
-    var api = this.config.apiUrl + '/api/rental/list_banner?curCityCode='+this.curCityCode;
+    var api = this.config.apiUrl + '/api/rental/list_banner?curCityCode='+this.currentPlaceCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
         this.focusList= data.list
@@ -103,16 +110,8 @@ export class RentsalePage {
     // }
   }
  paymentEvent(trade_state){
-
-  //   let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  // loading.present();
- $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
-
    this.housType = trade_state;
-   var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
+   var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.currentPlaceCode+ "&type=" + trade_state;
     switch(trade_state){
       case 1:
       this.tabTest={
@@ -164,9 +163,6 @@ export class RentsalePage {
     console.log(this.offent.top)
     $('.scroll-content').scrollTop(this.offent.top);
   this.http.get(api).map(res => res.json()).subscribe(data => {
-    //loading.dismiss();
-     $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -179,18 +175,9 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-    // let loading = this.loadingCtrl.create({
-	  //   showBackdrop: true,
-    // });
-    // loading.present();
-     $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
     $(".showMore").css("display","none")
-    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
+    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.currentPlaceCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      // loading.dismiss();
-       $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -251,7 +238,7 @@ export class RentsalePage {
   }
 
   getHouseInfo(infiniteScroll){
-    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.housType;
+    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" +this.currentPlaceCode + "&type=" + this.housType;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -279,7 +266,6 @@ export class RentsalePage {
   myCallbackFunction  =(params) => {
     var that = this;
      return new Promise((resolve, reject) => {
-
       if(typeof(params)!='undefined'){
           resolve('ok');
           that.currentPlace = params.changePlace;

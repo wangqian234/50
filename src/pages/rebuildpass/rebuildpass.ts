@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
@@ -32,7 +32,7 @@ export class RebuildpassPage {
     }
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
-  public config:ConfigProvider,public http: Http, public storage: StorageProvider,) {
+  public config:ConfigProvider,public http: Http, public storage: StorageProvider, public toastCtrl:ToastController,) {
    
     this.tel=this.storage.get('userName');
     this.mphone = this.tel.substr(0, 3) + '****' + this.tel.substr(7);   
@@ -68,15 +68,11 @@ export class RebuildpassPage {
   }
   //发送验证码
   getCode(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
    var data = {
      "mobile": this.tel
    }; 
     var api = this.config.apiUrl + '/api/vcode/register';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.num = 60;
         this.isShowSend = false;
@@ -121,6 +117,15 @@ export class RebuildpassPage {
       $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("成功修改密码!");
+      let toast = this.toastCtrl.create({
+          message: '成功修改密码',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
       this.navCtrl.pop(UserPage);
       } else {
         console.log(data.errmsg);

@@ -155,23 +155,17 @@ ion-slides{
     line-height: 0.5rem;
 }
 
-// li.d{
-//     border: solid 2px #FF971C !important;
-//     color: #666666;
-    
-// }
  #swdh ul li {
     float: left;
     padding: 0.15rem;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    
 }
-// h1 {
-//     font-size: 0.28rem;
-//     font-weight: normal;
-//     font-family: Microsoft YaHei;
-// }
+ #swdh ul li:nth-of-type(1){
+     margin-right: 0.8rem;
+ }
+  #swdh ul li:nth-of-type(2){
+     margin-left: 0.8rem;
+ }
+
 .jiss_df{
     margin: 3px 0;
     background-color: white;
@@ -267,8 +261,8 @@ em{
 .salespan{
     float: right;
     background-color: #FF730F;
-    width: 0.9rem;
-    height: 0.37rem;
+    width: 1rem;
+    height: 0.43rem;
     text-align: center;
     vertical-align: middle;
     font-size: 0.2rem;
@@ -277,7 +271,11 @@ em{
     line-height: 0.37rem;
     position: absolute;
     right: 0.2rem;
-        padding: 0.03rem 0;
+    padding: 0.03rem 0;
+    img{
+        height: 0.13rem;
+        margin-bottom: 0.01rem;
+    }
 }
 .gtitle{
     padding-bottom: 0.2rem;
@@ -286,6 +284,9 @@ em{
     border-bottom: 1px solid #f5f5f5;
     font-size: 0.18rem;
 
+}
+.dib_daoh_b{
+    border: none;
 }
 
 }

@@ -42,13 +42,9 @@ export class RentsaleinfoPage {
   }
 
   getRentSaleInfo(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     console.log(this.rental_id,this.type)
     var api = this.config.apiUrl + "/api/rental/info?type=" + this.type + "&rental_id=" + this.rental_id + "&token=" + this.storage.get("token");
       this.http.get(api).map(res => res.json()).subscribe(data => {
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         data.model.date = data.model.date.replace("T"," ")
         this.rentsale = data.model;
@@ -61,13 +57,9 @@ export class RentsaleinfoPage {
   }
   //我的发布房屋详情
    myPublishInfo(){
-     $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
       console.log(this.rental_id,this.type)
     var api = this.config.apiUrl + "/api/rental/info_user?type=" + this.type + "&rental_id=" + this.rental_id + "&token=" + this.storage.get("token");
       this.http.get(api).map(res => res.json()).subscribe(data => {
-        $(".spinnerbox").fadeOut(200);
-        $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.rentsale = data.model;
         console.log(data)
