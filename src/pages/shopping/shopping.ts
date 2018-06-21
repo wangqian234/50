@@ -107,12 +107,13 @@ export class ShoppingPage {
   
   //自带函数
   ionViewDidLoad() {
-    this.currentPlace = this.storage.get("currentPlace");
-    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter(){
+    this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+    alert(this.currentPlace)
     this.storage.set('tabs','444');
     this.clickFun();
     this.shopKeyList = this.storage.get("shopKewWords");

@@ -236,10 +236,12 @@ ionViewWillEnter(){
 
     //跳转到微信支付页面
   goWeixiPay(){
-    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
     console.log(this.tongtong);
-    location.href = this.tongtong;
+    //location.href ='http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+   //(<any>window).cordova.inappbrowser.open();
   }
+  
   
 
   //跳转支付页面
