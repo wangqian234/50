@@ -53,9 +53,8 @@
         <!--<div class="vo_carousel"></div>-->
         <div class="swiper-container shopswiper" id="shopswiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" *ngFor="let item of tuiList" (click)="goGoodsInfo(item['url'])"><img class="img1" src="{{item.img}}"  /></div>
+                <div class="swiper-slide stop-swiping" *ngFor="let item of tuijList" (click)="goGoodsInfo(item['url'])"><img class="img1" src="{{item.img}}"  /></div>
             </div>
-            <!-- 如果需要分页器 -->
             <div class="swiper-pagination shoppagination" id="shoppagination"></div>
         </div>
 

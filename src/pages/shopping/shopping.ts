@@ -112,6 +112,10 @@ export class ShoppingPage {
       loop: true,
       autoplayDisableOnInteraction: false,
       preventLinksPropagation: true,
+      freeMode : false,
+      freeModeMomentum : true,
+      // noSwiping : true,
+      // noSwipingClass : 'stop-swiping',
       autoplay: {
         delay: 3000,
         stopOnLastSlide: false,
@@ -126,15 +130,50 @@ export class ShoppingPage {
         observeParents:true,//修改swiper的父元素时，自动初始化swiper
       },
     })
+
+    //判断左右滑动事件
+    var startX;
+    var startY;
+    var moveEndX;
+    var moveEndY;
+    var that = this;
+    var $body = $(".shopswiper");
+    $body.css("height", "3.25rem");
+    $body.on("touchstart", function (e) {
+      startX = e.originalEvent.changedTouches[0].pageX,
+      startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $body.on("touchmove", function (e) {
+      var X;
+      var Y;
+      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      moveEndY = e.originalEvent.changedTouches[0].pageY,
+      X = moveEndX - startX,
+      Y = moveEndY - startY;
+      if (Math.abs(X) > Math.abs(Y) && X > 0) {
+        if(mySwiper.slidePrev()){
+          mySwiper.slidePrev();
+        }
+      }
+      else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+        console.log(mySwiper.slideNext)
+        if(mySwiper.slideNext){
+          mySwiper.slideNext();
+        }
+      }
+    });
   }
 
   //自带函数
   ionViewDidLoad() {
     this.currentPlace = this.storage.get("currentPlace");
-    $('.facediv li:nth-of-type(1)').attr("class", "activety");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+    $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter() {
+    this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.storage.set('tabs', '444');
     this.clickFun();
     this.shopKeyList = this.storage.get("shopKewWords");

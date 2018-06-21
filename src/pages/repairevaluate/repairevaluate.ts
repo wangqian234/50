@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import $ from 'jquery';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -24,7 +24,8 @@ export class RepairevaluatePage {
   txtScoreMemo:'',
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
-  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+  ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController, 
+  public toastCtrl: ToastController) {
     
   }
     ionViewWillLoad() {
@@ -54,6 +55,15 @@ export class RepairevaluatePage {
         console.log(data)
         if(data.errcode===0&&data.errmsg==='OK'){
             alert("评价成功")
+            let toast = this.toastCtrl.create({
+            message: '评价成功',
+            duration: 2000,
+            position: 'bottom'
+          });
+            toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+        toast.present();
             this.navCtrl.pop();
         }else{
           alert(data.errmsg)

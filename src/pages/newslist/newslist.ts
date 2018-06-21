@@ -43,14 +43,7 @@ export class NewslistPage {
     this.storage.set('tabs','false');
   }
   //获取最新资讯全部列表
-    getNews(infiniteScroll){
-      // let loading = this.loadingCtrl.create({
-	    // showBackdrop: true,
-      // enableBackdropDismiss: true,
-      // });
-      // loading.present();
-        $(".spinnerbox").fadeIn(200);
-        $(".spinner").fadeIn(200);
+    getNews(infiniteScroll){       
       if(this.navParams.get("act")){
         this.act = this.navParams.get("act");
         if(this.act=='gs'){
@@ -72,11 +65,12 @@ export class NewslistPage {
       }else{
         this.token = '';
        }
+        $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
         var j = 3;
         var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          // loading.dismiss();
         $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {

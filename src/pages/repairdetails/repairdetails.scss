@@ -124,13 +124,16 @@ page-repairdetails {
 .closs1 {  
     padding: 0.15rem;  
     background: #428bca;
-    text-align: center; 
+    text-align: center;
+    position: relative;
 }  
   
 .closs1-button {  
     float: right;  
     font-size: 0.6rem;
-    margin-top: -0.05rem; 
+    color: white;
+    position: absolute;
+    right: 0.3rem;
 }
 .div2 {  
     background:#eeeeee;  
@@ -148,7 +151,9 @@ page-repairdetails {
 } 
 .closs1>h2{
     font-size: 0.32rem;
-     padding: 0.09rem 0;
+    padding: 0.09rem 0;
+    text-align: center;
+    color: white;
 }
 img{
     height:1.7rem;
@@ -157,7 +162,7 @@ img{
 }
 
     #app p{font-size: 0.28rem; line-height: 0.4rem;}
-    #app li{list-style: none;padding: 0 20px 10px 20px;border-left: 2px solid #999;position: relative;}
+    #app li{list-style: none;padding: 0 20px 10px 20px;border-left: 2px solid #999;position: relative;line-height: 0.35rem;}
     #app li:before{content: "";width: 10px;height: 10px;display: block;background: #257cff;position: absolute;left: 0;top: 0;margin-left: -6px;border-radius: 50%;}
     #app ul{width: 80%;margin: 0 auto;}
 
@@ -184,6 +189,7 @@ img{
     .select-text{
         line-height: 0.26rem;
         font-size: 0.25rem;
+        margin-top: 0.05rem;
     }
 }
 

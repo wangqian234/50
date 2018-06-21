@@ -261,8 +261,8 @@ em{
 .salespan{
     float: right;
     background-color: #FF730F;
-    width: 0.9rem;
-    height: 0.37rem;
+    width: 1rem;
+    height: 0.43rem;
     text-align: center;
     vertical-align: middle;
     font-size: 0.2rem;
@@ -271,7 +271,11 @@ em{
     line-height: 0.37rem;
     position: absolute;
     right: 0.2rem;
-        padding: 0.03rem 0;
+    padding: 0.03rem 0;
+    img{
+        height: 0.13rem;
+        margin-bottom: 0.01rem;
+    }
 }
 .gtitle{
     padding-bottom: 0.2rem;

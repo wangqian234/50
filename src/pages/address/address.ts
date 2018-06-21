@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,App  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App ,ToastController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
@@ -43,7 +43,7 @@ export class AddressPage {
     }
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
- ,public storage:StorageProvider,public httpService:HttpServicesProvider,public app: App) {
+ ,public storage:StorageProvider,public httpService:HttpServicesProvider,public app: App,public toastCtrl:ToastController) {
   }
 
   ionViewWillEnter(){
@@ -56,14 +56,10 @@ export class AddressPage {
   }
   //获取当前用户的收货地址列表
   getAddressList(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     console.log(this.storage.get('token'))
     var api = this.config.apiUrl + '/api/Address/list?token=' + this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addresslist = data.list;
         console.log(this.addresslist);
@@ -82,8 +78,6 @@ export class AddressPage {
 
   //设置默认收货地址
   clickToDef(id){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var j = 3;
     var headers = new Headers({ 'Content-Type': 'application/json' });
     var options = new RequestOptions({ headers: headers });
@@ -93,11 +87,17 @@ export class AddressPage {
     };
     var api = this.config.apiUrl + '/api/Address/edit_default';
     this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("设置成功！");
+        let toast = this.toastCtrl.create({
+          message: '成功设置默认收货地址',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
         this.ionViewDidEnter(); //更新页面
       } else if (data.errcode === 40002){
         j--;
@@ -117,8 +117,6 @@ export class AddressPage {
         {
           return;
         }
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var data = {
       token : this.storage.get('token'),
       addressId : id,
@@ -128,10 +126,16 @@ export class AddressPage {
     var options = new RequestOptions({ headers: headers });
     var api = this.config.apiUrl + '/api/Address/del';
     this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-    $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("删除成功！");
+        let toast = this.toastCtrl.create({
+          message: '成功删除地址',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
         this.ionViewDidEnter(); //更新页面
       } else if(data.errcode === 40002){
         j--;
@@ -159,8 +163,6 @@ export class AddressPage {
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
   }
-
-
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
@@ -168,12 +170,8 @@ export class AddressPage {
 
   //获取地址详情（页面没写）
   getAddressDet(){
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
     var api = this.config.apiUrl + '/api/Address/info?token=' + this.storage.get('token') + "&addressId=" + this.addressId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      $(".spinnerbox").fadeOut(200);
-    $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
         console.log(data.model);
       } else {

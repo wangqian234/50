@@ -46,16 +46,15 @@
 		<div class="bar12"></div>
 	</div>
 
-	<!--<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+	<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
         pullingText="释放刷新"
         refreshingSpinner="circles"
         refreshingText="正在更新"
-        top="1rem;"
-        >
+        top="1rem;">
       </ion-refresher-content>
-  	</ion-refresher>-->
+  	</ion-refresher>
 
 	<div class="scroll" *ngFor="let item of listTotal;">
 		<!--商品列表-->
@@ -80,6 +79,7 @@
 	<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
 		<ion-infinite-scroll-content
 		loadingSpinner="circles"
+		distance = -2rem
 		loadingText="正在加载中，请稍候..."></ion-infinite-scroll-content>
 	</ion-infinite-scroll>
 </ion-content>
