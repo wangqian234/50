@@ -114,8 +114,8 @@ export class ShoppingPage {
       preventLinksPropagation: true,
       freeMode : false,
       freeModeMomentum : true,
-      // noSwiping : true,
-      // noSwipingClass : 'stop-swiping',
+      noSwiping : true,
+      noSwipingClass : 'stop-swiping',
       autoplay: {
         delay: 3000,
         stopOnLastSlide: false,
@@ -132,36 +132,36 @@ export class ShoppingPage {
     })
 
     //判断左右滑动事件
-    var startX;
-    var startY;
-    var moveEndX;
-    var moveEndY;
-    var that = this;
-    var $body = $(".shopswiper");
-    $body.css("height", "3.25rem");
-    $body.on("touchstart", function (e) {
-      startX = e.originalEvent.changedTouches[0].pageX,
-      startY = e.originalEvent.changedTouches[0].pageY;
-    });
-    $body.on("touchmove", function (e) {
-      var X;
-      var Y;
-      moveEndX = e.originalEvent.changedTouches[0].pageX,
-      moveEndY = e.originalEvent.changedTouches[0].pageY,
-      X = moveEndX - startX,
-      Y = moveEndY - startY;
-      if (Math.abs(X) > Math.abs(Y) && X > 0) {
-        if(mySwiper.slidePrev()){
-          mySwiper.slidePrev();
-        }
-      }
-      else if (Math.abs(X) > Math.abs(Y) && X < 0) {
-        console.log(mySwiper.slideNext)
-        if(mySwiper.slideNext){
-          mySwiper.slideNext();
-        }
-      }
-    });
+    // var startX;
+    // var startY;
+    // var moveEndX;
+    // var moveEndY;
+    // var that = this;
+    // var $body = $(".shopswiper");
+    // $body.css("height", "3.25rem");
+    // $body.on("touchstart", function (e) {
+    //   startX = e.originalEvent.changedTouches[0].pageX,
+    //   startY = e.originalEvent.changedTouches[0].pageY;
+    // });
+    // $body.on("touchmove", function (e) {
+    //   var X;
+    //   var Y;
+    //   moveEndX = e.originalEvent.changedTouches[0].pageX,
+    //   moveEndY = e.originalEvent.changedTouches[0].pageY,
+    //   X = moveEndX - startX,
+    //   Y = moveEndY - startY;
+    //   if (Math.abs(X) > Math.abs(Y) && X > 0) {
+    //     if(mySwiper.slidePrev()){
+    //       mySwiper.slidePrev();
+    //     }
+    //   }
+    //   else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+    //     console.log(mySwiper.slideNext)
+    //     if(mySwiper.slideNext){
+    //       mySwiper.slideNext();
+    //     }
+    //   }
+    // });
   }
 
   //自带函数
@@ -173,7 +173,7 @@ export class ShoppingPage {
 
   ionViewDidEnter() {
     this.currentPlace = this.storage.get("currentPlace");
-    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+    this.currentPlaceCode = this.storage.get('currentPlaceCode');
     this.storage.set('tabs', '444');
     this.clickFun();
     this.shopKeyList = this.storage.get("shopKewWords");
@@ -301,7 +301,6 @@ export class ShoppingPage {
 
   //跳转到商品详情页面
   goGoodsInfo(id) {
-    console.log(this)
     if (this.storage.get('token')) {
       this.navCtrl.push(ShopgoodsinfoPage, { id: id });
     } else {
@@ -316,10 +315,6 @@ export class ShoppingPage {
     })
   }
 
-  // ionViewWillLeave(){
-  //  this.node.empty();
-  // }
-
   gotoPlace() {
     this.navCtrl.push(PersonalPage, {
       callback: this.myCallbackFunction
@@ -329,7 +324,6 @@ export class ShoppingPage {
   myCallbackFunction = (params) => {
     var that = this;
     return new Promise((resolve, reject) => {
-
       if (typeof (params) != 'undefined') {
         resolve('ok');
         that.currentPlace = params.changePlace;

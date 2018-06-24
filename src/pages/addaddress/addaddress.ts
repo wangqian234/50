@@ -5,6 +5,7 @@ import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 import { StorageProvider } from '../../providers/storage/storage';
 import { LoadingController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 //收货地址列表
 import { AddressPage } from '../address/address';
 //返回首页
@@ -52,7 +53,8 @@ export class AddaddressPage {
     TabsPage = TabsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http: Http,public config:ConfigProvider,
-    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController) {
+    public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController,
+    private alertCtrl: AlertController) {
   }
 
   ionViewWillEnter(){
@@ -82,32 +84,67 @@ export class AddaddressPage {
 
   //添加收货地址（添加或编辑）
   addAddress(){
-    if(this.addressList.provinceVal == ""){
-        alert("请选择要添加地址的省份");
+    if(this.addressList.provinceVal == "" || this.addressList.provinceVal == "pre"){
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请选择要添加地址的省份',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
-    if(this.addressList.cityVal == ""){
-        alert("请选择要添加地址的城市");
+    if(this.addressList.cityVal == "" || this.addressList.cityVal == "pre"){
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请选择要添加地址的城市',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
-    if(this.addressList.districtVal == ""){
-        alert("请选择要添加地址的区县");
+    if(this.addressList.districtVal == "" || this.addressList.districtVal == "pre"){
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请选择要添加地址的区县',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
     if(this.addressList.address == ""){
-        alert("请填写要添加地址的详细地址");
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请选择要添加地址的详细地址',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
     if(this.addressList.name == ""){
-        alert("请填写您的姓名");
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请填写您的姓名',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
     if(this.addressList.mobile == "" || !(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.addressList.mobile))){
-        alert("请检查手机号码");
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请检查手机号码',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
     if(this.addressList.code == ""  || !(/^[0-9]{6}$/.test(this.addressList.code))){
-        alert("请检查邮政编码");
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '请检查邮政编码',
+          buttons: ['确认']
+        });
+        alert1.present();
         return;
     }
 

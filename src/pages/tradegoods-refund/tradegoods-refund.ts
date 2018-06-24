@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -10,7 +10,9 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 //添加、修改商品退款申请
 import {TradegoodsReapPage}from '../tradegoods-reap/tradegoods-reap';
-import $ from 'jquery'
+import $ from 'jquery';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-tradegoods-refund',
@@ -20,7 +22,7 @@ export class TradegoodsRefundPage {
   public list = [];
   public tradegoods_id;//商品订单编号
   public TradegoodsReapPage=TradegoodsReapPage;
-
+  public TabsPage = TabsPage;
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -28,7 +30,8 @@ export class TradegoodsRefundPage {
     //定义token
   public token=this.storage.get('token');
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider
+  , public app: App) {
         this.tradegoods_id=this.navParams.get('tradegoodsId');
         //alert(this.tradegoods_id);
   }
@@ -72,5 +75,9 @@ export class TradegoodsRefundPage {
  
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 }

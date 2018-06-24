@@ -1,4 +1,13 @@
 <ion-content style="background-color:#f5f5f5">
+
+<ion-fab right top>
+    <button ion-fab color="light"><img class="fanh_ann closearea" src="assets/imgs/moreamor.png"></button>
+    <ion-fab-list side="bottom">
+		<div class="qipao"></div>
+      <button (click)="backToHome()"><span>返回物业首页</span></button>
+    </ion-fab-list>
+</ion-fab>
+
 	<div class="spinnerbox"></div>
 	<div class="spinner">
 		<div class="bar1"></div>
@@ -17,16 +26,18 @@
  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="javascript:;">
-				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
-				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+			<div class="logo_k logo_k_fanh" (click)="backTo()"><a href="javascript:;">
+				<img class="fanh_ann" src="assets/imgs/fanh.png">
+				<!--<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">-->
 				</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a href="javascript:;" class="px24 zyyge">商品详情</a></li>  
 				</ul>
 			</div>
-			<div class="chacha" [navPush]="CartPage"><img class="fanh_ann" src="assets/imgs/gouwuche.png"></div>
+			<div class="chacha" [navPush]="CartPage">
+				<img class="fanh_ann" src="assets/imgs/gouwuche.png">
+			</div>
 		</div> 
 	</div>
 </div>
@@ -45,7 +56,7 @@
 <div class="xiangq_shangp_m">
 	<a href="javascript:;">
 	<p class="px30" style="font-size:0.28rem ;color:#222;margin-bottom:0.3rem;">
-		<span style="font-size:0.28rem ;color:#ff971c;">
+		<span style="font-size:0.28rem ;color:#ff971c;line-height:0.35rem;">
 		【{{goodMlist.groupnum}}人团】</span>{{goodMlist.title}}</p>
 	
 	<div class="xq_jiaq"><p>￥{{jiage}}</p>

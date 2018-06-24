@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import $ from 'jquery';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
@@ -23,7 +24,7 @@ export class HouseinfoPage {
   public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public config:ConfigProvider, public http: Http,
-  public storage:StorageProvider, public toastCtrl:ToastController) {
+  public storage:StorageProvider, public toastCtrl:ToastController,private alertCtrl: AlertController) {
   }
 
   ionViewWillLoad() {
@@ -56,11 +57,6 @@ export class HouseinfoPage {
     var api = this.config.apiUrl + '/api/UserRoom/info?token=' + this.storage.get('token') + '&roomId=' + this.houseId;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        // for(var i=0; i< data.model.length(); i++){
-        //   if(data.model.mobile != this.storage.get('userName')) {
-        //     this.houseInfo.push(data.model);
-        //   }
-        // }
         data.model.date = data.model.date.replace("T"," ")
         this.houseInfo=data.model; 
         console.log(JSON.stringify(this.houseInfo)+"用户房屋信息")
@@ -117,32 +113,49 @@ export class HouseinfoPage {
       'roomId':this.houseId,
     };
     var j = 3;
-    if(confirm("确定解除绑定吗？")){
-    var api = this.config.apiUrl + '/api/UserRoom/del?';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-        // console.log("成功解绑"+JSON.stringify(data))
-        let toast = this.toastCtrl.create({
-          message: '解除绑定成功',
-          duration: 2000,
-          position: 'bottom'
-        });
-          toast.onDidDismiss(() => {
-           console.log('Dismissed toast');
-        });
-      toast.present();
-        this.navCtrl.pop();
-      } else if(data.errcode === 40002){
-          j--;
-          if(j>0){
-            this.config.doDefLogin();
-            this.delUserRoom();
+    let alert1 = this.alertCtrl.create({
+      title: '',
+      message: '确认登录吗?',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            return;
           }
-      } else {
-        console.log(data.errmsg)
-      }
+        },
+        {
+          text: '确认',
+          handler: () => {
+            var api = this.config.apiUrl + '/api/UserRoom/del?';
+            this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+              if (data.errcode === 0 && data.errmsg === 'OK') {
+                // console.log("成功解绑"+JSON.stringify(data))
+                let toast = this.toastCtrl.create({
+                  message: '解除绑定成功',
+                  duration: 2000,
+                  position: 'bottom'
+                });
+                  toast.onDidDismiss(() => {
+                  console.log('Dismissed toast');
+                });
+              toast.present();
+                this.navCtrl.pop();
+              } else if(data.errcode === 40002){
+                  j--;
+                  if(j>0){
+                    this.config.doDefLogin();
+                    this.delUserRoom();
+                  }
+              } else {
+                console.log(data.errmsg)
+              }
+            });
+          }
+        }
+      ]
     });
-    }
+    alert1.present();
   }
 
   appearOtherUser(){

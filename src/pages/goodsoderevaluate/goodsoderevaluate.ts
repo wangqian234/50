@@ -1,5 +1,5 @@
 import { Component,ChangeDetectorRef  } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,App } from 'ionic-angular';
 import $ from 'jquery';
 
 //请求数据
@@ -14,6 +14,8 @@ import { LoadingController } from 'ionic-angular';
 //商品购物列表
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 // import { ChangeDetectorRef } from '@angular/core'; //更新页面
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 
 
@@ -27,7 +29,7 @@ export class GoodsoderevaluatePage {
 
     public list=[];
     public ShoppinglistPage=ShoppinglistPage;
-
+    public TabsPage = TabsPage;
     public SD_id;//订单编号
     public tradegoods_id;//商品订单编号
     public item;
@@ -48,8 +50,8 @@ export class GoodsoderevaluatePage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/tradegoods/add?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController
-,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider, public toastCtrl:ToastController) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController,public app: App,
+public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider, public toastCtrl:ToastController) {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品
@@ -167,6 +169,10 @@ export class GoodsoderevaluatePage {
 
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome() {
+    this.app.getRootNav().push(TabsPage);
   }
 
 }
