@@ -153,8 +153,6 @@ export class PayprefeePage {
    }else{
      this.payrefeeList.roomId=this.roomid;
    }
-    $(".spinnerbox").fadeIn(200);
-    $(".spinner").fadeIn(200);
    this.payrefeeList.createip = this.cip;
     this.payrefeeList.token=this.storage.get("token")
     this.payrefeeList.management = this.management;
@@ -165,13 +163,11 @@ export class PayprefeePage {
     var api = this.config.apiUrl+'/api/charge/prepay?';
     console.log(this.payrefeeList)
      this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
-       $(".spinnerbox").fadeOut(200);
-       $(".spinner").fadeOut(200);
           if(data.errcode===0){
             console.log(data)
             this.outTradeNo = data.errmsg;
             alert("支付成功")
-            this.navCtrl.pop();
+            //this.navCtrl.pop();
           }else{
             console.log(data)
             alert(data.errmsg)
@@ -181,12 +177,12 @@ export class PayprefeePage {
  }
       //微信查询接口
    checkPayment(){
-     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg === 'OK'){
-          alert("支付成功")
-       }
-     })
+    //  var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //    if(data.errmsg === 'OK'){
+    //       alert("支付成功")
+    //    }
+    //  })
    }
 
     clickmeToOut(){
@@ -199,19 +195,20 @@ export class PayprefeePage {
     clickmeToIn(){
       $("#enSureMon").css("display","none")
     }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.gopay();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+
+      clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          alert(data.ip)
+          that.cip = data.ip;
+          that.gopay();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+   }
  //项目下拉列表
  dw_Project(){
     var api = this.config.apiUrl+'/api/house/dw_Project?';
