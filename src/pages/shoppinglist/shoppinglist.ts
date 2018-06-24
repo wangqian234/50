@@ -155,6 +155,7 @@ export class ShoppinglistPage {
       this.obligationEventList.token = this.storage.get('token')
       this.obligationEventList.createip =this.cip;
       var api = this.aa + '/api/weixinpay/unifiedorder'
+      console.log(this.obligationEventList)
       this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 ){
           console.log(data)

@@ -166,8 +166,6 @@ export class ShoppingPage {
 
   //自带函数
   ionViewDidLoad() {
-    this.currentPlace = this.storage.get("currentPlace");
-    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
@@ -186,12 +184,8 @@ export class ShoppingPage {
 
   //获取商城首页
   getShop(callback) {
-    // $(".spinnerbox").fadeIn(200);
-    // $(".spinner").fadeIn(200);(200);
     var api = this.aa + '/api/index/list?curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      $(".spinnerbox").fadeOut(200);
-      $(".spinner").fadeOut(200);
       if (data.json['data_Banner'].errcode == 0 && data.json['data_Banner'].errmsg == 'OK') {
         this.tuiList = data.json["data_Banner"].list;
         this.tuangouList = data.json['data_Modules'].list;
