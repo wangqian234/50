@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 //StorageProvider
@@ -11,6 +11,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import $ from 'jquery'
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-shopinfo',
@@ -18,6 +20,7 @@ import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 })
 export class ShopinfoPage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;
+  public TabsPage = TabsPage;
   public wid;
   public sid;
   public goodMlist=[];
@@ -26,7 +29,7 @@ export class ShopinfoPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,public loadingCtrl: LoadingController, public app: App) {
    
   this.wid=navParams.get('wid');
   this.sid=navParams.get('sid');
@@ -67,12 +70,13 @@ ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
      }
      })
   }
- 
- 
- 
- 
+
  backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }

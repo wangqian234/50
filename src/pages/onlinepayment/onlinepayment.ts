@@ -236,10 +236,12 @@ ionViewWillEnter(){
 
     //跳转到微信支付页面
   goWeixiPay(){
-    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
     console.log(this.tongtong);
-    location.href = this.tongtong;
+    //location.href ='http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+   // (<any>window).cordova.InAppBrowser.open(this.tongtong,'_blank','location = yes')
   }
+  
   
 
   //跳转支付页面
@@ -268,20 +270,6 @@ ionViewWillEnter(){
     }
     clickmeToIn(){
       $("#enSureMon").css("display","none")
-    }
-//获取支付ip，调用结算账单方法
-  clickme(){
-    var that = this;
-    $.ajax({
-        url: 'http://freegeoip.net/json/',
-        success: function(data){
-          alert(data.ip)
-          that.cip = data.ip;
-          that.gopay();
-        },
-        type: 'get',
-        dataType: 'JSON'
-    });
     }
 
   getTotal(){
