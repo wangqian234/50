@@ -404,7 +404,7 @@ page-shopping {
     margin:0.2rem 0.09rem 0 0.09rem;
     text-align: center;
     p{
-        font-family:MicrosoftYaHei;
+        font-family:Microsoft YaHei;
         color:#818181;
     }
 }
@@ -608,7 +608,7 @@ border-bottom: 4px solid #FF971C;
     float: right !important;
     height: 0.2rem !important;
     width: 0.2rem !important;
-    margin-top: 0.05rem !important;
+    margin-top: 0.03rem !important;
 } 
 
 .logo_k_fanh .fanh_ann{
@@ -634,6 +634,10 @@ color: #F5F5F5;
 
 input[placeholder], [placeholder], *[placeholder] {   
 color:#F5F5F5 !important;   
+}
+
+.swiper-pagination-bullet-active{
+    background: #ff971c;
 }
 
 }
@@ -717,4 +721,9 @@ color:#F5F5F5 !important;
 
 .vo_carousel .arrow:hover{
     background-color: #666;
+}
+
+.swiper-container{
+    width: 100%;
+    height: 3.25rem;
 }

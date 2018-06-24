@@ -89,7 +89,15 @@ export class AddressPage {
     this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
       console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("设置成功！");
+        let toast = this.toastCtrl.create({
+          message: '成功设置默认收货地址',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
         this.ionViewDidEnter(); //更新页面
       } else if (data.errcode === 40002){
         j--;

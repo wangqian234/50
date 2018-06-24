@@ -64,7 +64,15 @@ export class RentsalePage {
     this.getFocusList();
   }
   ionViewDidEnter(){
+    this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.storage.set('tabs','true');
+    $('.swiper-container').autoplay = {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      };
+    $('.swiper-container').autoplayDisableOnInteraction = false;
   }
 
   ionViewDidLoad() {

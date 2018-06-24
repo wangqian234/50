@@ -109,6 +109,7 @@ export class ShopgoodsinfoPage {
     var api = this.aa +'/api/Goods/info?goods_Id='+this.navParams.get("id")+'&token='+this.token
     this.http.get(api).map(res =>res.json()).subscribe(data =>{  //缺少成功和失败的判断
         console.log(data)
+       if(data.errcode === 0 && data.errmsg === 'OK' || data.json){
         that.goodMlist = data.json['good_Model'].model;
         that.jiage=data.json['good_Model'].model.maxpreprice;
         that.prejiage=data.json['good_Model'].model.price;//根据规格而变的价格
@@ -117,6 +118,10 @@ export class ShopgoodsinfoPage {
         this.fenge(data.json['good_Model'].model.imgsrc_list);//轮播图
         that.dataGlist = data.json.data_group.list;
         that.dataSlist = data.json.data_Sizes.list;
+       } else {
+         alert(data.errmsg)
+         this.navCtrl.pop;
+       }
 
     })
   }
