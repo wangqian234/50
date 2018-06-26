@@ -43,10 +43,7 @@
   <div class="takePhoto">
     <ul class="photosList">
       <li  class="publishPhoto"  *ngFor="let imgItem of imgList"><img class="photo"  id="photo" [src]="imgItem"/></li>
-        <li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="showPicActionSheet()"/></li>
-          <!--<li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="doUpload()"/></li>-->
-         <!--<li  class="publishPhoto" > <img class="photo" src="http://mp.gyhsh.cn/upload/Temp/0e74624b-a489-4eaf-9b71-355914fcd4c8/ec76b6fa-ea7f-400f-ae86-72a43134db13.jpg" /></li>-->
-           
+      <li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="showPicActionSheet()"/></li>          
     </ul>
   </div>
 
@@ -58,11 +55,6 @@
       </div>
     </ion-item>
     <ion-item class="fang">
-      <!--<div class="repairList">
-        <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><ion-radio  name="radiofang" (click)="getValue('1')"[(ngModel)]="RSadd.nature" type="radio" value="1" ></ion-radio> <span>一手房</span></div>
-        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><ion-radio  name="radiofang" (click)="getValue('2')"[(ngModel)]="RSadd.nature" type="radio" vaule="2" ></ion-radio> <span>二手房</span></div>
-      </div>-->
      <div class="repairType">房源性质：</div>
      <ion-list radio-group [(ngModel)]="RSadd.nature" >
         <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
@@ -76,11 +68,6 @@
      </ion-list>
     </ion-item>
     <ion-item class="zu">
-      <!--<div class="repairList">
-        <div class="repairType">房源性质：</div>
-        <div style="width:1rem;float:left;margin: 0.18rem 0.15rem 0 0"><input  name="radiozu"(click)="getValue('1')" [(ngModel)]="RSadd.nature" type="radio" value="1" /><span>整租</span></div>
-        <div style="width:1rem;float:right;margin: 0.18rem 0.85rem 0 0rem"><input  name="radiozu"(click)="getValue('2')" [(ngModel)]="RSadd.nature" type="radio" value="2" /><span>合租</span></div>
-      </div>-->
       <div class="repairType">房源性质：</div>
       <ion-list radio-group [(ngModel)]="RSadd.nature" >
         <ion-item style="float:left;width:auto;margin-top: -0.05rem;">
@@ -104,12 +91,6 @@
         <select class="address_select"  [(ngModel)]='RSadd.region' cancelText="取消" okText="确认" (change)="getCode()">
         <option *ngFor="let item of areaCode" value="{{item.code}}" >{{item.name}}</option>
         </select>&nbsp;区&nbsp;
-       
-
-
-        <!--<ion-select style="float:left" (ionChange)="changeRoom()" [(ngModel)]='RSadd.region' cancelText="取消" okText="确认"> &nbsp;区&nbsp;
-          <ion-option *ngFor="let item of areaCode" value="{{item.code}}">{{item.name}}</ion-option>
-        	</ion-select>-->
       </div>
     </ion-item>
 

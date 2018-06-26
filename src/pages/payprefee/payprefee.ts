@@ -147,7 +147,6 @@ export class PayprefeePage {
 
 //结算函数 
  gopay(){
-   
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
    }else{
@@ -162,16 +161,16 @@ export class PayprefeePage {
     this.payrefeeList.rubbish = this.rubbish;
     var api = this.config.apiUrl+'/api/charge/prepay?';
     console.log(this.payrefeeList)
-     this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
-          if(data.errcode===0){
-            console.log(data)
-            this.outTradeNo = data.errmsg;
-            alert("支付成功")
-            //this.navCtrl.pop();
-          }else{
-            console.log(data)
-            alert(data.errmsg)
-            this.navCtrl.pop();
+    this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
+     if(data.errcode===0){
+        console.log(data)
+        this.outTradeNo = data.errmsg;
+        alert("支付成功")
+        //this.navCtrl.pop();
+     }else{
+        console.log(data)
+        alert(data.errmsg)
+        this.navCtrl.pop();
           }
      })
  }
@@ -197,18 +196,18 @@ export class PayprefeePage {
     }
 
       clickme(){
-    var that = this;
-    $.ajax({
-        url: 'http://freegeoip.net/json/',
-        success: function(data){
-          alert(data.ip)
-          that.cip = data.ip;
-          that.gopay();
-        },
-        type: 'get',
-        dataType: 'JSON'
-    });
-   }
+      var that = this;
+      $.ajax({
+          url: 'http://freegeoip.net/json/',
+          success: function(data){
+            alert(data.ip)
+            that.cip = data.ip;
+            that.gopay();
+          },
+          type: 'get',
+          dataType: 'JSON'
+      });
+     }
  //项目下拉列表
  dw_Project(){
     var api = this.config.apiUrl+'/api/house/dw_Project?';
