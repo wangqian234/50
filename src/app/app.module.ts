@@ -170,7 +170,10 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
 import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
+import { JPush } from '@jiguang-ionic/jpush';
 
+//极光推送
+import { JPushTestPage } from '../pages/j-push-test/j-push-test';
 
 @NgModule({
   declarations: [
@@ -239,6 +242,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    JPushTestPage,
   ],
   imports: [
     BrowserModule,
@@ -313,6 +317,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    JPushTestPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
@@ -331,6 +336,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     ImagePicker,
     Base64,
     Network,
+    JPush,
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ActionSheetController,AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
@@ -70,7 +70,8 @@ export class RentsaleaddPage {
     "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "澎湖县", "台东县", "花莲县", "中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "黄大仙区", "湾仔区", "油尖旺区", "离岛区", "葵青区", "北区",
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
-    public http: Http, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public camera: Camera, public imagePicker: ImagePicker, public actionSheetCtrl: ActionSheetController, private base64: Base64,private file:File) {
+    public http: Http, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public camera: Camera, public imagePicker: ImagePicker, public actionSheetCtrl: ActionSheetController, private base64: Base64, private file: File,
+    private alertCtrl: AlertController) {
 
   }
   ionViewWillEnter() {
@@ -271,12 +272,6 @@ export class RentsaleaddPage {
   }
   //获取城代码
   getCityCode() {
-    // var index = $.inArray(this.city, this.citys);
-    // if (index < 0) {
-    //   alert("请输入正确的城市名称");
-    //   this.city="";
-    //   return;
-    // }
     var api = this.config.apiUrl + '/api/rental/getCity?cityName=' + this.city;
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode == 0 && data.errmsg == 'OK') {
@@ -303,7 +298,12 @@ export class RentsaleaddPage {
         this.RSadd.city = this.cityCode.code;
         this.getAreaCode();
       } else {
-        alert("我们正在努力扩展业务城市范围，敬请期待")
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: '我们正在努力扩展业务城市范围，敬请期待',
+          buttons: ['确认']
+        });
+        alert1.present();
       }
     })
   }
@@ -337,61 +337,67 @@ export class RentsaleaddPage {
   //从相册中选择
   takePhoto() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 20,
       destinationType: 0,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,  //媒体类型，默认PICTURE->照片，还有VIDEO等可以选
       sourceType: 0,
       saveToPhotoAlbum: false,
       allowEdit: false,
-      targetWidth: 300,
-      targetHeight: 300
+      targetWidth: 100,
+      targetHeight: 100
     }
 
 
-    this.camera.getPicture(options).then((results) => {
-         // imageData is either a base64 encoded string or a file URI
-         // If it's base64:
-         alert(results);
-            this.imgList.push('data:image/png;base64,'+results);
+    // this.camera.getPicture(options).then((results) => {
+    //   // imageData is either a base64 encoded string or a file URI
+    //   // If it's base64:
+    //   alert(results);
+    //   this.imgList.push('data:image/png;base64,' + results);
+    //   // $.ajax({
+    //   //   type: "post",
+    //   //   url: this.config.apiUrl + "/api/files/upload_base64_temp",
+    //   //   dataType: "json",
+    //   //   contentType: "application/x-www-form-urlencoded",
+    //   //   data: { "file": results, "file_guid": "0e74624b-a489-4eaf-9b71-355914fcd4c8", "file_name": "QQ图片20180403181140.jpg" },
+    //   //   success: function (data) {
+    //   //     alert("success" + JSON.stringify(data));
+    //   //     this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
+    //   //   },
+    //   //   error: function (result) {
+    //   //     alert("error" + result);
+    //   //   }
+    //   // });
+    // }, (err) => {
+    //   console.log(err)
+    // });
 
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        alert(results[i]);
+        // var myReader: FileReader = new FileReader();
+        // var img = document.createElement('img');
+        // img.src = results[i];
+        // img.onload = function () {
+        //   var canvas = document.createElement("canvas");
+        //   canvas.width = img.width;
+        //   canvas.height = img.height;
+        //   alert("进来了1");
+        //   var ctx = canvas.getContext("2d");
+        //   ctx.drawImage(img, 0, 0, img.width, img.height);
+        //   var dataURL = canvas.toDataURL("image/png");
+        //   alert("wq"+dataURL);
+        // }
+        this.base64.encodeFile(results[i]).then((base64File: string) => {
+          alert("进来了");
+          alert(base64File);
         }, (err) => {
-         // Handle error
-         console.log(err)
+          alert(err);
         });
-
-
-
-    // this.imagePicker.getPictures(options).then((results) => {
-    //   for (var i = 0; i < results.length; i++) {
-    //     alert(results[i]);
-    //     var myReader: FileReader = new FileReader();
-    //     var img = document.createElement('img');
-    //     img.src = results[i];
-    //     img.onload = function () {
-    //       var canvas = document.createElement("canvas");
-    //       canvas.width = img.width;
-    //       canvas.height = img.height;
-    //       alert("进来了");
-    //       var ctx = canvas.getContext("2d");
-    //       ctx.drawImage(img, 0, 0, img.width, img.height);
-
-    //       var dataURL = canvas.toDataURL("image/png");
-    //       alert(dataURL);
-    //     }
-
-    //     // alert(results[i]);
-    //     this.base64.encodeFile(results[i]).then((base64File: string) => {
-    //       alert("进来了");
-    //       alert(base64File);
-    //     }, (err) => {
-    //       alert(err);
-    //     });
-    //     //界面展示
-
-    //     this.imgList.push('data:image/png;base64,' + results[i]);
-    //   }
-    // }, (err) => { });
+        //界面展示
+        this.imgList.push(results[i]);
+      }
+    }, (err) => { });
   }
 
 
@@ -412,7 +418,7 @@ export class RentsaleaddPage {
   //手机拍照
   photos() {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 50,
       destinationType: 0,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,  //媒体类型，默认PICTURE->照片，还有VIDEO等可以选
@@ -431,7 +437,7 @@ export class RentsaleaddPage {
       this.imgList.push('data:image/png;base64,' + imageData);
       $.ajax({
         type: "post",
-        url: "http://test.api.gyhsh.cn/api/files/upload_base64_temp",
+        url: this.config.apiUrl + "/api/files/upload_base64_temp",
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
         data: { "file": imageData, "file_guid": "0e74624b-a489-4eaf-9b71-355914fcd4c8", "file_name": "QQ图片20180403181140.jpg" },

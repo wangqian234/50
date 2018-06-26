@@ -31,6 +31,8 @@ import { TradegoodsGroupbuyPage } from '../tradegoods-groupbuy/tradegoods-groupb
 import { TradegoodsGroupbuyingPage } from '../tradegoods-groupbuying/tradegoods-groupbuying';
 //房屋租赁发布信息
 import { RentsalemyPage } from '../rentsalemy/rentsalemy';
+//极光推送
+import { JPushTestPage } from '../j-push-test/j-push-test';
 @Component({
   selector: 'page-user',
   templateUrl: 'user.html',
@@ -38,7 +40,7 @@ import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 export class UserPage {
 
   //页面跳转
-  public userLoginName = ''
+  public userLoginName = '';
   public enSureLogin:boolean = false;
 
 
@@ -57,6 +59,8 @@ export class UserPage {
 
   public RentsalemyPage = RentsalemyPage;
   public HouseinfolistPage = HouseinfolistPage
+
+  JPushTestPage = JPushTestPage;
 
    //自定义的变量
     public userinfo='';
