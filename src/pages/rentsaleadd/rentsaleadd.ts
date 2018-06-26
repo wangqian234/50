@@ -1,19 +1,28 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import $ from 'jquery'
+import $ from 'jquery';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'page-rentsaleadd',
   templateUrl: 'rentsaleadd.html',
 })
 export class RentsaleaddPage {
-
- public city;
+  public tempName = '';
+  public fileName = '';
+  public fileUrl;
+  public guid;
+  public base64Image = "";
+  public imgList = [];
+  public city;
   public cityName = '西安'
   public cityCode;
   public area;
@@ -27,7 +36,7 @@ export class RentsaleaddPage {
     room: '',
     restroom: '',
     halls: '',
-    priceMin:'0',
+    priceMin: '0',
     priceMax: '',
     phone: '',
     nature: '',
@@ -37,10 +46,10 @@ export class RentsaleaddPage {
     street: '',
     region: '',
     city: '',
-    id:'',
+    id: '',
   }
-  public vb ={
-    type:'',
+  public vb = {
+    type: '',
   }
   citys = ["北京", "天津", "石家庄", "唐山", "秦皇岛", "邯郸", "邢台", "保定", "张家口", "承德", "衡水", "廊坊", "沧州", "太原", "大同", "阳泉", "长治", "晋城", "朔州", "晋中", "运城", "忻州",
     "临汾", "吕梁", "呼和浩特", "包头", "乌海", "赤峰", "通辽", "鄂尔多斯", "呼伦贝尔", "巴彦淖尔", "乌兰察布", "兴安盟", "锡林郭勒盟", "阿拉善盟", "沈阳", "大连", "鞍山", "抚顺", "本溪", "丹东",
@@ -65,35 +74,36 @@ export class RentsaleaddPage {
     "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "澎湖县", "台东县", "花莲县", "中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "黄大仙区", "湾仔区", "油尖旺区", "离岛区", "葵青区", "北区",
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
-    public http: Http, public loadingCtrl: LoadingController, public toastCtrl:ToastController,) {
-      
+    public http: Http, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public camera: Camera, public imagePicker: ImagePicker, public actionSheetCtrl: ActionSheetController, private base64: Base64,private file:File) {
+
   }
   ionViewWillEnter() {
+    this.newGUID();
     if (this.storage.get('token')) {
     } else {
       this.navCtrl.push(LoginPage);
     }
     if (this.navParams.get('item')) {
       this.vb = this.navParams.get('item')
-       alert(this.vb.type)
+      alert(this.vb.type)
       this.ifontime(this.vb.type)
       this.RSadd = this.navParams.get('item')
-      if(this.RSadd.nature.toString() == '1' ){
-        this.RSadd.nature='1';
-      }else if(this.RSadd.nature.toString()=='2'){
-        this.RSadd.nature='2';
-      }else{
-        this.RSadd.nature='1';
+      if (this.RSadd.nature.toString() == '1') {
+        this.RSadd.nature = '1';
+      } else if (this.RSadd.nature.toString() == '2') {
+        this.RSadd.nature = '2';
+      } else {
+        this.RSadd.nature = '1';
       }
       console.log(this.RSadd)
       console.log(this.navParams.get('item'))
       this.RSadd.priceMin = '0';
-    }else{
+    } else {
       this.ifontime(1);
     }
   }
-  ionViewDidEnter(){
-    this.storage.set('tabs','false');
+  ionViewDidEnter() {
+    this.storage.set('tabs', 'false');
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RentsaleaddPage');
@@ -114,48 +124,48 @@ export class RentsaleaddPage {
   }
 
   getRSInfo() {
-   var j = 3;
-   if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(this.RSadd.phone))){
+    var j = 3;
+    if (!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(this.RSadd.phone))) {
       alert('请输入正确的手机号码');
       return;
     }
-    if(this.RSadd.title == ""){
+    if (this.RSadd.title == "") {
       alert('请输入标题');
       return;
     }
-    if(this.RSadd.space == ""){
+    if (this.RSadd.space == "") {
       alert('请输入房屋面积');
       return;
     }
-    if(this.RSadd.room == "" || this.RSadd.halls == "" || this.RSadd.halls == ""){
+    if (this.RSadd.room == "" || this.RSadd.halls == "" || this.RSadd.halls == "") {
       alert('请输入房屋户型');
       return;
     }
-    if(this.RSadd.priceMax == ""){
+    if (this.RSadd.priceMax == "") {
       alert('请输入预期价格');
       return;
     }
-    if(this.RSadd.phone == ""){
+    if (this.RSadd.phone == "") {
       alert('请输入您的手机号码');
       return;
     }
-    if(this.RSadd.contacts == ""){
+    if (this.RSadd.contacts == "") {
       alert('请输入您的姓名');
       return;
     }
-    if(this.RSadd.nature == ""){
+    if (this.RSadd.nature == "") {
       alert('请选择房源性质');
       return;
     }
-    if(this.RSadd.district == ""){
+    if (this.RSadd.district == "") {
       alert('请输入房屋所在小区');
       return;
     }
-    if(this.RSadd.describe == ""){
+    if (this.RSadd.describe == "") {
       alert('请对房屋做简单描述');
       return;
     }
-    if(this.RSadd.city == "" || this.RSadd.region == "" || this.RSadd.street == ""){
+    if (this.RSadd.city == "" || this.RSadd.region == "" || this.RSadd.street == "") {
       alert("请输入房屋位置");
       return;
     }
@@ -189,21 +199,21 @@ export class RentsaleaddPage {
         // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           let toast = this.toastCtrl.create({
-          message: '发布房源成功',
-          duration: 2000,
-          position: 'bottom'
-        });
+            message: '发布房源成功',
+            duration: 2000,
+            position: 'bottom'
+          });
           toast.onDidDismiss(() => {
-           console.log('Dismissed toast');
-        });
-      toast.present();
+            console.log('Dismissed toast');
+          });
+          toast.present();
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
           j--
-          if(j>0){
+          if (j > 0) {
             this.config.doDefLogin();
             this.getRSInfo();
-          }          
+          }
         } else {
           alert(data.errmsg);
         }
@@ -232,7 +242,7 @@ export class RentsaleaddPage {
         "street": this.RSadd.street,
         "region": this.RSadd.region,
         "city": this.RSadd.city,
-         "Id":this.RSadd.id,
+        "Id": this.RSadd.id,
       }
       var api = this.config.apiUrl + "/api/rental/edit";
       console.log(xiugai)
@@ -241,14 +251,14 @@ export class RentsaleaddPage {
         // loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           let toast = this.toastCtrl.create({
-          message: '修改房源成功',
-          duration: 2000,
-          position: 'bottom'
-        });
+            message: '修改房源成功',
+            duration: 2000,
+            position: 'bottom'
+          });
           toast.onDidDismiss(() => {
-           console.log('Dismissed toast');
-        });
-      toast.present();
+            console.log('Dismissed toast');
+          });
+          toast.present();
           this.navCtrl.pop();
         } else if (data.errcode === 40002) {
           this.getRSInfo();
@@ -259,11 +269,11 @@ export class RentsaleaddPage {
     }
   }
 
-//获取value值
-getValue(value){
-  // this.RSadd.nature = value;
-  // alert(this.RSadd.nature)
-}
+  //获取value值
+  getValue(value) {
+    // this.RSadd.nature = value;
+    // alert(this.RSadd.nature)
+  }
   //获取城代码
   getCityCode() {
     // var index = $.inArray(this.city, this.citys);
@@ -282,12 +292,12 @@ getValue(value){
       }
     })
   }
-    //获取城代码
+  //获取城代码
   getCityCodeend() {
     var index = $.inArray(this.city, this.citys);
     if (index < 0) {
       alert("请输入正确的城市名称");
-      this.city="";
+      this.city = "";
       return;
     }
     var api = this.config.apiUrl + '/api/rental/getCity?cityName=' + this.city;
@@ -327,4 +337,237 @@ getValue(value){
   backTo() {
     this.navCtrl.pop();
   }
+
+
+  //从相册中选择
+  takePhoto() {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: 0,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,  //媒体类型，默认PICTURE->照片，还有VIDEO等可以选
+      sourceType: 0,
+      saveToPhotoAlbum: false,
+      allowEdit: false,
+      targetWidth: 300,
+      targetHeight: 300
+    }
+    this.camera.getPicture(options).then((results) => {
+        var that = this;
+        this.imgList.push('data:image/png;base64,'+results);
+        $.ajax({
+        type: "post",
+        url: "http://test.api.gyhsh.cn/api/files/upload_base64_temp",
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        data: { "file": results, "file_guid": that.guid, "file_name": "QQ图片20180403181140.jpg" },
+        success: function (data) {
+         //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
+         if(that.fileName.length==0){
+           that.fileName = data.model.file_name;
+         }else{
+            that.fileName +="〡"+ data.model.file_name;
+         }    
+        
+         that.fileUrl= data.model.file_url;
+         var bb = that.fileUrl.split('/');
+         if(that.tempName.length == 0){
+           that.tempName = bb[4];
+         }else{
+             that.tempName += '〡'+ bb[4];
+         }
+        },
+        error: function (result) {
+          alert("上传照片失败" + result);
+        }
+      });   
+        }, (err) => {
+          alert("拍照失败")
+        });
+
+
+
+    // this.imagePicker.getPictures(options).then((results) => {
+    //   for (var i = 0; i < results.length; i++) {
+    //     alert(results[i]);
+    //     var myReader: FileReader = new FileReader();
+    //     var img = document.createElement('img');
+    //     img.src = results[i];
+    //     img.onload = function () {
+    //       var canvas = document.createElement("canvas");
+    //       canvas.width = img.width;
+    //       canvas.height = img.height;
+    //       alert("进来了");
+    //       var ctx = canvas.getContext("2d");
+    //       ctx.drawImage(img, 0, 0, img.width, img.height);
+
+    //       var dataURL = canvas.toDataURL("image/png");
+    //       alert(dataURL);
+    //     }
+
+    //     // alert(results[i]);
+    //     this.base64.encodeFile(results[i]).then((base64File: string) => {
+    //       alert("进来了");
+    //       alert(base64File);
+    //     }, (err) => {
+    //       alert(err);
+    //     });
+    //     //界面展示
+
+    //     this.imgList.push('data:image/png;base64,' + results[i]);
+    //   }
+    // }, (err) => { });
+  }
+
+
+  getBase64Image(img) {
+    alert(img);
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    alert("进来了");
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL
+    // return dataURL.replace("data:image/png;base64,", "");
+  }
+
+  //手机拍照
+  photos() {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: 0,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,  //媒体类型，默认PICTURE->照片，还有VIDEO等可以选
+      sourceType: 1,
+      saveToPhotoAlbum: false,
+      allowEdit: false,
+      targetWidth: 300,
+      targetHeight: 300,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      var that = this;
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      //测试1
+      this.imgList.push('data:image/png;base64,' + imageData);
+      $.ajax({
+        type: "post",
+        url: "http://test.api.gyhsh.cn/api/files/upload_base64_temp",
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded",
+        data: { "file": imageData, "file_guid": that.guid, "file_name": "QQ图片20180403181140.jpg" },
+        success: function (data) {
+         //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
+         if(that.fileName.length==0){
+           that.fileName = data.model.file_name;
+         }else{
+            that.fileName +="〡"+ data.model.file_name;
+         }    
+         that.fileUrl= data.model.file_url;
+         var bb = that.fileUrl.split('/');
+         if(that.tempName.length == 0){
+           that.tempName = bb[4];
+         }else{
+             that.tempName += '〡'+ bb[4];
+         }
+        },
+        error: function (result) {
+          alert("上传照片失败" + result);
+        }
+      });
+
+    }, (err) => {
+      alert("拍照失败");
+      // Handle error
+    });
+  }
+
+
+
+
+  //显示选择框
+  showPicActionSheet() {
+    this.useASComponent();
+  }
+
+  // 使用ionic中的ActionSheet组件
+  private useASComponent() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '选择',
+      buttons: [
+        {
+          text: '拍照',
+          handler: () => {
+            this.photos();
+          }
+        },
+        {
+          text: '从手机相册选择',
+          handler: () => {
+            this.takePhoto();
+          }
+        },
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+//生成guid
+date = new Date();
+newGUID () {
+this.date = new Date();
+var guidStr = '';
+var aa = this.getGUIDDate();
+var bb = this.getGUIDTime();
+var sexadecimalDate = this.hexadecimal(aa, 16);
+var sexadecimalTime = this.hexadecimal(bb, 16);
+for (var i = 0; i < 9; i++) {
+guidStr += Math.floor(Math.random() * 16).toString(16);
+}
+guidStr += sexadecimalDate;
+guidStr += sexadecimalTime;
+while (guidStr.length < 32) {
+guidStr += Math.floor(Math.random() * 16).toString(16);
+}
+return this.formatGUID(guidStr);
+}
+getGUIDDate() {
+return this.date.getFullYear() + this.addZero(this.date.getMonth() + 1) + this.addZero(this.date.getDay());
+}
+getGUIDTime () {
+return this.addZero(this.date.getHours()) + this.addZero(this.date.getMinutes()) + this.addZero(this.date.getSeconds()) + this.addZero(this.date.getMilliseconds()/10);
+}
+addZero (num) {
+if (Number(num).toString() != 'NaN' && num >= 0 && num < 10) {
+return '0' + Math.floor(num);
+} else {
+return num.toString();
+}
+}
+hexadecimal(num, x) {
+return parseInt(num.toString()).toString(x);
+}
+formatGUID(guidStr) {
+var str1 = guidStr.slice(0, 8) + '-',
+str2 = guidStr.slice(8, 12) + '-',
+str3 = guidStr.slice(12, 16) + '-',
+str4 = guidStr.slice(16, 20) + '-',
+str5 = guidStr.slice(20);
+alert(str1 + str2 + str3 + str4 + str5);
+this.guid = str1 + str2 + str3 + str4 + str5;
+console.log(this.guid);
+return str1 + str2 + str3 + str4 + str5;
+}
+
 }

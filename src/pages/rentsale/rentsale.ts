@@ -219,7 +219,7 @@ export class RentsalePage {
   }
   //我的发布信息跳转页面
   goRentsaleadd(){
-      if(this.storage.get('token')){
+    if(this.storage.get('token')){
       this.navCtrl.push(RentsaleaddPage)
     }else{
       this.navCtrl.push(LoginPage);

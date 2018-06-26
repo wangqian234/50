@@ -149,6 +149,8 @@ import { Device } from '@ionic-native/device';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer} from '@ionic-native/file-transfer';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
 import { Network } from '@ionic-native/network';
 //房屋租售列表
 import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
@@ -169,7 +171,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @NgModule({
   declarations: [
     MyApp,
@@ -316,6 +318,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     Geolocation,
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConfigProvider,
     HttpServicesProvider,
@@ -326,6 +329,8 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     Camera,
     File,
     FileTransfer,
+    ImagePicker,
+    Base64,
     Network,
   ]
 })

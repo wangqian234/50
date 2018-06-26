@@ -44,7 +44,6 @@ export class TabsPage {
         $(".mytabs").css("display","none");
         $(".mytabs2").css("display","block");
       } else {
-        this.storage.set('tabs','true');
         $(".mytabs2").css("display","none");
         $(".mytabs").css("display","block");
       }

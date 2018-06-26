@@ -42,9 +42,10 @@
 
   <div class="takePhoto">
     <ul class="photosList">
-      <li class="publishPhoto" *ngFor="let imgItem of imgList"><img class="photo" [src]="imgItem" /></li>
-      <li class="publishPhoto"><img class="photo" src="assets/imgs/addImg.png" (click)="showPicActionSheet()" /></li>
-      <!--<li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="doUpload()"/></li>-->
+      <li  class="publishPhoto"  *ngFor="let imgItem of imgList"><img class="photo"  id="photo" [src]="imgItem"/></li>
+        <li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="showPicActionSheet()"/></li>
+          <!--<li  class="publishPhoto" ><img class="photo" src="assets/imgs/addImg.png"  (click)="doUpload()"/></li>-->
+         <!--<li  class="publishPhoto" > <img class="photo" src="http://mp.gyhsh.cn/upload/Temp/0e74624b-a489-4eaf-9b71-355914fcd4c8/ec76b6fa-ea7f-400f-ae86-72a43134db13.jpg" /></li>-->       
     </ul>
   </div>
 

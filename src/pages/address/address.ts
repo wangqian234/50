@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,App ,ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
@@ -42,7 +43,7 @@ export class AddressPage {
       'token' : ''
     }
 
-  constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
+  constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef,private alertCtrl: AlertController
  ,public storage:StorageProvider,public httpService:HttpServicesProvider,public app: App,public toastCtrl:ToastController) {
   }
 
@@ -112,41 +113,56 @@ export class AddressPage {
   }
   //删除地址
   deleteAddress(id){
-    var r= confirm("确认删除收货地址")
-        if (r!=true)
-        {
-          return;
-        }
-    var data = {
-      token : this.storage.get('token'),
-      addressId : id,
-    }
-    var j = 3;
-    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    var options = new RequestOptions({ headers: headers });
-    var api = this.config.apiUrl + '/api/Address/del';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-        let toast = this.toastCtrl.create({
-          message: '成功删除地址',
-          duration: 2000,
-          position: 'top'
-        });
-        toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
-        });
-        toast.present();
-        this.ionViewDidEnter(); //更新页面
-      } else if(data.errcode === 40002){
-        j--;
-        if(j>0){
-          this.config.doDefLogin();
-          this.getAddressList();
-      }
-      }  else {
-        console.log(data.errmsg);
-      }
-    });
+      let alert1 = this.alertCtrl.create({
+        title: '',
+        message: '确认删除收货地址?',
+        buttons: [
+          {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+              return;
+            }
+          },
+          {
+            text: '确认',
+            handler: () => {
+              var data = {
+                token : this.storage.get('token'),
+                addressId : id,
+              }
+              var j = 3;
+              var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+              var options = new RequestOptions({ headers: headers });
+              var api = this.config.apiUrl + '/api/Address/del';
+              this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+                if (data.errcode === 0 && data.errmsg === 'OK') {
+                  let toast = this.toastCtrl.create({
+                    message: '成功删除地址',
+                    duration: 2000,
+                    position: 'top'
+                  });
+                  toast.onDidDismiss(() => {
+                    console.log('Dismissed toast');
+                  });
+                  toast.present();
+                  this.ionViewDidEnter(); //更新页面
+                } else if(data.errcode === 40002){
+                  j--;
+                  if(j>0){
+                    this.config.doDefLogin();
+                    this.getAddressList();
+                }
+                }  else {
+                  console.log(data.errmsg);
+                }
+              });
+            }
+          }
+        ]
+      });
+      alert1.present();
   }
 
   //编辑、新加地址页面
