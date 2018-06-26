@@ -6,13 +6,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 import {NewinfoPage} from '../newinfo/newinfo'
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
-/**
- * Generated class for the NewslistPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 
 @Component({
   selector: 'page-newslist',

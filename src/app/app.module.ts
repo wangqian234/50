@@ -171,7 +171,9 @@ import { CutSPipe } from '../pipes/cut-s/cut-s';
 import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
-
+import { JPush } from '@jiguang-ionic/jpush';
+//极光推送
+import { JPushTestPage } from '../pages/j-push-test/j-push-test';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 @NgModule({
   declarations: [
@@ -240,6 +242,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    JPushTestPage,
     RentsearchPage,
   ],
   imports: [
@@ -315,6 +318,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    JPushTestPage,
     RentsearchPage,
   ],
   providers: [  /*引入了自定义的服务*/
@@ -335,6 +339,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ImagePicker,
     Base64,
     Network,
+    JPush,
   ]
 })
 export class AppModule {}

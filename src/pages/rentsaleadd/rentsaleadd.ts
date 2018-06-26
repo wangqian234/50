@@ -74,7 +74,7 @@ export class RentsaleaddPage {
     "南投县", "云林县", "嘉义县", "台南县", "高雄县", "屏东县", "澎湖县", "台东县", "花莲县", "中西区", "东区", "九龙城区", "观塘区", "南区", "深水埗区", "黄大仙区", "湾仔区", "油尖旺区", "离岛区", "葵青区", "北区",
     "西贡区", "沙田区", "屯门区", "大埔区", "荃湾区", "元朗区", "澳门特别行政区", "海外"];
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: StorageProvider, public config: ConfigProvider,
-    public http: Http, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public camera: Camera, public imagePicker: ImagePicker, public actionSheetCtrl: ActionSheetController, private base64: Base64,private file:File) {
+    public http: Http, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public camera: Camera, public imagePicker: ImagePicker, public actionSheetCtrl: ActionSheetController, private base64: Base64, private file: File) {
 
   }
   ionViewWillEnter() {
@@ -353,37 +353,37 @@ export class RentsaleaddPage {
       targetHeight: 300
     }
     this.camera.getPicture(options).then((results) => {
-        var that = this;
-        this.imgList.push('data:image/png;base64,'+results);
-        $.ajax({
+      var that = this;
+      this.imgList.push('data:image/png;base64,' + results);
+      $.ajax({
         type: "post",
         url: "http://test.api.gyhsh.cn/api/files/upload_base64_temp",
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
         data: { "file": results, "file_guid": that.guid, "file_name": "QQ图片20180403181140.jpg" },
         success: function (data) {
-         //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
-         if(that.fileName.length==0){
-           that.fileName = data.model.file_name;
-         }else{
-            that.fileName +="〡"+ data.model.file_name;
-         }    
-        
-         that.fileUrl= data.model.file_url;
-         var bb = that.fileUrl.split('/');
-         if(that.tempName.length == 0){
-           that.tempName = bb[4];
-         }else{
-             that.tempName += '〡'+ bb[4];
-         }
+          //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
+          if (that.fileName.length == 0) {
+            that.fileName = data.model.file_name;
+          } else {
+            that.fileName += "〡" + data.model.file_name;
+          }
+
+          that.fileUrl = data.model.file_url;
+          var bb = that.fileUrl.split('/');
+          if (that.tempName.length == 0) {
+            that.tempName = bb[4];
+          } else {
+            that.tempName += '〡' + bb[4];
+          }
         },
         error: function (result) {
           alert("上传照片失败" + result);
         }
-      });   
-        }, (err) => {
-          alert("拍照失败")
-        });
+      });
+    }, (err) => {
+      alert("拍照失败")
+    });
 
 
 
@@ -461,19 +461,19 @@ export class RentsaleaddPage {
         contentType: "application/x-www-form-urlencoded",
         data: { "file": imageData, "file_guid": that.guid, "file_name": "QQ图片20180403181140.jpg" },
         success: function (data) {
-         //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
-         if(that.fileName.length==0){
-           that.fileName = data.model.file_name;
-         }else{
-            that.fileName +="〡"+ data.model.file_name;
-         }    
-         that.fileUrl= data.model.file_url;
-         var bb = that.fileUrl.split('/');
-         if(that.tempName.length == 0){
-           that.tempName = bb[4];
-         }else{
-             that.tempName += '〡'+ bb[4];
-         }
+          //this.imgList.push("http://mp.gyhsh.cn" + data.model.file_url);
+          if (that.fileName.length == 0) {
+            that.fileName = data.model.file_name;
+          } else {
+            that.fileName += "〡" + data.model.file_name;
+          }
+          that.fileUrl = data.model.file_url;
+          var bb = that.fileUrl.split('/');
+          if (that.tempName.length == 0) {
+            that.tempName = bb[4];
+          } else {
+            that.tempName += '〡' + bb[4];
+          }
         },
         error: function (result) {
           alert("上传照片失败" + result);
@@ -523,51 +523,51 @@ export class RentsaleaddPage {
     actionSheet.present();
   }
 
-//生成guid
-date = new Date();
-newGUID () {
-this.date = new Date();
-var guidStr = '';
-var aa = this.getGUIDDate();
-var bb = this.getGUIDTime();
-var sexadecimalDate = this.hexadecimal(aa, 16);
-var sexadecimalTime = this.hexadecimal(bb, 16);
-for (var i = 0; i < 9; i++) {
-guidStr += Math.floor(Math.random() * 16).toString(16);
-}
-guidStr += sexadecimalDate;
-guidStr += sexadecimalTime;
-while (guidStr.length < 32) {
-guidStr += Math.floor(Math.random() * 16).toString(16);
-}
-return this.formatGUID(guidStr);
-}
-getGUIDDate() {
-return this.date.getFullYear() + this.addZero(this.date.getMonth() + 1) + this.addZero(this.date.getDay());
-}
-getGUIDTime () {
-return this.addZero(this.date.getHours()) + this.addZero(this.date.getMinutes()) + this.addZero(this.date.getSeconds()) + this.addZero(this.date.getMilliseconds()/10);
-}
-addZero (num) {
-if (Number(num).toString() != 'NaN' && num >= 0 && num < 10) {
-return '0' + Math.floor(num);
-} else {
-return num.toString();
-}
-}
-hexadecimal(num, x) {
-return parseInt(num.toString()).toString(x);
-}
-formatGUID(guidStr) {
-var str1 = guidStr.slice(0, 8) + '-',
-str2 = guidStr.slice(8, 12) + '-',
-str3 = guidStr.slice(12, 16) + '-',
-str4 = guidStr.slice(16, 20) + '-',
-str5 = guidStr.slice(20);
-alert(str1 + str2 + str3 + str4 + str5);
-this.guid = str1 + str2 + str3 + str4 + str5;
-console.log(this.guid);
-return str1 + str2 + str3 + str4 + str5;
-}
+  //生成guid
+  date = new Date();
+  newGUID() {
+    this.date = new Date();
+    var guidStr = '';
+    var aa = this.getGUIDDate();
+    var bb = this.getGUIDTime();
+    var sexadecimalDate = this.hexadecimal(aa, 16);
+    var sexadecimalTime = this.hexadecimal(bb, 16);
+    for (var i = 0; i < 9; i++) {
+      guidStr += Math.floor(Math.random() * 16).toString(16);
+    }
+    guidStr += sexadecimalDate;
+    guidStr += sexadecimalTime;
+    while (guidStr.length < 32) {
+      guidStr += Math.floor(Math.random() * 16).toString(16);
+    }
+    return this.formatGUID(guidStr);
+  }
+  getGUIDDate() {
+    return this.date.getFullYear() + this.addZero(this.date.getMonth() + 1) + this.addZero(this.date.getDay());
+  }
+  getGUIDTime() {
+    return this.addZero(this.date.getHours()) + this.addZero(this.date.getMinutes()) + this.addZero(this.date.getSeconds()) + this.addZero(this.date.getMilliseconds() / 10);
+  }
+  addZero(num) {
+    if (Number(num).toString() != 'NaN' && num >= 0 && num < 10) {
+      return '0' + Math.floor(num);
+    } else {
+      return num.toString();
+    }
+  }
+  hexadecimal(num, x) {
+    return parseInt(num.toString()).toString(x);
+  }
+  formatGUID(guidStr) {
+    var str1 = guidStr.slice(0, 8) + '-',
+      str2 = guidStr.slice(8, 12) + '-',
+      str3 = guidStr.slice(12, 16) + '-',
+      str4 = guidStr.slice(16, 20) + '-',
+      str5 = guidStr.slice(20);
+    alert(str1 + str2 + str3 + str4 + str5);
+    this.guid = str1 + str2 + str3 + str4 + str5;
+    console.log(this.guid);
+    return str1 + str2 + str3 + str4 + str5;
+  }
 
 }
