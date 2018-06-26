@@ -14,7 +14,7 @@ import { BindroomPage } from '../bindroom/bindroom';
 //登录页面
 import { LoginPage } from '../login/login';
 import {PaymentPage} from '../payment/payment'
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
@@ -42,14 +42,22 @@ export class OnlinepaymentPage {
     createip:'',
     act:'House',
   };
+  url = {
+    tId:'',
+    token:'',
+    tags:'',
+    act:'',
+    createip:'',
+  }
   onlinepaymentList={
     roomId:''
   }
+  public weixinUrl;
   public payAct='';
   public tongtong;
   public tongtong1;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private iab: InAppBrowser) {
     
     //   if(this.navParams.get('item')){
     //   this.defRoomId=this.navParams.get('item');
@@ -142,7 +150,6 @@ ionViewWillEnter(){
      this.http.get(api).map(res => res.json()).subscribe(data =>{
           if(data.errcode===0&&data.errmsg==='OK'){
             that.list= data.list;
-
             var map = {};
             that.dest = [];
             for(var i = 0; i < that.list.length; i++){
@@ -197,6 +204,19 @@ ionViewWillEnter(){
       }
 
   }
+   clickme(){
+        var that = this;
+        $.ajax({
+            url: 'http://freegeoip.net/json/',
+            success: function(data){
+              that.cip = data.ip;
+              that.gopay();
+            },
+            type: 'get',
+            dataType: 'JSON'
+        });
+    }
+
 
   //结算账单
   gopay(){
@@ -226,23 +246,54 @@ ionViewWillEnter(){
           if(data.errcode===0 ){
             this.payAct = data.model.act;
             this.paytId = data.model.tId;
+            this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
             console.log(data)
-           this.goWeixiPay();
+           this.getmwebUrl();
           }else{
             alert(data.errmsg+"支付失败")
           }
      })
   }
 
-    //跳转到微信支付页面
+    //调用支付获取mweb_url
+    getmwebUrl(){
+      this.url.act = this.payAct;
+      this.url.createip = this.cip;
+      this.url.tags = 'android';
+      this.url.tId = this.paytId;
+      this.url.token = this.storage.get('token');
+      var api =  this.config.apiUrl + '/api/weixinpay/unifiedorder';
+      this.http.post(api,this.url).map(res => res.json()).subscribe(data =>{
+        console.log(data);
+        if(data.errcode == 0){
+          this.weixinUrl = data.model.mweb_url; 
+          this.goWeixiPay();
+         // (<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_blank','location=yes');
+        }
+     })
+    }
+  //跳转到微信支付页面
   goWeixiPay(){
-    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
     console.log(this.tongtong);
-    //location.href ='http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
-   // (<any>window).cordova.InAppBrowser.open(this.tongtong,'_blank','location = yes')
+    location.href =this.tongtong;
+    alert("dd")
+    location.href = this.weixinUrl;
+    //(<any>window).cordova.InAppBrowser.open(this.tongtong,'_blank','location=yes');
+  //  this.gotoUrl(this.tongtong)
+  //   this.gotoUrl(this.weixinUrl)
+    //(<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_top','location=yes');
   }
-  
-  
+
+  gotoUrl(url){
+     if((<any>window).VBArray){
+         var gotoLink = document.createElement('a');
+         gotoLink .href = url;
+         document.body.appendChild(gotoLink);
+         gotoLink .click();
+     }else{
+       window.location.href = url;
+     }
+ }
 
   //跳转支付页面
   gopayMent(outTradeNo,model,allprice,roomid){

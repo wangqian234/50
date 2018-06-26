@@ -15,6 +15,9 @@ import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
 import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 //租赁信息列表
 import { RentsalelistPage } from '../rentsalelist/rentsalelist';
+//房屋搜索
+import { RentsearchPage } from '../rentsearch/rentsearch';
+
 //登录页面
 import { LoginPage } from '../login/login';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
@@ -292,5 +295,21 @@ export class RentsalePage {
        refresher.complete();
      }, 2000);
  }
+   //输入框搜索，跳转到列表详情界面
+  doReserch() {
+    // var key = [];
+    // if (this.storage.get("shopKewWords")) {
+    //   key = this.storage.get("shopKewWords");
+    //   key.push(this.keywords);
+    //   this.storage.set("shopKewWords", key);
+    // } else {
+    //   key.push(this.keywords)
+    //   this.storage.set("shopKewWords", key);
+    // }
+    this.navCtrl.push(RentsearchPage);
+    // , {
+    //   keywords: this.keywords,
+    //  })
+  }
 
 }

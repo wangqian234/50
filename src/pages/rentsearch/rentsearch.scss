@@ -1,7 +1,6 @@
-page-rentsalelist {
-
- /////////
- .searchdiv{ 
+page-rentserch {
+///////////////
+  .searchdiv{ 
         padding:4px 0 ;
         background:#fff;
         // border-top:1px solid #3e3e3e;
@@ -21,7 +20,25 @@ page-rentsalelist {
         background:#fff;
         border-radius: 5px;
     }
-    
+    .choose{
+        float:left;
+        cursor:pointer;
+        height:32px;
+        width:29%; 
+        display:inline-block;
+        position:relative;
+        line-height:32px;
+        font-size:18px; 
+        text-align:center;
+        padding-right:10px;
+    }
+
+    .choose select{
+        height: 30px;
+        width:100%;
+        background-color: #fff;
+        color: #aaaaaa;
+    }
 
     .searchTextInit{
         height:32px;
@@ -73,7 +90,8 @@ page-rentsalelist {
     .choose ul li{
         padding: 5px 0;
     }
- ///////   
+///////////////////////
+///////   
 #test{
      position:sticky;
     z-index: 500;

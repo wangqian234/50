@@ -135,7 +135,8 @@ import { RentsaleaddPage }from '../pages/rentsaleadd/rentsaleadd';
 
 //房屋租售首页
 import { RentsalePage }from '../pages/rentsale/rentsale';
-
+//房屋搜索
+import { RentsearchPage }from '../pages/rentsearch/rentsearch';
 //房屋租售详细信息
 import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
@@ -171,7 +172,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @NgModule({
   declarations: [
     MyApp,
@@ -239,6 +240,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    RentsearchPage,
   ],
   imports: [
     BrowserModule,
@@ -313,11 +315,13 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    RentsearchPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConfigProvider,
     HttpServicesProvider,
