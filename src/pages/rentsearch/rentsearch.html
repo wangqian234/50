@@ -1,57 +1,57 @@
 
 <ion-header>
-	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
 			<div class="zhongjain_daoh">
 				<ul>
-					<li><a class="px24 zyyge">房屋信息列表</a></li>  
+					<li><a class="px24 zyyge">房屋搜索</a></li>  
 				</ul>
 			</div>
 		</div>
 	</div>
  </div>
+
 </ion-header>
 
+
 <ion-content style="background-color:#f5f5f5">
-	<div class="spinnerbox"></div>
-	<div class="spinner">
-			<div class="bar1"></div>
-			<div class="bar2"></div>
-			<div class="bar3"></div>
-			<div class="bar4"></div>
-			<div class="bar5"></div>
-			<div class="bar6"></div>
-			<div class="bar7"></div>
-			<div class="bar8"></div>
-			<div class="bar9"></div>
-			<div class="bar10"></div>
-			<div class="bar11"></div>
-			<div class="bar12"></div>
-	</div>
-	<!--<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
-	<div class="zhongj_k zhongj_k_z">
-		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
-			<div class="zhongjain_daoh">
-				<ul>
-					<li><a class="px24 zyyge">房屋信息列表</a></li>  
-				</ul>
-			</div>
-		</div>
-	</div>
- </div>-->
-<!--搜索-->
-	<div class="searchdiv">
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+
+
+<!---->
+ <div class="searchdiv">
     <div class="searchTool">
-        
+        <form class="choose">
+           <img src="assets/imgs/jiantou.png" style="margin-top:0.23rem;right:5px;width:0.17rem;height:0.15rem;margin-right: 0.08rem;">
+          <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 14px;" [(ngModel)]="houseType" (ngModelChange)="changeType()" >
+          
+          <option class = "11" value="1">出售</option>
+          <option selected class = "22" value="2">出租</option>
+          <option class = "33" value="3">求购</option>
+          <option class = "44" value="4">求租</option>          
+          </select>
+        </form>
         <input type="search" [(ngModel)]="search" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
         <input type="button" value class="searchBtn">
         <ion-icon (click)="getSaleList()" class="searchicon" name="ios-search-outline"></ion-icon>
     </div>
-  </div>
-<!---->
+  </div> 
  <div id="group-content" style="background-color:white">
   <ul class="order-nav clearfix" id="test">
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
@@ -92,5 +92,4 @@
   <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 </ion-content>
