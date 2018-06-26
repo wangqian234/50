@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import $ from 'jquery';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Http,Jsonp }from '@angular/http';
 
-@IonicPage()
+
 @Component({
   selector: 'page-editorinfo',
   templateUrl: 'editorinfo.html',
@@ -47,14 +47,18 @@ export class EditorinfoPage {
   user = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider, public http:Http, public storage:StorageProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,
+   public http:Http, public storage:StorageProvider, public toastCtrl:ToastController) {
+     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditorinfoPage');
     this.getUserInfo();
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   getBaseInfo(){
     $(".zhuc_qieh div:nth-of-type(1)").attr("class","zhuc");
     $(".zhuc_qieh div:nth-of-type(2)").removeAttr("class","zhuc")
@@ -101,12 +105,17 @@ export class EditorinfoPage {
         "birthday":this.personInfo.birthday,
         "sex":this.personInfo.sex,
       }
+      var now = new Date().getTime();
+      var birth = new Date(data.birthday).getTime();
+      if(birth - now >0){
+        alert("出生日期不能大于当前时间");
+        return;
+      }
       console.log(data)
       if(this.personInfo.birthday&&this.personInfo.name){
       var api = this.config.apiUrl + '/api/User/edit_Basic';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
        if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("修改成功！");
         this.storage.set('username1',this.personInfo.name)
         this.editMoreInfo();
       } else if(data.errcode === 40002) {
@@ -138,11 +147,24 @@ export class EditorinfoPage {
         "maritalStatus":this.personInfo.maritalstatus,
         "industryInfo":this.personInfo.industryinfo,
       }
+      if(!data.cardNo || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(data.cardNo)
+        || !/(P\d{7})|(G\d{8})/.test(data.cardNo)){
+        alert("请输入正确的证件格式");
+        return;
+      }
       console.log(JSON.stringify(data))
       var api = this.config.apiUrl + '/api/User/edit_More';
       this.http.post(api,data).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          console.log("修改成功!");
+          let toast = this.toastCtrl.create({
+          message: '修改个人信息成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
           this.navCtrl.pop();
       } else if(data.errcode === 40002){
         j--;

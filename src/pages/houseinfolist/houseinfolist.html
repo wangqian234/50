@@ -1,5 +1,7 @@
-<ion-content>
+
+<ion-header style="background-color:#448AFF">
 <div class="toub_beij toub_beij_zy" style="background-color:#448AFF;z-index: 10000;">
+
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh" (click)="backTo()">
@@ -12,6 +14,35 @@
 		</div> 
 	</div>
 </div>
+</ion-header>
+
+<ion-content>
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 <!--内容-->
 	<div style="height:20px;width:100%;background-color:#448AFF;position: absolute;"></div>
@@ -20,11 +51,11 @@
 		<div class="shouh_dange_beijin"  >
 			<div class="shang">
 				<div class="mz" style="width:98%">
-					<p (click)="getHouseInfo(list.id)"><em>项目名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.projectname}}</em></p>
+					<p (click)="getHouseInfo(list.id)">项目名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em><span>{{list.projectname}}</span></em></p>
 					<p (click)="getHouseInfo(list.id)"><em>楼栋名称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.edificename}}</em></p>
 					<p (click)="getHouseInfo(list.id)"><em>房间号码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.code}}</em></p>
 					<!--<p><em>业主姓名：{{list.name}}</em></p>-->
-					<p (click)="getHouseInfo(list.id)"><em>当前状态：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{list.state | pipeRelation}}</em></p>
+					<p (click)="getHouseInfo(list.id)">当前状态：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em class="curstate">{{list.state | pipeRelation}}</em></p>
 					
         			<div *ngIf="!list.default" class="def"><input type="radio" (change)="setDefaultHouse(list.id)"/>&nbsp;&nbsp;&nbsp;&nbsp;设为默认房屋</div>
 				</div>

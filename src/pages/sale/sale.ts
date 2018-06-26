@@ -5,13 +5,14 @@ import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 import { LoadingController } from 'ionic-angular';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 //商品详情界面
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 
-@IonicPage()
 @Component({
   selector: 'page-sale',
   templateUrl: 'sale.html',
@@ -19,14 +20,20 @@ import { TabsPage } from '../tabs/tabs'
 export class SalePage {
 
 public ShopgoodsinfoPage=ShopgoodsinfoPage;
+public TabsPage = TabsPage;
+public LoginPage = LoginPage;
 public list = [];
 public mode = 0 ;
-
+public currentPlaceCode;
 public page = 1;
 
 public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage: StorageProvider,) {
+    
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 //抢购时间判断
 ifontime(mode){
@@ -42,16 +49,9 @@ ifontime(mode){
 }
 
 ifontime2(infiniteScroll){
-   let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-   loading.present();
-   var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode=4403';
-
-   loading.dismiss();
+   var api = this.wdh+'/api/goods/list?pageSize=10&pageIndex='+ this.page +'&mode='+ this.mode +'&curCityCode='+this.currentPlaceCode;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-            if(data.errcode===0 && data.errmsg==="OK"){
-
+      if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
         console.log(this.list)
         var now = new Date().getTime();
@@ -87,12 +87,24 @@ ifontime2(infiniteScroll){
 //  ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
 //   }
   ionViewDidLoad() {
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
     this.ifontime2("");
   }
   backTo(){
     this.navCtrl.pop();
+  }
+
+  gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(ShopgoodsinfoPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
   }
 
   leftTimer(str){ 
@@ -129,6 +141,22 @@ doLoadMore(infiniteScroll){
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
   }
+
+    //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.page = 1;
+        this.list = [];
+        this.ifontime2('');
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 
 

@@ -1,5 +1,19 @@
 <ion-content style="background-color:#F5F5F5">
-
+  <div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
   <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -55,7 +69,7 @@
       <div class="repairList">
       <div class="repairType">报修类型：</div>
          <form class="choose">
-           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.2rem;right:5px;width:0.17rem;height:0.15rem;">
           <select name="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.type" (ngModelChange)="changeType()">
           <option selected value="55">请选择报修类型</option>
           <option value="0">业主维修</option>
@@ -72,7 +86,7 @@
       <div class="repairList">
       <div class="repairType">故障类别：</div>
          <form class="choose">
-           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.2rem;right:5px;width:0.17rem;height:0.15rem;">
           <select name ="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.category" >
           <option selected="selected" value="55">请选择工单类型</option>
           <option *ngFor="let list of stypelist"  value={{list.id}}>{{list.name}}</option>
@@ -84,7 +98,7 @@
       <div id="aa" style="display: none"class="repairList">
       <div class="repairType">选择小区：</div>
          <form class="choose">
-           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.12rem;right:5px;width:0.3rem;height:0.3rem;">
+           <img src="assets/imgs/jiantou.png" style="position:absolute;margin-top:0.2rem;right:5px;width:0.17rem;height:0.15rem;">
           <select name ="type" style="-webkit-appearance: none;" [(ngModel)]="addlist.projectId" >
           <option  selected="selected">请选择小区</option>
           <option *ngFor="let list of projectlist"  value={{list.id}}>{{list.name}}</option>

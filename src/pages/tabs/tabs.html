@@ -1,13 +1,25 @@
-<ion-tabs class="mytabs" #mainTabs>
-  <ion-tab [root]="tab1Root" tabTitle="物业首页"  tabIcon="megaphone"></ion-tab>
+<!--<ion-tabs class="mytabs" #mainTabs>
+  <ion-tab [root]="tab1Root" tabTitle="物业首页"  tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="租售中心" tabIcon="megaphone"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="在线商城" tabIcon="ios-briefcase" (ionSelect)="getShopTab()"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="个人中心" tabIcon="person"></ion-tab>
 </ion-tabs>
 <ion-tabs class="mytabs2" #mainTabs2>
   <ion-tab [root]="tab5Root" tabTitle="商城首页" tabIcon="ios-briefcase"></ion-tab>
-  <ion-tab [root]="tab6Root" tabTitle="商品分类" tabIcon="ios-apps"></ion-tab>
-  <ion-tab [root]="tab7Root" tabTitle="我的订单" tabIcon="document"></ion-tab>
-  <ion-tab [root]="tab8Root" tabTitle="购物车" tabIcon="ios-cart"></ion-tab>
-</ion-tabs>
+  <ion-tab [root]="tab6Root" tabTitle="商品分类" tabIcon="ios-pricetags-outline" (ionSelect)="getsort()"></ion-tab>
+  <ion-tab [root]="tab7Root" tabTitle="我的订单" tabIcon="ios-paper-outline" (ionSelect)="getorder()"></ion-tab>
+  <ion-tab [root]="tab8Root" tabTitle="购物车" tabIcon="ios-cart" (ionSelect)="getcart()"></ion-tab>
+</ion-tabs>-->
 
+<ion-tabs class="mytabs" #mainTabs>
+  <ion-tab [root]="tab1Root" tabTitle="物业首页"  tabIcon="fangwu"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="租售中心" tabIcon="fangzu"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="在线商城" tabIcon="fenqifenqishangcheng2" (ionSelect)="getShopTab()"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="个人中心" tabIcon="yonghu"></ion-tab>
+</ion-tabs>
+<ion-tabs class="mytabs2" #mainTabs2>
+  <ion-tab [root]="tab5Root" tabTitle="商城首页" tabIcon="fenqifenqishangcheng2"></ion-tab>
+  <ion-tab [root]="tab6Root" tabTitle="商品分类" tabIcon="66" (ionSelect)="getsort()"></ion-tab>
+  <ion-tab [root]="tab7Root" tabTitle="我的订单" tabIcon="dingdan" (ionSelect)="getorder()"></ion-tab>
+  <ion-tab [root]="tab8Root" tabTitle="购物车" tabIcon="gouwuche" (ionSelect)="getcart()"></ion-tab>
+</ion-tabs>

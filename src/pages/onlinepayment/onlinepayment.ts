@@ -1,4 +1,6 @@
+
 import { Component } from '@angular/core';
+
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -11,13 +13,14 @@ import $ from 'jquery';
 import { BindroomPage } from '../bindroom/bindroom';
 //登录页面
 import { LoginPage } from '../login/login';
+import {PaymentPage} from '../payment/payment'
 
-@IonicPage()
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
 })
 export class OnlinepaymentPage {
+  public paytId;
   public cip;
   public saveRoomId;
   public isChencked=false;
@@ -42,23 +45,25 @@ export class OnlinepaymentPage {
   onlinepaymentList={
     roomId:''
   }
-  public outTradeNo;
-  
+  public payAct='';
+  public tongtong;
+  public tongtong1;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider) {
-      if(this.navParams.get('item')){
-      this.defRoomId=this.navParams.get('item');
-      this.roomid=this.defRoomId;
-      this.getroomId();
-      this.getPayList();
-    }else {
-      if(this.storage.get('roomId')){
-      this.defRoomId=this.storage.get('roomId');
-     this.roomid=this.defRoomId;
-      this.getroomId();
-      this.getPayList();
-    }
-    }
+    
+    //   if(this.navParams.get('item')){
+    //   this.defRoomId=this.navParams.get('item');
+    //   this.roomid=this.defRoomId;
+    //   this.getroomId();
+    //   this.getPayList();
+    // }else {
+    //   if(this.storage.get('roomId')){
+    //   this.defRoomId=this.storage.get('roomId');
+    //   this.roomid=this.defRoomId;
+    //   this.getroomId();
+    //   this.getPayList();
+    // }
+    // }
   }
 
   //主页面加载函数 
@@ -76,11 +81,28 @@ export class OnlinepaymentPage {
     console.log('ionViewDidLoad OnlinepaymentPage');
   }
 
+
   ionViewDidEnter() {
-    this.appearSome();
+    if(this.navParams.get('item')){
+      this.defRoomId=this.navParams.get('item');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }else {
+      if(this.storage.get('roomId')){
+      this.defRoomId=this.storage.get('roomId');
+      this.roomid=this.defRoomId;
+      this.getroomId();
+      this.getPayList();
+    }
+    }
+    this.storage.set('tabs','false');
     this.getTotal();
   }
 
+ionViewWillEnter(){
+    //this.appearSome();
+}
   backTo(){
     this.navCtrl.pop();
   }
@@ -156,17 +178,30 @@ export class OnlinepaymentPage {
      })
   }
   appearSome(){
-    $(".user_titlediv").click(function(){
-      console.log($(this).next('div'))
-      if($(this).next('div').css("display") == "none"){
-        $(this).next('div').css("display","block");
+    // $(".user_titlediv").click(function(){
+    //   if($(this).next('div').css("display") == "none"){
+    //     $(this).find("img").css("transform","rotate(0deg)");
+    //     $(this).next('div').css("display","block");
+    //   } else {
+    //     $(this).next('div').css("display","none");
+    //     $(this).find("img").css("transform","rotate(270deg)")
+    //   }
+    // })
+
+      if($(".otherUser_content_con").css("display") == "none"){
+        $(".little_img").css("transform","rotate(0deg)");
+        $(".otherUser_content_con").css("display","block");
       } else {
-        $(this).next('div').css("display","none");
+        $(".otherUser_content_con").css("display","none");
+        $(".little_img").css("transform","rotate(270deg)")
       }
-    })
+
   }
+
   //结算账单
   gopay(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.pay.createip=this.cip;
     this.pay.roomId=this.roomid;
     this.pay.token=this.storage.get('token');
@@ -186,40 +221,56 @@ export class OnlinepaymentPage {
     console.log(this.pay)
     var api = this.config.apiUrl+'/api/charge/payment?';
      this.http.post(api,this.pay).map(res => res.json()).subscribe(data =>{
+       $(".spinnerbox").fadeOut(200);
+       $(".spinner").fadeOut(200);
           if(data.errcode===0 ){
-            this.outTradeNo = data.errmsg;
+            this.payAct = data.model.act;
+            this.paytId = data.model.tId;
             console.log(data)
-           // this.checkPayment()
-            this.getPayList()
+           this.goWeixiPay();
           }else{
             alert(data.errmsg+"支付失败")
           }
      })
   }
+
+    //跳转到微信支付页面
+  goWeixiPay(){
+    this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
+    console.log(this.tongtong);
+    //location.href ='http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice 
+   // (<any>window).cordova.InAppBrowser.open(this.tongtong,'_blank','location = yes')
+  }
+  
+  
+
+  //跳转支付页面
+  gopayMent(outTradeNo,model,allprice,roomid){
+    this.navCtrl.push(PaymentPage,{outTradeNo:outTradeNo,model:model,allprice:allprice,roomid:roomid})
+  }
+
      //微信查询接口
    checkPayment(){
-     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg === 'OK'){
-          alert("支付成功")
-       }else{
-         alert(data.errmsg)
-       }
-     })
+    //  var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //    if(data.errmsg === 'OK'){
+    //       alert("支付成功")
+    //    }else{
+    //      alert(data.errmsg)
+    //    }
+    //  })
    }
-        clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.gopay();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
+   //显示选择微信支付的页面
+    clickmeToOut(){
+      if(this.allprice == 0){
+        alert("请选择缴费选项")
+        return;
       }
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
 
   getTotal(){
     var that = this;
@@ -264,15 +315,14 @@ export class OnlinepaymentPage {
     }
       this.allprice = parseFloat(totalprice.toFixed(2));
   }
-  // //获取ip
-  // getClientIp(){
-  //   $cip = "unknown";
-  //   if($_SERVER['REMOTE_ADDR']){
-  //     $cip = $_SERVER['REMOTE_ADDR'];
-  //   }else if(getenv("REMOTE_ADDR")){
-  //     $cip = getenv("REMOTE_ADDR")
-  //   }
-  //     return $ip
-  // }
 
+  //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.getPayList();
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 }

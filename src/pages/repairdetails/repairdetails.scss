@@ -70,6 +70,7 @@ page-repairdetails {
     display: inline;
     color:#488aff;
     font-size: 0.25rem;
+    line-height: 0.5rem;
 }
 .detail{
     padding:0.1rem 0.3rem;
@@ -94,6 +95,7 @@ page-repairdetails {
     margin-right: 0.3rem;
     color:#488aff;
     font-size: 0.25rem;
+    line-height: 0.5rem;
 }
 .repair-type{
     margin-right: 0.3rem;
@@ -112,7 +114,7 @@ page-repairdetails {
 }
 .content1 {  
     background:#eeeeee;  
-    width: 70%;  
+    width: 80%;  
     z-index: 1;  
     margin: 30% auto;  
     overflow: auto;
@@ -122,18 +124,21 @@ page-repairdetails {
 .closs1 {  
     padding: 0.15rem;  
     background: #428bca;
-    text-align: center; 
+    text-align: center;
+    position: relative;
 }  
   
 .closs1-button {  
     float: right;  
     font-size: 0.6rem;
-    margin-top: -0.05rem; 
+    color: white;
+    position: absolute;
+    right: 0.3rem;
 }
 .div2 {  
     background:#eeeeee;  
     margin: auto;  
-    height: 200px;  
+    height: 4rem;  
     padding: 0 20px;
     margin-top: 15px;
 }
@@ -146,7 +151,9 @@ page-repairdetails {
 } 
 .closs1>h2{
     font-size: 0.32rem;
-     padding: 0.09rem 0;
+    padding: 0.09rem 0;
+    text-align: center;
+    color: white;
 }
 img{
     height:1.7rem;
@@ -155,13 +162,13 @@ img{
 }
 
     #app p{font-size: 0.28rem; line-height: 0.4rem;}
-    #app li{list-style: none;padding: 0 20px 10px 20px;border-left: 2px solid #999;position: relative;}
-    #app li:before{content: "";width: 10px;height: 10px;display: block;background: lightblue;position: absolute;left: 0;top: 0;margin-left: -6px;border-radius: 50%;}
+    #app li{list-style: none;padding: 0 20px 10px 20px;border-left: 2px solid #999;position: relative;line-height: 0.35rem;}
+    #app li:before{content: "";width: 10px;height: 10px;display: block;background: #257cff;position: absolute;left: 0;top: 0;margin-left: -6px;border-radius: 50%;}
     #app ul{width: 80%;margin: 0 auto;}
 
-    .button-inner{
-        font-size: 0.32rem;
-    }
+    // .button-inner{
+    //     font-size: 0.32rem;
+    // }
     .button-ios{
         height:0.8rem;
     }
@@ -170,6 +177,19 @@ img{
     }
     textarea{
         font:menu;
+        height: 2.5rem;
+        width: 100%;
+    }
+    .stateimg{
+    height: 1rem;
+    width: auto;
+    float: right;
+    margin-right: 0.5rem;
+    }
+    .select-text{
+        line-height: 0.26rem;
+        font-size: 0.25rem;
+        margin-top: 0.05rem;
     }
 }
 

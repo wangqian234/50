@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 //StorageProvider
@@ -10,8 +10,11 @@ import { Http, Jsonp, Headers, RequestOptions } from '@angular/http';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 //收货地址页面
 import { ChangeaddrPage } from '../changeaddr/changeaddr';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
+
 import $ from 'jquery'
-@IonicPage()
+
 @Component({
   selector: 'page-shopbuy',
   templateUrl: 'shopbuy.html',
@@ -19,6 +22,7 @@ import $ from 'jquery'
 export class ShopbuyPage {
   
   public ChangeaddrPage = ChangeaddrPage;
+  public TabsPage = TabsPage;
   public caId;
   public addressList=[];
   public wid;//商品ID
@@ -57,6 +61,7 @@ export class ShopbuyPage {
   }
   public outTradeNo;
   public cip;
+  public nametitle = "";
   
 
   //定义congfig中公共链接的变量aa
@@ -65,7 +70,7 @@ export class ShopbuyPage {
   public token = this.storage.get('token');
 
   constructor(public storage: StorageProvider, public navCtrl: NavController, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController) {
+    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
@@ -79,21 +84,19 @@ export class ShopbuyPage {
     console.log('ionViewDidLoad ShopbuyPage');
     
   }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewWillLoad() {
     this.getAddressList();
   }
   //购买页面显示的内容
   goodBuyList(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-      loading.present();
     //商品内容
     var that = this;
     var j = 3;
     var api = this.wdh + '/api/goods/buy_list?caId='+this.caId+'&token=' + this.token;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
       if(data.json.dt.errcode === 0 && data.json.dt.errmsg === 'OK'){
         console.log(data)
       that.dtlist = data.json.dt.model;
@@ -108,6 +111,11 @@ export class ShopbuyPage {
       that.addListList = data.json.address_List.list;
       //alert(JSON.stringify(that.addlist));
       that.goodSlist = data.json.dt_GoodsSize.list;//多商品列表
+      for(var i=0;i<data.json.dt_GoodsSize.list.length;i++){
+        that.nametitle += data.json.dt_GoodsSize.list[i].title;
+        that.nametitle += "、"
+      }
+      that.nametitle = that.nametitle.substring(0,that.nametitle.length-1)
       // if(this.goodSlist.length == 1){
       //   this.gnum = this.gnum;
       // }else if(this.goodSlist.length>1){
@@ -136,14 +144,9 @@ export class ShopbuyPage {
 
    //积分抵扣pricemax,没用！
    integral(){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-      loading.present();
      var that = this;
     var api4 = this.wdh + '/api/userintegral/info?preDecimal=111&token=' + this.token;  
   this.http.get(api4).map(res => res.json()).subscribe(data4 => {
-    loading.dismiss();
     if(data4.errcode === 0 && data4.errmsg === 'OK'){
       that.creditslist = data4.model;
     }
@@ -164,11 +167,9 @@ postFee(){
     var api3 = this.wdh + '/api/trade/info?addressId='+this.addressId+'&gId='+this.wid+'&gsId='+this.sizeId+'&goodsNum='+this.gnum+'&token=' + this.token;
     console.log(api3)   
     this.http.get(api3).map(res => res.json()).subscribe(data3 => {
-     
       if (data3.errcode === 0 && data3.errmsg === 'OK') {
       this.carriagelist = data3.model;
       this.fee=data3.model.postage;
-    
       } else if (data3.errcode === 40002) {
         j--;
           if (j > 0) {
@@ -247,19 +248,25 @@ discount(){
        }
      })
    }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.addBuy();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+
+    clickmeToOut(){
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
+    clickme(){
+        var that = this;
+        $.ajax({
+            url: 'http://freegeoip.net/json/',
+            success: function(data){
+              that.cip = data.ip;
+              that.addBuy();
+            },
+            type: 'get',
+            dataType: 'JSON'
+        });
+    }
 
   backTo() {
     this.navCtrl.pop();
@@ -298,7 +305,7 @@ discount(){
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.addressList = data.list;
         for(let i=0; i<this.addressList.length; i++){
-          if(this.addressList[i].cbdefaul == true){
+          if(this.addressList[i].cbdefault == true){
             this.caId = this.addressList[i].id;
             this.goodBuyList();
           }
@@ -315,6 +322,10 @@ discount(){
       }
     });
 
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }

@@ -76,7 +76,6 @@ ion-item{
     color: rgba(255,255,255,1);
     float: right;
     margin-top: 0.2rem;
-    margin-right: 15%;
 }
 .div_a_pass{
     font-size: 0.25rem;
@@ -84,14 +83,16 @@ ion-item{
     margin-bottom: 0.15rem;
     color: rgba(255,255,255,1);
     float:left;
-    margin-left: 15%;
 }
 a{
     font-size: 2rem !important;
 }
 
-.login_box { 
+.inputbox{
     width: 85%;
+    margin: auto; 
+}
+.login_box { 
     margin:auto;
     margin-top: 0.15rem;
     height: 0.7rem; 
@@ -176,6 +177,8 @@ a{
         font-size: 0.28rem;
         line-height: 0.5rem;
         margin-top: 2rem;
+        font-style: italic;
+    letter-spacing: 0.03rem;
     }
     .footer.register{
         font-weight: bold;
@@ -203,6 +206,27 @@ a{
     .logo{
         width: 60%;
     margin-left: 20%;
+    }
+
+    input[type="checkbox"]{
+        -webkit-appearance: none;
+        background: url(../assets/imgs/selectun.png) no-repeat;
+        vertical-align: middle;
+        height: 0.3rem;
+        width: 0.3rem;
+        background-size: cover;
+        float: left;
+    }
+
+    input[type="checkbox"]:checked {
+        background: url(../assets/imgs/selected.png) no-repeat;
+        background-size: cover;
+        float: left;
+    }
+    .div_a_pass p{
+        float: left;
+        padding-top: 0.04rem;
+        font-size: 0.25rem;
     }
         
 }

@@ -357,7 +357,7 @@ page-shopping {
 } 
 .tupian-div{
     position: relative;
-    margin-top: 10px;
+    // margin-top: 10px;
     float:left;
     height:3.5rem;
     background-color: white;
@@ -404,7 +404,7 @@ page-shopping {
     margin:0.2rem 0.09rem 0 0.09rem;
     text-align: center;
     p{
-        font-family:MicrosoftYaHei;
+        font-family:Microsoft YaHei;
         color:#818181;
     }
 }
@@ -435,8 +435,7 @@ border-bottom: 4px solid #FF971C;
 }
 .p_shop{
     font-size: 0.3rem;
-    font-family: MicrosoftYaHei-Bold;
-    font-weight: Bold;
+    font-family: Microsoft YaHei;
     color: #FF971C;
 }
 .p_shop2{
@@ -559,14 +558,14 @@ border-bottom: 4px solid #FF971C;
     height:0.57rem;
     margin-left: 5%;
 }
-ion-slides{
-     height: 3rem;;
-     margin-top: 10px;
-     background-color: white;
-}
-.slide-zoom{
-    height:100%;
-    }
+// ion-slides{
+//      height: 3rem;;
+//      margin-top: 10px;
+//      background-color: white;
+// }
+// .slide-zoom{
+//     height:100%;
+//     }
 .remen_sos{
     margin: 0;
     height: 100%;
@@ -609,7 +608,7 @@ ion-slides{
     float: right !important;
     height: 0.2rem !important;
     width: 0.2rem !important;
-    margin-top: 0.05rem !important;
+    margin-top: 0.03rem !important;
 } 
 
 .logo_k_fanh .fanh_ann{
@@ -637,6 +636,9 @@ input[placeholder], [placeholder], *[placeholder] {
 color:#F5F5F5 !important;   
 }
 
+.swiper-pagination-bullet-active{
+    background: #ff971c;
+}
 
 }
 
@@ -644,4 +646,84 @@ color:#F5F5F5 !important;
     padding: 0.05rem 0.2rem;
     color: #666666;
     font-size: 0.19rem;
+}
+ .lunbo_item{
+     width:100%;
+    height: 3.25rem;
+ }
+
+// 轮播图开始
+
+.vo_carousel {
+    width: 100%;
+    height: 3.25rem;
+    position: relative;
+}
+
+.vo_carousel .scroll{
+    overflow: hidden;
+}
+
+.vo_carousel ul{
+    position: relative;
+}
+
+.vo_carousel li{
+    position: absolute;
+    list-style: none;
+    top: 0;
+}
+
+.vo_carousel img{
+    height: 3.25rem;
+}
+
+.vo_carousel .pagination{
+    position: absolute;
+    left: 50%;
+    margin-top: -20px;
+}
+
+.vo_carousel .page{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
+    font-size: 14px;
+    margin-left: 7px;
+    display: inline-block;
+    background-color: #CFCFCF;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.vo_carousel .active{
+    background-color: #ff971c;
+}
+
+.vo_carousel .arrow{
+    padding: 0 4px;
+    background-color: #8A8A8A;
+    border: 1px solid #666666;
+    color: #FFF;
+    cursor: pointer;
+    position: absolute;
+    margin-top:-8px;
+}
+
+.vo_carousel .left-arrow{
+    left: 8px;
+}
+
+.vo_carousel .right-arrow{
+    right: 8px;
+}
+
+.vo_carousel .arrow:hover{
+    background-color: #666;
+}
+
+.swiper-container{
+    width: 100%;
+    height: 3.25rem;
 }

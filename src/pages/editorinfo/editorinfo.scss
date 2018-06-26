@@ -26,11 +26,11 @@ page-editorinfo {
         line-height: 32px;
         font-size: 18px;
         text-align: center;
-        padding-right: 10px;
+        padding-right: 40px;
     }
 .denglu_k .denglk_l .mz{
         width: 22%;
-        color: #333333;
+        color: #818181;
     }
     div.dk{
         background:#ff971c;
@@ -82,6 +82,12 @@ page-editorinfo {
         position: absolute;
     width: 100%;
     bottom: 0;
+    }
+    input{
+        color:#818181;
+    }
+    select{
+        color:#818181;
     }
 
 }

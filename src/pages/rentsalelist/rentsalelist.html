@@ -1,6 +1,6 @@
 
-<ion-content style="background-color:#f5f5f5">
-<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+<ion-header>
+	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
@@ -12,7 +12,46 @@
 		</div>
 	</div>
  </div>
+</ion-header>
 
+<ion-content style="background-color:#f5f5f5">
+	<div class="spinnerbox"></div>
+	<div class="spinner">
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
+			<div class="bar4"></div>
+			<div class="bar5"></div>
+			<div class="bar6"></div>
+			<div class="bar7"></div>
+			<div class="bar8"></div>
+			<div class="bar9"></div>
+			<div class="bar10"></div>
+			<div class="bar11"></div>
+			<div class="bar12"></div>
+	</div>
+	<!--<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+	<div class="zhongj_k zhongj_k_z">
+		<div class="jiu_feo">
+			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div class="zhongjain_daoh">
+				<ul>
+					<li><a class="px24 zyyge">房屋信息列表</a></li>  
+				</ul>
+			</div>
+		</div>
+	</div>
+ </div>-->
+<!--搜索-->
+	<div class="searchdiv">
+    <div class="searchTool">
+        
+        <input type="search" [(ngModel)]="search" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
+        <input type="button" value class="searchBtn">
+        <ion-icon (click)="getSaleList()" class="searchicon" name="ios-search-outline"></ion-icon>
+    </div>
+  </div>
+<!---->
  <div id="group-content" style="background-color:white">
   <ul class="order-nav clearfix" id="test">
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
@@ -20,6 +59,8 @@
       <li class="type" id="price"><a href="javascript:;">售价</a><img src="assets/imgs/gray.png"></li>
   </ul>
 	
+	
+
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of houseInfo"  (tap)="goRentsaleInfo(house.id,house.type)">
 				<div class="lieb_img"><img src="{{house.imgurl}}"></div>
@@ -34,6 +75,17 @@
 		</li>
 	</ul>
 </div>
+
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 <div class="nomore">没有更多数据了...</div>
 

@@ -9,8 +9,6 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-//ShoppingevaluatePage商品评价
-import {ShoppingevaluatePage}from '../shoppingevaluate/shoppingevaluate';
 //购物车
 import { CartPage } from '../cart/cart';
 
@@ -42,7 +40,7 @@ export class ShoppingdetailPage {
       //主页面加载函数
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
     var that=this;
     var api = this.aa+'/api/goods/info?goods_Id= 1 &token='+this.token ;
      this.http.get(api).map(res => res.json()).subscribe(data =>{
@@ -55,7 +53,9 @@ export class ShoppingdetailPage {
       console.log(that.dataSlist);
      })
   } 
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShoppingdetailPage');
   }

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http } from '@angular/http';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 //引入UserPage
 import { UserPage } from '../user/user';
 
@@ -32,7 +32,8 @@ export class RebuildpassPage {
     }
 
   constructor(public navCtrl: NavController, public navParams: NavParams , public httpService:HttpServicesProvider,
-  public config:ConfigProvider,public http: Http, public storage: StorageProvider,) {
+  public config:ConfigProvider,public http: Http, public storage: StorageProvider, public toastCtrl:ToastController,) {
+   
     this.tel=this.storage.get('userName');
     this.mphone = this.tel.substr(0, 3) + '****' + this.tel.substr(7);   
   }
@@ -41,9 +42,10 @@ export class RebuildpassPage {
     console.log('ionViewDidLoad RebuildpassPage');
   }
 
-  // ionViewDidEnter(){
-  //   this.navCtrl.push(UserPage);
-  // }
+  ionViewDidEnter(){
+    //this.navCtrl.push(UserPage);
+     this.storage.set('tabs','false');
+  }
 
 //显示倒计时间
   ownRegist() {
@@ -101,6 +103,8 @@ export class RebuildpassPage {
 
   //修改密码(点击修改按钮时生效)
   modifyPwd(){
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     var modifyInfo = {
       'mobile':this.tel,
       'pwd':this.modifyInfo.pwd,
@@ -109,8 +113,19 @@ export class RebuildpassPage {
     var api = this.config.apiUrl + '/api/User/edit_Pwd';
     console.log(modifyInfo);
     this.http.post(api,modifyInfo).map(res => res.json()).subscribe(data =>{
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
       console.log("成功修改密码!");
+      let toast = this.toastCtrl.create({
+          message: '成功修改密码',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
       this.navCtrl.pop(UserPage);
       } else {
         console.log(data.errmsg);

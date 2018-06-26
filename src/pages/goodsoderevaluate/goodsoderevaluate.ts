@@ -1,5 +1,5 @@
 import { Component,ChangeDetectorRef  } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,App } from 'ionic-angular';
 import $ from 'jquery';
 
 //请求数据
@@ -14,9 +14,11 @@ import { LoadingController } from 'ionic-angular';
 //商品购物列表
 import { ShoppinglistPage } from '../shoppinglist/shoppinglist';
 // import { ChangeDetectorRef } from '@angular/core'; //更新页面
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
 
-@IonicPage()
+
 @Component({
   selector: 'page-goodsoderevaluate',
   templateUrl: 'goodsoderevaluate.html',
@@ -27,7 +29,7 @@ export class GoodsoderevaluatePage {
 
     public list=[];
     public ShoppinglistPage=ShoppinglistPage;
-
+    public TabsPage = TabsPage;
     public SD_id;//订单编号
     public tradegoods_id;//商品订单编号
     public item;
@@ -48,20 +50,20 @@ export class GoodsoderevaluatePage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;//http://test.api.gyhsh.cn/api/tradegoods/add?pageSize=10&pageIndex=1&trade_State=0&token=111
  
-  constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController
-,public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController,public navParams: NavParams,public http:Http,public loadingCtrl: LoadingController,public app: App,
+public cd: ChangeDetectorRef, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider, public toastCtrl:ToastController) {
         this.SD_id=navParams.get('tradeId');//订单编号
         this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
         this.item=navParams.get('item');//商品
-
+        console.log(this.item.goods_list)
   }
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();
         this.getdetaillist();
         //this.getNum();
   }
-    ionViewWillEnter() {//钩子函数，将要进入页面的时候触发
-      //alert("进来了");
+    ionViewDidEnter() {//钩子函数，将要进入页面的时候触发
+      this.storage.set('tabs','false');
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -70,10 +72,12 @@ export class GoodsoderevaluatePage {
   getdetaillist(){
   }
   addEvaluate(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
       var j=3;
       var api = this.aa+'/api/tradegoods/add';
       this.evaluateList.commentGroup="〢"+this.tradegoods_id+"〡"+this.shopgrade.goods_satisfactionlevel+"〡"+
@@ -81,11 +85,20 @@ export class GoodsoderevaluatePage {
       this.evaluateList.trade_Id=this.SD_id;
       this.evaluateList.token = this.token;
       var date = this.evaluateList;
-      console.log("五爷"+JSON.stringify(this.evaluateList));
       this.http.post(api,this.evaluateList).map(res => res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        alert("添加成功！");
+        let toast = this.toastCtrl.create({
+          message: '评价成功',
+          duration: 2000,
+          position: 'bottom'
+        });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+        });
+      toast.present();
         this.navCtrl.setRoot(ShoppinglistPage,{id:4});
       }else if(data.errcode === 40002){
               j--;
@@ -156,6 +169,10 @@ export class GoodsoderevaluatePage {
 
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome() {
+    this.app.getRootNav().push(TabsPage);
   }
 
 }

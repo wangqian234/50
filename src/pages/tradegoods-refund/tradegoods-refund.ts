@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -10,9 +10,10 @@ import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
 //添加、修改商品退款申请
 import {TradegoodsReapPage}from '../tradegoods-reap/tradegoods-reap';
+import $ from 'jquery';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 
-
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-refund',
   templateUrl: 'tradegoods-refund.html',
@@ -21,7 +22,7 @@ export class TradegoodsRefundPage {
   public list = [];
   public tradegoods_id;//商品订单编号
   public TradegoodsReapPage=TradegoodsReapPage;
-
+  public TabsPage = TabsPage;
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -29,7 +30,8 @@ export class TradegoodsRefundPage {
     //定义token
   public token=this.storage.get('token');
 
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider
+  , public app: App) {
         this.tradegoods_id=this.navParams.get('tradegoodsId');
         //alert(this.tradegoods_id);
   }
@@ -39,8 +41,10 @@ export class TradegoodsRefundPage {
     if(this.navParams.get('item')){
       this.list = this.navParams.get('item')
     }
-    console.log(this.list)
     // this.getdetaillist();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
@@ -54,7 +58,6 @@ export class TradegoodsRefundPage {
        if(data.errcode === 0 && data.errmsg === 'OK'){
          this.list=data.model ;
          console.log(JSON.stringify(data))
-         //alert("王慧敏"+JSON.stringify(this.list) );
      } else if(data.errcode === 40002){
               j--;
               if(j>0){
@@ -62,7 +65,6 @@ export class TradegoodsRefundPage {
                 this.getdetaillist();
           }
       } else {
-        alert(data.errmsg);
         alert("请求失败");
      }
      })
@@ -73,5 +75,9 @@ export class TradegoodsRefundPage {
  
   backTo(){
     this.navCtrl.pop();
+  }
+
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 }

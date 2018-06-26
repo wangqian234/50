@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { RepairlistPage } from '../repairlist/repairlist';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
@@ -49,7 +49,8 @@ export class RepairaddPage {
   public LoginPage = LoginPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
-  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,public loadingCtrl: LoadingController) {
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,
+  public loadingCtrl: LoadingController,public toastCtrl:ToastController,) {
       if(this.storage.get('roomId')){
         this.defRoomId=this.storage.get('roomId')
         this.roomId= this.defRoomId;
@@ -68,6 +69,9 @@ export class RepairaddPage {
         this.navCtrl.push(LoginPage);
       }
     this.getRem();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 
   httptest(){
@@ -139,10 +143,6 @@ export class RepairaddPage {
   }
   //添加工单
   showPopup(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
     if(this.addlist.type==="4"){
       this.addlist.roomId="0"
     }else{
@@ -153,8 +153,17 @@ export class RepairaddPage {
     console.log(this.addlist)
     var api = this.config.apiUrl+'/api/list/add?';
      this.http.post(api,this.addlist).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
           if(data.errcode===0&&data.errmsg==='OK'){ 
+            let toast = this.toastCtrl.create({
+            message: '添加工单成功',
+            duration: 2000,
+            position: 'bottom'
+          });
+          toast.onDidDismiss(() => {
+           console.log('Dismissed toast');
+          });
+        toast.present();
+
               console.log(data)
               this.guidFile=data.model;
               this.navCtrl.pop();

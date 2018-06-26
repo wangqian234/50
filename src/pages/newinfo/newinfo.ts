@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
-
+import { StorageProvider } from '../../providers/storage/storage';
 @Component({
   selector: 'page-newinfo',
   templateUrl: 'newinfo.html',
@@ -13,7 +13,8 @@ export class NewinfoPage {
   newInfo = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-      public config:ConfigProvider, public http: Http) {
+      public config:ConfigProvider, public http: Http,public storage:StorageProvider,) {
+        
   }
 
   ionViewWillLoad() {
@@ -21,7 +22,9 @@ export class NewinfoPage {
       this.getNewInfo(this.navParams.get('id'));
     }
   }
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewinfoPage');
   }

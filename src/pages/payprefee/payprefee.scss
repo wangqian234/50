@@ -8,6 +8,7 @@ page-payprefee {
     .user_title{
         display: inline;
         font-size: 0.28rem;
+        color: #818181;
     }
     .otherUser_content{
         margin-top: 0.3rem;
@@ -22,9 +23,10 @@ page-payprefee {
         min-width:125px;
     }
     .fee_list span{
-        font-size: 0.26rem;
-        float:right;
+        font-size: 0.22rem;
+        line-height: 0.45rem;
         margin-top: 0.13rem;
+        color: #818181;
     }
     .user_bigo{
         color: gray;
@@ -34,17 +36,118 @@ page-payprefee {
     .fee_input{
         margin-left: 7px;
         width: 2.8rem;
-        height: 0.5rem;
+        height: 0.43rem;
         border: 1px solid gainsboro;
         border-radius: 0.05rem;
     }
     .fee_num{
         margin-right: 4px;
         float: right;
-        font-size: 0.26rem;
+        font-size: 0.22rem;
         margin-top: 0.13rem;
+        color: #818181;
     }
     .list-ios{
         margin: -1px 0 0px;
+    }
+    .gouwuc_yem .zhong p em{
+        color: #2979FF;
+    }
+
+        .list-ios .item-block .item-inner{
+        border:none;
+    }
+    .list-ios > .item-block:first-child{
+        border:none;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border:none;
+    }
+    .label-ios {
+        margin: 7px 8px 7px 0;
+    }
+    .button-ios{
+        height:0.8rem;
+        font-size: 0.32rem;
+        margin:0;
+        bottom:0;
+        position: absolute;
+    }
+    .button-inner{
+        font-size: 0.3rem;
+    }
+    .select-item{
+        background-color:#2979FF;
+        color:#F5F5F5;
+        height: 0.6rem;
+        // margin-top: 0.11rem;
+    }
+    .select-goal{
+        max-width:80%;
+    }
+    .select-text{
+            font-size: 0.23rem;
+    line-height: 0.28rem;
+    }
+    .item-ios.item-block .item-inner{
+        border: none;
+    }
+
+        .denglu_k{
+        margin: 0.4rem 0.2rem;
+    }
+    .dengl_anniu{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .dengl_anniu a{
+        background-color: #448AFF;
+        border: solid #448AFF 1px;
+    }
+    .choose {
+        float: right;
+        cursor: pointer;
+        height: 32px;
+        width: 70%;
+        display: inline-block;
+        position: relative;
+        line-height: 32px;
+        font-size: 18px;
+        text-align: center;
+        padding-right: 10px;
+    }
+
+    .denglu_k{
+        margin: 0;
+    }
+    .denglu_k .denglk_l .mz{
+        width:28%;
+        color: #333333;
+    }
+
+        .addressdiv{
+        margin-top: 10px;
+        background-color: white;
+    }
+    .denglu_k_k{
+        margin: 0;
+    }
+    .shouh_dange_beijin{
+        background: #f5f5f5;
+        border-radius: 0rem;
+        margin-top: 0;     
+        padding: 0;
+    }
+    .denglu_k .denglk_l{
+        margin: 0;
+        height: 0.75rem;
+        width: 96%;
+        margin-left: 2%;
+        border-bottom: solid 1px #F5F5F5;
+        padding-top: 0.1rem;
+    }
+    .dib_daoh_b{
+        z-index: 0;
     }
 }

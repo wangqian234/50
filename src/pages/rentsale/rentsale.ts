@@ -15,11 +15,14 @@ import { RentsaleaddPage } from '../rentsaleadd/rentsaleadd';
 import { RentsalemyPage } from '../rentsalemy/rentsalemy';
 //租赁信息列表
 import { RentsalelistPage } from '../rentsalelist/rentsalelist';
+//房屋搜索
+import { RentsearchPage } from '../rentsearch/rentsearch';
+
 //登录页面
 import { LoginPage } from '../login/login';
 import {ShopinfoPage} from '../shopinfo/shopinfo';
 import {ShopgoodsinfoPage} from '../shopgoodsinfo/shopgoodsinfo'
-@IonicPage()
+
 @Component({
   selector: 'page-rentsale',
   templateUrl: 'rentsale.html',
@@ -33,7 +36,6 @@ export class RentsalePage {
   //     'assets/imgs/rent1.jpg',
   //     'assets/imgs/rent2.jpg',
   //     'assets/imgs/rent3.jpg'];
-  curCityCode = "";
   houseInfo;
   showMore = false;
   housType = "1";
@@ -59,28 +61,32 @@ export class RentsalePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
-     this.curCityCode = "4403";
   }
   
   ionViewWillLoad(){
-    // //确认登录状态
-    // if(this.storage.get('token')){
-
-    // } else {
-    // this.navCtrl.push(LoginPage);
-    // }
     this.getFocusList();
+  }
+  ionViewDidEnter(){
+    this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+    this.storage.set('tabs','true');
+    $('.swiper-container').autoplay = {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      };
+    $('.swiper-container').autoplayDisableOnInteraction = false;
   }
 
   ionViewDidLoad() {
     this.getFirstHouse();
     this.currentPlace = this.storage.get("currentPlace");
-    this.offent = $('#testcontent').offset();
-    console.log("这个offent是",this.offent)
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+    this.offent = $('#group-content').offset();
   }
   //轮播图获取
   getFocusList(){
-    var api = this.config.apiUrl + '/api/rental/list_banner?curCityCode='+this.curCityCode;
+    var api = this.config.apiUrl + '/api/rental/list_banner?curCityCode='+this.currentPlaceCode;
     this.http.get(api).map(res => res.json()).subscribe(data =>{
       if(data.errcode === 0 && data.errmsg === 'OK'){
         this.focusList= data.list
@@ -107,15 +113,8 @@ export class RentsalePage {
     // }
   }
  paymentEvent(trade_state){
-
-  //   let loading = this.loadingCtrl.create({
-	//     showBackdrop: true,
-  //   });
-  // loading.present();
-
-
    this.housType = trade_state;
-   var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.curCityCode + "&type=" + trade_state;
+   var api = this.config.apiUrl + "/api/rental/list_type?pageSize=6&pageIndex=1&curCityCode=" + this.currentPlaceCode+ "&type=" + trade_state;
     switch(trade_state){
       case 1:
       this.tabTest={
@@ -167,7 +166,6 @@ export class RentsalePage {
     console.log(this.offent.top)
     $('.scroll-content').scrollTop(this.offent.top);
   this.http.get(api).map(res => res.json()).subscribe(data => {
-    //loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -180,14 +178,9 @@ export class RentsalePage {
   }
 
   getFirstHouse(){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
     $(".showMore").css("display","none")
-    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.curCityCode + "&type=1";
+    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=1&curCityCode=" + this.currentPlaceCode + "&type=1";
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK') {
         this.houseInfo = data.list;
         if(data.list.length == 0){
@@ -217,18 +210,38 @@ export class RentsalePage {
 
   //跳转到详情
   goRentsaleInfo(id,type){
-    this.navCtrl.push(RentsaleinfoPage,{
+    if(this.storage.get('token')){
+      this.navCtrl.push(RentsaleinfoPage,{
       houseId:id,
       houseType:type,
       quFen:1,
     })
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
+  }
+  //我的发布信息跳转页面
+  goRentsaleadd(){
+    if(this.storage.get('token')){
+      this.navCtrl.push(RentsaleaddPage)
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
+  }
+  //跳转到我的发布列表
+  goRentsalemy(){
+   if(this.storage.get('token')){
+      this.navCtrl.push(RentsalemyPage)
+    }else{
+      this.navCtrl.push(LoginPage);
+    }
   }
   doLoadMore(infiniteScrolle){
     this.getHouseInfo(infiniteScrolle);
   }
 
   getHouseInfo(infiniteScroll){
-    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.housType;
+    var api = this.config.apiUrl + "/api/rental/list_type?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" +this.currentPlaceCode + "&type=" + this.housType;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -256,7 +269,6 @@ export class RentsalePage {
   myCallbackFunction  =(params) => {
     var that = this;
      return new Promise((resolve, reject) => {
-
       if(typeof(params)!='undefined'){
           resolve('ok');
           that.currentPlace = params.changePlace;
@@ -268,4 +280,36 @@ export class RentsalePage {
             
    });
  }
+
+     //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.getFocusList();
+        this.paymentEvent(this.housType);
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
+   //输入框搜索，跳转到列表详情界面
+  doReserch() {
+    // var key = [];
+    // if (this.storage.get("shopKewWords")) {
+    //   key = this.storage.get("shopKewWords");
+    //   key.push(this.keywords);
+    //   this.storage.set("shopKewWords", key);
+    // } else {
+    //   key.push(this.keywords)
+    //   this.storage.set("shopKewWords", key);
+    // }
+    this.navCtrl.push(RentsearchPage);
+    // , {
+    //   keywords: this.keywords,
+    //  })
+  }
+
 }

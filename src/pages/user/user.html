@@ -1,4 +1,20 @@
 <ion-content style="background-color:#f5f5f5">
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+    
 
 <!--内容--> 
 <div class="gerenzhonhx">
@@ -18,17 +34,15 @@
 
   <ion-list inset class="user_list">
      <div class="blockdiv">
-        <p>物业管理<ion-icon name="fangwu"></ion-icon></p>
+        <p>物业管理</p>
         <ion-item [navPush]="HouseinfolistPage">
             <img src="assets/imgs/myhouse.png">
             <span>关联房屋信息</span>
-            
         </ion-item>
         
         <ion-item [navPush]="PayfeePage">
             <img src="assets/imgs/myfee.png">
             <span>费用明细</span>
-            
         </ion-item>
         <ion-item [navPush]="RepairlistPage">
             <img src="assets/imgs/myserve.png">
@@ -38,7 +52,6 @@
         <ion-item [navPush]="LoadingPage">
             <img src="assets/imgs/mynum.png">
             <span>积分收支明细</span>
-            
         </ion-item>
     </div>
 
@@ -47,17 +60,14 @@
         <ion-item [navPush]="ShoppinglistPage" [navParams]="{id:0}">
             <img src="assets/imgs/myshop.png">
             <span>商城订单</span>
-            
         </ion-item>
         <ion-item [navPush]="TradegoodsGroupbuyingPage" [navParams]="{id:0}">
             <img src="assets/imgs/mytuan.png">
             <span>团购订单</span>
-            
         </ion-item>
         <ion-item (click)="gotoAddressPage()">
             <img src="assets/imgs/myplace.png">
             <span>收货地址管理</span>
-            
         </ion-item>
     </div>
 
@@ -66,12 +76,10 @@
         <ion-item [navPush]="RentsalemyPage">
             <img src="assets/imgs/mypublic.png">
             <span>我的发布信息</span>
-            
         </ion-item>
         <ion-item [navPush]="LoadingPage">
             <img src="assets/imgs/mymanger.png">
             <span>我的预约信息</span>
-            
         </ion-item>
     </div>
 
@@ -80,12 +88,10 @@
         <ion-item [navPush]="RebuildpassPage">
             <img src="assets/imgs/mymiss.png">
             <span>账户安全</span>
-            
         </ion-item>
         <ion-item (click)="outLogin()">
             <img src="assets/imgs/myout.png">
             <span>退出登录</span>
-            
         </ion-item>
     </div>
 

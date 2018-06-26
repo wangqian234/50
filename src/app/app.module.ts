@@ -18,8 +18,6 @@ import { LoginPage } from '../pages/login/login';
 //注册
 import { RegisterpasswordPage } from '../pages/registerpassword/registerpassword';
 
-//商品列表
-import { ProductlistPage } from '../pages/productlist/productlist';
 
 //商品详情
 import { PcontentPage } from '../pages/pcontent/pcontent';
@@ -65,9 +63,6 @@ import { ShoppingdetailPage } from '../pages/shoppingdetail/shoppingdetail';
 
 //全部商品页
 import { ShopmalllistPage } from '../pages/shopmalllist/shopmalllist';
-
-//商品评价列表界面
-import {ShoppingevaluatePage}from '../pages/shoppingevaluate/shoppingevaluate';
 
 //支付
 
@@ -140,7 +135,8 @@ import { RentsaleaddPage }from '../pages/rentsaleadd/rentsaleadd';
 
 //房屋租售首页
 import { RentsalePage }from '../pages/rentsale/rentsale';
-
+//房屋搜索
+import { RentsearchPage }from '../pages/rentsearch/rentsearch';
 //房屋租售详细信息
 import { RentsaleinfoPage }from '../pages/rentsaleinfo/rentsaleinfo';
 
@@ -150,10 +146,13 @@ import { AddressinfoPage }from '../pages/addressinfo/addressinfo';
 //我的房屋租售信息
 import { RentsalemyPage }from '../pages/rentsalemy/rentsalemy';
 //拍照
-// import { Device } from '@ionic-native/device';
-// import { Camera } from '@ionic-native/camera';
-// import { File } from '@ionic-native/file';
-// import { FileTransfer} from '@ionic-native/file-transfer';
+import { Device } from '@ionic-native/device';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer} from '@ionic-native/file-transfer';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+import { Network } from '@ionic-native/network';
 //房屋租售列表
 import { RentsalelistPage  }from '../pages/rentsalelist/rentsalelist';
 
@@ -173,6 +172,7 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -182,7 +182,6 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     TabsPage,
     LoginPage,
     RegisterpasswordPage,
-    ProductlistPage,
     PcontentPage,
     PersonalPage,
     AddressPage,
@@ -241,6 +240,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    RentsearchPage,
   ],
   imports: [
     BrowserModule,
@@ -264,7 +264,6 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     TabsPage,
     LoginPage,
     RegisterpasswordPage,
-    ProductlistPage,
     PcontentPage,
     PersonalPage,
     AddressPage,
@@ -316,6 +315,7 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     RentsalemyPage,
     RentsalelistPage,
     AddressinfoPage,
+    RentsearchPage,
   ],
   providers: [  /*引入了自定义的服务*/
     Geolocation,
@@ -327,10 +327,13 @@ import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
     StorageProvider,
     ToolsProvider,
     CityDataProvider,
-    // Device,
-    // Camera,
-    // File,
-    // FileTransfer,
+    Device,
+    Camera,
+    File,
+    FileTransfer,
+    ImagePicker,
+    Base64,
+    Network,
   ]
 })
 export class AppModule {}

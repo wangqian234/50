@@ -1,12 +1,11 @@
 <!--王慧敏-->
-<ion-content style="background-color:#f5f5f5">
-
-<div class="toub_beij toub_beij_zy">
+<ion-header>
+	<div class="toub_beij toub_beij_zy">
 	<div  style="background-color:#ff971c;height:0.96rem" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#">
-								<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
-				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+			<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="#">
+								<img class="fanh_ann" src="assets/imgs/fanh.png">
+				<!--<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">-->
 				</a></div>
 			<div class="zhongjain_daoh">
 				<ul id="title">
@@ -14,12 +13,38 @@
           <li class="qbdd no" (click)="gotoGroup()"><a class="zyyge">团购订单</a></li>
 				</ul>
 			</div>
-			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div>
 	</div>
 </div>
+</ion-header>
+<ion-content style="background-color:#f5f5f5">
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;">
+      </ion-refresher-content>
+  </ion-refresher>
 	    <!--团购列表--> 
-  <div id="group-content" >
+  <div id="group-content" class="group-content">
         <ul class="order-nav clearfix" id="test2">
             <li class={{tab_test.li00}} data-nav="waitGroup" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
             <li class={{tab_test.li01}} data-nav="groupIng" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
@@ -79,7 +104,7 @@
     </div>
 
     <!--商品订单列表--> 
-  <div id="order-content" style="display:none">
+  <div id="order-content" class="order-content" style="display:none">
         <ul class="order-nav clearfix" id="test">
             <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:void(0);">全部</a></li>
             <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)" ><a href="javascript:void(0);">待付款</a></li>

@@ -66,7 +66,6 @@ page-rentsale {
 // }
 #test{
      position:sticky;
-    top:0.8rem;
     z-index: 500;
     background-color: white;
 }
@@ -141,6 +140,7 @@ page-rentsale {
 }
 .shangp_lieb_k_er li .lieb_img{
     width:35%;
+    height: 1.45rem;
 }
 .showMore{
     padding: 0.2rem;
@@ -152,7 +152,6 @@ page-rentsale {
 }
 ion-slides{
     height: 3.25rem;
-    margin-top: 10px;
 }
 .shangp_lieb_k_er li .lieb_txt p.biao{
     height:0.7rem;
@@ -184,7 +183,9 @@ input[placeholder], [placeholder], *[placeholder] {
 color:#F5F5F5 !important;   
 }
 
-
+.showMore{
+    font-size: 0.2rem;
+}
 
 }
 

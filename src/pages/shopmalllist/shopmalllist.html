@@ -1,16 +1,35 @@
 
 <ion-content>
+	<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
 <div id="yemnr">
 <!--头部--> 
 <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="javascript:;"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+			<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img class="fanh_ann" src="assets/imgs/fanh.png">
+				<!--<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">-->
+				</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a href="javascript:;" class="px24 zyyge">商品列表</a></li>  
 				</ul>
 			</div>
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div> 
 	</div>
 </div>
@@ -24,22 +43,7 @@
 				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
 				<div class="lieb_txt">
 					<p class="biao">{{item.title}}</p>
-					<p class="px26">¥{{item.price}}</p>
-          			<p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
-				</div>
-		</li>
-	</ul>
-</div>
-
-<div>
-  <img src="assets/imgs/recommend.png">
-  <span class="p_shop">&ensp;精品推荐</span>
-	<ul class="shangp_lieb_k_er">
-		<li *ngFor="let item of tuijList"  (tap)="goGoodsInfo(item['id'])">
-				<div class="lieb_img" ><img src="{{URL}}{{item.img}}"  ></div>
-				<div class="lieb_txt">
-					<p class="biao">{{item.title}}</p>
-					<!--<p class="px26">¥{{item.pricemin}}</p>-->
+					<p class="px26">¥{{item.pricemin}}</p>
           			<p class="bend">已有<i>{{item.soldnum}}</i>人购买</p>
 				</div>
 		</li>
@@ -71,7 +75,8 @@
 	</div>
 </div>
 
-<div class="nomore" style="display: none">没有更多数据了...</div>
+<div class="shopnomore"><img src="assets/imgs/leftbar.png"><span style="font-size:0.17rem;color:#FF971C">&nbsp;&nbsp;到底了&nbsp;&nbsp;</span><img src="assets/imgs/rightbar.png"></div>
+
  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
  <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>

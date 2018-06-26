@@ -1,12 +1,10 @@
 page-repairlist {
     .searchdiv{ 
-        height:50px;
-        padding:8px 0 0 0;
+        padding:4px 0 0 0;
         background:#fff;
         // border-top:1px solid #3e3e3e;
          border-bottom:1px solid #f5f5f5;
         text-align:center;
-        position: sticky;
         top: 0.78rem;
         z-index: 100;
     }
@@ -100,6 +98,7 @@ page-repairlist {
         font-size:0.23rem;
         line-height: 0.35rem;
         margin-left: 0.3rem;
+        color: #333333;
     }
     .item-ios{
         padding:0
@@ -112,26 +111,33 @@ page-repairlist {
     }
     .title_a{
         font-size: 0.3rem;
-        margin: 0.2rem 0 0.2rem 0.3rem;
-        line-height: 0.5rem; 
+        margin: 0.1rem 0 0.1rem 0.3rem;
+        line-height: 0.5rem;
+        float: left;
     }
     .searchicon{
     font-size: 0.45rem;
     position: absolute;
     right: 0.2rem;
-    margin-top: 0.05rem;
+    margin-top: 0.08rem;
     }
     .right{
         position: absolute;
-        top: 0.5rem;
-        right: 0rem;
-        width: 190px;
+        right: 0.5rem;
+        line-height: 0.65rem !important;
+        color: #666666;
     }
     .list-ios{
         margin-top: 10px;
     }
     .list-ios > .item-block:first-child{
         border-top: none;
+    }
+    ion-label img{
+            position: absolute;
+    right: 0.5rem;
+    top: 0.75rem;
+    height: 0.8rem;
     }
 
 }

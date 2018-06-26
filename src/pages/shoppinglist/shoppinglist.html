@@ -1,12 +1,10 @@
-<!--王慧敏-->
-<ion-content style="background-color:#f5f5f5">
-
+<ion-header>
 <div class="toub_beij toub_beij_zy">
 	<div  style="background-color:#ff971c;height:0.96rem;" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#">
-								<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
-				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">
+			<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="#">
+								<img class="fanh_ann" src="assets/imgs/fanh.png">
+				<!--<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">-->
 				</a></div>
 			<div class="zhongjain_daoh">
 				<ul id="title">
@@ -14,13 +12,59 @@
 					<li class="qbdd qbdd_you" (click)="gotoGroup()"><a class="zyyge">团购订单</a></li> 
 				</ul>
 			</div>
-			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div>
 	</div>
 </div>
+</ion-header>
+
+<!--王慧敏-->
+<ion-content style="background-color:#f5f5f5">
+	<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
+
+	<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
 
     <!--商品订单列表--> 
-  <div id="order-content">
+  <div id="order-content" class="order-content">
         <ul class="order-nav clearfix" id="test">
             <li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(0)"><a href="javascript:void(0);">全部</a></li>
             <li class={{tabTest.li01}} data-nav="payment" (click)="paymentEvent(1)" ><a href="javascript:void(0);">待付款</a></li>
@@ -28,6 +72,7 @@
             <li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(3)"><a href="javascript:void(0);">待收货</a></li>
             <li class={{tabTest.li04}} data-nav="cancel" (click)="paymentEvent(4)"><a href="javascript:void(0);">待评价</a></li>
         </ul>
+
         <div class="order-list">
             <div class="order-item">
 	<div class="gouwuc_kk gouwuc_kk_ddxq">
@@ -91,7 +136,7 @@
 
 
 	    <!--团购列表--> 
-  <div id="group-content" style="display:none">
+  <div id="group-content" class="group-content" style="display:none">
         <ul class="order-nav clearfix" id="test2">
             <li class={{tab_test.li00}} data-nav="waitGroup" (click)="groupEvent(0)"><a href="javascript:void(0);">待开团</a></li>
             <li class={{tab_test.li01}} data-nav="groupIng" (click)="groupEvent(1)"><a href="javascript:void(0);">组团中</a></li>
@@ -136,12 +181,12 @@
                         <p *ngIf="item.buy_state==1">
 	 					</p>
                         <p *ngIf="item.buy_state==2">
-		 					<a href="javascript:;">去评价</a>
-		 					<a href="javascript:;" class="color_1">再次购买</a>
+		 					<a href="javascript:;" (click)="evaluationEvent(item.trade_id,item.tradegoods_id,item.goods_id,item)">去评价</a>
+		 					<a href="javascript:;" (click)="buyagainEvent(item.goods_id,1)" class="color_1">再次购买</a>
 	 					</p>
                         <p *ngIf="item.buy_state==3">
-		 					<a href="javascript:;">去评价</a>
-		 					<a href="javascript:;" class="color_1">再次购买</a>
+		 					<a href="javascript:;" (click)="evaluationEvent(item.trade_id,item.tradegoods_id,item.goods_id,item)">去评价</a>
+		 					<a href="javascript:;" (click)="buyagainEvent(item.goods_id,1)" class="color_1">再次购买</a>
 	 					</p>
 	 				</div>
 	 			</div>

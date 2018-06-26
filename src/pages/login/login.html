@@ -78,6 +78,7 @@
 </div>
 
 
+<div class="inputbox">
 <div class="login_box">
   <ion-icon name="person-outline"></ion-icon>
   <form class="search_form">
@@ -85,27 +86,33 @@
   </form>
 </div>
 
-<div *ngIf="!loginNum" class="login_box">
-  <ion-icon name="unlock-outline"></ion-icon>
-  <form class="search_form">
-    <input [(ngModel)]='regist' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" style="width:60%"/>
-    <button *ngIf="isShowSend" (click)="ownRegist()">获取验证码</button>
-    <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
-  </form>
-</div>
-<div *ngIf="loginNum" class="login_box">
+  <div *ngIf="!loginNum" class="login_box">
     <ion-icon name="unlock-outline"></ion-icon>
-  <form class="search_form">
-    <input [(ngModel)]='userinfo.userPwd' name='userPwd' type="password" placeholder="请输入密码" class="swap_value" />
-  </form>
-</div>
-<div class="div_a_build">
-  <div class="div_a_pass" *ngIf="!loginNum" (click)="getLoginNum()">密码登录</div> 
-  <div class="div_a_pass" *ngIf="loginNum" (click)="getLoginNum()">验证码登录</div>
-  <div class="div_a" [navPush]="RebuildpassPage">忘记密码？</div>
+    <form class="search_form">
+      <input [(ngModel)]='code' name='regist' type="text"  placeholder="请输入验证码" class="swap_value" style="width:50%"/>
+      <button *ngIf="isShowSend" (click)="ownRegist()">获取验证码</button>
+      <button *ngIf="!isShowSend" style="color:gray">{{num}}秒后重新发送</button>
+    </form>
+  </div>
+  <div *ngIf="loginNum" class="login_box">
+      <ion-icon name="unlock-outline"></ion-icon>
+    <form class="search_form">
+      <input [(ngModel)]='userinfo.userPwd' name='userPwd' type="password" placeholder="请输入密码" class="swap_value" />
+    </form>
+  </div>
+  <div class="div_a_build">
+    <div class="div_a_pass" *ngIf="!loginNum" (click)="getLoginNum()">密码登录</div> 
+    <div class="div_a_pass" *ngIf="loginNum" (click)="getLoginNum()">验证码登录</div>
+    <div class="div_a" [navPush]="RebuildpassPage">忘记密码？</div>
+    <div style="clear:both"></div>
+    <div style="margin-top:0" class="div_a_pass" *ngIf="loginNum">
+      <input type=checkbox class="inputcheck" [(ngModel)]='remeberNum'>
+      <p>记住密码</p></div>
+  </div>
 </div>
 
-  <button (click)="doLogin()" class="ensure_button" ion-button block>登&nbsp;录</button>
+  <button *ngIf="loginNum" (click)="doLogin()" class="ensure_button" ion-button block>登&nbsp;录</button>
+  <button *ngIf="!loginNum" (click)="goRegisterpasswordPage()" class="ensure_button" ion-button block>验证码登录</button>
   <button style="margin-top:0;" [navPush]="RegisterpasswordPage" class="ensure_button" ion-button block>注&nbsp;册</button>
 <div class="footer">—&nbsp;&nbsp;深圳市汇生活科技技术有限公司&nbsp;&nbsp;—</div>
   </ion-content>

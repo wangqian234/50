@@ -29,6 +29,7 @@ export class RepairlistPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpService:HttpServicesProvider
   ,public config:ConfigProvider,public storage:StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+    
     if(this.navParams.get('cid')){
       this.cid=this.navParams.get('cid');
     }
@@ -43,6 +44,7 @@ export class RepairlistPage {
     
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.list = [];
     this.page = 1;
     this.getProductList("")
@@ -56,14 +58,9 @@ export class RepairlistPage {
     
   }
     getProductList(infiniteScroll){
-      let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-      loading.present();
       var j = 3;
         var api= this.config.apiUrl + '/api/list/list?tId='+this.type +'&keyWord='+this.keywords+'&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
           if(data.errcode===0 && data.errmsg==="OK"){
           if(data.list.length<10){
            $('.nomore').css('display','block');

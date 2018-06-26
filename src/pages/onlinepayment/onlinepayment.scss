@@ -23,9 +23,8 @@ page-onlinepayment {
     .fee_time{
         color:#818181;
         float:left;
-        width:60%;
+        width:40%;
         font-size: 0.23rem;
-        padding-left: 15%;
         margin-left: 0.51rem;
         line-height: 0.28rem;
     }
@@ -40,9 +39,8 @@ page-onlinepayment {
         color:#818181;
         font-size: 0.22rem;
     }
-    .appear{
+    .enappear{
         float: right;
-        margin-right: 0.5rem;
         color:#818181;
         font-size: 0.22rem;
     }
@@ -52,9 +50,16 @@ page-onlinepayment {
     ion-list{
         margin-top: 0.2rem;
     }
+    .gouwuc_yem .zhong p em{
+        color: #2979FF;
+    }
 
         .toub_beij_zy{
     border-bottom: solid 1px #2979FF !important;
+    }
+    .checkbox-ios-danger .checkbox-checked{
+        border-color: #2979FF !important;
+    background-color: #2979FF !important;
     }
     // .item-ios.item-block .item-inner{
     //     border-bottom: 0.55px solid #2979FF !important;
@@ -83,5 +88,36 @@ page-onlinepayment {
     }
     .logo_k_fanh .fanh_ann{
         margin: 0.15rem 0 0 0.3rem;
+    }
+    .toub_beij_zy .item-ios.item-block .item-inner{
+        border-bottom: none;
+    }
+    .little{
+        height: 0.3rem;
+    display: block;
+    float: right;
+    margin-top: -0.04rem;
+    transform: rotate(270deg);
+    }
+    .list-ios .item-block .item-inner{
+        border-bottom: 0.55px solid #f5f5f5;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: 0.55px solid #f5f5f5;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+        border-bottom: 0.55px solid #f5f5f5;
+    }
+    .otherUser_content{
+            margin-top: 0.1rem;
+    }
+    .dib_daoh_b{
+        z-index: 0;
+    }
+    .button-block-ios{
+        margin: 0;
+        height: 0.8rem;
+        bottom: 0;
+        position: absolute;
     }
 }

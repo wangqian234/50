@@ -1,6 +1,6 @@
-<ion-content style="background-color:#f5f5f5">
 
-	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF;height:0.96rem;">
+<ion-header>
+    <div class="toub_beij toub_beij_zy"  style="background-color:#448AFF;height:0.96rem;">
 		<div class="zhongj_k">
       <div class="logo_k logo_k_fanh" (click)="backTo()">
         <a href="#"><img class="fanh_ann" src="assets/imgs/fanh.png"></a>
@@ -16,7 +16,35 @@
 			</div>
 		</div>
 	</div>
+</ion-header>
 
+<ion-content style="background-color:#f5f5f5">
+  <div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
 <!--<div class="select" style="background-color:white;margin-top:10px;">
     <ion-item>
@@ -31,12 +59,12 @@
   <div class="otherUser_content">
 
   <div class="otherUser_title" style="margin-bottom:10px" *ngFor="let item of dest;let i of index">
-    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked">
-    <div class="user_titlediv">
+    <input style="float:left" type=checkbox class="inputcheck" [(ngModel)]="item.checked" (click)="getTotal()">
+    <div class="user_titlediv" (click)="appearSome()">
       <div class="user_title">&nbsp;&nbsp;{{item.date}}</div>
-      <div class="appear">￥{{item.totalNum}}&nbsp;&nbsp;></div>
+      <div class="enappear">￥{{item.totalNum}}&nbsp;&nbsp;<img class="little little_img" src="assets/imgs/littlejiantou.png"></div>
     </div>
-    <div class="otherUser_content" style="display:none">
+    <div class="otherUser_content otherUser_content_con" style="display:none">
       <ion-list>
         <ion-item *ngFor="let list of item.data">
           <div class="fee_time">{{list.name}}</div>
@@ -67,10 +95,32 @@
 		<div class="zhong"><p style="float:left;margin-left:2px">全选</p><p>总计：<em>{{allprice}}</em></p></div>
 		<div class="you">
 			<div class="goum">
-				<a style="background-color:#488aff" (tap)="clickme()">去结算</a>  
+				<a style="background-color:#488aff" (click)="clickme()">去结算</a>  
 			</div>
 		</div>
 	</div>
 </div>
 	<div class="nomore" style="display: none">没有更多数据了...</div>
+
+  <!--确认付款开始-->
+<div id="enSureMon" style="display:none">
+<div class="mengban"></div>
+<div class="enSureMon">
+	<div class="enSureMon_title"></div>
+	<div class="enSureMon_content">
+		<div class="enSureMon_con_ti">
+			<img (click)="clickmeToIn()" src="../assets/imgs/closeMon.png">
+			<div>确认付款</div>
+			<img src="../assets/imgs/closewuask.png">
+		</div>
+		<div class="enSureMon_con_co">
+			<div>￥{{allprice}}</div>
+			<div>商品名称<span>物业欠费缴费</span></div>
+			<div>付款方式<span>微信支付</span></div>
+		</div>
+	</div>
+	  <button ion-button block (click)=clickme() color="#488aff">立即付款</button>
+</div>
+</div>
+<!--确认付款结束-->
 </ion-content>

@@ -7,28 +7,30 @@ import { LoadingController } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 //商品购买页面
 import { ShopbuyPage } from '../shopbuy/shopbuy';
-
+//StorageProvider
+import { StorageProvider } from '../../providers/storage/storage';
 //团购详情界面
 import { GroupdetailPage } from '../groupdetail/groupdetail';
 //返回首页
 import { TabsPage } from '../tabs/tabs'
+import { LoginPage } from '../login/login';
 
-@IonicPage()
+
 @Component({
   selector: 'page-groupbuylist',
   templateUrl: 'groupbuylist.html',
 })
 export class GroupbuylistPage {
   public GroupdetailPage=GroupdetailPage;
+  public LoginPage = LoginPage;
   public pageSize = 10;
   public pageIndex = 1;
   public hasData=true;   /*是否有数据*/
   public list = [];
+  public currentPlaceCode;
   public wdh=this.config.apiUrl;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
-   
-   
+  public http: Http,public config:ConfigProvider,public loadingCtrl: LoadingController,public app: App,public storage:StorageProvider,) {
    
   }
 
@@ -36,19 +38,25 @@ export class GroupbuylistPage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
     this.getGroupList('');
-    
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 
   getGroupList(infiniteScroll)
   {
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-    loading.present();
+    //  let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    //    });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+     $(".spinner").fadeIn(200);
      var j = 3;  //确定递归次数，避免死循环
      var api = this.wdh+'/api/goods/group_list?pageSize=' + this.pageSize 
-     + '&pageIndex=' + this.pageIndex + '&curCityCode=4403';
-     loading.dismiss();
+     + '&pageIndex=' + this.pageIndex + '&curCityCode='+this.currentPlaceCode;
+    //  loading.dismiss();
+     $(".spinnerbox").fadeOut(200);
+     $(".spinner").fadeOut(200);
      this.http.get(api).map(res => res.json()).subscribe(data =>{
        if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
@@ -85,9 +93,19 @@ export class GroupbuylistPage {
   }
 
   ionViewDidLoad() {
-   
+   this.currentPlaceCode  = this.storage.get('currentPlaceCode')
   }
 
+    gotoGood(id){
+    if(this.storage.get('token')){
+      this.navCtrl.push(GroupdetailPage,{
+        id:id
+      });
+    } else {
+    this.navCtrl.push(LoginPage);
+    return;
+    }
+  }
     backTo(){
     this.navCtrl.pop();
   }
@@ -99,5 +117,21 @@ export class GroupbuylistPage {
   backToHome(){
     this.app.getRootNav().push(TabsPage);    
   }
+
+    //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.pageIndex = 1;
+        this.list = [];
+        this.getGroupList('');
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }

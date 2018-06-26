@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery'
 /**
  * Generated class for the AddressinfoPage page.
  *
@@ -11,7 +11,6 @@ import { StorageProvider } from '../../providers/storage/storage';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-addressinfo',
   templateUrl: 'addressinfo.html',
@@ -30,6 +29,9 @@ export class AddressinfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddressinfoPage');
     this.getAddressInfo();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 
   //获取地址信息（地址详情）

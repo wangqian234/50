@@ -1,6 +1,5 @@
-
-<ion-content style="background-color:#f5f5f5">
-<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
+<ion-header>
+	<div class="toub_beij toub_beij_zy"  style="background-color:#448AFF">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
@@ -9,10 +8,39 @@
 					<li><a class="px24 zyyge">我的租赁信息</a></li>  
 				</ul>
 			</div>
+			<div id="delete" class="chacha">批量删除</div>
+			<div id="over" style="display:none" class="chacha">完成</div>
 		</div>
 	</div>
  </div>
+</ion-header>
 
+<ion-content style="background-color:#f5f5f5">
+<div class="spinnerbox"></div>
+<div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+</div>
+<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
  <div id="group-content">
   <ul class="order-nav clearfix" id="test">
       <li class="type current" data-nav="all" (click)="myPublish(1)"><a href="javascript:;">我的出售</a></li>
@@ -20,15 +48,13 @@
       <li class="type" data-nav="payment" (click)="myPublish(3)"><a href="javascript:;">我的求购</a></li>
       <li class="type" data-nav="done" (click)="myPublish(4)"><a href="javascript:;">我的求租</a></li>
   </ul>
- 
 	<ul id="testcontent" class="shangp_lieb_k_er">
 		<li *ngFor="let house of mylist" >
-				<ion-checkbox  style="float:left;margin:0.6rem  0.2rem 0 0;"></ion-checkbox>
+				<ion-checkbox class="ioncheck" [(ngModel)]="house.checked" (ionChange)="changeChecked()"style="float:left;margin:0.6rem  0.2rem 0 0;display:none"></ion-checkbox>
 				<div style="float:left;width:90%;"  (tap)="goRentsaleInfo(house.id,house.type)">
 				<div class="lieb_img" style="width:30%"><img src="{{house.imgurl}}"></div>
 				<div class="lieb_txt">
-					<p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>
-					
+					<p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>					
 					<p class="bend areatop">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
 					<div style="clear:both"></div>
 					<p class="bend" style="float:left">{{house.area}}</p>
@@ -45,5 +71,21 @@
   <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+    <div class="dib_daoh_b" id="deletebutton" style="display:none">
+	<div class="gouwuc_ gouwuc_yem">
+		<div class="zuo" >
+			<i class="i1" (tap)="checkAll()">
+				<ion-checkbox style="padding:0.25rem"  disabled="true" color="danger" [(ngModel)]='isChencked'></ion-checkbox>
+			</i>
+		</div>
+		<div class="zhong"><p style="float:left;margin-left:2px">全选</p></div>
+		<div class="you">
+			<div class="goum">
+				<a style="background-color:#488aff" (tap)="delMyPublish()">立即删除</a>  
+			</div>
+		</div>
+	</div>
+</div>
   
 </ion-content>

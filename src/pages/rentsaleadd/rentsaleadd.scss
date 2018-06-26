@@ -34,7 +34,7 @@ page-rentsaleadd {
         display:inline-block;
         position:relative;
         line-height:0.5rem;
-        font-size:0.28px; 
+        font-size:0.26rem; 
         border: 1px solid #bbbbbb;
         border-radius: 4px;
         background-color: white;
@@ -54,9 +54,10 @@ page-rentsaleadd {
         height: 100px;
         border: 1px solid #bbbbbb;
         margin-top: 10px;
-        border-radius: 1px;
+        border-radius: 0.1rem;
         font-size: 0.26rem;
         padding: 10px;
+        line-height: 0.35rem;
     }
 
 
@@ -71,24 +72,27 @@ page-rentsaleadd {
     }
     .label-ios {
         margin: 7px 8px 7px 0;
+        color: #818181;
     }
     .button-ios{
         height:0.8rem;
         font-size: 0.32rem;
         margin:0;
         bottom:0;
-        position: sticky;
     }
     .button-inner{
         font-size: 0.3rem;
     }
 
     .activety {
-    border-bottom: 2px solid #448AFF;
+    border-bottom: 1px solid #2979FF;
     a{
-    color:#448AFF;
+    color:#2979FF;
     }
 }
+    .titlea{
+color:#818181;
+    }
 
 .sp_daoh{
     height: 0.73rem;
@@ -115,6 +119,63 @@ page-rentsaleadd {
     width:1.5rem;
     margin:0.1rem 0rem 0rem 0.05rem;
 }
+
+.select-ios{
+    min-width:10% !important;
+    padding:0 !important;
+}
+
+.address_select{
+    -webkit-appearance:none;
+    font-size: 14px;
+    width: 27%;
+    line-height:0.5rem;
+    height: 0.5rem;
+    border-radius:3px;
+    border:solid 1px #bbbbbb
+}
+.jiedao_select{
+    -webkit-appearance:none;
+    font-size: 14px;
+    width: 65%;
+    line-height:0.5rem;
+    height: 0.5rem;
+    border-radius:3px;
+    border:solid 1px #bbbbbb
+}
+
+
+
+.item-ios .radio-ios{
+//     border: solid 1px red;
+//     border-radius: 50%;
+//     width:18px;
+//   height:18px;
+//   padding-bottom:0.2rem;
+}
+
+ion-radio{
+        -webkit-appearance: none;
+        background: url(../assets/imgs/selectb.png) no-repeat;
+        vertical-align: middle;
+        height: 0.3rem;
+        width: 0.3rem;
+        background-size: cover;
+        float: left;
+}
+.radio-ios .radio-checked .radio-inner{
+    top:2px;
+    border-color: #818181;
+}
+ .spanin{
+     display: block;
+    position: absolute;
+    margin-top: -0.23rem;
+    margin-left: 0.6rem;
+ }
+ .list-ios{
+     margin: 0;
+ }
 
 }
 

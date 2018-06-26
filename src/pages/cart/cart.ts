@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, App, ToastController } from 'ionic-angular';
 import $ from 'jquery';
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -17,10 +17,10 @@ import { ShopbuyPage } from '../shopbuy/shopbuy';
 
 //返回首页
 import { TabsPage } from '../tabs/tabs'
-
+import {ShopgoodsinfoPage} from'../shopgoodsinfo/shopgoodsinfo'
 //加载圈
 import { LoadingController } from 'ionic-angular';
-
+import {LoginPage} from '../login/login'
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
@@ -62,31 +62,32 @@ export class CartPage {
   }
 
   constructor(public navCtrl: NavController,public config:ConfigProvider, public navParams: NavParams,public http: Http,
-  public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App) {
-        $(".ios .tabs .tabbar").css("display","none");
+  public storage:StorageProvider,public loadingCtrl: LoadingController,public app: App, public toastCtrl: ToastController) {
+        //$(".ios .tabs .tabbar").css("display","none");
   }
 
   ionViewWillEnter(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
-    document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
-     //this.getCartsData('');
+    document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
   }
   
   ionViewDidEnter() {
-    this.pageIndex = 1;
-    this.list = [];
-    this.getCartsData('');
+   this.storage.set('tabs','333');
+   console.log(this.storage.get('tabs'))
+      //确认登录状态
+      if(this.storage.get('token')){
+         this.pageIndex = 1;
+         this.list = [];
+         this.getCartsData(''); 
+      } else {
+        this.navCtrl.push(LoginPage);
+      }
   }
-
+  //获取购物车列表
   getCartsData(infiniteScroll){
-   let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
     var j = 3;  //确定递归次数，避免死循环
     var api = this.config.apiUrl + '/api/usercart/list?pageSize=' + this.pageSize + '&pageIndex=' + this.pageIndex + '&token=' +this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-        loading.dismiss();
         if(data.errcode===0 && data.errmsg==="OK"){
         if(data.list.length == 0){
           this.hasData = false;
@@ -131,6 +132,15 @@ export class CartPage {
         this.list = [];
         this.hasData = true;
         this.getCartsData('');
+        let toast = this.toastCtrl.create({
+        message: '删除商品成功',
+        duration: 2000,
+        position: 'bottom'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
       } else if(data.errcode === 40002) {
           j--;
           if(j>0){
@@ -219,7 +229,8 @@ export class CartPage {
       if(data.errcode ===0&&data.errmsg==='OK'){
         console.log("修改成功")
       }else{
-        alert(data.errmsg)
+        alert("修改数量失败！")
+        console.log(data.errmsg)
       }
     })
   }
@@ -241,6 +252,16 @@ export class CartPage {
 // }
 //结算
 buy(){
+  var buysome = 0
+   for(let i=0;i<this.list.length;i++){
+        if(this.list[i].checked==true){
+          buysome++;
+        }
+      }
+      if(buysome == 0){
+        alert("请先选中商品");
+        return;
+      }
   var gidGroup = [];
   var gsIdGroup = [];
   var numGroup = [];
@@ -260,20 +281,17 @@ buy(){
   //接口
   var j=3;
    var date = this.blist;
-     //alert(JSON.stringify(date));
     var api = this.config.apiUrl+'/api/usercart/add_settlement'
      this.http.post(api,date).map(res => res.json()).subscribe(data =>{
        console.log(data)
        console.log("jin11")
       if(data.errcode === 0 && data.errmsg === 'OK'){
-        // alert("post成功!");
          //跳转前验证
       var api=this.config.apiUrl+'/api/goods/buy_list?caId=1&token='+this.blist.token;
             this.http.get(api).map(res => res.json()).subscribe(data =>{
               console.log(data)
               console.log("jin22")
                //if(data.errcode === 0 && data.errmsg === 'OK'){
-                  //alert("可以购买!");
        this.navCtrl.push(ShopbuyPage,{
           wid: this.list[0].good_id,
           sid: this.list[0].size_id,
@@ -301,15 +319,57 @@ buy(){
     this.getCartsData(infiniteScroll);
   }
 
+goback = false
   backTo(){
-    this.app.getRootNav().push(TabsPage,{
-      tabs:true
-    });
+    // this.navCtrl.setRoot(TabsPage,{
+    //   tabs:true
+    // })
+    // this.app.getRootNav().push(TabsPage,{
+    //   tabs:true
+    // });
+    // $(" .ios .tabs .tabbar").css("display","flex");
+    // this.navCtrl.push(TabsPage,
+    //   {tab: true});
+    this.goback = true;
+    this.navCtrl.pop();
   }
+  goshopInfo(id){
+    this.navCtrl.push(ShopgoodsinfoPage,{id:id})
+  }
+    goshopInfo2(id){
+    this.navCtrl.push(ShopgoodsinfoPage,{id:id})
+  }
+  
+  ionViewDidLeave(){
+    if(this.goback){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
+    }
+  }
+
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }
+
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+        this.pageIndex = 1;
+         this.list = [];
+         this.getCartsData(''); 
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
    
 
 }

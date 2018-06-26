@@ -5,25 +5,27 @@ import { Http }from '@angular/http';
 import { StorageProvider } from '../../providers/storage/storage';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
-import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo'
-@IonicPage()
+import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo';
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-rentsalelist',
   templateUrl: 'rentsalelist.html',
 })
 export class RentsalelistPage {
-
+public LoginPage = LoginPage;
   houseInfo = [];
   houseType = "";
   nature = "";
   pageIndex = 1;
-  curCityCode = 4403;
   item = "";
   flag=true;
   horder = "";
   search = "";
+  public currentPlaceCode;
   constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider ,
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
+    
   }
 
   ionViewWillLoad() {
@@ -47,18 +49,37 @@ export class RentsalelistPage {
 
     }
   }
-
-
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
+  }
   ionViewDidLoad() {
+    this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.clickCSSTitle();
   }
 
+    //搜索
+      onSearchKeyUp(event){
+     if("Enter"==event.key){
+       this.houseInfo=[];
+       this.pageIndex=1;
+      this.getSaleInfo("");
+     }
+  }
+  getSaleList(){
+    this.houseInfo=[];
+       this.pageIndex=1;
+      this.getSaleInfo("");
+
+  }
   getSaleInfo(infiniteScroll){
-    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.curCityCode + "&type=" + this.houseType + 
+    // var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.currentPlaceCode + "&type=" + this.houseType + 
+        // '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
+    var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=4403&type=" + this.houseType + 
         '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        // alert(this.search);
         this.houseInfo = this.houseInfo.concat(data.list);
         console.log(this.houseInfo);
         if(infiniteScroll){
@@ -110,12 +131,12 @@ export class RentsalelistPage {
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "time+"
+        that.horder = "time"
       } else {
         that.horder = "time-"
       }
-      this.houseInfo=[];
-      this.pageIndex=1;
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -148,12 +169,12 @@ export class RentsalelistPage {
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "space+"
+        that.horder = "space"
       } else {
         that.horder = "space-"
       }
-      this.houseInfo=[];
-      this.pageIndex=1;
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
 
@@ -186,24 +207,48 @@ export class RentsalelistPage {
       // $(this).append('<img src="assets/imgs/order.png">');
 
       if(that.flag){
-        that.horder = "price+"
+        that.horder = "price"
       } else {
         that.horder = "price-"
       }
+      that.houseInfo=[];
+      that.pageIndex=1;
       that.getSaleInfo("");
     })
   }
+
+    
+    
     //跳转到详情
   goRentsaleInfo(id,type){
+    if(this.storage.get('token')){
     this.navCtrl.push(RentsaleinfoPage,{
       houseId:id,
       houseType:type,
       quFen:1,
-    })
+    })}else{
+this.navCtrl.push(LoginPage);
+}
+ 
   }
 
   backTo(){
     this.navCtrl.pop();
   }
+   //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+      this.houseInfo=[];
+      this.pageIndex=1;
+      this.getSaleInfo("");
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }

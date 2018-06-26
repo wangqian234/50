@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import { ShoppingPage } from '../shopping/shopping';
 
-@IonicPage()
+
 @Component({
   selector: 'page-personal',
   templateUrl: 'personal.html',
@@ -17,22 +17,26 @@ export class PersonalPage {
   public token = "";
   public personInfo = {};
   public currentPlace = "";
+  public currentPlaceCode = "";
   public keywords = "";
   public callback;
-
   public ShoppingPage = ShoppingPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
         public storage:StorageProvider,public config:ConfigProvider) {
+         
     this.callback = this.navParams.get("callback");
   }
   
 
   ionViewDidLoad() {
     this.currentPlace = this.storage.get("currentPlace");
+    this.currentPlaceCode =  this.storage.get("currentPlaceCode");
     this.gotoHere();
   }
-
+ ionViewDidEnter(){
+    this.storage.set('tabs','false');
+ }
   gotoHere(){
     var that = this;
       $('.container').show();
@@ -46,6 +50,17 @@ export class PersonalPage {
             that.navCtrl.pop();
           });
       });
+
+      $('#current').on('click', function () {
+          let change = {
+            changePlace : that.currentPlace,
+            changePlaceCode : that.currentPlaceCode
+          }
+         that.callback(change).then(()=>{
+            that.navCtrl.pop();
+          });
+      });
+
       //点击索引查询城市
       $('ion-content').on('click', '.letter a', function () {
         $('.scroll-content').scrollTop(0);
@@ -78,7 +93,19 @@ export class PersonalPage {
               $cityItem.removeClass('hidden');
           }
       });
-    }
+    
+$('.city-list').each(function () {
+var $cityList = $(this);
+if ($cityList.find('#current').length > 0) {
+return;
+}
+if ($cityList.find('p[data-id]').not('.hidden').length > 0) {
+$cityList.removeClass('hidden');
+} else {
+$cityList.addClass('hidden');
+}
+});
+  }
 
 
 }

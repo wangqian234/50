@@ -1,6 +1,6 @@
 //商品订单详情
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, ToastController } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 
 //请求数据
@@ -84,10 +84,12 @@ export class TradegoodsGroupbuyingPage {
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http,  public app: App,
    public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
-   public loadingCtrl: LoadingController) {
+   public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
         this.SD_id=navParams.get('id');
   }
-
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
+  }
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id});
@@ -116,7 +118,16 @@ export class TradegoodsGroupbuyingPage {
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-           alert("取消付款成功！");
+           alert("已取消付款");
+           let toast = this.toastCtrl.create({
+            message: '已取消付款',
+            duration: 2000,
+            position: 'bottom'
+          });
+            toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+        toast.present();
           this.paymentEvent(1);////刷新界面
           this.cd.detectChanges();//更新页面
         } else if(data.errcode === 40002){
@@ -140,6 +151,15 @@ export class TradegoodsGroupbuyingPage {
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
+          let toast = this.toastCtrl.create({
+            message: '收货成功！',
+            duration: 2000,
+            position: 'bottom'
+          });
+            toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+        toast.present();
           alert("收货成功！");
           this.paymentEvent(3);
           this.cd.detectChanges(); //更新页面
@@ -162,7 +182,7 @@ export class TradegoodsGroupbuyingPage {
    }
 
   ionViewDidLoad() {
-        this.getGroupList("");//实现列表缓存
+  this.getGroupList("");//实现列表缓存
   }
 /**王慧敏商城 */
      //商城实现列表缓慢加载
@@ -221,13 +241,8 @@ export class TradegoodsGroupbuyingPage {
       break;
     }
     $('.scroll-content').scrollTop('1.8rem');
-    //加载
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
     var api = this.aa+'/api/trade/list?pageSize=10&pageIndex='+this.page+'&trade_State='+this.SD_id+'&token='+this.token;
-    loading.dismiss();
+    // loading.dismiss();
     console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
 
@@ -398,7 +413,6 @@ export class TradegoodsGroupbuyingPage {
    groupbuyEvent(groupbuyid){
     //  alert("团购详情"+groupbuyid);
      this.navCtrl.push(TradegoodsGroupbuydetailPage,{gbId:groupbuyid});
-
    }
  
   //加载更多
@@ -416,15 +430,15 @@ export class TradegoodsGroupbuyingPage {
   }
     gotoGroup(){
     this.flag = false;
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block") ;
+    $(".order-content").css("display", "none") ;
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
   }
     gotoOrder(){
     this.flag = true;
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none") ;
+    $(".order-content").css("display", "block") ;
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
     this.SD_id = 0;
@@ -436,8 +450,26 @@ export class TradegoodsGroupbuyingPage {
     this.navCtrl.pop();
   }
 
-      backToHere(){
+  backToHome(){
      this.app.getRootNav().push(TabsPage);
   }
+
+       //下拉刷新
+ doRefresh(refresher) {
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+      if(this.flag){
+      this.getOrderList('');
+      }else{
+      this.getGroupList('');
+      }
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }

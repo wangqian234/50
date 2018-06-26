@@ -1,5 +1,19 @@
 <ion-content>
-
+  <div class="spinnerbox"></div>
+  <div class="spinner">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+      <div class="bar4"></div>
+      <div class="bar5"></div>
+      <div class="bar6"></div>
+      <div class="bar7"></div>
+      <div class="bar8"></div>
+      <div class="bar9"></div>
+      <div class="bar10"></div>
+      <div class="bar11"></div>
+      <div class="bar12"></div>
+  </div>
   <div style="margin-bottom:10px;background-color:#448AFF" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
@@ -15,32 +29,42 @@
 
 <div>
   <ion-icon class="repair-ion" name="build"></ion-icon>&nbsp;&nbsp;<p>{{repairdetaillist.typename}}{{repairdetaillist.time}}</p>
-  <p class="repair-state">{{repairdetaillist.statename}}</p>
+  <!--<p class="repair-state">{{repairdetaillist.statename}}</p>-->
+
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待派单'" src="assets/imgs/Statusicon_01.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待评价'" src="assets/imgs/Statusicon_02.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='待派工'" src="assets/imgs/Statusicon_03.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='已终止'" src="assets/imgs/Statusicon_04.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='已完成'" src="assets/imgs/Statusicon_05.png">
+    <img class="stateimg" *ngIf="repairdetaillist.statename=='处理中'" src="assets/imgs/Statusicon_06.png">
+
   <p class="detail">说明：{{repairdetaillist.mome}}</p>
-  <div>
+  <!--图片遍历-->
+  <!--<div>
     <img class="pic" src="assets/imgs/08.jpg" />
-  </div>
+  </div>-->
 </div>
 <p class="detail1">处理进度如下：</p>
-<div id="app" style="display: none">
+<div id="app" *ngIf = "app" >
     <ul>
         <li *ngFor="let item of disposememo">
           {{item}}
         </li>
+
     </ul>
 </div>  
 
-<div id="evaluateContent" style="display: none">
+<div id="evaluateContent"  *ngIf = "evaluateContent">
       <p>服务态度：{{repairdetaillist.servicescore}}</p>
       <p>处理及时：{{repairdetaillist.timelyscore}}</p>
       <p>处理质量：{{repairdetaillist.qualityscore}}</p>
       <p>评价内容：{{repairdetaillist.ScoreMemo}}</p>
 </div>
-<button id="stop"  style="display: none" ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
-<button id="finish"  style="display: none" ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
-<button ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
+<button  *ngIf = "stop"  id="stop"   ion-button block color="#f53d3d" (click)="showPopup()">终止工单</button>
+<button  *ngIf = "finish" id="finish"  ion-button block color="#f53d3d" (click)="showFinishPopup()">完成</button> 
+<button   *ngIf = "evaluate" id="evaluate" ion-button block color="#f53d3d" (click)="showevaluate()">评价</button> 
     <!-- 弹窗内容开始 -->  
-    <div id="background" class="back">  
+    <div id="background"  class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closePopup()">×</span>  
@@ -67,7 +91,7 @@
     </div>  
     
         <!-- 弹窗内容开始 -->  
-    <div id="finishRepaired" class="back">  
+    <div id="finishRepaired"   class="back">  
         <div id="div1" class="content1">  
             <div id="close" class="closs1">  
                 <span id="close-button" class="closs1-button" (click)="closeFinishPopup()">×</span>  
@@ -85,7 +109,7 @@
                 <ion-option value="0">其他原因（填写说明）</ion-option>
               </ion-select> 
             </ion-item>
-            <ion-item>
+            <ion-item style="height:2rem">
               <textarea class="add-some" [(ngModel)]="editcloselist.memo" placeholder="有没有什么补充说明的？"></textarea>
               </ion-item>
             </div>  

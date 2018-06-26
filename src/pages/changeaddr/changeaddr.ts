@@ -5,7 +5,7 @@ import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import $ from 'jquery'
 
 //增加收货地址
 import { AddaddressPage } from '../addaddress/addaddress';
@@ -39,12 +39,16 @@ export class ChangeaddrPage {
 
   constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
     ,public storage:StorageProvider,public httpService:HttpServicesProvider,public navParams: NavParams,) {
+     
       this.callback = this.navParams.get("callback");
       this.addListList = this.navParams.get("addListList");
   }
   ionViewWillEnter(){
     this.getRem();
     this.getAddressList();
+  }
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
   }
 
   gotoBuy(item){
@@ -62,7 +66,8 @@ export class ChangeaddrPage {
         this.addresslist = data.list;
         console.log(this.addresslist);
       } else {
-        alert(data.errmsg)
+        alert("获取地址列表失败！")
+        console.log(data.errmsg)
       }
     });
 

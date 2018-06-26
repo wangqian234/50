@@ -15,7 +15,6 @@ page-payfee {
         img{
             width: 0.25rem;
             height:0.25rem;
-            transform: rotate(180deg);
             margin-right: 0.25rem;
         }
     }
@@ -50,7 +49,6 @@ page-payfee {
         float:left;
         height:0.8rem;
         font-size:0.3rem;
-        border-radius: 0.05rem;
         color:white
     }
     .registerBtn { 
@@ -60,7 +58,6 @@ page-payfee {
         position: absolute;
         height:0.8rem;
         font-size:0.3rem;
-        border-radius: 0.05rem;
         color:white
     }
     .fee_time{
@@ -125,6 +122,27 @@ page-payfee {
     }
     .logo_k_fanh .fanh_ann{
         margin: 0.15rem 0 0 0.3rem;
+    }
+    .noblock{
+        display: none !important;
+    }
+    .block{
+        display: block !important;
+    }
+    .trans0{
+        transform: rotate(0) !important;
+    }
+    .trans90{
+        transform: rotate(90) !important;
+    }
+    .hrdivblock{
+       height: 0.7rem;
+        margin-top: 0.05rem;
+        width: 1px;
+        position: absolute;
+        background: white;
+        margin-left: 50%;
+        z-index: 2; 
     }
 
 }

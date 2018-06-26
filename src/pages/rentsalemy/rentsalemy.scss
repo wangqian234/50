@@ -1,7 +1,6 @@
 page-rentsalemy {
 #test{
      position:sticky;
-    top:0.8rem;
     z-index: 500;
     background-color: white;
 }
@@ -14,7 +13,6 @@ page-rentsalemy {
     text-align: center;
     float: left;
     height:0.8rem;
-    font-family: Roboto;
 }
 
 #group-content .order-nav .type a{
@@ -56,8 +54,20 @@ page-rentsalemy {
     .shangp_lieb_k_er{
         padding:0 !important;
     }
-
+    .shangp_lieb_k_er li .lieb_img{
+        height:1.45rem;        
+    }
     .shangp_lieb_k_er li .lieb_img img {
-        height:2.5rem;
+        height:1.45rem;
+    }
+    .chacha{
+        float: right;
+        position: absolute;
+        right: 0.2rem;
+        font-size: 0.22rem;
+        color: white;
+        line-height: 0.4rem;
+        margin-top: 0.1rem;
+        width: auto;
     }
 }

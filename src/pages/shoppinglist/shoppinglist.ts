@@ -1,6 +1,6 @@
 //商品订单详情
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, ToastController } from 'ionic-angular';
 import $ from 'jquery';//实现列表缓存
 
 //请求数据
@@ -32,7 +32,8 @@ import { LoadingController } from 'ionic-angular';
 //登录页面
 import { LoginPage } from '../login/login';
 //返回首页
-import { TabsPage } from '../tabs/tabs'
+import { TabsPage } from '../tabs/tabs';
+import { GroupdetailPage } from '../groupdetail/groupdetail';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class ShoppinglistPage {
   public ShopgoodsinfoPage=ShopgoodsinfoPage;//再次购买
   public LoginPage = LoginPage;
   public TabsPage = TabsPage;
+  public GroupdetailPage = GroupdetailPage;
   public offent;
     public addressList={
     trade_Id:'',
@@ -101,20 +103,35 @@ export class ShoppinglistPage {
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http
-  ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  ,public app: App,public loadingCtrl: LoadingController,public cd: ChangeDetectorRef,public jsonp:Jsonp ,
+  public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider, public toastCtrl: ToastController) {
+     
       if(navParams.get('id')){
         this.SD_id=navParams.get('id');
       } else {
         this.SD_id=0;   
       } 
-      $(".ios .tabs .tabbar").css("display","none");
+      //$(".ios .tabs .tabbar").css("display","none");
   }
+  ionViewDidEnter(){
+     if(this.navParams.get('id') != undefined){
+      this.storage.set('tabs','false');
+     } else {
+       this.storage.set('tabs','333');
+     }
+     //$(".ios .tabs .tabbar").css("display","none");
+  }
+
   //商品添加评价
   evaluationEvent(trade_id,tradegoods_id,wu,item){
     this.navCtrl.push(GoodsoderevaluatePage,{tradeId:trade_id,tradegoodsId:tradegoods_id,item:item});
   }
   //再次购买
-  buyagainEvent(goods_id){
+  buyagainEvent(goods_id,id){
+    if(id){
+      this.navCtrl.push(GroupdetailPage,{id:goods_id});
+      return;
+    }
     this.navCtrl.push(ShopgoodsinfoPage,{id:goods_id});
   }
   //商品评价详情
@@ -135,15 +152,11 @@ export class ShoppinglistPage {
      this.clickme();
    }
    payMent(){
-     let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
       this.obligationEventList.token = this.storage.get('token')
       this.obligationEventList.createip =this.cip;
       var api = this.aa + '/api/weixinpay/unifiedorder'
+      console.log(this.obligationEventList)
       this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
-         loading.dismiss();
         if(data.errcode === 0 ){
           console.log(data)
           this.outTradeNo = data.errmsg
@@ -152,19 +165,18 @@ export class ShoppinglistPage {
         }
       })
    }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.payMent();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
-      }
+      clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          that.cip = data.ip;
+          that.payMent();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+}
    //微信查询接口
    checkPayment(){
      var api = this.aa + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
@@ -176,18 +188,22 @@ export class ShoppinglistPage {
    }
    //商品取消付款
    cancelpaymentEvent(trade_id){
-         let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-      });
-      loading.present();
         this.cancelpaymentList.trade_Id=trade_id;
         this.cancelpaymentList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("取消付款成功！");
+          let toast = this.toastCtrl.create({
+          message: '取消付款成功！',
+          duration: 2000,
+          position: 'bottom'
+        });
+        toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
           this.paymentEvent(1);////刷新界面
           // this.cd.detectChanges();//更新页面
           //this.navCtrl.push(TradegoodsRefundPage);
@@ -206,17 +222,21 @@ export class ShoppinglistPage {
    }
    //商品确认收货
    receiveEvent(trade_id){
-         let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
         this.receivegoodsList.trade_Id=trade_id;
         this.receivegoodsList.token=this.token;
         var j=3;
         var api = this.aa+'/api/trade/update';
         this.http.post(api,this.receivegoodsList).map(res => res.json()).subscribe(data =>{
-          loading.dismiss();
         if (data.errcode === 0 && data.errmsg === 'OK') {
+          let toast = this.toastCtrl.create({
+            message: '收货成功',
+            duration: 2000,
+            position: 'bottom'
+          });
+          toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+          toast.present();
           alert("收货成功！");
           this.paymentEvent(3);
           // this.cd.detectChanges(); //更新页面
@@ -240,26 +260,29 @@ export class ShoppinglistPage {
    }
 
    ionViewWillLoad(){
-     //确认登录状态
-    if(this.storage.get('token')){
 
+   }
+  ionViewDidLoad() {
+         //确认登录状态
+    if(this.storage.get('token')){
+      this.getOrderList('');//实现列表缓存
     } else {
     this.navCtrl.push(LoginPage);
     }
-   }
-  ionViewDidLoad() {
-        this.getOrderList('');//实现列表缓存
-        if(this.navParams.get('id') == undefined){
+        
+   if(this.navParams.get('id') == undefined){
           $("#backTo").css("visibility","hidden")
         }
   }
 /**王慧敏商城 */
      //商城实现列表缓慢加载
    getOrderList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
+    // let loading = this.loadingCtrl.create({
+	  //   showBackdrop: true,
+    // });
+    // loading.present();
+     $(".spinnerbox").fadeIn(200);
+        $(".spinner").fadeIn(200);
     switch(this.SD_id){
       case 0:
       this.tabTest={
@@ -317,7 +340,9 @@ export class ShoppinglistPage {
     // console.log("王慧敏来了"+api);
     //var api= this.config.apiUrl + '/api/list/list?tId=1&keyWord=eee&pageIndex='+this.page+'&pageSize=10&token='+this.storage.get('token');
     this.http.get(api).map(res => res.json()).subscribe(data =>{
-      loading.dismiss();
+      // loading.dismiss();
+       $(".spinnerbox").fadeOut(200);
+        $(".spinner").fadeOut(200);
       // alert("王慧敏"+JSON.stringify(this.list));
       if(data.errcode===0 && data.errmsg==="OK"){
         this.list=this.list.concat(data.list);  /*数据拼接*/
@@ -348,7 +373,7 @@ export class ShoppinglistPage {
             this.getOrderList(infiniteScroll);
           }
         }else{
-          alert(data.errmsg);
+          console.log(data.errmsg);
         }
     })
   }
@@ -387,10 +412,6 @@ export class ShoppinglistPage {
 /**王慧敏团购 */
    //团购实现列表缓慢加载
    getGroupList(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-    });
-    loading.present();
     switch(this.SD_id){
       case 0:
       this.tab_test={
@@ -430,7 +451,6 @@ export class ShoppinglistPage {
      var api = this.aa+'/api/groupbuy/list?pageSize=10&pageIndex='+this.page+'&groupBuy_State='+this.SD_id+'&token='+this.token;
     //  console.log("王慧敏"+api);  
      this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
       //  alert("王慧敏"+JSON.stringify(this.groupBuyList));
      if(data.errcode===0 && data.errmsg==="OK"){
         this.groupBuyList=this.groupBuyList.concat(data.list);  /*数据拼接*/
@@ -513,8 +533,8 @@ export class ShoppinglistPage {
     gotoGroup(){
     this.flag = false;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "block") ;
-    $("#order-content").css("display", "none") ;
+    $(".group-content").css("display", "block");
+    $(".order-content").css("display", "none");
     $("#title li:nth-of-type(1)").attr("class","qbdd qbdd_you")
     $("#title li:nth-of-type(2)").attr("class","qbdd no")
     this.SD_id = 0;
@@ -525,19 +545,89 @@ export class ShoppinglistPage {
     gotoOrder(){
     this.flag = true;
     $('ion-infinite-scroll').css('display','block');//下拉加载
-    $("#group-content").css("display", "none") ;
-    $("#order-content").css("display", "block") ;
+    $(".group-content").css("display", "none");
+    $(".order-content").css("display", "block");
     $("#title li:nth-of-type(1)").attr("class","qbdd no")
     $("#title li:nth-of-type(2)").attr("class","qbdd qbdd_you")
   }
-  backTo(){
-    this.app.getRootNav().push(TabsPage,{
-      tabs:true
-    });
+  ionViewDidLeave(){
+//$(".ios .tabs .tabbar").css("display","-webkit-flex");
+    if(this.goback){
+        $(".mytabs").css("display","none");
+        $(".mytabs2").css("display","block");
+    }
   }
+goback = false;
+  backTo(){
+        this.goback = true;
+    this.navCtrl.pop();
+  }
+
+  
+  // backTo(){
+  
+  //   if(this.navParams.get('id') != undefined){
+  //     this.navCtrl.pop();
+  //   } else{
+  //   this.app.getRootNav().push(TabsPage,{
+  //     tabs:true
+  //   });
+  //   }
+  // }
+
+  // backTo(){
+  //   this.navCtrl.pop();
+  // }
 
   backToHome(){
      this.app.getRootNav().push(TabsPage);    
   }
+
+  //下拉刷新
+ doRefresh(refresher) {
+
+  this.outTradeNo;
+  this.list=[];
+  this.groupBuyList=[];
+  this.good_list=[];
+  this.SD_id;
+  this.page=1; //实现列表缓存
+
+  this.addressList={
+    trade_Id:'',
+    commentGroup:'',
+    token : '',
+  };
+  this.receivegoodsList={
+    trade_Id:'',
+    token:'',
+  }
+  this.cancelpaymentList={
+    trade_Id:'',
+    token:'',
+  }
+  this.obligationEventList={
+    tId:'',
+    token:'',
+    tags:'android',
+    act:'emall',
+    createip:'',
+  }
+
+    console.log('刷新开始', refresher);
+      setTimeout(() => { 
+       if(this.flag){
+      this.getOrderList('');
+     }else{
+      this.getGroupList('');
+     }
+      //   this.items = [];
+      //   for (var i = 0; i < 30; i++) {
+      //    this.items.push( this.items.length );
+      //  }
+       console.log('刷新结束');
+       refresher.complete();
+     }, 2000);
+ }
 
 }

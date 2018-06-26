@@ -1,7 +1,7 @@
 //商品退款申请
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 //请求数据
 import {Http,Jsonp}from '@angular/http';
@@ -11,14 +11,13 @@ import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
 import { LoadingController } from 'ionic-angular';
-
+import $ from 'jquery'
 //商品退款详情
 import {TradegoodsRefundPage}from '../tradegoods-refund/tradegoods-refund';
 //商品订单列表
 import {ShoppinglistPage}from '../shoppinglist/shoppinglist';
 
 
-@IonicPage()
 @Component({
   selector: 'page-tradegoods-reap',
   templateUrl: 'tradegoods-reap.html',
@@ -52,7 +51,8 @@ export class TradegoodsReapPage {
   public token=this.storage.get('token');
 
   constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public loadingCtrl: LoadingController
-,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+,public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider,
+public toastCtrl: ToastController,) {
             this.pretotalprice = this.navParams.get('pretotalprice')
             this.tradegoods_id=navParams.get('tradegoodsId');
             this.reapList.tgId=this.tradegoods_id;      
@@ -65,6 +65,9 @@ export class TradegoodsReapPage {
     //   this.refundList=this.navParams.get('item');
     // } 
   }
+  ionViewDidEnter(){
+     this.storage.set('tabs','false');
+  }
     getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 115) + 'px';
@@ -74,10 +77,6 @@ export class TradegoodsReapPage {
   }
   //添加商品退款申请
   addRefundApplicationEvent(){
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true,
-      });
-      loading.present();
       var j=3;
       if(this.reapList.price<=this.pretotalprice){
       var api = this.aa+'/api/tradegoods_refund/add'
@@ -85,7 +84,6 @@ export class TradegoodsReapPage {
       this.reapList.token=this.token;
       console.log(JSON.stringify(this.reapList) )
       this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
-        loading.dismiss();
       if (data.errcode === 0 && data.errmsg === 'OK'){
           alert("添加成功！");
           this.navCtrl.push(ShoppinglistPage,{id:2});
@@ -106,7 +104,6 @@ export class TradegoodsReapPage {
   }
   //修改商品退款申请
   modifyRefundApplicationEvent(){
-      alert("评价修改");
       var j=3;
       var api = this.aa+'/api/tradegoods_refund/add';
       this.reapList.token = this.token;
@@ -116,6 +113,15 @@ export class TradegoodsReapPage {
         this.http.post(api,this.reapList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
           alert("修改成功！");
+          let toast = this.toastCtrl.create({
+            message: '修改成功！',
+            duration: 2000,
+            position: 'bottom'
+          });
+            toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+        toast.present();
           this.navCtrl.push(ShoppinglistPage,{id:2});
         }else if(data.errcode === 40002){
               j--;

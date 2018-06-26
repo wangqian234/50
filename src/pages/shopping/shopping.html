@@ -1,122 +1,138 @@
-
-<ion-content  style="background-color:#f5f5f5">
-
+<ion-content style="background-color:#f5f5f5">
 
 
+    <div class="spinnerbox"></div>
+    <div class="spinner">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+        <div class="bar6"></div>
+        <div class="bar7"></div>
+        <div class="bar8"></div>
+        <div class="bar9"></div>
+        <div class="bar10"></div>
+        <div class="bar11"></div>
+        <div class="bar12"></div>
+    </div>
 
-<div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
-	<div class="zhongj_k shouye">
-		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
-        <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
-		<div class="shous_k">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
-            <img (click)="doSomething()" src="assets/imgs/sos.png">
+    <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
+        <div class="zhongj_k shouye">
+            <!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
+            <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
+            <div class="shous_k">
+                <input id="sos_tanc" class="sos_tanc" type="search" action="javascript:return true;"
+                 (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords'placeholder="限时疯抢，好物低至1元">
+                <img (click)="doSomething()" src="assets/imgs/sos.png">
+            </div>
+            <div class="dengl">
+                <div class="caid_img" (click)="gotoPlace()" id="zhu_caid"><img src="assets/imgs/location.png">
+                    <p>{{currentPlace}}</p>
+                </div>
+            </div>
         </div>
-		<div class="dengl">
-			<div class="caid_img"  (click)="gotoPlace()" id="zhu_caid"><img src="assets/imgs/location.png"><p>{{currentPlace}}</p></div>
-		</div>
-	</div>
 
-    <div class="zhongj_k sousuo" style="display:none">
-		<!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
-        <div class="logo_k logo_k_fanh" style="width:auto"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png">
-        <img style="margin-right: 0.2rem;" (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></div>
-		<div class="shous_k" style="width:63%">
-            <input id="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords' placeholder="限时疯抢，好物低至1元">
-            <img src="assets/imgs/sos.png">
+        <div class="zhongj_k sousuo" style="display:none">
+            <!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
+            <div class="logo_k logo_k_fanh" style="width:auto"><img (click)="fanhui()" class="fanh_ann" src="assets/imgs/fanh.png">
+                <img style="margin-right: 0.2rem;" (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></div>
+            <div class="shous_k" style="width:63%">
+                <input class="sos_tanc" type="search" action="javascript:return true;" (keyup)="onSearchKeyUp($event)" [(ngModel)]='keywords'
+                    placeholder="限时疯抢，好物低至1元">
+                <img src="assets/imgs/sos.png">
+            </div>
+            <div class="dengl" style="width:13%">
+                <div class="fanhui" (click)="doReserch()" id="fanhui">搜索</div>
+            </div>
         </div>
-		<div class="dengl"  style="width:13%">
-			<div class="fanhui" (click)="doReserch()" id="fanhui">搜索</div>
-		</div>
-	</div>
-</div>
-<div class="shopcontentdiv">
+    </div>
 
-<!-- 轮播图 -->
+    <div class="shopcontentdiv">
+        <!--手写轮播图-->
+        <!--<div class="vo_carousel"></div>-->
+        <div class="swiper-container shopswiper" id="shopswiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide stop-swiping" *ngFor="let item of tuijList" (click)="goGoodsInfo(item['url'])"><img class="img1" src="{{item.img}}"  /></div>
+            </div>
+            <div class="swiper-pagination shoppagination" id="shoppagination"></div>
+        </div>
 
-        <ion-slides *ngIf="tuangouList.length>0" class="focus" pager  loop="true" autoplay="3000" >    
-            <ion-slide *ngFor="let item of tuangouList">
-               <img class="img1" src="{{item.img}}" [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}" />
+        <!-- 团购图标-->
+        <div class="tupian-div">
+            <img [navPush]="SalePage" src="assets/imgs/qianggou.png">
+            <div class="tupian-div2">
+                <img src="assets/imgs/renmai.png" [navPush]="BigsalePage" class="div2">
+                <img src="assets/imgs/tuangou.png" [navPush]="GroupbuylistPage" class="div3">
+            </div>
+        </div>
 
-           </ion-slide>         
-        </ion-slides>
-
-  
-   <!-- 团购图标-->
-  <div class="tupian-div">
-        <img [navPush]="SalePage" src="assets/imgs/qianggou.png">
-        <div class="tupian-div2">
-            <img src="assets/imgs/renmai.png" [navPush]="BigsalePage"  class="div2">
-            <img src="assets/imgs/tuangou.png" [navPush]="GroupbuylistPage" class="div3">
-        </div> 
-  </div>
-
-  <div style="clear:both"></div>
+        <div style="clear:both"></div>
 
 
-            <div class="titleshop">
-                <img src="assets/imgs/recommend.png">
-                <span class="p_shop">&ensp;推荐分类</span>
-                <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
-            </div>               
+        <div class="titleshop">
+            <img src="assets/imgs/recommend.png">
+            <span class="p_shop">&ensp;推荐分类</span>
+            <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
+        </div>
         <!--<div class="prev1" id="prev2"><img src="assets/imgs/index_tab_l.png" alt=""></div>
 		<div class="next1" id="next2"><img src="assets/imgs/index_tab_r.png" alt=""></div>-->
-              <!--图标遍历-->          
-        <ul class="facediv" >
-            <li *ngFor= "let item of tubList;let i = index">   
-                    <div (tap)="getshoplist(item['id'],i)">
-                    <a ><img src="{{item.img}}"/></a>
-                    <p>{{item.name}}</p>                   
-                    </div>
+        <!--图标遍历-->
+        <ul class="facediv">
+            <li *ngFor="let item of tubList;let i = index">
+                <div (click)="getshoplist(item['id'],i)">
+                    <a><img src="{{item.img}}"/></a>
+                    <p>{{item.name}}</p>
+                </div>
             </li>
         </ul>
-        
-<div id="mallhome-content" style="margin-top:10px">
-   <ul class="goods-list" >
+
+        <div id="mallhome-content" style="margin-top:10px">
+            <ul class="goods-list">
                 <li class="goods-item clearfix" *ngFor="let item of shoplist" (tap)="goGoodsInfo(item['id'])">
                     <img [src]="item.img" alt="" srcset="">
-                    <div class="information" >
+                    <div class="information">
                         <p class="name">{{item.title}}</p>
                         <p class="tip">{{item.prename}}<span *ngIf="item.recommend==true">推荐</span></p>
                         <p class="sales-count">已售<span>{{item.soldnum}}</span>份</p>
                         <p class="price">￥<span>{{item.price}}</span></p>
-                        <div class="cartdiv"><img class="cartimg" src="assets/imgs/cart.png"></div>
+                        <div [navPush]="CartPage" class="cartdiv"><img class="cartimg" src="assets/imgs/cart.png"></div>
                     </div>
                 </li>
-        </ul>
-</div>
+            </ul>
+        </div>
 
         <div class="titleshop">
             <img src="assets/imgs/recommend.png">
             <span class="p_shop">&ensp;精品推荐</span>
             <span class="p_shop2" [navPush]="ShopsortPage" [navParams]="{type:1}">更多&ensp;<img class="moreimg" src="assets/imgs/more.png"></span>
         </div>
-        <ul style="margin-bottom:50px">
-        <li *ngFor= "let item of tuijList" style="height:3.19rem;">
-            <a [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}">
-               <div><img style="width:100%;height: 3.19rem;" src="{{item.img}}"></div>
-            </a>
-        </li>
-    </ul>
+        <ul style="margin-bottom:50px;">
+            <li *ngFor="let item of tuijList" style="margin-bottom: 5px;height:3.19rem;padding:0.1rem 0.2rem 0.1rem 0.2rem;background-color:white">
+                <a [navPush]='ShopgoodsinfoPage' [navParams]="{id:item['url']}">
+                    <div><img style="width:100%;height: 3rem;" src="{{item.img}}"></div>
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div id="searchInput" class="remen_sos">
         <div class="history" *ngIf="shopKeyList">
-		<p>历史搜索：</p><img src="assets/imgs/delete.png" (click)="clearShopKey()">
-			<ul>
-				<li *ngFor="let ketword of shopKeyList"><a href="#">{{ketword}}</a></li>
-			</ul>
+            <p>历史搜索：</p><img src="assets/imgs/delete.png" (click)="clearShopKey()">
+            <ul>
+                <li *ngFor="let ketword of shopKeyList" (click)="searchFromKey(ketword)"><a href="#">{{ketword}}</a></li>
+            </ul>
         </div>
 
         <div class="remen">
-		<p>热门搜索：</p>
-			<ul>
-				<li><a href="#">旅游</a></li>
-				<li><a href="#">家政服务</a></li>
-				<li><a href="#">汇超市</a></li>
-				<li><a href="#">保洁</a></li>
-			</ul>
+            <p>热门搜索：</p>
+            <ul>
+                <li><a href="#">旅游</a></li>
+                <li><a href="#">家政服务</a></li>
+                <li><a href="#">汇超市</a></li>
+                <li><a href="#">保洁</a></li>
+            </ul>
         </div>
-	</div>
+    </div>
 
 </ion-content>

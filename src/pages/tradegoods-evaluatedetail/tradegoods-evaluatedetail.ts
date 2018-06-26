@@ -8,8 +8,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ConfigProvider } from '../../providers/config/config';
 //StorageProvider
 import { StorageProvider } from '../../providers/storage/storage';
-
-@IonicPage()
+import $ from 'jquery'
 @Component({
   selector: 'page-tradegoods-evaluatedetail',
   templateUrl: 'tradegoods-evaluatedetail.html',
@@ -24,7 +23,8 @@ export class TradegoodsEvaluatedetailPage {
   public aa = this.config.apiUrl;
   //定义token
   public token=this.storage.get('token');
-  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
+  constructor(public storage:StorageProvider,public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp 
+  ,public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider) {
         //this.tradegoods_id=navParams.get('tradegoodsId');//商品订单编号
           this.SD_id=navParams.get('tradeId');
           this.goods_id=navParams.get('goodsId');
@@ -33,6 +33,9 @@ export class TradegoodsEvaluatedetailPage {
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
         this.getRem();
         this.getdetaillist();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;

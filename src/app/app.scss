@@ -15,5 +15,10 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-
+.toastcss1{
+    font-size: 0.25rem !important;
+    bottom:2rem !important;
+    position: absolute !important;
+    height: -webkit-fill-available !important;
+}
 

@@ -8,12 +8,16 @@ page-shopbuy {
 }
 .button-ios {
     border-radius: 4px;
-    height: 2em;
+    // height: 2em;
     font-size: 0.2rem;
     color: #fff;
-    background-color: #488aff;
-    margin: 0.4rem 0.2rem;
-    padding: 0 1em;
+    background-color: #FF730F;
+    bottom: 0;
+    position: absolute;
+    margin: 0;
+    height: 0.8rem;
+    // margin: 0.4rem 0.2rem;
+    // padding: 0 1em;
 }
 
 ///
@@ -87,18 +91,18 @@ page-shopbuy {
     border: none;
 }
 .gouwuc_ .you .goum a{
-    height:0.8rem !important;
-    line-height: 0.8rem !important;
+    // height:0.8rem !important;
+    // line-height: 0.8rem !important;
     border:1px solid #FF730F;
 }
 .goum a{
     background-color: #FF730F;
 }
 .gouwuc_yem .zhong{
-    height:0.8rem;
+    // height:0.8rem;
 }
 .dib_daoh_b{
-    height:0.8rem;
+    //height:0.8rem;
 }
 
 .min_xi{
@@ -151,7 +155,8 @@ dl{
     padding: 0.2rem;
 }
 .dingwei{
-    margin-top: 0.5rem;
+    margin-top: 0.55rem;
+    height: 0.23rem;
 }
 input{
     width: 75%;
@@ -203,4 +208,90 @@ ion-checkbox{
         border-color: #FF730F;
     background-color: #FF730F;
 }
+.logo_k_fanh{
+  width: auto;
+  position: absolute;
+}
+.zhongjain_daoh{
+  width: 100%;
+}
+.jiu_feo{
+  width: 100%;
+}
+.dib_daoh_b{
+    z-index: 0;
+}
+    .button-inner{
+        font-size: 0.3rem;
+    }
+
+}
+.mengban{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(129,129,129,0.7);
+}
+.enSureMon{
+    background-color: white;
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    bottom: 0;
+}
+.enSureMon_con_ti{
+    width: 92%;
+    margin: 0 auto;
+    height: 0.92rem;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 0.31rem 0;
+    div{
+        margin: 0 auto;
+        font-size: 0.29rem;
+        color: #333333;
+        text-align: center;
+    }
+    img:nth-of-type(1){
+        height: 0.3rem;
+        float: left;
+    }
+    img:nth-of-type(2){
+        height: 0.37rem;
+        float: right;
+        margin-top: -0.33rem;
+    }
+}
+.enSureMon_con_co{
+    font-family: Microsoft YaHei;
+    position: relative;
+    width: 92%;
+    margin: 0 auto;
+    div{
+        font-size: 0.22rem;
+        padding: 0.22rem 0.15rem;
+        border-bottom: 1px solid #E5E5E5;
+        color: #666666;
+        span{
+            float: right;
+            color: #333333;
+            text-align: right;
+            word-break:keep-all;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            width: 70%;
+            line-height: 0.3rem;
+        }
+    }
+    div:nth-of-type(1){
+        padding: 0.7rem 0 0.5rem 0;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+        font-size: 0.36rem;
+        color: rgba(51,51,51,1);
+        border-bottom: none;
+    }
 }

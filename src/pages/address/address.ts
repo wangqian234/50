@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App ,ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { Http,Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { ChangeDetectorRef } from '@angular/core'; 
 import { StorageProvider } from '../../providers/storage/storage';
 import { HttpServicesProvider } from '../../providers/http-services/http-services';
-
+import $ from 'jquery'
 
 //增加收货地址
 import { AddaddressPage } from '../addaddress/addaddress';
@@ -13,7 +14,9 @@ import { AddaddressPage } from '../addaddress/addaddress';
 import { LoginPage } from '../login/login';
 
 //引入地址详情页面
-import { AddressinfoPage } from '../addressinfo/addressinfo'
+import { AddressinfoPage } from '../addressinfo/addressinfo';
+//返回首页
+import { TabsPage } from '../tabs/tabs'
 
 @Component({
   selector: 'page-address',
@@ -30,6 +33,7 @@ export class AddressPage {
   public AddaddressPage=AddaddressPage;
   public LoginPage = LoginPage;
   public AddressinfoPage = AddressinfoPage;
+    TabsPage = TabsPage;
 
   //引入地址详情页面
   public addressInfo=[];
@@ -39,8 +43,8 @@ export class AddressPage {
       'token' : ''
     }
 
-  constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef
-    ,public storage:StorageProvider,public httpService:HttpServicesProvider) {
+  constructor(public navCtrl: NavController,public config:ConfigProvider,public http: Http,public cd: ChangeDetectorRef,private alertCtrl: AlertController
+ ,public storage:StorageProvider,public httpService:HttpServicesProvider,public app: App,public toastCtrl:ToastController) {
   }
 
   ionViewWillEnter(){
@@ -48,6 +52,7 @@ export class AddressPage {
     this.getAddressList();
   }
   ionViewDidEnter(){
+    this.storage.set('tabs','false');
     this.getAddressList();
   }
   //获取当前用户的收货地址列表
@@ -85,7 +90,15 @@ export class AddressPage {
     this.http.post(api,data,options).map(res => res.json()).subscribe(data =>{
       console.log(data)
       if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("设置成功！");
+        let toast = this.toastCtrl.create({
+          message: '成功设置默认收货地址',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
         this.ionViewDidEnter(); //更新页面
       } else if (data.errcode === 40002){
         j--;
@@ -100,28 +113,56 @@ export class AddressPage {
   }
   //删除地址
   deleteAddress(id){
-    var data = {
-      token : this.storage.get('token'),
-      addressId : id,
-    }
-    var j = 3;
-    var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    var options = new RequestOptions({ headers: headers });
-    var api = this.config.apiUrl + '/api/Address/del';
-    this.http.post(api,data).map(res => res.json()).subscribe(data =>{
-      if (data.errcode === 0 && data.errmsg === 'OK') {
-        console.log("删除成功！");
-        this.ionViewDidEnter(); //更新页面
-      } else if(data.errcode === 40002){
-        j--;
-        if(j>0){
-          this.config.doDefLogin();
-          this.getAddressList();
-      }
-      }  else {
-        console.log(data.errmsg);
-      }
-    });
+      let alert1 = this.alertCtrl.create({
+        title: '',
+        message: '确认删除收货地址?',
+        buttons: [
+          {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+              return;
+            }
+          },
+          {
+            text: '确认',
+            handler: () => {
+              var data = {
+                token : this.storage.get('token'),
+                addressId : id,
+              }
+              var j = 3;
+              var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+              var options = new RequestOptions({ headers: headers });
+              var api = this.config.apiUrl + '/api/Address/del';
+              this.http.post(api,data).map(res => res.json()).subscribe(data =>{
+                if (data.errcode === 0 && data.errmsg === 'OK') {
+                  let toast = this.toastCtrl.create({
+                    message: '成功删除地址',
+                    duration: 2000,
+                    position: 'top'
+                  });
+                  toast.onDidDismiss(() => {
+                    console.log('Dismissed toast');
+                  });
+                  toast.present();
+                  this.ionViewDidEnter(); //更新页面
+                } else if(data.errcode === 40002){
+                  j--;
+                  if(j>0){
+                    this.config.doDefLogin();
+                    this.getAddressList();
+                }
+                }  else {
+                  console.log(data.errmsg);
+                }
+              });
+            }
+          }
+        ]
+      });
+      alert1.present();
   }
 
   //编辑、新加地址页面
@@ -135,8 +176,9 @@ export class AddressPage {
   backTo(){
     this.navCtrl.pop();
   }
-
-
+  backToHome(){
+    this.app.getRootNav().push(TabsPage);    
+  }
   getRem(){
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';

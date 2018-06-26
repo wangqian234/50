@@ -1,24 +1,30 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import $ from 'jquery';
 //商品详情页
 import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 import { LoadingController } from 'ionic-angular';
+import { StorageProvider } from '../../providers/storage/storage';
+//返回首页
+import { TabsPage } from '../tabs/tabs';
 @Component({
   selector: 'page-shopmalllist',
   templateUrl: 'shopmalllist.html',
 })
 export class ShopmalllistPage {
+  public currentPlaceCode;
   public page=1;
   public list = [];
   public tuijList=[];
   public aa =this.config.apiUrl;
   //跳转页面
   public  ShopgoodsinfoPage = ShopgoodsinfoPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-  public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController) {
+  public TabsPage = TabsPage;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public app: App,
+  public http: Http,public config: ConfigProvider,public loadingCtrl: LoadingController,public storage:StorageProvider,) {
+    
   }
 
   ionViewWillLoad() {//钩子函数，将要进入页面的时候触发
@@ -29,6 +35,8 @@ export class ShopmalllistPage {
     this.tuijGoods();
   }
   ionViewDidEnter(){
+    this.currentPlaceCode = this.storage.get('currentPlaceCode');
+    this.storage.set('tabs','false');
     this.list = [];
     this.page = 1;
     this.reserchGoods("")
@@ -42,13 +50,8 @@ export class ShopmalllistPage {
   }
   //搜索商品接口
   reserchGoods(infiniteScroll){
-    let loading = this.loadingCtrl.create({
-	    showBackdrop: true,
-       });
-      loading.present();
-      var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode=4403&shop_Id=0';
+      var api = this.aa+'/api/goods/list?pageSize=10&pageIndex='+ this.page+'&keyWord='+ this.navParams.get('keywords')+'&curCityCode='+this.currentPlaceCode+'&shop_Id=0';
       this.http.get(api).map(res => res.json()).subscribe(data =>{
-       loading.dismiss();
        if(data.errcode === 0 && data.errmsg === 'OK'){
          if(data.list.length<10){
            $('.nomore').css('display','block');
@@ -69,12 +72,11 @@ export class ShopmalllistPage {
   }
   //推荐商品搜索
     tuijGoods(){
-      var api = this.aa +'/api/goods/list?curCityCode=4403';
+      var api = this.aa +'/api/goods/list?curCityCode='+this.currentPlaceCode;
       this.http.get(api).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 && data.errmsg === 'OK'){
           this.tuijList= data.list;
           console.log(this.tuijList)
-          console.log(1)
         }else{
           alert(data.errmsg);
         }
@@ -114,6 +116,10 @@ export class ShopmalllistPage {
       //加载更多
   doLoadMore(infiniteScroll){
     this.reserchGoods(infiniteScroll);
+  }
+
+    backToHome(){
+    this.app.getRootNav().push(TabsPage);    
   }
 
 }

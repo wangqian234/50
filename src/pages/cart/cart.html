@@ -1,22 +1,49 @@
 
-
-<ion-content style="background-color:#f5f5f5">
-		  <div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
+<ion-header>
+	<div style="background-color:#ff971c" class="toub_beij toub_beij_zy">
 	<div class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
-			<div class="logo_k logo_k_fanh"><a href="#">
-				<img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png">
-				<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png"></a>
-			</div>
+			<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="javascript:;">
+				<img class="fanh_ann" src="assets/imgs/fanh.png">
+				<!--<img (click)="backToHome()" class="fanh_ann closearea" src="assets/imgs/closearea.png">-->
+			</a></div>
 			<div class="zhongjain_daoh">
 				<ul>
 					<li><a class="px24 zyyge">购物车</a></li>  
 				</ul>
 			</div>
-			<!--<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>-->
+			<div class="chacha"><a href="javascript:;"><img (click)="backToHome()" class="fanh_ann" src="assets/imgs/closearea.png"></a></div>
 		</div> 
 	</div>
 </div>
+</ion-header>
+<ion-content style="background-color:#f5f5f5">
+	<div class="spinnerbox"></div>
+	<div class="spinner">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+		<div class="bar4"></div>
+		<div class="bar5"></div>
+		<div class="bar6"></div>
+		<div class="bar7"></div>
+		<div class="bar8"></div>
+		<div class="bar9"></div>
+		<div class="bar10"></div>
+		<div class="bar11"></div>
+		<div class="bar12"></div>
+	</div>
+
+	<ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="释放刷新"
+        refreshingSpinner="circles"
+        refreshingText="正在更新"
+        top="1rem;"
+        >
+      </ion-refresher-content>
+  </ion-refresher>
 
  <p style="text-align:center;padding-top: 0.2rem;font-size: 0.28rem" *ngIf="!hasData">您还没有添加商品到购物车~</p>
 
@@ -30,12 +57,16 @@
 					<img [src]=""/>
 					</dt> 
 				 </i>
+				 <div (click)="goshopInfo2(item.good_id)">
  				<h1><img [src]="item.img"></h1>
+				 </div>
  				<div class="you">
+					 <div (click) = "goshopInfo(item.good_id)">
  					<p class="px22 bt">{{item.title}}</p>
 					 <p class="px22" style="padding: 0.07rem 0 0 0;color:#FF730F;float: right;margin-right: 0.2rem;">￥{{item.preprice}}</p>
 					 <div style="clear:both"></div>
 					 <p class="cxh">{{item.size_name}}</p>
+					 </div>
  					<!--<p class="xh">{{item.size_name}}</p>-->
 					 <!--<img class="sizetra" src="assets/imgs/jiantou.png">-->
 					 	<div class="goum_sl">
@@ -47,6 +78,8 @@
 							</div>
 						</div>
 					 <img (tap)="delCartsData(item)" src="assets/imgs/delete.png">
+					 <div style="clear:borh"></div>
+					 <div  style="margin-top:0.8rem;text-align:right;width: 95%;color:#666666;">小计：<span style="color:#FF730F">￥{{item.num*item.preprice}}</span></div>
  					<div class="youjfy">
  					</div>
  				</div>

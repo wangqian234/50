@@ -19,7 +19,7 @@ page-rentsaleinfo {
     margin-top: 0.2rem;
     background-color: white;
     padding:0.1rem;
-    min-height:1.2rem;
+    height:1.2rem;
    
 }
 .hrdiv{
@@ -33,7 +33,6 @@ page-rentsaleinfo {
     margin-top: -20px;
     background-color: white;
     border-radius: 3px;
-    z-index: 5;
     position: relative;
     line-height: 0.4rem;
     font-size: 0.27rem;
@@ -41,9 +40,10 @@ page-rentsaleinfo {
 .title .biao{
     font-size: 0.22rem;
     line-height: 0.4rem;
-    font-family:Roboto;
     color: #818181;
     height:0.7rem;
+    padding-left: 0.3rem;
+    text-align: center;
 }
 .bend{
     float:left;
@@ -56,12 +56,16 @@ page-rentsaleinfo {
     margin-right:0.3rem;
     color:#2979FF;
     font-size:0.28rem;
+    margin-top: -0.08rem;
 }
 .roomType{
-     width:50%;
+    width:50%;
     text-align:center;
     float:left;
     border-right:solid 1px #F5F5F5;
+    padding: 0.15rem 0;
+        height: 1rem;
+    margin-bottom: 0.2rem;
 }
 .detail .title{
    
@@ -71,11 +75,14 @@ color:#818181;
 .detail .content{
     font-size:0.28rem;
     color:#2979FF;
+    line-height: 0.35rem;
 }
 .roomSize{
      width:50%;
     float:right;
      text-align:center;
+     height: 1.2rem;
+     padding: 0.15rem 0;
 }
 
 .detail_info{
@@ -87,11 +94,13 @@ color:#818181;
 }
 .detail_info img{
     margin-left:0.5rem;
+    margin-top: -0.02rem;
 }
 .detail_info .content{
     color:#818181;
     font-size:0.18rem;
-    margin:0 0 0.5rem 0.25rem;
+    margin:0.02rem 0 0 0.25rem;
+        position: absolute;
 }
 
 .room_info{
@@ -99,7 +108,7 @@ color:#818181;
     background-color: white;
     padding:0.2rem;
     min-height:0.5rem;
-   
+    margin-bottom: 1rem;
 }
 .room_info .title{
     margin-left: 6%;
@@ -121,11 +130,12 @@ font-size:0.28rem;
     color:#818181;
 }
 .tel_info{
-   margin-top:0.2rem;
     background-color: #2979FF;
     padding:0.35rem;
-    min-height:0.8rem;
-   
+    height:0.9rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 .tel_info img{
     float:right;
@@ -133,8 +143,13 @@ font-size:0.28rem;
 }
 .tel_info span{
     float:left;
-   
     color:white;
-    font-size:0.22rem;
+    font-size:0.25rem;
+}
+.iondiv{
+    color:white;
+    float:right;
+    font-size: 1.8em !important;
+    margin:0.05rem 0.1rem 0 0;
 }
 }

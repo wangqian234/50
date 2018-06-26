@@ -10,7 +10,7 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 
 //登录页面
 import { LoginPage } from '../login/login';
-@IonicPage()
+
 @Component({
   selector: 'page-payprefee',
   templateUrl: 'payprefee.html',
@@ -64,8 +64,9 @@ export class PayprefeePage {
     }
     }
   }
-
-    
+    ionViewDidEnter(){
+      this.storage.set('tabs','false');
+    }
     ionViewWillLoad(){
     this.getRem();
     //确认登录状态
@@ -146,6 +147,7 @@ export class PayprefeePage {
 
 //结算函数 
  gopay(){
+   
    if(this.roomid==="add"){
       this.payrefeeList.roomId=this.roomId;
    }else{
@@ -165,7 +167,7 @@ export class PayprefeePage {
             console.log(data)
             this.outTradeNo = data.errmsg;
             alert("支付成功")
-            this.navCtrl.pop();
+            //this.navCtrl.pop();
           }else{
             console.log(data)
             alert(data.errmsg)
@@ -175,26 +177,38 @@ export class PayprefeePage {
  }
       //微信查询接口
    checkPayment(){
-     var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
-     this.http.get(api).map(res => res.json()).subscribe(data =>{
-       if(data.errmsg === 'OK'){
-          alert("支付成功")
-       }
-     })
+    //  var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
+    //  this.http.get(api).map(res => res.json()).subscribe(data =>{
+    //    if(data.errmsg === 'OK'){
+    //       alert("支付成功")
+    //    }
+    //  })
    }
-           clickme(){
-          var that = this;
-          $.ajax({
-              url: 'http://freegeoip.net/json/',
-              success: function(data){
-                alert(data.ip)
-                that.cip = data.ip;
-                that.gopay();
-              },
-              type: 'get',
-              dataType: 'JSON'
-          });
+
+    clickmeToOut(){
+      if(this.allPrice == 0){
+        alert("缴费金额不能为0")
+        return;
       }
+      $("#enSureMon").fadeIn(200)
+    }
+    clickmeToIn(){
+      $("#enSureMon").css("display","none")
+    }
+
+      clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          alert(data.ip)
+          that.cip = data.ip;
+          that.gopay();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+   }
  //项目下拉列表
  dw_Project(){
     var api = this.config.apiUrl+'/api/house/dw_Project?';
@@ -206,6 +220,7 @@ export class PayprefeePage {
             alert(data.errmsg)
           }
      })
+     
  }
   //楼栋下拉列表
  getEdifice(projectId){

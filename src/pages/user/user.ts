@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 //引入账户设置页面
 import { PersonalPage } from '../personal/personal';
@@ -59,8 +60,8 @@ export class UserPage {
 
    //自定义的变量
     public userinfo='';
-    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider) {
-     
+    constructor(public navCtrl: NavController, public navParams: NavParams,public storage:StorageProvider,private alertCtrl: AlertController) { 
+
     }
     ionViewDidLoad(){
          
@@ -79,15 +80,29 @@ export class UserPage {
       }
 
       outLogin(){//退出登录
-        var r= confirm("确认退出登录吗？")
-        if (r==true)
-        {
-          this.storage.remove("token");
-          this.navCtrl.popToRoot(); /*回到根页面*/
-          this.navCtrl.push(TabsPage);
-        } else{
-          return;
-        }
+        let alert1 = this.alertCtrl.create({
+          title: '',
+          message: '确认登录吗?',
+          buttons: [
+            {
+              text: '取消',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+                return;
+              }
+            },
+            {
+              text: '确认',
+              handler: () => {
+                this.storage.remove("token");
+                this.navCtrl.popToRoot(); /*回到根页面*/
+                this.navCtrl.push(TabsPage);
+              }
+            }
+          ]
+        });
+        alert1.present();
       }
 
       gotoAddressPage(){
@@ -98,23 +113,8 @@ export class UserPage {
         }
     }
 
-    // ionViewDidEnter(){
-    //    console.log("3.0 ionViewDidEnter 当进入页面时触发");
-    // }
-    // ionViewWillLeave(){
-    //     console.log("4.0 ionViewWillLeave 当将要从页面离开时触发");
-    // }
-    // ionViewDidLeave(){
-    //     console.log("5.0 ionViewDidLeave 离开页面时触发");
-    // }
-    // ionViewWillUnload(){
-    //    console.log("6.0 ionViewWillUnload 当页面将要销毁同时页面上元素移除   时触发");
-    // }
-    // ionViewCanEnter(){
-    //    console.log("ionViewCanEnter");
-    // }
-    // ionViewCanLeave(){
-    //      console.log("ionViewCanLeave");
-    // }
+    ionViewDidEnter(){
+        this.storage.set('tabs','true');
+    }
 
 }

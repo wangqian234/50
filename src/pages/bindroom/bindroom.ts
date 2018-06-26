@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,ToastController} from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ConfigProvider } from '../../providers/config/config';
 import { StorageProvider } from '../../providers/storage/storage';
-
+import $ from 'jquery' 
 @Component({
   selector: 'page-bindroom',
   templateUrl: 'bindroom.html',
@@ -23,11 +23,16 @@ export class BindroomPage {
     memo:"",
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http,public storage:StorageProvider) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,public config:ConfigProvider,public http: Http,
+  public storage:StorageProvider,public toastCtrl:ToastController) {
+
+}
 
   ionViewWillLoad() {
     this.getProject();
+  }
+  ionViewDidEnter(){
+    this.storage.set('tabs','false');
   }
 
   ionViewDidLoad() {
@@ -37,14 +42,26 @@ export class BindroomPage {
 
   //新添加要绑定的房屋
   addBindInfo(){
-    console.log(JSON.stringify(this.bindRoom))
+    if(this.bindRoom.projectId == "" || this.bindRoom.edificeId == "" || this.bindRoom.roomId == ""){
+      alert("请选择所要绑定的房屋信息");
+      return;
+    }
      var api = this.config.apiUrl + '/api/UserRoom/add';
       this.http.post(api,(this.bindRoom)).map(res => res.json()).subscribe(data =>{
       if (data.errcode === 0 && data.errmsg === 'OK') {
+        let toast = this.toastCtrl.create({
+          message: '成功绑定房屋',
+          duration: 2000,
+          position: 'middle'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
         console.log("成功绑定房屋");
         this.navCtrl.pop();
       } else {
-        console.log(data.errmsg);
+        alert(data.errmsg);
       }
     });
 
