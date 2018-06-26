@@ -42,6 +42,16 @@
 		</div>
 	</div>
  </div>-->
+<!--搜索-->
+	<div class="searchdiv">
+    <div class="searchTool">
+        
+        <input type="search" [(ngModel)]="search" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
+        <input type="button" value class="searchBtn">
+        <ion-icon (click)="getSaleList()" class="searchicon" name="ios-search-outline"></ion-icon>
+    </div>
+  </div>
+<!---->
  <div id="group-content" style="background-color:white">
   <ul class="order-nav clearfix" id="test">
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>

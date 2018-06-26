@@ -1,7 +1,6 @@
-page-rentsalelist {
+page-rentsearch {
 
- /////////
- .searchdiv{ 
+     .searchdiv{ 
         padding:4px 0 ;
         background:#fff;
         // border-top:1px solid #3e3e3e;
@@ -21,7 +20,25 @@ page-rentsalelist {
         background:#fff;
         border-radius: 5px;
     }
-    
+    .choose{
+        float:left;
+        cursor:pointer;
+        height:32px;
+        width:29%; 
+        display:inline-block;
+        position:relative;
+        line-height:32px;
+        font-size:18px; 
+        text-align:center;
+        padding-right:10px;
+    }
+
+    .choose select{
+        height: 30px;
+        width:100%;
+        background-color: #fff;
+        color: #aaaaaa;
+    }
 
     .searchTextInit{
         height:32px;
@@ -73,7 +90,55 @@ page-rentsalelist {
     .choose ul li{
         padding: 5px 0;
     }
- ///////   
+        .item-ios h4{
+        font-size:0.23rem;
+        line-height: 0.3rem;
+        margin-left: 0.3rem;
+    }
+    .item-ios p{
+        font-size:0.23rem;
+        line-height: 0.35rem;
+        margin-left: 0.3rem;
+    }
+    .item-ios{
+        padding:0
+    }
+    .button[icon-only]{
+        min-width:0;
+    }
+    .dengl .caid_img{
+        width: 80%;
+    }
+    .title_a{
+        font-size: 0.3rem;
+        margin: 0.1rem 0 0.1rem 0.3rem;
+        line-height: 0.5rem;
+        float: left;
+    }
+    .searchicon{
+    font-size: 0.45rem;
+    position: absolute;
+    right: 0.2rem;
+    margin-top: 0.09rem;
+    }
+    .right{
+        position: absolute;
+        right: 0.5rem;
+        line-height: 0.65rem !important;
+    }
+    .list-ios{
+        margin-top: 10px;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: none;
+    }
+    ion-label img{
+            position: absolute;
+    right: 0.5rem;
+    top: 0.75rem;
+    height: 0.8rem;
+    }
+
 #test{
      position:sticky;
     z-index: 500;
@@ -182,5 +247,99 @@ page-rentsalelist {
     font-size: 0.17rem;
     color: #818181;
 }
+
+.toggle{
+    background: rgba(0,0,0,0);
+    position: absolute;
+    height: 0.96rem;
+    padding: 0;
+    margin: 0;
+    right: 0.2rem;
+    top: 0;
+}
+
+.menu-list{
+    padding: 0.4rem;
+}
+.blocktit{
+    font-size: 0.23rem;
+    line-height: 0.5rem;
+    color: #333333;
+}
+.blockinp{
+    border: 1px solid #666666;
+    border-radius: 2px;
+    width: 25%;
+    height: 0.4rem;  
+}
+.blockspan{
+    padding: 0.1rem 0.2rem;
+    background-color: #eeeeee;
+    border-radius: 2px;
+    border: 1px solid #cccccc;
+    display: inline-table;
+    margin-right: 0.2rem;
+    color: #666666;
+}
+.blockcon{
+    padding: 0.1rem;
+}
+.reset{
+    padding: 0.2rem 0.5rem;
+    background:rgba(4, 100, 255, 0.5);
+    border-left: 50%;
+    border-top-left-radius: 0.28rem;
+    border-bottom-left-radius: 0.28rem;
+    float: right;
+    color: white
+}
+.ensure{
+    padding: 0.2rem 0.5rem;
+    background:  rgb(68, 138, 255);
+    border-right: 50%;
+    border-top-right-radius: 0.285rem;
+    border-bottom-right-radius: 0.28rem;
+    float: right;
+    color: white;
+}
+ion-footer{
+    padding: 0.4rem;
+}
+// .radio-ios .radio-checked .radio-inner{
+//     border-style: none;
+//     background-color: yellowgreen;
+//     left: 0px;
+//     top: 0px;
+//     height: 100%;
+//     width: 100%;
+//     transform: rotate(0deg);
+//     border-radius: 3px;
+// }
+// .radio-ios .radio-icon{
+//     height: 0.4rem;
+//     width: 1rem;
+//     background-color: rgba(1,1,1,0.1);
+//     border-radius: 3px;
+// }
+// .radiocon{
+//     position: absolute;
+//     margin: 8px 11px 8px 8px;
+//     font-size: 0.2rem;
+//     height: 0.4rem;
+//     width: 1rem;
+//     text-align: center;
+//     line-height: 0.3rem;
+//     top:0;
+// }
+// .radioblo{
+//     position: relative;
+//     display: inline;
+//     width: 1.2rem;
+//     float: left;
+//     ion-item{
+//         display: inline;
+//         margin-top: -0.05rem;
+//     }
+//}
 
 }

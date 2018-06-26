@@ -1,0 +1,135 @@
+<ion-header #content>
+
+
+  <div class="toub_beij toub_beij_zy" style="background-color:#448AFF">
+    <div class="zhongj_k zhongj_k_z">
+      <div class="jiu_feo">
+        <div class="logo_k logo_k_fanh"><a href="#"><img (click)="backTo()" class="fanh_ann" src="assets/imgs/fanh.png"></a></div>
+        <div class="zhongjain_daoh">
+          <ul>
+            <li><a class="px24 zyyge">房屋搜索</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <button ion-button menuToggle icon-only class="toggle">  
+     <ion-icon name='ios-funnel-outline'></ion-icon>  
+   </button>
+    </div>
+  </div>
+
+</ion-header>
+
+
+<ion-content style="background-color:#f5f5f5">
+
+  <ion-menu side="right" type="overlay" [content]="content">
+    <ion-content>
+      <div class="menu-list">
+        <div class="blockdiv">
+          <div class="blocktit">价格区间</div>
+          <div class="blockcon"><input class="blockinp" type="number" /> - <input class="blockinp" type="number" />&nbsp;元</div>
+        </div>
+        <div class="blockdiv">
+          <div class="blocktit">房屋性质</div>
+          <div class="blockcon"><span class="blockspan">一手房</span><span class="blockspan">一手房</span></div>
+          <div class="blockcon"><span class="blockspan">整租</span><span class="blockspan">合租</span></div>
+        </div>
+        <div class="blockdiv">
+          <div class="blocktit">面积</div>
+          <div class="blockcon"><input class="blockinp" type="number" /> - <input class="blockinp" type="number" />&nbsp;㎡</div>
+        </div>
+        <div class="blockdiv">
+          <div class="blocktit">户型</div>
+          <div class="blockcon"><span class="blockspan">1室</span><span class="blockspan">2室</span><span class="blockspan">3室</span><span class="blockspan">4室</span></div>
+        </div>
+        <!--<div class="blockdiv">
+          <div class="blocktit">区域</div>
+          <div class="blockcon"></div>
+        </div>-->
+        <div class="blockdiv">
+          <div class="blocktit">排序</div>
+          <div class="blockcon"><span class="blockspan">时间</span><span class="blockspan">面积</span><span class="blockspan">价格</span></div>
+        </div>
+        <!--<ion-list no-lines>    
+          123 
+      </ion-list>-->
+      </div>
+    </ion-content>
+
+    <!--footer： 是这个菜单页面的底部也可以省略 -->
+    <ion-footer>
+      <span class="ensure">确认</span>
+      <span class="reset">重置</span>
+    </ion-footer>
+  </ion-menu>
+
+  <div class="spinnerbox"></div>
+  <div class="spinner">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    <div class="bar4"></div>
+    <div class="bar5"></div>
+    <div class="bar6"></div>
+    <div class="bar7"></div>
+    <div class="bar8"></div>
+    <div class="bar9"></div>
+    <div class="bar10"></div>
+    <div class="bar11"></div>
+    <div class="bar12"></div>
+  </div>
+
+
+  <div class="searchdiv">
+    <div class="searchTool">
+      <form class="choose">
+        <img src="assets/imgs/jiantou.png" style="position: absolute;margin-top:0.25rem;right:5px;width:0.2rem;height:0.1rem;margin-right: 0.08rem;">
+        <select name="type" style="-webkit-appearance:none;padding-left:0.2rem;font-size: 16px;" [(ngModel)]="houseType" (ngModelChange)="changeType()">
+          <option class = "11" value="1">出售</option>
+          <option selected class = "22" value="2">出租</option>
+          <option class = "33" value="3">求购</option>
+          <option class = "44" value="4">求租</option>
+          </select>
+      </form>
+      <input type="search" [(ngModel)]="search" (keyup)="onSearchKeyUp($event)" class="searchTextInit">
+      <input type="button" value class="searchBtn">
+      <ion-icon (click)="getSaleList()" class="searchicon" name="ios-search-outline"></ion-icon>
+    </div>
+  </div>
+  <div id="group-content" style="background-color:white">
+    <!--<ul class="order-nav clearfix" id="test">
+      <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
+      <li class="type" id="space"><a href="javascript:;">面积</a><img src="assets/imgs/gray.png"></li>
+      <li class="type" id="price"><a href="javascript:;">售价</a><img src="assets/imgs/gray.png"></li>
+    </ul>-->
+
+
+
+    <ul id="testcontent" class="shangp_lieb_k_er">
+      <li *ngFor="let house of houseInfo" (tap)="goRentsaleInfo(house.id,house.type)">
+        <div class="lieb_img"><img src="{{house.imgurl}}"></div>
+        <div class="lieb_txt">
+          <p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>
+          <p class="bend areatop">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
+          <div style="clear:both"></div>
+          <p class="bend" style="float:left">{{house.area}}</p>
+          <p class="px26" *ngIf="houseType ==1 || houseType ==3" style="float:right;font-size:0.22rem;color:#2979FF">¥ {{house.pricemin}}~{{house.pricemax | pipeMoney}}万<span> </span></p>
+          <p class="px26" *ngIf="houseType ==2 || houseType ==4" style="float:right;font-size:0.22rem;color:#2979FF">¥ {{house.pricemin}}~{{house.pricemax}}元<span> </span></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="释放刷新" refreshingSpinner="circles" refreshingText="正在更新"
+      top="1rem;">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="nomore">没有更多数据了...</div>
+
+  <ion-infinite-scroll (ionInfinite)="doLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

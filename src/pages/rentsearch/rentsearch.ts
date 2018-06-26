@@ -9,10 +9,10 @@ import {RentsaleinfoPage} from '../rentsaleinfo/rentsaleinfo';
 import { LoginPage } from '../login/login';
 
 @Component({
-  selector: 'page-rentsalelist',
-  templateUrl: 'rentsalelist.html',
+  selector: 'page-rentsearch',
+  templateUrl: 'rentsearch.html',
 })
-export class RentsalelistPage {
+export class RentsearchPage {
 public LoginPage = LoginPage;
   houseInfo = [];
   houseType = "";
@@ -27,28 +27,14 @@ public LoginPage = LoginPage;
   public storage :StorageProvider,public http:Http,public loadingCtrl: LoadingController) {
     
   }
-
-  ionViewWillLoad() {
-    if(this.navParams.get('id')){
-      switch(this.navParams.get('id')){
-        case 1 : 
+ 
+    ionViewWillLoad() {
+    
             this.houseType = "2";
             this.getSaleInfo('');
-            break;
-        case 2 : 
-          this.nature = "2";
-          this.houseType = "1";
-          this.getSaleInfo('');
-          break;
-        case 3 : 
-          this.nature = "1";
-          this.houseType = "1";
-          this.getSaleInfo('');
-          break;;
-      }
-
-    }
+   
   }
+
   ionViewDidEnter(){
     this.storage.set('tabs','false');
   }
@@ -56,7 +42,10 @@ public LoginPage = LoginPage;
     this.currentPlaceCode = this.storage.get('currentPlaceCode')
     this.clickCSSTitle();
   }
-
+//房屋类型
+changeType(){
+  this.houseInfo;
+}
     //搜索
       onSearchKeyUp(event){
      if("Enter"==event.key){
@@ -72,11 +61,11 @@ public LoginPage = LoginPage;
 
   }
   getSaleInfo(infiniteScroll){
-
+    
     // var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.currentPlaceCode + "&type=" + this.houseType + 
         // '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=4403&type=" + this.houseType + 
-    '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
+        '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
@@ -253,3 +242,4 @@ this.navCtrl.push(LoginPage);
  }
 
 }
+

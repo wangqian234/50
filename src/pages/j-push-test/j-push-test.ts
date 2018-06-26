@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //极光推送
 import { JPush } from '@jiguang-ionic/jpush';
 import { Device } from '@ionic-native/device';
-//引入收货地址界面
-import { AddressPage } from '../address/address';
+//引入商品详情界面
+import { ShopgoodsinfoPage } from '../shopgoodsinfo/shopgoodsinfo';
 
 @Component({
   selector: 'page-j-push-test',
@@ -18,7 +18,7 @@ export class JPushTestPage {
   devicePlatform: string;
   sequence: number = 0;
 
-  AddressPage = AddressPage;
+  ShopgoodsinfoPage = ShopgoodsinfoPage;
 
   tagResultHandler = function(result) {
     var sequence: number = result.sequence;
@@ -48,7 +48,6 @@ export class JPushTestPage {
       } else {
         content = event.aps.alert;
       }
-      alert('Receive notification: ' + JSON.stringify(event));
     }, false);
 
     document.addEventListener('jpush.openNotification', (event: any) => {
@@ -62,10 +61,14 @@ export class JPushTestPage {
           content = event.aps.alert;
         }
       }
-      alert('open notification: ' + JSON.stringify(event));
-      alert(JSON.stringify(event.extras));
-      alert(event.extras.id);
-      this.navCtrl.push(AddressPage);
+      if(event.extras.type != undefined && event.extras.id == "shop"){
+        if(event.extras.id != undefined && event.extras.id == "shop"){
+          var id = event.extras.id;
+          this.navCtrl.push(ShopgoodsinfoPage, {
+            id: id
+          })
+        }
+      }
     }, false);
 
     document.addEventListener('jpush.receiveLocalNotification', (event: any) => {
@@ -75,7 +78,6 @@ export class JPushTestPage {
       } else {
         content = event.content;
       }
-      alert('receive local notification: ' + JSON.stringify(event));
     }, false);
   }
 
