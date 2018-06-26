@@ -172,10 +172,9 @@ import { PipeMoneyPipe } from '../pipes/pipe-money/pipe-money';
 import { PipeGroupPipe } from '../pipes/pipe-group/pipe-group';
 import { PipeRelationPipe } from '../pipes/pipe-relation/pipe-relation';
 import { JPush } from '@jiguang-ionic/jpush';
-
 //极光推送
 import { JPushTestPage } from '../pages/j-push-test/j-push-test';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 @NgModule({
   declarations: [
     MyApp,
@@ -326,6 +325,7 @@ import { JPushTestPage } from '../pages/j-push-test/j-push-test';
     Geolocation,
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConfigProvider,
     HttpServicesProvider,
