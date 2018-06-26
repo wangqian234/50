@@ -71,7 +71,6 @@ export class NewslistPage {
         var api = this.config.apiUrl + '/api/Nwes/list?pageIndex='+this.page +'&pageSize=10&keyWord='+this.keywords+'&type='+this.type+'&token=' + this.token+'&act='+this.act;
         console.log(api);
         this.http.get(api).map(res => res.json()).subscribe(data =>{
-         
         $(".spinnerbox").fadeOut(200);
         $(".spinner").fadeOut(200);
         if (data.errcode === 0 && data.errmsg === 'OK') {

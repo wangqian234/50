@@ -52,8 +52,9 @@ export class TabsPage {
         $(".mytabs").css("display","block");
         this.tabs.select(1);
       }
-
   }
+
+
 
   getsort(){
     this.navCtrl.push(ShopsortPage)
@@ -72,6 +73,6 @@ export class TabsPage {
     $(".mytabs2").css("display","block");
   }
 
-}
 
+}
 
