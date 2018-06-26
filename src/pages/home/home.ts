@@ -164,8 +164,8 @@ export class HomePage {
         that.cityCodeList.forEach(function (val, index, arr) {
           if (addComp.city == arr[index].name) {
             that.storage.set("currentPlaceCode", arr[index].val);
-            alert(addComp.city)
-            alert(arr[index].val)
+            // alert(addComp.city)
+            // alert(arr[index].val)
           }
         })
       });
