@@ -16,6 +16,17 @@ import { LoginPage } from '../login/login';
   templateUrl: 'payprefee.html',
 })
 export class PayprefeePage {
+  url = {
+    tId:'',
+    token:'',
+    tags:'',
+    act:'',
+    createip:'',
+  }
+  public weixinUrl;
+  public payAct;
+  public paytId;
+  public surePay;
   public defRoomId;    /**默认房屋id */
   public iof_defList=[];  /*默认房屋列表 */
   public roomid;       /**选择的房屋ngModel值 */
@@ -144,7 +155,18 @@ export class PayprefeePage {
     var w = document.documentElement.clientWidth || document.body.clientWidth;
     document.documentElement.style.fontSize = (w / 750 * 120) + 'px';
   }
-
+     clickme(){
+      var that = this;
+      $.ajax({
+          url: 'http://freegeoip.net/json/',
+          success: function(data){
+            that.cip = data.ip;
+            that.gopay();
+          },
+          type: 'get',
+          dataType: 'JSON'
+      });
+     }
 //结算函数 
  gopay(){
    if(this.roomid==="add"){
@@ -163,17 +185,44 @@ export class PayprefeePage {
     console.log(this.payrefeeList)
     this.http.post(api,this.payrefeeList).map(res => res.json()).subscribe(data =>{
      if(data.errcode===0){
-        console.log(data)
-        this.outTradeNo = data.errmsg;
-        alert("支付成功")
-        //this.navCtrl.pop();
+       this.payAct = data.model.act;
+       this.paytId = data.model.tId;
+       this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=费用预存&money='+this.allPrice ;
+       console.log(data)
+       location.href = this.surePay;
+      // this.getmwebUrl();
+      //this.navCtrl.pop();
      }else{
         console.log(data)
         alert(data.errmsg)
-        this.navCtrl.pop();
+       // this.navCtrl.pop();
           }
      })
- }
+   }
+  //调用支付获取mweb_url
+    getmwebUrl(){
+      this.url.act = this.payAct;
+      this.url.createip = this.cip;
+      this.url.tags = 'android';
+      this.url.tId = this.paytId;
+      this.url.token = this.storage.get('token');
+      var api =  this.config.apiUrl + '/api/weixinpay/unifiedorder';
+      this.http.post(api,this.url).map(res => res.json()).subscribe(data =>{
+        console.log(data);
+        if(data.errcode == 0){
+          this.weixinUrl = data.model.mweb_url; 
+          this.goWeixiPay();
+         // (<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_blank','location=yes');
+        }
+     })
+    }
+      //跳转到微信支付页面
+   goWeixiPay(){
+    location.href=this.surePay;
+  //   this.gotoUrl(this.weixinUrl)
+    //(<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_top','location=yes');
+  }
+
       //微信查询接口
    checkPayment(){
     //  var api = this.config.apiUrl + '/api/weixinpay/queryorder?out_trade_no='+this.outTradeNo;
@@ -195,19 +244,7 @@ export class PayprefeePage {
       $("#enSureMon").css("display","none")
     }
 
-      clickme(){
-      var that = this;
-      $.ajax({
-          url: 'http://freegeoip.net/json/',
-          success: function(data){
-            alert(data.ip)
-            that.cip = data.ip;
-            that.gopay();
-          },
-          type: 'get',
-          dataType: 'JSON'
-      });
-     }
+ 
  //项目下拉列表
  dw_Project(){
     var api = this.config.apiUrl+'/api/house/dw_Project?';
