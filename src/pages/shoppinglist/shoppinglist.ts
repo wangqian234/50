@@ -194,7 +194,6 @@ export class ShoppinglistPage {
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert("取消付款成功！");
           let toast = this.toastCtrl.create({
           message: '取消付款成功！',
           duration: 2000,
@@ -237,7 +236,6 @@ export class ShoppinglistPage {
             console.log('Dismissed toast');
           });
           toast.present();
-          alert("收货成功！");
           this.paymentEvent(3);
           // this.cd.detectChanges(); //更新页面
           //this.navCtrl.push(TradegoodsRefundPage);

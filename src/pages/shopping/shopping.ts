@@ -269,8 +269,16 @@ export class ShoppingPage {
   doReserch() {
     var key = [];
     if (this.storage.get("shopKewWords")) {
+      var ensure = true;
       key = this.storage.get("shopKewWords");
-      key.push(this.keywords);
+      for(var i=0;i<key.length;i++){
+       if(key[i] == this.keywords){
+        ensure = false;
+       }
+      }
+      if(ensure){
+        key.push(this.keywords);
+      }
       this.storage.set("shopKewWords", key);
     } else {
       key.push(this.keywords)

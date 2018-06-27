@@ -90,6 +90,7 @@ $colors: (
 
 //自定义css
 
+.scroll-content{overflow-x: hidden !important;}
 
 .mytabs .tab-button[aria-selected=true] .tab-button-icon{
   color: #0082ca !important;  /*优先级高*/
