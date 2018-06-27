@@ -169,7 +169,7 @@ export class ShoppinglistPage {
        this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+
        '&createip='+this.cip+'&title=确认付款&money='+this.allPrice;
        console.log(data)
-       //location.href = this.surePay;
+       location.href = this.surePay;
         }else{
           console.log(data)
         }
@@ -204,7 +204,6 @@ export class ShoppinglistPage {
         var api = this.aa+'/api/trade/colse_update';
         this.http.post(api,this.cancelpaymentList).map(res => res.json()).subscribe(data =>{
         if (data.errcode === 0 && data.errmsg === 'OK') {
-          alert("取消付款成功！");
           let toast = this.toastCtrl.create({
           message: '取消付款成功！',
           duration: 2000,

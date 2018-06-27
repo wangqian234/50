@@ -300,11 +300,7 @@ ionViewWillEnter(){
      }
  }
   getReferer(){
-        if(document.referrer){
-            return document.referrer;
-        }else{
-            return false;
-        }
+   // request.getHearder("Referer")
 }
 
   //跳转支付页面

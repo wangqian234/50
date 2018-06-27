@@ -194,7 +194,7 @@ export class PayprefeePage {
       //this.navCtrl.pop();
      }else{
         console.log(data)
-        alert(data.errmsg)
+        alert("预付款失败")
        // this.navCtrl.pop();
           }
      })
