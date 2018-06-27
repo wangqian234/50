@@ -115,7 +115,7 @@ export class HouseinfoPage {
     var j = 3;
     let alert1 = this.alertCtrl.create({
       title: '',
-      message: '确认登录吗?',
+      message: '确认解除绑定吗?',
       buttons: [
         {
           text: '取消',

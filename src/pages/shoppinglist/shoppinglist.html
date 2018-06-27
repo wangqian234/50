@@ -117,7 +117,7 @@
 
                         <p *ngIf="item.trade_state==1">
                             <a (click)="cancelpaymentEvent(item.trade_id)">取消付款</a>
-		 					<a (click)="obligationEvent(item.trade_id)" class="color_1">确认付款</a>
+		 					<a (click)="obligationEvent(item.trade_id,item.pretotalprice)" class="color_1">确认付款</a>
 	 					</p>
 
                         <p *ngIf="item.trade_state==2">

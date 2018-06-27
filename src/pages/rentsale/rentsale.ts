@@ -98,19 +98,19 @@ export class RentsalePage {
   }
   //轮播图获取详情
   getInfo(url){
-    // this.url=url.substring(0,3);
-    // this.Id = url.substring(3,)
-    // if(url==="HRSHome"){
-    //   this.navCtrl.push(RentsalePage)
-    // }else if(this.url==="gId"){
-    //   this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
-    // }else if(this.url ==="sId"){
-    //   this.navCtrl.push(ShopinfoPage,{sid:this.Id})
-    // }else if(this.url === "rez"){
-    //  // this.navCtrl.push()
-    // }else if(this.url === "res"){
-    //  // this.navCtrl.push()
-    // }
+    this.url=url.substring(0,3);
+    this.Id = url.substring(3,)
+    if(url==="HRSHome"){
+      this.navCtrl.push(RentsalePage)
+    }else if(this.url==="gId"){
+      this.navCtrl.push(ShopgoodsinfoPage,{id:this.Id})
+    }else if(this.url ==="sId"){
+      this.navCtrl.push(ShopinfoPage,{sid:this.Id})
+    }else if(this.url === "rez"){
+     this.navCtrl.push(RentsaleinfoPage, { houseId: this.Id, houseType: 2, quFen: 1 })
+    }else if(this.url === "res"){
+     this.navCtrl.push(RentsaleinfoPage, { houseId: this.Id, houseType: 1, quFen: 1 })
+    }
   }
  paymentEvent(trade_state){
    this.housType = trade_state;

@@ -20,7 +20,9 @@ import $ from 'jquery'
   templateUrl: 'shopbuy.html',
 })
 export class ShopbuyPage {
-  
+  public payAct;
+  public paytId;
+  public surePay;
   public ChangeaddrPage = ChangeaddrPage;
   public TabsPage = TabsPage;
   public caId;
@@ -206,6 +208,18 @@ discount(){
   else if(this.checked==false){ 
   this.totalPrice=this.wtotalPrice+this.fee;}
 }
+  clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          that.cip = data.ip;
+          that.addBuy();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+  }
 
   //提交订单
   addBuy() {
@@ -226,7 +240,12 @@ discount(){
     var api =this.wdh + '/api/trade/add  ';
     this.http.post(api, date).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 ) {
-        this.outTradeNo = data.errmsg;
+        console.log(data);
+       this.payAct = data.model.act;
+       this.paytId = data.model.tId;
+       this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=商品购买&money='+this.totalPrice ;
+       console.log(data)
+       location.href = this.surePay;
       } else if (data.errcode === 40002) {
         j--;
         if (j > 0){
@@ -255,18 +274,7 @@ discount(){
     clickmeToIn(){
       $("#enSureMon").css("display","none")
     }
-    clickme(){
-        var that = this;
-        $.ajax({
-            url: 'http://freegeoip.net/json/',
-            success: function(data){
-              that.cip = data.ip;
-              that.addBuy();
-            },
-            type: 'get',
-            dataType: 'JSON'
-        });
-    }
+
 
   backTo() {
     this.navCtrl.pop();

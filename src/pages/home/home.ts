@@ -193,7 +193,7 @@ export class HomePage {
         goto: "rent"
       });
     } else if (this.url === "gId") {
-      this.navCtrl.push(ShopinfoPage, { sid: this.Id })
+      this.navCtrl.push(ShopgoodsinfoPage, { sid: this.Id })
     } else if (this.url === "sId") {
       this.navCtrl.push(ShopinfoPage, { sid: this.Id })
     } else if (this.url === "rez") {
@@ -254,7 +254,6 @@ export class HomePage {
   }
 
   getNewInfo(nid) {
-    alert(this.storage.get('tabs'))
     this.navCtrl.push(NewinfoPage, {
       id: nid
     });
