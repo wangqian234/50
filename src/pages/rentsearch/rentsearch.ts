@@ -36,7 +36,7 @@ export class RentsearchPage {
   }
 
   ionViewWillLoad() {
-    this.houseType = "1";
+    this.houseType = "2";
     this.getSaleInfo('');
   }
 
@@ -261,7 +261,7 @@ export class RentsearchPage {
       $(this).addClass("activety").siblings().removeClass('activety');
     })
     $(".nature").click(function () {
-      alert("我进来了")
+      // alert("我进来了")
       $(this).addClass("activety").siblings().removeClass('activety');
       that.nature=$(this).attr("data-value");
      
