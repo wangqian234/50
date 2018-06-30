@@ -15,6 +15,7 @@ import { BindroomPage } from '../bindroom/bindroom';
 import { LoginPage } from '../login/login';
 import {PaymentPage} from '../payment/payment'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {PayfeePage} from '../payfee/payfee'
 @Component({
   selector: 'page-onlinepayment',
   templateUrl: 'onlinepayment.html',
@@ -54,7 +55,7 @@ export class OnlinepaymentPage {
   }
   public weixinUrl;
   public payAct='';
-  public tongtong;
+  public surePay;
   public tongtong1;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:Http, public jsonp:Jsonp ,
   public httpService:HttpServicesProvider ,/*引用服务*/public config:ConfigProvider ,public storage :StorageProvider,private iab: InAppBrowser) {
@@ -246,9 +247,13 @@ ionViewWillEnter(){
           if(data.errcode===0 ){
             this.payAct = data.model.act;
             this.paytId = data.model.tId;
-            this.tongtong = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
+            this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=物业缴费&money='+this.allprice ;
             console.log(data)
-           this.getmwebUrl();
+             var ref = (<any>window).cordova.InAppBrowser.open(this.surePay,'_blank','location=yes,hideurlbar=yes,toolbarcolor=#488aff,closebuttoncolor=#ffffff,hidenavigationbuttons=yes,zoom=no')
+             ref.addEventListener('exit', () => {
+              this.navCtrl.push(PayfeePage)
+            })
+            //this.getmwebUrl();
           }else{
             alert(data.errmsg+"支付失败")
           }
@@ -267,19 +272,23 @@ ionViewWillEnter(){
         console.log(data);
         if(data.errcode == 0){
           this.weixinUrl = data.model.mweb_url; 
-          this.goWeixiPay();
+          //this.goWeixiPay();
          // (<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_blank','location=yes');
         }
      })
     }
   //跳转到微信支付页面
   goWeixiPay(){
-    console.log(this.tongtong);
-    location.href =this.tongtong;
-    alert("dd")
-    location.href = this.weixinUrl;
-    //(<any>window).cordova.InAppBrowser.open(this.tongtong,'_blank','location=yes');
-  //  this.gotoUrl(this.tongtong)
+    console.log(this.surePay);
+     
+    if(this.getReferer()){
+        alert(this.getReferer());
+        alert(this.weixinUrl)
+        this.gotoUrl(this.weixinUrl)
+    }else{
+      alert(this.getReferer())
+    }
+ 
   //   this.gotoUrl(this.weixinUrl)
     //(<any>window).cordova.InAppBrowser.open(this.weixinUrl,'_top','location=yes');
   }
@@ -294,6 +303,9 @@ ionViewWillEnter(){
        window.location.href = url;
      }
  }
+  getReferer(){
+   // request.getHearder("Referer")
+}
 
   //跳转支付页面
   gopayMent(outTradeNo,model,allprice,roomid){

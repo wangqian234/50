@@ -81,7 +81,7 @@ export class ShoppingPage {
   public shopKeyList = [];
   HomePage = HomePage;
   tuiList = [];
-
+  dibu:boolean;
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -208,6 +208,13 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === "OK") {
         this.shoplist = data.list;
+         if(this.shoplist.length == 0){
+         // $('.shopnomore').css('display','block');
+         this.dibu = true;
+        }else{
+          this.dibu = false;
+          //$('.shopnomore').css('display','none');
+        }
         console.log(data);
       } else {
         alert(data.errmsg);
@@ -255,6 +262,13 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === "OK") {
         that.shoplist = data.list;
+         if(that.shoplist.length == 0){
+         this.dibu = true;
+         // $('.shopnomore').css('display','block');
+        }else{
+          this.dibu = false;
+          //$('.shopnomore').css('display','none');
+        }
       } else {
         alert(data.errmsg);
       }
@@ -330,6 +344,8 @@ export class ShoppingPage {
         resolve('ok');
         that.currentPlace = params.changePlace;
         that.currentPlaceCode = params.changePlaceCode;
+        that.storage.set("currentPlace", that.currentPlace);
+        that.storage.set('currentPlaceCode', that.currentPlaceCode)
       } else {
         reject(Error('error'))
       }

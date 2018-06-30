@@ -58,8 +58,7 @@ export class JPushTestPage {
           content = event.aps.alert;
         }
       }
-      alert(event.extras.type)
-      alert(event.extras.id)
+      alert("我进入了jpush")
       if(event.extras.type != undefined && event.extras.type == "shop"){
         if(event.extras.id != undefined){
           var id = event.extras.id;

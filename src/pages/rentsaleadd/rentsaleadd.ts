@@ -564,7 +564,6 @@ export class RentsaleaddPage {
       str3 = guidStr.slice(12, 16) + '-',
       str4 = guidStr.slice(16, 20) + '-',
       str5 = guidStr.slice(20);
-    alert(str1 + str2 + str3 + str4 + str5);
     this.guid = str1 + str2 + str3 + str4 + str5;
     console.log(this.guid);
     return str1 + str2 + str3 + str4 + str5;

@@ -42,7 +42,7 @@ export class ShopsortPage {
     isEnd: false,
     isAjax: false
   }
-
+  dibu : boolean;
   fanhui: boolean = false;
   public currentPlaceCode;
 
@@ -95,6 +95,8 @@ export class ShopsortPage {
 
 
   getRightCateData(pid, i, name) {
+    $(".spinnerbox").fadeIn(200);
+    $(".spinner").fadeIn(200);
     this.title = name;
     this.pid = i;
     this.order = i;
@@ -104,6 +106,8 @@ export class ShopsortPage {
     $(span).attr("class", "activety");
     var api = this.wdh + '/api/goods/list?goods_Type=' + pid + '&curCityCode=4403';
     this.http.get(api).map(res => res.json()).subscribe(data => {
+      $(".spinnerbox").fadeOut(200);
+      $(".spinner").fadeOut(200);
       if (data.errmsg == 'OK') {
         var obj = {
           fenllist: '',
@@ -114,11 +118,18 @@ export class ShopsortPage {
         obj.name = name;
         this.listTotal.push(obj);
         this.fenllist = data.list;
+        if(this.fenllist.length == 0){
+          this.dibu = true;
+        }else{
+          this.dibu = false;
+        }
+        
       } else {
         alert(data.errmsg);
       }
     })
   }
+
 
   order = 0;
   doLoadMore(infiniteScroll) {

@@ -41,6 +41,10 @@ import { GroupdetailPage } from '../groupdetail/groupdetail';
   templateUrl: 'shoppinglist.html',
 })
 export class ShoppinglistPage {
+  public payAct;
+  public paytId;
+  public surePay;
+  public allPrice;
      //定义token
    goodsNum:0;
   public token=this.storage.get('token');
@@ -147,8 +151,9 @@ export class ShoppinglistPage {
      this.navCtrl.push(TradegoodsRefundPage,{tradegoodsId:tradegoods_id});
    }
    //商品确认付款
-   obligationEvent(trade_id){
+   obligationEvent(trade_id,pretotalprice){
      this.obligationEventList.tId = trade_id;
+     this.allPrice = pretotalprice;
      this.clickme();
    }
    payMent(){
@@ -159,7 +164,15 @@ export class ShoppinglistPage {
       this.http.post(api,this.obligationEventList).map(res => res.json()).subscribe(data =>{
         if(data.errcode === 0 ){
           console.log(data)
-          this.outTradeNo = data.errmsg
+       this.payAct = data.model.act;
+       this.paytId = data.model.tId;
+       this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+
+       '&createip='+this.cip+'&title=确认付款&money='+this.allPrice;
+       console.log(data)
+      var ref = (<any>window).cordova.InAppBrowser.open(this.surePay,'_blank','location=yes,hideurlbar=yes,toolbarcolor=#ff971c,closebuttoncolor=#ffffff,hidenavigationbuttons=yes,zoom=no')
+        ref.addEventListener('exit', () => {
+          this.navCtrl.push(ShoppinglistPage)
+        })
         }else{
           console.log(data)
         }
