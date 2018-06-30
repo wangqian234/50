@@ -66,7 +66,7 @@
 				<div class="lieb_img"><img src="{{house.imgurl}}"></div>
 				<div class="lieb_txt">
 					<p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>
-					<p class="bend areatop">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
+					<p class="bend areatop">{{house.room}}室{{house.halls}}厅{{house.restroom}}卫&nbsp;&nbsp;{{house.space}}㎡</p>
 					<div style="clear:both"></div>
 					<p class="bend" style="float:left">{{house.area}}</p>
 					<p class="px26" *ngIf="houseType ==1 || houseType ==3" style="float:right;font-size:0.22rem;color:#2979FF">¥ {{house.pricemin}}~{{house.pricemax | pipeMoney}}万<span> </span></p>
