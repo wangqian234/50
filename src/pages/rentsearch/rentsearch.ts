@@ -24,10 +24,10 @@ export class RentsearchPage {
   search = "";
 
   pricemin = 0;
-  pricemax;
+  pricemax = "";
   spacemin = 0;
-  spacemax;
-  room;
+  spacemax = "";
+  room = "";
   nature = "";
   public currentPlaceCode;
   constructor(public navCtrl: NavController, public navParams: NavParams, public config: ConfigProvider,
@@ -61,6 +61,7 @@ export class RentsearchPage {
     }
   }
   getSaleList() {
+
     this.houseInfo = [];
     this.pageIndex = 1;
     this.getSaleInfo("");
@@ -71,16 +72,17 @@ export class RentsearchPage {
     // var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex+"&curCityCode=" + this.currentPlaceCode + "&type=" + this.houseType + 
     // '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     var api = this.config.apiUrl + "/api/rental/list?pageSize=10&pageIndex=" + this.pageIndex + "&curCityCode=4403&type=" + this.houseType +
-      '&pricemin=&pricemax=&room=&spacemin=&spacemax=&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
+      '&pricemin=' + this.pricemin + '&pricemax=' + this.pricemax + '&room=' + this.room + '&spacemin=' + this.spacemin + '&spacemax=' + this.spacemax + '&nature=' + this.nature + "&search=" + this.search + "&horder=" + this.horder;
     console.log(api)
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === 'OK') {
         // alert(this.search);
+
         this.houseInfo = this.houseInfo.concat(data.list);
+        this.pageIndex++;
         console.log(this.houseInfo);
         if (infiniteScroll) {
           //告诉ionic 请求数据完成
-          this.pageIndex++;
           infiniteScroll.complete();
           if (data.list.length < 10) {  /*没有数据停止上拉更新*/
             infiniteScroll.enable(false);
@@ -249,27 +251,38 @@ export class RentsearchPage {
   }
 
   clickme() {
+    var that = this;
     $(".room").click(function () {
       $(this).addClass("activety").siblings().removeClass('activety');
+      // alert($(this).attr("data-value"))
+      that.room = $(this).attr("data-value");
     })
     $(".horder").click(function () {
       $(this).addClass("activety").siblings().removeClass('activety');
     })
     $(".nature").click(function () {
+      // alert("我进来了")
       $(this).addClass("activety").siblings().removeClass('activety');
+      that.nature = $(this).attr("data-value");
+    })
+    $(".nature1").click(function () {
+      // alert("我进来了")
+      $(this).addClass("activety").siblings().removeClass('activety');
+      that.nature = $(this).attr("data-value");
     })
   }
 
   ensureSearch() {
 
+    this.getSaleList();
   }
 
   resetSearch() {
     this.pricemin = 0;
-    this.pricemax;
+    this.pricemax = "";
     this.spacemin = 0;
-    this.spacemax;
-    this.room;
+    this.spacemax = "";
+    this.room = "";
     this.nature = "";
     $(".room").removeClass('activety');
     $(".horder").removeClass('activety');

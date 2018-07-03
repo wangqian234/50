@@ -35,31 +35,29 @@
       <div class="menu-list">
         <div class="blockdiv">
           <div class="blocktit">价格区间</div>
-          <div class="blockcon"><input class="blockinp" type="number" /> - <input class="blockinp" type="number" />&nbsp;元</div>
+          <div class="blockcon"><input class="blockinp" type="number" [(ngModel)]="pricemin" /> - <input class="blockinp" type="number" [(ngModel)]="pricemax" />&nbsp;元</div>
         </div>
         <div class="blockdiv">
           <div class="blocktit">房屋性质</div>
-          <div class="blockcon" *ngIf="houseType == 1 || houseType == 3"><span class="blockspan nature">一手房</span><span class="blockspan nature">一手房</span></div>
-          <div class="blockcon" *ngIf="houseType == 2 || houseType == 4"><span class="blockspan nature">整租</span><span class="blockspan nature">合租</span></div>
+          <div class="blockcon" *ngIf="houseType == 1 || houseType == 3" ><span class="blockspan nature" data-value="1">一手房</span><span class="blockspan nature" data-value="2">二手房</span></div>
+          <div class="blockcon" *ngIf="houseType == 2 || houseType == 4" ><span class="blockspan nature1" data-value="1">整租</span><span class="blockspan nature1" data-value="2">合租</span></div>
         </div>
         <div class="blockdiv">
           <div class="blocktit">面积</div>
-          <div class="blockcon"><input class="blockinp" type="number" /> - <input class="blockinp" type="number" />&nbsp;㎡</div>
+          <div class="blockcon"><input class="blockinp" type="number" [(ngModel)]="spacemin" /> - <input class="blockinp" type="number" [(ngModel)]="spacemax" />&nbsp;㎡</div>
         </div>
-        <div class="blockdiv">
+        <div class="blockdiv" >
           <div class="blocktit">户型</div>
-          <div class="blockcon"><span class="blockspan room">1室</span><span class="blockspan room">2室</span><span class="blockspan room">3室</span>
-            <span class="blockspan room">4室</span>
+          <div class="blockcon" ><span class="blockspan room" data-value="0">不限户型</span> <span data-value="1" class="blockspan room">1室</span>
+          <span class="blockspan room" data-value="2">2室</span><span class="blockspan room"data-value="3" >3室</span>
+            
           </div>
         </div>
         <!--<div class="blockdiv">
           <div class="blocktit">区域</div>
           <div class="blockcon"></div>
         </div>-->
-        <div class="blockdiv">
-          <div class="blocktit">排序</div>
-          <div class="blockcon"><span class="blockspan horder">时间</span><span class="blockspan horder">面积</span><span class="blockspan horder">价格</span></div>
-        </div>
+
       </div>
     </ion-content>
 
@@ -91,11 +89,11 @@
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="space"><a href="javascript:;">面积</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="price"><a href="javascript:;">售价</a><img src="assets/imgs/gray.png"></li>
-      <!--<li class="type" style="border-left: 1px solid #eeeeee;"><a href="javascript:;" style="margin-right:0.25rem">筛选</a>
+      <li class="type" style="border-left: 1px solid #eeeeee;"><a href="javascript:;" style="margin-right:0.25rem">筛选</a>
         <button style="padding-left:1rem;" ion-button menuToggle icon-only class="toggle">  
           <ion-icon style="color:#818181;font-size: 0.3rem;margin-bottom: 0.1rem;" name='ios-funnel-outline'></ion-icon>  
         </button>
-      </li>-->
+      </li>
     </ul>
 
 
@@ -105,7 +103,7 @@
         <div class="lieb_img"><img src="{{house.imgurl}}"></div>
         <div class="lieb_txt">
           <p class="biao">【{{house.district}}】 &nbsp;{{house.title}}</p>
-          <p class="bend areatop">{{house.halls}}室{{house.restroom}}厅&nbsp;&nbsp;{{house.space}}㎡</p>
+          <p class="bend areatop">{{house.room}}室{{house.halls}}厅{{house.restroom}}卫&nbsp;&nbsp;{{house.space}}㎡</p>
           <div style="clear:both"></div>
           <p class="bend" style="float:left">{{house.area}}</p>
           <p class="px26" *ngIf="houseType ==1 || houseType ==3" style="float:right;font-size:0.22rem;color:#2979FF">¥ {{house.pricemin}}~{{house.pricemax | pipeMoney}}万<span> </span></p>

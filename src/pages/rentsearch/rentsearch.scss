@@ -155,8 +155,8 @@ page-rentsearch {
 }
 #group-content .order-nav .type{
     height:0.7rem;
-    // width: 25%;
-    width: 33.3%;
+    width: 25%;
+    //width: 33.3%;
     text-align: center;
     float: left;
     height:0.8rem;
@@ -285,7 +285,7 @@ page-rentsearch {
     border-radius: 2px;
     border: 1px solid #cccccc;
     display: inline-table;
-    margin-right: 0.2rem;
+    margin: 0.1rem 0.2rem 0.1rem 0;
     color: #666666;
 }
 .blockcon{

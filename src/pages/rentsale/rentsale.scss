@@ -89,10 +89,13 @@ page-rentsale {
     color: #818181;
     font-size: 0.28rem;
 }
-#group-content .order-nav .type.current a{
-    color: #2979FF;
-}
-#group-content .order-nav .type.current{
+// #group-content .order-nav .type.current a{
+//     color: #2979FF;
+// }
+// #group-content .order-nav .type.current{
+//     border-bottom: 2px solid #2979FF;
+// }
+.type.current{
     border-bottom: 2px solid #2979FF;
 }
 #group-content{
@@ -185,6 +188,16 @@ color:#F5F5F5 !important;
 
 .showMore{
     font-size: 0.2rem;
+}
+ion-fab-list button{
+    border-radius: 0
+}
+
+#group-content .order-nav .type img {
+    width: 0.15rem;
+    float: right;
+    padding-top: 0.32rem;
+    margin-right: 0.5rem;
 }
 
 }

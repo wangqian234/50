@@ -17,7 +17,7 @@
         <div class="bar12"></div>
     </div>
 
-    <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.96rem;padding:0.05rem 0">
+    <div class="toub_beij toub_beij_zy" style="background-color:#ff971c;height:0.8rem;padding:0.05rem 0">
         <div class="zhongj_k shouye">
             <!--<div class="logo_k" [navPush]="ShopsortPage"><img src="assets/imgs/class.png"><p>分类</p></div>-->
             <div class="logo_k logo_k_fanh"><img (click)="backToHere()" class="fanh_ann" src="assets/imgs/fanh.png"></div>
@@ -56,6 +56,8 @@
                 <div class="swiper-slide stop-swiping" *ngFor="let item of tuijList" (click)="goGoodsInfo(item['url'])"><img class="img1" src="{{item.img}}"  /></div>
             </div>
             <div class="swiper-pagination shoppagination" id="shoppagination"></div>
+            <div class="swiper-button-prev"></div><!--左箭头-->
+            <div class="swiper-button-next"></div><!--右箭头-->
         </div>
 
         <!-- 团购图标-->

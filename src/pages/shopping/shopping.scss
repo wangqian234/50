@@ -656,6 +656,12 @@ color:#F5F5F5 !important;
 .swiper-pagination-bullet-active{
     background: #ff971c;
 }
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+    background-image: none;
+}
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next{
+    background-image: none;
+}
 
 }
 

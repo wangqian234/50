@@ -129,39 +129,38 @@ export class ShoppingPage {
         observer:true,//修改swiper自己或子元素时，自动初始化swiper
         observeParents:true,//修改swiper的父元素时，自动初始化swiper
       },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
     })
 
     //判断左右滑动事件
-    // var startX;
-    // var startY;
-    // var moveEndX;
-    // var moveEndY;
-    // var that = this;
-    // var $body = $(".shopswiper");
-    // $body.css("height", "3.25rem");
-    // $body.on("touchstart", function (e) {
-    //   startX = e.originalEvent.changedTouches[0].pageX,
-    //   startY = e.originalEvent.changedTouches[0].pageY;
-    // });
-    // $body.on("touchmove", function (e) {
-    //   var X;
-    //   var Y;
-    //   moveEndX = e.originalEvent.changedTouches[0].pageX,
-    //   moveEndY = e.originalEvent.changedTouches[0].pageY,
-    //   X = moveEndX - startX,
-    //   Y = moveEndY - startY;
-    //   if (Math.abs(X) > Math.abs(Y) && X > 0) {
-    //     if(mySwiper.slidePrev()){
-    //       mySwiper.slidePrev();
-    //     }
-    //   }
-    //   else if (Math.abs(X) > Math.abs(Y) && X < 0) {
-    //     console.log(mySwiper.slideNext)
-    //     if(mySwiper.slideNext){
-    //       mySwiper.slideNext();
-    //     }
-    //   }
-    // });
+    var startX;
+    var startY;
+    var moveEndX;
+    var moveEndY;
+    var that = this;
+    var $body = $(".shopswiper");
+    $body.css("height", "3.25rem");
+    $body.on("touchstart", function (e) {
+      startX = e.originalEvent.changedTouches[0].pageX,
+      startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $body.on("touchmove", function (e) {
+      var X;
+      var Y;
+      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      moveEndY = e.originalEvent.changedTouches[0].pageY,
+      X = moveEndX - startX,
+      Y = moveEndY - startY;
+      if (Math.abs(X) > Math.abs(Y) && X > 0) {
+          $(".swiper-button-prev").click();
+      }
+      else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+          $(".swiper-button-next").click();
+      }
+    });
   }
 
   //自带函数
