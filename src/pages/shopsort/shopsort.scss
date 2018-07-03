@@ -144,6 +144,23 @@ page-shopsort {
     box-orient: horizontal; 
     box-pack: center;
 }
+.dibu{
+    display: -webkit-box; 
+    -webkit-box-orient: horizontal; 
+    -webkit-box-pack: center; 
+    display: -moz-box; 
+    -moz-box-orient: horizontal; 
+    -moz-box-pack: center; 
+    display: -o-box; 
+    -o-box-orient: horizontal; 
+    -o-box-pack: center; 
+    display: -ms-box; 
+    -ms-box-orient: horizontal; 
+    -ms-box-pack: center; 
+    display: box; 
+    box-orient: horizontal; 
+    box-pack: center;
+}
 
 .shangp_lieb_k li .lieb_txt p.biao {
   height: 0.7rem;
@@ -172,5 +189,5 @@ ion-spinner{
     width: 0.35rem;
     position: absolute;
     right: 0.4rem;
-    top: 0.3rem;
+    top: 0.2rem;
 }

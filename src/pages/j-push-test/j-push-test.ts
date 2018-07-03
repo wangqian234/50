@@ -23,19 +23,16 @@ export class JPushTestPage {
   tagResultHandler = function(result) {
     var sequence: number = result.sequence;
     var tags: Array<string> = result.tags == null ? [] : result.tags;
-    alert('Success!' + '\nSequence: ' + sequence + '\nTags: ' + tags.toString());
   };
 
   aliasResultHandler = function(result) {
     var sequence: number = result.sequence;
     var alias: string = result.alias;
-    alert('Success!' + '\nSequence: ' + sequence + '\nAlias: ' + alias);
   };
 
   errorHandler = function(err) {
     var sequence: number = err.sequence;
     var code = err.code;
-    alert('Error!' + '\nSequence: ' + sequence + '\nCode: ' + code);
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public jpush: JPush, device: Device) {
@@ -61,8 +58,9 @@ export class JPushTestPage {
           content = event.aps.alert;
         }
       }
-      if(event.extras.type != undefined && event.extras.id == "shop"){
-        if(event.extras.id != undefined && event.extras.id == "shop"){
+      alert("我进入了jpush")
+      if(event.extras.type != undefined && event.extras.type == "shop"){
+        if(event.extras.id != undefined){
           var id = event.extras.id;
           this.navCtrl.push(ShopgoodsinfoPage, {
             id: id

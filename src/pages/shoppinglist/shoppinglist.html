@@ -1,6 +1,6 @@
 <ion-header>
 <div class="toub_beij toub_beij_zy">
-	<div  style="background-color:#ff971c;height:0.96rem;" class="zhongj_k zhongj_k_z">
+	<div  style="background-color:#ff971c;height:0.8rem;" class="zhongj_k zhongj_k_z">
 		<div class="jiu_feo">
 			<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="#">
 								<img class="fanh_ann" src="assets/imgs/fanh.png">
@@ -117,7 +117,7 @@
 
                         <p *ngIf="item.trade_state==1">
                             <a (click)="cancelpaymentEvent(item.trade_id)">取消付款</a>
-		 					<a (click)="obligationEvent(item.trade_id)" class="color_1">确认付款</a>
+		 					<a (click)="obligationEvent(item.trade_id,item.pretotalprice)" class="color_1">确认付款</a>
 	 					</p>
 
                         <p *ngIf="item.trade_state==2">
@@ -185,7 +185,7 @@
 		 					<a href="javascript:;" (click)="buyagainEvent(item.goods_id,1)" class="color_1">再次购买</a>
 	 					</p>
                         <p *ngIf="item.buy_state==3">
-		 					<a href="javascript:;" (click)="evaluationEvent(item.trade_id,item.tradegoods_id,item.goods_id,item)">去评价</a>
+		 					<!--<a href="javascript:;" (click)="evaluationEvent(item.trade_id,item.tradegoods_id,item.goods_id,item)">去评价</a>-->
 		 					<a href="javascript:;" (click)="buyagainEvent(item.goods_id,1)" class="color_1">再次购买</a>
 	 					</p>
 	 				</div>

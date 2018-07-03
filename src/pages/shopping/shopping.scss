@@ -490,6 +490,23 @@ border-bottom: 4px solid #FF971C;
     margin-right: 0.5rem;
     padding-top: 0.1em;
 }
+.shopnomore{
+    display: -webkit-box; 
+    -webkit-box-orient: horizontal; 
+    -webkit-box-pack: center; 
+    display: -moz-box; 
+    -moz-box-orient: horizontal; 
+    -moz-box-pack: center; 
+    display: -o-box; 
+    -o-box-orient: horizontal; 
+    -o-box-pack: center; 
+    display: -ms-box; 
+    -ms-box-orient: horizontal; 
+    -ms-box-pack: center; 
+    display: box; 
+    box-orient: horizontal; 
+    box-pack: center;
+}
 
 .facediv::-webkit-scrollbar {
         display: none;
@@ -638,6 +655,12 @@ color:#F5F5F5 !important;
 
 .swiper-pagination-bullet-active{
     background: #ff971c;
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+    background-image: none;
+}
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next{
+    background-image: none;
 }
 
 }

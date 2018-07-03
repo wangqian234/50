@@ -19,6 +19,7 @@ import { CartPage } from '../cart/cart';
 
 import $ from 'jquery';
 import {RentsaleaddPage} from '../rentsaleadd/rentsaleadd';
+import {PcontentPage} from '../pcontent/pcontent';
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -27,6 +28,7 @@ export class TabsPage {
   @ViewChild('mainTabs2') tabRef2: Tabs;
  
   tab1Root = HomePage;
+  //tab1Root = PcontentPage;
   tab2Root = RentsalePage;
   tab3Root = ShoppingPage;
   tab4Root = UserPage;

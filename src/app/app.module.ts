@@ -340,6 +340,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Base64,
     Network,
     JPush,
+    
   ]
 })
 export class AppModule {}

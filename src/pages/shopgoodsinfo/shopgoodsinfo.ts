@@ -197,9 +197,9 @@ export class ShopgoodsinfoPage {
       });
       alert1.present();
     } else {
-      this.ifEnough();
+      //this.ifEnough();
       setTimeout(() => {
-        if (this.enough) {
+        //if (this.enough) {
           this.addcarList.token = this.token;
           this.addcarList.gId = this.navParams.get("id");
           this.addcarList.gsId = this.goodSize;
@@ -221,7 +221,7 @@ export class ShopgoodsinfoPage {
               alert(data.errmsg);
             }
           })
-        }
+        //}
 
       }, 0)
     }
@@ -267,9 +267,9 @@ export class ShopgoodsinfoPage {
       });
       alert1.present();
     } else {
-      this.ifEnough();
+      //this.ifEnough();
       setTimeout(() => {
-        if (this.enough) {
+        //if (this.enough) {
           this.buylist.token = this.token;
           this.buylist.gId = this.navParams.get('id');
           this.buylist.type = "detail";
@@ -300,7 +300,7 @@ export class ShopgoodsinfoPage {
               alert(data.errmsg);
             }
           });
-        }
+       // }
       })
     }
   }

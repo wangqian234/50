@@ -81,7 +81,7 @@ export class ShoppingPage {
   public shopKeyList = [];
   HomePage = HomePage;
   tuiList = [];
-
+  dibu:boolean;
 
   //定义congfig中公共链接的变量aa
   public aa = this.config.apiUrl;
@@ -129,39 +129,38 @@ export class ShoppingPage {
         observer:true,//修改swiper自己或子元素时，自动初始化swiper
         observeParents:true,//修改swiper的父元素时，自动初始化swiper
       },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
     })
 
     //判断左右滑动事件
-    // var startX;
-    // var startY;
-    // var moveEndX;
-    // var moveEndY;
-    // var that = this;
-    // var $body = $(".shopswiper");
-    // $body.css("height", "3.25rem");
-    // $body.on("touchstart", function (e) {
-    //   startX = e.originalEvent.changedTouches[0].pageX,
-    //   startY = e.originalEvent.changedTouches[0].pageY;
-    // });
-    // $body.on("touchmove", function (e) {
-    //   var X;
-    //   var Y;
-    //   moveEndX = e.originalEvent.changedTouches[0].pageX,
-    //   moveEndY = e.originalEvent.changedTouches[0].pageY,
-    //   X = moveEndX - startX,
-    //   Y = moveEndY - startY;
-    //   if (Math.abs(X) > Math.abs(Y) && X > 0) {
-    //     if(mySwiper.slidePrev()){
-    //       mySwiper.slidePrev();
-    //     }
-    //   }
-    //   else if (Math.abs(X) > Math.abs(Y) && X < 0) {
-    //     console.log(mySwiper.slideNext)
-    //     if(mySwiper.slideNext){
-    //       mySwiper.slideNext();
-    //     }
-    //   }
-    // });
+    var startX;
+    var startY;
+    var moveEndX;
+    var moveEndY;
+    var that = this;
+    var $body = $(".shopswiper");
+    $body.css("height", "3.25rem");
+    $body.on("touchstart", function (e) {
+      startX = e.originalEvent.changedTouches[0].pageX,
+      startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $body.on("touchmove", function (e) {
+      var X;
+      var Y;
+      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      moveEndY = e.originalEvent.changedTouches[0].pageY,
+      X = moveEndX - startX,
+      Y = moveEndY - startY;
+      if (Math.abs(X) > Math.abs(Y) && X > 0) {
+          $(".swiper-button-prev").click();
+      }
+      else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+          $(".swiper-button-next").click();
+      }
+    });
   }
 
   //自带函数
@@ -208,6 +207,13 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === "OK") {
         this.shoplist = data.list;
+         if(this.shoplist.length == 0){
+         // $('.shopnomore').css('display','block');
+         this.dibu = true;
+        }else{
+          this.dibu = false;
+          //$('.shopnomore').css('display','none');
+        }
         console.log(data);
       } else {
         alert(data.errmsg);
@@ -255,6 +261,13 @@ export class ShoppingPage {
     this.http.get(api).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 && data.errmsg === "OK") {
         that.shoplist = data.list;
+         if(that.shoplist.length == 0){
+         this.dibu = true;
+         // $('.shopnomore').css('display','block');
+        }else{
+          this.dibu = false;
+          //$('.shopnomore').css('display','none');
+        }
       } else {
         alert(data.errmsg);
       }
@@ -330,6 +343,8 @@ export class ShoppingPage {
         resolve('ok');
         that.currentPlace = params.changePlace;
         that.currentPlaceCode = params.changePlaceCode;
+        that.storage.set("currentPlace", that.currentPlace);
+        that.storage.set('currentPlaceCode', that.currentPlaceCode)
       } else {
         reject(Error('error'))
       }

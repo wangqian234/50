@@ -1,5 +1,5 @@
 <ion-header>
-	<div style="background-color:#ff971c;height:0.96rem;" class="toub_beij toub_beij_zy">
+	<div style="background-color:#ff971c;height:0.8rem;" class="toub_beij toub_beij_zy">
 		<div class="zhongj_k zhongj_k_z">
 			<div class="jiu_feo">
 				<div (click)="backTo()" class="logo_k logo_k_fanh"><a href="javascript:;">
@@ -31,7 +31,7 @@
 <ion-content>
 
 	<div class="spinnerbox"></div>
-	<div class="spinner">
+	<div style="margin-left:11%" class="spinner">
 		<div class="bar1"></div>
 		<div class="bar2"></div>
 		<div class="bar3"></div>
@@ -72,8 +72,13 @@
 						<p class="px26">¥ {{item.goodspricemin}}</p>
 					</div>
 				</a>
-			</li>
+			</li>			
 		</ul>
+		<div *ngIf = "dibu" class="dibu" style="margin:0 0 5px 0;z-index:0;">
+				<img src="assets/imgs/leftbar.png">
+				<span style="font-size:0.17rem;color:#FF971C">{{item.name}}已售完</span>
+				<img src="assets/imgs/rightbar.png">
+			</div>	
 	</div>
 
 	<ion-infinite-scroll (ionInfinite)="doLoadMore($event)">

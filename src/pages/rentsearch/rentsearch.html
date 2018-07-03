@@ -40,7 +40,7 @@
         <div class="blockdiv">
           <div class="blocktit">房屋性质</div>
           <div class="blockcon" *ngIf="houseType == 1 || houseType == 3" ><span class="blockspan nature" data-value="1">一手房</span><span class="blockspan nature" data-value="2">二手房</span></div>
-          <div class="blockcon" *ngIf="houseType == 2 || houseType == 4" ><span class="blockspan nature">整租</span><span class="blockspan nature" data-value="2">合租</span></div>
+          <div class="blockcon" *ngIf="houseType == 2 || houseType == 4" ><span class="blockspan nature1" data-value="1">整租</span><span class="blockspan nature1" data-value="2">合租</span></div>
         </div>
         <div class="blockdiv">
           <div class="blocktit">面积</div>
@@ -89,10 +89,11 @@
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="space"><a href="javascript:;">面积</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="price"><a href="javascript:;">售价</a><img src="assets/imgs/gray.png"></li>
-<li class="type" style="border-left: 1px solid #eeeeee;"><a href="javascript:;" style="margin-right:0.25rem">筛选</a>
-  <button style="padding-left:1rem;" ion-button menuToggle icon-only class="toggle">  
-     <ion-icon style="color:#818181;font-size: 0.3rem;margin-bottom: 0.1rem;" name='ios-funnel-outline'></ion-icon>  
-   </button></li>
+      <li class="type" style="border-left: 1px solid #eeeeee;"><a href="javascript:;" style="margin-right:0.25rem">筛选</a>
+        <button style="padding-left:1rem;" ion-button menuToggle icon-only class="toggle">  
+          <ion-icon style="color:#818181;font-size: 0.3rem;margin-bottom: 0.1rem;" name='ios-funnel-outline'></ion-icon>  
+        </button>
+      </li>
     </ul>
 
 
@@ -113,7 +114,8 @@
   </div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" pullMax=500>
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="释放刷新" refreshingSpinner="circles" refreshingText="正在更新" top="1rem;">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="释放刷新" refreshingSpinner="circles" refreshingText="正在更新"
+      top="1rem;">
     </ion-refresher-content>
   </ion-refresher>
 

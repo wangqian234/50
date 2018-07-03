@@ -45,10 +45,10 @@ export class ChangeaddrPage {
   }
   ionViewWillEnter(){
     this.getRem();
-    this.getAddressList();
   }
   ionViewDidEnter(){
      this.storage.set('tabs','false');
+     this.getAddressList();
   }
 
   gotoBuy(item){

@@ -1,6 +1,6 @@
 //wdh
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App,AlertController } from 'ionic-angular';
 import { ConfigProvider } from '../../providers/config/config';
 import { LoadingController } from 'ionic-angular';
 //StorageProvider
@@ -12,7 +12,8 @@ import { HttpServicesProvider } from '../../providers/http-services/http-service
 import { ChangeaddrPage } from '../changeaddr/changeaddr';
 //返回首页
 import { TabsPage } from '../tabs/tabs';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {ShoppinglistPage} from '../shoppinglist/shoppinglist'
 import $ from 'jquery'
 
 @Component({
@@ -20,7 +21,9 @@ import $ from 'jquery'
   templateUrl: 'shopbuy.html',
 })
 export class ShopbuyPage {
-  
+  public payAct;
+  public paytId;
+  public surePay;
   public ChangeaddrPage = ChangeaddrPage;
   public TabsPage = TabsPage;
   public caId;
@@ -70,7 +73,8 @@ export class ShopbuyPage {
   public token = this.storage.get('token');
 
   constructor(public storage: StorageProvider, public navCtrl: NavController, public navParams: NavParams, public http: Http, public jsonp: Jsonp,
-    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController,public app: App) {
+    public httpService: HttpServicesProvider,/*引用服务*/public config: ConfigProvider,public loadingCtrl: LoadingController,public app: App,
+    private alertCtrl: AlertController, private iab: InAppBrowser) {
     this.wid = navParams.get('wid');
     this.sizeId =navParams.get('sid');
     this.gnum = navParams.get('gnum');
@@ -97,8 +101,16 @@ export class ShopbuyPage {
     var j = 3;
     var api = this.wdh + '/api/goods/buy_list?caId='+this.caId+'&token=' + this.token;
     this.http.get(api).map(res => res.json()).subscribe(data => {
-      if(data.json.dt.errcode === 0 && data.json.dt.errmsg === 'OK'){
-        console.log(data)
+      if(data.errcode == -1){
+         let alert1 = this.alertCtrl.create({
+          title: '',
+          subTitle: data.errmsg,
+          buttons: ['确认']
+        });
+        alert1.present();
+        return;
+    } else {
+       console.log(data)
       that.dtlist = data.json.dt.model;
       that.jfen=data.json.dt.model.useintegralpricemax;//获得积分抵扣额度
       that.totalPrice=data.json.dt.model.totalprice;
@@ -123,7 +135,9 @@ export class ShopbuyPage {
       // }
       //商品内容（名称title、图片img、购买数量buynum）
       //alert(JSON.stringify(that.goodSlist));
-      }
+      
+    }
+ 
     }) 
   }
    //运费postage
@@ -206,6 +220,18 @@ discount(){
   else if(this.checked==false){ 
   this.totalPrice=this.wtotalPrice+this.fee;}
 }
+  clickme(){
+    var that = this;
+    $.ajax({
+        url: 'http://freegeoip.net/json/',
+        success: function(data){
+          that.cip = data.ip;
+          that.addBuy();
+        },
+        type: 'get',
+        dataType: 'JSON'
+    });
+  }
 
   //提交订单
   addBuy() {
@@ -226,7 +252,14 @@ discount(){
     var api =this.wdh + '/api/trade/add  ';
     this.http.post(api, date).map(res => res.json()).subscribe(data => {
       if (data.errcode === 0 ) {
-        this.outTradeNo = data.errmsg;
+        console.log(data);
+       this.payAct = data.model.act;
+       this.paytId = data.model.tId;
+       this.surePay = 'http://test.gyhsh.cn/Public/H5Pay.html?act='+this.payAct+'&tId='+this.paytId+'&tags=web&token='+this.storage.get('token')+'&createip='+this.cip+'&title=商品购买&money='+this.totalPrice ;
+       var ref = (<any>window).cordova.InAppBrowser.open(this.surePay,'_blank','location=yes,hideurlbar=yes,toolbarcolor=#ff971c,closebuttoncolor=#ffffff,hidenavigationbuttons=yes,zoom=no')
+        ref.addEventListener('exit', () => {
+          this.navCtrl.push(ShoppinglistPage)
+        })
       } else if (data.errcode === 40002) {
         j--;
         if (j > 0){
@@ -255,18 +288,7 @@ discount(){
     clickmeToIn(){
       $("#enSureMon").css("display","none")
     }
-    clickme(){
-        var that = this;
-        $.ajax({
-            url: 'http://freegeoip.net/json/',
-            success: function(data){
-              that.cip = data.ip;
-              that.addBuy();
-            },
-            type: 'get',
-            dataType: 'JSON'
-        });
-    }
+
 
   backTo() {
     this.navCtrl.pop();

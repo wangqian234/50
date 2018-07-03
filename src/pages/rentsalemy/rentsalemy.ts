@@ -31,7 +31,8 @@ export class RentsalemyPage {
   }
 
   ionViewDidLoad() {
-    this.currentPlaceCode = this.storage.get('currentPlaceCode')
+   // this.currentPlaceCode = this.storage.get('currentPlaceCode')
+   this.currentPlaceCode = 4403;
     this.clickCSS();
     this.myPublish(1);
     this.getDelete();
