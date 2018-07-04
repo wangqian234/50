@@ -283,35 +283,64 @@ export class RentsalePage {
    });
  }
 
+ renttype(){
+   $(".renttype").toggleClass("display");
+   $(".rentroom").removeClass("display");
+   $(".rentmore1").removeClass("display");
+   $(".rentmore2").removeClass("display");
+   $(".rentorder").removeClass("display");
+   $(".rentmoney").removeClass("display");
+ }
+ rentmoney(){
+   $(".renttype").removeClass("display");
+   $(".rentroom").removeClass("display");
+   $(".rentmore1").removeClass("display");
+   $(".rentmore2").removeClass("display");
+   $(".rentorder").removeClass("display");
+   $(".rentmoney").toggleClass("display");
+ }
+ rentroom(){
+   $(".renttype").removeClass("display");
+   $(".rentroom").toggleClass("display");
+   $(".rentmore1").removeClass("display");
+   $(".rentmore2").removeClass("display");
+   $(".rentorder").removeClass("display");
+   $(".rentmoney").removeClass("display");
+ }
+ rentmore(){
+   $(".renttype").removeClass("display");
+   $(".rentroom").removeClass("display");
+   $(".rentorder").removeClass("display");
+   $(".rentmoney").removeClass("display");
+   if(this.housType == "1" || this.housType == "3"){
+      $(".rentmore1").toggleClass("display");
+   } else {
+      $(".rentmore2").toggleClass("display");
+   }
+  
+ }
+ rentorder(){
+   $(".renttype").removeClass("display");
+   $(".rentroom").removeClass("display");
+   $(".rentmore1").removeClass("display");
+   $(".rentmore2").removeClass("display");
+   $(".rentorder").toggleClass("display");
+   $(".rentmoney").removeClass("display");
+ }
+
      //下拉刷新
  doRefresh(refresher) {
     console.log('刷新开始', refresher);
       setTimeout(() => { 
         this.getFocusList();
         this.paymentEvent(this.housType);
-      //   this.items = [];
-      //   for (var i = 0; i < 30; i++) {
-      //    this.items.push( this.items.length );
-      //  }
        console.log('刷新结束');
        refresher.complete();
      }, 2000);
  }
    //输入框搜索，跳转到列表详情界面
   doReserch() {
-    // var key = [];
-    // if (this.storage.get("shopKewWords")) {
-    //   key = this.storage.get("shopKewWords");
-    //   key.push(this.keywords);
-    //   this.storage.set("shopKewWords", key);
-    // } else {
-    //   key.push(this.keywords)
-    //   this.storage.set("shopKewWords", key);
-    // }
     this.navCtrl.push(RentsearchPage);
-    // , {
-    //   keywords: this.keywords,
-    //  })
   }
 
 }

@@ -57,77 +57,115 @@
 		</ion-slides>
 	</div>
 
-	<div><img class="huimgdiv" src="assets/imgs/title.png"></div>
-	<!--<div class="daohang_bd" style="margin:0;color:#646464;background-color:white;padding-top: 10px;">
-		<ul class="titleIcon">
-			<li (click)="gotoList(1)">
-				<a href="#">
-					<h1><img src="assets/imgs/searchhouse.png"></h1>
-					<p>求租</p>
-				</a>
-			</li>
-			<li (click)="gotoList(2)">
-				<a href="#">
-					<h1><img src="assets/imgs/secondhand.png"></h1>
-					<p>二手房</p>
-				</a>
-			</li>
-			<li (click)="gotoList(3)">
-				<a href="#">
-					<h1><img src="assets/imgs/newhouse.png"></h1>
-					<p>新房</p>
-				</a>
-			</li>
-			<li (click)="goRentsaleadd()">
-				<a href="javascript:;">
-					<h1><img src="assets/imgs/public.png"></h1>
-					<p>发布信息</p>
-				</a>
-			</li>
-		</ul>
-	</div>-->
-
-		<div class="daohang_bd" style="margin:0;color:#646464;background-color:white;padding-top: 10px;">
-		<ul class="titleIcon">
-			<li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(1)">
-				<a href="javascript:;">
-					<h1><img src="assets/imgs/searchhouse.png"></h1>
-					<p>出售信息</p>
-				</a>
-			</li>
-			<li class={{tabTest.li01}} data-nav="receive" (click)="paymentEvent(2)">
-				<a href="javascript:;">
-					<h1><img src="assets/imgs/secondhand.png"></h1>
-					<p>出租信息</p>
-				</a>
-			</li>
-			<li class={{tabTest.li02}} data-nav="payment" (click)="paymentEvent(3)">
-				<a href="javascript:;">
-					<h1><img src="assets/imgs/newhouse.png"></h1>
-					<p>求购信息</p>
-				</a>
-			</li>
-			<li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(4)">
-				<a href="javascript:;">
-					<h1><img src="assets/imgs/public.png"></h1>
-					<p>求租信息</p>
-				</a>
-			</li>
-		</ul>
-	</div>
-
 	<div id="group-content">
+		<ul class="order-nav clearfix" id="test">
+			<li class="type" (click)="renttype()"><a href="javascript:;">出租</a><img src="assets/imgs/jiantou.png"></li>
+			<li class="type" (click)="rentmoney()"><a href="javascript:;">价格</a><img src="assets/imgs/jiantou.png"></li>
+			<li class="type" (click)="rentroom()"><a href="javascript:;">房型</a><img src="assets/imgs/jiantou.png"></li>
+			<li class="type" (click)="rentmore()"><a href="javascript:;">更多</a><img src="assets/imgs/jiantou.png"></li>
+			<li class="type" style="width:8%;" (click)="rentorder()"><img style="width: 0.4rem;padding-top: 0.2rem;margin-right: 0.2rem;" src="assets/imgs/jiantoud.png"></li>
+		</ul>
+		<div class="renttype">
+			<ul class="rentul">
+				<li class="rentli">出租</li>
+				<li class="rentli">出售</li>
+				<li class="rentli">求租</li>
+				<li class="rentli">求购</li>
+			</ul>
+		</div>
+
+		<div class="rentmoney">
+			<div class="blockcon"><input class="blockinp" type="number" [(ngModel)]="pricemin" /> - <input class="blockinp" type="number" [(ngModel)]="pricemax"
+				/>&nbsp;元</div>
+			<div class="blockcon">
+				<span class="blockspan room" data-value="0">200万以下</span>
+				<span data-value="1" class="blockspan room">200-300万</span>
+				<span class="blockspan room" data-value="2">300-400万</span>
+				<span class="blockspan room" data-value="3">400-500万</span>
+				<span class="blockspan room" data-value="3">500-800万</span>
+				<span class="blockspan room" data-value="3">800-1000万</span>
+				<span class="blockspan room" data-value="3">1000万以上</span>
+			</div>
+			<div class="rentdiv">
+				<span class="ensure" (click)="ensureSearch()">不限条件</span>
+				<span class="reset" (click)="resetSearch()">确认</span>
+			</div>
+		</div>
+
+		<div class="rentroom">
+			<div class="blockcon">
+				<span data-value="1" class="blockspan room">1室</span>
+				<span class="blockspan room" data-value="2">2室</span>
+				<span class="blockspan room" data-value="3">3室</span>
+				<span class="blockspan room" data-value="3">4室</span>
+				<span class="blockspan room" data-value="3">4室以上</span>
+			</div>
+		</div>
+
+		<div class="rentmore1">
+			<div class="blockdiv">
+				<div class="blocktit">房屋性质</div>
+				<div class="blockcon"><span class="blockspan nature" data-value="1">一手房</span><span class="blockspan nature" data-value="2">二手房</span></div>
+			</div>
+			<div class="blockdiv">
+				<div class="blocktit">面积</div>
+				<div class="blockcon">
+					<span data-value="1" class="blockspan room">50㎡以下</span>
+					<span class="blockspan room" data-value="2">50-70㎡</span>
+					<span class="blockspan room" data-value="3">70-90㎡</span>
+					<span class="blockspan room" data-value="3">90-110㎡</span>
+					<span class="blockspan room" data-value="3">110-140㎡</span>
+					<span class="blockspan room" data-value="3">140-170㎡</span>
+					<span class="blockspan room" data-value="3">170-200㎡</span>
+					<span class="blockspan room" data-value="3">200㎡以上</span>
+				</div>
+			</div>
+			<div class="rentdiv">
+				<span class="ensure" (click)="ensureSearch()">不限条件</span>
+				<span class="reset" (click)="resetSearch()">确认</span>
+			</div>
+		</div>
+
+		<div class="rentmore2">
+			<div class="blockdiv">
+				<div class="blocktit">房屋性质</div>
+				<div class="blockcon"><span class="blockspan nature1" data-value="1">整租</span><span class="blockspan nature1" data-value="2">合租</span></div>
+			</div>
+			<div class="blockdiv">
+				<div class="blocktit">面积</div>
+				<div class="blockcon">
+					<span data-value="1" class="blockspan room">50㎡以下</span>
+					<span class="blockspan room" data-value="2">50-70㎡</span>
+					<span class="blockspan room" data-value="3">70-90㎡</span>
+					<span class="blockspan room" data-value="3">90-110㎡</span>
+					<span class="blockspan room" data-value="3">110-140㎡</span>
+					<span class="blockspan room" data-value="3">140-170㎡</span>
+					<span class="blockspan room" data-value="3">170-200㎡</span>
+					<span class="blockspan room" data-value="3">200㎡以上</span>
+				</div>
+			</div>
+			<div>
+				<span class="ensure" (click)="ensureSearch()">不限条件</span>
+				<span class="reset" (click)="resetSearch()">确认</span>
+			</div>
+		</div>
+
+		<div class="rentorder">
+			<ul class="rentul">
+				<li class="rentli">默认排序</li>
+				<li class="rentli">最新发布</li>
+				<li class="rentli">总价从高到低</li>
+				<li class="rentli">总价从低到高</li>
+				<li class="rentli">面积从大到小</li>
+				<li class="rentli">面积从小到大</li>
+			</ul>
+		</div>
+
 		<!--<ul class="order-nav clearfix" id="test">
-			<li class={{tabTest.li00}} data-nav="all" (click)="paymentEvent(1)"><a href="javascript:;">热门出售</a></li>
-			<li class={{tabTest.li01}} data-nav="receive" (click)="paymentEvent(2)"><a href="javascript:;">热门出租</a></li>
-			<li class={{tabTest.li02}} data-nav="payment" (click)="paymentEvent(3)"><a href="javascript:;">热门求购</a></li>
-			<li class={{tabTest.li03}} data-nav="done" (click)="paymentEvent(4)"><a href="javascript:;">热门求租</a></li>
-		</ul>-->
-  <ul class="order-nav clearfix" id="test">
       <li class="type" id="time"><a href="javascript:;">时间</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="space"><a href="javascript:;">面积</a><img src="assets/imgs/gray.png"></li>
       <li class="type" id="price"><a href="javascript:;">售价</a><img src="assets/imgs/gray.png"></li>
-  </ul>
+  </ul>-->
 
 		<ul id="testcontent" class="shangp_lieb_k_er">
 			<li *ngFor="let house of houseInfo" (tap)="goRentsaleInfo(house.id,house.type)">

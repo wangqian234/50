@@ -165,7 +165,7 @@ export class ShoppingPage {
 
   //自带函数
   ionViewDidLoad() {
-    $('.facediv li:nth-of-type(1)').attr("class","activety");
+    // $('.facediv li:nth-of-type(1)').attr("class","activety");
   }
 
   ionViewDidEnter() {
@@ -190,6 +190,7 @@ export class ShoppingPage {
         this.tuangouList = data.json['data_Modules'].list;
         this.len = this.tuangouList.length;
         this.tubList = data.json['data_Sort'].list;
+        $('.facediv li:nth-of-type(1)').attr("class","activety");
         this.tuijList = data.json['data_Recommend'].list;
         if (callback) {
           callback();
